@@ -1,9 +1,11 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.11.13)  19 MAR 2020 14:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.11.13)  19 MAR 2020 14:34
 entering extended mode
-**./Informe.tex
-(Informe.tex
+**"./Ejemplo de como citar.tex"
+("Ejemplo de como citar.tex"
 LaTeX2e <2019-10-01> patch level 3
-(Header.tex (IEEEtran.cls
+(../Informe/Header.tex
+("C:\Users\Usuario\AppData\Local\Programs\MiKTeX 2.9\tex/latex/ieeetran\IEEEtra
+n.cls"
 Document Class: IEEEtran 2015/08/26 V1.8b by Michael Shell
 -- See the "IEEEtran_HOWTO" manual for usage information.
 -- http://www.michaelshell.org/tex/ieeetran/
@@ -1061,11 +1063,11 @@ Package: nicefrac 1998/08/04 v0.9b Nice fractions
 \L@UnitsRaiseDisplaystyle=\skip64
 \L@UnitsRaiseTextstyle=\skip65
 \L@UnitsRaiseScriptstyle=\skip66
-))) (Informe.aux
-LaTeX Info: Redefining \. on input line 20.
-LaTeX Info: Redefining \% on input line 20.
+))) ("Ejemplo de como citar.aux"
+LaTeX Info: Redefining \. on input line 22.
+LaTeX Info: Redefining \% on input line 22.
 )
-\openout1 = `Informe.aux'.
+\openout1 = `"Ejemplo de como citar.aux"'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 3.
 LaTeX Font Info:    ... okay on input line 3.
@@ -1174,66 +1176,56 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 3.
 LaTeX Info: Redefining \pageref on input line 3.
 LaTeX Info: Redefining \nameref on input line 3.
- (Informe.out) (Informe.out)
+ ("Ejemplo de como citar.out") ("Ejemplo de como citar.out")
 \@outlinefile=\write4
-\openout4 = `Informe.out'.
+\openout4 = `"Ejemplo de como citar.out"'.
 
- (Caratula.tex
-LaTeX Font Info:    Font shape `OT1/ptm/bx/sc' in size <17> not available
-(Font)              Font shape `OT1/ptm/b/sc' tried instead on input line 4.
-LaTeX Font Info:    Calculating math sizes for size <24> on input line 9.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 9.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 11.
+
 
 ("C:\Users\Usuario\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsa.fd
 "
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 9.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 11.
+
 
 ("C:\Users\Usuario\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsb.fd
 "
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [0
-
-
-{C:/Users/Usuario/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}])
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 22.
-
-[1
+) [1{C:/Users/Usuario/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
 
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 71.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 71.
- (Informe.aux
-LaTeX Info: Redefining \. on input line 20.
-LaTeX Info: Redefining \% on input line 20.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 15.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 15.
+
+("Ejemplo de como citar.aux"
+LaTeX Info: Redefining \. on input line 22.
+LaTeX Info: Redefining \% on input line 22.
 )
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 71.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 71.
-Package rerunfilecheck Info: File `Informe.out' has not changed.
-(rerunfilecheck)             Checksum: 93171EE2CAE95C84AB171B160C574E9E;281.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 71.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 15.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 15.
+Package rerunfilecheck Info: File `"Ejemplo de como citar".out' has not changed
+.
+(rerunfilecheck)             Checksum: 6D6A1423FE33323A50E5A32429BCCCE4;47.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 15.
  ) 
 Here is how much of TeX's memory you used:
- 30852 strings out of 492450
- 700083 string characters out of 3119070
- 904619 words of memory out of 3000000
- 34720 multiletter control sequences out of 15000+200000
- 53309 words of font info for 109 fonts, out of 3000000 for 9000
+ 30786 strings out of 492450
+ 699811 string characters out of 3119070
+ 896629 words of memory out of 3000000
+ 34674 multiletter control sequences out of 15000+200000
+ 34077 words of font info for 75 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 63i,11n,72p,430b,406s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 63i,11n,72p,457b,361s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/Usuario/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.e
-nc}<C:/Users/Usuario/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfo
-nts/cm/cmsy10.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX 2.9/fonts/typ
-e1/urw/times/utmb8a.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX 2.9/fon
-ts/type1/urw/times/utmbi8a.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX 
-2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Users/Usuario/AppData/Local/Programs/M
-iKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Informe.pdf (2 pages, 68421 bytes).
+nc}<C:/Users/Usuario/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/ut
+mr8a.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/ti
+mes/utmri8a.pfb>
+Output written on "Ejemplo de como citar.pdf" (1 page, 27781 bytes).
 PDF statistics:
- 68 PDF objects out of 1000 (max. 8388607)
- 10 named destinations out of 1000 (max. 500000)
- 61 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 32 PDF objects out of 1000 (max. 8388607)
+ 4 named destinations out of 1000 (max. 500000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
