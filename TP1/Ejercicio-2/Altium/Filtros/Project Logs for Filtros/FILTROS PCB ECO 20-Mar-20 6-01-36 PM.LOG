@@ -1,0 +1,162 @@
+Added Component: Designator=ALIMENTACION(MOLEX3)
+Added Component: Designator=C1aE1(0805)
+Added Component: Designator=C1aE2(0805)
+Added Component: Designator=C1aE3(0805)
+Added Component: Designator=C1aE5(0805)
+Added Component: Designator=C1bE1(0805)
+Added Component: Designator=C1bE2(0805)
+Added Component: Designator=C1bE3(0805)
+Added Component: Designator=C1bE5(0805)
+Added Component: Designator=C1E4(0805)
+Added Component: Designator=C2aE1(0805)
+Added Component: Designator=C2aE2(0805)
+Added Component: Designator=C2aE3(0805)
+Added Component: Designator=C2aE4(0805)
+Added Component: Designator=C2aE5(0805)
+Added Component: Designator=C2bE1(0805)
+Added Component: Designator=C2bE2(0805)
+Added Component: Designator=C2bE3(0805)
+Added Component: Designator=C2bE4(0805)
+Added Component: Designator=C2bE5(0805)
+Added Component: Designator=CD1(0805)
+Added Component: Designator=CD2(0805)
+Added Component: Designator=CD3(0805)
+Added Component: Designator=CD4(0805)
+Added Component: Designator=IN(MOLEX2)
+Added Component: Designator=OUT(MOLEX2)
+Added Component: Designator=R1aE4(0805)
+Added Component: Designator=R1bE4(0805)
+Added Component: Designator=R1E1(0805)
+Added Component: Designator=R1E2(0805)
+Added Component: Designator=R1E3(0805)
+Added Component: Designator=R1E5(0805)
+Added Component: Designator=R2aE4(0805)
+Added Component: Designator=R2bE4(0805)
+Added Component: Designator=R2E1(0805)
+Added Component: Designator=R2E2(0805)
+Added Component: Designator=R2E3(0805)
+Added Component: Designator=R2E5(0805)
+Added Component: Designator=U1(TI-N14)
+Added Component: Designator=U2(TI-P8)
+Added Pin To Net: NetName=-VCC Pin=ALIMENTACION-1
+Added Pin To Net: NetName=-VCC Pin=CD3-1
+Added Pin To Net: NetName=-VCC Pin=CD4-1
+Added Pin To Net: NetName=-VCC Pin=U1-11
+Added Pin To Net: NetName=-VCC Pin=U2-4
+Added Net: Name=-VCC
+Added Pin To Net: NetName=GND Pin=ALIMENTACION-2
+Added Pin To Net: NetName=GND Pin=C2aE1-2
+Added Pin To Net: NetName=GND Pin=C2aE2-2
+Added Pin To Net: NetName=GND Pin=C2aE4-2
+Added Pin To Net: NetName=GND Pin=C2bE1-2
+Added Pin To Net: NetName=GND Pin=C2bE2-2
+Added Pin To Net: NetName=GND Pin=C2bE3-2
+Added Pin To Net: NetName=GND Pin=C2bE4-2
+Added Pin To Net: NetName=GND Pin=C2bE5-2
+Added Pin To Net: NetName=GND Pin=CD1-2
+Added Pin To Net: NetName=GND Pin=CD2-2
+Added Pin To Net: NetName=GND Pin=CD3-2
+Added Pin To Net: NetName=GND Pin=CD4-2
+Added Pin To Net: NetName=GND Pin=IN-1
+Added Pin To Net: NetName=GND Pin=OUT-2
+Added Net: Name=GND
+Added Pin To Net: NetName=NetC1aE1_1 Pin=C1aE1-1
+Added Pin To Net: NetName=NetC1aE1_1 Pin=C1bE1-1
+Added Pin To Net: NetName=NetC1aE1_1 Pin=R2E1-2
+Added Pin To Net: NetName=NetC1aE1_1 Pin=U1-3
+Added Net: Name=NetC1aE1_1
+Added Pin To Net: NetName=NetC1aE1_2 Pin=C1aE1-2
+Added Pin To Net: NetName=NetC1aE1_2 Pin=C1bE1-2
+Added Pin To Net: NetName=NetC1aE1_2 Pin=R1E2-1
+Added Pin To Net: NetName=NetC1aE1_2 Pin=U1-1
+Added Pin To Net: NetName=NetC1aE1_2 Pin=U1-2
+Added Net: Name=NetC1aE1_2
+Added Pin To Net: NetName=NetC1aE2_1 Pin=C1aE2-1
+Added Pin To Net: NetName=NetC1aE2_1 Pin=R2E2-2
+Added Pin To Net: NetName=NetC1aE2_1 Pin=U1-5
+Added Net: Name=NetC1aE2_1
+Added Pin To Net: NetName=NetC1aE2_2 Pin=C1aE2-2
+Added Pin To Net: NetName=NetC1aE2_2 Pin=C1bE2-1
+Added Net: Name=NetC1aE2_2
+Added Pin To Net: NetName=NetC1aE3_1 Pin=C1aE3-1
+Added Pin To Net: NetName=NetC1aE3_1 Pin=C1bE3-1
+Added Pin To Net: NetName=NetC1aE3_1 Pin=R2E3-2
+Added Pin To Net: NetName=NetC1aE3_1 Pin=U1-10
+Added Net: Name=NetC1aE3_1
+Added Pin To Net: NetName=NetC1aE3_2 Pin=C1aE3-2
+Added Pin To Net: NetName=NetC1aE3_2 Pin=C1bE3-2
+Added Pin To Net: NetName=NetC1aE3_2 Pin=R1aE4-1
+Added Pin To Net: NetName=NetC1aE3_2 Pin=U1-8
+Added Pin To Net: NetName=NetC1aE3_2 Pin=U1-9
+Added Net: Name=NetC1aE3_2
+Added Pin To Net: NetName=NetC1aE5_1 Pin=C1aE5-1
+Added Pin To Net: NetName=NetC1aE5_1 Pin=C1bE5-1
+Added Pin To Net: NetName=NetC1aE5_1 Pin=R2E5-2
+Added Pin To Net: NetName=NetC1aE5_1 Pin=U2-3
+Added Net: Name=NetC1aE5_1
+Added Pin To Net: NetName=NetC1aE5_2 Pin=C1aE5-2
+Added Pin To Net: NetName=NetC1aE5_2 Pin=C1bE5-2
+Added Pin To Net: NetName=NetC1aE5_2 Pin=OUT-1
+Added Pin To Net: NetName=NetC1aE5_2 Pin=U2-2
+Added Pin To Net: NetName=NetC1aE5_2 Pin=U2-6
+Added Net: Name=NetC1aE5_2
+Added Pin To Net: NetName=NetC1bE2_2 Pin=C1bE2-2
+Added Pin To Net: NetName=NetC1bE2_2 Pin=R1E3-1
+Added Pin To Net: NetName=NetC1bE2_2 Pin=U1-6
+Added Pin To Net: NetName=NetC1bE2_2 Pin=U1-7
+Added Net: Name=NetC1bE2_2
+Added Pin To Net: NetName=NetC1E4_1 Pin=C1E4-1
+Added Pin To Net: NetName=NetC1E4_1 Pin=R2aE4-2
+Added Pin To Net: NetName=NetC1E4_1 Pin=U1-12
+Added Net: Name=NetC1E4_1
+Added Pin To Net: NetName=NetC1E4_2 Pin=C1E4-2
+Added Pin To Net: NetName=NetC1E4_2 Pin=R1E5-1
+Added Pin To Net: NetName=NetC1E4_2 Pin=U1-13
+Added Pin To Net: NetName=NetC1E4_2 Pin=U1-14
+Added Net: Name=NetC1E4_2
+Added Pin To Net: NetName=NetC2aE1_1 Pin=C2aE1-1
+Added Pin To Net: NetName=NetC2aE1_1 Pin=C2bE1-1
+Added Pin To Net: NetName=NetC2aE1_1 Pin=R1E1-2
+Added Pin To Net: NetName=NetC2aE1_1 Pin=R2E1-1
+Added Net: Name=NetC2aE1_1
+Added Pin To Net: NetName=NetC2aE2_1 Pin=C2aE2-1
+Added Pin To Net: NetName=NetC2aE2_1 Pin=C2bE2-1
+Added Pin To Net: NetName=NetC2aE2_1 Pin=R1E2-2
+Added Pin To Net: NetName=NetC2aE2_1 Pin=R2E2-1
+Added Net: Name=NetC2aE2_1
+Added Pin To Net: NetName=NetC2aE3_1 Pin=C2aE3-1
+Added Pin To Net: NetName=NetC2aE3_1 Pin=R1E3-2
+Added Pin To Net: NetName=NetC2aE3_1 Pin=R2E3-1
+Added Net: Name=NetC2aE3_1
+Added Pin To Net: NetName=NetC2aE3_2 Pin=C2aE3-2
+Added Pin To Net: NetName=NetC2aE3_2 Pin=C2bE3-1
+Added Net: Name=NetC2aE3_2
+Added Pin To Net: NetName=NetC2aE4_1 Pin=C2aE4-1
+Added Pin To Net: NetName=NetC2aE4_1 Pin=C2bE4-1
+Added Pin To Net: NetName=NetC2aE4_1 Pin=R1bE4-2
+Added Pin To Net: NetName=NetC2aE4_1 Pin=R2bE4-1
+Added Net: Name=NetC2aE4_1
+Added Pin To Net: NetName=NetC2aE5_1 Pin=C2aE5-1
+Added Pin To Net: NetName=NetC2aE5_1 Pin=R1E5-2
+Added Pin To Net: NetName=NetC2aE5_1 Pin=R2E5-1
+Added Net: Name=NetC2aE5_1
+Added Pin To Net: NetName=NetC2aE5_2 Pin=C2aE5-2
+Added Pin To Net: NetName=NetC2aE5_2 Pin=C2bE5-1
+Added Net: Name=NetC2aE5_2
+Added Pin To Net: NetName=NetIN_2 Pin=IN-2
+Added Pin To Net: NetName=NetIN_2 Pin=R1E1-1
+Added Net: Name=NetIN_2
+Added Pin To Net: NetName=NetR1aE4_2 Pin=R1aE4-2
+Added Pin To Net: NetName=NetR1aE4_2 Pin=R1bE4-1
+Added Net: Name=NetR1aE4_2
+Added Pin To Net: NetName=NetR2aE4_1 Pin=R2aE4-1
+Added Pin To Net: NetName=NetR2aE4_1 Pin=R2bE4-2
+Added Net: Name=NetR2aE4_1
+Added Pin To Net: NetName=VCC Pin=ALIMENTACION-3
+Added Pin To Net: NetName=VCC Pin=CD1-1
+Added Pin To Net: NetName=VCC Pin=CD2-1
+Added Pin To Net: NetName=VCC Pin=U1-4
+Added Pin To Net: NetName=VCC Pin=U2-7
+Added Net: Name=VCC
+Added Class: Name=Filtros
+Added Room: Name=Filtros

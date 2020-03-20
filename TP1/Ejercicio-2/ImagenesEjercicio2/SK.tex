@@ -1,0 +1,36 @@
+\input{Header-Stda.tex}
+
+
+\begin{document}
+
+\begin{circuitikz}
+			\draw
+			
+				node[op amp, yscale=-1](opamp){}
+				
+				(opamp.out) to[short, -*] ++ (0.5, 0) node[](OUT_FEEDBACK){}
+				(opamp.+) to[short] ++ (-0.5, 0) node[](IN+){}
+				(opamp.-) to[short] ++ (-0.5, 0) node[](IN-){}			
+			
+				(IN-) to[short, -] ++ (0, -1)
+				to[open] ++ (0, -2)
+				to[open] ++ (0, 2)
+				to[short, -] ++ (3, 0)
+				-| (OUT_FEEDBACK.center)
+				
+				(IN+) to[short] ++ (-1, 0)
+				to[C, l=$C_2$, *-] ++ (0, -2) node[ground]{}
+				to[open] ++ (0, 2)
+				to[R, l=$R_2$, -*] ++ (-2, 0)
+				to[R, l=$R_1$, -o] ++ (-2, 0)
+				node[label=west:$V_i$]{}
+				to[open] ++ (2, 0)
+				to[short] ++ (0, 1)
+				to[C, l=$C_1$] ++ (6, 0)
+				-| (OUT_FEEDBACK.center)
+				(OUT_FEEDBACK) to[short, -o] ++ (0.5, 0)
+				node[label=east:$V_o$] {}
+			;
+		\end{circuitikz}
+
+\end{document}
