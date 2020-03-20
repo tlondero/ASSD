@@ -109,7 +109,7 @@ Para las señales $X_b$ y $X_c$ se graficó la potencia en función del armónic
 \caption{Señal triangular reconstruida junto a su espectro de potencias.}
 	\label{fig:pottriang}
 \end{figure}
-Es de apreciar que  incluyendo hasta el 3er armónico se obtiene una potencia superior al 95$\%$\\
+Es de apreciar que  tan solo con la inclusión de 2 armónicos se obtiene una potencia superior al 98$\%$\\
 Luego con la señal seno $\frac{3}{2}$
 \begin{figure}[H]
 	\centering
@@ -119,12 +119,12 @@ Luego con la señal seno $\frac{3}{2}$
 	\label{fig:potsin}
 \end{figure}
 Es de apreciar que  incluyendo hasta el 3er armónico se obtiene una potencia superior al 95$\%$ \\
-La frecuencia fundamental de estas señales será $f_0 =\frac{N}{2} kHz = 1,5 kHz $, correspondiendole la frecuencia del máximo armónico (el 3er) de 4k5Hz, asimismo, es favorable considerar la señal de AM que también será probada por el sistema , cuya máxima frecuencia será $2,2 \cdot f_0 = 3k3Hz$. Se tomará  $f_p= 5kHz$  definiendo así la plantilla del filtro.
+La frecuencia fundamental de estas señales será $f_0 =\frac{N}{2} kHz = 1,5 kHz $, correspondiendole la frecuencia del máximo armónico (el 3er) de 4k5Hz, asimismo, es favorable considerar la señal de AM que también será probada por el sistema , cuya máxima frecuencia será $2,2 \cdot f_0 = 3k3Hz$. Se tomará  $f_p= 5kHz$  definiendo así la plantilla de ambos filtros.
 \begin{table}[H]
 \centering
 \begin{tabular}{cccc}
 $f_p$ & $f_a$ & $A_p$ & $A_s$ \\ \hline
-5kHz & 7.5kHz & 1dB & 41dB
+5kHz & 7.5kHz & 1dB & 50dB
 \end{tabular}
 \end{table}
 \subsection{Diseño del filtro}
@@ -143,6 +143,112 @@ Ademas de obtener una transferencia teórica de la siguiente forma:
 \caption{Respuesta en frecuencia teórica.}
 	\label{fig:transteorica}
 \end{figure}
-Lo cual corresponde a un filtro de orden 7, con frecuencias de corte y Q como indica la siguiente tabla:
+Lo cual corresponde a un filtro de orden 10, con frecuencias de corte y Q como indica la siguiente tabla:
+\begin{table}[H]
+\centering
+\begin{tabular}{ccc}
+\textbf{Etapa} & \textbf{Frecuencia de corte [kHz]} & \textbf{Q} \\ \hline
+1 & 2.1 & 0.54 \\
+2 & 2.8 & 0.84 \\
+3 & 3.8 & 1.45 \\
+4 & 4.6 & 2.82 \\
+5 & 5.1 & 9.06
+\end{tabular}
+\end{table}
+La topología elegida para realizar todas las  etapas fue la \textbf{Sallen Key} pasa bajos, debido a que no se alcanzan valores altos de Q
+Siendo el circuito correspondiente.
 
+\begin{figure}[H]
+\centering
+	\includegraphics[width=0.9\textwidth]{ImagenesEjercicio2/SK.pdf}
+	\caption{Celda Sallen Key.}
+	\label{fig:SK}
+\end{figure}
+
+Luego se obtuvieron los valores para los componentes.
+\begin{table}[H]
+\centering
+\begin{tabular}{cccc}
+\hline
+\multicolumn{4}{|c|}{\textbf{Etapa 1 celda SK}} \\ \hline
+Componente & Valor & Valor comercial & Error \\ \hline
+R1 & 100k$\Omega$ & 100k$\Omega$ & 0$\%$ \\
+R2 & 100k$\Omega$ & 100k$\Omega$ & 0 $\%$\\
+C1 & 832pF & 12pF / / 820pF & $\le$0.1$\%$ \\
+C2 & 719pF & 680pF / / 39pF & $\le$0.1 $\%$
+\end{tabular}
+\end{table}
+\begin{table}[H]
+\centering
+\begin{tabular}{cccc}
+\hline
+\multicolumn{4}{|c|}{\textbf{Etapa 2 celda SK}} \\ \hline
+Componente & Valor & Valor comercial & Error \\ \hline
+R1 & 100k$\Omega$ & 100k$\Omega$ & 0 $\%$\\
+R2 & 100k$\Omega$ & 100k$\Omega$ & 0$\%$ \\
+C1 & 947.37pF & 1nF + 18nF & 0.4$\%$ \\
+C2 & 336.8pF & 6.8pF // 330pF & 0.1 $\%$
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{cccc}
+\hline
+\multicolumn{4}{|c|}{\textbf{Etapa 3 celda SK}} \\ \hline
+Componente & Valor & Valor comercial & Error \\ \hline
+R1 & 100k$\Omega$ & 100k$\Omega$ & 0$\%$ \\
+R2 & 100k$\Omega$ & 100k$\Omega$ & 0$\%$ \\
+C1 & 1.21nF & 15pF / / 1.2nF & $\le$0.1$\%$ \\
+C2 & 144.44pF & 3.9nF+150pF & 0.2 $\%$
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{cccc}
+\hline
+\multicolumn{4}{|c|}{\textbf{Etapa 4 celda SK}} \\ \hline
+Componente & Valor & Valor comercial & Error \\ \hline
+R1 & 5.9k$\Omega$ & 1.2k+4.7 $\Omega$ & $\le$0.1 $\%$ \\
+R2 & 5.9kk$\Omega$ &  1.2k+4.7$\Omega$ & $\le$0.1 $\%$ \\
+C1 & 33nF & 33nF & 0$\%$ \\
+C2 & 1.04nF & 220pF // 820pF & $\le$0.1 $\%$
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{cccc}
+\hline
+\multicolumn{4}{|c|}{\textbf{Etapa 5 celda SK}} \\ \hline
+Componente & Valor & Valor comercial & Error \\ \hline
+R1 & 100k$\Omega$ & 100k$\Omega$ & 0$\%$ \\
+R2 & 100k$\Omega$ & 100k$\Omega$ & 0 $\%$\\
+C1 & 5.7nF & 100pF // 5.6nF & $\le$0.1$\%$ \\
+C2 & 17.34pF & 18pF + 470pF & $\le$0.1 $\%$
+\end{tabular}
+\end{table}
+
+
+Para la implementación se optó por utilizar dos integrados \textbf{TL084} debido a que cuenta con 4 opamps cada integrado, su elevada impedancia de entrada y ancho de banda. Se simuló en \textbf{LTSpice} el filtro completo, obteniendo así la respuesta en frecuencia del mismo como se ve a continuación:
+ \begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{ImagenesEjercicio2/spice.PNG}
+\caption{Respuesta en frecuencia simulada.}
+	\label{fig:transspice}
+\end{figure}
+Luego de esto, se realizó el diseño en altium de la placa a realizar, obteniendo el siguiente diseño:
+ \begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{ImagenesEjercicio2/altiumesq.PNG}
+\caption{Esquemático Altium.}
+	\label{fig:altiumesq}
+\end{figure}
+ \begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{ImagenesEjercicio2/altiumpcb.PNG}
+\caption{PCB Altium.}
+	\label{fig:altiumpcb}
+\end{figure}
 \end{document}
