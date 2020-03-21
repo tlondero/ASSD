@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.11.13)  19 MAR 2020 23:22
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.11.13)  20 MAR 2020 22:08
 entering extended mode
 **./Ejercicio-3.tex
 (Ejercicio-3.tex
@@ -669,6 +669,11 @@ Package: booktabs 2019/10/08 v1.6180339 publication quality tables
 \@lastruleclass=\count147
 \@thisrulewidth=\dimen260
 )
+("C:\Users\Usuario\AppData\Local\Programs\MiKTeX 2.9\tex/latex/jknappen\mathrsf
+s.sty"
+Package: mathrsfs 1996/01/01 Math RSFS package v1.0 (jk)
+\symrsfs=\mathgroup6
+)
 ("C:\Users\Usuario\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\hyperre
 f.sty"
 Package: hyperref 2019/11/10 v7.00c Hypertext links for LaTeX
@@ -1062,19 +1067,24 @@ LaTeX Info: Redefining \nameref on input line 3.
 \@outlinefile=\write4
 \openout4 = `Ejercicio-3.out'.
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 12.
-
+LaTeX Font Info:    Trying to load font information for U+msa on input line 8.
 
 ("C:\Users\Usuario\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsa.fd
 "
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 12.
-
+LaTeX Font Info:    Trying to load font information for U+msb on input line 8.
 
 ("C:\Users\Usuario\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsb.fd
 "
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Trying to load font information for U+rsfs on input line 8.
+
+
+("C:\Users\Usuario\AppData\Local\Programs\MiKTeX 2.9\tex/latex/jknappen\ursfs.f
+d"
+File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 ) [1{C:/Users/Usuario/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
 
 ]
@@ -1087,37 +1097,27 @@ LaTeX Info: Redefining \% on input line 20.
 )
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 39.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 39.
-
-
-Package rerunfilecheck Warning: File `Ejercicio-3.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `Ejercicio-3.out':
-(rerunfilecheck)             Before: 131A1ECDB6256D582A4A8105E06B7989;147
-(rerunfilecheck)             After:  67C476B6F77503E37F38F520E89B83A8;109.
+Package rerunfilecheck Info: File `Ejercicio-3.out' has not changed.
+(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 39.
  ) 
 Here is how much of TeX's memory you used:
- 29881 strings out of 492450
- 681596 string characters out of 3119070
- 882677 words of memory out of 3000000
- 33787 multiletter control sequences out of 15000+200000
- 5944 words of font info for 24 fonts, out of 3000000 for 9000
+ 29899 strings out of 492450
+ 682152 string characters out of 3119070
+ 882756 words of memory out of 3000000
+ 33799 multiletter control sequences out of 15000+200000
+ 6142 words of font info for 26 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 63i,11n,73p,445b,361s stack positions out of 5000i,500n,10000p,200000b,50000s
-pdfTeX warning (dest): name{subsection.0.3} has been referenced but does not 
-exist, replaced by a fixed one
-
-<C:/Users/Usuario/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts
-/cm/cmbx12.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/
-public/amsfonts/cm/cmmi10.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX 2
-.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/Usuario/AppData/Local/Pro
-grams/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Usuario/App
-Data/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on Ejercicio-3.pdf (1 page, 61785 bytes).
+ 63i,11n,73p,549b,361s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Users/Usuario/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfon
+ts/cm/cmbx10.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX 2.9/fonts/type
+1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX
+ 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/Usuario/AppData/Local/P
+rograms/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Usuario/A
+ppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on Ejercicio-3.pdf (1 page, 65962 bytes).
 PDF statistics:
- 51 PDF objects out of 1000 (max. 8388607)
- 5 named destinations out of 1000 (max. 500000)
- 37 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 38 PDF objects out of 1000 (max. 8388607)
+ 2 named destinations out of 1000 (max. 500000)
+ 13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

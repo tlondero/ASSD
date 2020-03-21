@@ -1,12 +1,13 @@
 \input{../Informe/Header.tex}
 
 \begin{document}
+Las llaves compuestas por tecnología de estado solido son pequeñas, rápidas, de fácil uso y control. Además poseen un consumo bajo comparado con compuertas tradicionales controladas electricamente. Las compuertas digitales estan diseñadas para que transmitir y bloquear señales de niveles digitales. Por otro lado, las analógicas son diseñados para señales analógicas, si bien normalmente presentan un buen comportamiento frente a las digitales.
 
-Las llaves compuestas por tecnología de estado solido son pequeñas, rápidas, de fácil uso y control. Además poseen un consumo bajo comparado con compuertas tradicionales controladas electricamente.
+A la hora de seleccionar la compuerta a emplear, se deben de tener varios aspectos en cuenta. Entre estos, la impedancia serie que representan, ya que al momento de estar cerrada, no son un cable ideal. Por otro lado, tambien se debe considerar la capacitancia que representan al estar abierta.
 
-Las compuertas digitales estan diseñadas para que transmitir y bloquear señales de niveles digitales. Por otro lado, las analógicas son diseñados para señales analógicas, si bien normalmente presentan un buen comportamiento frente a las digitales.
+Entre las analizadas se encuentran las compuertas \href{http://www.ti.com/lit/ds/symlink/cd4016b.pdf}{CD4016}, \href{http://www.ti.com/lit/ds/symlink/cd4066b.pdf}{CD4066}, \href{http://www.ti.com/lit/ds/symlink/cd4051b.pdf}{CD4053} y \href{http://www.ti.com/lit/ds/symlink/cd4051b.pdf}{CD4051}, las cuales presentan caracterísiticas muy similares entre sí, siendo todos sus factoreas dependientes de $VDD$, el cual varía entre $5 \ V$ y $15 \ V$.
 
-\subsection{\href{http://www.ti.com/lit/ds/symlink/cd4016b.pdf}{CD4016}}
+Para la primera se observan los siguientes datos:
 \begin{multicols}{2}
 \begin{itemize}
 	\item $V_{OS} = 0.4 \ V \sim 13.5 \ V$
@@ -20,7 +21,7 @@ Las compuertas digitales estan diseñadas para que transmitir y bloquear señale
 \end{itemize}
 \end{multicols}
 
-\subsection{\href{http://www.ti.com/lit/ds/symlink/cd4066b.pdf}{CD4066}, \href{http://www.ti.com/lit/ds/symlink/cd4051b.pdf}{CD4053} y \href{http://www.ti.com/lit/ds/symlink/cd4051b.pdf}{CD4051}}
+A su vez, para las restantes se encontró:
 \begin{multicols}{2}
 \begin{itemize}
 	\item $V_{OS} = 0.4 \ V \sim 13.5 \ V$
@@ -33,7 +34,6 @@ Las compuertas digitales estan diseñadas para que transmitir y bloquear señale
 	\item Delay de encendido/apagado $= 15 \ ns \sim 70 \ ns$
 \end{itemize}
 \end{multicols}
-Estos datos varían dependiendo en $VDD$, entre $5 \ V$ y $15 \ V$.
 
-
+De esta forma, dado la poca diferencia entre cada una y dado a que \textcolor{red}{\textbf{CHAMUYO DE ALGUN DATO DEL CIRCUITO QUE PERMITE HACER IMPEDANCIAS Y CAPACITANCIAS DESPRECIABLES}} se decidió emplear una llave \textcolor{red}{\textbf{CD4066 O CD4016 PORQUE LAS RECOMENDÓ DANI.}}
 \end{document}
