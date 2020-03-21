@@ -61,28 +61,10 @@ Para realizar el muestreo y las subsiguientes mediciones se requiere diseñar un
 			;
 		\end{circuitikz}
 	\caption{Oscilador con ajuste de frecuencia y duty cycle independientes.}
-	\label{fig:osc}
+	\label{fig:rcnet}
 
 \end{figure}
 
-Este permite, con los valores tomados mostrados a continuación, variar la frecuencia entre $~5kHz$, la frecuencia de corte de nuestro filtro anti-alias, y $15kHz$, logrando llegar hasta una frecuencia igual a tres veces la frecuencia de Nyquist. Además, este circuito permite configurar el duty cycle de la señal entre $~3\%$ y $~97\%$. Existe sin embargo una muy pequeña interacción entre el ajuste de frecuencia y duty cycle, pero a fines prácticos se la consideró insignificante.
-
-Los valores tomados se detallan a continuación:
-
-\begin{table}[H]
-\centering
-\begin{tabular}{cc}
-\hline
-Componente & Valor \\ \hline
-$R_1$ & $10 \ k\Omega$ \\
-$R_2$ & $10 \ k\Omega$ \\
-$R_3$ & $2.2 \ k\Omega$  \\
-$RP_{freq}$ & $3 \ k\Omega$  \\
-$RP_{DT}$ & $30 \ k\Omega$  \\
-$C_1$ & $10 \ nF$  \\
-$C_2$ & $2.2 \ nF$\\ \hline
-\end{tabular}
-\caption{Componentes del oscilador.}
-\end{table}
+Este permite, con los valores tomados mostrados a continuación, variar la frecuencia entre $~5kHz$, la frecuencia de corte de nuestro filtro anti-alias, y $15kHz$
 
 \end{document}
