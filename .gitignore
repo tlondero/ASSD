@@ -85,6 +85,7 @@ fabric.properties
 *.cb
 *.cb2
 .*.lb
+*.synctex.gz
 
 ## Intermediate documents:
 *.dvi
@@ -94,7 +95,7 @@ fabric.properties
 # *.ps
 # *.eps
 
-!Consigna.pdf
+!Consigna*.*
 !DATASHEET*.*
 !datasheet*.*
 !DOC*.*
@@ -460,3 +461,6 @@ dmypy.json
 *.vscode
 *.pycache
 TP4/analog/core.py
+*.aux
+*.log
+*.gz
