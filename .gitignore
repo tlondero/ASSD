@@ -94,7 +94,7 @@ fabric.properties
 # *.ps
 # *.eps
 
-!Consigna.pdf
+!Consigna*.*
 !DATASHEET*.*
 !datasheet*.*
 !DOC*.*
