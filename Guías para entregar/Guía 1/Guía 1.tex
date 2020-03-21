@@ -1,0 +1,107 @@
+\input{Header.tex}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%		Caratula		%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{Caratula.tex}
+
+
+%%%%%%%%%%%%%%%%%%%%%
+%		Informe		%
+%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Ejercicio 1}
+\begin{itemize}
+	\item[d)] $\mathbf{R \left[ x \left( nT \right) \right] = 5nT x^2 \left( nT \right)}$ 
+	
+		\textbf{Invariancia:}
+		
+		$R \left[ x \left( nT - T \right) \right] = 5nT x^2 \left( nT -T \right)$ 
+		
+		$T \left[ R \left[ x \left( nT \right) \right] \right] = T \left[ 5nT x^2 \left( nT \right) \right] = 5nT x^2 \left( nT -T \right)$ 
+		
+		Es tiempo invariante.
+		
+		\textbf{Causalidad:} Es causal ya que no depende de entradas futuras.
+		
+		\textbf{Linealidad:}
+		
+		 $R \left[ ax_1 \left( nT \right) + bx_2 \left( nT \right) \right] = a5nT {x_{1}}^{2} \left( nT -T \right) + b5nT {x_{2}}^{2} \left( nT -T \right) = aR \left[ x_1 \left( nT \right) \right] + bR \left[ x_2 \left( nT \right) \right]$
+
+		Es un sistema lineal.
+		
+	\item[e)] $\mathbf{R \left[ x \left( nT \right) \right] = 3x \left( nT - 3T\right)}$ 
+	
+		\textbf{Invariancia:}
+		
+		$R \left[ x \left( nT - T \right) \right] = 3x \left( nT - 3T -T \right)$ 
+		
+		$T \left[ R \left[ x \left( nT \right) \right] \right] = T \left[ 3x \left( nT - 3T \right) \right] = 3x \left( nT - 3T -T \right)$ 
+		
+		Es tiempo invariante.
+		
+		\textbf{Causalidad:} Es causal ya que no depende de entradas futuras.
+		
+		\textbf{Linealidad:}
+		
+		 $R \left[ ax_1 \left( nT \right) + bx_2 \left( nT \right) \right] = a3 x_{1} \left( nT - 3T \right) + b3 x_{2} \left( nT - 3T \right) = aR \left[ x_1 \left( nT \right) \right] + bR \left[ x_2 \left( nT \right) \right]$
+
+		Es un sistema lineal.
+		
+	\item[i)] $\mathbf{R \left[ x \left( nT \right) \right] = x \left( nT + T\right) e^{-nT}}$ 
+	
+		\textbf{Invariancia:}
+		
+		$R \left[ x \left( nT - T \right) \right] =  x \left( nT \right) e^{-nT + T}$ 
+		
+		$T \left[ R \left[ x \left( nT \right) \right] \right] = T \left[  x \left( nT \right) e^{-nT + T} \right] = x \left( nT \right) e^{-nT + T}$ 
+		
+		Es tiempo invariante.
+		
+		\textbf{Causalidad:} No es causal ya que depende de entradas futuras.
+		
+		\textbf{Linealidad:}
+		
+		 $R \left[ ax_1 \left( nT \right) + bx_2 \left( nT \right) \right] = a x_{1} \left( nT \right) e^{-nT + T} + b x_{2} \left( nT \right) e^{-nT + T} = aR \left[ x_1 \left( nT \right) \right] + bR \left[ x_2 \left( nT \right) \right]$
+
+		Es un sistema lineal.		
+
+\end{itemize}
+
+\section*{Ejercicio 2b}
+La ecuación en diferencia del sistema se vale de la función auxiliar $e(nT)$.
+
+\begin{enumerate}
+	\item	$e(nT) = x(nT) + e(nT - T) - 0.5e(nT - 2T)$
+	\item	$y(nT) = e(nT) + e(nT - T)$
+\end{enumerate}
+
+\section*{Ejercicio 9}
+La ecuación en diferencia del sistema es
+\begin{equation*}
+	y(nT) = 0.5x(nT - 2T) + \alpha y(nT - T) + \beta y(nT - 2T)
+\end{equation*}
+se obtienen los siguientes resultados.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}{.7\textwidth}
+\centering
+	\includegraphics[width=\textwidth]{Imagenes/9-impulso.png}
+\end{subfigure}
+\begin{subfigure}{.7\textwidth}
+\centering
+	\includegraphics[width=\textwidth]{Imagenes/9-escalon.png}
+\end{subfigure}
+\end{figure}
+
+\begin{center}
+	\textcolor{red}{\textbf{Para estimar la respuesta el impulso en el caso de a...}}
+\end{center}
+
+
+
+\end{document}
