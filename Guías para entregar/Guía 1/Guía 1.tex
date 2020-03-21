@@ -98,6 +98,7 @@ se obtienen los siguientes resultados.
 \end{subfigure}
 \end{figure}
 
+Se puede determinar la frecuencia de oscilación para los casos de $\alpha = 1$ y $\beta = -\frac{1}{2}$ y $\alpha = \frac{5}{4}$ y $\beta = -\frac{25}{32}$, tanto de la respuesta al impulso como del escalón. Para todos los casos se obtiene $f_o = \frac{125}{T}$.
 \begin{center}
 	\textcolor{red}{\textbf{Para estimar la respuesta el impulso en el caso de a...}}
 \end{center}
@@ -157,12 +158,13 @@ Sabiendo que es una serie geométrica
 \end{equation*}
 
 Siendo así:
-\begin{equation*}
-	|H(j \omega)| = \frac{0.4}{\sqrt{1 + 0.4^2 - 0.8 cos( \omega T)}}	
-\end{equation*}
-\begin{equation*}
+\begin{equation}
+	|H(j \omega)| = \frac{0.4}{\sqrt{1 + 0.4^2 - 0.8 cos( \omega T)}}
+	\label{equ:mod}	
+\end{equation}
+\begin{equation}
 	\phase{H(j \omega)} = arctan \left( \frac{0.4 sen( \omega T)}{0.4 cos( \omega T) - 1} \right)
-\end{equation*}
+\end{equation}
 
 \begin{figure}[H]
 \centering
@@ -175,5 +177,7 @@ Siendo así:
 	\includegraphics[width=\textwidth]{Imagenes/11-fase.png}
 \end{subfigure}
 \end{figure}
+
+Evaluando (\ref{equ:mod}) en 0, se obtiene $H(0) = \frac{2}{3}$. Ahora se busca la frecuencia tal que $|H(j \omega)| = \frac{2}{3 \sqrt{2}}$. Despejando, se obtiene $f = \frac{0.99}{2 \pi T} = 157.31 \a Hz$.
 
 \end{document}
