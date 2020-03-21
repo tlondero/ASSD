@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.11.13)  20 MAR 2020 21:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.11.13)  21 MAR 2020 02:19
 entering extended mode
 **"./Guía 1.tex"
 ("Guía 1.tex"
@@ -669,6 +669,36 @@ Package: booktabs 2019/10/08 v1.6180339 publication quality tables
 \@lastruleclass=\count147
 \@thisrulewidth=\dimen260
 )
+("C:\Users\Usuario\AppData\Local\Programs\MiKTeX 2.9\tex/latex/steinmetz\steinm
+etz.sty"
+Package: steinmetz 2009/06/14 v1.0 Steinmetz symbol for electrotechnics
+
+("C:\Users\Usuario\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pict2e\pict2e.st
+y"
+Package: pict2e 2019/08/20 v0.3c Improved picture commands (HjG,RN,JT)
+
+("C:\Users\Usuario\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pict2e\pict2e.cf
+g"
+File: pict2e.cfg 2016/02/05 v0.1u pict2e configuration for teTeX/TeXLive
+)
+Package pict2e Info: Driver file: pdftex.def on input line 119.
+Package pict2e Info: Driver file for pict2e: p2e-pdftex.def on input line 121.
+
+("C:\Users\Usuario\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pict2e\p2e-pdfte
+x.def"
+File: p2e-pdftex.def 2016/02/05 v0.1u Driver-dependant file (RN,HjG,JT)
+)
+\pIIe@GRAPH=\toks40
+\@arclen=\dimen261
+\@arcrad=\dimen262
+\@tempdimd=\dimen263
+)
+\stm@phasebox=\box70
+\stm@phasedp=\skip53
+\stm@phaseht=\skip54
+\stm@phasetot=\skip55
+\stm@phasewd=\skip56
+)
 ("C:\Users\Usuario\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\hyperre
 f.sty"
 Package: hyperref 2019/11/10 v7.00c Hypertext links for LaTeX
@@ -735,7 +765,7 @@ Package: auxhook 2016/05/16 v1.4 Hooks for auxiliary files (HO)
 ns.sty"
 Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
 )
-\@linkdim=\dimen261
+\@linkdim=\dimen264
 \Hy@linkcounter=\count148
 \Hy@pagecounter=\count149
 
@@ -769,7 +799,7 @@ Package hyperref Info: Bookmarks ON on input line 4788.
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 5147.
-\XeTeXLinkMargin=\dimen262
+\XeTeXLinkMargin=\dimen265
 
 ("C:\Users\Usuario\AppData\Local\Programs\MiKTeX 2.9\tex/generic/oberdiek\bitse
 t.sty"
@@ -781,8 +811,8 @@ Package: bigintcalc 2016/05/16 v1.4 Expandable calculations on big integers (HO
 )
 ))
 \Fld@menulength=\count152
-\Field@Width=\dimen263
-\Fld@charsize=\dimen264
+\Field@Width=\dimen266
+\Fld@charsize=\dimen267
 Package hyperref Info: Hyper figures OFF on input line 6418.
 Package hyperref Info: Link nesting OFF on input line 6423.
 Package hyperref Info: Hyper index ON on input line 6426.
@@ -826,9 +856,9 @@ Package: uniquecounter 2016/05/16 v1.3 Provide unlimited unique counter (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 82.
 )
-\Hy@SectionHShift=\skip53
+\Hy@SectionHShift=\skip57
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 28.
+Package hyperref Info: Option `colorlinks' set `true' on input line 29.
 
 ("C:\Users\Usuario\AppData\Local\Programs\MiKTeX 2.9\tex/latex/circuitikz\circu
 itikz.sty"
@@ -842,10 +872,10 @@ File: tikzlibrarycalc.code.tex 2019/08/03 v3.1.4b (3.1.4b)
 ("C:\Users\Usuario\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/libraries\
 pgflibraryarrows.meta.code.tex"
 File: pgflibraryarrows.meta.code.tex 2019/08/03 v3.1.4b (3.1.4b)
-\pgfarrowinset=\dimen265
-\pgfarrowlength=\dimen266
-\pgfarrowwidth=\dimen267
-\pgfarrowlinewidth=\dimen268
+\pgfarrowinset=\dimen268
+\pgfarrowlength=\dimen269
+\pgfarrowwidth=\dimen270
+\pgfarrowlinewidth=\dimen271
 )
 ("C:\Users\Usuario\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/frontendla
 yer/tikz/libraries\tikzlibrarybending.code.tex"
@@ -858,35 +888,35 @@ File: pgfmodulebending.code.tex 2019/08/03 v3.1.4b (3.1.4b)
 ("C:\Users\Usuario\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/modules\pg
 fmodulenonlineartransformations.code.tex"
 File: pgfmodulenonlineartransformations.code.tex 2019/08/03 v3.1.4b (3.1.4b)
-\pgftransformnonlinearflatness=\dimen269
+\pgftransformnonlinearflatness=\dimen272
 )
 ("C:\Users\Usuario\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/libraries\
 pgflibrarycurvilinear.code.tex"
 File: pgflibrarycurvilinear.code.tex 2019/08/03 v3.1.4b (3.1.4b)
-\pgf@curvilinear@time@a=\dimen270
-\pgf@curvilinear@length@a=\dimen271
-\pgf@curvilinear@length@b=\dimen272
-\pgf@curvilinear@length@c=\dimen273
-\pgf@curvilinear@length@d=\dimen274
+\pgf@curvilinear@time@a=\dimen273
+\pgf@curvilinear@length@a=\dimen274
+\pgf@curvilinear@length@b=\dimen275
+\pgf@curvilinear@length@c=\dimen276
+\pgf@curvilinear@length@d=\dimen277
 )
-\pgf@arrows@the@rigidity=\dimen275
+\pgf@arrows@the@rigidity=\dimen278
 ))
 ("C:\Users\Usuario\AppData\Local\Programs\MiKTeX 2.9\tex/generic/circuitikz\pgf
 circ.defines.tex"
 \pgf@circ@count@a=\count158
 \pgf@circ@count@b=\count159
 \pgf@circ@count@c=\count160
-\pgf@circ@res@up=\dimen276
-\pgf@circ@res@down=\dimen277
-\pgf@circ@res@zero=\dimen278
-\pgf@circ@res@left=\dimen279
-\pgf@circ@res@right=\dimen280
-\pgf@circ@res@other=\dimen281
-\pgf@circ@res@step=\dimen282
-\pgf@circ@res@temp=\dimen283
-\pgfstartlinewidth=\dimen284
-\pgf@circ@Rlen=\dimen285
-\pgf@circ@scaled@Rlen=\dimen286
+\pgf@circ@res@up=\dimen279
+\pgf@circ@res@down=\dimen280
+\pgf@circ@res@zero=\dimen281
+\pgf@circ@res@left=\dimen282
+\pgf@circ@res@right=\dimen283
+\pgf@circ@res@other=\dimen284
+\pgf@circ@res@step=\dimen285
+\pgf@circ@res@temp=\dimen286
+\pgfstartlinewidth=\dimen287
+\pgf@circ@Rlen=\dimen288
+\pgf@circ@scaled@Rlen=\dimen289
 )
 ("C:\Users\Usuario\AppData\Local\Programs\MiKTeX 2.9\tex/generic/circuitikz\pgf
 circutils.tex")
@@ -926,15 +956,15 @@ Package circuitikz Warning: You did not specify one of the voltage directions:
 r.sty"
 Package: fancyhdr 2019/01/31 v3.10 Extensive control of page headers and footer
 s
-\f@nch@headwidth=\skip54
-\f@nch@O@elh=\skip55
-\f@nch@O@erh=\skip56
-\f@nch@O@olh=\skip57
-\f@nch@O@orh=\skip58
-\f@nch@O@elf=\skip59
-\f@nch@O@erf=\skip60
-\f@nch@O@olf=\skip61
-\f@nch@O@orf=\skip62
+\f@nch@headwidth=\skip58
+\f@nch@O@elh=\skip59
+\f@nch@O@erh=\skip60
+\f@nch@O@olh=\skip61
+\f@nch@O@orh=\skip62
+\f@nch@O@elf=\skip63
+\f@nch@O@erf=\skip64
+\f@nch@O@olf=\skip65
+\f@nch@O@orf=\skip66
 )
 ("C:\Users\Usuario\AppData\Local\Programs\MiKTeX 2.9\tex/latex/units\units.sty"
 Package: units 1998/08/04 v0.9b Typesetting units
@@ -944,9 +974,9 @@ Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 ("C:\Users\Usuario\AppData\Local\Programs\MiKTeX 2.9\tex/latex/units\nicefrac.s
 ty"
 Package: nicefrac 1998/08/04 v0.9b Nice fractions
-\L@UnitsRaiseDisplaystyle=\skip63
-\L@UnitsRaiseTextstyle=\skip64
-\L@UnitsRaiseScriptstyle=\skip65
+\L@UnitsRaiseDisplaystyle=\skip67
+\L@UnitsRaiseTextstyle=\skip68
+\L@UnitsRaiseScriptstyle=\skip69
 ))) ("Guía 1.aux"
 LaTeX Info: Redefining \. on input line 20.
 LaTeX Info: Redefining \% on input line 20.
@@ -974,16 +1004,16 @@ LaTeX Info: Redefining \% on input line 3.
 -pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count162
-\scratchdimen=\dimen287
-\scratchbox=\box70
+\scratchdimen=\dimen290
+\scratchbox=\box71
 \nofMPsegments=\count163
 \nofMParguments=\count164
-\everyMPshowfont=\toks40
+\everyMPshowfont=\toks41
 \MPscratchCnt=\count165
-\MPscratchDim=\dimen288
+\MPscratchDim=\dimen291
 \MPnumerator=\count166
 \makeMPintoPDFobject=\count167
-\everyMPtoPDFconversion=\toks41
+\everyMPtoPDFconversion=\toks42
 )
 ("C:\Users\Usuario\AppData\Local\Programs\MiKTeX 2.9\tex/latex/oberdiek\epstopd
 f-base.sty"
@@ -1038,7 +1068,7 @@ ABD: EveryShipout initializing macros
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
-\AtBeginShipoutBox=\box71
+\AtBeginShipoutBox=\box72
 Package hyperref Info: Link coloring ON on input line 3.
 
 ("C:\Users\Usuario\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\nameref
@@ -1084,40 +1114,51 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: Imagenes/9-impulso.png Graphic file (type png)
 <use Imagenes/9-impulso.png>
 Package pdftex.def Info: Imagenes/9-impulso.png  used on input line 93.
-(pdftex.def)             Requested size: 358.50314pt x 268.88925pt.
+(pdftex.def)             Requested size: 250.95612pt x 188.22089pt.
 <Imagenes/9-escalon.png, id=18, 462.528pt x 346.896pt>
 File: Imagenes/9-escalon.png Graphic file (type png)
 <use Imagenes/9-escalon.png>
 Package pdftex.def Info: Imagenes/9-escalon.png  used on input line 97.
-(pdftex.def)             Requested size: 358.50314pt x 268.88925pt.
+(pdftex.def)             Requested size: 250.95612pt x 188.22089pt.
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.100 
-       [1] [2 <./Imagenes/9-impulso.png> <./Imagenes/9-escalon.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 107.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 107.
-
-("Guía 1.aux"
+       [1]
+<Imagenes/11-modulo.png, id=35, 462.528pt x 346.896pt>
+File: Imagenes/11-modulo.png Graphic file (type png)
+<use Imagenes/11-modulo.png>
+Package pdftex.def Info: Imagenes/11-modulo.png  used on input line 171.
+(pdftex.def)             Requested size: 250.95612pt x 188.22089pt.
+<Imagenes/11-fase.png, id=36, 462.528pt x 346.896pt>
+File: Imagenes/11-fase.png Graphic file (type png)
+<use Imagenes/11-fase.png>
+Package pdftex.def Info: Imagenes/11-fase.png  used on input line 175.
+(pdftex.def)             Requested size: 250.95612pt x 188.22089pt.
+ [2 <./Imagenes/9-impulso.png> <./Imagenes/9-escalon.png>] [3 <./Imagenes/11-mo
+dulo.png> <./Imagenes/11-fase.png>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 179.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 179.
+ ("Guía 1.aux"
 LaTeX Info: Redefining \. on input line 20.
 LaTeX Info: Redefining \% on input line 20.
 )
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 107.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 107.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 179.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 179.
 Package rerunfilecheck Info: File `"Guía 1".out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 107.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 179.
  ) 
 Here is how much of TeX's memory you used:
- 29970 strings out of 492450
- 682916 string characters out of 3119070
- 882666 words of memory out of 3000000
- 33853 multiletter control sequences out of 15000+200000
+ 30157 strings out of 492450
+ 685818 string characters out of 3119070
+ 886687 words of memory out of 3000000
+ 34022 multiletter control sequences out of 15000+200000
  18319 words of font info for 70 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  63i,11n,73p,432b,402s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1129,17 +1170,19 @@ rograms/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/Usuario
 /AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C
 :/Users/Usuario/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/c
 m/cmmi10.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pu
-blic/amsfonts/cm/cmmi7.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX 2.9/
-fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Usuario/AppData/Local/Progra
-ms/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Usuario/AppDat
-a/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/U
-suario/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.
-pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsf
-onts/cm/cmsy7.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX 2.9/fonts/typ
-e1/public/amsfonts/cm/cmti12.pfb>
-Output written on "Guía 1.pdf" (3 pages, 211584 bytes).
+blic/amsfonts/cm/cmmi5.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX 2.9/
+fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/Usuario/AppData/Local/Progra
+ms/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Usuario/AppDat
+a/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/
+Usuario/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.p
+fb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfo
+nts/cm/cmsy10.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX 2.9/fonts/typ
+e1/public/amsfonts/cm/cmsy5.pfb><C:/Users/Usuario/AppData/Local/Programs/MiKTeX
+ 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/Usuario/AppData/Local/P
+rograms/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on "Guía 1.pdf" (4 pages, 282002 bytes).
 PDF statistics:
- 86 PDF objects out of 1000 (max. 8388607)
- 9 named destinations out of 1000 (max. 500000)
- 23 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 104 PDF objects out of 1000 (max. 8388607)
+ 12 named destinations out of 1000 (max. 500000)
+ 33 words of extra memory for PDF output out of 10000 (max. 10000000)
 

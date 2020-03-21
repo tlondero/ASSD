@@ -88,11 +88,11 @@ se obtienen los siguientes resultados.
 
 \begin{figure}[H]
 \centering
-\begin{subfigure}{.7\textwidth}
+\begin{subfigure}{.49\textwidth}
 \centering
 	\includegraphics[width=\textwidth]{Imagenes/9-impulso.png}
 \end{subfigure}
-\begin{subfigure}{.7\textwidth}
+\begin{subfigure}{.49\textwidth}
 \centering
 	\includegraphics[width=\textwidth]{Imagenes/9-escalon.png}
 \end{subfigure}
@@ -102,6 +102,78 @@ se obtienen los siguientes resultados.
 	\textcolor{red}{\textbf{Para estimar la respuesta el impulso en el caso de a...}}
 \end{center}
 
+\section*{Ejercicio 11}
+La ecuación en diferencia del sistema es: %(con $T=1 \ ms$)
+\begin{equation*}
+	y(n) = 0.4 y(n - 1) + 0.4 x(n)
+\end{equation*}
 
+Siendo este un sistema relajado, se busca $y(n)$ con $x(n) = \delta (n)$:
+\begin{equation*}
+	h(0) = 0.4 x(0) + 0.4h(-1) = 0.4
+\end{equation*}
+\begin{equation*}
+	h(1) = 0.4 x(1) + 0.4h(0) = 0.4^2
+\end{equation*}
+\begin{equation*}
+	h(2) = 0.4 x(2) + 0.4h(1) = 0.4^3
+\end{equation*}
+\begin{equation*}
+	...
+\end{equation*}
+\begin{equation*}
+	h(n) = 0.4^{n+1}
+\end{equation*}
+
+Se busca que la salida quede expresada de la forma:
+\begin{equation*}
+	y(n) = y_{zi}(n) + y_{zs}(n)
+\end{equation*}
+
+Donde
+\begin{equation*}
+	\lim_{n\to\infty} y(n) = \lim_{x\to\infty} y_{zi}(n) + y_{zs}(n) \longrightarrow h(n)*x(n) + 0
+\end{equation*}
+
+Asumiendo excitación senoidal $x(nt) = cos(n \omega T) = \frac{e^{j n \omega T}}{2j} + \frac{e^{-j n \omega T}}{2j}$
+\begin{equation*}
+	y(nT) = R[x(nT)] = \frac{1}{2j} R\left[ e^{j n \omega T} \right] + \frac{1}{2j} R\left[ e^{-j n \omega T} \right] = \frac{1}{2j} y_1 (\omega T) + \frac{1}{2j} y_2 (\omega T)
+\end{equation*}
+
+Tomando
+\begin{equation*}
+	y_1 (\omega T) = \sum_{k=0}^{n} x_1(n - k) h(k) = \sum_{k=0}^{n}e^{j \left( n - k \right) \omega T } 0.4^{n+1} = 0.4 \sum_{k=0}^{n}e^{j \left( n - k \right) \omega T } e^{ln \left( 0.4 \right) } = 0.4 e^{j n \omega T } \sum_{k=0}^{n}e^{j \left( - k \right) \omega T \ ln \left( 0.4 \right) }
+\end{equation*}
+
+Sabiendo que es una serie geométrica
+\begin{equation*}
+	y_1 (\omega T) = 0.4 e^{j n \omega T } \frac{ e^{ \left[ ln \left( 0.4 \right) - j k \omega T \right] \left(n + 1 \right) } - 1}{e^{ ln \left( 0.4 \right) - j k \omega T} - 1}
+\end{equation*}
+\begin{equation*}
+	\lim_{n\to\infty} y_1 (n) = e^{j n \omega T } \frac{0.4}{1 - e^{ ln \left( 0.4 \right) - j k \omega T}} = \tilde{y}_1(n)	
+\end{equation*}
+\begin{equation*}
+	H(j \omega) = \frac{0.4}{1 - e^{ ln \left( 0.4 \right) - j k \omega T}}	
+\end{equation*}
+
+Siendo así:
+\begin{equation*}
+	|H(j \omega)| = \frac{0.4}{\sqrt{1 + 0.4^2 - 0.8 cos( \omega T)}}	
+\end{equation*}
+\begin{equation*}
+	\phase{H(j \omega)} = arctan \left( \frac{0.4 sen( \omega T)}{0.4 cos( \omega T) - 1} \right)
+\end{equation*}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}{.49\textwidth}
+\centering
+	\includegraphics[width=\textwidth]{Imagenes/11-modulo.png}
+\end{subfigure}
+\begin{subfigure}{.49\textwidth}
+\centering
+	\includegraphics[width=\textwidth]{Imagenes/11-fase.png}
+\end{subfigure}
+\end{figure}
 
 \end{document}
