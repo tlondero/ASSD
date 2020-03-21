@@ -19,9 +19,9 @@
 	
 		\textbf{Invariancia:}
 		
-		$R \left[ x \left( nT - T \right) \right] = 5nT x^2 \left( nT -T \right)$ 
+		$R \left[ x \left( nT - kT \right) \right] = 5nT x^2 \left( nT - kT \right)$ 
 		
-		$T \left[ R \left[ x \left( nT \right) \right] \right] = T \left[ 5nT x^2 \left( nT \right) \right] = 5(nT-T) x^2 \left( nT -T \right)$ 
+		$T \left[ R \left[ x \left( nT \right) \right] \right] = T \left[ 5nT x^2 \left( nT \right) \right] = 5(nT-T) x^2 \left( nT - kT \right)$ 
 		
 		No es tiempo invariante.
 		
@@ -33,31 +33,13 @@
 
 		No es un sistema lineal.
 		
-	\item[e)] $\mathbf{R \left[ x \left( nT \right) \right] = 3x \left( nT - 3T\right)}$ 
+	\item[e)] $\mathbf{R \left[ x \left( nT \right) \right] = 3x \left( nT + 3T\right)}$ 
 	
 		\textbf{Invariancia:}
 		
-		$R \left[ x \left( nT - T \right) \right] = 3x \left( nT - 3T -T \right)$ 
+		$R \left[ x \left( nT - T \right) \right] = 3x \left( nT + 3T - kT \right)$ 
 		
-		$T \left[ R \left[ x \left( nT \right) \right] \right] = T \left[ 3x \left( nT - 3T \right) \right] = 3x \left( nT - 3T -T \right)$ 
-		
-		Es tiempo invariante.
-		
-		\textbf{Causalidad:} Es causal ya que no depende de entradas futuras.
-		
-		\textbf{Linealidad:}
-		
-		 $R \left[ ax_1 \left( nT \right) + bx_2 \left( nT \right) \right] = a3 x_{1} \left( nT - 3T \right) + b3 x_{2} \left( nT - 3T \right) = aR \left[ x_1 \left( nT \right) \right] + bR \left[ x_2 \left( nT \right) \right]$
-
-		Es un sistema lineal.
-		
-	\item[i)] $\mathbf{R \left[ x \left( nT \right) \right] = x \left( nT + T\right) e^{-nT}}$ 
-	
-		\textbf{Invariancia:}
-		
-		$R \left[ x \left( nT - T \right) \right] =  x \left( nT \right) e^{-nT + T}$ 
-		
-		$T \left[ R \left[ x \left( nT \right) \right] \right] = T \left[  x \left( nT \right) e^{-nT + T} \right] = x \left( nT \right) e^{-nT + T}$ 
+		$T \left[ R \left[ x \left( nT \right) \right] \right] = T \left[ 3x \left( nT + 3T \right) \right] = 3x \left( nT + 3T - kT \right)$ 
 		
 		Es tiempo invariante.
 		
@@ -65,7 +47,25 @@
 		
 		\textbf{Linealidad:}
 		
-		 $R \left[ ax_1 \left( nT \right) + bx_2 \left( nT \right) \right] = a x_{1} \left( nT \right) e^{-nT + T} + b x_{2} \left( nT \right) e^{-nT + T} = aR \left[ x_1 \left( nT \right) \right] + bR \left[ x_2 \left( nT \right) \right]$
+		 $R \left[ ax_1 \left( nT \right) + bx_2 \left( nT \right) \right] = 3 \left[ ax_{1} \left( nT + 3T \right) + b x_{2} \left( nT + 3T \right) \right] = a 3 x_{1} \left( nT + 3T \right) + b 3x_{2} \left( nT + 3T \right) = aR \left[ x_1 \left( nT \right) \right] + bR \left[ x_2 \left( nT \right) \right]$
+
+		Es un sistema lineal.
+		
+	\item[i)] $\mathbf{R \left[ x \left( nT \right) \right] = x \left( nT + T\right) e^{-nT}}$ 
+	
+		\textbf{Invariancia:}
+		
+		$R \left[ x \left( nT - kT \right) \right] =  x \left( nT + T - kT  \right) e^{-nT}$ 
+		
+		$T \left[ R \left[ x \left( nT \right) \right] \right] = T \left[  x \left( nT + T - kT \right) e^{-nT + kT} \right] = x \left( nT + T -kT \right) e^{-nT + kT}$ 
+		
+		No es tiempo invariante.
+		
+		\textbf{Causalidad:} No es causal ya que depende de entradas futuras.
+		
+		\textbf{Linealidad:}
+		
+		 $R \left[ ax_1 \left( nT \right) + bx_2 \left( nT \right) \right] = \left[ a x_{1} \left( nT \right) + b x_{2} \left( nT \right) \right] e^{-nT + T} = a x_{1} \left( nT \right) e^{-nT + T} + b x_{2} \left( nT \right) e^{-nT + T} = aR \left[ x_1 \left( nT \right) \right] + bR \left[ x_2 \left( nT \right) \right]$
 
 		Es un sistema lineal.		
 
@@ -84,7 +84,8 @@ La ecuación en diferencia del sistema es
 \begin{equation*}
 	y(nT) = 0.5x(nT - 2T) + \alpha y(nT - T) + \beta y(nT - 2T)
 \end{equation*}
-se obtienen los siguientes resultados.
+
+De esta formase obtienen los siguientes resultados.
 
 \begin{figure}[H]
 \centering
@@ -100,7 +101,7 @@ se obtienen los siguientes resultados.
 
 Se puede determinar la frecuencia de oscilación para los casos de $\alpha = 1$ y $\beta = -\frac{1}{2}$ y $\alpha = \frac{5}{4}$ y $\beta = -\frac{25}{32}$, tanto de la respuesta al impulso como del escalón. Para todos los casos se obtiene $f_o = \frac{125}{T}$.
 \begin{center}
-	\textcolor{red}{\textbf{Para estimar la respuesta el impulso en el caso de a...}}
+	\textcolor{red}{\textbf{Para estimar la respuesta en frecuenacia en el caso de a...}}
 \end{center}
 
 \section*{Ejercicio 11}
