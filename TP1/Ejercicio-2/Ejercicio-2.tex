@@ -133,11 +133,11 @@ Para las señales $X_b$ y $X_c$ se graficó la potencia en función del armónic
 
 Es de interes apreciar que, para el caso de la señal triangular, tan solo con la inclusión de 2 armónicos, se obtiene una potencia superior al $98\%$. Por otro lado, se necesita incluir hasta el 3er armónico de la función  seno $\frac{3}{2}$ para obtener una potencia superior al $95\%$.
 
-La frecuencia fundamental de estas señales es $f_0 = \frac{N}{2} = 1,5 \ kHz$, correspondiendole la del máximo armónico (es decir, el tercero) de $4.5 \ kHz$. Asimismo, es conveniente considerar la señal de AM que también es probada en el sistema, cuya máxima frecuencia es de $2,2 \cdot f_0 = 3.3 \ kHz$. Se toma $f_p= 5 \ kHz$  definiendo así la plantilla de ambos filtros:
+La frecuencia fundamental de estas señales es $f_0 = \frac{N}{2} = 1,5 \ kHz$, correspondiendole la del máximo armónico (es decir, el tercero) de $10.5 \ kHz$. Asimismo, es conveniente considerar la señal de AM que también es probada en el sistema, cuya máxima frecuencia es de $2,2 \cdot f_0 = 3.3 \ kHz$. Se toma $f_p= 5 \ kHz$  definiendo así la plantilla de ambos filtros:
 \begin{multicols}{2}
 \begin{itemize}
-	\item $f_p = 5 \ kHz$
-	\item $f_a = 7.5 \ kHz$
+	\item $f_p = 11\ kHz$
+	\item $f_a = 16.5 \ kHz$
 	\item $A_p = 1 \ dB$
 	\item $A_s = 50 \ dB$
 \end{itemize}
@@ -163,11 +163,11 @@ Sintentizando el filtro con los datos mostrado, se corresponde un filtro de orde
 \begin{tabular}{ccc}
 \hline
 \textbf{Etapa} & \textbf{Frecuencia de corte [kHz]} & \textbf{Q} \\ \hline
-1 & 2.1 & 0.54 \\
-2 & 2.8 & 0.84 \\
-3 & 3.8 & 1.45 \\
-4 & 4.6 & 2.82 \\
-5 & 5.1 & 9.06 \\ \hline
+1 & 4.5 & 0.54 \\
+2 & 6.2 & 0.84 \\
+3 & 8.3 & 1.45 \\
+4 & 10.1 & 2.82 \\
+5 & 11.2 & 9.06 \\ \hline
 \end{tabular}
 \caption{Frecuencias de corte y Q de las etapas del filtro deseado.}
 \end{table}
@@ -189,8 +189,8 @@ Luego se obtuvieron los siguientes valores para los componentes:
 Componente & Valor & Valor comercial & Error \\ \hline
 $R_1$ & $100 \ k\Omega$ & $100 \ k\Omega$ & $0\%$ \\
 $R_2$ & $100 \ k\Omega$ & $100 \ k\Omega$ & $0\%$\\
-$C_1$ & $832 \ pF$ & $12 \ pF // 820 \ pF$ & $\le0.1\%$ \\
-$C_2$ & $719 \ pF$ & $680 \ pF // 39 \ pF$ & $\le0.1\%$ \\ \hline
+$C_1$ & $378.6pF \ pF$ & $390 \ pF + 12 \ nF$ & $0.2\%$ \\
+$C_2$ & $326.8pF \ pF$ & $330 \ pF + 33 \ nF$ & $\le0.1\%$ \\ \hline
 \end{tabular}
 \caption{Componentes de la etapa 1.}
 \end{table}
@@ -202,8 +202,8 @@ $C_2$ & $719 \ pF$ & $680 \ pF // 39 \ pF$ & $\le0.1\%$ \\ \hline
 Componente & Valor & Valor comercial & Error \\ \hline
 $R_1$ & $100 \ k\Omega$ & $100 \ k\Omega$ & $0\%$ \\
 $R_2$ & $100 \ k\Omega$ & $100 \ k\Omega$ & $0\%$\\
-$C_1$ & $1.21 \ nF$ & $15 \ pF // 1.2 \ nF$ & $\le0.1\%$ \\
-$C_2$ & $144.44 \ pF$ & $3.9 \ nF + 150 \ pF$ & $0.2\%$ \\ \hline
+$C_1$ & $552.6 \ pF$ & $560 \ pF + 39 \ nF$ & $\le0.1\%$ \\
+$C_2$ & $65.8 \ pF$ & $82 \ pF + 330 \ pF$ & $0.2\%$ \\ \hline
 \end{tabular}
 \caption{Componentes de la etapa 3.}
 \end{table}
@@ -214,8 +214,8 @@ $C_2$ & $144.44 \ pF$ & $3.9 \ nF + 150 \ pF$ & $0.2\%$ \\ \hline
 Componente & Valor & Valor comercial & Error \\ \hline
 $R_1$ & $100 \ k\Omega$ & $100 \ k\Omega$ & $0\%$ \\
 $R_2$ & $100 \ k\Omega$ & $100 \ k\Omega$ & $0\%$\\
-$C_1$ & $947.37 \ pF$ & $1 \ nF + 18 \ nF$ & $0.4\%$ \\
-$C_2$ & $336.8 \ pF$ & $6.8 \ pF // 330 \ pF$ & $0.1\%$ \\ \hline
+$C_1$ & $429.1 \ pF$ & $39 \ pF // 390 \ pF$ & $0.4\%$ \\
+$C_2$ & $153.3 \ pF$ & $3.3 \ pF // 150 \ pF$ & $0.1\%$ \\ \hline
 \end{tabular}
 \caption{Componentes de la etapa 2.}
 \end{table}
@@ -224,10 +224,10 @@ $C_2$ & $336.8 \ pF$ & $6.8 \ pF // 330 \ pF$ & $0.1\%$ \\ \hline
 \begin{tabular}{cccc}
 \hline
 Componente & Valor & Valor comercial & Error \\ \hline
-$R_1$ & $5.9 \ k\Omega$ & $1.2 \ k\Omega + 4.7 \ \Omega$ & $\le0.1\%$ \\
-$R_2$ & $5.9 \ k\Omega$ & $1.2 \ k\Omega + 4.7 \ \Omega$ & $\le0.1\%$\\
-$C_1$ & $33 \ nF$ & $33 \ nF$ & $0\%$ \\
-$C_2$ & $1.04 \ pF$ & $220 \ pF // 820 \ pF$ & $\le0.1\%$ \\ \hline
+$R_1$ & $100 \ k\Omega$ & $100 \ k\Omega$ & $0\%$ \\
+$R_2$ & $100 \ k\Omega$ & $100 \ k\Omega$ & $0\%$\\
+$C_1$ & $884.9 \ pF$ & $68pF // 820pF $ & $0.3\%$ \\
+$C_2$ & $27.9 \ pF$ & $33 \ pF + 180 \ pF$ & $\le0.1\%$ \\ \hline
 \end{tabular}
 \caption{Componentes de la etapa 4.}
 \end{table}
@@ -239,8 +239,8 @@ $C_2$ & $1.04 \ pF$ & $220 \ pF // 820 \ pF$ & $\le0.1\%$ \\ \hline
 Componente & Valor & Valor comercial & Error \\ \hline
 $R_1$ & $100 \ k\Omega$ & $100 \ k\Omega$ & $0\%$ \\
 $R_2$ & $100 \ k\Omega$ & $100 \ k\Omega$ & $0\%$\\
-$C_1$ & $5.7 \ nF$ & $100 \ pF // 5.6 \ nF$ & $\le0.1\%$ \\
-$C_2$ & $17.34 \ pF$ & $18 \ pF + 470 \ pF$ & $\le0.1\%$ \\ \hline
+$C_1$ & $2.6 \ nF$ & $3.3 \ nF + 12 \ nF$ & $\le0.1\%$ \\
+$C_2$ & $7.9 \ pF$ & $8.2 \ pF + 220 \ pF$ & $0.3\%$ \\ \hline
 \end{tabular}
 \caption{Componentes de la etapa 5.}
 \end{table}
@@ -252,7 +252,7 @@ Para la implementación se optó por utilizar amplificadores del tipo \href{http
 \caption{Respuesta en frecuencia simulada.}
 	\label{fig:transspice}
 \end{figure}
-A continuación se hizo un análisis de montecarlo del filtro, obteniendo una ligera desviación respecto del filtro deseado, la cual aun asi se ajusta a la plantilla.
+A continuación se hizo un análisis de montecarlo del filtro, obteniendo una ligera desviación respecto del filtro deseado, la cual aun asi se ajusta a la plantilla con la eventual ganancia en el sobrepico.
  \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\textwidth]{ImagenesEjercicio2/montecarlo.PNG}
