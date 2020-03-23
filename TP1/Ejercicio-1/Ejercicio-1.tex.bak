@@ -4,6 +4,8 @@
 
 \subsection{Introducción}
 
+FALTA LA INTRODUCCIÓN AY CHE!!!!!!!
+
 \subsection{Oscilador}
 
 Para realizar el muestreo y las subsiguientes mediciones se requiere diseñar un oscilador con frecuencia y duty cycle variable. El diseño elegido es el siguiente:
@@ -61,10 +63,62 @@ Para realizar el muestreo y las subsiguientes mediciones se requiere diseñar un
 			;
 		\end{circuitikz}
 	\caption{Oscilador con ajuste de frecuencia y duty cycle independientes.}
-	\label{fig:rcnet}
+	\label{fig:osc}
 
 \end{figure}
 
-Este permite, con los valores tomados mostrados a continuación, variar la frecuencia entre $~5kHz$, la frecuencia de corte de nuestro filtro anti-alias, y $15kHz$
+Este permite, con los valores tomados mostrados a continuación, variar la frecuencia entre $\approx 9.66kHz$, levemente menor a la frecuencia de corte de nuestro filtro anti-alias, y $25kHz$, logrando traspasar a la frecuencia de Nyquist en un $25\%$. Además, este circuito permite configurar el duty cycle de la señal entre $\approx1\%$ y $\approx99\%$ con máxima frecuencia y entre $\approx5\%$ y $\approx95\%$ con mínima frecuencia. Existe como se puede ver una muy pequeña interacción entre el ajuste de frecuencia y duty cycle, lo que genera que los límites del duty cycle se achiquen al disminuir la frecuencia, pero a fines prácticos se la consideró insignificante dado que los límites mínimos se cumplen.
+
+Los valores tomados se detallan a continuación:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{cc}
+\hline
+Componente & Valor \\ \hline
+$R_1$ & $2.2 \ k\Omega$ \\
+$R_2$ & $10 \ k\Omega$ \\
+$R_3$ & $10 \ k\Omega$  \\
+$RP_{freq}$ & $4 \ k\Omega$  \\
+$RP_{DT}$ & $45 \ k\Omega$  \\
+$C_1$ & $10 \ nF$  \\
+$C_2$ & $1 \ nF$\\ \hline
+\end{tabular}
+\caption{Componentes del oscilador.}
+\end{table}
+
+Una peculiaridad de esta configuración circuital del 555 es que la salida se encuentra tomada en el pin de descarga del integrado. Esta configuración funciona dado que el pin de descarga y el pin de salida del 555 se encuentran en contra-fase. Esto permite realizar la carga y descarga del capacitor $C_1$ mediante la salida del integrado. Además, las resistencias $R_2$ y $R_3$ aumentan el rango de variabilidad de frecuencias y duty cycle del oscilador. Como el pin de descarga del 555 es de tipo open collector, se debe atar esta salida a la tensión de alimentación mediante una resistencia de pull up, en este caso $R_1$.
+Los resultados del oscilador, con una alimentación de $5V$ se muestran a continuación:
+
+\begin{figure}
+\centering
+\begin{subfigure}[b]{.45\linewidth}
+\includegraphics[width=\linewidth]{/ImagenesEjercicio1/DT50FMAX.png}
+\caption{Onda simétrica con máxima frecuencia.}
+\end{subfigure}
+\begin{subfigure}[b]{.45\linewidth}
+\includegraphics[width=\linewidth]{/ImagenesEjercicio1/DT50FMIN.png}
+\caption{Onda simétrica con mínima frecuencia.}
+\end{subfigure}
+
+\begin{subfigure}[b]{.45\linewidth}
+\includegraphics[width=\linewidth]{/ImagenesEjercicio1/DTMAXFMAX.png}
+\caption{Máximo duty cycle con máxima frecuencia.}
+\end{subfigure}
+\begin{subfigure}[b]{.45\linewidth}
+\includegraphics[width=\linewidth]{/ImagenesEjercicio1/DTMAXFMIN.png}
+\caption{Máximo duty cycle con mínima frecuencia.}
+\end{subfigure}
+
+\begin{subfigure}[b]{.45\linewidth}
+\includegraphics[width=\linewidth]{/ImagenesEjercicio1/DTMINFMAX.png}
+\caption{Mínimo duty cycle con máxima frecuencia.}
+\end{subfigure}
+\begin{subfigure}[b]{.45\linewidth}
+\includegraphics[width=\linewidth]{/ImagenesEjercicio1/DTMINFMIN.png}
+\caption{Mínimo duty cycle con máxima frecuencia.}
+\end{subfigure}
+
+\end{figure}
 
 \end{document}
