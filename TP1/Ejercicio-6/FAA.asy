@@ -1,0 +1,13 @@
+Version 4
+SymbolType CELL
+LINE Normal -80 0 -48 0
+LINE Normal 81 0 48 0
+RECTANGLE Normal 48 48 -48 -48
+WINDOW 3 -16 -2 Left 1
+SYMATTR Value FAA
+PIN -80 0 BOTTOM 8
+PINATTR PinName IN
+PINATTR SpiceOrder 1
+PIN 80 0 BOTTOM 8
+PINATTR PinName OUT
+PINATTR SpiceOrder 2
