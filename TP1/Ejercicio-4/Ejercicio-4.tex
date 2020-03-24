@@ -44,7 +44,7 @@ En una primera instancia se utilizo una capacitor de $47nF$.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{ImagenesEjercicio4/ChTests/Vin1_30ksamplig47nF}
-	\caption{Sinusoidal 5Khz muestreada a 30KHz con un $C_{hold}=47nF$}
+	\caption{Sinusoidal 5KHz muestreada a 30KHz con un $C_{hold}=47nF$}
 	\label{fig:vin130ksamplig47nf}
 \end{figure}
 En color \textcolor{red}{rojo} observamos el resultado de la operación de muestreado. 
@@ -82,7 +82,7 @@ Analizando la figura \ref{fig:vin130ksamplig120pfzoom} notamos que el capacitor 
 
 
 Ahora veremos lo que sucede cuando empleamos una señal más rápida.
-La señal senoidal ahora posee una frecuencia de oscilación de $20*3*12 KHz = 720Khz$. Para poder obtener imágenes y apreciar los cambios en los capacitores elegidos es necesarios muestrear a la señal por encima de la mínima permitida por el criterio de Nyquist. Sin embargo, si consideramos ese caso obtenemos  $F_{nyqusit}=1.44Mhz$.
+La señal senoidal ahora posee una frecuencia de oscilación de $20*3*12 KHz = 720KHz$. Para poder obtener imágenes y apreciar los cambios en los capacitores elegidos es necesarios muestrear a la señal por encima de la mínima permitida por el criterio de Nyquist. Sin embargo, si consideramos ese caso obtenemos  $F_{nyqusit}=1.44Mhz$.
 Para la simulación de la  figura \ref{fig:vin21440ksamplign120pf} se utilizo el capacitor de $120pF$ que había obtenido buenos resultados previamente. Pese a ello una imagen poco anticipada aparece al finalizar la simulación. La salida parecería ser nula. Aun si esta no fuese nula no sirve a nuestros propósitos. 
 \begin{figure}[H]
 	\centering
@@ -102,12 +102,79 @@ En primer lugar podemos relacionar lo ocurrido aquí con lo sucedido cuando se u
 \end{figure}
 
 Si elegimos muestrear a la frecuencia de Nyquist entonces le estamos dando al $C_{hold}$ un tiempo de $T_{acq}=\frac{1}{2*F_{nyquist}}$
-$$T_{acq}\approx 700nS = 0.7\mu S$$
+$$T_{acq}\approx 700ns = 0.7\mu s$$
 Por lo tanto, si hacemos referencia a las curvas de la figura \ref{fig:holdcapacqtime} vemos que nuestro requerimiento esta por fuera de las capacidades del \textbf{LF398}. En conclusión, necesitaríamos capacitancias extremadamente pequeñas. Lo cual tiene como contrapartida que no podrán mantener el valor almacenado durante mucho tiempo.
+\subsubsection{Elección del $C_{hold}$ apropiado}
+Como analizamos anteriormente, es de suma importancia elegir un capacitor que se cargue lo suficientemente rápido como para poder seguir a la señal de entrada y que a su vez pueda retener el valor muestreado sin degradarse. 
+En nuestro caso de aplicación se sabe que la señal de control tendrá una frecuencia máxima de $F_{osc}=25KHz$. Por lo tanto el capacitor de hold tendrá un tiempo de adquisición mínimo dado por:
+$$T_{acq}=\frac{1}{2*F_{nyquist}}\approx20\mu s$$
+
+Entonces observando la figura debajo tenemos 3 opciones a elegir dependiendo de que tan preciso queramos y/o necesitemos que sea el valor de la muestra. Esto se debe a que la elección del capacitor nos lleva a una relación de compromiso. Podemos reducir el tiempo de adquisición al elegir un capacitor más pequeño pero esto incrementara el \textbf{hold step} y el \textbf{droop rate} lo cual puede ser contraproducente.
+
+\begin{figure}[H]
+	\begin{subfigure}[b]{0.4\linewidth}
+		\centering
+		\includegraphics[scale=0.6]{ImagenesEjercicio4/HoldCapAcqTimeSl.png}
+		\caption{}
+		\label{fig:holdcapacqtimeSL}
+	\end{subfigure}
+	~
+	\begin{subfigure}[b]{0.4\linewidth}
+		\centering
+		\includegraphics[]{ImagenesEjercicio4/AcqTime.PNG}
+		\caption{}
+		\label{fig:acqtime}
+	\end{subfigure}
+ \caption{\ref{fig:holdcapacqtimeSL} Capacitor de Hold en función del tiempo de adquisición. \ref{fig:acqtime} Vista en detalle del muestreo y los efectos del Hold Step}
+\end{figure}
+
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{@{}lrlll@{}}
+		\toprule
+		\multicolumn{1}{c}{\textbf{Error \%}} & \multicolumn{1}{c}{\textbf{C}} &  &  &  \\ \midrule
+		0.01                                  & 8nF                            &  &  &  \\
+		0.1                                   & 10nF                           &  &  &  \\
+		1                                     & 16nF                           &  &  &  \\ \bottomrule
+	\end{tabular}
+	\caption{Valores de capacitor posibles según el error aceptado}
+	\label{tab:acqCap}
+\end{table}
+	
+Dadas estas 3 opciones ahora debemos también considerar el \textbf{hold step}. Este fenómeno se describe como un escalón de tensión que es generado cuando se pasa de modo \textit{sample} a modo \textit{hold}.
+Siguiendo las recomendaciones del fabricante, es deseable que el \textbf{hold step} se mantenga por debajo de la mitad del paso de tensión que representa al LSB. 
+$$V_{hs}\lesssim\frac{FS}{2^(n+1)}$$
+
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{ImagenesEjercicio4/HoldStepError}
+	\caption{Vista en detalle de los efectos del hold step}
+	\label{fig:holdsteperror}
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{ImagenesEjercicio4/HoldStep}
+	\caption{}
+	\label{fig:holdstep}
+\end{figure}
+
+
+\subsubsection{Analizando otros modelos de Sample and Hold IC}
 
 
 
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{ImagenesEjercicio4/AbsorcionDielectrico}
+	\caption{}
+	\label{fig:absorciondielectrico}
+\end{figure}
 
 
   
