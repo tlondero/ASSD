@@ -215,7 +215,7 @@ class top_block(gr.top_block, Qt.QWidget):
         if not True:
           self.qtgui_time_sink_x_0.disable_legend()
 
-        labels = ['FAA', 'Sample and hold', 'Llave analogica', 'Entrada', 'FR',
+        labels = ['Entrada', 'FAA', 'Sample and Hold', 'Llave analogica', 'FR',
                   '', '', '', '', '']
         widths = [1, 1, 1, 1, 1,
                   1, 1, 1, 1, 1]
@@ -269,7 +269,7 @@ class top_block(gr.top_block, Qt.QWidget):
         if "float" == "float" or "float" == "msg_float":
           self.qtgui_freq_sink_x_0.set_plot_pos_half(not True)
 
-        labels = ['FAA', 'Sample and Hold', 'Llave analogica', 'Entrada', 'FR',
+        labels = ['Entrada', 'Faa', 'Sample and Hold', 'Llave analogica', 'FR',
                   '', '', '', '', '']
         widths = [1, 1, 1, 1, 1,
                   1, 1, 1, 1, 1]
@@ -292,21 +292,19 @@ class top_block(gr.top_block, Qt.QWidget):
             self.top_grid_layout.setRowStretch(r, 1)
         for c in range(0, 4):
             self.top_grid_layout.setColumnStretch(c, 1)
-        self.filtro_antialiasing_0 = filter.fir_filter_fff(1, firdes.low_pass(
-        	1, samp_rate, fp, fp*1.5, firdes.WIN_HAMMING, 6.76))
+        self.low_pass_filter_0 = filter.interp_fir_filter_fff(1, firdes.low_pass(
+        	1, samp_rate, fp, 2500, firdes.WIN_HAMMING, 6.76))
         self.filtro_antialiasing = filter.fir_filter_fff(1, firdes.low_pass(
         	1, samp_rate, fp, 2500, firdes.WIN_HAMMING, 6.76))
-        self.blocks_throttle_0_1_0 = blocks.throttle(gr.sizeof_float*1, samp_rate,True)
-        self.blocks_throttle_0_1 = blocks.throttle(gr.sizeof_float*1, samp_rate,True)
+        self.blocks_throttle_0_0_0 = blocks.throttle(gr.sizeof_float*1, samp_rate,True)
         self.blocks_throttle_0_0 = blocks.throttle(gr.sizeof_float*1, samp_rate,True)
-        self.blocks_throttle_0 = blocks.throttle(gr.sizeof_float*1, samp_rate,True)
         self.blocks_threshold_ff_0 = blocks.threshold_ff(dutycycle, dutycycle, 0)
         self.blocks_sample_and_hold_xx_0 = blocks.sample_and_hold_ff()
         self.blocks_multiply_xx_0 = blocks.multiply_vff(1)
         self.blocks_multiply_const_vxx_0_1 = blocks.multiply_const_vff((m/2, ))
         self.blocks_multiply_const_vxx_0_0 = blocks.multiply_const_vff((m/2, ))
         self.blocks_multiply_const_vxx_0 = blocks.multiply_const_vff((2, ))
-        self.blocks_float_to_char_0 = blocks.float_to_char(1, 1)
+        self.blocks_float_to_char_0_2 = blocks.float_to_char(1, 1)
         self.blocks_add_xx_0 = blocks.add_vff(1)
         self.blks2_selector_0_1_0_0_0_0 = grc_blks2.selector(
         	item_size=gr.sizeof_float*1,
@@ -359,42 +357,40 @@ class top_block(gr.top_block, Qt.QWidget):
         self.connect((self.analog_sig_source_x_0, 0), (self.blks2_selector_0_1, 0))
         self.connect((self.analog_sig_source_x_0_0, 0), (self.blocks_multiply_const_vxx_0, 0))
         self.connect((self.analog_sig_source_x_0_0_0, 0), (self.blocks_threshold_ff_0, 0))
-        self.connect((self.analog_sig_source_x_0_1, 0), (self.blocks_float_to_char_0, 0))
+        self.connect((self.analog_sig_source_x_0_1, 0), (self.blocks_float_to_char_0_2, 0))
         self.connect((self.analog_sig_source_x_0_2, 0), (self.blocks_add_xx_0, 0))
         self.connect((self.analog_sig_source_x_0_2_0, 0), (self.blocks_multiply_const_vxx_0_0, 0))
         self.connect((self.analog_sig_source_x_0_2_1, 0), (self.blocks_multiply_const_vxx_0_1, 0))
         self.connect((self.blks2_selector_0_1, 0), (self.blks2_selector_0_1_0, 0))
         self.connect((self.blks2_selector_0_1, 0), (self.filtro_antialiasing, 0))
-        self.connect((self.blks2_selector_0_1, 0), (self.qtgui_freq_sink_x_0, 3))
-        self.connect((self.blks2_selector_0_1, 0), (self.qtgui_time_sink_x_0, 3))
-        self.connect((self.blks2_selector_0_1_0, 0), (self.blks2_selector_0_1_0_0, 0))
-        self.connect((self.blks2_selector_0_1_0, 0), (self.blocks_sample_and_hold_xx_0, 0))
+        self.connect((self.blks2_selector_0_1, 0), (self.qtgui_freq_sink_x_0, 0))
+        self.connect((self.blks2_selector_0_1, 0), (self.qtgui_time_sink_x_0, 0))
         self.connect((self.blks2_selector_0_1_0, 0), (self.blocks_throttle_0_0, 0))
-        self.connect((self.blks2_selector_0_1_0_0, 0), (self.blks2_selector_0_1_0_0_0, 0))
-        self.connect((self.blks2_selector_0_1_0_0, 0), (self.blocks_multiply_xx_0, 0))
-        self.connect((self.blks2_selector_0_1_0_0, 0), (self.blocks_throttle_0, 0))
+        self.connect((self.blks2_selector_0_1_0_0, 0), (self.blocks_throttle_0_0_0, 0))
         self.connect((self.blks2_selector_0_1_0_0_0, 0), (self.blks2_selector_0_1_0_0_0_0, 0))
-        self.connect((self.blks2_selector_0_1_0_0_0, 0), (self.blocks_throttle_0_1, 0))
-        self.connect((self.blks2_selector_0_1_0_0_0, 0), (self.filtro_antialiasing_0, 0))
-        self.connect((self.blks2_selector_0_1_0_0_0_0, 0), (self.blocks_throttle_0_1_0, 0))
+        self.connect((self.blks2_selector_0_1_0_0_0, 0), (self.low_pass_filter_0, 0))
+        self.connect((self.blks2_selector_0_1_0_0_0, 0), (self.qtgui_freq_sink_x_0, 3))
+        self.connect((self.blks2_selector_0_1_0_0_0, 0), (self.qtgui_time_sink_x_0, 3))
+        self.connect((self.blks2_selector_0_1_0_0_0_0, 0), (self.qtgui_freq_sink_x_0, 4))
+        self.connect((self.blks2_selector_0_1_0_0_0_0, 0), (self.qtgui_time_sink_x_0, 4))
         self.connect((self.blocks_add_xx_0, 0), (self.blks2_selector_0_1, 3))
-        self.connect((self.blocks_float_to_char_0, 0), (self.blocks_sample_and_hold_xx_0, 1))
+        self.connect((self.blocks_float_to_char_0_2, 0), (self.blocks_sample_and_hold_xx_0, 1))
         self.connect((self.blocks_multiply_const_vxx_0, 0), (self.blks2_selector_0_1, 1))
         self.connect((self.blocks_multiply_const_vxx_0_0, 0), (self.blocks_add_xx_0, 1))
         self.connect((self.blocks_multiply_const_vxx_0_1, 0), (self.blocks_add_xx_0, 2))
         self.connect((self.blocks_multiply_xx_0, 0), (self.blks2_selector_0_1_0_0_0, 1))
         self.connect((self.blocks_sample_and_hold_xx_0, 0), (self.blks2_selector_0_1_0_0, 1))
+        self.connect((self.blocks_sample_and_hold_xx_0, 0), (self.blks2_selector_0_1_0_0_0, 0))
+        self.connect((self.blocks_sample_and_hold_xx_0, 0), (self.blocks_multiply_xx_0, 0))
         self.connect((self.blocks_threshold_ff_0, 0), (self.blocks_multiply_xx_0, 1))
-        self.connect((self.blocks_throttle_0, 0), (self.qtgui_freq_sink_x_0, 0))
-        self.connect((self.blocks_throttle_0, 0), (self.qtgui_time_sink_x_0, 1))
         self.connect((self.blocks_throttle_0_0, 0), (self.qtgui_freq_sink_x_0, 1))
-        self.connect((self.blocks_throttle_0_0, 0), (self.qtgui_time_sink_x_0, 0))
-        self.connect((self.blocks_throttle_0_1, 0), (self.qtgui_freq_sink_x_0, 2))
-        self.connect((self.blocks_throttle_0_1, 0), (self.qtgui_time_sink_x_0, 2))
-        self.connect((self.blocks_throttle_0_1_0, 0), (self.qtgui_freq_sink_x_0, 4))
-        self.connect((self.blocks_throttle_0_1_0, 0), (self.qtgui_time_sink_x_0, 4))
+        self.connect((self.blocks_throttle_0_0, 0), (self.qtgui_time_sink_x_0, 1))
+        self.connect((self.blocks_throttle_0_0_0, 0), (self.qtgui_freq_sink_x_0, 2))
+        self.connect((self.blocks_throttle_0_0_0, 0), (self.qtgui_time_sink_x_0, 2))
         self.connect((self.filtro_antialiasing, 0), (self.blks2_selector_0_1_0, 1))
-        self.connect((self.filtro_antialiasing_0, 0), (self.blks2_selector_0_1_0_0_0_0, 1))
+        self.connect((self.filtro_antialiasing, 0), (self.blks2_selector_0_1_0_0, 0))
+        self.connect((self.filtro_antialiasing, 0), (self.blocks_sample_and_hold_xx_0, 0))
+        self.connect((self.low_pass_filter_0, 0), (self.blks2_selector_0_1_0_0_0_0, 1))
         self.connect((self.sen32, 0), (self.blks2_selector_0_1, 2))
 
     def closeEvent(self, event):
@@ -425,12 +421,10 @@ class top_block(gr.top_block, Qt.QWidget):
         self.samp_rate = samp_rate
         self.qtgui_time_sink_x_0.set_samp_rate(self.samp_rate)
         self.qtgui_freq_sink_x_0.set_frequency_range(0, self.samp_rate)
-        self.filtro_antialiasing_0.set_taps(firdes.low_pass(1, self.samp_rate, self.fp, self.fp*1.5, firdes.WIN_HAMMING, 6.76))
+        self.low_pass_filter_0.set_taps(firdes.low_pass(1, self.samp_rate, self.fp, 2500, firdes.WIN_HAMMING, 6.76))
         self.filtro_antialiasing.set_taps(firdes.low_pass(1, self.samp_rate, self.fp, 2500, firdes.WIN_HAMMING, 6.76))
-        self.blocks_throttle_0_1_0.set_sample_rate(self.samp_rate)
-        self.blocks_throttle_0_1.set_sample_rate(self.samp_rate)
+        self.blocks_throttle_0_0_0.set_sample_rate(self.samp_rate)
         self.blocks_throttle_0_0.set_sample_rate(self.samp_rate)
-        self.blocks_throttle_0.set_sample_rate(self.samp_rate)
         self.analog_sig_source_x_0_2_1.set_sampling_freq(self.samp_rate)
         self.analog_sig_source_x_0_2_0.set_sampling_freq(self.samp_rate)
         self.analog_sig_source_x_0_2.set_sampling_freq(self.samp_rate)
@@ -469,7 +463,7 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_fp(self, fp):
         self.fp = fp
-        self.filtro_antialiasing_0.set_taps(firdes.low_pass(1, self.samp_rate, self.fp, self.fp*1.5, firdes.WIN_HAMMING, 6.76))
+        self.low_pass_filter_0.set_taps(firdes.low_pass(1, self.samp_rate, self.fp, 2500, firdes.WIN_HAMMING, 6.76))
         self.filtro_antialiasing.set_taps(firdes.low_pass(1, self.samp_rate, self.fp, 2500, firdes.WIN_HAMMING, 6.76))
 
     def get_fmoduladora(self):
