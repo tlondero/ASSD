@@ -14,11 +14,12 @@ El modulo de \textbf{Sample and Hold}  puede ser esquematizado de la siguiente f
 	\label{fig:syh}
 \end{figure}
 Su objetivo es el de muestrear la señal analógica de entrada y retener su valor por un pequeño intervalo de tiempo para que la circuiteria colocada inmediatamente después puede utilizar ese valor para digitalizarla.
-Para esto, requerimos de una alta impedancia de entrada lo cual evita cualquier efecto de carga del IC sobre la fuente de la señal. Esto es modelado como un buffer a la entrada. Luego tenemos una \textbf{llave}, que puede estar implementada con una llave analogica o transistores MOSFET, la cual se encargara de cambiar del modo muestreo(sample) permitiendo que el capacitor se carga con el valor actual, y mantener(hold) ese valor cuando la misma este abierta. Finalmente tenemos un buffer adicional a la salida para prevenir la descarga del capacitor y así ofrecer mayor fidelidad. 
+Para esto, requerimos de una alta impedancia de entrada lo cual evita cualquier efecto de carga del IC sobre la fuente de la señal. Esto es modelado como un buffer a la entrada. Luego tenemos una \textbf{llave}, que puede estar implementada con una llave analogica o transistores MOSFET, la cual se encargara de cambiar del modo muestreo (sample) permitiendo que el capacitor se carga con el valor actual, y mantener (hold) ese valor cuando la misma este abierta. Finalmente tenemos un buffer adicional a la salida para prevenir la descarga del capacitor y así ofrecer mayor fidelidad. 
 
 
  Sin embargo, es necesario adaptarlo a las condiciones en las que se lo va a utilizar. Para esto, se incluyen pines de corrección de tensión de offset, selección tasa de muestreo (para controlar la "llave") y finalmente otro muy importante para escoger el capacitor, $C_{hold}$ más apropiado.
- Es interesante mencionar la inclusión de un pin \textbf{LOGIC REFERENCE} el cual nos brinda mayor flexibilidad al momento de tener que elegir una señal de muestreo\footnote{Para saber más sobre el funcionamiento y puesta a punto del LF398 revisar el apéndice A}.
+ Es interesante mencionar la inclusión de un pin \textbf{LOGIC REFERENCE} el cual nos brinda mayor flexibilidad al momento de tener que elegir una señal de muestreo
+ %\footnote{Para saber más sobre el funcionamiento y puesta a punto del LF398 revisar el apéndice A}.
  \subsubsection{Circuito de corrección de tensión offset}
  Para poder obtener una digitalización de alta fidelidad es necesario calibrar el IC. En el caso de la digitalización de señales las tensiones de offset pueden provocar interpretaciones erróneas de los verdaderos valores de la señal. De hecho se recomienda que la tensión de offset este por debajo de la mitad del voltaje que ofrece el LSB.
  $$
@@ -26,7 +27,10 @@ Para esto, requerimos de una alta impedancia de entrada lo cual evita cualquier 
  $$
 Donde \textit{n }es la resolución del \textbf{ADC}
 y \textit{FS} es el tope de escala.
-
+Asumiendo un que los rangos de señal pueden variar entre $\pm15$ nos da una $FS=30$.
+$$V_{OS}<\frac{FS}{2^{n+1}}$$
+$$V_{OS}<\frac{30V}{2^{8+1}}$$
+$$V_{OS}<58.5mV$$
 El fabricante nos brinda una configuración para poder compensar la tensión de offset tanto de AC como de DC:
 \begin{figure}[H]
 	\centering
@@ -34,6 +38,18 @@ El fabricante nos brinda una configuración para poder compensar la tensión de 
 	\caption{En \textcolor{red}{rojo} se señala el circuito de corrección de tensión DC, en la parte inferior notamos la presencia de un circuito que corrige la señal AC no deseada}
 	\label{fig:dccolorized}
 \end{figure}
+Para poder establecer la necesidad o no de tener que utilizar el circuito de compensación hemos de medir la tensión de offset:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{ImagenesEjercicio4/DCACoffset}
+	\caption{Offset de DC y AC con entrada nula}
+	\label{fig:dcacoffset}
+\end{figure}
+Del gráfico concluimos:
+$$V_{offset DC}\approx 1mV$$
+$$V_{offset AC}\approx 2mV_{pp}$$
+
+Dado que el offset indeseado no supera el limite permitido podemos prescindir del uso de los circuitos de ajuste.
 
 \subsubsection{Análisis experimental del Capacitor de Hold, $C_{h}$}
 El capacitor de hold cumple la funcionalidad de retener el valor muestreado una vez obtenido. Es deseable elegir un capacitor cuyo dieléctrico ofrezca una gran resistencia para evitar la descarga indeseada del capacitor y mantener el valor obtenido.
@@ -44,7 +60,7 @@ En una primera instancia se utilizo una capacitor de $47nF$.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{ImagenesEjercicio4/ChTests/Vin1_30ksamplig47nF}
-	\caption{Sinusoidal 5Khz muestreada a 30KHz con un $C_{hold}=47nF$}
+	\caption{Sinusoidal 5KHz muestreada a 30KHz con un $C_{hold}=47nF$}
 	\label{fig:vin130ksamplig47nf}
 \end{figure}
 En color \textcolor{red}{rojo} observamos el resultado de la operación de muestreado. 
@@ -82,7 +98,7 @@ Analizando la figura \ref{fig:vin130ksamplig120pfzoom} notamos que el capacitor 
 
 
 Ahora veremos lo que sucede cuando empleamos una señal más rápida.
-La señal senoidal ahora posee una frecuencia de oscilación de $20*3*12 KHz = 720Khz$. Para poder obtener imágenes y apreciar los cambios en los capacitores elegidos es necesarios muestrear a la señal por encima de la mínima permitida por el criterio de Nyquist. Sin embargo, si consideramos ese caso obtenemos  $F_{nyqusit}=1.44Mhz$.
+La señal senoidal ahora posee una frecuencia de oscilación de $20*3*12 KHz = 720KHz$. Para poder obtener imágenes y apreciar los cambios en los capacitores elegidos es necesarios muestrear a la señal por encima de la mínima permitida por el criterio de Nyquist. Sin embargo, si consideramos ese caso obtenemos  $F_{nyqusit}=1.44Mhz$.
 Para la simulación de la  figura \ref{fig:vin21440ksamplign120pf} se utilizo el capacitor de $120pF$ que había obtenido buenos resultados previamente. Pese a ello una imagen poco anticipada aparece al finalizar la simulación. La salida parecería ser nula. Aun si esta no fuese nula no sirve a nuestros propósitos. 
 \begin{figure}[H]
 	\centering
@@ -102,15 +118,85 @@ En primer lugar podemos relacionar lo ocurrido aquí con lo sucedido cuando se u
 \end{figure}
 
 Si elegimos muestrear a la frecuencia de Nyquist entonces le estamos dando al $C_{hold}$ un tiempo de $T_{acq}=\frac{1}{2*F_{nyquist}}$
-$$T_{acq}\approx 700nS = 0.7\mu S$$
+$$T_{acq}\approx 700ns = 0.7\mu s$$
 Por lo tanto, si hacemos referencia a las curvas de la figura \ref{fig:holdcapacqtime} vemos que nuestro requerimiento esta por fuera de las capacidades del \textbf{LF398}. En conclusión, necesitaríamos capacitancias extremadamente pequeñas. Lo cual tiene como contrapartida que no podrán mantener el valor almacenado durante mucho tiempo.
+\subsubsection{Elección del $C_{hold}$ apropiado}
+Como analizamos anteriormente, es de suma importancia elegir un capacitor que se cargue lo suficientemente rápido como para poder seguir a la señal de entrada y que a su vez pueda retener el valor muestreado sin degradarse. 
+En nuestro caso de aplicación se sabe que la señal de control tendrá una frecuencia máxima de $F_{osc}=25KHz$. Por lo tanto el capacitor de hold tendrá un tiempo de adquisición mínimo dado por:
+$$T_{acq}=\frac{1}{2*F_{nyquist}}\approx20\mu s$$
+
+Entonces observando la figura debajo tenemos 3 opciones a elegir dependiendo de que tan preciso queramos y/o necesitemos que sea el valor de la muestra. Esto se debe a que la elección del capacitor nos lleva a una relación de compromiso. Podemos reducir el tiempo de adquisición al elegir un capacitor más pequeño pero esto incrementara el \textbf{hold step} y el \textbf{droop rate} lo cual puede ser contraproducente.
+
+\begin{figure}[H]
+	\begin{subfigure}[b]{0.4\linewidth}
+		\centering
+		\includegraphics[scale=0.6]{ImagenesEjercicio4/HoldCapAcqTimeSl.png}
+		\caption{}
+		\label{fig:holdcapacqtimeSL}
+	\end{subfigure}
+	~
+	\begin{subfigure}[b]{0.4\linewidth}
+		\centering
+		\includegraphics[]{ImagenesEjercicio4/AcqTime.PNG}
+		\caption{}
+		\label{fig:acqtime}
+	\end{subfigure}
+ \caption{\ref{fig:holdcapacqtimeSL} Capacitor de Hold en función del tiempo de adquisición. \ref{fig:acqtime} Vista en detalle del muestreo y los efectos del Hold Step}
+\end{figure}
 
 
+\begin{table}[H]
+	\centering
+	\begin{tabular}{@{}lrlll@{}}
+		\toprule
+		\multicolumn{1}{c}{\textbf{Error \%}} & \multicolumn{1}{c}{\textbf{C}} &  &  &  \\ \midrule
+		0.01                                  & 8nF                            &  &  &  \\
+		0.1                                   & 10nF                           &  &  &  \\
+		1                                     & 16nF                           &  &  &  \\ \bottomrule
+	\end{tabular}
+	\caption{Valores de capacitor posibles según el error aceptado}
+	\label{tab:acqCap}
+\end{table}
+	
+Dadas estas 3 opciones ahora debemos también considerar el \textbf{hold step}. Este fenómeno se describe como un escalón de tensión que es generado cuando se pasa de modo \textit{sample} a modo \textit{hold}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{ImagenesEjercicio4/HoldStepError}
+	\caption{Vista en detalle de los efectos del hold step}
+	\label{fig:holdsteperror}
+\end{figure}
 
+Siguiendo las recomendaciones del fabricante, es deseable que el \textbf{hold step} se mantenga por debajo de la mitad del paso de tensión que representa al LSB. Asumiendo un que los rangos de señal pueden variar entre $\pm15$ nos da una $FS=30$.
+$$V_{hs}<\frac{FS}{2^{n+1}}$$
+$$V_{hs}<\frac{30V}{2^{8+1}}$$
 
+$$V_{hs}< 58.5mV$$
 
+En la figura a continuación denotamos dónde se encuentra este limite de forma aproximada. 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{ImagenesEjercicio4/HoldStepMarcado}
+	\caption{}
+	\label{fig:holdstep}
+\end{figure}
 
-  
+Esto quiere decir que podemos movernos hacia abajo en la curva con bastante libertad dado que cualquier valor de capacitor por encima de los $110pF$ respetara el limite de $V_{hs}$ impuesto.\\
+Por ultimó debemos tener en cuenta la tecnología de capacitor a utilizar.
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{ImagenesEjercicio4/AbsorcionDielectrico}
+	\caption{}
+	\label{fig:absorciondielectrico}
+\end{figure}
+La figura \ref{fig:absorciondielectrico} nos indica como cambia la histeresis de diferentes capacitores según el tiempo de muestreo. En una primera observación el gráfico puede resultar un poco confuso. Recordemos que el $T_{acq}=20\mu s$ y la escala horizontal tiene unidades de $ms$. Esto es porque las curvas intentan comunicar que tan bien consiguen relajarse los capacitores luego de realizar un muestreo de tal forma que no quede un remanente que afecte a la siguiente muestre.
+La importancia de elegir el tipo correcto de tecnología impacta sobre el \textbf{droop rate} y en al precisión del muestreo. Se comparan dos grandes grupos de tecnologías, por un lado los capacitores \textbf{Mylar} (film)
+
+Por lo expresado anteriormente se utilizara un capacitor de $C_h = 8nF$ dado que nos ofrece el menor error de muestreo y mantiene las exigencias dadas por el \textit{hold step}
+
+Dadas las curvas y las recomendaciones del fabricante se utilizaran capacitores de poliestireno dada su baja histeresis.
+
+\subsubsection{Analizando otros modelos de Sample and Hold IC}
+
 
 
 \end{document}
