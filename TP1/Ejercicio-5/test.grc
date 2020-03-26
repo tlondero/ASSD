@@ -1025,7 +1025,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(320, 640)</value>
+      <value>(400, 752)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1088,7 +1088,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(304, 448)</value>
+      <value>(368, 544)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1395,7 +1395,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(704, 312)</value>
+      <value>(552, 240)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1458,7 +1458,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(888, 488)</value>
+      <value>(736, 464)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1521,7 +1521,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(848, 624)</value>
+      <value>(872, 720)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1584,7 +1584,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(848, 792)</value>
+      <value>(1024, 920)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1698,7 +1698,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(504, 476)</value>
+      <value>(552, 572)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1706,7 +1706,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>blocks_float_to_char_0</value>
+      <value>blocks_float_to_char_0_2</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -1898,7 +1898,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(712, 640)</value>
+      <value>(768, 744)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1949,7 +1949,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(704, 496)</value>
+      <value>(704, 536)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1992,7 +1992,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(520, 652)</value>
+      <value>(568, 756)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2021,61 +2021,6 @@
     <param>
       <key>minoutbuf</key>
       <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_throttle</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(896, 372)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_throttle_0</value>
-    </param>
-    <param>
-      <key>ignoretag</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>samples_per_second</key>
-      <value>samp_rate</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>float</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
     </param>
   </block>
   <block>
@@ -2153,7 +2098,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1008, 604)</value>
+      <value>(896, 484)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2161,62 +2106,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>blocks_throttle_0_1</value>
-    </param>
-    <param>
-      <key>ignoretag</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>samples_per_second</key>
-      <value>samp_rate</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>float</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_throttle</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(1008, 804)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_throttle_0_1_0</value>
+      <value>blocks_throttle_0_0_0</value>
     </param>
     <param>
       <key>ignoretag</key>
@@ -2314,7 +2204,7 @@ os.chdir(script_path)</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(552, 200)</value>
+      <value>(520, 368)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2385,11 +2275,11 @@ os.chdir(script_path)</value>
     </param>
     <param>
       <key>type</key>
-      <value>fir_filter_fff</value>
+      <value>interp_fir_filter_fff</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(608, 776)</value>
+      <value>(1008, 776)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2401,7 +2291,7 @@ os.chdir(script_path)</value>
     </param>
     <param>
       <key>id</key>
-      <value>filtro_antialiasing_0</value>
+      <value>low_pass_filter_0</value>
     </param>
     <param>
       <key>interp</key>
@@ -2421,7 +2311,7 @@ os.chdir(script_path)</value>
     </param>
     <param>
       <key>width</key>
-      <value>fp*1.5</value>
+      <value>2500</value>
     </param>
     <param>
       <key>win</key>
@@ -2508,7 +2398,7 @@ os.chdir(script_path)</value>
     </param>
     <param>
       <key>label1</key>
-      <value>FAA</value>
+      <value>Entrada</value>
     </param>
     <param>
       <key>width1</key>
@@ -2540,7 +2430,7 @@ os.chdir(script_path)</value>
     </param>
     <param>
       <key>label2</key>
-      <value>Sample and Hold</value>
+      <value>Faa</value>
     </param>
     <param>
       <key>width2</key>
@@ -2556,7 +2446,7 @@ os.chdir(script_path)</value>
     </param>
     <param>
       <key>label3</key>
-      <value>Llave analogica</value>
+      <value>Sample and Hold</value>
     </param>
     <param>
       <key>width3</key>
@@ -2572,7 +2462,7 @@ os.chdir(script_path)</value>
     </param>
     <param>
       <key>label4</key>
-      <value>Entrada</value>
+      <value>Llave analogica</value>
     </param>
     <param>
       <key>width4</key>
@@ -2795,7 +2685,7 @@ os.chdir(script_path)</value>
     </param>
     <param>
       <key>label1</key>
-      <value>FAA</value>
+      <value>Entrada</value>
     </param>
     <param>
       <key>marker1</key>
@@ -2843,7 +2733,7 @@ os.chdir(script_path)</value>
     </param>
     <param>
       <key>label2</key>
-      <value>Sample and hold</value>
+      <value>FAA</value>
     </param>
     <param>
       <key>marker2</key>
@@ -2867,7 +2757,7 @@ os.chdir(script_path)</value>
     </param>
     <param>
       <key>label3</key>
-      <value>Llave analogica</value>
+      <value>Sample and Hold</value>
     </param>
     <param>
       <key>marker3</key>
@@ -2891,7 +2781,7 @@ os.chdir(script_path)</value>
     </param>
     <param>
       <key>label4</key>
-      <value>Entrada</value>
+      <value>Llave analogica</value>
     </param>
     <param>
       <key>marker4</key>
@@ -3165,7 +3055,7 @@ os.chdir(script_path)</value>
   </connection>
   <connection>
     <source_block_id>analog_sig_source_x_0_1</source_block_id>
-    <sink_block_id>blocks_float_to_char_0</sink_block_id>
+    <sink_block_id>blocks_float_to_char_0_2</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -3203,23 +3093,11 @@ os.chdir(script_path)</value>
     <source_block_id>blks2_selector_0_1</source_block_id>
     <sink_block_id>qtgui_freq_sink_x_0</sink_block_id>
     <source_key>0</source_key>
-    <sink_key>3</sink_key>
+    <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>blks2_selector_0_1</source_block_id>
     <sink_block_id>qtgui_time_sink_x_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>3</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blks2_selector_0_1_0</source_block_id>
-    <sink_block_id>blks2_selector_0_1_0_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blks2_selector_0_1_0</source_block_id>
-    <sink_block_id>blocks_sample_and_hold_xx_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -3231,19 +3109,7 @@ os.chdir(script_path)</value>
   </connection>
   <connection>
     <source_block_id>blks2_selector_0_1_0_0</source_block_id>
-    <sink_block_id>blks2_selector_0_1_0_0_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blks2_selector_0_1_0_0</source_block_id>
-    <sink_block_id>blocks_multiply_xx_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blks2_selector_0_1_0_0</source_block_id>
-    <sink_block_id>blocks_throttle_0</sink_block_id>
+    <sink_block_id>blocks_throttle_0_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -3255,21 +3121,33 @@ os.chdir(script_path)</value>
   </connection>
   <connection>
     <source_block_id>blks2_selector_0_1_0_0_0</source_block_id>
-    <sink_block_id>blocks_throttle_0_1</sink_block_id>
+    <sink_block_id>low_pass_filter_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>blks2_selector_0_1_0_0_0</source_block_id>
-    <sink_block_id>filtro_antialiasing_0</sink_block_id>
+    <sink_block_id>qtgui_freq_sink_x_0</sink_block_id>
     <source_key>0</source_key>
-    <sink_key>0</sink_key>
+    <sink_key>3</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blks2_selector_0_1_0_0_0</source_block_id>
+    <sink_block_id>qtgui_time_sink_x_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>3</sink_key>
   </connection>
   <connection>
     <source_block_id>blks2_selector_0_1_0_0_0_0</source_block_id>
-    <sink_block_id>blocks_throttle_0_1_0</sink_block_id>
+    <sink_block_id>qtgui_freq_sink_x_0</sink_block_id>
     <source_key>0</source_key>
-    <sink_key>0</sink_key>
+    <sink_key>4</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blks2_selector_0_1_0_0_0_0</source_block_id>
+    <sink_block_id>qtgui_time_sink_x_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>4</sink_key>
   </connection>
   <connection>
     <source_block_id>blocks_add_xx_0</source_block_id>
@@ -3278,7 +3156,7 @@ os.chdir(script_path)</value>
     <sink_key>3</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_float_to_char_0</source_block_id>
+    <source_block_id>blocks_float_to_char_0_2</source_block_id>
     <sink_block_id>blocks_sample_and_hold_xx_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>1</sink_key>
@@ -3314,24 +3192,24 @@ os.chdir(script_path)</value>
     <sink_key>1</sink_key>
   </connection>
   <connection>
+    <source_block_id>blocks_sample_and_hold_xx_0</source_block_id>
+    <sink_block_id>blks2_selector_0_1_0_0_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_sample_and_hold_xx_0</source_block_id>
+    <sink_block_id>blocks_multiply_xx_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
     <source_block_id>blocks_threshold_ff_0</source_block_id>
     <sink_block_id>blocks_multiply_xx_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>1</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_throttle_0</source_block_id>
-    <sink_block_id>qtgui_freq_sink_x_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_throttle_0</source_block_id>
-    <sink_block_id>qtgui_time_sink_x_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>1</sink_key>
-  </connection>
-  <connection>
     <source_block_id>blocks_throttle_0_0</source_block_id>
     <sink_block_id>qtgui_freq_sink_x_0</sink_block_id>
     <source_key>0</source_key>
@@ -3341,31 +3219,19 @@ os.chdir(script_path)</value>
     <source_block_id>blocks_throttle_0_0</source_block_id>
     <sink_block_id>qtgui_time_sink_x_0</sink_block_id>
     <source_key>0</source_key>
-    <sink_key>0</sink_key>
+    <sink_key>1</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_throttle_0_1</source_block_id>
+    <source_block_id>blocks_throttle_0_0_0</source_block_id>
     <sink_block_id>qtgui_freq_sink_x_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>2</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_throttle_0_1</source_block_id>
+    <source_block_id>blocks_throttle_0_0_0</source_block_id>
     <sink_block_id>qtgui_time_sink_x_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>2</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_throttle_0_1_0</source_block_id>
-    <sink_block_id>qtgui_freq_sink_x_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>4</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_throttle_0_1_0</source_block_id>
-    <sink_block_id>qtgui_time_sink_x_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>4</sink_key>
   </connection>
   <connection>
     <source_block_id>filtro_antialiasing</source_block_id>
@@ -3374,7 +3240,19 @@ os.chdir(script_path)</value>
     <sink_key>1</sink_key>
   </connection>
   <connection>
-    <source_block_id>filtro_antialiasing_0</source_block_id>
+    <source_block_id>filtro_antialiasing</source_block_id>
+    <sink_block_id>blks2_selector_0_1_0_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>filtro_antialiasing</source_block_id>
+    <sink_block_id>blocks_sample_and_hold_xx_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>low_pass_filter_0</source_block_id>
     <sink_block_id>blks2_selector_0_1_0_0_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>1</sink_key>
