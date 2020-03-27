@@ -4,7 +4,7 @@
 \section{Simulaciones Básicas}
 
 \subsubsection{Simulaciones con Python}
-Se utilizó el framework de \textit{GNURadio} para programar cada módulo del sistema encerrado en una interfaz gráfica. Esta interfaz tiene la posibilidad de visualizar al mismo tiempo tanto la señal en tiempo como su espectro en cada nodo del sistema. Se puede elegir entre señales sinusoidales, triangulares, 3/2 seno o moduladas AM como entrada.
+Se utilizó el framework de \textbf{GNURadio} para programar cada módulo del sistema encerrado en una interfaz gráfica, la cual brinda la posibilidad de visualizar tanto la señal en tiempo como su espectro en cada nodo del sistema en el mismo momento. Se puede elegir entre señales sinusoidales, triangulares, 3/2 seno o moduladas AM como entrada, señales cuyo estudio es de interes.
 
 \subsubsection{Simulaciones con LTSpice}
 Para ambos sistemas, tanto con la llave analógica seleccionada como para el Sample and Hold elegido, se realizaron las correspondientes simulaciones con las exitaciones deseadas, obteniendo así los resultados presentados a continuación.
@@ -12,7 +12,6 @@ Para ambos sistemas, tanto con la llave analógica seleccionada como para el Sam
 \textcolor{red}{\textbf{Aclarar bajo qué condiciones, es el punto 6a.}}
 
 max lf398 vin = $\pm 18 \ V$
-max 4066 vin = $\pm 7.5 \ V$
 
 \begin{figure}[H]
 \centering
@@ -47,6 +46,11 @@ max 4066 vin = $\pm 7.5 \ V$
 	\includegraphics[width=\textwidth]{ImagenesEjercicio6/SH - Tri.png}
 \end{subfigure}
 \end{figure} 
+
+La señal cosenoidal se caracteriza por poseer una frecuencia de $1.5 \ kHz$ y una amplitud de $2 \ V_{PP}$. Para las otras dos exitaciones se respetó la misma frecuencia variando la amplitud, siendo esta para ambos casos de $7.5 \ V_{PP}$, limitada por la tensión máxima a la entrada de la llave seleccionada. Los pulsos utilizados para el muestreo poseen un Duty Cycle del $50 \%$.
+
+\textcolor{red}{\textbf{Calcular potencia recuperada.}}
+
 
 Nuevamente, se realizaron las mismas simulaciones variando...
 

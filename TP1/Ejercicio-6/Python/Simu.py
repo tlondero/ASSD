@@ -38,4 +38,5 @@ for i in simulaciones:
     plt.plot(time, vout, label = "Salida")
     plt.legend()
     plt.grid()
+    plt.savefig('../ImagenesEjercicio6/' + i[7:-3] + 'png')
     plt.show()
