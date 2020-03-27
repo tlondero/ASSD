@@ -1,9 +1,4 @@
-\input{../Informe/Header.tex}
-
-\begin{document}
-\section{Filtros}
-
-\subsection{Introducción a filtros Anti Aliasing}
+\subsubsection{Introducción a filtros Anti Aliasing}
 Un filtro \textbf{Anti Aliasing} es un filtro pasa bajos, el cual se encarga de que se cumpla el criterio de muestreo de \textbf{Nyquist}. Este postula que, para la reconstrucción exacta de una señal periódica continua en banda base, es necesaria una frecuencia de muestreo $f_s$ de un valor por lo menos 2 veces superior al ancho de banda B de la señal original. Bajo estas condiciones, para reconstruir la señal solo hace falta realizar la convolución de la muestreada con la función $sinc(B\cdot t$).
 
 La señal original se puede expresar como:
@@ -63,7 +58,7 @@ Otro factor importante a considerar es que la frecuencia de Nyquist está defini
 %	\label{fig:vout}
 %\end{figure}
 
-\subsection{Introducción a filtros recuperadores}
+\subsubsection{Introducción a filtros recuperadores}
 El filtro recuperador es aquel que cumple con la tarea de recuperar la señal a partir de su espectro, dado que previo al filtro, se tiene un espectro como es observado en la Figura (\ref{fig:recuperador}). El objetivo de este es filtrar los espectros ajenos a la banda base, para obtener en el dominio temporal la señal original. Es necesario remarcar la vital importancia de recuperador, como su nombre indica.
 \begin{figure}[H]
 	\centering
@@ -72,7 +67,7 @@ El filtro recuperador es aquel que cumple con la tarea de recuperar la señal a 
 	\label{fig:recuperador}
 \end{figure}
 
-\subsection{Análisis espectral}
+\subsubsection{Análisis espectral}
 En esta sección se procede a analizar el tipo de señales que recibe el circuito. Es así que see especifican las siguientes señales:
 {\center
 $X_a = cos(2 \pi f_{in} t)$ \ \ $\sim$  \ \
@@ -272,4 +267,3 @@ Luego, se realizó el diseño en \textbf{Altium} de la placa a realizar, obtenie
 \caption{PCB Altium.}
 	\label{fig:altiumpcb}
 \end{figure}
-\end{document}
