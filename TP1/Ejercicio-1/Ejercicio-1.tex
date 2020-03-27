@@ -4,8 +4,7 @@
 
 \subsection{Introducción}
 
-Se quiso diseñar y simular el sistema mostrado en la Figura(\ref{fig:sist}). Para esto, se diseño un oscilador que lidie con las señales de control del sistema, un filtro anti-alias y recuperador, el bloque de sample and hold y de la llave analógica. Como primera instancia, se quiso abordar el tema desde un punto teórico, por ende, se deducirán las fórmulas matemáticas para cada nodo del sistema.
-
+En el siguiente informe se busca diseñar y simular el sistema mostrado en la Figura (\ref{fig:sist}). Para esto, se valió un oscilador que lidie con las señales de control del sistema, un filtro antialiasing y recuperador, un bloque de sample and hold y y una llave analógica. Como primera instancia, se abordadó el tema desde un punto teórico, deduciendo las fórmulas matemáticas para cada nodo del sistema.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{ImagenesEjercicio1/sistema.png}
@@ -13,43 +12,45 @@ Se quiso diseñar y simular el sistema mostrado en la Figura(\ref{fig:sist}). Pa
 	\label{fig:sist}
 \end{figure}
 
-Siendo $X_{in}(t)$ la señal de entrada analógica al sistema, para que esta sea inequívocamente representada por muestras equiespaciadas en el tiempo debe ser el periodo de muestreo menor a la mitad del periodo de la señal de entrada, es decir, sea $f_{in}$ la componente de mayor frecuencia de señal de entrada y $f_s$ la frecuencia de muestreo
-
+Siendo $X_{in}(t)$ la señal de entrada analógica al sistema, para que esta sea inequívocamente representada por muestras equiespaciadas en el tiempo, debe ser el periodo de muestreo menor a la mitad del periodo de la señal de entrada, es decir, sea $f_{in}$ la componente de mayor frecuencia de señal de entrada y $f_s$ la frecuencia de muestreo
 \begin{equation}
 f_{s} > f_{in}
 \end{equation}
 
-Debido a esto, se utiliza un filtro pasabajos para limitar en frecuencia la señal de entrada. Este filtro se denomina filtro anti-alias, dado que al muestrear por debajo del susodicho límite la relación entre la señal muestreada y la señal original no es más unívoca. Estas señales que pueden ser confundidas por la señal de entrada original se denominan aliases.
+Debido a esto, se utiliza un filtro pasabajos para limitar en frecuencia la señal de entrada. Este filtro se denomina filtro antialiasing (o anti-alias), dado que al muestrear por debajo del susodicho límite, la relación entre la señal muestreada y la señal original no es más unívoca. Estas señales que pueden ser confundidas por la señal de entrada original se denominan aliases.
 
+Ahora que la señal de entrada puede ser inequívocamente representada por un muestreo en tiempo, se procede a obtener la fórmula matemática. Para esto, existen dos formas de muestrear una señal: muestreo natural y muestreo instantáneo. El muestreo natural se realiza con el sistema de la Figura (\ref{fig:sist}), bypasseando el bloque de sample and hold, mientras que el muestreo instantáneo se realiza con el sistema entero.
 
-Ahora que nuestra señal de entrada puede ser inequívocamente representada por un muestreo en tiempo, se procede a obtener la fórmula matemática. Para esto, se deben definir dos formas de muestrear una señal: muestreo natural y muestreo instantáneo. El muestreo natural se realiza con el sistema de la Figura (\ref{fig:sist}) bypasseando el bloque de sample and hold, mientras que el muestreo instantáneo se realiza con el sistema entero.
+\begin{center}
+	\textcolor{red}{\textbf{\textbf{Poner de donde salieron estas imagenes.}}}
+\end{center}
 
 \begin{figure}[H]
 \centering
-\begin{subfigure}[b]{.45\linewidth}
-\includegraphics[width=\linewidth]{/ImagenesEjercicio1/Muestreonatural.png}
+%\begin{subfigure}[b]{.45\linewidth}
+\includegraphics[width=0.6\linewidth]{/ImagenesEjercicio1/Muestreonatural.png}
 \caption{Muestreo natural. a-b) Señal original y su espectro c-d) Tren de pulsos y su espectro e-f) Convolución de ambas señales.}
 \label{fig:muestreonatural}
-\end{subfigure}
-\begin{subfigure}[b]{.45\linewidth}
-\includegraphics[width=\linewidth]{/ImagenesEjercicio1/Muestreoinstantaneo.png}
+\end{figure}
+%\end{subfigure}
+%\begin{subfigure}[b]{.45\linewidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\linewidth]{/ImagenesEjercicio1/Muestreoinstantaneo.png}
 \caption{Muestreo natural. a-b) Señal original multiplicada por tren de deltas y su espectro c-d) Pulso y su espectro e-f) Convolución de ambas señales.}
 \label{fig:muestreoinstantaneo}
-\end{subfigure}
+%\end{subfigure}
 \end{figure}
 
-Finalmente, sea $X_{FAA}$ la señal de entrada limitada en banda, al pasar por el sample and hold la señal multiplicada por un tren de deltas es convolucionada con un pulso obteniendo $X_{SH}$, es decir
-
+Finalmente, sea $X_{FAA}$ la señal de entrada limitada en banda, al pasar por el sample and hold, la señal multiplicada por un tren de deltas es convolucionada con un pulso obteniendo $X_{SH}$, es decir
 \begin{equation}
 X_{SH} = \sum_{+\infty}^{k = -\infty}X_{FAA}(t)\cdot \delta_T(t-Tk) * \Pi(\frac{t}{\tau} y no se que mas poner xdxdxd
 \end{equation}
 
 \subsection{Oscilador}
-
 Para realizar el muestreo y las subsiguientes mediciones se requiere diseñar un oscilador con frecuencia y duty cycle variable. El diseño elegido es el siguiente:
 
 \begin{figure}[H]
-
 	\centering
 		\begin{circuitikz}
 			\draw
@@ -105,10 +106,7 @@ Para realizar el muestreo y las subsiguientes mediciones se requiere diseñar un
 
 \end{figure}
 
-Este permite, con los valores tomados mostrados a continuación, variar la frecuencia entre $\approx 9.66kHz$, levemente menor a la frecuencia de corte de nuestro filtro anti-alias, y $25kHz$, logrando traspasar a la frecuencia de Nyquist en un $25\%$. Además, este circuito permite configurar el duty cycle de la señal entre $\approx1\%$ y $\approx99\%$ con máxima frecuencia y entre $\approx5\%$ y $\approx95\%$ con mínima frecuencia. Existe como se puede ver una muy pequeña interacción entre el ajuste de frecuencia y duty cycle, lo que genera que los límites del duty cycle se achiquen al disminuir la frecuencia, pero a fines prácticos se la consideró insignificante dado que los límites mínimos se cumplen.
-
-Los valores tomados se detallan a continuación:
-
+Este permite, con los valores mostrados más adelante, variar la frecuencia entre $9.66 \ kHz$, levemente menor a la frecuencia de corte del filtro anti-alias, y $25 \ kHz$, logrando traspasar a la frecuencia de Nyquist en un $25\%$. Además, este circuito permite configurar el duty cycle de la señal desde un $1\%$ a $99\%$ con máxima frecuencia y desde un $5\%$ a $95\%$ con mínima frecuencia. Existe, como se puede ver, una pequeña interacción entre el ajuste de frecuencia y duty cycle, lo que genera que los límites del duty cycle se achiquen al disminuir la frecuencia. A fines prácticos, se la consideró insignificante dado que los límites mínimos se cumplen. De esta forma, los valores tomados se detallan a continuación:
 \begin{table}[H]
 \centering
 \begin{tabular}{cc}
@@ -125,34 +123,34 @@ $C_2$ & $1 \ nF$\\ \hline
 \caption{Componentes del oscilador.}
 \end{table}
 
-Una peculiaridad de esta configuración circuital del 555 es que la salida se encuentra tomada en el pin de descarga del integrado. Esta configuración funciona dado que el pin de descarga y el pin de salida del 555 se encuentran en contra-fase. Esto permite realizar la carga y descarga del capacitor $C_1$ mediante la salida del integrado. Además, las resistencias $R_2$ y $R_3$ aumentan el rango de variabilidad de frecuencias y duty cycle del oscilador. Como el pin de descarga del 555 es de tipo open collector, se debe atar esta salida a la tensión de alimentación mediante una resistencia de pull up, en este caso $R_1$.
-Los resultados del oscilador, con una alimentación de $5V$ se muestran a continuación:
+Una peculiaridad de esta configuración circuital del 555 es que la salida se encuentra tomada en el pin de descarga del integrado. Esta configuración funciona dado que el dicho pin y el pin de salida del integrado se encuentran en contra-fase. Esto permite realizar la carga y descarga del capacitor $C_1$ mediante la salida del integrado. Además, las resistencias $R_2$ y $R_3$ aumentan el rango de variabilidad de frecuencias y duty cycle del oscilador. Como el pin de descarga es de tipo open collector, se debe atar esta salida a la tensión de alimentación mediante una resistencia de pull up, en este caso $R_1$.
 
+Los resultados del oscilador, con una alimentación de $5 \ V$ se muestran a continuación:
 \begin{figure}
 \centering
-\begin{subfigure}[b]{.45\linewidth}
+\begin{subfigure}[b]{.49\linewidth}
 \includegraphics[width=\linewidth]{/ImagenesEjercicio1/DT50FMAX.png}
 \caption{Onda simétrica con máxima frecuencia.}
 \end{subfigure}
-\begin{subfigure}[b]{.45\linewidth}
+\begin{subfigure}[b]{.49\linewidth}
 \includegraphics[width=\linewidth]{/ImagenesEjercicio1/DT50FMIN.png}
 \caption{Onda simétrica con mínima frecuencia.}
 \end{subfigure}
 
-\begin{subfigure}[b]{.45\linewidth}
+\begin{subfigure}[b]{.49\linewidth}
 \includegraphics[width=\linewidth]{/ImagenesEjercicio1/DTMAXFMAX.png}
 \caption{Máximo duty cycle con máxima frecuencia.}
 \end{subfigure}
-\begin{subfigure}[b]{.45\linewidth}
+\begin{subfigure}[b]{.49\linewidth}
 \includegraphics[width=\linewidth]{/ImagenesEjercicio1/DTMAXFMIN.png}
 \caption{Máximo duty cycle con mínima frecuencia.}
 \end{subfigure}
 
-\begin{subfigure}[b]{.45\linewidth}
+\begin{subfigure}[b]{.49\linewidth}
 \includegraphics[width=\linewidth]{/ImagenesEjercicio1/DTMINFMAX.png}
 \caption{Mínimo duty cycle con máxima frecuencia.}
 \end{subfigure}
-\begin{subfigure}[b]{.45\linewidth}
+\begin{subfigure}[b]{.49\linewidth}
 \includegraphics[width=\linewidth]{/ImagenesEjercicio1/DTMINFMIN.png}
 \caption{Mínimo duty cycle con máxima frecuencia.}
 \end{subfigure}
