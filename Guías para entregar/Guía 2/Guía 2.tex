@@ -1,0 +1,51 @@
+\input{Header.tex}
+\usepackage{amsmath}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%		Caratula		%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{Caratula.tex}
+
+
+%%%%%%%%%%%%%%%%%%%%%
+%		Informe		%
+%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Ejercicio 1}
+\begin{itemize}
+	\item[2b)] 
+	Se habia llegado al resultado:
+	\begin{align}
+ \begin{cases} 
+      x(nT) = e(nT) -  e(nT - T)+0.5e(nT - 2T)    \\
+      y(nT) = e(nT) + e(nT - T) 
+   \end{cases} 
+   \begin{Huge}
+   \xrightarrow{\mathcal{Z}}
+   \end{Huge} 
+    \begin{cases} 
+      X(z) = E(z) \cdot (1-  z^{-1}+ 0.5 \cdot  z^{-2}) \\
+      Y(z) = E(z)\cdot (1 +  z^{-1})
+   \end{cases}
+	\end{align}
+Igualando las expresiones:
+\begin{align}
+Y(z) \cdot (1-  z^{-1}+ 0.5 \cdot  z^{-2}) = X(z) \cdot (1 +  z^{-1})\xrightarrow{\mathcal{Z}^{-1}}
+y(n) = x(n) + x(n-1)+y(n-1) -0.5 \cdot y(n-2) 
+\end{align}
+\item[9)] 	Se habia llegado al resultado:
+	\begin{align}
+	y(n)= 0.5 \cdot x(n-2) + \alpha  \cdot y(n-1) + \beta  \cdot y(n-2)    \xrightarrow{\mathcal{Z}} Y(z) = 0.5 \cdot z^{-2} \cdot X(z) + \alpha  \cdot z^{-1} \cdot Y(z) + \beta z^{-2}  \cdot Y(z) 
+	\end{align}
+	Despejando la transferencia dado que esta es la transformada de la respuesta al impulso.
+	\begin{align}
+	H(z)=\frac{1}{2}\cdot \frac{1}{z^2-\alpha z - \beta} = \frac{1}{2}\cdot \left( \frac{\frac{1}{z_1-z_2}}{z-z_1} + \frac{\frac{1}{z_2-z_1}}{z-z_2} \right) \ \ \ \ \ \ \ \ \ \ z_{1,2}=\frac{\alpha \pm \sqrt{\alpha ^2 + 4\beta} }{2}
+		\end{align}
+		\begin{align}
+	h(n)=\frac{1}{2}\cdot \frac{1}{z_1-z_2}\cdot (z_1^{n-1}-z_2^{n-1})\cdot u(n-1)
+	\end{align}
+\end{itemize}	
+
+\end{document}
