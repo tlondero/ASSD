@@ -42,7 +42,7 @@ Ahora que nuestra señal de entrada puede ser inequívocamente representada por 
 Finalmente, sea $X_{FAA}$ la señal de entrada limitada en banda, al pasar por el sample and hold la señal multiplicada por un tren de deltas es convolucionada con un pulso obteniendo $X_{SH}$, es decir
 
 \begin{equation}
-X_{SH} = \sum_{}^{}
+X_{SH} = \sum_{+\infty}^{k = -\infty}X_{FAA}\cdot \delta_T(t-k) * \Pi(\frac{t}{\tau} y no se que mas poner
 \end{equation}
 
 \subsection{Oscilador}
