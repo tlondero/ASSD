@@ -47,5 +47,48 @@ y(n) = x(n) + x(n-1)+y(n-1) -0.5 \cdot y(n-2)
 	h(n)=\frac{1}{2}\cdot \frac{1}{z_1-z_2}\cdot (z_1^{n-1}-z_2^{n-1})\cdot u(n-1)
 	\end{align}
 \end{itemize}	
+\section*{Ejercicio 3}
+\begin{itemize}
+	\item[a)]
+		Para analizar la estabilidad de (\ref{eq:hz}) se utilizaron 2 métodos, el primero es verificar que el modulo de las raices del denominador sean menor a 1, y el otro es el metodo de \href{https://en.wikibooks.org/wiki/Control_Systems/Jurys_Test}{Jury-Marden Stability Criterion}
+		\begin{equation}
+		H(z)=\frac{z^6}{6z^6+5z^5+4z^4+3z^3+2z^2+z+1}
+		\label{eq:hz}
+		\end{equation}
+		Las raices del denominador serán:
+		\begin{equation}
+		z_{1,2}=-0.703387 \pm j \cdot 0.365055 \ \ \ \ 		z_{3,4}=-0.116036 \pm j\cdot  0.731154 \ \ \ \ z_{5,6}=0.402756 \pm j\cdot  0.567471
+		\end{equation}
+		los cuales todos cuentan con módulo menor a 1, lo cual indica que el sistema es estable.
+		Para el segundo análisis de estabilidad
+		primero se comprobaron las hipótesis de Jury, las cuales son:
+		Sea un sistema descrito como $H(z) = \frac{N(z)}{D(z)}$
+		\\
+		\begin{itemize}
+		\item D(1) $>$ 0 $\rightarrow D(1)=\frac{1}{21}$
+				\item $(-1)^N \cdot D(-1) > 0 \rightarrow (-1)^6 \cdot D(-1)=\frac{1}{4}$
+				\item $a_0 < a_n \rightarrow 1<6$
+		\end{itemize}
+		Dado que cumple con todas las hipótesis se procedió a generar la matriz de Jury:
+		\begin{table}[H]
+\centering
+\begin{tabular}{llllllll}
+\multicolumn{1}{c}{Rows} & $z^0$ & $z^1$ & $z^2$ & $z^3$ & $z^4$ & $z^5$ & $z^6$ \\ \hline
+\multicolumn{1}{l|}{1} & 1 & 1 & 2 & 3 & 4 & 5 & 6 \\
+\multicolumn{1}{l|}{2} & 6 & 5 & 4 & 3 & 2 & 1 & 1 \\
+\multicolumn{1}{l|}{3} & -35 & -29 & -22 & -15 & -8 & -1 & 0 \\
+\multicolumn{1}{l|}{4} & 0 & -1 & -8 & -15 & -22 & -29 & -35 \\
+\multicolumn{1}{l|}{5} & 1224 & 1007 & 755 & 503 & 251 & 0 & 0 \\
+\multicolumn{1}{l|}{6} & 0 & 0 & 251 & 503 & 755 & 1007 & 1224 \\
+\multicolumn{1}{l|}{7} & 1435175 & 1106315 & 734615 & 362915 & 0 & 0 & 0 \\
+\multicolumn{1}{l|}{8} & 0 & 0 & 0 & 362915 & 734615 & 1106315 & 1435175 \\
+\multicolumn{1}{l|}{9} & 1928019983400 & 1321152827400 & 652802774400 & 0 & 0 & 0 & 0
+\end{tabular}
+\end{table}
+
+\end{itemize}
+De aquí para asegurar la estabilidad basta con verificar que los  $|b_0| > |b_{5}| \ \|c_0| > |c_{4}| \ \ |d_0| > |d_{3}| \ \|e_0| > |e_{2}|$
+Los cuales verifican, por lo cual se define que el sistema es estable.
+
 
 \end{document}
