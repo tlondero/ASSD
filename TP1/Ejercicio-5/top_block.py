@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 ##################################################
 # GNU Radio Python Flow Graph
-# Title: Top Block
+# Title: Simulation G3
 # GNU Radio version: 3.7.13.5
 ##################################################
 
@@ -38,9 +38,9 @@ from gnuradio import qtgui
 class top_block(gr.top_block, Qt.QWidget):
 
     def __init__(self):
-        gr.top_block.__init__(self, "Top Block")
+        gr.top_block.__init__(self, "Simulation G3")
         Qt.QWidget.__init__(self)
-        self.setWindowTitle("Top Block")
+        self.setWindowTitle("Simulation G3")
         qtgui.util.check_set_qss()
         try:
             self.setWindowIcon(Qt.QIcon.fromTheme('gnuradio-grc'))
@@ -70,9 +70,9 @@ class top_block(gr.top_block, Qt.QWidget):
         self.samp_rate = samp_rate = 300000
         self.m = m = 0.5
         self.llaveAnalcheck = llaveAnalcheck = True
-        self.fportadora = fportadora = 1000
-        self.fp = fp = 10000
-        self.fmoduladora = fmoduladora = 50
+        self.fportadora = fportadora = 3000
+        self.fp = fp = 10500
+        self.fmoduladora = fmoduladora = 300
         self.faacheck = faacheck = True
         self.dutycycle = dutycycle = 0.5
         self.UIF = UIF = 1500
@@ -111,13 +111,13 @@ class top_block(gr.top_block, Qt.QWidget):
         for c in range(0, 1):
             self.top_grid_layout.setColumnStretch(c, 1)
         self._m_range = Range(0, 1, 0.05, 0.5, 200)
-        self._m_win = RangeWidget(self._m_range, self.set_m, 'Coeficiente de modulacion', "counter", float)
+        self._m_win = RangeWidget(self._m_range, self.set_m, 'Modulation coefficient', "counter", float)
         self.top_grid_layout.addWidget(self._m_win, 5, 4, 1, 1)
         for r in range(5, 6):
             self.top_grid_layout.setRowStretch(r, 1)
         for c in range(4, 5):
             self.top_grid_layout.setColumnStretch(c, 1)
-        _llaveAnalcheck_check_box = Qt.QCheckBox('Llave Analogica')
+        _llaveAnalcheck_check_box = Qt.QCheckBox('Analog Switch')
         self._llaveAnalcheck_choices = {True: True, False: False}
         self._llaveAnalcheck_choices_inv = dict((v,k) for k,v in self._llaveAnalcheck_choices.iteritems())
         self._llaveAnalcheck_callback = lambda i: Qt.QMetaObject.invokeMethod(_llaveAnalcheck_check_box, "setChecked", Qt.Q_ARG("bool", self._llaveAnalcheck_choices_inv[i]))
@@ -128,21 +128,21 @@ class top_block(gr.top_block, Qt.QWidget):
             self.top_grid_layout.setRowStretch(r, 1)
         for c in range(0, 1):
             self.top_grid_layout.setColumnStretch(c, 1)
-        self._fportadora_range = Range(500, 3000, 100, 1000, 200)
-        self._fportadora_win = RangeWidget(self._fportadora_range, self.set_fportadora, 'Frecuencia portadora', "counter_slider", float)
+        self._fportadora_range = Range(500, 3000, 100, 3000, 200)
+        self._fportadora_win = RangeWidget(self._fportadora_range, self.set_fportadora, 'Carrier frequency', "counter_slider", float)
         self.top_grid_layout.addWidget(self._fportadora_win, 4, 4, 1, 1)
         for r in range(4, 5):
             self.top_grid_layout.setRowStretch(r, 1)
         for c in range(4, 5):
             self.top_grid_layout.setColumnStretch(c, 1)
-        self._fmoduladora_range = Range(1, 200, 10, 50, 200)
-        self._fmoduladora_win = RangeWidget(self._fmoduladora_range, self.set_fmoduladora, 'Frecuencia moduladora', "counter_slider", float)
+        self._fmoduladora_range = Range(1, 500, 10, 300, 200)
+        self._fmoduladora_win = RangeWidget(self._fmoduladora_range, self.set_fmoduladora, 'Modulator frequency', "counter_slider", float)
         self.top_grid_layout.addWidget(self._fmoduladora_win, 3, 4, 1, 1)
         for r in range(3, 4):
             self.top_grid_layout.setRowStretch(r, 1)
         for c in range(4, 5):
             self.top_grid_layout.setColumnStretch(c, 1)
-        _faacheck_check_box = Qt.QCheckBox('Filtro Anti Alias')
+        _faacheck_check_box = Qt.QCheckBox('Anti-Alias Filter')
         self._faacheck_choices = {True: True, False: False}
         self._faacheck_choices_inv = dict((v,k) for k,v in self._faacheck_choices.iteritems())
         self._faacheck_callback = lambda i: Qt.QMetaObject.invokeMethod(_faacheck_check_box, "setChecked", Qt.Q_ARG("bool", self._faacheck_choices_inv[i]))
@@ -161,7 +161,7 @@ class top_block(gr.top_block, Qt.QWidget):
         for c in range(1, 2):
             self.top_grid_layout.setColumnStretch(c, 1)
         self._UIF_range = Range(100, 5000, 10, 1500, 200)
-        self._UIF_win = RangeWidget(self._UIF_range, self.set_UIF, 'Frecuencia', "counter_slider", float)
+        self._UIF_win = RangeWidget(self._UIF_range, self.set_UIF, 'Frequency', "counter_slider", float)
         self.top_grid_layout.addWidget(self._UIF_win, 3, 1, 2, 3)
         for r in range(3, 5):
             self.top_grid_layout.setRowStretch(r, 1)
@@ -174,7 +174,7 @@ class top_block(gr.top_block, Qt.QWidget):
             self.top_grid_layout.setRowStretch(r, 1)
         for c in range(1, 4):
             self.top_grid_layout.setColumnStretch(c, 1)
-        _FR_check_box = Qt.QCheckBox('Filtro Recuperador')
+        _FR_check_box = Qt.QCheckBox('Recover Filter')
         self._FR_choices = {True: True, False: False}
         self._FR_choices_inv = dict((v,k) for k,v in self._FR_choices.iteritems())
         self._FR_callback = lambda i: Qt.QMetaObject.invokeMethod(_FR_check_box, "setChecked", Qt.Q_ARG("bool", self._FR_choices_inv[i]))
@@ -185,8 +185,8 @@ class top_block(gr.top_block, Qt.QWidget):
             self.top_grid_layout.setRowStretch(r, 1)
         for c in range(0, 1):
             self.top_grid_layout.setColumnStretch(c, 1)
-        self._AMPLITUD_range = Range(1, 5, 1, 1, 200)
-        self._AMPLITUD_win = RangeWidget(self._AMPLITUD_range, self.set_AMPLITUD, "AMPLITUD", "counter", float)
+        self._AMPLITUD_range = Range(1, 15, 1, 1, 200)
+        self._AMPLITUD_win = RangeWidget(self._AMPLITUD_range, self.set_AMPLITUD, 'Amplitude', "counter", float)
         self.top_grid_layout.addWidget(self._AMPLITUD_win, 0, 3, 1, 1)
         for r in range(0, 1):
             self.top_grid_layout.setRowStretch(r, 1)
@@ -215,8 +215,8 @@ class top_block(gr.top_block, Qt.QWidget):
         if not True:
           self.qtgui_time_sink_x_0.disable_legend()
 
-        labels = ['Entrada', 'FAA', 'Sample and Hold', 'Llave analogica', 'FR',
-                  '', '', '', '', '']
+        labels = ['Input', 'AAF', 'Sample and Hold', 'Analog Switch', 'RF',
+                  'poronga', 'Poronga Char', '', '', '']
         widths = [1, 1, 1, 1, 1,
                   1, 1, 1, 1, 1]
         colors = ["blue", "red", "green", "black", "cyan",
@@ -261,7 +261,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.qtgui_freq_sink_x_0.enable_grid(False)
         self.qtgui_freq_sink_x_0.set_fft_average(1.0)
         self.qtgui_freq_sink_x_0.enable_axis_labels(True)
-        self.qtgui_freq_sink_x_0.enable_control_panel(False)
+        self.qtgui_freq_sink_x_0.enable_control_panel(True)
 
         if not True:
           self.qtgui_freq_sink_x_0.disable_legend()
@@ -269,7 +269,7 @@ class top_block(gr.top_block, Qt.QWidget):
         if "float" == "float" or "float" == "msg_float":
           self.qtgui_freq_sink_x_0.set_plot_pos_half(not True)
 
-        labels = ['Entrada', 'Faa', 'Sample and Hold', 'Llave analogica', 'FR',
+        labels = ['Input', 'AAF', 'Sample and Hold', 'Analog Switch', 'FR',
                   '', '', '', '', '']
         widths = [1, 1, 1, 1, 1,
                   1, 1, 1, 1, 1]
@@ -298,14 +298,16 @@ class top_block(gr.top_block, Qt.QWidget):
         	1, samp_rate, fp, 2500, firdes.WIN_HAMMING, 6.76))
         self.blocks_throttle_0_0_0 = blocks.throttle(gr.sizeof_float*1, samp_rate,True)
         self.blocks_throttle_0_0 = blocks.throttle(gr.sizeof_float*1, samp_rate,True)
-        self.blocks_threshold_ff_0 = blocks.threshold_ff(dutycycle, dutycycle, 0)
+        self.blocks_threshold_ff_0 = blocks.threshold_ff(1-dutycycle, 1-dutycycle, 0)
         self.blocks_sample_and_hold_xx_0 = blocks.sample_and_hold_ff()
         self.blocks_multiply_xx_0 = blocks.multiply_vff(1)
+        self.blocks_multiply_const_vxx_0_1_0 = blocks.multiply_const_vff((-1, ))
         self.blocks_multiply_const_vxx_0_1 = blocks.multiply_const_vff((m/2, ))
         self.blocks_multiply_const_vxx_0_0 = blocks.multiply_const_vff((m/2, ))
         self.blocks_multiply_const_vxx_0 = blocks.multiply_const_vff((2, ))
         self.blocks_float_to_char_0_2 = blocks.float_to_char(1, 1)
         self.blocks_add_xx_0 = blocks.add_vff(1)
+        self.blocks_add_const_vxx_0 = blocks.add_const_vff((1, ))
         self.blks2_selector_0_1_0_0_0_0 = grc_blks2.selector(
         	item_size=gr.sizeof_float*1,
         	num_inputs=2,
@@ -344,8 +346,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.analog_sig_source_x_0_2_1 = analog.sig_source_f(samp_rate, analog.GR_SIN_WAVE, fportadora-fmoduladora, AMPLITUD, 0)
         self.analog_sig_source_x_0_2_0 = analog.sig_source_f(samp_rate, analog.GR_SIN_WAVE, fportadora + fmoduladora, AMPLITUD, 0)
         self.analog_sig_source_x_0_2 = analog.sig_source_f(samp_rate, analog.GR_SIN_WAVE, fportadora, AMPLITUD, 0)
-        self.analog_sig_source_x_0_1 = analog.sig_source_f(samp_rate, analog.GR_TRI_WAVE, SR, 1, 0)
-        self.analog_sig_source_x_0_0_0 = analog.sig_source_f(samp_rate, analog.GR_SAW_WAVE, SR, 1, 0)
+        self.analog_sig_source_x_0_0_0_0 = analog.sig_source_f(samp_rate, analog.GR_SAW_WAVE, SR, 1, 0)
         self.analog_sig_source_x_0_0 = analog.sig_source_f(samp_rate, analog.GR_TRI_WAVE, UIF, AMPLITUD, -AMPLITUD/2)
         self.analog_sig_source_x_0 = analog.sig_source_f(samp_rate, analog.GR_SIN_WAVE, UIF, AMPLITUD, 0)
 
@@ -356,8 +357,7 @@ class top_block(gr.top_block, Qt.QWidget):
         ##################################################
         self.connect((self.analog_sig_source_x_0, 0), (self.blks2_selector_0_1, 0))
         self.connect((self.analog_sig_source_x_0_0, 0), (self.blocks_multiply_const_vxx_0, 0))
-        self.connect((self.analog_sig_source_x_0_0_0, 0), (self.blocks_threshold_ff_0, 0))
-        self.connect((self.analog_sig_source_x_0_1, 0), (self.blocks_float_to_char_0_2, 0))
+        self.connect((self.analog_sig_source_x_0_0_0_0, 0), (self.blocks_threshold_ff_0, 0))
         self.connect((self.analog_sig_source_x_0_2, 0), (self.blocks_add_xx_0, 0))
         self.connect((self.analog_sig_source_x_0_2_0, 0), (self.blocks_multiply_const_vxx_0_0, 0))
         self.connect((self.analog_sig_source_x_0_2_1, 0), (self.blocks_multiply_const_vxx_0_1, 0))
@@ -366,6 +366,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.connect((self.blks2_selector_0_1, 0), (self.qtgui_freq_sink_x_0, 0))
         self.connect((self.blks2_selector_0_1, 0), (self.qtgui_time_sink_x_0, 0))
         self.connect((self.blks2_selector_0_1_0, 0), (self.blocks_throttle_0_0, 0))
+        self.connect((self.blks2_selector_0_1_0_0, 0), (self.blks2_selector_0_1_0_0_0, 0))
         self.connect((self.blks2_selector_0_1_0_0, 0), (self.blocks_throttle_0_0_0, 0))
         self.connect((self.blks2_selector_0_1_0_0_0, 0), (self.blks2_selector_0_1_0_0_0_0, 0))
         self.connect((self.blks2_selector_0_1_0_0_0, 0), (self.low_pass_filter_0, 0))
@@ -373,15 +374,17 @@ class top_block(gr.top_block, Qt.QWidget):
         self.connect((self.blks2_selector_0_1_0_0_0, 0), (self.qtgui_time_sink_x_0, 3))
         self.connect((self.blks2_selector_0_1_0_0_0_0, 0), (self.qtgui_freq_sink_x_0, 4))
         self.connect((self.blks2_selector_0_1_0_0_0_0, 0), (self.qtgui_time_sink_x_0, 4))
+        self.connect((self.blocks_add_const_vxx_0, 0), (self.blocks_float_to_char_0_2, 0))
         self.connect((self.blocks_add_xx_0, 0), (self.blks2_selector_0_1, 3))
         self.connect((self.blocks_float_to_char_0_2, 0), (self.blocks_sample_and_hold_xx_0, 1))
         self.connect((self.blocks_multiply_const_vxx_0, 0), (self.blks2_selector_0_1, 1))
         self.connect((self.blocks_multiply_const_vxx_0_0, 0), (self.blocks_add_xx_0, 1))
         self.connect((self.blocks_multiply_const_vxx_0_1, 0), (self.blocks_add_xx_0, 2))
+        self.connect((self.blocks_multiply_const_vxx_0_1_0, 0), (self.blocks_add_const_vxx_0, 0))
         self.connect((self.blocks_multiply_xx_0, 0), (self.blks2_selector_0_1_0_0_0, 1))
         self.connect((self.blocks_sample_and_hold_xx_0, 0), (self.blks2_selector_0_1_0_0, 1))
-        self.connect((self.blocks_sample_and_hold_xx_0, 0), (self.blks2_selector_0_1_0_0_0, 0))
         self.connect((self.blocks_sample_and_hold_xx_0, 0), (self.blocks_multiply_xx_0, 0))
+        self.connect((self.blocks_threshold_ff_0, 0), (self.blocks_multiply_const_vxx_0_1_0, 0))
         self.connect((self.blocks_threshold_ff_0, 0), (self.blocks_multiply_xx_0, 1))
         self.connect((self.blocks_throttle_0_0, 0), (self.qtgui_freq_sink_x_0, 1))
         self.connect((self.blocks_throttle_0_0, 0), (self.qtgui_time_sink_x_0, 1))
@@ -428,8 +431,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.analog_sig_source_x_0_2_1.set_sampling_freq(self.samp_rate)
         self.analog_sig_source_x_0_2_0.set_sampling_freq(self.samp_rate)
         self.analog_sig_source_x_0_2.set_sampling_freq(self.samp_rate)
-        self.analog_sig_source_x_0_1.set_sampling_freq(self.samp_rate)
-        self.analog_sig_source_x_0_0_0.set_sampling_freq(self.samp_rate)
+        self.analog_sig_source_x_0_0_0_0.set_sampling_freq(self.samp_rate)
         self.analog_sig_source_x_0_0.set_sampling_freq(self.samp_rate)
         self.analog_sig_source_x_0.set_sampling_freq(self.samp_rate)
 
@@ -487,8 +489,8 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_dutycycle(self, dutycycle):
         self.dutycycle = dutycycle
-        self.blocks_threshold_ff_0.set_hi(self.dutycycle)
-        self.blocks_threshold_ff_0.set_lo(self.dutycycle)
+        self.blocks_threshold_ff_0.set_hi(1-self.dutycycle)
+        self.blocks_threshold_ff_0.set_lo(1-self.dutycycle)
 
     def get_UIF(self):
         return self.UIF
@@ -503,8 +505,7 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_SR(self, SR):
         self.SR = SR
-        self.analog_sig_source_x_0_1.set_frequency(self.SR)
-        self.analog_sig_source_x_0_0_0.set_frequency(self.SR)
+        self.analog_sig_source_x_0_0_0_0.set_frequency(self.SR)
 
     def get_FR(self):
         return self.FR

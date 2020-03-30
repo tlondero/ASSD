@@ -82,7 +82,7 @@
     </param>
     <param>
       <key>title</key>
-      <value></value>
+      <value>Simulation G3</value>
     </param>
     <param>
       <key>placement</key>
@@ -121,7 +121,7 @@
     </param>
     <param>
       <key>label</key>
-      <value></value>
+      <value>Amplitude</value>
     </param>
     <param>
       <key>min_len</key>
@@ -141,7 +141,7 @@
     </param>
     <param>
       <key>stop</key>
-      <value>5</value>
+      <value>15</value>
     </param>
     <param>
       <key>rangeType</key>
@@ -188,7 +188,7 @@
     </param>
     <param>
       <key>label</key>
-      <value>Filtro Recuperador</value>
+      <value>Recover Filter</value>
     </param>
     <param>
       <key>true</key>
@@ -294,7 +294,7 @@
     </param>
     <param>
       <key>label</key>
-      <value>Frecuencia</value>
+      <value>Frequency</value>
     </param>
     <param>
       <key>min_len</key>
@@ -424,7 +424,7 @@
     </param>
     <param>
       <key>label</key>
-      <value>Filtro Anti Alias</value>
+      <value>Anti-Alias Filter</value>
     </param>
     <param>
       <key>true</key>
@@ -443,7 +443,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>50</value>
+      <value>300</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -467,7 +467,7 @@
     </param>
     <param>
       <key>label</key>
-      <value>Frecuencia moduladora</value>
+      <value>Modulator frequency</value>
     </param>
     <param>
       <key>min_len</key>
@@ -487,7 +487,7 @@
     </param>
     <param>
       <key>stop</key>
-      <value>200</value>
+      <value>500</value>
     </param>
     <param>
       <key>rangeType</key>
@@ -522,7 +522,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>10000</value>
+      <value>10500</value>
     </param>
   </block>
   <block>
@@ -533,7 +533,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>1000</value>
+      <value>3000</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -557,7 +557,7 @@
     </param>
     <param>
       <key>label</key>
-      <value>Frecuencia portadora</value>
+      <value>Carrier frequency</value>
     </param>
     <param>
       <key>min_len</key>
@@ -624,7 +624,7 @@
     </param>
     <param>
       <key>label</key>
-      <value>Llave Analogica</value>
+      <value>Analog Switch</value>
     </param>
     <param>
       <key>true</key>
@@ -667,7 +667,7 @@
     </param>
     <param>
       <key>label</key>
-      <value>Coeficiente de modulacion</value>
+      <value>Modulation coefficient</value>
     </param>
     <param>
       <key>min_len</key>
@@ -1025,7 +1025,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(400, 752)</value>
+      <value>(368, 688)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1033,7 +1033,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>analog_sig_source_x_0_0_0</value>
+      <value>analog_sig_source_x_0_0_0_0</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -1064,69 +1064,6 @@
     <key>analog_sig_source_x</key>
     <param>
       <key>amp</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>freq</key>
-      <value>SR</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(368, 544)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>analog_sig_source_x_0_1</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>offset</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>float</value>
-    </param>
-    <param>
-      <key>samp_rate</key>
-      <value>samp_rate</value>
-    </param>
-    <param>
-      <key>waveform</key>
-      <value>analog.GR_TRI_WAVE</value>
-    </param>
-  </block>
-  <block>
-    <key>analog_sig_source_x</key>
-    <param>
-      <key>amp</key>
       <value>AMPLITUD</value>
     </param>
     <param>
@@ -1151,7 +1088,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(16, 624)</value>
+      <value>(32, 520)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1214,7 +1151,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(16, 744)</value>
+      <value>(32, 632)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1277,7 +1214,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(16, 856)</value>
+      <value>(16, 760)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1521,7 +1458,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(872, 720)</value>
+      <value>(856, 672)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1584,7 +1521,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1024, 920)</value>
+      <value>(1152, 800)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1621,6 +1558,57 @@
     <param>
       <key>type</key>
       <value>float</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_add_const_vxx</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>const</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(568, 604)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_add_const_vxx_0</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>float</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
     </param>
     <param>
       <key>vlen</key>
@@ -1698,7 +1686,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(552, 572)</value>
+      <value>(480, 540)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1800,7 +1788,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(168, 772)</value>
+      <value>(200, 756)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1851,7 +1839,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(168, 884)</value>
+      <value>(296, 836)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1860,6 +1848,57 @@
     <param>
       <key>id</key>
       <value>blocks_multiply_const_vxx_0_1</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>float</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_multiply_const_vxx</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>const</key>
+      <value>-1</value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(392, 604)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_multiply_const_vxx_0_1_0</value>
     </param>
     <param>
       <key>type</key>
@@ -1992,7 +2031,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(568, 756)</value>
+      <value>(568, 700)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2000,7 +2039,7 @@
     </param>
     <param>
       <key>high</key>
-      <value>dutycycle</value>
+      <value>1-dutycycle</value>
     </param>
     <param>
       <key>id</key>
@@ -2012,7 +2051,7 @@
     </param>
     <param>
       <key>low</key>
-      <value>dutycycle</value>
+      <value>1-dutycycle</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -2279,7 +2318,7 @@ os.chdir(script_path)</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1008, 776)</value>
+      <value>(1048, 656)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2350,7 +2389,7 @@ os.chdir(script_path)</value>
     </param>
     <param>
       <key>ctrlpanel</key>
-      <value>False</value>
+      <value>True</value>
     </param>
     <param>
       <key>affinity</key>
@@ -2398,7 +2437,7 @@ os.chdir(script_path)</value>
     </param>
     <param>
       <key>label1</key>
-      <value>Entrada</value>
+      <value>Input</value>
     </param>
     <param>
       <key>width1</key>
@@ -2430,7 +2469,7 @@ os.chdir(script_path)</value>
     </param>
     <param>
       <key>label2</key>
-      <value>Faa</value>
+      <value>AAF</value>
     </param>
     <param>
       <key>width2</key>
@@ -2462,7 +2501,7 @@ os.chdir(script_path)</value>
     </param>
     <param>
       <key>label4</key>
-      <value>Llave analogica</value>
+      <value>Analog Switch</value>
     </param>
     <param>
       <key>width4</key>
@@ -2653,7 +2692,7 @@ os.chdir(script_path)</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1128, 248)</value>
+      <value>(1128, 208)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -2685,7 +2724,7 @@ os.chdir(script_path)</value>
     </param>
     <param>
       <key>label1</key>
-      <value>Entrada</value>
+      <value>Input</value>
     </param>
     <param>
       <key>marker1</key>
@@ -2733,7 +2772,7 @@ os.chdir(script_path)</value>
     </param>
     <param>
       <key>label2</key>
-      <value>FAA</value>
+      <value>AAF</value>
     </param>
     <param>
       <key>marker2</key>
@@ -2781,7 +2820,7 @@ os.chdir(script_path)</value>
     </param>
     <param>
       <key>label4</key>
-      <value>Llave analogica</value>
+      <value>Analog Switch</value>
     </param>
     <param>
       <key>marker4</key>
@@ -2805,7 +2844,7 @@ os.chdir(script_path)</value>
     </param>
     <param>
       <key>label5</key>
-      <value>FR</value>
+      <value>RF</value>
     </param>
     <param>
       <key>marker5</key>
@@ -2829,7 +2868,7 @@ os.chdir(script_path)</value>
     </param>
     <param>
       <key>label6</key>
-      <value></value>
+      <value>poronga</value>
     </param>
     <param>
       <key>marker6</key>
@@ -2853,7 +2892,7 @@ os.chdir(script_path)</value>
     </param>
     <param>
       <key>label7</key>
-      <value></value>
+      <value>Poronga Char</value>
     </param>
     <param>
       <key>marker7</key>
@@ -3048,14 +3087,8 @@ os.chdir(script_path)</value>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>analog_sig_source_x_0_0_0</source_block_id>
+    <source_block_id>analog_sig_source_x_0_0_0_0</source_block_id>
     <sink_block_id>blocks_threshold_ff_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>analog_sig_source_x_0_1</source_block_id>
-    <sink_block_id>blocks_float_to_char_0_2</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -3109,6 +3142,12 @@ os.chdir(script_path)</value>
   </connection>
   <connection>
     <source_block_id>blks2_selector_0_1_0_0</source_block_id>
+    <sink_block_id>blks2_selector_0_1_0_0_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blks2_selector_0_1_0_0</source_block_id>
     <sink_block_id>blocks_throttle_0_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
@@ -3150,6 +3189,12 @@ os.chdir(script_path)</value>
     <sink_key>4</sink_key>
   </connection>
   <connection>
+    <source_block_id>blocks_add_const_vxx_0</source_block_id>
+    <sink_block_id>blocks_float_to_char_0_2</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
     <source_block_id>blocks_add_xx_0</source_block_id>
     <sink_block_id>blks2_selector_0_1</sink_block_id>
     <source_key>0</source_key>
@@ -3180,6 +3225,12 @@ os.chdir(script_path)</value>
     <sink_key>2</sink_key>
   </connection>
   <connection>
+    <source_block_id>blocks_multiply_const_vxx_0_1_0</source_block_id>
+    <sink_block_id>blocks_add_const_vxx_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
     <source_block_id>blocks_multiply_xx_0</source_block_id>
     <sink_block_id>blks2_selector_0_1_0_0_0</sink_block_id>
     <source_key>0</source_key>
@@ -3193,13 +3244,13 @@ os.chdir(script_path)</value>
   </connection>
   <connection>
     <source_block_id>blocks_sample_and_hold_xx_0</source_block_id>
-    <sink_block_id>blks2_selector_0_1_0_0_0</sink_block_id>
+    <sink_block_id>blocks_multiply_xx_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_sample_and_hold_xx_0</source_block_id>
-    <sink_block_id>blocks_multiply_xx_0</sink_block_id>
+    <source_block_id>blocks_threshold_ff_0</source_block_id>
+    <sink_block_id>blocks_multiply_const_vxx_0_1_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
