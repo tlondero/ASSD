@@ -3,53 +3,47 @@
 \begin{document}
 \section{Simulaciones Básicas}
 
+Se simularon las funciones descritas en la Tabla (\ref{fn})
+
+\begin{table}[H]
+\centering
+\begin{tabular}{@{}c@{}}
+\toprule
+Función \\ \midrule
+$A\cdot Cos(2\pi \cdot 1.5kHz \cdot t)$ \\
+Triangular simétrica 1.5kHz de pico $V_{MAX}$ \\
+3/2 Seno amplitud VMAX 1.5kHz \\ \bottomrule
+\end{tabular}
+\caption{Funciones a simular}
+\label{fn}
+\end{table}
+
+Se determinó que el valor máximo de amplitud de entrada al sistema es de $5V$ el cual es el mínimo entre los dos valores limitantes: Máxima entrada al CD4066 y límite mínimo de distorsión. Además, los límites de tensión de alimentación recomendados son 18V de la hoja de datos del CD4066.
+
+Para hallar los valores óptimos de $A$, $F_s$ y $DT$ se simuló utilizando \textit{LTSpiceXVII} las curvas de entrada y salida del sistema variando simultáneamente los valores de las tres variables, previamente fijando los rangos de variación de las variables. Estos rangos son de $1V$ a $5V$ para $A$,
+ $21kHz$ (para cumplir con el doble de la frecuencia de corte del filtro recuperador) a $25kHz$ (límite del oscilador) y de $5\%$ (límite del oscilador) a $50\%$ (limite por consigna) para el duty cycle. Finalmente, se utilizó el siguiente script en \textit{Python} para hallar el valor de las tres variables tal que la distorsión a la salida respecto a la entrada sea la mínima, computando la correlación entre las dos señales.
+
+\lstinputlisting{Python/spiceanal.py}
+
+
+
 \subsubsection{Simulaciones con Python}
 Se utilizó el framework de \textbf{GNURadio} para programar cada módulo del sistema encerrado en una interfaz gráfica, la cual brinda la posibilidad de visualizar tanto la señal en tiempo como su espectro en cada nodo del sistema en el mismo momento. Se puede elegir entre señales sinusoidales, triangulares, 3/2 seno o moduladas AM como entrada, señales cuyo estudio es de interes.
 
 \subsubsection{Simulaciones con LTSpice}
-Para ambos sistemas, tanto con la llave analógica seleccionada como para el Sample and Hold elegido, se realizaron las correspondientes simulaciones con las exitaciones deseadas, obteniendo así los resultados presentados a continuación.
+Para ambos sistemas, tanto con la llave analógica seleccionada como para el Sample and Hold elegido, se realizaron las simulaciones de las funciones en la Tabla (\ref{fn}) con las exitaciones deseadas con los siguientes esquemas en \textit{LTSPICEXVII}.
 
-\textcolor{red}{\textbf{Aclarar bajo qué condiciones, es el punto 6a.}}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{ImagenesEjercicio6/SIMULACIONLLAVE.png}
+\caption{Esquema de simulación para el sistema con llave analógica.}
+\end{figure}
 
-\textcolor{green}{\textbf{APRENDIZAJE EXPERIMENTAL DE ALAN O///O:}
-Bueno a la llave si le meto mas de 20V de supply se muere, si le meto mas de 5V a la entrada se chotea. con la senoidal corte k anda re bien pero con la triangular y la 32sen es horrible. tuve que meterle cap a la salida de la llave analogica porque sino habia ALTOS picos en todas las subidas y bajadas
-}
-
-%\begin{figure}[H]
-%\centering
-%\begin{subfigure}{.49\textwidth}
-%	\centering
-%	\includegraphics[width=\textwidth]{ImagenesEjercicio6/LA - 3 2.png}
-%\end{subfigure}
-%\begin{subfigure}{.49\textwidth}
-%	\centering
-%	\includegraphics[width=\textwidth]{ImagenesEjercicio6/LA - Cos.png}
-%\end{subfigure}
-%\end{figure}
-%\begin{figure}[H]
-%\centering
-%\begin{subfigure}{.49\textwidth}
-%	\centering
-%	\includegraphics[width=\textwidth]{ImagenesEjercicio6/LA - Tri.png}
-%\end{subfigure}
-%\begin{subfigure}{.49\textwidth}
-%	\centering
-%	\includegraphics[width=\textwidth]{ImagenesEjercicio6/SH - 3 2.png}
-%\end{subfigure}
-%\end{figure}
-%\begin{figure}[H]
-%\centering
-%\begin{subfigure}{.49\textwidth}
-%	\centering
-%	\includegraphics[width=\textwidth]{ImagenesEjercicio6/SH - Cos.png}
-%\end{subfigure}
-%\begin{subfigure}{.49\textwidth}
-%	\centering
-%	\includegraphics[width=\textwidth]{ImagenesEjercicio6/SH - Tri.png}
-%\end{subfigure}
-%\end{figure}
-
-La señal cosenoidal se caracteriza por poseer una frecuencia de $1.5 \ kHz$ y una amplitud de $2 \ V_{PP}$. Para las otras dos exitaciones se respetó la misma frecuencia variando la amplitud, siendo esta para ambos casos de $7.5 \ V_{PP}$, limitada por la tensión máxima a la entrada de la llave seleccionada. Los pulsos utilizados para el muestreo poseen un Duty Cycle del $50 \%$.
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{ImagenesEjercicio6/SIMULACIONSH.png}
+\caption{Esquema de simulación para el sistema con Sample and Hold.}
+\end{figure}
 
 \textcolor{red}{\textbf{Calcular potencia recuperada.}}
 
