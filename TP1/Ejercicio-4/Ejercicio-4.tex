@@ -14,6 +14,26 @@ El modulo de \textbf{Sample and Hold}  puede ser esquematizado de la siguiente f
 	\label{fig:syh}
 \end{figure}
 Su objetivo es el de muestrear la señal analógica de entrada y retener su valor por un pequeño intervalo de tiempo para que la circuiteria colocada inmediatamente después puede utilizar ese valor para digitalizarla.
+\subsubsection{Breve introducción formal al muestreo de señales}
+Dada una señal analógica de entrada $x_{a}(t)$ deseamos obtener una señal discreta $x(n)$ producto de muestrar la entrada cada $T$ segundos.
+Como primer paso para hallar la expresión que describe a la señal discreta efectuamos un muestreo ideal sobre la entrada
+
+\begin{equation}
+	\centering
+	x_{\delta_{T}}(n)=\sum_{-\infty}^{\infty} x_{a}(t)\delta_{T}(t-nT)
+	\label{
+		muestreo_ideal}
+\end{equation}
+$$x_{\delta_{T}}(n) =x_{a}(nT) $$
+Una vez tomadas las muestras de la señal, la convolucionaremos con un pulso unitario de duración $T$
+
+$$x(n)=p(t)*\sum_{-\infty}^{\infty} x_{a}(nT)\delta_{T}(t-nT)$$
+\begin{equation}
+\centering
+x(n)=\sum_{-\infty}^{\infty} x_{a}(nT)p_{T}(t-nT)
+\end{equation}
+
+\subsubsection{Consideraciones sobre el modulo Sample and Hold}
 Para esto, requerimos de una alta impedancia de entrada lo cual evita cualquier efecto de carga del IC sobre la fuente de la señal. Esto es modelado como un buffer a la entrada. Luego tenemos una \textbf{llave}, que puede estar implementada con una llave analogica o transistores MOSFET, la cual se encargara de cambiar del modo muestreo (sample) permitiendo que el capacitor se carga con el valor actual, y mantener (hold) ese valor cuando la misma este abierta. Finalmente tenemos un buffer adicional a la salida para prevenir la descarga del capacitor y así ofrecer mayor fidelidad. 
 
 
