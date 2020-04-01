@@ -14,119 +14,93 @@ $A\cdot Cos(2\pi \cdot 1.5kHz \cdot t)$ \\
 Triangular simétrica 1.5kHz de pico $V_{MAX}$ \\
 3/2 Seno amplitud VMAX 1.5kHz \\ \bottomrule
 \end{tabular}
-\caption{Funciones a simular}
+\caption{Funciones simuladas.}
 \label{fn}
 \end{table}
 
-Se determinó que el valor máximo de amplitud de entrada al sistema es de $5V$ el cual es el mínimo entre los dos valores limitantes: Máxima entrada al CD4066 y límite mínimo de distorsión. Además, los límites de tensión de alimentación recomendados son 18V de la hoja de datos del CD4066.
+Se determinó que el valor máximo de amplitud de entrada al sistema es de $5 \ V$, el cual es el mínimo entre los dos valores limitantes: máxima entrada al CD4066 y límite mínimo de distorsión. Además, los límites de tensión de alimentación recomendados son $18 \ V$ de la hoja de datos del Sample and Hold.
 
-Para hallar los valores óptimos de $A$, $F_s$ y $DT$ se simuló utilizando \textit{LTSpiceXVII} las curvas de entrada y salida del sistema variando simultáneamente los valores de las tres variables, previamente fijando los rangos de variación de las variables. Estos rangos son de $1V$ a $5V$ para $A$,
- $21kHz$ (para cumplir con el doble de la frecuencia de corte del filtro recuperador) a $25kHz$ (límite del oscilador) y de $5\%$ (límite del oscilador) a $50\%$ (limite por consigna) para el duty cycle. Finalmente, se utilizó el siguiente script en \textit{Python} para hallar el valor de las tres variables tal que la distorsión a la salida respecto a la entrada sea la mínima, computando la correlación entre las dos señales.
-
+Para hallar los valores óptimos de $A$, $F_s$ y $DT$ se simuló utilizando \textbf{LTSpiceXVII} las curvas de entrada y salida del sistema variando simultáneamente los valores de las tres variables, previamente fijando los rangos entre las mismas cambian. Estos rangos son de $1 \ V$ a $5 \ V$ para $A$, $21 \ kHz$ (para cumplir con el doble de la frecuencia de corte del filtro recuperador) a $25 \ kHz$ (límite del oscilador) y de $5\%$ (límite del oscilador) a $50\%$ (limite por consigna) para el duty cycle. Finalmente, se utilizó el siguiente script en \textbf{Python} para hallar el valor de los tres parámetros tal que la distorsión a la salida respecto a la entrada sea la mínima, computando la correlación entre las dos señales.
 \begin{figure}[H]
 \centering
-\scalebox{0.75}{
-\lstinputlisting{Python/spiceanal.py}
+\scalebox{0.75}{\lstinputlisting{Python/spiceanal.py}
 }
 \end{figure}
 
 Se obtuvieron los siguientes resultados.:
-
 \begin{figure}[H]
 \centering
-\begin{subfigure}{\linewidth}
-\includegraphics[width=\linewidth]{ImagenesEjercicio6/scatter_sh_seno.png}
-\caption{Scatterplot de las simulación.}
-\end{subfigure}
-
-\begin{subfigure}{\linewidth}
-\[A = 4V \ F_s = 21250Hz \ DT = 5\%\]
-\caption{Parámetros para la menor distorsión.}
-\end{subfigure}
-\label{seno_sh}
-\caption{Resultados experimentales de la simulación para \textbf{senoidal con S\&H}.}
+	\includegraphics[width=0.8\linewidth]{ImagenesEjercicio6/scatter_sh_seno.png}
+	\caption{Scatterplot de la simulación para la \textbf{senoidal con S\&H}.}
+	\label{seno_sh}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\begin{subfigure}{\linewidth}
-\includegraphics[width=\linewidth]{ImagenesEjercicio6/scatter_llave_seno.png}
-\caption{Scatterplot de las simulación.}
-\end{subfigure}
-
-\begin{subfigure}{\linewidth}
-\[A = 5V \ F_s = 21250Hz \ DT = 50\%\]
-\caption{Parámetros para la menor distorsión.}
-\end{subfigure}
-\label{seno_llave}
-\caption{Resultados experimentales de la simulación para \textbf{senoidal con llave analógica}.}
+	\includegraphics[width=0.8\linewidth]{ImagenesEjercicio6/scatter_llave_seno.png}
+	\caption{Scatterplot de las simulación para la \textbf{senoidal con llave analógica}.}
+	\label{seno_llave}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\begin{subfigure}{\linewidth}
-\includegraphics[width=\linewidth]{ImagenesEjercicio6/scatter_llave_triang.png}
-\caption{Scatterplot de las simulación.}
-\end{subfigure}
-
-\begin{subfigure}{\linewidth}
-\[A = 5V \ F_s = 23750Hz \ DT = 50\%\]
-\caption{Parámetros para la menor distorsión.}
-\end{subfigure}
-\label{triang_llave}
-\caption{Resultados experimentales de la simulación para \textbf{triangular con llave analógica}.}
+	\includegraphics[width=0.8\linewidth]{ImagenesEjercicio6/scatter_llave_triang.png}
+	\caption{Scatterplot de las simulación para la \textbf{triangular con llave analógica}.}
+	\label{triang_llave}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\begin{subfigure}{\linewidth}
-\includegraphics[width=\linewidth]{ImagenesEjercicio6/scatter_sh_triang.png}
-\caption{Scatterplot de las simulación.}
-\end{subfigure}
-
-\begin{subfigure}{\linewidth}
-\[A = 5V \ F_s = 24000Hz \ DT = 30\%\]
-\caption{Parámetros para la menor distorsión.}
-\end{subfigure}
-\label{triang_sh}
-\caption{Resultados experimentales de la simulación para \textbf{triangular con S\&H}.}
+	\includegraphics[width=0.8\linewidth]{ImagenesEjercicio6/scatter_sh_triang.png}
+	\caption{Scatterplot de las simulación para la \textbf{triangular con S\&H}.}
+	\label{triang_sh}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\begin{subfigure}{\linewidth}
-\includegraphics[width=\linewidth]{ImagenesEjercicio6/scatter_llave_sen32.png}
-\caption{Scatterplot de las simulación.}
-\end{subfigure}
-
-\begin{subfigure}{\linewidth}
-\[A = 1V \ F_s = 23500Hz \ DT = 50\%\]
-\caption{Parámetros para la menor distorsión.}
-\end{subfigure}
-\label{sen32_llave}
-\caption{Resultados experimentales de la simulación para \textbf{seno 3/2 con llave analógica}.}
+	\includegraphics[width=0.8\linewidth]{ImagenesEjercicio6/scatter_llave_sen32.png}
+	\caption{Scatterplot de las simulación para el \textbf{seno 3/2 con llave analógica}.}
+	\label{sen32_llave}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\begin{subfigure}{\linewidth}
-\includegraphics[width=\linewidth]{ImagenesEjercicio6/scatter_sh_sen32.png}
-\caption{Scatterplot de las simulación.}
-\end{subfigure}
-
-\begin{subfigure}{\linewidth}
-\[A = 1.5V \ F_s = 20000Hz \ DT = 5\%\]
-\caption{Parámetros para la menor distorsión.}
-\end{subfigure}
-\label{sen32_sh}
-\caption{Resultados experimentales de la simulación para \textbf{seno 3/2 con S\&H}.}
+	\includegraphics[width=0.8\linewidth]{ImagenesEjercicio6/scatter_sh_sen32.png}
+	\caption{Scatterplot de las simulación para el \textbf{seno 3/2 con S\&H}.}
+	\label{sen32_sh}
 \end{figure}
+
+De esta forma se efectuaron las siguientes tablas con los parámetros para la menor distorsión para cada circuito:
+\begin{multicols}{2}
+\begin{table}[H]
+\centering
+\begin{tabular}{cccc}
+\hline
+$\mathbf{Entrada}$  & $\mathbf{A \ [V]}$ & $\mathbf{F_s \ [Hz]}$ & $\mathbf{DT \ [\%]}$ \\ \hline
+\textbf{Coseno}     & 4                  & 21250                 & 5                    \\
+\textbf{3/2 Seno}   & 1.5                & 20000                 & 5                    \\
+\textbf{Triangular} & 5                  & 24000                 & 30                  	\\ \hline
+\end{tabular}
+\caption{Circuito con Sample and Hold.}
+\end{table}
+\begin{table}[H]
+\centering
+\begin{tabular}{cccc}
+\hline
+$\mathbf{Entrada}$  & $\mathbf{A \ [V]}$ & $\mathbf{F_s \ [Hz]}$ & $\mathbf{DT \ [\%]}$ \\ \hline
+\textbf{Coseno}     & 5                  & 21250                 & 50                   \\
+\textbf{3/2 Seno}   & 1                  & 23500                 & 50                   \\
+\textbf{Triangular} & 5                  & 23750                 & 50                   \\ \hline
+\end{tabular}
+\caption{Circuito con llave analógica.}
+\end{table}
+\end{multicols}
 
 \subsubsection{Simulaciones con Python}
 Se utilizó el framework de \textbf{GNURadio} para programar cada módulo del sistema encerrado en una interfaz gráfica, la cual brinda la posibilidad de visualizar tanto la señal en tiempo como su espectro en cada nodo del sistema en el mismo momento. Se puede elegir entre señales sinusoidales, triangulares, 3/2 seno o moduladas AM como entrada, señales cuyo estudio es de interes.
 
 \subsubsection{Simulaciones con LTSpice}
-Para ambos sistemas, tanto con la llave analógica seleccionada como para el Sample and Hold elegido, se realizaron las simulaciones de las funciones en la Tabla (\ref{fn}) con las exitaciones deseadas con los siguientes esquemas en \textit{LTSPICEXVII}.
+Para ambos sistemas se realizaron las simulaciones correspondientes, presentadas en la Tabla (\ref{fn}), mediante los siguientes esquemas en \textbf{LTSpice}.
 
 \begin{figure}[H]
 \centering
@@ -139,6 +113,34 @@ Para ambos sistemas, tanto con la llave analógica seleccionada como para el Sam
 \includegraphics[width=\textwidth]{ImagenesEjercicio6/SIMULACIONSH.png}
 \caption{Esquema de simulación para el sistema con Sample and Hold.}
 \end{figure}
+
+Los resultados obtenidos de dichas simulaciones se presentana continuación:
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{ImagenesEjercicio6/LA - 3 2.png}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{ImagenesEjercicio6/LA - Cos.png}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{ImagenesEjercicio6/LA - Tri.png}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{ImagenesEjercicio6/SH - 3 2.png}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{ImagenesEjercicio6/SH - Cos.png}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{ImagenesEjercicio6/SH - Tri.png}
+\end{figure}
+\end{multicols}
 
 \textcolor{red}{\textbf{Calcular potencia recuperada.}}
 
