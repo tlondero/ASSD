@@ -23,9 +23,14 @@ Se determinó que el valor máximo de amplitud de entrada al sistema es de $5V$ 
 Para hallar los valores óptimos de $A$, $F_s$ y $DT$ se simuló utilizando \textit{LTSpiceXVII} las curvas de entrada y salida del sistema variando simultáneamente los valores de las tres variables, previamente fijando los rangos de variación de las variables. Estos rangos son de $1V$ a $5V$ para $A$,
  $21kHz$ (para cumplir con el doble de la frecuencia de corte del filtro recuperador) a $25kHz$ (límite del oscilador) y de $5\%$ (límite del oscilador) a $50\%$ (limite por consigna) para el duty cycle. Finalmente, se utilizó el siguiente script en \textit{Python} para hallar el valor de las tres variables tal que la distorsión a la salida respecto a la entrada sea la mínima, computando la correlación entre las dos señales.
 
+\begin{figure}[H]
+\centering
+\scalebox{0.75}{
 \lstinputlisting{Python/spiceanal.py}
+}
+\end{figure}
 
-Esto dio los siguientes resultados:
+Se obtuvieron los siguientes resultados.:
 
 \begin{figure}[H]
 \centering
