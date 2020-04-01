@@ -4,8 +4,7 @@ import scipy.signal
 import matplotlib.pyplot as plt
 import numpy as np
 
-#LTR = LTSpiceRawRead("..//Spice//FAA+LL+FR.raw")
-LTR = LTSpiceRawRead("..//Spice//FAA+SH+FR.raw")
+LTR = LTSpiceRawRead("sen32sh.raw")
 
 corr = []
 corr_maxes = []
@@ -16,14 +15,13 @@ vin = LTR.get_trace("V(vin)")
 vout = LTR.get_trace("V(vout)")
 
 for i in LTR.get_steps():
-    corr.append(scipy.signal.correlate(vin.get_wave(i), vout.get_wave(i), method='fft'))
+    corr.append(scipy.signal.correlate(vin.get_wave(i), vout.get_wave(i)))
     step_vars.append(LTR.steps[i])
     corr_maxes.append(np.max(corr[i]))
 
 least_distorted_steps.append(np.where(corr_maxes == np.max(corr_maxes)))
 
 print("Least distorted: ")
-
 for i in range(len(least_distorted_steps)):
     print(LTR.steps[(least_distorted_steps[i][0][0])])
 
@@ -33,7 +31,7 @@ x = [(i['freqs']/1000) for i in step_vars]
 y = [i['dts'] for i in step_vars]
 z = [i['amp'] for i in step_vars]
 c = corr_maxes
-img = ax.scatter(x, y, z, c=c, cmap='CMRmap_r', alpha=1)
+img = ax.scatter(x, y, z, c=c, cmap='Spectral', alpha=1)
 cbar = plt.colorbar(img)
 cbar.set_label('Correlacion')
 plt.title("Maxima correlacion entre entrada y salida")

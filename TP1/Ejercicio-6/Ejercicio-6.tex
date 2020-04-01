@@ -25,7 +25,97 @@ Para hallar los valores óptimos de $A$, $F_s$ y $DT$ se simuló utilizando \tex
 
 \lstinputlisting{Python/spiceanal.py}
 
+Esto dio los siguientes resultados:
 
+\begin{figure}[H]
+\centering
+\begin{subfigure}{\linewidth}
+\includegraphics[width=\linewidth]{ImagenesEjercicio6/scatter_sh_seno.png}
+\caption{Scatterplot de las simulación.}
+\end{subfigure}
+
+\begin{subfigure}{\linewidth}
+\[A = 4V \ F_s = 21250Hz \ DT = 5\%\]
+\caption{Parámetros para la menor distorsión.}
+\end{subfigure}
+\label{seno_sh}
+\caption{Resultados experimentales de la simulación para \textbf{senoidal con S\&H}.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}{\linewidth}
+\includegraphics[width=\linewidth]{ImagenesEjercicio6/scatter_llave_seno.png}
+\caption{Scatterplot de las simulación.}
+\end{subfigure}
+
+\begin{subfigure}{\linewidth}
+\[A = 5V \ F_s = 21250Hz \ DT = 50\%\]
+\caption{Parámetros para la menor distorsión.}
+\end{subfigure}
+\label{seno_llave}
+\caption{Resultados experimentales de la simulación para \textbf{senoidal con llave analógica}.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}{\linewidth}
+\includegraphics[width=\linewidth]{ImagenesEjercicio6/scatter_llave_triang.png}
+\caption{Scatterplot de las simulación.}
+\end{subfigure}
+
+\begin{subfigure}{\linewidth}
+\[A = 5V \ F_s = 23750Hz \ DT = 50\%\]
+\caption{Parámetros para la menor distorsión.}
+\end{subfigure}
+\label{triang_llave}
+\caption{Resultados experimentales de la simulación para \textbf{triangular con llave analógica}.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}{\linewidth}
+\includegraphics[width=\linewidth]{ImagenesEjercicio6/pend.jpg}
+\caption{Scatterplot de las simulación.}
+\end{subfigure}
+
+\begin{subfigure}{\linewidth}
+\[A = PEND \ F_s = PEND \ DT = PEND\]
+\caption{Parámetros para la menor distorsión.}
+\end{subfigure}
+\label{triang_sh}
+\caption{Resultados experimentales de la simulación para \textbf{triangular con S\&H}.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}{\linewidth}
+\includegraphics[width=\linewidth]{ImagenesEjercicio6/scatter_llave_sen32.png}
+\caption{Scatterplot de las simulación.}
+\end{subfigure}
+
+\begin{subfigure}{\linewidth}
+\[A = 1V \ F_s = 23500Hz \ DT = 50\%\]
+\caption{Parámetros para la menor distorsión.}
+\end{subfigure}
+\label{sen32_llave}
+\caption{Resultados experimentales de la simulación para \textbf{seno 3/2 con llave analógica}.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}{\linewidth}
+\includegraphics[width=\linewidth]{ImagenesEjercicio6/scatter_sh_sen32.png}
+\caption{Scatterplot de las simulación.}
+\end{subfigure}
+
+\begin{subfigure}{\linewidth}
+\[A = 1.5V \ F_s = 20000Hz \ DT = 5\%\]
+\caption{Parámetros para la menor distorsión.}
+\end{subfigure}
+\label{sen32_sh}
+\caption{Resultados experimentales de la simulación para \textbf{seno 3/2 con S\&H}.}
+\end{figure}
 
 \subsubsection{Simulaciones con Python}
 Se utilizó el framework de \textbf{GNURadio} para programar cada módulo del sistema encerrado en una interfaz gráfica, la cual brinda la posibilidad de visualizar tanto la señal en tiempo como su espectro en cada nodo del sistema en el mismo momento. Se puede elegir entre señales sinusoidales, triangulares, 3/2 seno o moduladas AM como entrada, señales cuyo estudio es de interes.
