@@ -1,0 +1,6 @@
+IDEAS PROPUESTAS:
+
+- Reconcoer un objeto en concreto y seguirlo.
+- Dada la posicion inical, seguir un objeto por su color y forma.
+- Diferenciar entre perros y gatos con red neuronal y filtro de convolución.
+- Reconocer "calle" y señales de transito con auto a control remoto.
