@@ -40,7 +40,7 @@ Se obtuvieron los siguientes resultados.:
 \end{subfigure}
 
 \begin{subfigure}{\linewidth}
-\[A = 4V \ F_s = 21250Hz \ DT = 5\%\]
+\[A = 5V \ F_s = 22000Hz \ DT = 25\%\]
 \caption{Parámetros para la menor distorsión.}
 \end{subfigure}
 \label{seno_sh}
@@ -122,25 +122,101 @@ Se obtuvieron los siguientes resultados.:
 \caption{Resultados experimentales de la simulación para \textbf{seno 3/2 con S\&H}.}
 \end{figure}
 
+Finalmente, se recopilan los resultados para cada tipo de señal y sistema en la Tabla (\ref{tab:res}).
+\begin{table}[H]
+\begin{tabular}{@{}ccccccc@{}}
+\toprule
+Parámetro & Seno S\&H & Seno Llave & Triangular S\&H & Triangular Llave & Seno3/2 S\&H & Seno3/2 Llave \\ \midrule
+Amplitud & 5V & 5V & 5V & 5V & 1.5V & 1V \\
+Frecuencia de sampleo & 22000Hz & 21250Hz & 24000Hz & 23750Hz & 20000Hz & 23500Hz \\
+Duty Cycle & 25\% & 50\% & 30\% & 50\% & 5\% & 50\% \\ \bottomrule
+\end{tabular}
+\label{tab:res}
+\caption{Resultados experimentales de los parámetros del sistema para obtener menor distorsión.}
+\end{table}
+
 \subsubsection{Simulaciones con Python}
 Se utilizó el framework de \textbf{GNURadio} para programar cada módulo del sistema encerrado en una interfaz gráfica, la cual brinda la posibilidad de visualizar tanto la señal en tiempo como su espectro en cada nodo del sistema en el mismo momento. Se puede elegir entre señales sinusoidales, triangulares, 3/2 seno o moduladas AM como entrada, señales cuyo estudio es de interes.
 
 \subsubsection{Simulaciones con LTSpice}
-Para ambos sistemas, tanto con la llave analógica seleccionada como para el Sample and Hold elegido, se realizaron las simulaciones de las funciones en la Tabla (\ref{fn}) con las exitaciones deseadas con los siguientes esquemas en \textit{LTSPICEXVII}.
+Para ambos sistemas, tanto con la llave analógica seleccionada como para el Sample and Hold elegido, se realizaron las simulaciones de las funciones en la Tabla (\ref{fn}) con los parámetros del sistema que resultan en la menor distorsión según los resultados experimentales detallados en la Tabla (\ref{tab:res}).
+
+%\begin{figure}[H]
+%\centering
+%\scalebox{0.9}{
+%\includegraphics[width=\textwidth]{ImagenesEjercicio6/SIMULACIONLLAVE.png}
+%}
+%\caption{Esquema de simulación para el sistema con llave analógica.}
+%\end{figure}
+%
+%\begin{figure}[H]
+%\centering
+%\scalebox{0.9}{
+%\includegraphics[width=\textwidth]{ImagenesEjercicio6/SIMULACIONSH.png}
+%}
+%\caption{Esquema de simulación para el sistema con Sample and Hold.}
+%\end{figure}
+
+\textbf{Senoidal con S\&H}
+
+Se calculó para la señal senoidal muestreada con sample and hold con $5V$ de amplitud, $22000Hz$ de frecuencia de muestreo y duty cycle del $25\%$ mostrada en la Figura (\ref{fig:senollave}) un $93,21\%$ de potencia recuperada. 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{ImagenesEjercicio6/SIMULACIONLLAVE.png}
-\caption{Esquema de simulación para el sistema con llave analógica.}
+\includegraphics[width=\textwidth]{ImagenesEjercicio6/pend.jpg}
+\caption{Comparación temporal entre entrada y salida del sistema.}
 \end{figure}
+
+\textbf{Senoidal con llave analógica}
+
+Se calculó para la señal senoidal muestreada con llave analógica con $5V$ de amplitud, $21250Hz$ de frecuencia de muestreo y duty cycle del $50\%$ mostrada en la Figura (\ref{fig:senollave}) un $21,48\%$ de potencia recuperada. 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{ImagenesEjercicio6/SIMULACIONSH.png}
-\caption{Esquema de simulación para el sistema con Sample and Hold.}
+\includegraphics[width=\textwidth]{ImagenesEjercicio6/pend.jpg}
+\caption{Comparación temporal entre entrada y salida del sistema.}
+\label{fig:senollave}
 \end{figure}
 
-\textcolor{red}{\textbf{Calcular potencia recuperada.}}
+\textbf{Triangular con S\&H}
+
+Se calculó para la señal triangular muestreada con sample and hold con $5V$ de amplitud, $24000Hz$ de frecuencia de muestreo y duty cycle del $30\%$ mostrada en la Figura (\ref{fig:senollave}) un $101,05\%$ de potencia recuperada. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{ImagenesEjercicio6/pend.jpg}
+\caption{Comparación temporal entre entrada y salida del sistema.}
+\end{figure}
+
+\textbf{Triangular con llave analógica}
+
+Se calculó para la señal triangular muestreada con llave analógica con $5V$ de amplitud, $23750Hz$ de frecuencia de muestreo y duty cycle del $50\%$ mostrada en la Figura (\ref{fig:senollave}) un $27,60\%$ de potencia recuperada. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{ImagenesEjercicio6/pend.jpg}
+\caption{Comparación temporal entre entrada y salida del sistema.}
+\end{figure}
+
+\textbf{Seno 3/2 con S\&H}
+
+Se calculó para la señal seno 3/2 muestreada con sample and hold con $1.5V$ de amplitud, $20000Hz$ de frecuencia de muestreo y duty cycle del $5\%$ mostrada en la Figura (\ref{fig:senollave}) un $102,35\%$ de potencia recuperada. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{ImagenesEjercicio6/pend.jpg}
+\caption{Comparación temporal entre entrada y salida del sistema.}
+\end{figure}
+
+\textbf{Seno 3/2 con llave analógica}
+
+Se calculó para la señal seno 3/2 muestreada con llave analógica con $1V$ de amplitud, $23500Hz$ de frecuencia de muestreo y duty cycle del $50\%$ mostrada en la Figura (\ref{fig:senollave}) un $32,59\%$ de potencia recuperada. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{ImagenesEjercicio6/pend.jpg}
+\caption{Comparación temporal entre entrada y salida del sistema.}
+\end{figure}
 
 Nuevamente, se realizaron las mismas simulaciones variando...
 

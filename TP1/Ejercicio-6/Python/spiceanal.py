@@ -4,7 +4,7 @@ import scipy.signal
 import matplotlib.pyplot as plt
 import numpy as np
 
-LTR = LTSpiceRawRead("triangsh.raw")
+LTR = LTSpiceRawRead("sen32sh.raw")
 
 corr = []
 corr_maxes = []
@@ -20,8 +20,9 @@ for i in LTR.get_steps():
     corr_maxes.append(np.max(corr[i]))
 
 least_distorted_steps.append(np.where(corr_maxes == np.max(corr_maxes)))
-
+plt.show()
 print("Least distorted: ")
+
 for i in range(len(least_distorted_steps)):
     print(LTR.steps[(least_distorted_steps[i][0][0])])
 
@@ -39,4 +40,24 @@ ax.set_zlabel('Amplitud [V]', rotation = 0)
 ax.set_ylabel('Duty Cycle [%]', rotation = 0)
 ax.set_xlabel('Frecuencia [kHz]', rotation = 0)
 
+plt.show()
+
+pow_in = []
+pow_out = []
+power_restored = []
+
+for i in LTR.get_steps():
+    pow_in.append(0)
+    pow_out.append(0)
+    for j in range(len(time.get_wave(i))):
+        pow_in[i] =  pow_in[i] + abs(vin.get_wave(i)[j])**2
+        pow_out[i] = pow_out[i] + abs(vout.get_wave(i)[j])**2
+
+for i in LTR.get_steps():
+    power_restored.append(pow_out[i]/pow_in[i])
+
+print(round(power_restored[least_distorted_steps[0][0][0]], 4))
+
+plt.plot(power_restored)
+plt.plot(least_distorted_steps[0][0][0], power_restored[least_distorted_steps[0][0][0]], "ro")
 plt.show()
