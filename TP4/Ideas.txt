@@ -3,4 +3,3 @@ IDEAS PROPUESTAS:
 - Reconcoer un objeto en concreto y seguirlo (2D).
 - Dada la posicion inical, seguir un objeto por su color y forma (2D). Variación: usar codigo QR (por ejemplo) para reconocer el objeto y luego segurilo.
 - Diferenciar entre perros y gatos con red neuronal y filtro de convolución (2D).
-- Reconocer "calle" y señales de transito con auto a control remoto.
