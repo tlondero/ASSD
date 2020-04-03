@@ -4,7 +4,7 @@ import scipy.signal
 import matplotlib.pyplot as plt
 import numpy as np
 
-LTR = LTSpiceRawRead("sen32sh.raw")
+LTR = LTSpiceRawRead("triangsh.raw")
 
 corr = []
 corr_maxes = []

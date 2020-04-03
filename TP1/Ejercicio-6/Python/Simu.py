@@ -5,7 +5,7 @@ from SpiceParser import SpiceParser
 import glob
 import os
 
-simulaciones = [f for f in glob.glob("./Simu/*.*", recursive=True)]
+simulaciones = [f for f in glob.glob("./Simu/puntob2/*.*", recursive=True)]
 
 #SIMULACION
 
