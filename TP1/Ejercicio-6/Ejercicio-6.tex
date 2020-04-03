@@ -25,7 +25,7 @@ Para hallar los valores óptimos de $A$, $F_s$ y $DT$ se simuló utilizando \tex
 \scalebox{0.75}{\lstinputlisting{Python/spiceanal.py}}
 \end{figure}
 
-Se obtuvieron los siguientes resultados.:
+Se obtuvieron los siguientes resultados:
 \begin{figure}[H]
 \centering
 	\includegraphics[width=0.8\linewidth]{ImagenesEjercicio6/scatter_sh_seno.png}
@@ -88,7 +88,7 @@ $\mathbf{Entrada}$  & $\mathbf{A \ [V]}$ & $\mathbf{F_s \ [Hz]}$ & $\mathbf{DT \
 \hline
 $\mathbf{Entrada}$  & $\mathbf{A \ [V]}$ & $\mathbf{F_s \ [Hz]}$ & $\mathbf{DT \ [\%]}$ &$P_r$ \\ \hline
 \textbf{Coseno}     & 5                  & 21250                 & 50       &     0.1775       \\
-\textbf{3/2 Seno}   & 1                  & 23500                 & 50        &      0.268     \\
+\textbf{3/2 Seno}   & 1                  & 23500                 & 50        &      0.2680     \\
 \textbf{Triangular} & 5                  & 23750                 & 50         &    0.2377      \\ \hline
 \end{tabular}
 \caption{Circuito con llave analógica.}
@@ -102,34 +102,34 @@ Se utilizó el framework de \textbf{GNURadio} para programar cada módulo del si
 
 \subsubsection{Simulaciones con LTSpice}
 Para ambos sistemas se realizaron las simulaciones de las funciones en la Tabla (\ref{fn}) con los parámetros que obtenidos y detallados en las Tablas (\ref{tab:res1}) y (\ref{tab:res2}). A continuación se presenta una comparación temporal de la entrada y salida para cada uno de los casos analizados.
-
-\begin{multicols}{2}
 \begin{figure}[H]
+	\begin{subfigure}{.5\textwidth}
 	\centering
-	\includegraphics[width=0.5\textwidth]{ImagenesEjercicio6/LA - 3 2.png}
-\end{figure}
-\begin{figure}[H]
+	\includegraphics[width=\textwidth]{ImagenesEjercicio6/LA - 3 2.png}
+	\end{subfigure}	
+	\begin{subfigure}{.5\textwidth}
 	\centering
-	\includegraphics[width=0.5\textwidth]{ImagenesEjercicio6/LA - Cos.png}
-\end{figure}
-\begin{figure}[H]
+	\includegraphics[width=\textwidth]{ImagenesEjercicio6/LA - Cos.png}
+	\end{subfigure}
+	
+	\begin{subfigure}{.5\textwidth}
 	\centering
-	\includegraphics[width=0.5\textwidth]{ImagenesEjercicio6/LA - Tri.png}
-\end{figure}
-\begin{figure}[H]
+	\includegraphics[width=\textwidth]{ImagenesEjercicio6/LA - Tri.png}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
 	\centering
-	\includegraphics[width=0.5\textwidth]{ImagenesEjercicio6/SH - 3 2.png}
-\end{figure}
-\begin{figure}[H]
+	\includegraphics[width=\textwidth]{ImagenesEjercicio6/SH - 3 2.png}
+	\end{subfigure}
+	
+	\begin{subfigure}{.5\textwidth}
 	\centering
-	\includegraphics[width=0.5\textwidth]{ImagenesEjercicio6/SH - Cos.png}
+	\includegraphics[width=\textwidth]{ImagenesEjercicio6/SH - Cos.png}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{ImagenesEjercicio6/SH - Tri.png}
+	\end{subfigure}
 \end{figure}
-\begin{figure}[H]
-\centering
-	\includegraphics[width=0.5\textwidth]{ImagenesEjercicio6/SH - Tri.png}
-\end{figure}
-\end{multicols}
-
 
 Nuevamente, se realizaron las mismas simulaciones variando...
 
