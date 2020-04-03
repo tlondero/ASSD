@@ -22,8 +22,7 @@ Se determinó que el valor máximo de amplitud de entrada al sistema es de $5 \ 
 Para hallar los valores óptimos de $A$, $F_s$ y $DT$ se simuló utilizando \textbf{LTSpiceXVII} las curvas de entrada y salida del sistema variando simultáneamente los valores de las tres variables, previamente fijando los rangos entre las mismas cambian. Estos rangos son de $1 \ V$ a $5 \ V$ para $A$, $21 \ kHz$ (para cumplir con el doble de la frecuencia de corte del filtro recuperador) a $25 \ kHz$ (límite del oscilador) y de $5\%$ (límite del oscilador) a $50\%$ (limite por consigna) para el duty cycle. Finalmente, se utilizó el siguiente script en \textbf{Python} para hallar el valor de los tres parámetros tal que la distorsión a la salida respecto a la entrada sea la mínima, computando la correlación entre las dos señales.
 \begin{figure}[H]
 \centering
-\scalebox{0.75}{\lstinputlisting{Python/spiceanal.py}
-}
+\scalebox{0.75}{\lstinputlisting{Python/spiceanal.py}}
 \end{figure}
 
 Se obtuvieron los siguientes resultados.:
@@ -69,28 +68,28 @@ Se obtuvieron los siguientes resultados.:
 	\label{sen32_sh}
 \end{figure}
 
-De esta forma se efectuaron las siguientes tablas con los parámetros para la menor distorsión para cada circuito:
+De esta forma se efectuaron las siguientes tablas con los parámetros para la menor distorsión para cada circuito junto a la relación entre la potencia a la salida versus la salida a la entrada, es decir, $P_r = \frac{P_{out}}{P_{in}}$:
 \begin{multicols}{2}
 \begin{table}[H]
 \centering
-\begin{tabular}{cccc}
+\begin{tabular}{ccccc}
 \hline
-$\mathbf{Entrada}$  & $\mathbf{A \ [V]}$ & $\mathbf{F_s \ [Hz]}$ & $\mathbf{DT \ [\%]}$ \\ \hline
-\textbf{Coseno}     & 5                 & 22000                 & 25                    \\
-\textbf{3/2 Seno}   & 1.5                & 20000                 & 5                    \\
-\textbf{Triangular} & 5                  & 24000                 & 30                  	\\ \hline
+$\mathbf{Entrada}$  & $\mathbf{A \ [V]}$ & $\mathbf{F_s \ [Hz]}$ & $\mathbf{DT \ [\%]}$ & $P_r$\\ \hline
+\textbf{Coseno}     & 5                 & 22000                 & 25         &      0.9635     \\
+\textbf{3/2 Seno}   & 5                & 22750                 & 40           &    1.1796     \\
+\textbf{Triangular} & 5                  & 24000                 & 30          &       1.0586 	\\ \hline
 \end{tabular}
 \caption{Circuito con Sample and Hold.}
 \label{tab:res1}
 \end{table}
 \begin{table}[H]
 \centering
-\begin{tabular}{cccc}
+\begin{tabular}{ccccc}
 \hline
-$\mathbf{Entrada}$  & $\mathbf{A \ [V]}$ & $\mathbf{F_s \ [Hz]}$ & $\mathbf{DT \ [\%]}$ \\ \hline
-\textbf{Coseno}     & 5                  & 21250                 & 50                   \\
-\textbf{3/2 Seno}   & 1                  & 23500                 & 50                   \\
-\textbf{Triangular} & 5                  & 23750                 & 50                   \\ \hline
+$\mathbf{Entrada}$  & $\mathbf{A \ [V]}$ & $\mathbf{F_s \ [Hz]}$ & $\mathbf{DT \ [\%]}$ &$P_r$ \\ \hline
+\textbf{Coseno}     & 5                  & 21250                 & 50       &     0.1775       \\
+\textbf{3/2 Seno}   & 1                  & 23500                 & 50        &      0.268     \\
+\textbf{Triangular} & 5                  & 23750                 & 50         &    0.2377      \\ \hline
 \end{tabular}
 \caption{Circuito con llave analógica.}
 \label{tab:res2}

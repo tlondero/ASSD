@@ -4,7 +4,7 @@ import scipy.signal
 import matplotlib.pyplot as plt
 import numpy as np
 
-LTR = LTSpiceRawRead("sen32sh.raw")
+LTR = LTSpiceRawRead("32llave.raw") 
 
 corr = []
 corr_maxes = []
@@ -14,10 +14,11 @@ time = LTR.get_trace(0)
 vin = LTR.get_trace("V(vin)")
 vout = LTR.get_trace("V(vout)")
 
-for i in LTR.get_steps():
-    corr.append(scipy.signal.correlate(vin.get_wave(i), vout.get_wave(i)))
-    step_vars.append(LTR.steps[i])
-    corr_maxes.append(np.max(corr[i]))
+for i in range(len(LTR.get_steps())):
+    if(i > 190):
+        corr.append(scipy.signal.correlate(vin.get_wave(i), vout.get_wave(i)))
+        step_vars.append(LTR.steps[i])
+        corr_maxes.append(np.max(corr[i - 191]))
 
 least_distorted_steps.append(np.where(corr_maxes == np.max(corr_maxes)))
 plt.show()
@@ -25,12 +26,15 @@ print("Least distorted: ")
 
 for i in range(len(least_distorted_steps)):
     print(LTR.steps[(least_distorted_steps[i][0][0])])
-
+x=[]
+y=[]
+z=[]
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
-x = [(i['freqs']/1000) for i in step_vars]
-y = [i['dts'] for i in step_vars]
-z = [i['amp'] for i in step_vars]
+for i in range(len(step_vars)):
+    x.append(step_vars[i]['freqs']/1000)
+    y.append(step_vars[i]['dts'])
+    z.append(step_vars[i]['amp'])
 c = corr_maxes
 img = ax.scatter(x, y, z, c=c, cmap='Spectral', alpha=1)
 cbar = plt.colorbar(img)
