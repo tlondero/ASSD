@@ -5,6 +5,7 @@ class Blob:
          self.w = 1
          self.h = 1
          self.threshold = threshold
+         self.prevBlob = Blob(0,0,threshold)
 
      def expandB(self,B2):
          xaux=self.x

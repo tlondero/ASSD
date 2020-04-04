@@ -27,6 +27,8 @@ time_count = 0
 start_time=0
 cap = cv2.VideoCapture(1)
 cap.open(0)
+PrevImg = np.zeros([HEIGHT, WIDTH, 3], np.uint8)
+CurrImg = np.zeros([HEIGHT, WIDTH, 3], np.uint8)
 ret=0
 frame=0
 NFrame = False
@@ -40,6 +42,8 @@ while(True):
         end_time = time.time()
         time_count += end_time - start_time
         if (time_count > 0.01):
+            for i in range(len(blobs)):
+                blobs[i].prevBlob = blobs[i]
             start_time = time.time()
             time_count = 0
             NFrame=True
@@ -87,12 +91,8 @@ while(True):
         NFrame=False
 
     if(count>10):
-
         for i in range(len(blobs)):
             screen = cv2.rectangle(screen, (int(blobs[i].y ), int(blobs[i].x)),(int(blobs[i].y+blobs[i].h),int(blobs[i].x+blobs[i].w)), (0, 255, 0),thickness=1)
-#            screen = cv2.circle(screen, (int(blobs[i].y+blobs[i].h/2), int(blobs[i].x+blobs[i].w/2)), 2, (0, 255, 0), 2)
-
-
         blobs.clear()
 
 
