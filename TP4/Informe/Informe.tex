@@ -33,18 +33,12 @@ El procesamiento de dichas se define como el conjunto de técnicas aplicadas a e
 	
 Es posible considerar tres tipos de procesos computarizados en el procesamiento de imagenes, basandose en el nivel de tratamiento que se aplique, siendo así clasificados en bajo, medio y alto nivel. Los primeros incluyen activdades tales como reducción de ruido y aumento de contraste, tareas caracterizadas por el hecho de que tanto la entrada como la salida son imagenes. Las actividades de medio nivel de procesamiento incluyen trabajos de segmentación, es decir, identificar regiones u objetos dentro de las imagenes, descripción y clasificación de dichos elementos. Es así que esta categoría es destacada por sus salidas, ya que suelen ser información extraida de las imagenes a la entrada. Por último, los procesos de alto nivel se caracterizan por no solo reconocer objetos y analizarlos, sino tambien por darles un tratado normalmente asociado con la visión, tales así como ``darles sentido'' \cite{ref:intro1}.
 	
-	De esta forma, este trabajo se centra en procesos de medio nivel.
-	
-	\textcolor{blue}{Hablar un poco más de lo que se hace en el informe.}
-	
-	%
-	
-	\textcolor{red}{Debe haber suficiente material para que un profesional que no conoce el tema para nada, pueda entenderlo. Referenciar libros y tutorial papers que profundicen.}
+%	\textcolor{red}{Debe haber suficiente material para que un profesional que no conoce el tema para nada, pueda entenderlo. Referenciar libros y tutorial papers que profundicen.}
 	
 \section{Investigación}
-Dado que una señal a la entrada del sistema es considerada continua, una imagen sufre de dos procesos claves: \textbf{cuantización} y \textbf{discretización}. Si bien ambos refieren a tomar variables continuas y almacenarlas en memoria como variables discretas, se reliza esta diferenciación entre ambas ya que la primera hace referencia a la amplitud de la señal mientras que la segunda a coordenadas, que para el caso del estudio de imagenes, se refiere a coordenadas, es decir, pixeles. Antes de continuar, es importante tener en cuenta que se define un pixel como el mínimo elemento que compone un a imagen digital.
+Dada una señal continua a la entrada del sistema, una imagen sufre de dos procesos claves: \textbf{cuantización} y \textbf{discretización}. Si bien ambos refieren a tomar variables continuas y almacenarlas en memoria como variables discretas, se reliza esta diferenciación entre ambas ya que la primera hace referencia a la amplitud de la señal mientras que la segunda a coordenadas, que para el caso del estudio de imagenes, se refiere a pixeles, siendo estos el mínimo elemento que compone un a imagen digital.
 	
-Una entrada al sistema puede ser considerada la presentada en la Figura (\ref{fig:disc1}), la cual, como ya se ha mencionado, es continua en $x$, $y$ y $f(x,y)$.
+Ejemplifando lo anterior, se toma una entrada al sistema, como puede ser la presentada en la Figura (\ref{fig:disc1}), la cual, como ya se ha mencionado, es continua en $x$, $y$ y $f(x,y)$.
 \begin{figure}[H]
 \centering
 	\includegraphics[width=0.3\textwidth]{Imagenes/Digitalizacion_1.png}
@@ -52,7 +46,7 @@ Una entrada al sistema puede ser considerada la presentada en la Figura (\ref{fi
 	\label{fig:disc1}
 \end{figure}
 
-Por lo tanto, se deben tomar coordenadas finitas, por ejemplo, aquellas que se encuentran sobre la recta AB, y asignarle a cada una un valor dado de amplitud. En la Figura (\ref{fig:disc2}) se observa como una recta continua paralela al eje $x$ (horizontal), la cual posee ciertas variaciones aleatorias dadas por el ruido existente, es dividida en una cierta cantidad de posiciones equiespaciadas (discretización), marcadas con cuadrados blancos sobre la curva, asigandoles un nivel específico en la escala de grises (cuantización), marcado con una linea negra por la izquierda de dicha escala.
+Por lo tanto, se deben tomar coordenadas finitas, por ejemplo, aquellas que se encuentran sobre la recta AB, y asignarle a cada una un valor dado de amplitud. En la Figura~(\ref{fig:disc2}) se observa como una recta continua paralela al eje $x$ (horizontal), la cual posee ciertas variaciones aleatorias dadas por el ruido existente, es dividida en una cierta cantidad de posiciones equiespaciadas (discretización), marcadas con cuadrados blancos sobre la curva, asigandoles un nivel específico en la escala de grises (cuantización), marcado con una linea negra por la izquierda de dicha escala.
 \begin{figure}[H]
 \centering
 	\includegraphics[width=0.5\textwidth]{Imagenes/Digitalizacion_2.png}
@@ -60,7 +54,7 @@ Por lo tanto, se deben tomar coordenadas finitas, por ejemplo, aquellas que se e
 	\label{fig:disc2}
 \end{figure}
 
-Realizando el mismo proceso para todos los niveles de discretización en el eje $y$ (vertical), se obtiene finalmente una imagen digitalizada, la cual se la compara a continuación con imagen original \cite{ref:digit1}.
+Realizando el mismo proceso para todos los niveles de discretización en el eje $y$ (vertical), se obtiene finalmente una imagen digitalizada, la cual se la compara a continuación con la original \cite{ref:digit1}.
 \begin{figure}[H]
 \centering
 	\includegraphics[width=0.5\textwidth]{Imagenes/Digitalizacion_3.png}
@@ -70,13 +64,17 @@ Realizando el mismo proceso para todos los niveles de discretización en el eje 
 
 \textcolor{red}{
 \begin{itemize}
-	\item Descripción de las líneas de investigación (con referencias).
+	%\item Descripción de las líneas de investigación (con referencias).
 	\item Descripción de los conceptos más importantes de cada una.
 	\item Análisis propio de lo presentado.
 	\item Simulaciones de lo más relevante (códigos como apéndice)
 	\item Elección del camino y justificación.
 \end{itemize}
 }
+
+	De esta forma, este trabajo se centra en procesos de medio nivel. Dicha definición es muy amplia, por lo cual es necesario acotar dicho camino. Es por ello que se decidió centralizarse en el seguimiento de objetos en imagenes en movimiento.
+	
+	\textcolor{blue}{Escribí una brevísima descripción de lo que se va a hacer. Profundizar y escribir el objetivo final. Justificar elección.}
 
 \section{Aportes}
 \textcolor{red}{
