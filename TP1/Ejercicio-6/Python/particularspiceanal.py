@@ -4,7 +4,7 @@ import scipy.signal
 import matplotlib.pyplot as plt
 import numpy as np
 
-LTR = LTSpiceRawRead("bllavesen.raw")
+LTR = LTSpiceRawRead("cshsen.raw")
 
 corr = []
 corr_maxes = []
