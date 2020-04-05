@@ -162,7 +162,7 @@ Nuevamente, se realizaron las mismas simulaciones utilizando una frecuencia de e
 	\end{subfigure}
 \end{figure}
 
-Finalmente, con una frecuencia de entrada de $15750Hz$ y una frecuencia de sampleo de $50kHz$.
+Finalmente, con una frecuencia de entrada de $15750Hz$ y una frecuencia de sampleo de $30kHz$.
 
 \begin{figure}[H]
 	\begin{subfigure}{.5\textwidth}
@@ -192,5 +192,23 @@ Finalmente, con una frecuencia de entrada de $15750Hz$ y una frecuencia de sampl
 	\includegraphics[width=\textwidth]{ImagenesEjercicio6/puntob2/SH - Tri.png}
 	\end{subfigure}
 \end{figure}
+
+Se calcularon las potencias recuperadas en cada caso
+
+\begin{table}[H]
+\centering
+\begin{tabular}{ccc}
+\hline
+$\mathbf{Sistema + Señal}$  & $\mathbf{Potencia con f_{in} = 5kHz f_{s} = 15.75kHz}$ & $\mathbf{Potencia con f_{in} = 15.75kHz f_{s} = 30kHz}$ \\ \hline
+$\textbf{S\&H Coseno}$     & $0.8282$   & $2e-06$ \\
+$\textbf{S\&H Seno 3/2}$   & $?$  & $?$  \\
+$\textbf{S\&H Triangular}$ & $?$  & $?$ 	\\
+$\textbf{Llave Coseno}$     & $0.3889$ & $6e-06$   \\
+$\textbf{Llave Seno 3/2}$   & $?$  & $?$  \\
+$\textbf{Llave Triangular}$ & $?$	& $?$ \\ \hline
+\end{tabular}
+\caption{Circuito con Sample and Hold.}
+\label{tab:res1}
+\end{table}
 
 \end{document}
