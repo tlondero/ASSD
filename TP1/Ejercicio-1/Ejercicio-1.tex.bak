@@ -1,12 +1,4 @@
-\input{../Informe/Header.tex}
-
-\begin{document}
-
-\subsection{Introducción}
-
-En el siguiente informe se busca diseñar y simular el sistema mostrado en la Figura (\ref{fig:sist}). Para esto, se valió un oscilador que lidie con las señales de control del sistema, un filtro antialiasing y recuperador, un bloque de sample and hold y y una llave analógica.
-
-\subsection{Oscilador}
+\section{Oscilador}
 Para realizar el muestreo y las subsiguientes mediciones se requiere diseñar un oscilador con frecuencia y duty cycle variable. El diseño elegido es el siguiente:
 
 \begin{figure}[H]
@@ -115,5 +107,3 @@ Los resultados del oscilador, con una alimentación de $5 \ V$ se muestran a con
 \end{subfigure}
 
 \end{figure}
-
-\end{document}
