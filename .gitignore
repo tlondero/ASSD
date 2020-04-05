@@ -75,7 +75,6 @@ fabric.properties
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
-*.log
 *.lot
 *.fls
 *.out
@@ -448,9 +447,7 @@ dmypy.json
 ##############LTSPICE##############
 *.net
 *.op
-*.raw
 *.lnk
-*.log
 *.ipynd_checkpoints
 *checkpoint.ipynb
 *.plt
@@ -462,5 +459,4 @@ dmypy.json
 *.pycache
 TP4/analog/core.py
 *.aux
-*.log
 *.gz
