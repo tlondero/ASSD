@@ -1,0 +1,35 @@
+Board Information Report
+Filename     : C:\Users\Guido\Documents\GitHub\ASSD\TP1\Altium\placaConversor.PcbDoc
+Date         : 05-Apr-20
+Time         : 6:47:22 PM
+Time Elapsed : 00:00:00
+
+General
+    Board Size, 165mmx67.5mm
+    Components on board, 113
+count : 2
+
+Routing Information
+    Routing completion, 100.00%
+    Connections, 202
+    Connections routed, 202
+    Connections remaining, 0
+count : 4
+
+Layer, Arcs, Pads, Vias, Tracks, Texts, Fills, Regions, ComponentBodies
+    Top Layer, 0, 104, 0, 270, 0, 0, 0, 0
+    Bottom Layer, 0, 40, 0, 389, 0, 0, 0, 0
+    Mechanical 1, 0, 0, 0, 20, 0, 0, 0, 109
+    Mechanical 13, 6, 0, 0, 86, 3, 0, 3, 53
+    Mechanical 15, 0, 0, 0, 174, 0, 0, 0, 0
+    Multi-Layer, 0, 140, 59, 0, 0, 0, 1, 0
+    Top Paste, 0, 0, 0, 0, 0, 0, 0, 0
+    Top Overlay, 34, 0, 0, 389, 187, 5, 6, 0
+    Top Solder, 0, 0, 0, 0, 0, 0, 0, 0
+    Bottom Solder, 0, 0, 0, 0, 0, 0, 0, 0
+    Bottom Overlay, 0, 0, 0, 80, 40, 0, 0, 0
+    Bottom Paste, 0, 0, 0, 0, 0, 0, 0, 0
+    Drill Guide, 0, 0, 0, 0, 0, 0, 0, 0
+    Keep-Out Layer, 2, 0, 0, 4, 0, 0, 0, 0
+    Drill Drawing, 0, 0, 0, 0, 0, 0, 0, 0
+count : 15
