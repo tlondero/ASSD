@@ -1,4 +1,5 @@
-Las llaves compuestas por tecnología de estado solido son pequeñas, rápidas, de fácil uso y control. Además poseen un consumo bajo comparado con compuertas tradicionales controladas electricamente. Las compuertas digitales estan diseñadas para que transmitir y bloquear señales de niveles digitales. Por otro lado, las analógicas son diseñados para señales analógicas, si bien normalmente presentan un buen comportamiento frente a las digitales.
+\subsubsection{Análisis y comparación de diferentes llaves analógicas}
+Las llaves compuestas por tecnología de estado solido son pequeñas, rápidas, de fácil uso y control. Además poseen un consumo bajo comparado con compuertas tradicionales controladas eléctricamente. Las compuertas digitales estan diseñadas para que transmitir y bloquear señales de niveles digitales. Por otro lado, las analógicas son diseñados para señales analógicas, si bien normalmente presentan un buen comportamiento frente a las digitales.
 
 A la hora de seleccionar la compuerta a emplear, se deben de tener varios aspectos en cuenta. Entre estos, la impedancia serie que representan, ya que al momento de estar cerrada, no son un cable ideal. Por otro lado, tambien se debe considerar la capacitancia que representan al estar abierta.
 
@@ -33,3 +34,52 @@ A su vez, para las restantes se encontró:
 \end{multicols}
 
 De esta forma, dado la poca diferencia entre cada una y dado a que afectan al circuito de forma similar (en cuanto a su impedancia y capacitancia en serie respecta), se decidió emplear una llave \textbf{CD4066}, que cumple con las funciones y necesidas requeridas. También es posible seleccionar la llave \textbf{CD4016}, pero se decidió utilizar la otra ya que se disponía del modelo de la dicha para las simulaciones.
+
+\subsubsection{Análisis formal de la llave analogica}
+La llave analógica se encarga de transmitir la señal de entrada durante un intervalo de tiempo finito y luego bloquear su paso. Esto puede ser modelado como la multiplicación de la señal de entrada con un tren de pulsos.
+ 
+ \begin{equation}
+ p(t)_{T} = \sum_{-\infty}^{\infty}p(t-nT)
+ \end{equation}
+ Con $p(t)$
+  \begin{equation}
+p(t)=
+\begin{cases}
+1, & \text{si}\ -\frac{k}{2}<t<\frac{k}{2} \\
+0, & \text{caso contrario}
+\end{cases}
+\end{equation}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{"../Ejercicio-3/ImagenesEjercicio3/Tren de Pulsos"}
+	\caption{Tren de Pulsos}
+	\label{fig:tren-de-pulsos}
+\end{figure}
+Por lo tanto a la salida de la llave analogica
+\begin{equation}
+y(t)=x(t)\cdot p(t)_{T}
+\end{equation}
+\begin{equation}
+y(t)=\sum_{-\infty}^{\infty}x(t)p(t-nT)
+\end{equation}
+
+Lo cual se ilustra en la siguiente imagen
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{../Ejercicio-3/ImagenesEjercicio3/natural-sampling1-l}
+	\caption{Muestreo Natural con llave analogica}
+	\label{fig:natural-sampling1-l}
+\end{figure}
+
+En el domino de las frecuencias el tren de pulsos es representado por una \textbf{sinc discreta}. El espectro resultante se ilustra en la siguiente imagen
+	
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{../Ejercicio-3/ImagenesEjercicio3/Espectro}
+	\caption{Espectro resultante de utilizar al utiliza la llave analogica}
+	\label{fig:espectro}
+\end{figure}
+
+Si el tiempo de apertura de la llave se reduce entonces obtendremos una envolvente más aplanada. Esto reduce los efectos de distorsión introducidos por la forma de la sinc.
+
