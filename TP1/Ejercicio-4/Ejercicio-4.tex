@@ -225,7 +225,29 @@ Por lo expresado anteriormente se utilizara un capacitor de $C_h = 8nF$ dado que
 Dadas las curvas y las recomendaciones del fabricante se utilizaran capacitores de poliestireno dada su baja histeresis.
 
 \subsubsection{Analizando otros modelos de Sample and Hold IC}
+Por lo general los módulo de Sample and Hold vienen ya incorporados dentro de los \textbf{ADC} por lo que no hay abundancia de modelos en el mercado. Sin embargo, esto no quiere decir que el \textbf{LF398} sea el único. En esta ocasión vamos a compara al \textbf{LF398} contra el \textbf{SMP04} de \textit{Analog Devices}
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+\begin{table}[H]
+	\centering
+	\begin{tabular}{@{}lll@{}}
+		\toprule
+		& \textbf{LF398}                & \textbf{SPM04}                  \\ \midrule
+		Impendancia de entrada                     & 10G$\omega$                   & No posee
+		Input Buffers      \\
+		Tiempo de adquisición con error de  0.1 \% & \multicolumn{1}{r}{4 $\mu$ s} & \multicolumn{1}{r}{3,5 $\mu$ s} \\
+		$C_h$ Interno                              & \multicolumn{1}{r}{NO}        & \multicolumn{1}{r}{YES}         \\
+		HOLD step (similar test condition)         & \multicolumn{1}{r}{2 mV}      & \multicolumn{1}{r}{2,5}         \\
+		Tensión de Offset de entrada Typ           & $\pm$ 2mV                     & $\pm$ 2,5mV                     \\
+		Tensión de Offset de entrada Max           & $\pm$ 7mV                     & $\pm$ 10mV                      \\ \bottomrule
+	\end{tabular}
+	\caption{Tabla comparativa del LF398 de Texas Instruments vs SMP}
+	\label{tab:sampleandholdcomparisson}
+\end{table}
 
+No poseer buffers de entrada presupone una gran desventaja frente al \textbf{LF398} dado que esto nos limita los tipos de fuentes de señal que podemos colocar a la entrada. Por el contrario la gran impedancia de entrada en el IC fabricado por TI conseguimos total independencia de la impedancia de salida de la fuente de señal y por lo tanto mitigamos los efectos de carga del sample and hold sobre la fuente preservando la información contenida en la señal.  
+El \textbf{SPM04} presenta una mayor tensión de offset, esto puede forzar al diseñador a implementar alguna solución para compensar esta magnitud en caso de que produzca errores significativos dependiendo de las condiciones de uso. Sin embargo, a diferencia de Texas Instruments, Analog Devices no propone ningún circuito de compensación ni pines adicionales para implementarlo. 
+Haciendo un paralelo entre ambas hojas de datos, podemos afirmar que es bastante complicado conseguir compararlos debido a las diferentes condiciones de prueba bajo las que fueron sometidos. 
 
 
 %\end{document}
