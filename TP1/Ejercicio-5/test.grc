@@ -2532,7 +2532,7 @@ os.chdir(script_path)</value>
     </param>
     <param>
       <key>color3</key>
-      <value>"green"</value>
+      <value>"black"</value>
     </param>
     <param>
       <key>label3</key>
@@ -2548,7 +2548,7 @@ os.chdir(script_path)</value>
     </param>
     <param>
       <key>color4</key>
-      <value>"cyan"</value>
+      <value>"magenta"</value>
     </param>
     <param>
       <key>label4</key>
@@ -2564,7 +2564,7 @@ os.chdir(script_path)</value>
     </param>
     <param>
       <key>color5</key>
-      <value>"yellow"</value>
+      <value>"dark red"</value>
     </param>
     <param>
       <key>label5</key>
