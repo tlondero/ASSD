@@ -301,6 +301,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.blocks_threshold_ff_0 = blocks.threshold_ff(1-dutycycle, 1-dutycycle, 0)
         self.blocks_sample_and_hold_xx_0 = blocks.sample_and_hold_ff()
         self.blocks_multiply_xx_0 = blocks.multiply_vff(1)
+        self.blocks_multiply_const_vxx_0_2 = blocks.multiply_const_vff((AMPLITUD, ))
         self.blocks_multiply_const_vxx_0_1_0 = blocks.multiply_const_vff((-1, ))
         self.blocks_multiply_const_vxx_0_1 = blocks.multiply_const_vff((m/2, ))
         self.blocks_multiply_const_vxx_0_0 = blocks.multiply_const_vff((m/2, ))
@@ -381,6 +382,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_multiply_const_vxx_0_0, 0), (self.blocks_add_xx_0, 1))
         self.connect((self.blocks_multiply_const_vxx_0_1, 0), (self.blocks_add_xx_0, 2))
         self.connect((self.blocks_multiply_const_vxx_0_1_0, 0), (self.blocks_add_const_vxx_0, 0))
+        self.connect((self.blocks_multiply_const_vxx_0_2, 0), (self.blks2_selector_0_1, 2))
         self.connect((self.blocks_multiply_xx_0, 0), (self.blks2_selector_0_1_0_0_0, 1))
         self.connect((self.blocks_sample_and_hold_xx_0, 0), (self.blks2_selector_0_1_0_0, 1))
         self.connect((self.blocks_sample_and_hold_xx_0, 0), (self.blocks_multiply_xx_0, 0))
@@ -394,7 +396,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.connect((self.filtro_antialiasing, 0), (self.blks2_selector_0_1_0_0, 0))
         self.connect((self.filtro_antialiasing, 0), (self.blocks_sample_and_hold_xx_0, 0))
         self.connect((self.low_pass_filter_0, 0), (self.blks2_selector_0_1_0_0_0_0, 1))
-        self.connect((self.sen32, 0), (self.blks2_selector_0_1, 2))
+        self.connect((self.sen32, 0), (self.blocks_multiply_const_vxx_0_2, 0))
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "top_block")
@@ -520,6 +522,7 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_AMPLITUD(self, AMPLITUD):
         self.AMPLITUD = AMPLITUD
+        self.blocks_multiply_const_vxx_0_2.set_k((self.AMPLITUD, ))
         self.analog_sig_source_x_0_2_1.set_amplitude(self.AMPLITUD)
         self.analog_sig_source_x_0_2_0.set_amplitude(self.AMPLITUD)
         self.analog_sig_source_x_0_2.set_amplitude(self.AMPLITUD)
