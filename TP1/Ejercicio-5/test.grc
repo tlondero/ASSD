@@ -314,7 +314,7 @@
     </param>
     <param>
       <key>stop</key>
-      <value>5000</value>
+      <value>20000</value>
     </param>
     <param>
       <key>rangeType</key>

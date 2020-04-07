@@ -1,0 +1,7 @@
+fp = 10.5k
+
+fa = 15.75k
+
+sample rate = a definir.
+
+fin = 5000Hz

@@ -160,7 +160,7 @@ class top_block(gr.top_block, Qt.QWidget):
             self.top_grid_layout.setRowStretch(r, 1)
         for c in range(1, 2):
             self.top_grid_layout.setColumnStretch(c, 1)
-        self._UIF_range = Range(100, 5000, 10, 1500, 200)
+        self._UIF_range = Range(100, 20000, 10, 1500, 200)
         self._UIF_win = RangeWidget(self._UIF_range, self.set_UIF, 'Frequency', "counter_slider", float)
         self.top_grid_layout.addWidget(self._UIF_win, 3, 1, 2, 3)
         for r in range(3, 5):

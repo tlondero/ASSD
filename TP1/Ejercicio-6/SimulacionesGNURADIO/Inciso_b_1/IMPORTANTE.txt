@@ -7,7 +7,7 @@ fa = 15.75k
 Condiciones de simulación
 -------------------------
 sample rate = 15750
-fs = 5000Hz
+fin = 5000Hz
 Amplitud = 5V
 
 
