@@ -1,0 +1,17 @@
+Datos previos
+------------
+fp = 10.5k
+
+fa = 15.75k
+
+Condiciones de simulación
+-------------------------
+sample rate = 15750
+fs = 5000Hz
+Amplitud = 5V
+
+
+Observaciones
+-------------
+Para la llave analogica se necesito DT maximo 0,50
+Para el Sample and Hold se necesito DT minimo 0,05
