@@ -98,10 +98,89 @@ $\mathbf{Entrada}$  & $\mathbf{A \ [V]}$ & $\mathbf{F_s \ [Hz]}$ & $\mathbf{DT \
 
 
 \subsubsection{Simulaciones con Python}
-Se utilizó el framework de \textbf{GNURadio} para programar cada módulo del sistema encerrado en una interfaz gráfica, la cual brinda la posibilidad de visualizar tanto la señal en tiempo como su espectro en cada nodo del sistema en el mismo momento. Se puede elegir entre señales sinusoidales, triangulares, 3/2 seno o moduladas AM como entrada, señales cuyo estudio es de interes.
+Se utilizó el framework de \textbf{GNURadio} para programar cada módulo del sistema encerrado en una interfaz gráfica, la cual brinda la posibilidad de visualizar tanto la señal en tiempo como su espectro en cada nodo del sistema en el mismo momento. Se puede elegir entre señales sinusoidales, triangulares, 3/2 seno o moduladas AM como entrada, señales cuyo estudio es de interés.
+
+Se realizaron las simulaciones de las funciones en la Tabla (\ref{fn}) con los parámetros que obtenidos y detallados en las Tablas (\ref{tab:res1}) y (\ref{tab:res2}).
+
+\begin{figure}[H]
+	\begin{subfigure}{.5\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{SimulacionesGNURADIO/Condiciones_optimas/COSENO_TIEMPO_LLAVE_BC.PNG}
+	\end{subfigure}	
+	\begin{subfigure}{.5\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{SimulacionesGNURADIO/Condiciones_optimas/COSENO_TIEMPO_SAMPLE_AND_HOLD_BC.PNG}
+	\end{subfigure}
+	
+	\begin{subfigure}{.5\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{SimulacionesGNURADIO/Condiciones_optimas/COSENO_FFT_LLAVE_BC.PNG}
+	\caption{Sistema con llave analógica.}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{SimulacionesGNURADIO/Condiciones_optimas/COSENO_FFT_SAMPLE_AND_HOLD_BC.PNG}
+	\caption{Sistema con sample and hold.}	
+	\end{subfigure}
+	\caption{Señal cosenoidal a través del sistema.}
+\end{figure}
+
+
+\begin{figure}[H]
+	\begin{subfigure}{.5\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{SimulacionesGNURADIO/Condiciones_optimas/SENO32_TIEMPO_LLAVE_BC.PNG}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+	\centering
+
+		\includegraphics[width=\textwidth]{SimulacionesGNURADIO/Condiciones_optimas/SENO32_TIEMPO_SAMPLE_AND_HOLD_BC.PNG}
+	\end{subfigure}
+	
+	\begin{subfigure}{.5\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{SimulacionesGNURADIO/Condiciones_optimas/SENO32_FFT_LLAVE_BC.PNG}
+		\caption{Sistema con llave analógica.}	
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{SimulacionesGNURADIO/Condiciones_optimas/SENO32_FFT_SAMPLE_AND_HOLD_BC.PNG}
+		\caption{Sistema con sample and hold.}	
+	\end{subfigure}
+	\caption{Señal seno 3/2 a través del sistema.}
+\end{figure}
+
+
+\begin{figure}[H]
+		\begin{subfigure}{.5\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{SimulacionesGNURADIO/Condiciones_optimas/TRIANGULAR_TIEMPO_LLAVE_BC.PNG}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+	\centering
+
+		\includegraphics[width=\textwidth]{SimulacionesGNURADIO/Condiciones_optimas/TRIANGULAR_TIEMPO_SAMPLE_AND_HOLD_BC.PNG}
+	\end{subfigure}
+	
+		\begin{subfigure}{.5\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{SimulacionesGNURADIO/Condiciones_optimas/TRIANGULAR_FFT_LLAVE_BC.PNG}
+	\caption{Sistema con llave analógica.}		
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{SimulacionesGNURADIO/Condiciones_optimas/TRIANGULAR_FFT_SAMPLE_AND_HOLD_BC.PNG}
+	\caption{Sistema con sample and hold.}		
+	\end{subfigure}
+	
+	\caption{Señal triangular a través del sistema.}
+\end{figure}
+
 
 \subsubsection{Simulaciones con LTSpice}
 Para ambos sistemas se realizaron las simulaciones de las funciones en la Tabla (\ref{fn}) con los parámetros que obtenidos y detallados en las Tablas (\ref{tab:res1}) y (\ref{tab:res2}). A continuación se presenta una comparación temporal de la entrada y salida para cada uno de los casos analizados.
+
+{\LARGE \textcolor{red}{FALTAN ACTUALIZAR TODAS LAS FOTOS}}
 \begin{figure}[H]
 	\begin{subfigure}{.5\textwidth}
 	\centering
