@@ -57,7 +57,7 @@ Para realizar el muestreo y las subsiguientes mediciones se requiere diseñar un
 
 \end{figure}
 
-Este permite, con los valores mostrados más adelante, variar la frecuencia entre $9.66 \ kHz$, levemente menor a la frecuencia de corte del filtro anti-alias, y $25 \ kHz$, logrando traspasar a la frecuencia de Nyquist en un $25\%$. Además, este circuito permite configurar el duty cycle de la señal desde un $1\%$ a $99\%$ con máxima frecuencia y desde un $5\%$ a $95\%$ con mínima frecuencia. Existe, como se puede ver, una pequeña interacción entre el ajuste de frecuencia y duty cycle, lo que genera que los límites del duty cycle se achiquen al disminuir la frecuencia. A fines prácticos, se la consideró insignificante dado que los límites mínimos se cumplen. De esta forma, los valores tomados se detallan a continuación:
+Este permite, con los valores mostrados más adelante, variar la frecuencia entre $9.66 \ kHz$, levemente menor a la frecuencia de corte del filtro anti-alias, y $25 \ kHz$, logrando traspasar a la frecuencia de Nyquist en un $25\%$, para más adelante poder extender este rango hasta los 500kHz utilizando un banco de capacitores, explicado más adelante. Además, este circuito permite configurar el duty cycle de la señal desde un $1\%$ a $99\%$ con máxima frecuencia y desde un $5\%$ a $95\%$ con mínima frecuencia. Existe, como se puede ver, una pequeña interacción entre el ajuste de frecuencia y duty cycle, lo que genera que los límites del duty cycle se achiquen al disminuir la frecuencia. A fines prácticos, se la consideró insignificante dado que los límites mínimos se cumplen. De esta forma, los valores tomados se detallan a continuación:
 \begin{table}[H]
 \centering
 \begin{tabular}{cc}
@@ -105,5 +105,7 @@ Los resultados del oscilador, con una alimentación de $5 \ V$ se muestran a con
 \includegraphics[width=\linewidth]{/ImagenesEjercicio1/DTMINFMIN.png}
 \caption{Mínimo duty cycle con máxima frecuencia.}
 \end{subfigure}
+
+Finalmente, si se quisiera aumentar o decrementar la frecuencia de este oscilador en rangos mayores o menores a los detallados en un principio, basta simplemente con colocar un banco de capacitores con llaves de bypass para cada uno, de esta manera logrando un rango de variación de frecuencia muy grande, dado que la frecuencia depende . Alternativamente, se pueden colocar jumpers para deshabilitar o habilitar cada capacitor. 
 
 \end{figure}
