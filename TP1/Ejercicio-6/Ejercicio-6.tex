@@ -308,4 +308,58 @@ Se simuló el caso en el que la señal cosenoidal posee misma frecuencia que la 
 
 {\huge \textcolor{red}{JUSTIFICAR MATEMATICAMENTE LO QUE PASA EN LAS IMAGENES DE ARRIBA}}
 
+\begin{equation*}
+	\mathcal{F}_{N} \left( \omega \right) = \frac{A \tau}{T} \sum_{n=-\infty}^{\infty} sinc \left( \frac{n \tau \omega_S}{2 \pi} \right) \mathcal{F} \left( \omega - n \omega_S \right)
+\end{equation*}
+
+\begin{equation*}
+	\mathcal{F}_{N} \left( \omega_S \right) = \frac{A \tau}{T} \sum_{n=-\infty}^{\infty} sinc \left( \frac{n \tau \omega_S}{2 \pi} \right) \mathcal{F} \left( \left( 1 - n \right) \omega_S \right)
+\end{equation*}
+
+\begin{equation*}
+	\mathcal{F}_{N} \left( \omega_S \right) = \frac{A \tau}{T} \sum_{k=-\infty}^{\infty} sinc \left( \frac{ \left( 1 - k \right) \tau \omega_S}{2 \pi} \right) \mathcal{F} \left( k \omega_S \right)
+\end{equation*}
+
+
+Finalmente se tomaron nuevamente ambos sistemas para la entrada triangular y para la 3/2 seno y se fue variando la frecuencia de sampleo. De esta forma, llegando a que esta última variable sea de $11 \ kHz$, se obtuvieron los siguientes resultados:
+\begin{figure}[H]
+\centering
+	\includegraphics[width=0.8\linewidth]{ImagenesEjercicio6/6d-32LA11k.png}
+	\caption{Llave analógica con 3/2 seno.}
+	\label{fig:32la}
+\end{figure}
+\begin{figure}[H]
+\centering
+	\includegraphics[width=0.8\linewidth]{ImagenesEjercicio6/6d-32SH11k.png}
+	\caption{Sample and Hold con 3/2 seno.}
+	\label{fig:32sh}
+\end{figure}
+\begin{figure}[H]
+\centering
+	\includegraphics[width=0.8\linewidth]{ImagenesEjercicio6/6d-TRLA11k.png}
+	\caption{Llave analógica con triangular.}
+	\label{fig:trla}
+\end{figure}
+\begin{figure}[H]
+\centering
+	\includegraphics[width=0.8\linewidth]{ImagenesEjercicio6/6d-TRSH11k.png}
+	\caption{Sample and Hold con triangular.}
+	\label{fig:trsh}
+\end{figure}
+
+Dado que la frecuencia de muestreo debe ser superior al doble de la de Nyquist, y dicha condición no está siendo cumplida, se puede observar como la señal recuperada a la salida del sistema se encuentra distorsionada. Esto se debe a la superposición de espectros repetidos en frecuencia de la señal muestrada. Si se trabaja con una mayor al doble de la frecuencia de Nyquist, se garantiza que estos espectros no se superponen. Cabe destacar que al comparar los resultados de ambos sistemas, es notable que el Sample and Hold presenta mejores resultados que la llave analógica dado que el primer sistema mantiene constante la señal en ciertos instantes mientras que el segundo simplemente toma valores nulos, generando una mayor perdida de información.
+\subsection{PCB}
+Se realizó el diseño de la placa en Altium, teniendo en cuenta los criterios de diseño vistos en la clase, utilizando esquematicos multisheet y pcb dobel faz.
+\begin{figure}[H]
+\centering
+	\includegraphics[width=0.8\linewidth]{ImagenesEjercicio6/main.png}
+	\caption{Esquemático altium.}
+	\label{fig:esq}
+\end{figure}
+\begin{figure}[H]
+\centering
+	\includegraphics[width=1\linewidth]{ImagenesEjercicio6/placa.png}
+	\caption{PCB altium.}
+	\label{fig:pcb}
+\end{figure}
 \end{document}
