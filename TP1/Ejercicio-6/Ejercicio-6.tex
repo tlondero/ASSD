@@ -180,36 +180,36 @@ Se realizaron las simulaciones de las funciones en la Tabla (\ref{fn}) con los p
 \subsubsection{Simulaciones con LTSpice}
 Para ambos sistemas se realizaron las simulaciones de las funciones en la Tabla (\ref{fn}) con los parámetros que obtenidos y detallados en las Tablas (\ref{tab:res1}) y (\ref{tab:res2}). A continuación se presenta una comparación temporal de la entrada y salida para cada uno de los casos analizados.
 
-{\LARGE \textcolor{red}{FALTAN ACTUALIZAR TODAS LAS FOTOS}}
 \begin{figure}[H]
 	\begin{subfigure}{.5\textwidth}
 	\centering
-	\includegraphics[width=\textwidth]{ImagenesEjercicio6/LA - 3 2.png}
+	\includegraphics[width=\textwidth]{ImagenesEjercicio6/puntoa/LA - 3 2.png}
 	\end{subfigure}	
 	\begin{subfigure}{.5\textwidth}
 	\centering
-	\includegraphics[width=\textwidth]{ImagenesEjercicio6/LA - Cos.png}
+	\includegraphics[width=\textwidth]{ImagenesEjercicio6/puntoa/LA - Cos.png}
 	\end{subfigure}
 	
 	\begin{subfigure}{.5\textwidth}
 	\centering
-	\includegraphics[width=\textwidth]{ImagenesEjercicio6/LA - Tri.png}
+	\includegraphics[width=\textwidth]{ImagenesEjercicio6/puntoa/LA - Tri.png}
 	\end{subfigure}
 	\begin{subfigure}{.5\textwidth}
 	\centering
-	\includegraphics[width=\textwidth]{ImagenesEjercicio6/SH - 3 2.png}
+	\includegraphics[width=\textwidth]{ImagenesEjercicio6/puntoa/SH - 3 2.png}
 	\end{subfigure}
 	
 	\begin{subfigure}{.5\textwidth}
 	\centering
-	\includegraphics[width=\textwidth]{ImagenesEjercicio6/SH - Cos.png}
+	\includegraphics[width=\textwidth]{ImagenesEjercicio6/puntoa/SH - Cos.png}
 	\end{subfigure}
 	\begin{subfigure}{.5\textwidth}
 	\centering
-	\includegraphics[width=\textwidth]{ImagenesEjercicio6/SH - Tri.png}
+	\includegraphics[width=\textwidth]{ImagenesEjercicio6/puntoa/SH - Tri.png}
 	\end{subfigure}
 \end{figure}
 
+Es notable como la amplitud de las señales muestreadas solamente con sample and hold es casi igual a la amplitud de la señal original, dado que este tipo de muestreo es equivalente a un pseudo-muestreo instantáneo de duty cycle 100\%. En el caso de la señal muestreada solamente con la llave analógica, la amplitud a la salida es mucho menor que la amplitud a la entrada, al igual que la potencia a la salida versus la potencia a la entrada. Esto puede verse tanto en el tiempo como en la frecuencia. En el tiempo, al muestrear con una llave analógica se están introduciendo ceros a la señal original donde antes había valores distintos de cero, esto causa que la potencia de la señal se vea disminuida. En la frecuencia, se puede observar este efecto al tener en cuenta que el espectro de la señal se ve ponderada por el sinc.
 Nuevamente, se realizaron las mismas simulaciones utilizando una frecuencia de entrada de $5 \ kHz$ y una frecuencia de sampleo de $15750 \ Hz$.
 
 \begin{figure}[H]
@@ -241,6 +241,7 @@ Nuevamente, se realizaron las mismas simulaciones utilizando una frecuencia de e
 	\end{subfigure}
 \end{figure}
 
+Para este caso, se observan aliases en la señal recuperada, dado que como la frecuencia de sampleo se encuentra por debajo de dos veces la frecuencia de corte del filtro anti-alias, al recuperar la señal no se logra segmentar correctamente el espectro de la señal original en banda base sino que se recupera también un sobrelapamiento de los espectros repetidos de la señal original.
 Finalmente, con una frecuencia de entrada de $15750 \ Hz$ y una frecuencia de sampleo de $30 \ kHz$.
 
 \begin{figure}[H]
@@ -278,16 +279,18 @@ Se calcularon las potencias recuperadas en cada caso
 \centering
 \begin{tabular}{cccc}
 \hline
-\textbf{Sistema + Señal}  & \textbf{Pot. punto B1} & \textbf{Pot. punto B2} & \textbf{Pot. punto C/D} \\ \hline
-\textbf{S\&H Coseno}     & 0.8282   & 2E-06 & 0.8306\\
-\textbf{S\&H Seno 3/2}   & 1.1599  & 0.1100 & ?\\
-\textbf{S\&H Triangular} & 0.8989  & 3E-06 &	?\\
-\textbf{Llave Coseno}     & 0.3889 & 6E-06 & 0.6147 \\
-\textbf{Llave Seno 3/2}   & 0.5470  & 0.0203 & ?\\
-\textbf{Llave Triangular} & 0.2701	& 5E-06 & ?\\ \hline
+\textbf{Sistema + Señal}  & \textbf{Potencia recuperada $f_{in}=5kHz$} & \textbf{Potencia recuperada $f_{in}=15.75kHz$} \\ \hline
+\textbf{S\&H Coseno}     & 0.8282   & 2E-06\\
+\textbf{S\&H Seno 3/2}   & 1.1599  & 0.1100\\
+\textbf{S\&H Triangular} & 0.8989  & 3E-06\\
+\textbf{Llave Coseno}     & 0.3889 & 6E-06 \\
+\textbf{Llave Seno 3/2}   & 0.5470  & 0.0203\\
+\textbf{Llave Triangular} & 0.2701	& 5E-06\\ \hline
 \end{tabular}
 \caption{Circuito con Sample and Hold.}
 \label{tab:res3}
 \end{table}
+
+Se puede observar que la potencia recuperada para los últimos casos es casi nula, dado que el filtro anti-alias posee una gran atenuación para frecuencias mayores o iguales a $f_a$, por lo que la señal de entrada a la salida del filtro es ínfima.
 
 \end{document}
