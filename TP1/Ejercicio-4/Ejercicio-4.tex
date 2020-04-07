@@ -15,7 +15,7 @@ El modulo de \textbf{Sample and Hold}  puede ser esquematizado de la siguiente f
 \end{figure}
 Su objetivo es el de muestrear la señal analógica de entrada y retener su valor por un pequeño intervalo de tiempo para que la circuiteria colocada inmediatamente después puede utilizar ese valor para digitalizarla.
 \subsubsection{Breve introducción formal al muestreo de señales con Sample and Hold}
-Dada una señal analógica de entrada $x_{a}(t)$ deseamos obtener una señal discreta $x(n)$ producto de muestrar la entrada cada $T$ segundos.
+Dada una señal analógica de entrada $x_{a}(t)$ deseamos obtener una señal discreta $x(n)$ producto de muestrear la entrada cada $T$ segundos.
 Como primer paso para hallar la expresión que describe a la señal discreta efectuamos un muestreo ideal sobre la entrada
 
 \begin{equation}
@@ -247,7 +247,22 @@ Por lo general los módulo de Sample and Hold vienen ya incorporados dentro de l
 
 No poseer buffers de entrada presupone una gran desventaja frente al \textbf{LF398} dado que esto nos limita los tipos de fuentes de señal que podemos colocar a la entrada. Por el contrario la gran impedancia de entrada en el IC fabricado por TI conseguimos total independencia de la impedancia de salida de la fuente de señal y por lo tanto mitigamos los efectos de carga del sample and hold sobre la fuente preservando la información contenida en la señal.  
 El \textbf{SPM04} presenta una mayor tensión de offset, esto puede forzar al diseñador a implementar alguna solución para compensar esta magnitud en caso de que produzca errores significativos dependiendo de las condiciones de uso. Sin embargo, a diferencia de Texas Instruments, Analog Devices no propone ningún circuito de compensación ni pines adicionales para implementarlo. 
-Haciendo un paralelo entre ambas hojas de datos, podemos afirmar que es bastante complicado conseguir compararlos debido a las diferentes condiciones de prueba bajo las que fueron sometidos. 
+Un punto en el que se distingue el SMP04 es que provee 4 unidades de Sample and Hold dentro de un mismo integrado.
+Debajo se encuentran los diagramas en bloques que describen la estructura interna de cada uno.
 
+\begin{figure}[H]
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=0.9\linewidth, height=5cm]{ImagenesEjercicio4/FunctionalDiagramLM398.PNG} 
+		\caption{LM398}
+		\label{fig:subim1}
+	\end{subfigure}
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[scale=0.8]{ImagenesEjercicio4/FunctionalDiagramSMP04.PNG}
+		\caption{SMP04}
+		\label{fig:subim2}
+	\end{subfigure}
+	\caption{Diagramas en bloque de los módulos Sample and Hold}
+	\label{fig:image2}
+\end{figure}
 
 %\end{document}
