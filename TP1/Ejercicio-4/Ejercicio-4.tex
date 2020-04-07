@@ -34,7 +34,7 @@ $$x(n)=p(t)*\sum_{-\infty}^{\infty} x_{a}(nT)\delta_{T}(t-nT)$$
 x(n)=\sum_{-\infty}^{\infty} x_{a}(nT)p_{T}(t-nT)
 \end{equation}
 
-Este proceso queda ilustrado en la figura \ref{fig:sh-circuit-waveform}
+Este proceso queda ilustrado en la Figura (\ref{fig:sh-circuit-waveform})
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.5]{ImagenesEjercicio4/SH-Circuit-Waveform}
@@ -123,12 +123,12 @@ En este caso la señal de salida representa más fielmente a la original. Una pr
 \end{figure}
 
 
-Analizando la figura \ref{fig:vin130ksamplig120pfzoom} notamos que el capacitor efectivamente consigue cargarse lo suficientemente rápido como para poder seguirle el paso a la señal de entrada. 
+Analizando la Figura (\ref{fig:vin130ksamplig120pfzoom}) notamos que el capacitor efectivamente consigue cargarse lo suficientemente rápido como para poder seguirle el paso a la señal de entrada. 
 
 
 Ahora veremos lo que sucede cuando empleamos una señal más rápida.
 La señal senoidal ahora posee una frecuencia de oscilación de $20*3*12 KHz = 720KHz$. Para poder obtener imágenes y apreciar los cambios en los capacitores elegidos es necesarios muestrear a la señal por encima de la mínima permitida por el criterio de Nyquist. Sin embargo, si consideramos ese caso obtenemos  $F_{nyqusit}=1.44Mhz$.
-Para la simulación de la  figura \ref{fig:vin21440ksamplign120pf} se utilizo el capacitor de $120pF$ que había obtenido buenos resultados previamente. Pese a ello una imagen poco anticipada aparece al finalizar la simulación. La salida parecería ser nula. Aun si esta no fuese nula no sirve a nuestros propósitos. 
+Para la simulación de la Figura (\ref{fig:vin21440ksamplign120pf}) se utilizo el capacitor de $120pF$ que había obtenido buenos resultados previamente. Pese a ello una imagen poco anticipada aparece al finalizar la simulación. La salida parecería ser nula. Aun si esta no fuese nula no sirve a nuestros propósitos. 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{ImagenesEjercicio4/ChTests/Vin2_1440kSamplign120pF}
@@ -148,7 +148,7 @@ En primer lugar podemos relacionar lo ocurrido aquí con lo sucedido cuando se u
 
 Si elegimos muestrear a la frecuencia de Nyquist entonces le estamos dando al $C_{hold}$ un tiempo de $T_{acq}=\frac{1}{2*F_{nyquist}}$
 $$T_{acq}\approx 700ns = 0.7\mu s$$
-Por lo tanto, si hacemos referencia a las curvas de la figura \ref{fig:holdcapacqtime} vemos que nuestro requerimiento esta por fuera de las capacidades del \textbf{LF398}. En conclusión, necesitaríamos capacitancias extremadamente pequeñas. Lo cual tiene como contrapartida que no podrán mantener el valor almacenado durante mucho tiempo.
+Por lo tanto, si hacemos referencia a las curvas de la Figura (\ref{fig:holdcapacqtime}) vemos que nuestro requerimiento esta por fuera de las capacidades del \textbf{LF398}. En conclusión, necesitaríamos capacitancias extremadamente pequeñas. Lo cual tiene como contrapartida que no podrán mantener el valor almacenado durante mucho tiempo.
 \subsubsection{Elección del $C_{hold}$ apropiado}
 Como analizamos anteriormente, es de suma importancia elegir un capacitor que se cargue lo suficientemente rápido como para poder seguir a la señal de entrada y que a su vez pueda retener el valor muestreado sin degradarse. 
 En nuestro caso de aplicación se sabe que la señal de control tendrá una frecuencia máxima de $F_{osc}=25KHz$. Por lo tanto el capacitor de hold tendrá un tiempo de adquisición mínimo dado por:
@@ -176,7 +176,7 @@ Entonces observando la figura debajo tenemos 3 opciones a elegir dependiendo de 
 
 \begin{table}[H]
 	\centering
-	\begin{tabular}{@{}lrlll@{}}
+	\begin{tabular}{@{}ccccc@{}}
 		\toprule
 		\multicolumn{1}{c}{\textbf{Error \%}} & \multicolumn{1}{c}{\textbf{C}} &  &  &  \\ \midrule
 		0.01                                  & 8nF                            &  &  &  \\
@@ -217,7 +217,7 @@ Por ultimó debemos tener en cuenta la tecnología de capacitor a utilizar.
 	\caption{}
 	\label{fig:absorciondielectrico}
 \end{figure}
-La figura \ref{fig:absorciondielectrico} nos indica como cambia la histeresis de diferentes capacitores según el tiempo de muestreo. En una primera observación el gráfico puede resultar un poco confuso. Recordemos que el $T_{acq}=20\mu s$ y la escala horizontal tiene unidades de $ms$. Esto es porque las curvas intentan comunicar que tan bien consiguen relajarse los capacitores luego de realizar un muestreo de tal forma que no quede un remanente que afecte a la siguiente muestre.
+La Figura (\ref{fig:absorciondielectrico}) nos indica como cambia la histeresis de diferentes capacitores según el tiempo de muestreo. En una primera observación el gráfico puede resultar un poco confuso. Recordemos que el $T_{acq}=20\mu s$ y la escala horizontal tiene unidades de $ms$. Esto es porque las curvas intentan comunicar que tan bien consiguen relajarse los capacitores luego de realizar un muestreo de tal forma que no quede un remanente que afecte a la siguiente muestre.
 La importancia de elegir el tipo correcto de tecnología impacta sobre el \textbf{droop rate} y en al precisión del muestreo. Se comparan dos grandes grupos de tecnologías, por un lado los capacitores \textbf{Mylar} (film)
 
 Por lo expresado anteriormente se utilizara un capacitor de $C_h = 8nF$ dado que nos ofrece el menor error de muestreo y mantiene las exigencias dadas por el \textit{hold step}
@@ -230,7 +230,7 @@ Por lo general los módulo de Sample and Hold vienen ya incorporados dentro de l
 % \usepackage{booktabs}
 \begin{table}[H]
 	\centering
-	\begin{tabular}{@{}lll@{}}
+	\begin{tabular}{ccccc}
 		\toprule
 		& \textbf{LF398}                & \textbf{SPM04}                  \\ \midrule
 		Impendancia de entrada                     & 10G$\omega$                   & No posee
