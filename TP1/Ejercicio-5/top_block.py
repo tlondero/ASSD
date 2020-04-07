@@ -273,7 +273,7 @@ class top_block(gr.top_block, Qt.QWidget):
                   '', '', '', '', '']
         widths = [1, 1, 1, 1, 1,
                   1, 1, 1, 1, 1]
-        colors = ["blue", "red", "green", "cyan", "yellow",
+        colors = ["blue", "red", "black", "magenta", "dark red",
                   "magenta", "yellow", "dark red", "dark green", "dark blue"]
         alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
                   1.0, 1.0, 1.0, 1.0, 1.0]
