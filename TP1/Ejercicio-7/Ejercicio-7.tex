@@ -1,6 +1,3 @@
-\input{../Informe/Header.tex}
-
-\begin{document}
 En este punto se analizará la utilización del remuestreo en una señal de AM descrita por la siguiente ecuación:
 \begin{equation}
 X_c = A_{MAX} \cdot \left[ \frac{1}{2} \cdot \cos (2 \pi (1.8 f_{in}) t) +\cos (2 \pi (2 f_{in}) t)  + \frac{1}{2} \cdot \cos (2 \pi (2.2 f_{in}) t) \right]
@@ -86,4 +83,3 @@ Finalmente se grafica la tensión en cada uno de los nodos del sistema dada la e
 	\label{fig:srecovery}
 \end{figure}
 Es apreciable, que el espectro de cada señal corresponde con el de una señal modulada en AM para las figuras (\ref{fig:input}) , (\ref{fig:alias}) y (\ref{fig:recovery}) mientras que se ve en las figuras (\ref{fig:sh}) y (\ref{fig:analog}) las replicas del espectro original en el resto del espectro, una observación notable, es que a simple vista los espectros entre el spice y el calculado parecen diferir, es que uno se encuentra en escala logarítmica y el otro lineal.
-\end{document}
