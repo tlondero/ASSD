@@ -1,8 +1,3 @@
-\input{../Informe/Header.tex}
-
-\begin{document}
-\section{Simulaciones Básicas}
-
 Se simularon las funciones descritas en la Tabla (\ref{fn}).
 \begin{table}[H]
 \centering
@@ -22,7 +17,7 @@ Se determinó que el valor máximo de amplitud de entrada al sistema es de $5 \ 
 Para hallar los valores óptimos de $A$, $F_s$ y $DT$ se simuló utilizando \textbf{LTSpiceXVII} las curvas de entrada y salida del sistema variando simultáneamente los valores de las tres variables, previamente fijando los rangos entre las mismas cambian. Estos rangos son de $1 \ V$ a $5 \ V$ para $A$, $21 \ kHz$ (para cumplir con el doble de la frecuencia de corte del filtro recuperador) a $25 \ kHz$ (límite del oscilador) y de $5\%$ (límite del oscilador) a $50\%$ (limite por consigna) para el duty cycle. Finalmente, se utilizó el siguiente script en \textbf{Python} para hallar el valor de los tres parámetros tal que la distorsión a la salida respecto a la entrada sea la mínima, computando la correlación entre las dos señales.
 \begin{figure}[H]
 \centering
-\scalebox{0.75}{\lstinputlisting{Python/spiceanal.py}}
+\scalebox{0.75}{\lstinputlisting{../Ejercicio-6/Python/spiceanal.py}}
 \end{figure}
 
 Se obtuvieron los siguientes resultados:
@@ -293,7 +288,7 @@ Se calcularon las potencias recuperadas en cada caso
 
 Se puede observar que la potencia recuperada para los últimos casos es casi nula, dado que el filtro anti-alias posee una gran atenuación para frecuencias mayores o iguales a $f_a$, por lo que la señal de entrada a la salida del filtro es ínfima.
 
-Se simuló el caso en el que la señal cosenoidal posee misma frecuencia que la frecuencia de sampleo, ambas por debajo de la frecuencia de corte del filtro anti-alias.
+Se simuló el caso en el que la señal cosenoidal posee misma frecuencia que la de sampleo, ambas por debajo de la frecuencia de corte del filtro anti-alias, generando las salidas que se observan a continuación.
 
 \begin{figure}[H]
 	\begin{subfigure}{.5\textwidth}
@@ -306,19 +301,19 @@ Se simuló el caso en el que la señal cosenoidal posee misma frecuencia que la 
 	\end{subfigure}
 \end{figure}
 
-{\huge \textcolor{red}{JUSTIFICAR MATEMATICAMENTE LO QUE PASA EN LAS IMAGENES DE ARRIBA}}
+Estas distorsiones se deben a que $f_S < f_N$. Además, dado que el $f_P$ del filtro recuperador es mayor a la de muestreo, no solamente hay superposición de espectros sino que también hay alias.
 
-\begin{equation*}
-	\mathcal{F}_{N} \left( \omega \right) = \frac{A \tau}{T} \sum_{n=-\infty}^{\infty} sinc \left( \frac{n \tau \omega_S}{2 \pi} \right) \mathcal{F} \left( \omega - n \omega_S \right)
-\end{equation*}
-
-\begin{equation*}
-	\mathcal{F}_{N} \left( \omega_S \right) = \frac{A \tau}{T} \sum_{n=-\infty}^{\infty} sinc \left( \frac{n \tau \omega_S}{2 \pi} \right) \mathcal{F} \left( \left( 1 - n \right) \omega_S \right)
-\end{equation*}
-
-\begin{equation*}
-	\mathcal{F}_{N} \left( \omega_S \right) = \frac{A \tau}{T} \sum_{k=-\infty}^{\infty} sinc \left( \frac{ \left( 1 - k \right) \tau \omega_S}{2 \pi} \right) \mathcal{F} \left( k \omega_S \right)
-\end{equation*}
+%\begin{equation*}
+%	\mathcal{F}_{N} \left( \omega \right) = \frac{A \tau}{T} \sum_{n=-\infty}^{\infty} sinc \left( \frac{n \tau \omega_S}{2 \pi} \right) \mathcal{F} \left( \omega - n \omega_S \right)
+%\end{equation*}
+%
+%\begin{equation*}
+%	\mathcal{F}_{N} \left( \omega_S \right) = \frac{A \tau}{T} \sum_{n=-\infty}^{\infty} sinc \left( \frac{n \tau \omega_S}{2 \pi} \right) \mathcal{F} \left( \left( 1 - n \right) \omega_S \right)
+%\end{equation*}
+%
+%\begin{equation*}
+%	\mathcal{F}_{N} \left( \omega_S \right) = \frac{A \tau}{T} \sum_{k=-\infty}^{\infty} sinc \left( \frac{ \left( 1 - k \right) \tau \omega_S}{2 \pi} \right) \mathcal{F} \left( k \omega_S \right)
+%\end{equation*}
 
 Finalmente se tomaron nuevamente ambos sistemas para la entrada triangular y para la 3/2 seno y se fue variando la frecuencia de sampleo. De esta forma, llegando a que esta última variable sea de $11 \ kHz$, se obtuvieron los siguientes resultados:
 \begin{figure}[H]
@@ -361,4 +356,3 @@ Se realizó el diseño de la placa en Altium, teniendo en cuenta los criterios d
 	\caption{PCB altium.}
 	\label{fig:pcb}
 \end{figure}
-\end{document}
