@@ -1,26 +1,28 @@
 Circuit: * C:\Users\Acer\Desktop\GitHub\ASSD\TP1\Ejercicio-1\Spice\Oscilador.asc
 
-R11: both pins shorted together -- ignoring.
+WARNING: Node N005 is floating.
+WARNING: Node N006 is floating.
+
 WARNING: Less than two connections to node +VCC.  This node is used by V2.
 WARNING: Less than two connections to node -VCC.  This node is used by V3.
-WARNING: Less than two connections to node NC_01.  This node is used by R8.
-WARNING: Less than two connections to node NC_02.  This node is used by R10.
+WARNING: Less than two connections to node N005.  This node is used by C3.
+WARNING: Less than two connections to node N006.  This node is used by C4.
 Direct Newton iteration for .op point succeeded.
 
-Date: Sun Mar 22 15:05:00 2020
-Total elapsed time: 0.092 seconds.
+Date: Wed Apr 08 15:21:28 2020
+Total elapsed time: 0.109 seconds.
 
 tnom = 27
 temp = 27
 method = modified trap
-totiter = 6444
-traniter = 6430
-tranpoints = 2083
-accept = 1808
-rejected = 275
-matrix size = 25
+totiter = 5242
+traniter = 5228
+tranpoints = 1793
+accept = 1600
+rejected = 193
+matrix size = 26
 fillins = 6
 solver = Normal
-Matrix Compiler1: 1020 bytes object code size  0.2/0.1/[0.1]
-Matrix Compiler2: 1.52 KB object code size  0.1/0.2/[0.1]
+Matrix Compiler1: 1.04 KB object code size  0.5/0.3/[0.1]
+Matrix Compiler2: 1.59 KB object code size  0.4/0.5/[0.2]
 
