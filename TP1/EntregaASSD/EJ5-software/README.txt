@@ -1,0 +1,1 @@
+Para correr el programa lo primero es descargar el software desde la http://www.gcndevelopment.com/gnuradio/downloads.htm, la versión v3.7.13.5/v1.6, luego debe abrirse la aplicación ``GNURadio companion'', la cual abre el entorno de simulación,abrir el archivo "test.grc", luego se le debe dar al simbolo de play para comenzar
