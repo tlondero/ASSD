@@ -16,7 +16,7 @@ bool MyFFT::fft(complex<double> *in, complex<double> *out, int N) {
 			fout.push_back(in[i]);
 		}
 		this->fftr(fout);
-		for (int i = 0; i < fout.size(); i++) {
+		for (unsigned int i = 0; i < fout.size(); i++) {
 			out[i] = fout[i];
 			if (std::abs(out[i].imag()) < THRESHOLD) { out[i]._Val[1] = 0; }
 			if (std::abs(out[i].real()) < THRESHOLD) { out[i]._Val[0] = 0; }
