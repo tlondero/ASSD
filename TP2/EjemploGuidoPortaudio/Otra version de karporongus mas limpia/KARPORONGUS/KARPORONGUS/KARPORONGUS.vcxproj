@@ -117,16 +117,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="KarplusDrum.cpp" />
-    <ClCompile Include="KarplusStrong.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="String.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="WavGen.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="KarplusDrum.h" />
-    <ClInclude Include="KarplusStrong.h" />
+    <ClInclude Include="String.h" />
     <ClInclude Include="Utils.h" />
+    <ClInclude Include="WavGen.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

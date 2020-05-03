@@ -23,4 +23,4 @@ const float oneoversr = 1. / SAMPLE_RATE;
 // This routine will be called by the PortAudio engine when audio is needed.
 int sineCallback(const void *inputBuffer, void *outputBuffer, unsigned long framesPerBuffer, const PaStreamCallbackTimeInfo* timeInfo, PaStreamCallbackFlags statusFlags, void *userData);
 vector<double> genSine(int N);
-vector<double> genNoise(int N,int active);
+vector<double> genNoise(int L);

@@ -1,6 +1,5 @@
 #include <vector>
 #include <stdlib.h> // Random
-#include"KarplusStrong.h"
 #include <stdio.h>
 #include <ctime>
 #include <math.h>
@@ -29,24 +28,19 @@ int sineCallback(const void *inputBuffer, void *outputBuffer, unsigned long fram
 }
 
 
-vector<double> genSine(int N) {
+vector<double> genSine(int L) {
 	vector<double> sine;
-	for (int i = 0; i < N; i++) {
-		sine.push_back(sin(TWOPI * i / N));
+	for (int i = 0; i < L; i++) {
+		sine.push_back(sin(TWOPI * i / L));
 	}
-	sine.push_back(0);
 	return sine;
 }
 
-vector<double> genNoise(int N, int active) {
+vector<double> genNoise(int L) {
 
 	vector<double> noise;
-	for (int i = 0; i < N; i++) {
-		if (i < active)
-			noise.push_back(rand() / (double)RAND_MAX);
-		else
-			noise.push_back(0);
+	for (int i = 0; i < L; i++) {
+			noise.push_back(((rand()%2000-1000.0)/1000.0) * SAMPLE_RATE);
 	}
-	noise.push_back(0);
 	return noise;
 }
