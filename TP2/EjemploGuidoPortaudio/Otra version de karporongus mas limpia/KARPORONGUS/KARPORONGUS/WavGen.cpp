@@ -21,7 +21,7 @@ namespace little_endian_io
 }
 using namespace little_endian_io;
 
-int makeWav(int channels, double seconds, string name,vector<double> data)        //frequency in Hz
+int makeWav(int channels, double seconds, string name,vector<double> data,double volume)        //frequency in Hz
 {
     ofstream f(name + ".wav", ios::binary);
     int sample_rate = SAMPLE_RATE;
@@ -45,15 +45,15 @@ int makeWav(int channels, double seconds, string name,vector<double> data)      
     // Write the audio samples
     // (We'll generate a single C4 note with a sine wave, fading from left to right)
     constexpr double two_pi = TWO_PI;
-    constexpr double max_amplitude = MAX_AMP;  // "volume"
+     double max_amplitude = volume;  // "volume"
 
     int N = sample_rate * seconds;  // total number of samples
     for (int n = 0; n < N; n++)
     {
 		if (n >= data.size())data.push_back(0);
-        double amplitude = (double)n / N * max_amplitude;
+		double amplitude = (double)n / N * max_amplitude;
 		double value = data[n];
-        write_word(f, (int)(amplitude * value), 2);
+        write_word(f, (int)((max_amplitude - amplitude) * value), 2);
         write_word(f, (int)((max_amplitude - amplitude) * value), 2);
     }
 

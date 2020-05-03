@@ -24,7 +24,10 @@
     <ClCompile Include="WavGen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="String.cpp">
+    <ClCompile Include="Guitar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Drum.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,7 +38,10 @@
     <ClInclude Include="WavGen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="String.h">
+    <ClInclude Include="Guitar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Drum.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

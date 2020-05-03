@@ -2,11 +2,11 @@
 #include <vector>
 using namespace std;
 
-class String
+class Guitar
 {
 public:
-	String(int pitch_, long int fs_);
-	~String();
+	Guitar(int pitch_, long int fs_,double rf_);
+	~Guitar();
 	double getSample(void);
 
 private:
@@ -15,6 +15,7 @@ private:
 	double startSample;
 	int currentSample;
 	double previousSample;
+	double rf;
 	vector <double> waveTable;
 };
 

@@ -117,13 +117,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Drum.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="String.cpp" />
+    <ClCompile Include="Guitar.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="WavGen.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="String.h" />
+    <ClInclude Include="Drum.h" />
+    <ClInclude Include="Guitar.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="WavGen.h" />
   </ItemGroup>
