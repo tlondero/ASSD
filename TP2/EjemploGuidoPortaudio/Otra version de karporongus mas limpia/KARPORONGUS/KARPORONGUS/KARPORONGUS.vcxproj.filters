@@ -27,6 +27,9 @@
     <ClCompile Include="KarplusDrum.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="WavGen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KarplusStrong.h">

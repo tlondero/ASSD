@@ -121,6 +121,7 @@
     <ClCompile Include="KarplusStrong.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="WavGen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KarplusDrum.h" />
