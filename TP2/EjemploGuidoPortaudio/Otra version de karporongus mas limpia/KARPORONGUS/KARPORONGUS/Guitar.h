@@ -7,6 +7,7 @@ class Guitar
 public:
 	Guitar(int pitch_, long int fs_,double rf_);
 	~Guitar();
+	vector<double> composeSound(double cutFactor,int duration,double delay, int TotalDuration);
 	double getSample(void);
 
 private:
@@ -17,5 +18,6 @@ private:
 	double previousSample;
 	double rf;
 	vector <double> waveTable;
+	vector<double> Guitarsound;
 };
 

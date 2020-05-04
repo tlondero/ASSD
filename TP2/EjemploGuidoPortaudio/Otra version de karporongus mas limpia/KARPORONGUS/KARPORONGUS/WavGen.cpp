@@ -51,7 +51,7 @@ int makeWav(int channels, double seconds, string name,vector<double> data,double
     for (int n = 0; n < N; n++)
     {
 		if (n >= data.size())data.push_back(0);
-		double amplitude = (double)n / N * max_amplitude;
+		double amplitude =  1;// (double)n / N * max_amplitude;
 		double value = data[n];
         write_word(f, (int)((max_amplitude - amplitude) * value), 2);
         write_word(f, (int)((max_amplitude - amplitude) * value), 2);
