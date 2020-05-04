@@ -4,7 +4,7 @@ using namespace std;
 using namespace smf;
 
 int main(void) {
-	MidiFile midifile("sample.mid");
+	MidiFile midifile("HB.mid");
 	int tracks = midifile.getTrackCount();
 	vector<string> listOfInstruments;
 

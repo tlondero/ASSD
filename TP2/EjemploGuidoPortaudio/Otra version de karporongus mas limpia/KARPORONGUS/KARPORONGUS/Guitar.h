@@ -8,7 +8,6 @@ public:
 	Guitar(int pitch_, long int fs_,double rf_);
 	~Guitar();
 	vector<double> composeSound(double cutFactor,int duration,double delay, int TotalDuration);
-
 	double getSample(void);
 
 private:

@@ -34,9 +34,9 @@ int main(void) {
 	int fs = 44100;
 	double rf = 1;
 	double prob =  0.5;
-	int wavDuration = 5;
-	int durationNote = 2;
-	double delay = 0;
+	int wavDuration = 180;
+	int durationNote = 60;
+	double delay =0 ;
 	double cut = 0.3;
 	double volume=800;
 	Guitar myGuitar(freq[1], fs,rf);
