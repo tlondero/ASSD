@@ -117,25 +117,33 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="KarplusStrong.cpp" />
+    <ClCompile Include="Drum.cpp" />
+    <ClCompile Include="Instrument.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Guitar.cpp" />
+    <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="WavGen.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="KarplusStrong.h" />
+    <ClInclude Include="Drum.h" />
+    <ClInclude Include="General.h" />
+    <ClInclude Include="Guitar.h" />
+    <ClInclude Include="Instrument.h" />
+    <ClInclude Include="Organ.h" />
+    <ClInclude Include="Utils.h" />
+    <ClInclude Include="WavGen.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="..\packages\portaudio.redist.0.19.1\build\native\portaudio.redist.targets" Condition="Exists('..\packages\portaudio.redist.0.19.1\build\native\portaudio.redist.targets')" />
-    <Import Project="..\packages\portaudio.0.19.1\build\native\portaudio.targets" Condition="Exists('..\packages\portaudio.0.19.1\build\native\portaudio.targets')" />
+    <Import Project="..\packages\libsndfile-msvc-x86.1.0.27.9902\build\native\libsndfile-msvc-x86.targets" Condition="Exists('..\packages\libsndfile-msvc-x86.1.0.27.9902\build\native\libsndfile-msvc-x86.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\portaudio.redist.0.19.1\build\native\portaudio.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\portaudio.redist.0.19.1\build\native\portaudio.redist.targets'))" />
-    <Error Condition="!Exists('..\packages\portaudio.0.19.1\build\native\portaudio.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\portaudio.0.19.1\build\native\portaudio.targets'))" />
+    <Error Condition="!Exists('..\packages\libsndfile-msvc-x86.1.0.27.9902\build\native\libsndfile-msvc-x86.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\libsndfile-msvc-x86.1.0.27.9902\build\native\libsndfile-msvc-x86.targets'))" />
   </Target>
 </Project>

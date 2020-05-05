@@ -1,7 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <cmath>
-
+#include <vector>
+#include "WavGen.h"
 #define SAMPLE_RATE     44100
 #define MAX_AMP         32760
 #define TWO_PI          6.283185307179586476925286766559
@@ -20,7 +21,7 @@ namespace little_endian_io
 }
 using namespace little_endian_io;
 
-int makeSin(double frequency, int channels, double seconds, string name)        //frequency in Hz
+int makeWav(int channels, double seconds, string name,vector<double> data,double volume)        //frequency in Hz
 {
     ofstream f(name + ".wav", ios::binary);
     int sample_rate = SAMPLE_RATE;
@@ -44,14 +45,15 @@ int makeSin(double frequency, int channels, double seconds, string name)        
     // Write the audio samples
     // (We'll generate a single C4 note with a sine wave, fading from left to right)
     constexpr double two_pi = TWO_PI;
-    constexpr double max_amplitude = MAX_AMP;  // "volume"
+     double max_amplitude = volume;  // "volume"
 
     int N = sample_rate * seconds;  // total number of samples
     for (int n = 0; n < N; n++)
     {
-        double amplitude = (double)n / N * max_amplitude;
-        double value = sin((two_pi * n * frequency) / sample_rate);
-        write_word(f, (int)(amplitude * value), 2);
+		if (n >= data.size())data.push_back(0);
+		double amplitude =  1;// (double)n / N * max_amplitude;
+		double value = data[n];
+        write_word(f, (int)((max_amplitude - amplitude) * value), 2);
         write_word(f, (int)((max_amplitude - amplitude) * value), 2);
     }
 
@@ -70,8 +72,8 @@ int makeSin(double frequency, int channels, double seconds, string name)        
 
 }
 
-int main(void)
-{
-    int a = makeSin(200, 2, 1, "mamee");
-	return 0;
-}
+//int main(void)
+//{
+//    int a = makeSin(200, 2, 1, "mamee");
+//	return 0;
+//}

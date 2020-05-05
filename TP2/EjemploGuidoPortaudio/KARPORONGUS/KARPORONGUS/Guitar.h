@@ -1,22 +1,22 @@
 #pragma once
 #include <vector>
 using namespace std;
-
-class Guitar
+#include "Instrument.h"
+#include "General.h"
+class Guitar: public Instrument
 {
 public:
-	Guitar();
+	Guitar(double rf);
 	//pitch= frecuencia deseada, fs = sample rate, rf controla el decay time, para que sea una guitarra podes elegir el rf que quieras mientras sea igual a 1
 	~Guitar();
-	vector<double> composeSound(double cutFactor,int duration, int pitch, int SampleRate, double rf,double Normvelocity);
-	double getSample(double rf);
+	vector<double> generateNote(double duration, double pitch,double Normvelocity, double cutFactor,char noiseType);
+	double getSample();
 
 private:
-
+	double rf;
 	double startSample;
 	int currentSample;
 	double previousSample;
 	vector <double> waveTable;
-	vector<double> Guitarsound;
 };
 
