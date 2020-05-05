@@ -34,13 +34,15 @@ int main(void) {
 	int fs = 44100;
 	double rf = 1;
 	double prob =  0.5;
-	int durationNote = 5;
+	int durationNote = 3;
 	double cut = 1;
 	double volume=800;
-	double Normvelocity=0.5;
+	double Normvelocity=1;
 	Guitar myGuitar;
-	vector<double> GuitarSound1 =myGuitar.composeSound(cut,durationNote,freq[1],fs,rf, Normvelocity);
-	makeWav(2, durationNote, "velocity-low", GuitarSound1,volume);
+	vector<double> GuitarSound1 = myGuitar.composeSound(cut,durationNote,freq[5],fs,rf, Normvelocity);
+	vector<double> GuitarSound2 = myGuitar.composeSound(cut, durationNote, freq[2], fs, rf, Normvelocity);
+	GuitarSound1.insert(GuitarSound1.end(), GuitarSound2.begin(), GuitarSound2.end());
+	makeWav(2, durationNote*2, "velocity-low", GuitarSound1,volume);
 	return 0;
 	}
 

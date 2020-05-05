@@ -3,8 +3,7 @@
 
 #include <ctime>
 
-Guitar::Guitar()
-{
+Guitar::Guitar(){
 }
 
 double Guitar::getSample(double rf) {
@@ -18,6 +17,8 @@ double Guitar::getSample(double rf) {
 }
 vector<double> Guitar::composeSound( double cutFactor, int duration,int pitch, int SampleRate,double rf, double Normvelocity){
 	srand(time(NULL));
+	this->waveTable.clear();
+	this->Guitarsound.clear();
 	for (int i = 0; i < floor((SampleRate / (double)pitch)); i++) {
 		waveTable.push_back(((rand() % 2) * 2 - 1)*Normvelocity);
 	}
@@ -30,8 +31,7 @@ vector<double> Guitar::composeSound( double cutFactor, int duration,int pitch, i
 		else{
 			Guitarsound.push_back(this->getSample(rf)*cos(3.1415*(i - cutFactor * duration*SampleRate) / ((2 * duration*SampleRate*(1 - cutFactor)))));
 		}
-	}
-
+}
 	return this->Guitarsound;
 }
 Guitar::~Guitar()
