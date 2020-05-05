@@ -5,18 +5,17 @@ using namespace std;
 class Guitar
 {
 public:
-	Guitar(int pitch_, long int fs_,double rf_);
+	Guitar();
+	//pitch= frecuencia deseada, fs = sample rate, rf controla el decay time, para que sea una guitarra podes elegir el rf que quieras mientras sea igual a 1
 	~Guitar();
-	vector<double> composeSound(double cutFactor,int duration,double delay, int TotalDuration);
-	double getSample(void);
+	vector<double> composeSound(double cutFactor,int duration, int pitch, int SampleRate, double rf,double Normvelocity);
+	double getSample(double rf);
 
 private:
-	int pitch;
-	long int fs;
+
 	double startSample;
 	int currentSample;
 	double previousSample;
-	double rf;
 	vector <double> waveTable;
 	vector<double> Guitarsound;
 };

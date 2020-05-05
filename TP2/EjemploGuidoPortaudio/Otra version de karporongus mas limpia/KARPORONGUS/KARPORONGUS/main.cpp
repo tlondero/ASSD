@@ -34,22 +34,15 @@ int main(void) {
 	int fs = 44100;
 	double rf = 1;
 	double prob =  0.5;
-	int wavDuration = 180;
-	int durationNote = 60;
-	double delay =0 ;
-	double cut = 0.3;
+	int durationNote = 3;
+	double cut = 1;
 	double volume=800;
-	Guitar myGuitar(freq[1], fs,rf);
-	Guitar myGuitar2(freq[3], fs, rf);
-	Drum myDrum(freq[3],fs,rf,prob);
-	vector<double> DrumSound;
-	vector<double> GuitarSound1 =myGuitar.composeSound(cut, durationNote,delay, wavDuration);
-	vector<double> GuitarSound2 = myGuitar2.composeSound(cut, durationNote, 1, wavDuration);
-	vector<double> GuitarSound;
-	for (int i = 0; i < GuitarSound1.size(); i++) {
-		GuitarSound.push_back(GuitarSound1[i] + GuitarSound2[i]);
-	}
-	makeWav(2, wavDuration, "prueba", GuitarSound,volume);
+	double Normvelocity=1;
+	Guitar myGuitar;
+	vector<double> GuitarSound1 = myGuitar.composeSound(cut,durationNote,freq[5],fs,rf, Normvelocity);
+	vector<double> GuitarSound2 = myGuitar.composeSound(cut, durationNote, freq[2], fs, rf, Normvelocity);
+	GuitarSound1.insert(GuitarSound1.end(), GuitarSound2.begin(), GuitarSound2.end());
+	makeWav(2, durationNote*2, "velocity-low", GuitarSound1,volume);
 	return 0;
 	}
 
