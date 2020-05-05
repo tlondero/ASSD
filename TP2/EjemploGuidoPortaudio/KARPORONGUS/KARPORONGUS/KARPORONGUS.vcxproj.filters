@@ -13,18 +13,60 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Instrumentos">
+      <UniqueIdentifier>{a04d756b-e8b9-419c-96f2-dd3e939bc2fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Instrumentos">
+      <UniqueIdentifier>{a636cbaa-ab5d-4cb6-967a-cce9a27bbc11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utils">
+      <UniqueIdentifier>{7e20200e-fb6c-479b-8e0f-801629b50213}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utils">
+      <UniqueIdentifier>{fb65be2b-c72a-4ae9-ba7f-266056de8f79}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="KarplusStrong.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Guitar.cpp">
+      <Filter>Source Files\Instrumentos</Filter>
+    </ClCompile>
+    <ClCompile Include="Drum.cpp">
+      <Filter>Source Files\Instrumentos</Filter>
+    </ClCompile>
+    <ClCompile Include="Instrument.cpp">
+      <Filter>Source Files\Instrumentos</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="WavGen.cpp">
+      <Filter>Source Files\Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="KarplusStrong.h">
+    <ClInclude Include="General.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Drum.h">
+      <Filter>Header Files\Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="Guitar.h">
+      <Filter>Header Files\Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="Instrument.h">
+      <Filter>Header Files\Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="Organ.h">
+      <Filter>Header Files\Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="WavGen.h">
+      <Filter>Header Files\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
