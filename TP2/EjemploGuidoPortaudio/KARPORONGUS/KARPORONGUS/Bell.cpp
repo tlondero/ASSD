@@ -21,7 +21,7 @@ vector <double> Bell::generateNote(double duration, double pitch, double Normvel
 	
 	for (int i = 0; i < (int)duration * SAMPLE_RATE; i++) {
 		Idet = (this->io) * exp(-i / (SAMPLE_RATE * (this->tau)));
-		Adet = exp(-i / (SAMPLE_RATE * (this->tau)));
+		Adet = exp(-i / (SAMPLE_RATE * (this->tau)));				
 		BellSound.push_back( Adet*( cos( (DOSPI * fc * i / SAMPLE_RATE) + Idet * cos(DOSPI * fm * i / SAMPLE_RATE))*Normvelocity ));
 	}
 
@@ -35,14 +35,3 @@ vector <double> Bell::generateNote(double duration, double pitch, double Normvel
 
 Bell::~Bell() {
 }
-
-/*
-CAMPANA: Fc/Fm = 2/1
-A = e^-x/T
-T = 2/3
-I = A/2
-
-TROMBON: 1/1
-I = 3*CLARINETE
-A
-*/
