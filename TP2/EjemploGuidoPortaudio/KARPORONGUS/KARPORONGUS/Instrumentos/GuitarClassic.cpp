@@ -21,7 +21,7 @@ vector<double> GuitarClassic::generateNote(double duration, double pitch, double
 	this->waveTable.clear();
 	vector<double> Guitarsound;
 	if (noiseType == 'B')
-		for (int i = 0; i < floor((SAMPLE_RATE / (double)pitch)-0.5); i++)
+		for (unsigned int i = 0; i < floor((SAMPLE_RATE / (double)pitch)-0.5); i++)
 			waveTable.push_back(((rand() % 2) * 2 - 1)*Normvelocity);
 
 	else if (noiseType == 'U')
@@ -41,7 +41,7 @@ vector<double> GuitarClassic::generateNote(double duration, double pitch, double
 
 	this->currentSample = 0;
 	this->previousSample = 0;
-	for (int i = 0; i < (int)duration*SAMPLE_RATE; i++) {
+	for (unsigned int i = 0; i < (int)duration*SAMPLE_RATE; i++) {
 		if (i < cutFactor*duration*SAMPLE_RATE) {
 			Guitarsound.push_back(this->getSample());
 		}
@@ -50,7 +50,7 @@ vector<double> GuitarClassic::generateNote(double duration, double pitch, double
 		}
 	}
 	double max = *max_element(Guitarsound.begin(), Guitarsound.end());
-	for (int i = 0; i < Guitarsound.size(); i++) {
+	for (unsigned int i = 0; i < Guitarsound.size(); i++) {
 		Guitarsound[i] = Guitarsound[i] / max;
 	}
 	return Guitarsound;

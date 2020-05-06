@@ -11,19 +11,24 @@ namespace little_endian_io {
 }
 using namespace little_endian_io;
 
-WavController::WavController(double duration_, string wavName_) {
+WavController::WavController(double duration_, string wavName_, double volume_) {
 	this->duration = duration_;
 	this->wavName = wavName_;
 	this->wavVector = vector<double>(floor(this->duration * SAMPLE_RATE), 0);
+	this->volume = volume_;
 }
 void WavController::compileWav(vector<SynthTrack> allTracks) {
-	for (int track = 0; track < allTracks.size(); track++) {
-		for (int note = 0; note < allTracks[track].track.size(); note++) {
+	for (unsigned int track = 0; track < allTracks.size(); track++) {
+		for (unsigned int note = 0; note < allTracks[track].track.size(); note++) {
 			int T= floor(allTracks[track].track[note].t_on*SAMPLE_RATE);
-			for (int i = 0; i < allTracks[track].track[note].sound.size();i++) {
+			for (unsigned int i = 0; i < allTracks[track].track[note].sound.size();i++) {
 				this->wavVector[i + T] += allTracks[track].track[note].sound[i];
 			}
 		}
+	}
+	double max = *max_element(wavVector.begin(), wavVector.end());
+	for (int i = 0; i < wavVector.size(); i++) {
+		wavVector[i] = wavVector[i] / max;
 	}
 }
 
@@ -31,7 +36,6 @@ void WavController::makeWav() {
 	int channels = 2;
 	double seconds = this->duration;
 	string name = this->wavName;
-	double volume = 1000;
 	ofstream f(name + ".wav", ios::binary);
 
 	// Write the file headers
@@ -54,7 +58,7 @@ void WavController::makeWav() {
 	double max_amplitude = volume;  // "volume"
 
 	int N = SAMPLE_RATE * seconds;  // total number of samples
-	for (int n = 0; n < N; n++)
+	for (unsigned int n = 0; n < N; n++)
 	{
 		if (n >= this->wavVector.size())this->wavVector.push_back(0);
 		double amplitude = 1;
