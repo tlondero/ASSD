@@ -117,11 +117,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+
     <ClCompile Include="Instrumentos\Banjo.cpp" />
     <ClCompile Include="Instrumentos\Drum.cpp" />
     <ClCompile Include="Instrumentos\GuitarClassic.cpp" />
     <ClCompile Include="Instrumentos\GuitarImproved.cpp" />
     <ClCompile Include="Instrumentos\Instrument.cpp" />
+
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MidiParser.cpp" />
     <ClCompile Include="midi\Binasc.cpp" />

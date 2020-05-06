@@ -4,6 +4,7 @@
 #include "General.h"
 #include "Utils.h"
 
+
 #include "Instrumentos/Banjo.h"
 #include "Instrumentos/Drum.h"
 #include "Instrumentos/GuitarClassic.h"
@@ -13,6 +14,7 @@
 using namespace std;
 
 int main(void) {
+
 	MidiParser myMidi;
 	if (myMidi.addMidi("sample")) {
 		vector<Tracks> myTracks = myMidi.getTracks();
@@ -31,6 +33,7 @@ int main(void) {
 		cout << "No se encontró el archivo" << endl;
 		getchar();
 	}
+
 	return 0;
 }
 
