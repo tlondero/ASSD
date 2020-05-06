@@ -52,3 +52,6 @@ bool MidiParser::addMidi(std::string filename) {
 MidiParser::~MidiParser()
 {
 }
+double MidiParser::getTotalDuration(void) {
+	return this->totalDuration;
+}

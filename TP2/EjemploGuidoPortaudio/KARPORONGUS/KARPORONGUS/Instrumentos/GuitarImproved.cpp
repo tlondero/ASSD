@@ -5,11 +5,12 @@
 #include <ctime>
 #include <random>
 
-GuitarImproved::GuitarImproved(double rf)
+GuitarImproved::GuitarImproved()
 {
+}
+void GuitarImproved:: setParam(double rf) {
 	this->rf = rf;
 }
-
 double GuitarImproved::getSample() {
 	double sample = 0;
 	int currentSampleNorm = this->currentSample % this->waveTable.size();
@@ -50,7 +51,7 @@ vector<double> GuitarImproved::generateNote(double duration, double pitch, doubl
 
 	this->currentSample = 0;
 	this->previousSample = 0;
-	for (unsigned int i = 0; i < (int)duration*SAMPLE_RATE; i++) {
+	for (unsigned int i = 0; i < floor(duration*SAMPLE_RATE); i++) {
 		if (i < cutFactor*duration*SAMPLE_RATE) {
 			Guitarsound.push_back(this->getSample());
 		}
@@ -60,7 +61,7 @@ vector<double> GuitarImproved::generateNote(double duration, double pitch, doubl
 	}
 	double max = *max_element(Guitarsound.begin(), Guitarsound.end());
 	for (int i = 0; i < Guitarsound.size(); i++) {
-		Guitarsound[i] = Guitarsound[i] / max;
+		Guitarsound[i] = Guitarsound[i] / max  *Normvelocity;
 	}
 	return Guitarsound;
 }

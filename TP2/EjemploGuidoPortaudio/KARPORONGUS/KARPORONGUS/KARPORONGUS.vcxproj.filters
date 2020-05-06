@@ -22,9 +22,6 @@
     <Filter Include="Source Files\Utils">
       <UniqueIdentifier>{7e20200e-fb6c-479b-8e0f-801629b50213}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Utils">
-      <UniqueIdentifier>{fb65be2b-c72a-4ae9-ba7f-266056de8f79}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\MIDI">
       <UniqueIdentifier>{df2c70ed-95e0-43bb-a279-8954a79e4738}</UniqueIdentifier>
     </Filter>
@@ -36,6 +33,21 @@
     </Filter>
     <Filter Include="Header Files\Wav">
       <UniqueIdentifier>{da95c2db-96e8-4725-8c8d-cb223c92611b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Controladores de Instrumentos">
+      <UniqueIdentifier>{dd44aecf-4381-4c17-a779-0270a21ac0ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Controladores de Instrumentos">
+      <UniqueIdentifier>{c35a69d6-fa71-4b58-829f-1a0931183514}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utils">
+      <UniqueIdentifier>{fb65be2b-c72a-4ae9-ba7f-266056de8f79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\User Input">
+      <UniqueIdentifier>{915fd7cc-4fc4-4403-8d25-5a0e088d6771}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\User Input">
+      <UniqueIdentifier>{ff932de3-2edd-4528-8dbd-4656f5d8637a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -93,14 +105,22 @@
     <ClCompile Include="Utils\SynthTrack.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="Instrumentos\Bell.cpp">
-      <Filter>Source Files\Instrumentos</Filter>
+
+    <ClCompile Include="AcousticGuitarController.cpp">
+      <Filter>Source Files\Controladores de Instrumentos</Filter>
     </ClCompile>
-    <ClCompile Include="Instrumentos\Clarinet.cpp">
-      <Filter>Source Files\Instrumentos</Filter>
+    <ClCompile Include="ControllerOfControllers.cpp">
+      <Filter>Source Files\Controladores de Instrumentos</Filter>
     </ClCompile>
-    <ClCompile Include="Instrumentos\Trombone.cpp">
-      <Filter>Source Files\Instrumentos</Filter>
+    <ClCompile Include="UserInput.cpp">
+      <Filter>Source Files\User Input</Filter>
+    </ClCompile>
+    <ClCompile Include="UserChoice.cpp">
+      <Filter>Source Files\User Input</Filter>
+    </ClCompile>
+    <ClCompile Include="InstParams.cpp">
+      <Filter>Source Files\User Input</Filter>
+
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -161,14 +181,22 @@
     <ClInclude Include="Clarinet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Instrumentos\Bell.h">
-      <Filter>Header Files\Instrumentos</Filter>
+
+    <ClInclude Include="AcousticGuitarController.h">
+      <Filter>Header Files\Controladores de Instrumentos</Filter>
     </ClInclude>
-    <ClInclude Include="Instrumentos\Clarinet.h">
-      <Filter>Header Files\Instrumentos</Filter>
+    <ClInclude Include="ControllerOfControllers.h">
+      <Filter>Header Files\Controladores de Instrumentos</Filter>
     </ClInclude>
-    <ClInclude Include="Instrumentos\Trombone.h">
-      <Filter>Header Files\Instrumentos</Filter>
+    <ClInclude Include="UserInput.h">
+      <Filter>Header Files\User Input</Filter>
+    </ClInclude>
+    <ClInclude Include="UserChoice.h">
+      <Filter>Header Files\User Input</Filter>
+    </ClInclude>
+    <ClInclude Include="InstParams.h">
+      <Filter>Header Files\User Input</Filter>
+
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

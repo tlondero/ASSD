@@ -117,6 +117,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+
+    <ClCompile Include="AcousticGuitarController.cpp" />
+    <ClCompile Include="ControllerOfControllers.cpp" />
+    <ClCompile Include="InstParams.cpp" />
     <ClCompile Include="Instrumentos\Banjo.cpp" />
     <ClCompile Include="Instrumentos\Bell.cpp" />
     <ClCompile Include="Instrumentos\Clarinet.cpp" />
@@ -132,6 +136,8 @@
     <ClCompile Include="midi\MidiEventList.cpp" />
     <ClCompile Include="midi\MidiFile.cpp" />
     <ClCompile Include="midi\MidiMessage.cpp" />
+    <ClCompile Include="UserChoice.cpp" />
+    <ClCompile Include="UserInput.cpp" />
     <ClCompile Include="Utils\MusicData.cpp" />
     <ClCompile Include="Utils\Note.cpp" />
     <ClCompile Include="Utils\SynthTrack.cpp" />
@@ -141,7 +147,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clarinet.h" />
+    <ClInclude Include="ControllerOfControllers.h" />
     <ClInclude Include="General.h" />
+    <ClInclude Include="AcousticGuitarController.h" />
+    <ClInclude Include="InstParams.h" />
     <ClInclude Include="Instrumentos\Banjo.h" />
     <ClInclude Include="Instrumentos\Bell.h" />
     <ClInclude Include="Instrumentos\Clarinet.h" />
@@ -156,6 +165,8 @@
     <ClInclude Include="midi\MidiEventList.h" />
     <ClInclude Include="midi\MidiFile.h" />
     <ClInclude Include="midi\MidiMessage.h" />
+    <ClInclude Include="UserChoice.h" />
+    <ClInclude Include="UserInput.h" />
     <ClInclude Include="Utils\MusicData.h" />
     <ClInclude Include="Utils\Note.h" />
     <ClInclude Include="Utils\SynthTrack.h" />

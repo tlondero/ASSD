@@ -9,33 +9,29 @@
 #include "MidiParser.h"
 #include "WavController.h"
 #include "Utils/SynthTrack.h"
+#include "AcousticGuitarController.h"
+#include "ControllerOfControllers.h"
 using namespace std;
 
 int main(void) {
 
 	MidiParser myMidi;
-	if (myMidi.addMidi("sample")) {
+	if (myMidi.addMidi("twinkle")) {
+
 		vector<Tracks> myTracks = myMidi.getTracks();
-		int freq[6] = { 82, 130, 164, 196, 261, 330 };
+		double duration = myMidi.getTotalDuration();
+		UserInput ui;
+		UserChoice uc;
+		uc.params.GuitarParam_rf = 1;
+		uc.TrackInstrument = "GUITAR";
+		uc.TrackNumber = 0;
+		ui.wavName = "twinkle";
+		ui.pairTrackInst.push_back(uc);
 		double rf = 1;
-		double prob = 0.5;
-		int durationNote = 3;
-		double cut = 0.5;
-		double volume = 1000;
-		double Normvelocity = 1;
-		GuitarImproved myGuitar(rf);
-		vector<double> GuitarSound1 = myGuitar.generateNote(durationNote, 130, Normvelocity, cut, 'B');
-		MusicData md;
-		md.t_on = 0;
-		md.sound = GuitarSound1;
-		vector<MusicData> musicdataV;
-		musicdataV.push_back(md);
-		SynthTrack synthtrack;
-		synthtrack.instrumentName = "Guitar";
-		synthtrack.track= musicdataV;
 		vector<SynthTrack> synthtrackv;
-		synthtrackv.push_back(synthtrack);
-		WavController myWavController(durationNote,"elpija",1000);
+		ControllerOfControllers myCC;
+		synthtrackv=myCC.sytnsynthesisProject(myTracks, ui);
+		WavController myWavController(duration,"twinkle",1000);
 		myWavController.compileWav(synthtrackv);
 		myWavController.makeWav();
 
@@ -50,3 +46,21 @@ int main(void) {
 
 
 
+//test de GuitarCOntroller
+		//Tracks testTrack;
+		//testTrack.instrumentName = "Guitar";
+		//Note tstn1;
+		//Note tstn2;
+		//tstn1.Duration = 2;
+		//tstn1.frequency = 130;
+		//tstn1.t_on = 0;
+		//tstn1.velocity = 100;
+		//tstn2.Duration = 2;
+		//tstn2.frequency = 330;
+		//tstn2.t_on = 2;
+		//tstn2.velocity = 100;
+		//testTrack.Notes.push_back(tstn1);
+		//testTrack.Notes.push_back(tstn2);
+		//AcousticGuitarController myGC;
+		//myGC.setParam(rf);
+		//synthtrackv.push_back(myGC.sytnsynthesisTrack(testTrack));

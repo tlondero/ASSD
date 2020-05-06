@@ -7,7 +7,8 @@ using namespace std;
 class GuitarImproved
 {
 public:
-	GuitarImproved(double rf);
+	GuitarImproved();
+	void setParam(double rf);
 	~GuitarImproved();
 	vector<double> generateNote(double duration, double pitch, double Normvelocity, double cutFactor, char noiseType);
 	vector<double> generateNoteElectric(double duration, double pitch, double Normvelocity, double cutFactor, char noiseType);
