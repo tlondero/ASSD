@@ -45,6 +45,12 @@
     <ClCompile Include="WavGen.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
+    <ClCompile Include="Clarinet.cpp">
+      <Filter>Source Files\Instrumentos</Filter>
+    </ClCompile>
+    <ClCompile Include="Bell.cpp">
+      <Filter>Source Files\Instrumentos</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="General.h">
@@ -67,6 +73,12 @@
     </ClInclude>
     <ClInclude Include="WavGen.h">
       <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Clarinet.h">
+      <Filter>Header Files\Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="Bell.h">
+      <Filter>Header Files\Instrumentos</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
