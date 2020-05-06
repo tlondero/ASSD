@@ -30,7 +30,7 @@ vector<double> GuitarImproved::generateNote(double duration, double pitch, doubl
 	}
 	vector<double> Guitarsound;
 	if (noiseType == 'B')
-		for (int i = 0; i < floor((SAMPLE_RATE / (double)pitch) ); i++)
+		for (unsigned int i = 0; i < floor((SAMPLE_RATE / (double)pitch) ); i++)
 			waveTable.push_back(((rand() % 2) * 2 - 1)*Normvelocity);
 
 	else if (noiseType == 'U')
@@ -50,7 +50,7 @@ vector<double> GuitarImproved::generateNote(double duration, double pitch, doubl
 
 	this->currentSample = 0;
 	this->previousSample = 0;
-	for (int i = 0; i < (int)duration*SAMPLE_RATE; i++) {
+	for (unsigned int i = 0; i < (int)duration*SAMPLE_RATE; i++) {
 		if (i < cutFactor*duration*SAMPLE_RATE) {
 			Guitarsound.push_back(this->getSample());
 		}
@@ -85,7 +85,7 @@ vector<double> GuitarImproved::generateNoteElectric(double duration, double pitc
 	rf = 1;
 	vector<double> Guitarsound;
 	if (noiseType == 'B')
-		for (int i = 0; i < floor((SAMPLE_RATE / (double)pitch) - 0.5); i++)
+		for (unsigned int i = 0; i < floor((SAMPLE_RATE / (double)pitch) - 0.5); i++)
 			waveTable.push_back(((rand() % 2) * 2 - 1)*Normvelocity);
 
 	else if (noiseType == 'U')
@@ -105,7 +105,7 @@ vector<double> GuitarImproved::generateNoteElectric(double duration, double pitc
 
 	this->currentSample = 0;
 	this->previousSample = 0;
-	for (int i = 0; i < (int)duration*SAMPLE_RATE; i++) {
+	for (unsigned int i = 0; i < (int)duration*SAMPLE_RATE; i++) {
 		if (i < cutFactor*duration*SAMPLE_RATE) {
 			Guitarsound.push_back(this->getSample());
 		}

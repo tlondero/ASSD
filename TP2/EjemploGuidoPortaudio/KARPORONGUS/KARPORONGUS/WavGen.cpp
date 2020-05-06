@@ -8,8 +8,7 @@
 
 using namespace std;
 
-namespace little_endian_io
-{
+namespace little_endian_io{
     template <typename Word>
     std::ostream& write_word(std::ostream& outs, Word value, unsigned size = sizeof(Word))
     {

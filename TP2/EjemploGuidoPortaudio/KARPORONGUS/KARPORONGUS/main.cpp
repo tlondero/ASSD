@@ -2,14 +2,13 @@
 
 #include "WavGen.h"
 #include "General.h"
-
-
 #include "Instrumentos/Banjo.h"
 #include "Instrumentos/Drum.h"
 #include "Instrumentos/GuitarClassic.h"
 #include "Instrumentos/GuitarImproved.h"
 #include "MidiParser.h"
-
+#include "WavController.h"
+#include "Utils/SynthTrack.h"
 using namespace std;
 
 int main(void) {
@@ -26,7 +25,20 @@ int main(void) {
 		double Normvelocity = 1;
 		GuitarImproved myGuitar(rf);
 		vector<double> GuitarSound1 = myGuitar.generateNote(durationNote, 130, Normvelocity, cut, 'B');
-		makeWav(2, durationNote, "Guitar", GuitarSound1, volume);
+		MusicData md;
+		md.t_on = 0;
+		md.sound = GuitarSound1;
+		vector<MusicData> musicdataV;
+		musicdataV.push_back(md);
+		SynthTrack synthtrack;
+		synthtrack.instrumentName = "Guitar";
+		synthtrack.track= musicdataV;
+		vector<SynthTrack> synthtrackv;
+		synthtrackv.push_back(synthtrack);
+		WavController myWavController(durationNote,"elpija",1000);
+		myWavController.compileWav(synthtrackv);
+		myWavController.makeWav();
+
 	}
 	else {
 		cout << "No se encontró el archivo" << endl;
