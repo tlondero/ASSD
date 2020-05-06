@@ -105,6 +105,7 @@
     <ClCompile Include="Utils\SynthTrack.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
+
     <ClCompile Include="AcousticGuitarController.cpp">
       <Filter>Source Files\Controladores de Instrumentos</Filter>
     </ClCompile>
@@ -119,6 +120,7 @@
     </ClCompile>
     <ClCompile Include="InstParams.cpp">
       <Filter>Source Files\User Input</Filter>
+
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -179,6 +181,7 @@
     <ClInclude Include="Clarinet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+
     <ClInclude Include="AcousticGuitarController.h">
       <Filter>Header Files\Controladores de Instrumentos</Filter>
     </ClInclude>
@@ -193,6 +196,7 @@
     </ClInclude>
     <ClInclude Include="InstParams.h">
       <Filter>Header Files\User Input</Filter>
+
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
