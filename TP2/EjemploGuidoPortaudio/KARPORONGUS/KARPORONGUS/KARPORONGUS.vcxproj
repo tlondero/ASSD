@@ -117,6 +117,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bell.cpp" />
     <ClCompile Include="Drum.cpp" />
     <ClCompile Include="Clarinet.cpp" />
     <ClCompile Include="Instrument.cpp" />
@@ -126,6 +127,7 @@
     <ClCompile Include="WavGen.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bell.h" />
     <ClInclude Include="Drum.h" />
     <ClInclude Include="Clarinet.h" />
     <ClInclude Include="General.h" />

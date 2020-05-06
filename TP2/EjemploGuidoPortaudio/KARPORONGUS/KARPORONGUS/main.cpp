@@ -11,6 +11,7 @@
 #include "Guitar.h"
 #include "Drum.h"
 #include "Clarinet.h"
+#include "Bell.h"
 
 //#include "General.h"
 #define MAX_AMP         32760
@@ -27,11 +28,16 @@ int main(void) {
 	double volume = 1000;
 	double Normvelocity = 1;
 	
+	/*
 	Clarinet clarinet;
 	vector <double> clarinetSound = clarinet.generateNote(durationNote, 330, Normvelocity);
 	makeWav(2, durationNote, "ThisWontWork5MEOLVIDEDEUNPARENTESIS2", clarinetSound, volume);
+	*/
 	
-	
+	Bell bell;
+	vector <double> bellSound = bell.generateNote(durationNote, 330, Normvelocity);
+	makeWav(2, durationNote, "DemasiadoOptimismo", bellSound, volume);
+
 	
 	//Drum myGuitar(rf,prob);
 	//vector<double> GuitarSound1 = myGuitar.generateNote(durationNote,40, Normvelocity, cut);
