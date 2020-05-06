@@ -117,13 +117,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-
     <ClCompile Include="Instrumentos\Banjo.cpp" />
     <ClCompile Include="Instrumentos\Drum.cpp" />
     <ClCompile Include="Instrumentos\GuitarClassic.cpp" />
     <ClCompile Include="Instrumentos\GuitarImproved.cpp" />
     <ClCompile Include="Instrumentos\Instrument.cpp" />
-
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MidiParser.cpp" />
     <ClCompile Include="midi\Binasc.cpp" />
@@ -131,9 +129,11 @@
     <ClCompile Include="midi\MidiEventList.cpp" />
     <ClCompile Include="midi\MidiFile.cpp" />
     <ClCompile Include="midi\MidiMessage.cpp" />
-    <ClCompile Include="Note.cpp" />
-    <ClCompile Include="Tracks.cpp" />
-    <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="Utils\MusicData.cpp" />
+    <ClCompile Include="Utils\Note.cpp" />
+    <ClCompile Include="Utils\SynthTrack.cpp" />
+    <ClCompile Include="Utils\Tracks.cpp" />
+    <ClCompile Include="WavController.cpp" />
     <ClCompile Include="WavGen.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -149,9 +149,11 @@
     <ClInclude Include="midi\MidiEventList.h" />
     <ClInclude Include="midi\MidiFile.h" />
     <ClInclude Include="midi\MidiMessage.h" />
-    <ClInclude Include="Note.h" />
-    <ClInclude Include="Tracks.h" />
-    <ClInclude Include="Utils.h" />
+    <ClInclude Include="Utils\MusicData.h" />
+    <ClInclude Include="Utils\Note.h" />
+    <ClInclude Include="Utils\SynthTrack.h" />
+    <ClInclude Include="Utils\Tracks.h" />
+    <ClInclude Include="WavController.h" />
     <ClInclude Include="WavGen.h" />
   </ItemGroup>
   <ItemGroup>

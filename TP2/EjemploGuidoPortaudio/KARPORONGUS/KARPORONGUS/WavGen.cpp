@@ -3,9 +3,8 @@
 #include <cmath>
 #include <vector>
 #include "WavGen.h"
-#define SAMPLE_RATE     44100
-#define MAX_AMP         32760
-#define TWO_PI          6.283185307179586476925286766559
+#include "General.h"
+//#define MAX_AMP         32760
 
 using namespace std;
 
@@ -43,15 +42,13 @@ int makeWav(int channels, double seconds, string name,vector<double> data,double
     f << "data----";  // (chunk size to be filled in later)
 
     // Write the audio samples
-    // (We'll generate a single C4 note with a sine wave, fading from left to right)
-    constexpr double two_pi = TWO_PI;
      double max_amplitude = volume;  // "volume"
 
     int N = sample_rate * seconds;  // total number of samples
     for (int n = 0; n < N; n++)
     {
 		if (n >= data.size())data.push_back(0);
-		double amplitude =  1;// (double)n / N * max_amplitude;
+		double amplitude =  1;
 		double value = data[n];
         write_word(f, (int)((amplitude) * value*volume), 2);
         write_word(f, (int)(( amplitude) * value*volume), 2);
@@ -71,9 +68,3 @@ int makeWav(int channels, double seconds, string name,vector<double> data,double
     return 0;
 
 }
-
-//int main(void)
-//{
-//    int a = makeSin(200, 2, 1, "mamee");
-//	return 0;
-//}

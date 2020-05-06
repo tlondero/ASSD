@@ -1,6 +1,6 @@
 #pragma once
 #include "midi/MidiFile.h"
-#include"Tracks.h"
+#include"utils\Tracks.h"
 #include <string>
 #include <vector>
 using namespace std;

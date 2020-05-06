@@ -31,13 +31,16 @@
     <Filter Include="Header Files\MIDI">
       <UniqueIdentifier>{849fd9eb-d03c-4088-8f57-4740bafe1505}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Wav">
+      <UniqueIdentifier>{dc791c35-53f7-4acb-bcce-f73db0a9646d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Wav">
+      <UniqueIdentifier>{da95c2db-96e8-4725-8c8d-cb223c92611b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Utils.cpp">
-      <Filter>Source Files\Utils</Filter>
     </ClCompile>
     <ClCompile Include="WavGen.cpp">
       <Filter>Source Files\Utils</Filter>
@@ -75,25 +78,25 @@
     <ClCompile Include="MidiParser.cpp">
       <Filter>Source Files\MIDI</Filter>
     </ClCompile>
-    <ClCompile Include="Note.cpp">
+    <ClCompile Include="WavController.cpp">
+      <Filter>Source Files\Wav</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\Note.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="Tracks.cpp">
+    <ClCompile Include="Utils\Tracks.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="Clarinet.cpp">
-      <Filter>Source Files\Instrumentos</Filter>
+    <ClCompile Include="Utils\MusicData.cpp">
+      <Filter>Source Files\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="Bell.cpp">
-      <Filter>Source Files\Instrumentos</Filter>
+    <ClCompile Include="Utils\SynthTrack.cpp">
+      <Filter>Source Files\Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="General.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Utils.h">
-      <Filter>Header Files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="WavGen.h">
       <Filter>Header Files\Utils</Filter>
@@ -131,17 +134,20 @@
     <ClInclude Include="midi\Binasc.h">
       <Filter>Header Files\MIDI</Filter>
     </ClInclude>
-    <ClInclude Include="Note.h">
+    <ClInclude Include="WavController.h">
+      <Filter>Header Files\Wav</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\Note.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Tracks.h">
+    <ClInclude Include="Utils\Tracks.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Clarinet.h">
-      <Filter>Header Files\Instrumentos</Filter>
+    <ClInclude Include="Utils\MusicData.h">
+      <Filter>Header Files\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Bell.h">
-      <Filter>Header Files\Instrumentos</Filter>
+    <ClInclude Include="Utils\SynthTrack.h">
+      <Filter>Header Files\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
