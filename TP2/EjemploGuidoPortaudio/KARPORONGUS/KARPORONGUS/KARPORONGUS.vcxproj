@@ -117,12 +117,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-
     <ClCompile Include="Instrumentos\Banjo.cpp" />
+    <ClCompile Include="Instrumentos\Bell.cpp" />
+    <ClCompile Include="Instrumentos\Clarinet.cpp" />
     <ClCompile Include="Instrumentos\Drum.cpp" />
     <ClCompile Include="Instrumentos\GuitarClassic.cpp" />
     <ClCompile Include="Instrumentos\GuitarImproved.cpp" />
     <ClCompile Include="Instrumentos\Instrument.cpp" />
+    <ClCompile Include="Instrumentos\Trombone.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MidiParser.cpp" />
     <ClCompile Include="midi\Binasc.cpp" />
@@ -141,10 +143,13 @@
     <ClInclude Include="Clarinet.h" />
     <ClInclude Include="General.h" />
     <ClInclude Include="Instrumentos\Banjo.h" />
+    <ClInclude Include="Instrumentos\Bell.h" />
+    <ClInclude Include="Instrumentos\Clarinet.h" />
     <ClInclude Include="Instrumentos\Drum.h" />
     <ClInclude Include="Instrumentos\GuitarClassic.h" />
     <ClInclude Include="Instrumentos\GuitarImproved.h" />
     <ClInclude Include="Instrumentos\Instrument.h" />
+    <ClInclude Include="Instrumentos\Trombone.h" />
     <ClInclude Include="MidiParser.h" />
     <ClInclude Include="midi\Binasc.h" />
     <ClInclude Include="midi\MidiEvent.h" />

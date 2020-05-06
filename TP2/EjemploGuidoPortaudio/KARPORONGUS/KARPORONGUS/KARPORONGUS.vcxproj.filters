@@ -93,7 +93,15 @@
     <ClCompile Include="Utils\SynthTrack.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
-
+    <ClCompile Include="Instrumentos\Bell.cpp">
+      <Filter>Source Files\Instrumentos</Filter>
+    </ClCompile>
+    <ClCompile Include="Instrumentos\Clarinet.cpp">
+      <Filter>Source Files\Instrumentos</Filter>
+    </ClCompile>
+    <ClCompile Include="Instrumentos\Trombone.cpp">
+      <Filter>Source Files\Instrumentos</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="General.h">
@@ -147,11 +155,21 @@
     <ClInclude Include="Utils\MusicData.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
-
     <ClInclude Include="Utils\SynthTrack.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
-
+    <ClInclude Include="Clarinet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Instrumentos\Bell.h">
+      <Filter>Header Files\Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="Instrumentos\Clarinet.h">
+      <Filter>Header Files\Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="Instrumentos\Trombone.h">
+      <Filter>Header Files\Instrumentos</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
