@@ -13,8 +13,8 @@ Bell::Bell() {
 
 vector <double> Bell::generateNote(double duration, double pitch, double Normvelocity) {
 	vector <double> BellSound;
-	double fc = pitch* (this->m);
-	double fm = pitch* (this->n);
+	double fc = 0.5 * pitch* (this->m);
+	double fm = 0.5 * pitch* (this->n);
 
 	double Idet;
 	double Adet;
