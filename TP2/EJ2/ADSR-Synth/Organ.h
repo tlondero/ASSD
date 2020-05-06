@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <algorithm>
 
 #define SAMPLE_RATE     44100
 #define TWO_PI          6.283185307179586476925286766559
@@ -9,7 +10,7 @@
 class Organ
 {
 public:
-	Organ(double sub, double fifth, double primary, double eight, double twelveth, double fifteenth, double seventeenth, double nineteenth, double below, double third, double fourth, double perfect_fifth, int sub_harmonic_count, int mix_harmonic_count, double A = 0.05, double D = 0, double S = 0.75, double R = 0.2);
+	Organ(double sub_harmonic_count, double mix_harmonic_count = 0, double sub = 1, double fifth = 0, double primary = 0, double eight = 0, double twelveth = 0, double fifteenth = 0, double seventeenth = 0, double nineteenth = 0, double below = 0, double third = 0, double fourth = 0, double perfect_fifth = 0, double A = 0.05, double D = 0, double S = 0.75, double R = 0.2);
 	std::vector<double> generateNote(double duration, double pitch, double volume);
 	~Organ();
 
@@ -29,8 +30,8 @@ private:
 	double perfectFourth;  //Levanta una cuarta perfecta arriba de la fundamental junto a sus armónicos
 	double perfectFifth;	//Levanta una quinta perfecta arriba de la fundamental junto a sus armónicos
 
-	int sub_harmonic_count;
-	int mix_harmonic_count;
+	double sub_harmonic_count;
+	double mix_harmonic_count;
 	
 	//Armónicos del organo
 	std::vector<double> sub_harmonics;

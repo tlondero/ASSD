@@ -116,18 +116,24 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MidiParser.cpp" />
     <ClCompile Include="midi\Binasc.cpp" />
     <ClCompile Include="midi\MidiEvent.cpp" />
     <ClCompile Include="midi\MidiEventList.cpp" />
     <ClCompile Include="midi\MidiFile.cpp" />
     <ClCompile Include="midi\MidiMessage.cpp" />
+    <ClCompile Include="Note.cpp" />
+    <ClCompile Include="Tracks.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MidiParser.h" />
     <ClInclude Include="midi\Binasc.h" />
     <ClInclude Include="midi\MidiEvent.h" />
     <ClInclude Include="midi\MidiEventList.h" />
     <ClInclude Include="midi\MidiFile.h" />
     <ClInclude Include="midi\MidiMessage.h" />
+    <ClInclude Include="Note.h" />
+    <ClInclude Include="Tracks.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

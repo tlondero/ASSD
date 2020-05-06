@@ -13,41 +13,65 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Midi">
+      <UniqueIdentifier>{e90c6d2a-95e5-4233-96b2-c658c59e0782}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Midi">
+      <UniqueIdentifier>{fff4843f-0d29-4e8b-94b5-61a873857cec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="midi\Binasc.cpp">
+    <ClCompile Include="MidiParser.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="midi\Binasc.cpp">
+      <Filter>Source Files\Midi</Filter>
     </ClCompile>
     <ClCompile Include="midi\MidiEvent.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Midi</Filter>
     </ClCompile>
     <ClCompile Include="midi\MidiEventList.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Midi</Filter>
     </ClCompile>
     <ClCompile Include="midi\MidiFile.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Midi</Filter>
     </ClCompile>
     <ClCompile Include="midi\MidiMessage.cpp">
+      <Filter>Source Files\Midi</Filter>
+    </ClCompile>
+    <ClCompile Include="Tracks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Note.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="midi\Binasc.h">
+    <ClInclude Include="MidiParser.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="midi\Binasc.h">
+      <Filter>Header Files\Midi</Filter>
     </ClInclude>
     <ClInclude Include="midi\MidiEvent.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Midi</Filter>
     </ClInclude>
     <ClInclude Include="midi\MidiEventList.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Midi</Filter>
     </ClInclude>
     <ClInclude Include="midi\MidiFile.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Midi</Filter>
     </ClInclude>
     <ClInclude Include="midi\MidiMessage.h">
+      <Filter>Header Files\Midi</Filter>
+    </ClInclude>
+    <ClInclude Include="Tracks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Note.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
