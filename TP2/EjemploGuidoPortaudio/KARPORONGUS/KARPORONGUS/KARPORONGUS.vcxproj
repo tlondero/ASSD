@@ -117,13 +117,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-
+    <ClCompile Include="Clarinet.cpp" />
     <ClCompile Include="Instrumentos\Banjo.cpp" />
     <ClCompile Include="Instrumentos\Drum.cpp" />
     <ClCompile Include="Instrumentos\GuitarClassic.cpp" />
     <ClCompile Include="Instrumentos\GuitarImproved.cpp" />
     <ClCompile Include="Instrumentos\Instrument.cpp" />
-
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MidiParser.cpp" />
     <ClCompile Include="midi\Binasc.cpp" />
@@ -137,6 +136,7 @@
     <ClCompile Include="WavGen.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Clarinet.h" />
     <ClInclude Include="General.h" />
     <ClInclude Include="Instrumentos\Banjo.h" />
     <ClInclude Include="Instrumentos\Drum.h" />
