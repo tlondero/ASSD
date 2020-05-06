@@ -14,6 +14,7 @@ public:
 	//Devuelve falso si no se encontró el archivo.
 	vector<Tracks> getTracks();
 	//Devuelve un vector de tracks
+	double getTotalDuration(void);
 private:
 	MidiFile midiFile;
 	double totalDuration;

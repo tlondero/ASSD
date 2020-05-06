@@ -6,7 +6,8 @@
 class Drum :public Instrument
 {
 public:
-	Drum( double rf_,double prob_);
+	Drum( );
+	void setParams(double rf_, double prob_);
 	~Drum();
 	double getSample(void);
 	std::vector<double> generateNote(double duration, double pitch, double Normvelocity, double cutFactor);

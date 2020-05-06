@@ -4,13 +4,15 @@
 #include "..\General.h"
 #include <random>r
 using namespace std;
-Drum::Drum( double rf_,double prob_)
+Drum::Drum( )
 {
 
+
+}
+void Drum::setParams(double rf_, double prob_) {
 	this->rf = rf_;
 	this->prob = prob_;
 }
-
 double Drum::getSample(void) {
 	double sample = 0;
 	int currentSampleNorm = this->currentSample % this->waveTable.size();

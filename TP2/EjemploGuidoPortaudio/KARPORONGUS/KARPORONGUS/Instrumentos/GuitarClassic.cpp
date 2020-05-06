@@ -3,10 +3,11 @@
 #include <algorithm>
 #include <ctime>
 #include <random>
-GuitarClassic::GuitarClassic(double rf) {
+GuitarClassic::GuitarClassic() {
+}
+void GuitarClassic::setParam(double rf) {
 	this->rf = rf;
 }
-
 double GuitarClassic::getSample() {
 	double sample = 0;
 	int currentSampleNorm = this->currentSample % this->waveTable.size();
