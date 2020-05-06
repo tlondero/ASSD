@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include "Instrument.h"
-#include "General.h"
+#include "../General.h"
 
 #define DOSPI 6.283185307179586476925286766559
 #define PI DOSPI/2

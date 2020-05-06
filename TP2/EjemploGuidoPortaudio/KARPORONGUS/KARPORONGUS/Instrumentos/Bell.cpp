@@ -19,9 +19,11 @@ vector <double> Bell::generateNote(double duration, double pitch, double Normvel
 	double Idet;
 	double Adet;
 	
+	int normtime = (int)duration * SAMPLE_RATE;
+
 	for (int i = 0; i < (int)duration * SAMPLE_RATE; i++) {
-		Idet = (this->io) * exp(-i / (SAMPLE_RATE * (this->tau)));
-		Adet = exp(-i / (SAMPLE_RATE * (this->tau)));				
+		Idet = (this->io) * exp(-i / (normtime * (this->tau)));
+		Adet = exp( -i / (normtime * (this->tau)) );
 		BellSound.push_back( Adet*( cos( (DOSPI * fc * i / SAMPLE_RATE) + Idet * cos(DOSPI * fm * i / SAMPLE_RATE))*Normvelocity ));
 	}
 
