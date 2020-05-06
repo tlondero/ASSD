@@ -118,6 +118,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Drum.cpp" />
+    <ClCompile Include="Clarinet.cpp" />
     <ClCompile Include="Instrument.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Guitar.cpp" />
@@ -126,6 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Drum.h" />
+    <ClInclude Include="Clarinet.h" />
     <ClInclude Include="General.h" />
     <ClInclude Include="Guitar.h" />
     <ClInclude Include="Instrument.h" />

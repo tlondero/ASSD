@@ -10,8 +10,9 @@
 #include <iostream>
 #include "Guitar.h"
 #include "Drum.h"
+#include "Clarinet.h"
 
-#include "General.h"
+//#include "General.h"
 #define MAX_AMP         32760
 #define TWO_PI          6.283185307179586476925286766559
 
@@ -25,9 +26,16 @@ int main(void) {
 	double cut = 1;
 	double volume = 1000;
 	double Normvelocity = 1;
-	Drum myGuitar(rf,prob);
-	vector<double> GuitarSound1 = myGuitar.generateNote(durationNote,40, Normvelocity, cut);
-	makeWav(2, durationNote, "RuidoUniforme", GuitarSound1, volume);
+	
+	Clarinet clarinet;
+	vector <double> clarinetSound = clarinet.generateNote(durationNote, 330, Normvelocity);
+	makeWav(2, durationNote, "ThisWontWork5MEOLVIDEDEUNPARENTESIS2", clarinetSound, volume);
+	
+	
+	
+	//Drum myGuitar(rf,prob);
+	//vector<double> GuitarSound1 = myGuitar.generateNote(durationNote,40, Normvelocity, cut);
+	//makeWav(2, durationNote, "RuidoUniforme", GuitarSound1, volume);
 	//GuitarSound1 = myGuitar.generateNote(durationNote, freq[3], Normvelocity, cut);
 	//makeWav(2, durationNote, "RuidoBinario", GuitarSound1, volume);
 	//GuitarSound1 = myGuitar.generateNote(durationNote, freq[5], Normvelocity, cut);
