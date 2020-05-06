@@ -93,6 +93,7 @@
     <ClCompile Include="Utils\SynthTrack.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
+
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="General.h">
@@ -146,9 +147,11 @@
     <ClInclude Include="Utils\MusicData.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
+
     <ClInclude Include="Utils\SynthTrack.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
+
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

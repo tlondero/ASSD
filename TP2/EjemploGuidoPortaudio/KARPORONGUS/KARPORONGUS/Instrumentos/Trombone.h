@@ -7,17 +7,16 @@
 
 using namespace std;
 
-class Bell : public Instrument
+class Trombone : public Instrument
 {
 public:
-	Bell();
-	~Bell();
+	Trombone();
+	~Trombone();
 	
 	vector <double> generateNote(double duration, double pitch, double Normvelocity);
 
 private:
 	double n;
 	double m;
-	double tau;
 	double io;
 };
