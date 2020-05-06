@@ -2,13 +2,13 @@
 #include <vector>
 using namespace std;
 #include "Instrument.h"
-#include "General.h"
-class Guitar: public Instrument
+#include "..\General.h"
+class GuitarClassic: public Instrument
 {
 public:
-	Guitar(double rf);
+	GuitarClassic(double rf);
 	//pitch= frecuencia deseada, fs = sample rate, rf controla el decay time, para que sea una guitarra podes elegir el rf que quieras mientras sea igual a 1
-	~Guitar();
+	~GuitarClassic();
 	vector<double> generateNote(double duration, double pitch,double Normvelocity, double cutFactor,char noiseType);
 	double getSample();
 

@@ -1,25 +1,31 @@
-#include "Guitar.h"
-#include <stdlib.h> 
-#include <algorithm>
+#include "Banjo.h"
+using namespace std;
 #include <ctime>
 #include <random>
-Guitar::Guitar(double rf) {
-	this->rf = rf;
+#include <algorithm>
+Banjo::Banjo(){
 }
 
-double Guitar::getSample() {
+double Banjo::getSample(){
 	double sample = 0;
 	int currentSampleNorm = this->currentSample % this->waveTable.size();
-	this->waveTable[currentSampleNorm] = rf * 0.5*(this->waveTable[currentSampleNorm] + this->previousSample);
+	this->waveTable[currentSampleNorm] = rf * (this->a*this->waveTable[currentSampleNorm] + this->b* this->previousSample);
 	sample = this->waveTable[currentSampleNorm];
 	this->previousSample = sample;
 	this->currentSample++;
 	return sample;
 }
-vector<double> Guitar::generateNote(double duration, double pitch, double Normvelocity, double cutFactor, char noiseType) {
+vector<double> Banjo::generateNote(double duration, double pitch, double Normvelocity, double cutFactor, char noiseType) {
 	srand(time(NULL));
 	this->waveTable.clear();
-	vector<double> Guitarsound;
+	this->b = ((double)SAMPLE_RATE / (pitch)) - (int)((double)SAMPLE_RATE / (pitch));
+	this->a = 1 - this->b;
+	if (b == 0 || pitch < 400) {
+		a = 0.5;
+		b = 0.5;
+	}
+	rf = 0.96;
+	vector<double> Banjosound;
 	if (noiseType == 'B')
 		for (int i = 0; i < floor((SAMPLE_RATE / (double)pitch)); i++)
 			waveTable.push_back(((rand() % 2) * 2 - 1)*Normvelocity);
@@ -43,18 +49,19 @@ vector<double> Guitar::generateNote(double duration, double pitch, double Normve
 	this->previousSample = 0;
 	for (int i = 0; i < (int)duration*SAMPLE_RATE; i++) {
 		if (i < cutFactor*duration*SAMPLE_RATE) {
-			Guitarsound.push_back(this->getSample());
+			Banjosound.push_back(this->getSample());
 		}
 		else {
-			Guitarsound.push_back(this->getSample()*cos(3.1415*(i - cutFactor * duration*SAMPLE_RATE) / ((2 * duration*SAMPLE_RATE*(1 - cutFactor)))));
+			Banjosound.push_back(this->getSample()*cos(3.1415*(i - cutFactor * duration*SAMPLE_RATE) / ((2 * duration*SAMPLE_RATE*(1 - cutFactor)))));
 		}
 	}
-	double max = *max_element(Guitarsound.begin(), Guitarsound.end());
-	for (int i = 0; i < Guitarsound.size(); i++) {
-		Guitarsound[i] = Guitarsound[i] / max;
+	double max = *max_element(Banjosound.begin(), Banjosound.end());
+	for (int i = 0; i < Banjosound.size(); i++) {
+		Banjosound[i] = Banjosound[i] / max;
 	}
-	return Guitarsound;
+	return Banjosound;
 }
-Guitar::~Guitar()
+
+Banjo::~Banjo()
 {
 }

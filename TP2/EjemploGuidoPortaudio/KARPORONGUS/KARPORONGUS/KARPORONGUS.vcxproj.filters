@@ -25,19 +25,16 @@
     <Filter Include="Header Files\Utils">
       <UniqueIdentifier>{fb65be2b-c72a-4ae9-ba7f-266056de8f79}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\MIDI">
+      <UniqueIdentifier>{df2c70ed-95e0-43bb-a279-8954a79e4738}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MIDI">
+      <UniqueIdentifier>{849fd9eb-d03c-4088-8f57-4740bafe1505}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Guitar.cpp">
-      <Filter>Source Files\Instrumentos</Filter>
-    </ClCompile>
-    <ClCompile Include="Drum.cpp">
-      <Filter>Source Files\Instrumentos</Filter>
-    </ClCompile>
-    <ClCompile Include="Instrument.cpp">
-      <Filter>Source Files\Instrumentos</Filter>
     </ClCompile>
     <ClCompile Include="Utils.cpp">
       <Filter>Source Files\Utils</Filter>
@@ -45,27 +42,93 @@
     <ClCompile Include="WavGen.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
+    <ClCompile Include="Instrumentos\Banjo.cpp">
+      <Filter>Source Files\Instrumentos</Filter>
+    </ClCompile>
+    <ClCompile Include="Instrumentos\Drum.cpp">
+      <Filter>Source Files\Instrumentos</Filter>
+    </ClCompile>
+    <ClCompile Include="Instrumentos\GuitarClassic.cpp">
+      <Filter>Source Files\Instrumentos</Filter>
+    </ClCompile>
+    <ClCompile Include="Instrumentos\GuitarImproved.cpp">
+      <Filter>Source Files\Instrumentos</Filter>
+    </ClCompile>
+    <ClCompile Include="Instrumentos\Instrument.cpp">
+      <Filter>Source Files\Instrumentos</Filter>
+    </ClCompile>
+    <ClCompile Include="midi\Binasc.cpp">
+      <Filter>Source Files\MIDI</Filter>
+    </ClCompile>
+    <ClCompile Include="midi\MidiEvent.cpp">
+      <Filter>Source Files\MIDI</Filter>
+    </ClCompile>
+    <ClCompile Include="midi\MidiEventList.cpp">
+      <Filter>Source Files\MIDI</Filter>
+    </ClCompile>
+    <ClCompile Include="midi\MidiFile.cpp">
+      <Filter>Source Files\MIDI</Filter>
+    </ClCompile>
+    <ClCompile Include="midi\MidiMessage.cpp">
+      <Filter>Source Files\MIDI</Filter>
+    </ClCompile>
+    <ClCompile Include="MidiParser.cpp">
+      <Filter>Source Files\MIDI</Filter>
+    </ClCompile>
+    <ClCompile Include="Note.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Tracks.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="General.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Drum.h">
-      <Filter>Header Files\Instrumentos</Filter>
-    </ClInclude>
-    <ClInclude Include="Guitar.h">
-      <Filter>Header Files\Instrumentos</Filter>
-    </ClInclude>
-    <ClInclude Include="Instrument.h">
-      <Filter>Header Files\Instrumentos</Filter>
-    </ClInclude>
-    <ClInclude Include="Organ.h">
-      <Filter>Header Files\Instrumentos</Filter>
-    </ClInclude>
     <ClInclude Include="Utils.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="WavGen.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Instrumentos\Banjo.h">
+      <Filter>Header Files\Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="Instrumentos\Drum.h">
+      <Filter>Header Files\Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="Instrumentos\GuitarClassic.h">
+      <Filter>Header Files\Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="Instrumentos\GuitarImproved.h">
+      <Filter>Header Files\Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="Instrumentos\Instrument.h">
+      <Filter>Header Files\Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="MidiParser.h">
+      <Filter>Header Files\MIDI</Filter>
+    </ClInclude>
+    <ClInclude Include="midi\MidiEvent.h">
+      <Filter>Header Files\MIDI</Filter>
+    </ClInclude>
+    <ClInclude Include="midi\MidiEventList.h">
+      <Filter>Header Files\MIDI</Filter>
+    </ClInclude>
+    <ClInclude Include="midi\MidiFile.h">
+      <Filter>Header Files\MIDI</Filter>
+    </ClInclude>
+    <ClInclude Include="midi\MidiMessage.h">
+      <Filter>Header Files\MIDI</Filter>
+    </ClInclude>
+    <ClInclude Include="midi\Binasc.h">
+      <Filter>Header Files\MIDI</Filter>
+    </ClInclude>
+    <ClInclude Include="Note.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Tracks.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
   </ItemGroup>
