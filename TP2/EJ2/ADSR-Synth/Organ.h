@@ -10,7 +10,7 @@
 class Organ
 {
 public:
-	Organ(double sub_harmonic_count, double mix_harmonic_count = 0, double sub = 1, double fifth = 0, double primary = 0, double eight = 0, double twelveth = 0, double fifteenth = 0, double seventeenth = 0, double nineteenth = 0, double below = 0, double third = 0, double fourth = 0, double perfect_fifth = 0, double A = 0.05, double D = 0, double S = 0.75, double R = 0.2);
+	Organ(double sub_harmonic_count, double mix_harmonic_count = 0, double sub = 1, double fifth = 0, double primary = 0, double eight = 0, double twelveth = 0, double fifteenth = 0, double seventeenth = 0, double nineteenth = 0, double below = 0, double third = 0, double fourth = 0, double perfect_fifth = 0, double a = 0.1, double r = 0.3, double s = 0.03, double noise = 0.001);
 	std::vector<double> generateNote(double duration, double pitch, double volume);
 	~Organ();
 
@@ -47,4 +47,8 @@ private:
 	std::vector<double> perfect_fourth_harmonics;
 	std::vector<double> perfect_fifth_harmonics;
 
+	double a;
+	double r;
+	double s;
+	double noise;
 };
