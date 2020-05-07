@@ -2,7 +2,11 @@
 #include <iostream>
 
 
-Organ::Organ(double sub_harmonic_count, double mix_harmonic_count, double sub, double fifth, double primary, double eight, double twelveth, double fifteenth, double seventeenth, double nineteenth, double below, double third, double fourth, double perfect_fifth, double a, double r, double s, double noise)
+Organ::Organ()
+{
+}
+
+void Organ::set_parameters(double sub_harmonic_count, double mix_harmonic_count, double sub, double fifth, double primary, double eight, double twelveth, double fifteenth, double seventeenth, double nineteenth, double below, double third, double fourth, double perfect_fifth, double a, double r, double s, double noise)
 {
 	this->a = a;
 	this->r = r;
@@ -31,18 +35,17 @@ Organ::Organ(double sub_harmonic_count, double mix_harmonic_count, double sub, d
 
 	for (int i = 0; i < this->mix_harmonic_count; i++) {
 		this->fifth_harmonics.push_back(pow(10, (-(i) * 20 / this->mix_harmonic_count)) * fifth);
-		this->primary_harmonics.push_back(pow(10, (-(i)  * 10 / this->mix_harmonic_count)) * primary);
-		this->eighth_harmonics.push_back(pow(10, (-(i)  * 20 / this->mix_harmonic_count)) * eighth);
-		this->twelveth_harmonics.push_back(pow(10, (-(i)  * 20 / this->mix_harmonic_count)) * twelveth);
-		this->fifteenth_harmonics.push_back(pow(10, (-(i)  * 20 / this->mix_harmonic_count)) * fifteenth);
-		this->seventeenth_harmonics.push_back(pow(10, (-(i)  * 20 / this->mix_harmonic_count)) * seventeenth);
-		this->nineteenth_harmonics.push_back(pow(10, (-(i)  * 20 / this->mix_harmonic_count)) * nineteenth);
-		this->below_harmonics.push_back(pow(10, (-(i)  * 20 / this->mix_harmonic_count)) * below);
-		this->major_third_harmonics.push_back(pow(10, (-(i)  * 20 / this->mix_harmonic_count)) * third);
-		this->perfect_fourth_harmonics.push_back(pow(10, (-(i)  * 20 / this->mix_harmonic_count)) * fourth);
-		this->perfect_fifth_harmonics.push_back(pow(10, (-(i)  * 20 / this->mix_harmonic_count)) * perfect_fifth);
+		this->primary_harmonics.push_back(pow(10, (-(i) * 10 / this->mix_harmonic_count)) * primary);
+		this->eighth_harmonics.push_back(pow(10, (-(i) * 20 / this->mix_harmonic_count)) * eighth);
+		this->twelveth_harmonics.push_back(pow(10, (-(i) * 20 / this->mix_harmonic_count)) * twelveth);
+		this->fifteenth_harmonics.push_back(pow(10, (-(i) * 20 / this->mix_harmonic_count)) * fifteenth);
+		this->seventeenth_harmonics.push_back(pow(10, (-(i) * 20 / this->mix_harmonic_count)) * seventeenth);
+		this->nineteenth_harmonics.push_back(pow(10, (-(i) * 20 / this->mix_harmonic_count)) * nineteenth);
+		this->below_harmonics.push_back(pow(10, (-(i) * 20 / this->mix_harmonic_count)) * below);
+		this->major_third_harmonics.push_back(pow(10, (-(i) * 20 / this->mix_harmonic_count)) * third);
+		this->perfect_fourth_harmonics.push_back(pow(10, (-(i) * 20 / this->mix_harmonic_count)) * fourth);
+		this->perfect_fifth_harmonics.push_back(pow(10, (-(i) * 20 / this->mix_harmonic_count)) * perfect_fifth);
 	}
-
 }
 
 std::vector<double> Organ::generateNote(double duration, double frequency, double volume)
