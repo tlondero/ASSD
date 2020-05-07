@@ -17,13 +17,15 @@ public:
 	wxButton* m_btn1 = nullptr;
 	wxTextCtrl* m_txt1 = nullptr;
 	wxListBox* m_list1 = nullptr;
-	wxButton* m_btn2 = nullptr;
+	wxButton* m_btn2 = nullptr;				//Boton para agregar archivo a ddm
+	wxButton* m_btn3 = nullptr;				//Boton para borrar archivo de ddm
 	wxComboBox* m_ddm = nullptr;
 
 	vector<string> choices;			//vector de strings que tiene los mismos que el DDM y en el mismo orden
 
 	void OnButtonClicked1(wxCommandEvent& evt);
 	void AddWavToList(wxCommandEvent& evt);
+	void DeleteWavFromList(wxCommandEvent& evt);
 
 	wxDECLARE_EVENT_TABLE();
 };
