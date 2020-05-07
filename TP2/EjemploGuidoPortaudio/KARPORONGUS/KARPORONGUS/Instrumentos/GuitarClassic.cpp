@@ -42,7 +42,7 @@ vector<double> GuitarClassic::generateNote(double duration, double pitch, double
 
 	this->currentSample = 0;
 	this->previousSample = 0;
-	for (unsigned int i = 0; i < (int)duration*SAMPLE_RATE; i++) {
+	for (unsigned int i = 0; i < floor(duration*SAMPLE_RATE); i++) {
 		if (i < cutFactor*duration*SAMPLE_RATE) {
 			Guitarsound.push_back(this->getSample());
 		}

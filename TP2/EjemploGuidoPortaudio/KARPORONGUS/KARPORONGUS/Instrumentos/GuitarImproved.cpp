@@ -29,6 +29,7 @@ vector<double> GuitarImproved::generateNote(double duration, double pitch, doubl
 		a = 0.5;
 		b = 0.5;
 	}
+
 	vector<double> Guitarsound;
 	if (noiseType == 'B')
 		for (unsigned int i = 0; i < floor((SAMPLE_RATE / (double)pitch) ); i++)
@@ -83,7 +84,8 @@ vector<double> GuitarImproved::generateNoteElectric(double duration, double pitc
 		a = 0.5;
 		b = 0.5;
 	}
-	rf = 1;
+	if (this->rf > 0.2)
+		rf = 0.96;
 	vector<double> Guitarsound;
 	if (noiseType == 'B')
 		for (unsigned int i = 0; i < floor((SAMPLE_RATE / (double)pitch) - 0.5); i++)
@@ -106,7 +108,7 @@ vector<double> GuitarImproved::generateNoteElectric(double duration, double pitc
 
 	this->currentSample = 0;
 	this->previousSample = 0;
-	for (unsigned int i = 0; i < (int)duration*SAMPLE_RATE; i++) {
+	for (unsigned int i = 0; i < floor(duration*SAMPLE_RATE); i++) {
 		if (i < cutFactor*duration*SAMPLE_RATE) {
 			Guitarsound.push_back(this->getSample());
 		}
