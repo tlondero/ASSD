@@ -8,6 +8,7 @@ class OrganController
 public:
 	OrganController();
 	SynthTrack sytnsynthesisTrack(Tracks Track);
+	SynthTrack sytnsynthesisPreview(Tracks Track);
 	~OrganController();
 private:
 	Organ organ;

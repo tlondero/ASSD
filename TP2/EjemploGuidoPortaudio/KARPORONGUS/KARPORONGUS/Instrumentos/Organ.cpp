@@ -85,7 +85,12 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 				}
 			}
 			else if (n > (T-R)){
-				ADSR = cos((((double)TWO_PI) / (4 * R))*(n - (T - R)));
+				if (volume >= 0.3) {
+					ADSR = cos((((double)TWO_PI) / (4 * R))*(n - (T - R))) * (1 - 0.3*volume*sin(40 * (n - R))*sin(n - (T - R)));
+				}
+				else {
+					ADSR = cos((((double)TWO_PI) / (4 * R))*(n - (T - R)));
+				}
 			}
 
 
@@ -122,9 +127,14 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 					ADSR = 1;
 				}
 			}
-			else if (n > (T-R)){
-				ADSR = cos((((double)TWO_PI) / (4 * R))*(n - (T - R)));
-			}
+			else if (n > (T - R)) {
+					if (volume >= 0.3) {
+						ADSR = cos((((double)TWO_PI) / (4 * R))*(n - (T - R))) * (1 - 0.3*volume*sin(40 * (n - R))*sin(n - (T - R)));
+					}
+					else {
+						ADSR = cos((((double)TWO_PI) / (4 * R))*(n - (T - R)));
+					}
+				}
 
 				note[n] += (fifth_harmonics[i] * ADSR * sin(TWO_PI * f * (n) / SAMPLE_RATE));
 			}
@@ -154,7 +164,12 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 					}
 				}
 				else if (n > (T - R)) {
-					ADSR = cos((((double)TWO_PI) / (4 * R))*(n - (T - R)));
+					if (volume >= 0.3) {
+						ADSR = cos((((double)TWO_PI) / (4 * R))*(n - (T - R))) * (1 - 0.3*volume*sin(40 * (n - R))*sin(n - (T - R)));
+					}
+					else {
+						ADSR = cos((((double)TWO_PI) / (4 * R))*(n - (T - R)));
+					}
 				}
 
 				note[n] += (primary_harmonics[i] * ADSR * sin(TWO_PI * f * (n) / SAMPLE_RATE));
@@ -185,7 +200,12 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 					}
 				}
 				else if (n > (T - R)) {
-					ADSR = cos((((double)TWO_PI) / (4 * R))*(n - (T - R)));
+					if (volume >= 0.3) {
+						ADSR = cos((((double)TWO_PI) / (4 * R))*(n - (T - R))) * (1 - 0.3*volume*sin(40 * (n - R))*sin(n - (T - R)));
+					}
+					else {
+						ADSR = cos((((double)TWO_PI) / (4 * R))*(n - (T - R)));
+					}
 				}
 
 				note[n] += (eighth_harmonics[i] * ADSR * sin(TWO_PI * f * (n) / SAMPLE_RATE));
@@ -216,7 +236,12 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 					}
 				}
 				else if (n > (T - R)) {
-					ADSR = cos((((double)TWO_PI) / (4 * R))*(n - (T - R)));
+					if (volume >= 0.3) {
+						ADSR = cos((((double)TWO_PI) / (4 * R))*(n - (T - R))) * (1 - 0.3*volume*sin(40 * (n - R))*sin(n - (T - R)));
+					}
+					else {
+						ADSR = cos((((double)TWO_PI) / (4 * R))*(n - (T - R)));
+					}
 				}
 
 				note[n] += (twelveth_harmonics[i] * ADSR * sin(TWO_PI * f * (n) / SAMPLE_RATE));
@@ -247,7 +272,12 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 					}
 				}
 				else if (n > (T - R)) {
-					ADSR = cos((((double)TWO_PI) / (4 * R))*(n - (T - R)));
+					if (volume >= 0.3) {
+						ADSR = cos((((double)TWO_PI) / (4 * R))*(n - (T - R))) * (1 - 0.3*volume*sin(40 * (n - R))*sin(n - (T - R)));
+					}
+					else {
+						ADSR = cos((((double)TWO_PI) / (4 * R))*(n - (T - R)));
+					}
 				}
 
 				note[n] += (fifteenth_harmonics[i] * ADSR * sin(TWO_PI * f * (n) / SAMPLE_RATE));
@@ -278,7 +308,12 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 					}
 				}
 				else if (n > (T - R)) {
-					ADSR = cos((((double)TWO_PI) / (4 * R))*(n - (T - R)));
+					if (volume >= 0.3) {
+						ADSR = cos((((double)TWO_PI) / (4 * R))*(n - (T - R))) * (1 - 0.3*volume*sin(40 * (n - R))*sin(n - (T - R)));
+					}
+					else {
+						ADSR = cos((((double)TWO_PI) / (4 * R))*(n - (T - R)));
+					}
 				}
 
 				note[n] += (seventeenth_harmonics[i] * ADSR * sin(TWO_PI * f * (n) / SAMPLE_RATE));
@@ -309,7 +344,12 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 					}
 				}
 				else if (n > (T - R)) {
-					ADSR = cos((((double)TWO_PI) / (4 * R))*(n - (T - R)));
+					if (volume >= 0.3) {
+						ADSR = cos((((double)TWO_PI) / (4 * R))*(n - (T - R))) * (1 - 0.3*volume*sin(40 * (n - R))*sin(n - (T - R)));
+					}
+					else {
+						ADSR = cos((((double)TWO_PI) / (4 * R))*(n - (T - R)));
+					}
 				}
 
 				note[n] += (nineteenth_harmonics[i] * ADSR * sin(TWO_PI * f * (n) / SAMPLE_RATE));
@@ -331,7 +371,12 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 			}
 		}
 		else if (n > (T - R)) {
-			ADSR = cos((((double)TWO_PI) / (4 * R))*(n - (T - R)));
+			if (volume >= 0.3) {
+				ADSR = cos((((double)TWO_PI) / (4 * R))*(n - (T - R))) * (1 - 0.3*volume*sin(40 * (n - R))*sin(n - (T - R)));
+			}
+			else {
+				ADSR = cos((((double)TWO_PI) / (4 * R))*(n - (T - R)));
+			}
 		}
 
 		if (this->below != 0) {
@@ -364,7 +409,12 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 					}
 				}
 				else if (n > (T - R)) {
-					ADSR = cos((((double)TWO_PI) / (4 * R))*(n - (T - R)));
+					if (volume >= 0.3) {
+						ADSR = cos((((double)TWO_PI) / (4 * R))*(n - (T - R))) * (1 - 0.3*volume*sin(40 * (n - R))*sin(n - (T - R)));
+					}
+					else {
+						ADSR = cos((((double)TWO_PI) / (4 * R))*(n - (T - R)));
+					}
 				}
 
 				note[n] += (major_third_harmonics[i] * ADSR * sin(TWO_PI * f * (n) / SAMPLE_RATE));
@@ -395,7 +445,12 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 					}
 				}
 				else if (n > (T - R)) {
-					ADSR = cos((((double)TWO_PI) / (4 * R))*(n - (T - R)));
+					if (volume >= 0.3) {
+						ADSR = cos((((double)TWO_PI) / (4 * R))*(n - (T - R))) * (1 - 0.3*volume*sin(40 * (n - R))*sin(n - (T - R)));
+					}
+					else {
+						ADSR = cos((((double)TWO_PI) / (4 * R))*(n - (T - R)));
+					}
 				}
 
 				note[n] += (perfect_fourth_harmonics[i] * ADSR * sin(TWO_PI * f * (n) / SAMPLE_RATE));
@@ -426,7 +481,12 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 					}
 				}
 				else if (n > (T - R)) {
-					ADSR = cos((((double)TWO_PI) / (4 * R))*(n - (T - R)));
+					if (volume >= 0.3) {
+						ADSR = cos((((double)TWO_PI) / (4 * R))*(n - (T - R))) * (1 - 0.3*volume*sin(40 * (n - R))*sin(n - (T - R)));
+					}
+					else {
+						ADSR = cos((((double)TWO_PI) / (4 * R))*(n - (T - R)));
+					}
 				}
 
 				note[n] += (perfect_fifth_harmonics[i] * ADSR * sin(TWO_PI * f * (n) / SAMPLE_RATE));
@@ -458,6 +518,17 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 
 		note[n] += (((rand() % 2) * 2) - 1)*this->noise*ADSR;
 	}
+
+	std::ofstream myfile;
+	myfile.open("sintest.txt");
+	for (int i = 0; i < note.size(); i++) {
+		myfile << note[i];
+		if (i != note.size() - 1) {
+			myfile << ",";
+		}
+	}
+	myfile.close();
+	
 
 	double max = *max_element(note.begin(), note.end());
 	for (int i = 0; i < note.size(); i++) {

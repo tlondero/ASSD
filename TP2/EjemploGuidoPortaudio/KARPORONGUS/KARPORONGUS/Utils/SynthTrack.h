@@ -10,5 +10,6 @@ public:
 	~SynthTrack();
 	string instrumentName;
 	vector<MusicData> track;
+	double previewDuration;
 };
 
