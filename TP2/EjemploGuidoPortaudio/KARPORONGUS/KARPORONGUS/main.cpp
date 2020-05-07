@@ -15,15 +15,15 @@ using namespace std;
 int main(void) {
 
 	MidiParser myMidi;
-	if (myMidi.addMidi("ravel")) {
+	if (myMidi.addMidi("MarioMidi")) {
 		vector<Tracks> myTracks = myMidi.getTracks();
 		double duration = myMidi.getTotalDuration();
 		UserInput ui;
 		UserChoice uc;
 		uc.params.GuitarParam_rf = 1;
-		uc.TrackInstrument = "FLUTE";
+		uc.TrackInstrument = "GUITAR";
 		uc.TrackNumber = 0;
-		ui.wavName = "test_alan";
+		ui.wavName = "test_ktn";
 		ui.pairTrackInst.push_back(uc);
 		double rf = 1;
 		vector<SynthTrack> synthtrackv;
