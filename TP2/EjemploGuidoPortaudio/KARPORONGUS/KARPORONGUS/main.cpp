@@ -16,7 +16,6 @@ int main(void) {
 
 	MidiParser myMidi;
 	if (myMidi.addMidi("MarioMidi")) {
-
 		vector<Tracks> myTracks = myMidi.getTracks();
 		double duration = myMidi.getTotalDuration();
 		UserInput ui;
