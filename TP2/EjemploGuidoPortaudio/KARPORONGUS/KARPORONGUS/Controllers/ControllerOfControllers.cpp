@@ -8,7 +8,7 @@ vector<SynthTrack> ControllerOfControllers::sytnsynthesisProject(vector<Tracks> 
 		if (userData.pairTrackInst[track].TrackInstrument == "GUITAR") {
 
 			this->AGController.setParam(userData.pairTrackInst[track].params.GuitarParam_rf);
-			mySynthTrackVector.push_back(this->AGController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber]));
+			mySynthTrackVector.push_back(this->AGController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber],true));
 		}
 		else if (userData.pairTrackInst[track].TrackInstrument == "ELECTRIC_GUITAR") {
 			this->EGController.setParam(userData.pairTrackInst[track].params.GuitarParam_rf);
