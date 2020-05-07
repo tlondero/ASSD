@@ -39,7 +39,7 @@ vector<Tracks> MidiParser::getTracks() {
 			}
 
 		}
-		if (strcmp(actualTrack.instrumentName.c_str(),""))
+		if (strcmp(actualTrack.instrumentName.c_str(),"") && (actualTrack.Notes.size()>=1))
 			trackVector.push_back(actualTrack);
 		else if (actualTrack.Notes.size() > 1) {
 			actualTrack.instrumentName = "UNKNOWN";
