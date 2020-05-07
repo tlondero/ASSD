@@ -150,6 +150,12 @@
     <ClCompile Include="Controllers\OrganController.cpp">
       <Filter>Source Files\Controladores de Instrumentos</Filter>
     </ClCompile>
+    <ClCompile Include="Controllers\TrumpetController.cpp">
+      <Filter>Source Files\Controladores de Instrumentos</Filter>
+    </ClCompile>
+    <ClCompile Include="Instrumentos\Trumpet.cpp">
+      <Filter>Source Files\Instrumentos</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="General.h">
@@ -253,6 +259,12 @@
     </ClInclude>
     <ClInclude Include="Controllers\OrganController.h">
       <Filter>Header Files\Controladores de Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\TrumpetController.h">
+      <Filter>Header Files\Controladores de Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="Instrumentos\Trumpet.h">
+      <Filter>Header Files\Instrumentos</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

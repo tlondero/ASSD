@@ -7,6 +7,7 @@
 #include "ClarinetController.h"
 #include "TromboneController.h"
 #include "OrganController.h"
+#include "TrumpetController.h"
 
 // Aca se incluyen todos los instrumentos
 #include "../Utils/Tracks.h"
@@ -27,6 +28,7 @@ private:
 	ClarinetController CController;
 	TromboneController TController;
 	OrganController OController;
+	TrumpetController TrumpController;
 	// aca agregas tus instrumentos
 };
 

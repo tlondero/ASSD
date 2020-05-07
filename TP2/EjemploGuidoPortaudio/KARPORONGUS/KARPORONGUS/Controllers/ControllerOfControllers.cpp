@@ -1,7 +1,5 @@
 #include "ControllerOfControllers.h"
 
-
-
 ControllerOfControllers::ControllerOfControllers(){
 }
 vector<SynthTrack> ControllerOfControllers::sytnsynthesisProject(vector<Tracks> projectTracks, UserInput userData) {
@@ -40,6 +38,9 @@ vector<SynthTrack> ControllerOfControllers::sytnsynthesisProject(vector<Tracks> 
 				projectTracks[userData.pairTrackInst[track].TrackNumber].instrumentName = "FLUTE";
 			}
 			mySynthTrackVector.push_back(this->OController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber]));
+		}
+		else if (userData.pairTrackInst[track].TrackInstrument == "TRUMPET") {
+			mySynthTrackVector.push_back(this->TrumpController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber]));
 		}
 		//else if (other instrument) {
 		//}
