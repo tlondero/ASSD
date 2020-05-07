@@ -14,7 +14,7 @@ using namespace little_endian_io;
 WavController::WavController(double duration_, string wavName_, double volume_) {
 	this->duration = duration_;
 	this->wavName = wavName_;
-	this->wavVector = vector<double>(floor(this->duration * SAMPLE_RATE), 0);
+	this->wavVector = vector<double>(ceil(this->duration * SAMPLE_RATE), 0);
 	this->volume = volume_;
 }
 void WavController::compileWav(vector<SynthTrack> allTracks) {
