@@ -9,5 +9,6 @@ public:
 	~Tracks();
 	std::string instrumentName;
 	std::vector<Note> Notes;
+	std::string userInstrumentChoice;
 };
 

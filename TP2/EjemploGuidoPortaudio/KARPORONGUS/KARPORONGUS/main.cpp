@@ -16,24 +16,30 @@ int main(void) {
 
 	MidiParser myMidi;
 
+
 	if (myMidi.addMidi("Mario2")) {
+
 
 		vector<Tracks> myTracks = myMidi.getTracks();
 		double duration = myMidi.getTotalDuration();
 		UserInput ui;
 		UserChoice uc;
 		uc.params.GuitarParam_rf = 1;
-		uc.TrackInstrument = "GUITAR";
+
+		uc.TrackInstrument = "ORGAN";
 		uc.TrackNumber = 0;
-		ui.wavName = "Mario_ktn";
+		myTracks[uc.TrackNumber].userInstrumentChoice = uc.TrackInstrument;
+		ui.wavName = "test_alan";
 
 		ui.pairTrackInst.push_back(uc);
 		double rf = 1;
 		vector<SynthTrack> synthtrackv;
 		ControllerOfControllers myCC;
 		synthtrackv=myCC.sytnsynthesisProject(myTracks, ui);
+
 										//DUracion debug
 		WavController myWavController(duration+1,ui.wavName,1000);
+
 		myWavController.compileWav(synthtrackv);
 		myWavController.makeWav();
 	}
