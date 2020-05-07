@@ -126,6 +126,7 @@
     <ClCompile Include="Controllers\ElectricGuitarController.cpp" />
     <ClCompile Include="Controllers\OrganController.cpp" />
     <ClCompile Include="Controllers\TromboneController.cpp" />
+    <ClCompile Include="Controllers\TrumpetController.cpp" />
     <ClCompile Include="Controllers\WavController.cpp" />
     <ClCompile Include="Instrumentos\Banjo.cpp" />
     <ClCompile Include="Instrumentos\Bell.cpp" />
@@ -136,6 +137,7 @@
     <ClCompile Include="Instrumentos\Instrument.cpp" />
     <ClCompile Include="Instrumentos\Organ.cpp" />
     <ClCompile Include="Instrumentos\Trombone.cpp" />
+    <ClCompile Include="Instrumentos\Trumpet.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MidiParser.cpp" />
     <ClCompile Include="midi\Binasc.cpp" />
@@ -152,7 +154,6 @@
     <ClCompile Include="Utils\Tracks.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Clarinet.h" />
     <ClInclude Include="Controllers\AcousticGuitarController.h" />
     <ClInclude Include="Controllers\BanjoController.h" />
     <ClInclude Include="Controllers\BellController.h" />
@@ -162,6 +163,7 @@
     <ClInclude Include="Controllers\ElectricGuitarController.h" />
     <ClInclude Include="Controllers\OrganController.h" />
     <ClInclude Include="Controllers\TromboneController.h" />
+    <ClInclude Include="Controllers\TrumpetController.h" />
     <ClInclude Include="Controllers\WavController.h" />
     <ClInclude Include="General.h" />
     <ClInclude Include="Instrumentos\Banjo.h" />
@@ -173,6 +175,7 @@
     <ClInclude Include="Instrumentos\Instrument.h" />
     <ClInclude Include="Instrumentos\Organ.h" />
     <ClInclude Include="Instrumentos\Trombone.h" />
+    <ClInclude Include="Instrumentos\Trumpet.h" />
     <ClInclude Include="MidiParser.h" />
     <ClInclude Include="midi\Binasc.h" />
     <ClInclude Include="midi\MidiEvent.h" />

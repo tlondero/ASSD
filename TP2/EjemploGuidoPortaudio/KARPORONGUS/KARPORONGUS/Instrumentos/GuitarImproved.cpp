@@ -25,7 +25,7 @@ vector<double> GuitarImproved::generateNote(double duration, double pitch, doubl
 	this->waveTable.clear();
 	this->b = ((double)SAMPLE_RATE/( pitch )) - (int)((double)SAMPLE_RATE / ( pitch));
 	this->a = 1 - this->b;
-	if (b == 0 || pitch<400) {
+	if (b < .1 || pitch<400) {
 		a = 0.5;
 		b = 0.5;
 	}
