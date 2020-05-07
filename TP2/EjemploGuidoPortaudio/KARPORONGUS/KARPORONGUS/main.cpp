@@ -21,7 +21,7 @@ int main(void) {
 		UserInput ui;
 		UserChoice uc;
 		uc.params.GuitarParam_rf = 1;
-		uc.TrackInstrument = "TRUMPET";
+		uc.TrackInstrument = "CLARINET";
 		uc.TrackNumber = 0;
 		ui.wavName = "TomiTwinkle";
 		ui.pairTrackInst.push_back(uc);
