@@ -23,6 +23,15 @@ vector<SynthTrack> ControllerOfControllers::sytnsynthesisProject(vector<Tracks> 
 			this->DController.setParam(userData.pairTrackInst[track].params.DrumParam_rf, userData.pairTrackInst[track].params.DrumProb);
 			mySynthTrackVector.push_back(this->DController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber]));
 		}
+		else if (userData.pairTrackInst[track].TrackInstrument == "TROMBONE") {
+			mySynthTrackVector.push_back(this->TController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber]));
+		}
+		else if (userData.pairTrackInst[track].TrackInstrument == "BELL") {
+			mySynthTrackVector.push_back(this->bellController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber]));
+		}
+		else if (userData.pairTrackInst[track].TrackInstrument == "CLARINET") {
+			mySynthTrackVector.push_back(this->CController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber]));
+		}
 		//else if (other instrument) {
 		//}
 	}
