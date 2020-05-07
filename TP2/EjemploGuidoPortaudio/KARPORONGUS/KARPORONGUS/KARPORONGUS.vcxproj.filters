@@ -212,9 +212,6 @@
     <ClInclude Include="Instrumentos\Clarinet.h">
       <Filter>Header Files\Instrumentos</Filter>
     </ClInclude>
-    <ClInclude Include="Clarinet.h">
-      <Filter>Header Files\Instrumentos</Filter>
-    </ClInclude>
     <ClInclude Include="Instrumentos\Trombone.h">
       <Filter>Header Files\Instrumentos</Filter>
     </ClInclude>

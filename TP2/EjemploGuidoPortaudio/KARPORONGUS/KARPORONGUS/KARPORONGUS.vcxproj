@@ -154,7 +154,6 @@
     <ClCompile Include="Utils\Tracks.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Clarinet.h" />
     <ClInclude Include="Controllers\AcousticGuitarController.h" />
     <ClInclude Include="Controllers\BanjoController.h" />
     <ClInclude Include="Controllers\BellController.h" />
