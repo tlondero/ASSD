@@ -19,9 +19,9 @@ vector <double> Trombone::generateNote(double duration, double pitch, double Nor
 	double Idet;
 	double Adet;
 
-	double normtime = duration * SAMPLE_RATE;
+	double normtime = floor(duration * SAMPLE_RATE);
 	
-	for (int i = 0; i < (int)duration * SAMPLE_RATE; i++) {
+	for (int i = 0; i < floor(duration * SAMPLE_RATE); i++) {
 		
 		if (i * 11 < normtime) {
 			Idet = (this->io) * i * 11 / normtime;

@@ -3,6 +3,10 @@
 #include "ElectricGuitarController.h"
 #include "BanjoController.h"
 #include "DrumController.h"
+#include "BellController.h"
+#include "ClarinetController.h"
+#include "TromboneController.h"
+
 // Aca se incluyen todos los instrumentos
 #include "../Utils/Tracks.h"
 #include "../UserInput/UserInput.h"
@@ -18,6 +22,9 @@ private:
 	ElectricGuitarController EGController;
 	BanjoController BController;
 	DrumController DController;
+	BellController bellController;
+	ClarinetController CController;
+	TromboneController TController;
 	// aca agregas tus instrumentos
 };
 

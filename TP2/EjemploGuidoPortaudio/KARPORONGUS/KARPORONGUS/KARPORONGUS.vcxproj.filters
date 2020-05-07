@@ -135,6 +135,15 @@
     <ClCompile Include="Controllers\DrumController .cpp">
       <Filter>Source Files\Controladores de Instrumentos</Filter>
     </ClCompile>
+    <ClCompile Include="Controllers\BellController.cpp">
+      <Filter>Source Files\Controladores de Instrumentos</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\ClarinetController.cpp">
+      <Filter>Source Files\Controladores de Instrumentos</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\TromboneController.cpp">
+      <Filter>Source Files\Controladores de Instrumentos</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="General.h">
@@ -222,6 +231,15 @@
       <Filter>Header Files\Controladores de Instrumentos</Filter>
     </ClInclude>
     <ClInclude Include="Controllers\DrumController.h">
+      <Filter>Header Files\Controladores de Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\BellController.h">
+      <Filter>Header Files\Controladores de Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\ClarinetController.h">
+      <Filter>Header Files\Controladores de Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\TromboneController.h">
       <Filter>Header Files\Controladores de Instrumentos</Filter>
     </ClInclude>
   </ItemGroup>
