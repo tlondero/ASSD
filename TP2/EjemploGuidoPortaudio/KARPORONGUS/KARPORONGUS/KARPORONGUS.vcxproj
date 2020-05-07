@@ -117,10 +117,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-
-    <ClCompile Include="AcousticGuitarController.cpp" />
-    <ClCompile Include="ControllerOfControllers.cpp" />
-    <ClCompile Include="InstParams.cpp" />
+    <ClCompile Include="Controllers\AcousticGuitarController.cpp" />
+    <ClCompile Include="Controllers\BanjoController.cpp" />
+    <ClCompile Include="Controllers\BellController.cpp" />
+    <ClCompile Include="Controllers\ClarinetController.cpp" />
+    <ClCompile Include="Controllers\ControllerOfControllers.cpp" />
+    <ClCompile Include="Controllers\DrumController .cpp" />
+    <ClCompile Include="Controllers\ElectricGuitarController.cpp" />
+    <ClCompile Include="Controllers\OrganController.cpp" />
+    <ClCompile Include="Controllers\TromboneController.cpp" />
+    <ClCompile Include="Controllers\WavController.cpp" />
     <ClCompile Include="Instrumentos\Banjo.cpp" />
     <ClCompile Include="Instrumentos\Bell.cpp" />
     <ClCompile Include="Instrumentos\Clarinet.cpp" />
@@ -128,6 +134,7 @@
     <ClCompile Include="Instrumentos\GuitarClassic.cpp" />
     <ClCompile Include="Instrumentos\GuitarImproved.cpp" />
     <ClCompile Include="Instrumentos\Instrument.cpp" />
+    <ClCompile Include="Instrumentos\Organ.cpp" />
     <ClCompile Include="Instrumentos\Trombone.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MidiParser.cpp" />
@@ -136,21 +143,27 @@
     <ClCompile Include="midi\MidiEventList.cpp" />
     <ClCompile Include="midi\MidiFile.cpp" />
     <ClCompile Include="midi\MidiMessage.cpp" />
-    <ClCompile Include="UserChoice.cpp" />
-    <ClCompile Include="UserInput.cpp" />
+    <ClCompile Include="UserInput\InstParams.cpp" />
+    <ClCompile Include="UserInput\UserChoice.cpp" />
+    <ClCompile Include="UserInput\UserInput.cpp" />
     <ClCompile Include="Utils\MusicData.cpp" />
     <ClCompile Include="Utils\Note.cpp" />
     <ClCompile Include="Utils\SynthTrack.cpp" />
     <ClCompile Include="Utils\Tracks.cpp" />
-    <ClCompile Include="WavController.cpp" />
-    <ClCompile Include="WavGen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clarinet.h" />
-    <ClInclude Include="ControllerOfControllers.h" />
+    <ClInclude Include="Controllers\AcousticGuitarController.h" />
+    <ClInclude Include="Controllers\BanjoController.h" />
+    <ClInclude Include="Controllers\BellController.h" />
+    <ClInclude Include="Controllers\ClarinetController.h" />
+    <ClInclude Include="Controllers\ControllerOfControllers.h" />
+    <ClInclude Include="Controllers\DrumController.h" />
+    <ClInclude Include="Controllers\ElectricGuitarController.h" />
+    <ClInclude Include="Controllers\OrganController.h" />
+    <ClInclude Include="Controllers\TromboneController.h" />
+    <ClInclude Include="Controllers\WavController.h" />
     <ClInclude Include="General.h" />
-    <ClInclude Include="AcousticGuitarController.h" />
-    <ClInclude Include="InstParams.h" />
     <ClInclude Include="Instrumentos\Banjo.h" />
     <ClInclude Include="Instrumentos\Bell.h" />
     <ClInclude Include="Instrumentos\Clarinet.h" />
@@ -158,6 +171,7 @@
     <ClInclude Include="Instrumentos\GuitarClassic.h" />
     <ClInclude Include="Instrumentos\GuitarImproved.h" />
     <ClInclude Include="Instrumentos\Instrument.h" />
+    <ClInclude Include="Instrumentos\Organ.h" />
     <ClInclude Include="Instrumentos\Trombone.h" />
     <ClInclude Include="MidiParser.h" />
     <ClInclude Include="midi\Binasc.h" />
@@ -165,14 +179,13 @@
     <ClInclude Include="midi\MidiEventList.h" />
     <ClInclude Include="midi\MidiFile.h" />
     <ClInclude Include="midi\MidiMessage.h" />
-    <ClInclude Include="UserChoice.h" />
-    <ClInclude Include="UserInput.h" />
+    <ClInclude Include="UserInput\InstParams.h" />
+    <ClInclude Include="UserInput\UserChoice.h" />
+    <ClInclude Include="UserInput\UserInput.h" />
     <ClInclude Include="Utils\MusicData.h" />
     <ClInclude Include="Utils\Note.h" />
     <ClInclude Include="Utils\SynthTrack.h" />
     <ClInclude Include="Utils\Tracks.h" />
-    <ClInclude Include="WavController.h" />
-    <ClInclude Include="WavGen.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

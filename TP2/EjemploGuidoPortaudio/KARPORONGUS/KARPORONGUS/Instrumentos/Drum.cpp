@@ -42,7 +42,7 @@ vector<double> Drum::generateNote(double duration, double pitch, double Normvelo
 	}
 	this->currentSample = 0;
 	this->previousSample = 0;
-	for (int i = 0; i < (int)duration*SAMPLE_RATE; i++) {
+	for (int i = 0; i < floor(duration*SAMPLE_RATE); i++) {
 		if (i < cutFactor*duration*SAMPLE_RATE) {
 			DrumSound.push_back(this->getSample());
 		}

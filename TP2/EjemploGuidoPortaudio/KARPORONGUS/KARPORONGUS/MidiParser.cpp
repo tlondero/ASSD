@@ -39,8 +39,12 @@ vector<Tracks> MidiParser::getTracks() {
 			}
 
 		}
-		if (strcmp(actualTrack.instrumentName.c_str(), ""))
+		if (strcmp(actualTrack.instrumentName.c_str(),""))
 			trackVector.push_back(actualTrack);
+		else if (actualTrack.Notes.size() > 1) {
+			actualTrack.instrumentName = "UNKNOWN";
+			trackVector.push_back(actualTrack);
+		}
 	}
 	this->totalDuration = *max_element(toff.begin(), toff.end());
 	return trackVector;

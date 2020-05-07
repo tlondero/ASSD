@@ -19,9 +19,9 @@ vector <double> Clarinet::generateNote(double duration, double pitch, double Nor
 	double Idet;
 	double Adet;
 
-	int normtime = (int) duration * SAMPLE_RATE;
+	int normtime = floor(duration * SAMPLE_RATE);
 
-	for (int i = 0; i < (int)duration * SAMPLE_RATE; i++) {
+	for (int i = 0; i < floor(duration * SAMPLE_RATE); i++) {
 	
 		Idet = (this->io) * (1 + exp(-i / (normtime * (this->tau))) );
 				
