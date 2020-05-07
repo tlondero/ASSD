@@ -117,25 +117,71 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Bell.cpp" />
-    <ClCompile Include="Drum.cpp" />
-    <ClCompile Include="Clarinet.cpp" />
-    <ClCompile Include="Instrument.cpp" />
+    <ClCompile Include="Controllers\AcousticGuitarController.cpp" />
+    <ClCompile Include="Controllers\BanjoController.cpp" />
+    <ClCompile Include="Controllers\BellController.cpp" />
+    <ClCompile Include="Controllers\ClarinetController.cpp" />
+    <ClCompile Include="Controllers\ControllerOfControllers.cpp" />
+    <ClCompile Include="Controllers\DrumController .cpp" />
+    <ClCompile Include="Controllers\ElectricGuitarController.cpp" />
+    <ClCompile Include="Controllers\TromboneController.cpp" />
+    <ClCompile Include="Controllers\WavController.cpp" />
+    <ClCompile Include="Instrumentos\Banjo.cpp" />
+    <ClCompile Include="Instrumentos\Bell.cpp" />
+    <ClCompile Include="Instrumentos\Clarinet.cpp" />
+    <ClCompile Include="Instrumentos\Drum.cpp" />
+    <ClCompile Include="Instrumentos\GuitarClassic.cpp" />
+    <ClCompile Include="Instrumentos\GuitarImproved.cpp" />
+    <ClCompile Include="Instrumentos\Instrument.cpp" />
+    <ClCompile Include="Instrumentos\Trombone.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Guitar.cpp" />
-    <ClCompile Include="Utils.cpp" />
-    <ClCompile Include="WavGen.cpp" />
+    <ClCompile Include="MidiParser.cpp" />
+    <ClCompile Include="midi\Binasc.cpp" />
+    <ClCompile Include="midi\MidiEvent.cpp" />
+    <ClCompile Include="midi\MidiEventList.cpp" />
+    <ClCompile Include="midi\MidiFile.cpp" />
+    <ClCompile Include="midi\MidiMessage.cpp" />
+    <ClCompile Include="UserInput\InstParams.cpp" />
+    <ClCompile Include="UserInput\UserChoice.cpp" />
+    <ClCompile Include="UserInput\UserInput.cpp" />
+    <ClCompile Include="Utils\MusicData.cpp" />
+    <ClCompile Include="Utils\Note.cpp" />
+    <ClCompile Include="Utils\SynthTrack.cpp" />
+    <ClCompile Include="Utils\Tracks.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Bell.h" />
-    <ClInclude Include="Drum.h" />
     <ClInclude Include="Clarinet.h" />
+    <ClInclude Include="Controllers\AcousticGuitarController.h" />
+    <ClInclude Include="Controllers\BanjoController.h" />
+    <ClInclude Include="Controllers\BellController.h" />
+    <ClInclude Include="Controllers\ClarinetController.h" />
+    <ClInclude Include="Controllers\ControllerOfControllers.h" />
+    <ClInclude Include="Controllers\DrumController.h" />
+    <ClInclude Include="Controllers\ElectricGuitarController.h" />
+    <ClInclude Include="Controllers\TromboneController.h" />
+    <ClInclude Include="Controllers\WavController.h" />
     <ClInclude Include="General.h" />
-    <ClInclude Include="Guitar.h" />
-    <ClInclude Include="Instrument.h" />
-    <ClInclude Include="Organ.h" />
-    <ClInclude Include="Utils.h" />
-    <ClInclude Include="WavGen.h" />
+    <ClInclude Include="Instrumentos\Banjo.h" />
+    <ClInclude Include="Instrumentos\Bell.h" />
+    <ClInclude Include="Instrumentos\Clarinet.h" />
+    <ClInclude Include="Instrumentos\Drum.h" />
+    <ClInclude Include="Instrumentos\GuitarClassic.h" />
+    <ClInclude Include="Instrumentos\GuitarImproved.h" />
+    <ClInclude Include="Instrumentos\Instrument.h" />
+    <ClInclude Include="Instrumentos\Trombone.h" />
+    <ClInclude Include="MidiParser.h" />
+    <ClInclude Include="midi\Binasc.h" />
+    <ClInclude Include="midi\MidiEvent.h" />
+    <ClInclude Include="midi\MidiEventList.h" />
+    <ClInclude Include="midi\MidiFile.h" />
+    <ClInclude Include="midi\MidiMessage.h" />
+    <ClInclude Include="UserInput\InstParams.h" />
+    <ClInclude Include="UserInput\UserChoice.h" />
+    <ClInclude Include="UserInput\UserInput.h" />
+    <ClInclude Include="Utils\MusicData.h" />
+    <ClInclude Include="Utils\Note.h" />
+    <ClInclude Include="Utils\SynthTrack.h" />
+    <ClInclude Include="Utils\Tracks.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

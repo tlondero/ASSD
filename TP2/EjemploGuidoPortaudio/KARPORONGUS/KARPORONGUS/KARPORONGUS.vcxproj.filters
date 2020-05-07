@@ -22,63 +22,225 @@
     <Filter Include="Source Files\Utils">
       <UniqueIdentifier>{7e20200e-fb6c-479b-8e0f-801629b50213}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\MIDI">
+      <UniqueIdentifier>{df2c70ed-95e0-43bb-a279-8954a79e4738}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MIDI">
+      <UniqueIdentifier>{849fd9eb-d03c-4088-8f57-4740bafe1505}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Wav">
+      <UniqueIdentifier>{dc791c35-53f7-4acb-bcce-f73db0a9646d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Wav">
+      <UniqueIdentifier>{da95c2db-96e8-4725-8c8d-cb223c92611b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Controladores de Instrumentos">
+      <UniqueIdentifier>{dd44aecf-4381-4c17-a779-0270a21ac0ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Controladores de Instrumentos">
+      <UniqueIdentifier>{c35a69d6-fa71-4b58-829f-1a0931183514}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Header Files\Utils">
       <UniqueIdentifier>{fb65be2b-c72a-4ae9-ba7f-266056de8f79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\User Input">
+      <UniqueIdentifier>{915fd7cc-4fc4-4403-8d25-5a0e088d6771}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\User Input">
+      <UniqueIdentifier>{ff932de3-2edd-4528-8dbd-4656f5d8637a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Guitar.cpp">
+    <ClCompile Include="Instrumentos\Banjo.cpp">
       <Filter>Source Files\Instrumentos</Filter>
     </ClCompile>
-    <ClCompile Include="Drum.cpp">
+    <ClCompile Include="Instrumentos\Drum.cpp">
       <Filter>Source Files\Instrumentos</Filter>
     </ClCompile>
-    <ClCompile Include="Instrument.cpp">
+    <ClCompile Include="Instrumentos\GuitarClassic.cpp">
       <Filter>Source Files\Instrumentos</Filter>
     </ClCompile>
-    <ClCompile Include="Utils.cpp">
+    <ClCompile Include="Instrumentos\GuitarImproved.cpp">
+      <Filter>Source Files\Instrumentos</Filter>
+    </ClCompile>
+    <ClCompile Include="Instrumentos\Instrument.cpp">
+      <Filter>Source Files\Instrumentos</Filter>
+    </ClCompile>
+    <ClCompile Include="midi\Binasc.cpp">
+      <Filter>Source Files\MIDI</Filter>
+    </ClCompile>
+    <ClCompile Include="midi\MidiEvent.cpp">
+      <Filter>Source Files\MIDI</Filter>
+    </ClCompile>
+    <ClCompile Include="midi\MidiEventList.cpp">
+      <Filter>Source Files\MIDI</Filter>
+    </ClCompile>
+    <ClCompile Include="midi\MidiFile.cpp">
+      <Filter>Source Files\MIDI</Filter>
+    </ClCompile>
+    <ClCompile Include="midi\MidiMessage.cpp">
+      <Filter>Source Files\MIDI</Filter>
+    </ClCompile>
+    <ClCompile Include="MidiParser.cpp">
+      <Filter>Source Files\MIDI</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\Note.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="WavGen.cpp">
+    <ClCompile Include="Utils\Tracks.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="Clarinet.cpp">
+    <ClCompile Include="Utils\MusicData.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\SynthTrack.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Instrumentos\Bell.cpp">
       <Filter>Source Files\Instrumentos</Filter>
     </ClCompile>
-    <ClCompile Include="Bell.cpp">
+    <ClCompile Include="Instrumentos\Clarinet.cpp">
       <Filter>Source Files\Instrumentos</Filter>
+    </ClCompile>
+    <ClCompile Include="Instrumentos\Trombone.cpp">
+      <Filter>Source Files\Instrumentos</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\AcousticGuitarController.cpp">
+      <Filter>Source Files\Controladores de Instrumentos</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\ControllerOfControllers.cpp">
+      <Filter>Source Files\Controladores de Instrumentos</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInput\InstParams.cpp">
+      <Filter>Source Files\User Input</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInput\UserChoice.cpp">
+      <Filter>Source Files\User Input</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInput\UserInput.cpp">
+      <Filter>Source Files\User Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\WavController.cpp">
+      <Filter>Source Files\Wav</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\ElectricGuitarController.cpp">
+      <Filter>Source Files\Controladores de Instrumentos</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\BanjoController.cpp">
+      <Filter>Source Files\Controladores de Instrumentos</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\DrumController .cpp">
+      <Filter>Source Files\Controladores de Instrumentos</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\BellController.cpp">
+      <Filter>Source Files\Controladores de Instrumentos</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\ClarinetController.cpp">
+      <Filter>Source Files\Controladores de Instrumentos</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\TromboneController.cpp">
+      <Filter>Source Files\Controladores de Instrumentos</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="General.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Drum.h">
+    <ClInclude Include="Instrumentos\Banjo.h">
       <Filter>Header Files\Instrumentos</Filter>
     </ClInclude>
-    <ClInclude Include="Guitar.h">
+    <ClInclude Include="Instrumentos\Drum.h">
       <Filter>Header Files\Instrumentos</Filter>
     </ClInclude>
-    <ClInclude Include="Instrument.h">
+    <ClInclude Include="Instrumentos\GuitarClassic.h">
       <Filter>Header Files\Instrumentos</Filter>
     </ClInclude>
-    <ClInclude Include="Organ.h">
+    <ClInclude Include="Instrumentos\GuitarImproved.h">
       <Filter>Header Files\Instrumentos</Filter>
     </ClInclude>
-    <ClInclude Include="Utils.h">
+    <ClInclude Include="Instrumentos\Instrument.h">
+      <Filter>Header Files\Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="MidiParser.h">
+      <Filter>Header Files\MIDI</Filter>
+    </ClInclude>
+    <ClInclude Include="midi\MidiEvent.h">
+      <Filter>Header Files\MIDI</Filter>
+    </ClInclude>
+    <ClInclude Include="midi\MidiEventList.h">
+      <Filter>Header Files\MIDI</Filter>
+    </ClInclude>
+    <ClInclude Include="midi\MidiFile.h">
+      <Filter>Header Files\MIDI</Filter>
+    </ClInclude>
+    <ClInclude Include="midi\MidiMessage.h">
+      <Filter>Header Files\MIDI</Filter>
+    </ClInclude>
+    <ClInclude Include="midi\Binasc.h">
+      <Filter>Header Files\MIDI</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\Note.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="WavGen.h">
+    <ClInclude Include="Utils\Tracks.h">
       <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\MusicData.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\SynthTrack.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Instrumentos\Bell.h">
+      <Filter>Header Files\Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="Instrumentos\Clarinet.h">
+      <Filter>Header Files\Instrumentos</Filter>
     </ClInclude>
     <ClInclude Include="Clarinet.h">
       <Filter>Header Files\Instrumentos</Filter>
     </ClInclude>
-    <ClInclude Include="Bell.h">
+    <ClInclude Include="Instrumentos\Trombone.h">
       <Filter>Header Files\Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\AcousticGuitarController.h">
+      <Filter>Header Files\Controladores de Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\ControllerOfControllers.h">
+      <Filter>Header Files\Controladores de Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInput\InstParams.h">
+      <Filter>Header Files\User Input</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInput\UserChoice.h">
+      <Filter>Header Files\User Input</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInput\UserInput.h">
+      <Filter>Header Files\User Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\WavController.h">
+      <Filter>Header Files\Wav</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\ElectricGuitarController.h">
+      <Filter>Header Files\Controladores de Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\BanjoController.h">
+      <Filter>Header Files\Controladores de Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\DrumController.h">
+      <Filter>Header Files\Controladores de Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\BellController.h">
+      <Filter>Header Files\Controladores de Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\ClarinetController.h">
+      <Filter>Header Files\Controladores de Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\TromboneController.h">
+      <Filter>Header Files\Controladores de Instrumentos</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

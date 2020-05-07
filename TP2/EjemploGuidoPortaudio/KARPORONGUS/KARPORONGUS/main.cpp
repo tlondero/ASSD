@@ -1,53 +1,43 @@
 
-#include <stdlib.h> // Random
-#include "WavGen.h"
-#include <stdio.h>
-#include <ctime>
-#include <math.h>
-#include "portaudio.h"
-#include "Utils.h"
-#include <fstream>
-#include <iostream>
-#include "Guitar.h"
-#include "Drum.h"
-#include "Clarinet.h"
-#include "Bell.h"
 
-//#include "General.h"
-#define MAX_AMP         32760
-#define TWO_PI          6.283185307179586476925286766559
-
+#include "General.h"
+#include "Instrumentos/Banjo.h"
+#include "Instrumentos/Drum.h"
+#include "Instrumentos/GuitarClassic.h"
+#include "Instrumentos/GuitarImproved.h"
+#include "MidiParser.h"
+#include "Controllers/WavController.h"
+#include "Utils/SynthTrack.h"
+#include "Controllers/AcousticGuitarController.h"
+#include "Controllers/ControllerOfControllers.h"
 using namespace std;
 
 int main(void) {
-	int freq[6] = { 82, 130, 164, 196, 261, 330 };
-	double rf = 0.9;
-	double prob = 0.5;
-	int durationNote = 3;
-	double cut = 1;
-	double volume = 1000;
-	double Normvelocity = 1;
-	
-	/*
-	Clarinet clarinet;
-	vector <double> clarinetSound = clarinet.generateNote(durationNote, 330, Normvelocity);
-	makeWav(2, durationNote, "ThisWontWork5MEOLVIDEDEUNPARENTESIS2", clarinetSound, volume);
-	*/
-	
-	Bell bell;
-	vector <double> bellSound = bell.generateNote(durationNote, 330, Normvelocity);
-	makeWav(2, durationNote, "DemasiadoOptimismo", bellSound, volume);
 
-	
-	//Drum myGuitar(rf,prob);
-	//vector<double> GuitarSound1 = myGuitar.generateNote(durationNote,40, Normvelocity, cut);
-	//makeWav(2, durationNote, "RuidoUniforme", GuitarSound1, volume);
-	//GuitarSound1 = myGuitar.generateNote(durationNote, freq[3], Normvelocity, cut);
-	//makeWav(2, durationNote, "RuidoBinario", GuitarSound1, volume);
-	//GuitarSound1 = myGuitar.generateNote(durationNote, freq[5], Normvelocity, cut);
-	//makeWav(2, durationNote, "RuidoGausiano", GuitarSound1, volume);
+	MidiParser myMidi;
+	if (myMidi.addMidi("MarioMidi")) {
+
+		vector<Tracks> myTracks = myMidi.getTracks();
+		double duration = myMidi.getTotalDuration();
+		UserInput ui;
+		UserChoice uc;
+		uc.params.GuitarParam_rf = 1;
+		uc.TrackInstrument = "GUITAR";
+		uc.TrackNumber = 0;
+		ui.wavName = "PinkPanther";
+		ui.pairTrackInst.push_back(uc);
+		double rf = 1;
+		vector<SynthTrack> synthtrackv;
+		ControllerOfControllers myCC;
+		synthtrackv=myCC.sytnsynthesisProject(myTracks, ui);
+		WavController myWavController(duration,ui.wavName,1000);
+		myWavController.compileWav(synthtrackv);
+		myWavController.makeWav();
+	}
+	else {
+		cout << "No se encontró el archivo" << endl;
+		getchar();
+	}
+
 	return 0;
 }
-
-
-
