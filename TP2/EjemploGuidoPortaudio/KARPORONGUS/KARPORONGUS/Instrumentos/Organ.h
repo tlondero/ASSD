@@ -2,6 +2,8 @@
 
 #include <vector>
 #include <algorithm>
+#include <fstream>
+#include <iostream>
 
 #define SAMPLE_RATE     44100
 #define TWO_PI          6.283185307179586476925286766559

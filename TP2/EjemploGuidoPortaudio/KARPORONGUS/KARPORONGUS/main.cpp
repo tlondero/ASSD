@@ -14,45 +14,45 @@ using namespace std;
 
 int main(void) {
 
+	//HACER CONTROL-F Y BUSCAR "REVISAR" CAMBIE COSAS QUE NO SE SI ESTAN BIEN SDS
+	//-alan
+
+
 	MidiParser myMidi;
-	if (myMidi.addMidi("bach_tocatta_fugue_d_minor")) {
+	if (myMidi.addMidi("twinkleAlan")) {
 		vector<Tracks> myTracks = myMidi.getTracks();
-		double duration = myMidi.getTotalDuration();
+		double duration = myMidi.getTotalDuration() + 1;
+		ControllerOfControllers myCC;
+		WavController myWavController;
 		UserInput ui;
 		UserChoice uc;
+		double rf = 1;
+
+		//Síntesis preview
+		uc.InstrumentPreview = "ORGAN";
+		ui.wavName = "preview" + uc.InstrumentPreview;
+		uc.params.GuitarParam_rf = 1;
+		uc.TrackNumber = 0;
+		myTracks[uc.TrackNumber].userInstrumentChoice = uc.InstrumentPreview;
+		ui.pairTrackInst.push_back(uc);
+		vector<SynthTrack> synthtrack_preview;
+		synthtrack_preview = myCC.sytnsynthesisPreview(myTracks, ui);
+		myWavController.compileWav(synthtrack_preview, synthtrack_preview[0].previewDuration, ui.wavName, 1000);
+		myWavController.makeWav();
+		ui.pairTrackInst.clear();
+
+		//Síntesis total
 		uc.params.GuitarParam_rf = 1;
 		uc.TrackInstrument = "ORGAN";
 		uc.TrackNumber = 0;
 		myTracks[uc.TrackNumber].userInstrumentChoice = uc.TrackInstrument;
 		ui.wavName = "test_alan";
 		ui.pairTrackInst.push_back(uc);
-		double rf = 1;
 		vector<SynthTrack> synthtrackv;
-		ControllerOfControllers myCC;
 		synthtrackv=myCC.sytnsynthesisProject(myTracks, ui);
-
-		////////////////////////////////////////////////////////////////debug
-		/*std::cout << "Writing debug file.." << std::endl;
-
-		std::ofstream myfile;
-		myfile.open("sintest.txt");
-
-		for (int i = 0; i < synthtrackv[0].track.size(); i++) {
-			for (int n = 0; n < synthtrackv[0].track[i].sound.size(); n++) {
-				myfile << synthtrackv[0].track[i].sound[n];
-				if ((i != synthtrackv[0].track.size() - 1) && (n != synthtrackv[0].track[i].sound.size() - 1)) {
-					myfile << ",";
-				}
-			}
-		}
-		myfile.close();
-		std::cout << "File written, press enter." << std::endl;
-		getchar();*/
-		//////////////////////////////////////////////////////////////////////
-
-		WavController myWavController(duration,ui.wavName,1000);
-		myWavController.compileWav(synthtrackv);
+		myWavController.compileWav(synthtrackv, duration, ui.wavName, 1000);
 		myWavController.makeWav();
+		ui.pairTrackInst.clear();
 	}
 	else {
 		cout << "No se encontró el archivo" << endl;
