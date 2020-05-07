@@ -22,9 +22,9 @@ int main(void) {
 		UserInput ui;
 		UserChoice uc;
 		uc.params.GuitarParam_rf = 1;
-		uc.TrackInstrument = "DRUM";
+		uc.TrackInstrument = "GUITAR";
 		uc.TrackNumber = 0;
-		ui.wavName = "MarioMidiE";
+		ui.wavName = "PinkPanther";
 		ui.pairTrackInst.push_back(uc);
 		double rf = 1;
 		vector<SynthTrack> synthtrackv;
