@@ -43,14 +43,16 @@ int main(void) {
 
 		//Síntesis total
 		uc.params.GuitarParam_rf = 1;
+
 		uc.TrackInstrument = "ORGAN";
 		uc.TrackNumber = 0;
 		myTracks[uc.TrackNumber].userInstrumentChoice = uc.TrackInstrument;
 		ui.wavName = "test_alan";
+
 		ui.pairTrackInst.push_back(uc);
 		vector<SynthTrack> synthtrackv;
 		synthtrackv=myCC.sytnsynthesisProject(myTracks, ui);
-		myWavController.compileWav(synthtrackv, duration, ui.wavName, 1000);
+		myWavController.compileWav(synthtrackv, duration+1, ui.wavName, 1000);
 		myWavController.makeWav();
 		ui.pairTrackInst.clear();
 	}
