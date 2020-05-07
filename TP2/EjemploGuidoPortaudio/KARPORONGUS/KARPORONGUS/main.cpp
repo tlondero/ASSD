@@ -14,16 +14,34 @@ using namespace std;
 
 int main(void) {
 
+	//HACER CONTROL-F Y BUSCAR "REVISAR" CAMBIE COSAS QUE NO SE SI ESTAN BIEN SDS
+	//-alan
+
+
 	MidiParser myMidi;
-
-
-	if (myMidi.addMidi("Mario2")) {
-
-
+	if (myMidi.addMidi("twinkleAlan")) {
 		vector<Tracks> myTracks = myMidi.getTracks();
-		double duration = myMidi.getTotalDuration();
+		double duration = myMidi.getTotalDuration() + 1;
+		ControllerOfControllers myCC;
+		WavController myWavController;
 		UserInput ui;
 		UserChoice uc;
+		double rf = 1;
+
+		//Síntesis preview
+		uc.InstrumentPreview = "ORGAN";
+		ui.wavName = "preview" + uc.InstrumentPreview;
+		uc.params.GuitarParam_rf = 1;
+		uc.TrackNumber = 0;
+		myTracks[uc.TrackNumber].userInstrumentChoice = uc.InstrumentPreview;
+		ui.pairTrackInst.push_back(uc);
+		vector<SynthTrack> synthtrack_preview;
+		synthtrack_preview = myCC.sytnsynthesisPreview(myTracks, ui);
+		myWavController.compileWav(synthtrack_preview, synthtrack_preview[0].previewDuration, ui.wavName, 1000);
+		myWavController.makeWav();
+		ui.pairTrackInst.clear();
+
+		//Síntesis total
 		uc.params.GuitarParam_rf = 1;
 
 		uc.TrackInstrument = "ORGAN";
@@ -32,16 +50,11 @@ int main(void) {
 		ui.wavName = "test_alan";
 
 		ui.pairTrackInst.push_back(uc);
-		double rf = 1;
 		vector<SynthTrack> synthtrackv;
-		ControllerOfControllers myCC;
 		synthtrackv=myCC.sytnsynthesisProject(myTracks, ui);
-
-										//DUracion debug
-		WavController myWavController(duration+1,ui.wavName,1000);
-
-		myWavController.compileWav(synthtrackv);
+		myWavController.compileWav(synthtrackv, duration+1, ui.wavName, 1000);
 		myWavController.makeWav();
+		ui.pairTrackInst.clear();
 	}
 	else {
 		cout << "No se encontró el archivo" << endl;

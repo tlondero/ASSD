@@ -11,13 +11,15 @@ namespace little_endian_io {
 }
 using namespace little_endian_io;
 
-WavController::WavController(double duration_, string wavName_, double volume_) {
+WavController::WavController() {
+
+}
+
+void WavController::compileWav(vector<SynthTrack> allTracks, double duration_, string wavName_, double volume_) {
 	this->duration = duration_;
 	this->wavName = wavName_;
 	this->wavVector = vector<double>(ceil(this->duration * SAMPLE_RATE), 0);
 	this->volume = volume_;
-}
-void WavController::compileWav(vector<SynthTrack> allTracks) {
 	for (unsigned int track = 0; track < allTracks.size(); track++) {
 		for (unsigned int note = 0; note < allTracks[track].track.size(); note++) {
 			int T= floor(allTracks[track].track[note].t_on*SAMPLE_RATE);

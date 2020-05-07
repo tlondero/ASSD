@@ -42,5 +42,45 @@ vector<SynthTrack> ControllerOfControllers::sytnsynthesisProject(vector<Tracks> 
 	return mySynthTrackVector;
 }
 
+vector<SynthTrack> ControllerOfControllers::sytnsynthesisPreview(vector<Tracks> projectTracks, UserInput userData) {
+	vector<SynthTrack> mySynthTrackVector;
+	for (unsigned int track = 0; track < userData.pairTrackInst.size(); track++) {
+		/*if (userData.pairTrackInst[track].InstrumentPreview == "GUITAR") {
+
+			this->AGController.setParam(userData.pairTrackInst[track].params.GuitarParam_rf);
+			mySynthTrackVector.push_back(this->AGController.sytnsynthesisPreview(projectTracks[userData.pairTrackInst[track].TrackNumber]));
+		}
+		else if (userData.pairTrackInst[track].InstrumentPreview == "ELECTRIC_GUITAR") {
+			this->EGController.setParam(userData.pairTrackInst[track].params.GuitarParam_rf);
+			mySynthTrackVector.push_back(this->EGController.sytnsynthesisPreview(projectTracks[userData.pairTrackInst[track].TrackNumber]));
+		}
+		else if (userData.pairTrackInst[track].InstrumentPreview == "BANJO") {
+			mySynthTrackVector.push_back(this->BController.sytnsynthesisPreview(projectTracks[userData.pairTrackInst[track].TrackNumber]));
+		}
+		else if (userData.pairTrackInst[track].InstrumentPreview == "DRUM") {
+			this->DController.setParam(userData.pairTrackInst[track].params.DrumParam_rf, userData.pairTrackInst[track].params.DrumProb);
+			mySynthTrackVector.push_back(this->DController.sytnsynthesisPreview(projectTracks[userData.pairTrackInst[track].TrackNumber]));
+		}
+		else if (userData.pairTrackInst[track].InstrumentPreview == "TROMBONE") {
+			mySynthTrackVector.push_back(this->TController.sytnsynthesisPreview(projectTracks[userData.pairTrackInst[track].TrackNumber]));
+		}
+		else if (userData.pairTrackInst[track].InstrumentPreview == "BELL") {
+			mySynthTrackVector.push_back(this->bellController.sytnsynthesisPreview(projectTracks[userData.pairTrackInst[track].TrackNumber]));
+		}
+		else if (userData.pairTrackInst[track].InstrumentPreview == "CLARINET") {
+			mySynthTrackVector.push_back(this->CController.sytnsynthesisPreview(projectTracks[userData.pairTrackInst[track].TrackNumber]));
+		}
+		else*/ if (userData.pairTrackInst[track].InstrumentPreview == "ORGAN" || userData.pairTrackInst[track].InstrumentPreview == "FLUTE") {
+			mySynthTrackVector.push_back(this->OController.sytnsynthesisPreview(projectTracks[userData.pairTrackInst[track].TrackNumber]));
+		}
+		/*else if (userData.pairTrackInst[track].InstrumentPreview == "TRUMPET") {
+			mySynthTrackVector.push_back(this->TrumpController.sytnsynthesisPreview(projectTracks[userData.pairTrackInst[track].TrackNumber]));
+		}*/
+		//else if (other instrument) {
+		//}
+	}
+	return mySynthTrackVector;
+}
+
 ControllerOfControllers::~ControllerOfControllers(){
 }

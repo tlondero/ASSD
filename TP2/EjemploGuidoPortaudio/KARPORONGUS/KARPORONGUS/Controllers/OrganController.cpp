@@ -41,7 +41,7 @@ OrganController::OrganController()
 		0.1,  //Major Third
 		0,		//Perfect Fourth
 		0,		//Perfect Fifth
-		0.15,	//attack
+		0.08,	//attack
 		0.6,	//release
 		0.00001, //sustain oscillation
 		0.02
@@ -56,7 +56,7 @@ SynthTrack OrganController::sytnsynthesisTrack(Tracks Track) {
 		for (unsigned int note = 0; note < Track.Notes.size(); note++) {
 			MusicData noteData;
 			noteData.t_on = Track.Notes[note].t_on;
-			noteData.sound = this->organ.generateNote(Track.Notes[note].Duration, Track.Notes[note].frequency, Track.Notes[note].velocity / 100.0);
+			noteData.sound = this->organ.generateNote(Track.Notes[note].Duration + 0.5, Track.Notes[note].frequency, Track.Notes[note].velocity / 100.0);
 			mySynthesis.track.push_back(noteData);
 		}
 	}
@@ -68,9 +68,55 @@ SynthTrack OrganController::sytnsynthesisTrack(Tracks Track) {
 			mySynthesis.track.push_back(noteData);
 		}
 	}
-//	if (Track.instrumentName == "") {
-//
-//	}
+	return mySynthesis;
+}
+
+SynthTrack OrganController::sytnsynthesisPreview(Tracks Track) {
+	SynthTrack mySynthesis;
+	mySynthesis.instrumentName = Track.instrumentName;
+	double time_first = 0;
+	//aca va un for por el cual se llama a la guitarra con la duración de la nota, la velocity y la frecuencia, lo que devuelve la guitarra se guarda  en mySynth en los vectores de nota con la info del ton
+	if (Track.userInstrumentChoice == "ORGAN") {
+		double extra_reverb_time = 0.5;
+		double time_last = 0;
+		for (unsigned int note = 0; note < Track.Notes.size(); note++) {
+			if (time_last - time_first < 5) {
+				MusicData noteData;
+				noteData.t_on = Track.Notes[note].t_on;
+				noteData.sound = this->organ.generateNote(Track.Notes[note].Duration + extra_reverb_time, Track.Notes[note].frequency, Track.Notes[note].velocity / 100.0);
+				mySynthesis.track.push_back(noteData);
+				if (note == 0) {
+					time_first = noteData.t_on;
+				}
+				time_last = Track.Notes[note].t_on + Track.Notes[note].Duration + extra_reverb_time;
+			}
+			else {
+				break;
+			}
+		}
+		mySynthesis.previewDuration = time_last - time_first;
+	}
+	if (Track.userInstrumentChoice == "FLUTE") {
+		double extra_reverb_time = 0.2;
+		double time_last = 0;
+		for (unsigned int note = 0; note < Track.Notes.size(); note++) {
+			if (time_last - time_first < 5) {
+				MusicData noteData;
+				noteData.t_on = Track.Notes[note].t_on;
+				noteData.sound = this->flute.generateNote(Track.Notes[note].Duration + extra_reverb_time, Track.Notes[note].frequency, Track.Notes[note].velocity / 100.0);
+				mySynthesis.track.push_back(noteData);
+				if (note == 0) {
+					time_first = noteData.t_on;
+				}
+				time_last = Track.Notes[note].t_on + Track.Notes[note].Duration + extra_reverb_time;
+			}
+			else {
+				break;
+			}
+		}
+
+		mySynthesis.previewDuration = time_last - time_first;
+	}
 	return mySynthesis;
 }
 

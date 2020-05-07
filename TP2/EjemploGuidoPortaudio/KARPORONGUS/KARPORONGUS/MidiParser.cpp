@@ -26,15 +26,17 @@ vector<Tracks> MidiParser::getTracks() {
 				actualTrack.instrumentName = a;
 			}
 			if (midiFile[track][event].isNote()) {
-				if (midiFile[track][event].isNoteOn()) {
-					actualNote.t_on = midiFile[track][event].seconds;
-					actualNote.Duration = midiFile[track][event].getDurationInSeconds();
-					actualNote.velocity = midiFile[track][event].getVelocity();
-					actualNote.frequency = pow(2, (midiFile[track][event].getKeyNumber() - 69.0) / 12.0) * 440;
-					actualTrack.Notes.push_back(actualNote);
-				}
-				if (midiFile[track][event].isNoteOff()) {
-					toff.push_back(midiFile[track][event].seconds);
+				if (midiFile[track][event].getDurationInSeconds() != 0) { //REVISAR
+					if (midiFile[track][event].isNoteOn()) {
+						actualNote.t_on = midiFile[track][event].seconds;
+						actualNote.Duration = midiFile[track][event].getDurationInSeconds();
+						actualNote.velocity = midiFile[track][event].getVelocity();
+						actualNote.frequency = pow(2, (midiFile[track][event].getKeyNumber() - 69.0) / 12.0) * 440;
+						actualTrack.Notes.push_back(actualNote);
+					}
+					if (midiFile[track][event].isNoteOff()) {
+						toff.push_back(midiFile[track][event].seconds);
+					}
 				}
 			}
 
