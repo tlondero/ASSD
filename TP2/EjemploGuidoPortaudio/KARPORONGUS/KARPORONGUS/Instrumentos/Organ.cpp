@@ -64,7 +64,7 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 		
 		f = (frequency*((i + 1) + (2 * i)));
 		F = f/frequency;
-		ADSR_freq_factor = (2) / (1 + (exp((-F + 1) / (10))));
+		ADSR_freq_factor = ((2) / (1 + (exp((-F + 1) / (10)))))*(volume+0.51);
 		A = (a*T) / ADSR_freq_factor;
 		R = (r*T) / ADSR_freq_factor;
 		
@@ -101,7 +101,7 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 
 		f = (frequency*((i + 3) + (6 * i)));
 		F = f / frequency;
-		ADSR_freq_factor = (2) / (1 + (exp((-F + 1) / (10))));
+		ADSR_freq_factor = ((2) / (1 + (exp((-F + 1) / (10)))))*(volume+0.51);
 		A = (a*T) / ADSR_freq_factor;
 		R = (r*T) / ADSR_freq_factor;
 
@@ -132,7 +132,7 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 
 		f = (frequency*((i + 2) + (4 * i)));
 		F = f / frequency;
-		ADSR_freq_factor = (2) / (1 + (exp((-F + 1) / (10))));
+		ADSR_freq_factor = ((2) / (1 + (exp((-F + 1) / (10)))))*(volume+0.51);
 		A = (a*T) / ADSR_freq_factor;
 		R = (r*T) / ADSR_freq_factor;
 
@@ -163,7 +163,7 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 
 		f = (frequency*((i + 4) + (8 * i)));
 		F = f / frequency;
-		ADSR_freq_factor = (2) / (1 + (exp((-F + 1) / (10))));
+		ADSR_freq_factor = ((2) / (1 + (exp((-F + 1) / (10)))))*(volume+0.51);
 		A = (a*T) / ADSR_freq_factor;
 		R = (r*T) / ADSR_freq_factor;
 
@@ -194,7 +194,7 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 
 		f = (frequency*((i + 6) + (12 * i)));
 		F = f / frequency;
-		ADSR_freq_factor = (2) / (1 + (exp((-F + 1) / (10))));
+		ADSR_freq_factor = ((2) / (1 + (exp((-F + 1) / (10)))))*(volume+0.51);
 		A = (a*T) / ADSR_freq_factor;
 		R = (r*T) / ADSR_freq_factor;
 
@@ -225,7 +225,7 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 
 		f = (frequency*((i + 8) + (15 * i)));
 		F = f / frequency;
-		ADSR_freq_factor = (2) / (1 + (exp((-F + 1) / (10))));
+		ADSR_freq_factor = ((2) / (1 + (exp((-F + 1) / (10)))))*(volume+0.51);
 		A = (a*T) / ADSR_freq_factor;
 		R = (r*T) / ADSR_freq_factor;
 
@@ -256,7 +256,7 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 
 		f = (frequency*((i + 9) + (17 * i)));
 		F = f / frequency;
-		ADSR_freq_factor = (2) / (1 + (exp((-F + 1) / (10))));
+		ADSR_freq_factor = ((2) / (1 + (exp((-F + 1) / (10)))))*(volume+0.51);
 		A = (a*T) / ADSR_freq_factor;
 		R = (r*T) / ADSR_freq_factor;
 
@@ -287,7 +287,7 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 
 		f = (frequency*((i + 10) + (19 * i)));
 		F = f / frequency;
-		ADSR_freq_factor = (2) / (1 + (exp((-F + 1) / (10))));
+		ADSR_freq_factor = ((2) / (1 + (exp((-F + 1) / (10)))))*(volume+0.51);
 		A = (a*T) / ADSR_freq_factor;
 		R = (r*T) / ADSR_freq_factor;
 
@@ -342,7 +342,7 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 
 		f = (major_third_frequency*((i + 1) + (2 * i)));
 		F = f / frequency;
-		ADSR_freq_factor = (2) / (1 + (exp((-F + 1) / (10))));
+		ADSR_freq_factor = ((2) / (1 + (exp((-F + 1) / (10)))))*(volume+0.51);
 		A = (a*T) / ADSR_freq_factor;
 		R = (r*T) / ADSR_freq_factor;
 
@@ -373,7 +373,7 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 
 		f = (perfect_fourth_frequency*((i + 1) + (2 * i)));
 		F = f / frequency;
-		ADSR_freq_factor = (2) / (1 + (exp((-F + 1) / (10))));
+		ADSR_freq_factor = ((2) / (1 + (exp((-F + 1) / (10)))))*(volume+0.51);
 		A = (a*T) / ADSR_freq_factor;
 		R = (r*T) / ADSR_freq_factor;
 
@@ -404,7 +404,7 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 
 		f = (perfect_fifth_frequency*((i + 1) + (2 * i)));
 		F = f / frequency;
-		ADSR_freq_factor = (2) / (1 + (exp((-F + 1) / (10))));
+		ADSR_freq_factor = ((2) / (1 + (exp((-F + 1) / (10)))))*(volume+0.51);
 		A = (a*T) / ADSR_freq_factor;
 		R = (r*T) / ADSR_freq_factor;
 

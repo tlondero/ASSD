@@ -8,7 +8,7 @@ vector<SynthTrack> ControllerOfControllers::sytnsynthesisProject(vector<Tracks> 
 	vector<SynthTrack> mySynthTrackVector;
 	for (unsigned int track = 0; track < userData.pairTrackInst.size(); track++) {
 		if (userData.pairTrackInst[track].TrackInstrument == "GUITAR") {
-			
+
 			this->AGController.setParam(userData.pairTrackInst[track].params.GuitarParam_rf);
 			mySynthTrackVector.push_back(this->AGController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber]));
 		}
@@ -31,6 +31,9 @@ vector<SynthTrack> ControllerOfControllers::sytnsynthesisProject(vector<Tracks> 
 		}
 		else if (userData.pairTrackInst[track].TrackInstrument == "CLARINET") {
 			mySynthTrackVector.push_back(this->CController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber]));
+		}
+		else if (userData.pairTrackInst[track].TrackInstrument == "ORGAN" || userData.pairTrackInst[track].TrackInstrument == "FLUTE") {
+			mySynthTrackVector.push_back(this->OController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber]));
 		}
 		//else if (other instrument) {
 		//}
