@@ -119,9 +119,12 @@
   <ItemGroup>
     <ClCompile Include="Controllers\AcousticGuitarController.cpp" />
     <ClCompile Include="Controllers\BanjoController.cpp" />
+    <ClCompile Include="Controllers\BellController.cpp" />
+    <ClCompile Include="Controllers\ClarinetController.cpp" />
     <ClCompile Include="Controllers\ControllerOfControllers.cpp" />
     <ClCompile Include="Controllers\DrumController .cpp" />
     <ClCompile Include="Controllers\ElectricGuitarController.cpp" />
+    <ClCompile Include="Controllers\TromboneController.cpp" />
     <ClCompile Include="Controllers\WavController.cpp" />
     <ClCompile Include="Instrumentos\Banjo.cpp" />
     <ClCompile Include="Instrumentos\Bell.cpp" />
@@ -150,9 +153,12 @@
     <ClInclude Include="Clarinet.h" />
     <ClInclude Include="Controllers\AcousticGuitarController.h" />
     <ClInclude Include="Controllers\BanjoController.h" />
+    <ClInclude Include="Controllers\BellController.h" />
+    <ClInclude Include="Controllers\ClarinetController.h" />
     <ClInclude Include="Controllers\ControllerOfControllers.h" />
     <ClInclude Include="Controllers\DrumController.h" />
     <ClInclude Include="Controllers\ElectricGuitarController.h" />
+    <ClInclude Include="Controllers\TromboneController.h" />
     <ClInclude Include="Controllers\WavController.h" />
     <ClInclude Include="General.h" />
     <ClInclude Include="Instrumentos\Banjo.h" />
