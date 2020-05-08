@@ -159,12 +159,20 @@ cMainMenu::~cMainMenu() {
 
 }
 
+void cMainMenu::addToDdm(vector<string> tracks, wxComboBox* ddm) {
+	for (int i = 0; i < tracks.size(); i++) {
+		ddm->Append(tracks[i]);
+	}
+}
+
 vector<string> cMainMenu::midiToStringDdm(vector<Tracks> MidiParsed) {
 	vector<string> myddmtext;
 	for (unsigned int i = 0; i < MidiParsed.size(); i++) {
 		myddmtext.push_back("Track " + to_string(i) + " [" + MidiParsed[i].instrumentName + "] " + "(Notes : " + to_string(MidiParsed[i].Notes.size()) + ")");
 	}
+	return myddmtext;
 }
+
 /*
 void cMainMenu::AddTrackToDdm(wxCommandEvent& evt)
 {

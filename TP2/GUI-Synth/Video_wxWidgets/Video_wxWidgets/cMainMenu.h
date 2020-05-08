@@ -93,18 +93,12 @@ private:
 
 	void AddTrackToDdm(wxCommandEvent& evt);
 	void DeleteTrackToDdm(wxCommandEvent& evt);
-
+	void addToDdm(vector<string> tracks, wxComboBox* ddm);
 	
 	string selecetedMidi;			//vector de strings que tiene los mismos que el DDM y en el mismo orden
 	
 	vector<string> midiToStringDdm(vector<Tracks> MidiParsed);//Funció que recibe el vector de tracks que devuelve el midi parser
 	//y devuelve el vector de strings que utilizará el ddm para mostrar los tracks.
-
-									/*
-	void OnButtonClicked1(wxCommandEvent& evt);
-	void AddWavToList(wxCommandEvent& evt);
-	void DeleteWavFromList(wxCommandEvent& evt);
-	*/
 
 	wxDECLARE_EVENT_TABLE();
 };
