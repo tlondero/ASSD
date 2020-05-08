@@ -58,7 +58,6 @@ private:
 	//Botones
 	wxButton* b_cargarMidi = nullptr;
 	wxButton* b_crearWav = nullptr;
-	wxButton* b_addValue = nullptr;
 	wxButton* b_addTrack = nullptr;
 	wxButton* b_removeTrack = nullptr;
 	wxButton* b_preview = nullptr;
@@ -77,13 +76,11 @@ private:
 	wxComboBox* ddm_micEff = nullptr;
 
 	//Lists Box
-	wxListBox* lb_trackParam = nullptr;
+	//wxListBox* lb_trackParam = nullptr;
 	wxListBox* lb_tracks = nullptr;
 	wxListBox* lb_wavEff = nullptr;
 	wxListBox* lb_micEff = nullptr;
 
-	//TextCtrl
-	wxTextCtrl* tx_trackValue = nullptr;
 
 	//Images
 	//wxStaticBitmap* img_Spectogram = nullptr;
@@ -92,10 +89,19 @@ private:
 	wxStaticText* t_tackDdm = nullptr;
 	wxStaticText* t_instrumentoDdm = nullptr;
 	wxStaticText* t_paramList = nullptr;
-	wxStaticText* t_valueList = nullptr;
 	wxStaticText* t_previewDdm = nullptr;
 	wxStaticText* t_effectWavDdm = nullptr;
 	wxStaticText* t_effectMicDdm = nullptr;
+
+	//Dinmac Texts
+	wxTextCtrl* tx_organA = nullptr;
+	wxTextCtrl* tx_organR = nullptr;
+	wxTextCtrl* tx_organS = nullptr;
+
+	wxStaticText* t_organA = nullptr;
+	wxStaticText* t_organR = nullptr;
+	wxStaticText* t_organS = nullptr;
+
 
 	//Clases de soporte.
 	MidiParser midi;
@@ -110,8 +116,11 @@ private:
 	void addToDdm(vector<string> tracks, wxComboBox* ddm);
 	void AddTrack(wxCommandEvent& evt);
 	void detectInstrumentChange(wxCommandEvent& evt);
-	void addValueToParam(wxCommandEvent& evt);
-	
+	//void addValueToParam(wxCommandEvent& evt);
+
+	vector<wxStaticText*> t_toShow;
+	vector<wxTextCtrl*> tx_toShow;
+
 	string selecetedMidi;			//vector de strings que tiene los mismos que el DDM y en el mismo orden
 	
 	vector<string> midiToStringDdm(vector<Tracks> MidiParsed);//Funció que recibe el vector de tracks que devuelve el midi parser

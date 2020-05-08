@@ -4,7 +4,6 @@ wxBEGIN_EVENT_TABLE(cMainMenu, wxFrame)
 	EVT_BUTTON(10001, AddMidiToProgram)
 	EVT_BUTTON(10002, AddTrack)
 	EVT_TEXT(10003, detectInstrumentChange)
-	EVT_BUTTON(10004, addValueToParam)
 	EVT_MENU(10005, OnMenuExit)
 	EVT_MENU(10006, OnMenuFullsecreen)
 	
@@ -34,7 +33,6 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	//Botones
 	b_cargarMidi = new wxButton(this, 10001, "Load MIDI file", wxPoint(BUTTON_SP, BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
 	b_crearWav = new wxButton(this, wxID_ANY, "Create WAV file", wxPoint(BUTTON_SP, BUTTON_Y + 2*BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
-	b_addValue = new wxButton(this, 10004, "Enter value", wxPoint(2 * BUTTON_SP + LB_X / 2, 2 * BUTTON_Y + 6 * BUTTON_SP + 3 * DDM_Y + 4 * TEXT_Y), wxSize(BUTTON_X, BUTTON_Y / 2));
 	b_addTrack = new wxButton(this, 10002, "Add track", wxPoint(COL2, BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
 	b_removeTrack = new wxButton(this, wxID_ANY, "Remove track", wxPoint(COL2 + BUTTON_SP + BUTTON_X, BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
 	b_preview = new wxButton(this, wxID_ANY, "Listen preview track", wxPoint(COL2, 6 * BUTTON_SP + BUTTON_Y + TEXT_Y + LB_Y/2), wxSize(2*BUTTON_X, BUTTON_Y));
@@ -54,16 +52,13 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 
 
 	//Lists Box
-	lb_trackParam = new wxListBox(this, wxID_ANY, wxPoint(BUTTON_SP, 2 * BUTTON_Y + 6 * BUTTON_SP + 3 * DDM_Y + TEXT_Y), wxSize(LB_X/2, LB_Y));
+	//lb_trackParam = new wxListBox(this, wxID_ANY, wxPoint(BUTTON_SP, 2 * BUTTON_Y + 6 * BUTTON_SP + 3 * DDM_Y + TEXT_Y), wxSize(LB_X/2, LB_Y));
 	lb_tracks = new wxListBox(this, wxID_ANY, wxPoint(COL2, 4 * BUTTON_SP + BUTTON_Y + TEXT_Y), wxSize(LB_X, LB_Y/2));
 	lb_wavEff = new wxListBox(this, wxID_ANY, wxPoint(COL2, 14 * BUTTON_SP + 3 * BUTTON_Y + 2 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(LB_X, LB_Y/2));
 	lb_micEff = new wxListBox(this, wxID_ANY, wxPoint(COL3, 3 * BUTTON_SP + 2 * BUTTON_Y + TEXT_Y + DDM_Y), wxSize(300, 300));
 
-	//TextCtrl
-	tx_trackValue = new wxTextCtrl(this, wxID_ANY, "", wxPoint(2 * BUTTON_SP + LB_X / 2, 2 * BUTTON_Y + 6 * BUTTON_SP + 3 * DDM_Y + TEXT_Y), wxSize(LB_X / 2, DDM_Y - 5));
 		
 	//Images
-
 	//wxStaticBitmap* img_Spectogram = nullptr;
 
 
@@ -71,10 +66,32 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	t_tackDdm = new wxStaticText(this, wxID_ANY, "Tracks:", wxPoint(BUTTON_SP, 2*BUTTON_Y + 4*BUTTON_SP), wxSize(TEXT_X, TEXT_Y));
 	t_instrumentoDdm = new wxStaticText(this, wxID_ANY, "Instruments:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 6 * BUTTON_SP + DDM_Y), wxSize(TEXT_X, TEXT_Y));
 	t_paramList = new wxStaticText(this, wxID_ANY, "Parameters:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 6 * BUTTON_SP + 3 * DDM_Y), wxSize(TEXT_X, TEXT_Y));
-	t_valueList = new wxStaticText(this, wxID_ANY, "Values:", wxPoint(2 * BUTTON_SP + TEXT_X, 2 * BUTTON_Y + 6 * BUTTON_SP + 3 * DDM_Y), wxSize(TEXT_X, TEXT_Y));
 	t_previewDdm = new wxStaticText(this, wxID_ANY, "Lista de tracks agregados:", wxPoint(COL2, 4 * BUTTON_SP + BUTTON_Y), wxSize(TEXT_X, TEXT_Y));
 	t_effectWavDdm = new wxStaticText(this, wxID_ANY, "WAV Effects:", wxPoint(COL2, 6 * BUTTON_SP + 2 * BUTTON_Y + 2 * TEXT_Y + LB_Y / 2), wxSize(TEXT_X, TEXT_Y));
 	t_effectMicDdm = new wxStaticText(this, wxID_ANY, "MIC Effects:", wxPoint(COL3, 2 * BUTTON_SP + BUTTON_Y), wxSize(TEXT_X, TEXT_Y));
+
+
+
+	//Dynamic TextCtrl
+	tx_organA = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 6 * BUTTON_SP + 3 * DDM_Y + 2 * TEXT_Y), wxSize(TEXT_X, TEXT_Y));
+	tx_organR = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 6 * BUTTON_SP + 3 * DDM_Y + 4 * TEXT_Y), wxSize(TEXT_X, TEXT_Y));
+	tx_organS = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 6 * BUTTON_SP + 3 * DDM_Y + 6 * TEXT_Y), wxSize(TEXT_X, TEXT_Y));
+	tx_toShow.push_back(tx_organA);
+	tx_toShow.push_back(tx_organR);
+	tx_toShow.push_back(tx_organS);
+
+	t_organA = new wxStaticText(this, wxID_ANY, "A:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 6 * BUTTON_SP + 3 * DDM_Y + TEXT_Y), wxSize(TEXT_X, TEXT_Y));
+	t_organR = new wxStaticText(this, wxID_ANY, "R:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 6 * BUTTON_SP + 3 * DDM_Y + 3 * TEXT_Y), wxSize(TEXT_X, TEXT_Y));
+	t_organS = new wxStaticText(this, wxID_ANY, "S:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 6 * BUTTON_SP + 3 * DDM_Y + 5 * TEXT_Y), wxSize(TEXT_X, TEXT_Y));
+	t_toShow.push_back(t_organA);
+	t_toShow.push_back(t_organR);
+	t_toShow.push_back(t_organS);
+
+	
+	for (int i = 0; i < tx_toShow.size(); i++) {
+		tx_toShow[i]->Hide();
+		t_toShow[i]->Hide();
+	}
 
 	////Grid Sizer
 
@@ -142,26 +159,33 @@ void cMainMenu::AddTrack(wxCommandEvent& evt) {
 }
 
 void cMainMenu::detectInstrumentChange(wxCommandEvent& evt) {
+	for (int i = 0; i < tx_toShow.size(); i++) {
+		tx_toShow[i]->Clear();
+		tx_toShow[i]->Hide();
+		t_toShow[i]->Hide();
+	}
 	string intrumentoElegido = ddm_instrumento->GetStringSelection();						//verificar que el imput esté en la lista de esa mierda
-	tx_trackValue->Clear();																	// (el ususario puede en el ddm)
-	lb_trackParam->Clear();
-
+	
 	if (intrumentoElegido == GUITAR) {
-		lb_trackParam->AppendString("RL");
+		//lb_trackParam->AppendString("RL");
 	}
 	else if (intrumentoElegido == ORGANO) {
-		lb_trackParam->AppendString("A");
-		lb_trackParam->AppendString("S");
-		lb_trackParam->AppendString("R");
+		tx_organA->Show();
+		tx_organS->Show();
+		tx_organR->Show();
+		t_organA->Show();
+		t_organS->Show();
+		t_organR->Show();	
 	}
 	evt.Skip();
 }
 
+/*
 void cMainMenu::addValueToParam(wxCommandEvent& evt) {
 	string track = ddm_track->GetStringSelection();
 	string instrument = ddm_instrumento->GetStringSelection();
 	string param = lb_trackParam->GetStringSelection();
-	double value = tx_trackValue->GetStringSelection().ToDouble() ;
+	double value = stod(string(tx_trackValue->GetStringSelection()));
 	UserChoice uc;
 
 	if (instrument == GUITAR) {
@@ -181,7 +205,7 @@ void cMainMenu::addValueToParam(wxCommandEvent& evt) {
 
 	this->ui.pairTrackInst.push_back(uc);
 }
-
+*/
 
 
 void cMainMenu::AddMidiToProgram(wxCommandEvent& evt) {
