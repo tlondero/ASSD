@@ -5,9 +5,12 @@
 #include <wx/clntdata.h>
 #include <wx/sizer.h>
 #include <wx/gbsizer.h>
+#include <wx/textctrl.h>
 #include <vector>
 #include "Utils/Tracks.h"
 #include "MidiParser.h"
+#include "UserInput/UserInput.h"
+
 #define BUTTON_X 150
 #define BUTTON_Y 50
 #define BUTTON_SP 5
@@ -24,6 +27,10 @@
 #define COL2 450
 #define COL3 2*450
 #define COL4 3*450
+
+//INSTRUMENTOS
+#define GUITAR "Guitar"
+#define ORGANO "Organ"
 
 using namespace std;
 
@@ -42,6 +49,7 @@ private:
 
 	bool fullscreen = false;
 
+
 	//Toolbar
 	wxToolBar* m_ToolBar = nullptr;
 	wxMenuBar* m_MenuBar = nullptr;
@@ -50,6 +58,7 @@ private:
 	//Botones
 	wxButton* b_cargarMidi = nullptr;
 	wxButton* b_crearWav = nullptr;
+	wxButton* b_addValue = nullptr;
 	wxButton* b_addTrack = nullptr;
 	wxButton* b_removeTrack = nullptr;
 	wxButton* b_preview = nullptr;
@@ -58,7 +67,7 @@ private:
 	wxButton* b_toggleMic = nullptr;
 	wxButton* b_addEffMic = nullptr;
 	wxButton* b_removeEffMic = nullptr;
-	
+
 	//wxButton* b_generateSpect = nullptr;
 
 	//Drop Down Menu (Combo Box)
@@ -69,10 +78,12 @@ private:
 
 	//Lists Box
 	wxListBox* lb_trackParam = nullptr;
-	wxListBox* lb_trackValue = nullptr;
 	wxListBox* lb_tracks = nullptr;
 	wxListBox* lb_wavEff = nullptr;
 	wxListBox* lb_micEff = nullptr;
+
+	//TextCtrl
+	wxTextCtrl* tx_trackValue = nullptr;
 
 	//Images
 	//wxStaticBitmap* img_Spectogram = nullptr;
@@ -85,9 +96,12 @@ private:
 	wxStaticText* t_previewDdm = nullptr;
 	wxStaticText* t_effectWavDdm = nullptr;
 	wxStaticText* t_effectMicDdm = nullptr;
+
 	//Clases de soporte.
 	MidiParser midi;
 	vector<Tracks> midiTranslated;
+	UserInput ui;
+
 	//Functions
 	void AddMidiToProgram(wxCommandEvent& evt);
 
@@ -95,6 +109,8 @@ private:
 	void DeleteTrackToDdm(wxCommandEvent& evt);
 	void addToDdm(vector<string> tracks, wxComboBox* ddm);
 	void AddTrack(wxCommandEvent& evt);
+	void detectInstrumentChange(wxCommandEvent& evt);
+	void addValueToParam(wxCommandEvent& evt);
 	
 	string selecetedMidi;			//vector de strings que tiene los mismos que el DDM y en el mismo orden
 	
