@@ -29,7 +29,7 @@ int main(void) {
 		double rf = 1;
 
 		//Síntesis preview
-		uc.InstrumentPreview = "ORGAN";
+		uc.InstrumentPreview = "FLUTE";
 		ui.wavName = "preview" + uc.InstrumentPreview;
 		uc.params.GuitarParam_rf = 1;
 		uc.TrackNumber = 0;
@@ -42,19 +42,19 @@ int main(void) {
 		ui.pairTrackInst.clear();
 
 		//Síntesis total
-		uc.params.GuitarParam_rf = 1;
+		//uc.params.GuitarParam_rf = 1;
 
-		uc.TrackInstrument = "ORGAN";
-		uc.TrackNumber = 0;
-		myTracks[uc.TrackNumber].userInstrumentChoice = uc.TrackInstrument;
-		ui.wavName = "test_alan";
+		//uc.TrackInstrument = "ORGAN";
+		//uc.TrackNumber = 0;
+		//myTracks[uc.TrackNumber].userInstrumentChoice = uc.TrackInstrument;
+		//ui.wavName = "test_alan";
 
-		ui.pairTrackInst.push_back(uc);
-		vector<SynthTrack> synthtrackv;
-		synthtrackv=myCC.sytnsynthesisProject(myTracks, ui);
-		myWavController.compileWav(synthtrackv, duration+1, ui.wavName, 1000);
-		myWavController.makeWav();
-		ui.pairTrackInst.clear();
+		//ui.pairTrackInst.push_back(uc);
+		//vector<SynthTrack> synthtrackv;
+		//synthtrackv=myCC.sytnsynthesisProject(myTracks, ui);
+		//myWavController.compileWav(synthtrackv, duration+1, ui.wavName, 1000);
+		//myWavController.makeWav();
+		//ui.pairTrackInst.clear();
 	}
 	else {
 		cout << "No se encontró el archivo" << endl;

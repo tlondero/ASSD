@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <fstream>
 #include <iostream>
+#include <string>
 
 #define SAMPLE_RATE     44100
 #define TWO_PI          6.283185307179586476925286766559

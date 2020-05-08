@@ -6,22 +6,22 @@ OrganController::OrganController()
 {
 	this->flute.set_parameters(
 		2, //Subharmonic count
-		3, //Mixharmonic count
-		1,  //Sub
+		2, //Mixharmonic count
+		0.1,  //Sub
 		1e-10,  //Fifth
-		1e-4,  //Primary
+		1,  //Primary
 		1e-15,  //Eighth
 		1e-5,  //Twelveth
 		0,  //Fifteenth
 		0,  //Seventeenth
 		0,  //Nineteenth
-		0.005,  //Below
+		0.01,  //Below
 		0.001,  //Major Third
 		0.000001,  //Perfect Fourth
 		0,  //Perfect Fifth
-		0.1, //Attack
-		0.3,  //sustain
-		0.03, ////sustain oscillation
+		0.05, //Attack
+		0.4,  //sustain
+		0.05, ////sustain oscillation
 		0.000005 //Noise factor
 	);
 

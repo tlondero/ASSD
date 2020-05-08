@@ -1,3 +1,3 @@
-load sintest.txt
+load adsr0.txt
 
-plot(sintest);
+plot(adsr0);

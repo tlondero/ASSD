@@ -1,3 +1,2 @@
-load sintest.txt
-print(sintest)
+load 
 plot(sintest);
