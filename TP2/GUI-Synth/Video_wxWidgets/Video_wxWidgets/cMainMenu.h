@@ -36,6 +36,8 @@ private:
 	void OnMenuFullsecreen(wxCommandEvent& evt);
 	void OnMenuExit(wxCommandEvent &evt);
 
+
+
 	bool fullscreen = false;
 
 	//Toolbar
@@ -82,9 +84,16 @@ private:
 	wxStaticText* t_effectWavDdm = nullptr;
 	wxStaticText* t_effectMicDdm = nullptr;
 
-	/*
-	vector<string> choices;			//vector de strings que tiene los mismos que el DDM y en el mismo orden
+	//Functions
+	void AddMidiToProgram(wxCommandEvent& evt);
 
+	void AddTrackToDdm(wxCommandEvent& evt);
+	void DeleteTrackToDdm(wxCommandEvent& evt);
+
+	
+	vector<string> selecetedMidi;			//vector de strings que tiene los mismos que el DDM y en el mismo orden
+	
+									/*
 	void OnButtonClicked1(wxCommandEvent& evt);
 	void AddWavToList(wxCommandEvent& evt);
 	void DeleteWavFromList(wxCommandEvent& evt);
