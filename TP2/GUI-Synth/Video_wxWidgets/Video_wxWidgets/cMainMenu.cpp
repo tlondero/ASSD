@@ -142,6 +142,7 @@ void cMainMenu::AddMidiToProgram(wxCommandEvent& evt) {
 		wxLogError("Cannot open file '%s'.", openFileDialog.GetPath());
 	}
 	else if (selecetedMidi != pathSelected) {			//verifico si el string ya está dentro de vector
+		ddm_track->Clear();
 		selecetedMidi = pathSelected;
 		if (this->midi.addMidi(this->selecetedMidi)) {
 				this->midiTranslated=this->midi.getTracks();
@@ -164,6 +165,7 @@ void cMainMenu::addToDdm(vector<string> tracks, wxComboBox* ddm) {
 		ddm->Append(tracks[i]);
 	}
 }
+
 
 vector<string> cMainMenu::midiToStringDdm(vector<Tracks> MidiParsed) {
 	vector<string> myddmtext;
