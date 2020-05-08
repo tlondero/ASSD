@@ -21,10 +21,38 @@
   <ItemGroup>
     <ClCompile Include="cApp.cpp" />
     <ClCompile Include="cMainMenu.cpp" />
+    <ClCompile Include="MidiParser.cpp" />
+    <ClCompile Include="midi\Binasc.cpp" />
+    <ClCompile Include="midi\MidiEvent.cpp" />
+    <ClCompile Include="midi\MidiEventList.cpp" />
+    <ClCompile Include="midi\MidiFile.cpp" />
+    <ClCompile Include="midi\MidiMessage.cpp" />
+    <ClCompile Include="UserInput\InstParams.cpp" />
+    <ClCompile Include="UserInput\UserChoice.cpp" />
+    <ClCompile Include="UserInput\UserInput.cpp" />
+    <ClCompile Include="Utils\MusicData.cpp" />
+    <ClCompile Include="Utils\Note.cpp" />
+    <ClCompile Include="Utils\SynthTrack.cpp" />
+    <ClCompile Include="Utils\Tracks.cpp" />
+    <ClCompile Include="Utils\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cApp.h" />
     <ClInclude Include="cMainMenu.h" />
+    <ClInclude Include="MidiParser.h" />
+    <ClInclude Include="midi\Binasc.h" />
+    <ClInclude Include="midi\MidiEvent.h" />
+    <ClInclude Include="midi\MidiEventList.h" />
+    <ClInclude Include="midi\MidiFile.h" />
+    <ClInclude Include="midi\MidiMessage.h" />
+    <ClInclude Include="UserInput\InstParams.h" />
+    <ClInclude Include="UserInput\UserChoice.h" />
+    <ClInclude Include="UserInput\UserInput.h" />
+    <ClInclude Include="Utils\MusicData.h" />
+    <ClInclude Include="Utils\Note.h" />
+    <ClInclude Include="Utils\SynthTrack.h" />
+    <ClInclude Include="Utils\Tracks.h" />
+    <ClInclude Include="Utils\Utils.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
