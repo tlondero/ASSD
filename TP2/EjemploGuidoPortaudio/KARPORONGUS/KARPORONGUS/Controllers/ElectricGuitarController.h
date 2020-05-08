@@ -7,7 +7,7 @@ class ElectricGuitarController
 public:
 	ElectricGuitarController();
 	void setParam(double rf);
-	SynthTrack sytnsynthesisTrack(Tracks GuitarTrack);
+	SynthTrack sytnsynthesisTrack(Tracks GuitarTrack, bool preview);
 	~ElectricGuitarController();
 private:
 	GuitarImproved Guitar;

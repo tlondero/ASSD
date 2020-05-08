@@ -7,7 +7,7 @@ class AcousticGuitarController
 public:
 	AcousticGuitarController();
 	void setParam(double rf);
-	SynthTrack sytnsynthesisTrack(Tracks GuitarTrack, bool scaleFreq);
+	SynthTrack sytnsynthesisTrack(Tracks GuitarTrack, bool preview);
 	~AcousticGuitarController();
 private:
 	GuitarImproved Guitar;

@@ -19,7 +19,7 @@ int main(void) {
 
 
 	MidiParser myMidi;
-	if (myMidi.addMidi("twinkleAlan")) {
+	if (myMidi.addMidi("twinkleAlan.mid")) {
 		vector<Tracks> myTracks = myMidi.getTracks();
 		double duration = myMidi.getTotalDuration() + 1;
 		ControllerOfControllers myCC;
@@ -29,14 +29,15 @@ int main(void) {
 		double rf = 1;
 
 		//Síntesis preview
-		uc.InstrumentPreview = "FLUTE";
-		ui.wavName = "preview" + uc.InstrumentPreview;
+		uc.TrackInstrument = "FLUTE";
+		uc.InstrumentPreview = true;
+		ui.wavName = "preview" + uc.TrackInstrument;
 		uc.params.GuitarParam_rf = 1;
 		uc.TrackNumber = 0;
-		myTracks[uc.TrackNumber].userInstrumentChoice = uc.InstrumentPreview;
+		myTracks[uc.TrackNumber].userInstrumentChoice = uc.TrackInstrument;
 		ui.pairTrackInst.push_back(uc);
 		vector<SynthTrack> synthtrack_preview;
-		synthtrack_preview = myCC.sytnsynthesisPreview(myTracks, ui);
+		synthtrack_preview = myCC.sytnsynthesisProject(myTracks, ui);
 		myWavController.compileWav(synthtrack_preview, synthtrack_preview[0].previewDuration, ui.wavName, 1000);
 		myWavController.makeWav();
 		ui.pairTrackInst.clear();
