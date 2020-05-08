@@ -1,11 +1,27 @@
 #pragma once
 #include "wx/wx.h"
-//#include <wx/filedlg.h>
 #include <wx/wfstream.h>
 #include <wx/combobox.h>
 #include <wx/clntdata.h>
 #include <wx/sizer.h>
 #include <wx/gbsizer.h>
+
+#define BUTTON_X 150
+#define BUTTON_Y 50
+#define BUTTON_SP 5
+
+#define DDM_X 300
+#define DDM_Y 30
+
+#define TEXT_X 150
+#define TEXT_Y 15
+
+#define LB_X 300
+#define LB_Y 300
+
+#define COL2 450
+#define COL3 2*450
+#define COL4 3*450
 
 using namespace std;
 
@@ -15,10 +31,18 @@ public:
 	cMainMenu();
 	~cMainMenu();
 
-public:
-	//Grid Bag Sizer
-	wxSizer* gbSize = nullptr;
+private:
 
+	void OnMenuFullsecreen(wxCommandEvent& evt);
+	void OnMenuExit(wxCommandEvent &evt);
+
+	bool fullscreen = false;
+
+	//Toolbar
+	wxToolBar* m_ToolBar = nullptr;
+	wxMenuBar* m_MenuBar = nullptr;
+
+	
 	//Botones
 	wxButton* b_cargarMidi = nullptr;
 	wxButton* b_crearWav = nullptr;
@@ -30,8 +54,8 @@ public:
 	wxButton* b_toggleMic = nullptr;
 	wxButton* b_addEffMic = nullptr;
 	wxButton* b_removeEffMic = nullptr;
-
-	wxButton* b_generateSpect = nullptr;
+	
+	//wxButton* b_generateSpect = nullptr;
 
 	//Drop Down Menu (Combo Box)
 	wxComboBox* ddm_track = nullptr;
@@ -47,7 +71,7 @@ public:
 	wxListBox* lb_micEff = nullptr;
 
 	//Images
-	wxStaticBitmap* img_Spectogram = nullptr;
+	//wxStaticBitmap* img_Spectogram = nullptr;
 
 	//Text
 	wxStaticText* t_tackDdm = nullptr;
@@ -58,11 +82,13 @@ public:
 	wxStaticText* t_effectWavDdm = nullptr;
 	wxStaticText* t_effectMicDdm = nullptr;
 
+	/*
 	vector<string> choices;			//vector de strings que tiene los mismos que el DDM y en el mismo orden
 
 	void OnButtonClicked1(wxCommandEvent& evt);
 	void AddWavToList(wxCommandEvent& evt);
 	void DeleteWavFromList(wxCommandEvent& evt);
+	*/
 
 	wxDECLARE_EVENT_TABLE();
 };
