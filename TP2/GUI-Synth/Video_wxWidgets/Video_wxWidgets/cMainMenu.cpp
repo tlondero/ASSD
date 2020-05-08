@@ -1,7 +1,7 @@
 #include "cMainMenu.h"
 
 wxBEGIN_EVENT_TABLE(cMainMenu, wxFrame)
-	//EVT_BUTTON(10001, OnButtonClicked1)
+	EVT_BUTTON(10001, AddMidiToProgram)
 	//EVT_BUTTON(10002, AddWavToList)
 	//EVT_BUTTON(10003, AddWavToList)
 	//EVT_BUTTON(10004, DeleteWavFromList)
@@ -31,7 +31,7 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	m_MenuBar->Append(menuFile, "More");
 
 	//Botones
-	b_cargarMidi = new wxButton(this, wxID_ANY, "Load MIDI file", wxPoint(BUTTON_SP, BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
+	b_cargarMidi = new wxButton(this, 10001, "Load MIDI file", wxPoint(BUTTON_SP, BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
 	b_crearWav = new wxButton(this, wxID_ANY, "Create WAV file", wxPoint(BUTTON_SP, BUTTON_Y + 2*BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
 	b_addTrack = new wxButton(this, wxID_ANY, "Add track", wxPoint(COL2, BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
 	b_removeTrack = new wxButton(this, wxID_ANY, "Remove track", wxPoint(COL2 + BUTTON_SP + BUTTON_X, BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
@@ -123,10 +123,101 @@ void cMainMenu::OnMenuExit(wxCommandEvent & evt) {
 	evt.Skip();
 }
 
+void cMainMenu::AddMidiToProgram(wxCommandEvent& evt) {
+
+	wxFileDialog openFileDialog(this, _("Open MIDI file"), "", "", "MIDI files (*.mid)|*.mid", wxFD_OPEN | wxFD_FILE_MUST_EXIST);  //Abro explorador de archivos
+	bool addString = true;
+	if (openFileDialog.ShowModal() == wxID_CANCEL) {			//Esto está por si se cierra el explorador sin elegir archivos
+		return;
+	}
+
+	wxFileInputStream input_stream(openFileDialog.GetPath());	//Verifico que todo ande joya
+
+	string pathSelected = openFileDialog.GetPath();				//Path completo
+
+	string stringSelected = pathSelected.substr(pathSelected.find_last_of('\\') + 1);
+	stringSelected = stringSelected.substr(stringSelected.find_last_of('\\') + 1, stringSelected.size() - 4);		//Solo el nombre sin el .wav
+
+	if (!input_stream.IsOk()) {
+		wxLogError("Cannot open file '%s'.", openFileDialog.GetPath());
+	}
+	else {
+		for (int i = 0; i < selecetedMidi.size(); i++) {
+			if (selecetedMidi[i] == stringSelected) {			//verifico si el string ya está dentro de vector
+				addString = false;
+				i = selecetedMidi.size();
+			}
+		}
+		if (addString) {
+			selecetedMidi.push_back(stringSelected);		//agrego el string al vector
+		}
+	}
+
+	evt.Skip();
+}
+
 cMainMenu::~cMainMenu() {
 
 }
-//
+
+/*
+void cMainMenu::AddTrackToDdm(wxCommandEvent& evt)
+{
+	wxFileDialog openFileDialog(this, _("Open MIDI file"), "", "", "MIDI files (*.mid)|*.mid", wxFD_OPEN | wxFD_FILE_MUST_EXIST);  //Abro explorador de archivos
+	bool addString = true;
+	if (openFileDialog.ShowModal() == wxID_CANCEL) {			//Esto está por si se cierra el explorador sin elegir archivos
+		return;
+	}
+
+	wxFileInputStream input_stream(openFileDialog.GetPath());	//Verifico que todo ande joya
+
+	string pathSelected = openFileDialog.GetPath();				//Path completo
+
+	string stringSelected = pathSelected.substr(pathSelected.find_last_of('\\') + 1);
+	stringSelected = stringSelected.substr(stringSelected.find_last_of('\\') + 1, stringSelected.size() - 4);		//Solo el nombre sin el .wav
+
+	if (!input_stream.IsOk()) {
+		wxLogError("Cannot open file '%s'.", openFileDialog.GetPath());
+	}
+	else {
+		for (int i = 0; i < selecetedMidi.size(); i++) {
+			if (selecetedMidi[i] == stringSelected) {			//verifico si el string ya está dentro de vector
+				addString = false;
+				i = selecetedMidi.size();
+			}
+		}
+		if (addString) {
+			selecetedMidi.push_back(stringSelected);		//agrego el string al vector
+			ddm_track->Append(stringSelected);			//agrego el string al DDM
+		}
+	}
+
+	evt.Skip();
+}
+
+void cMainMenu::DeleteTrackToDdm(wxCommandEvent& evt){
+
+	if (!(ddm_track->IsTextEmpty()))
+	{
+		bool removeString = false;							//existe la posibilidad que el usuario escriba cualquier cosa en el ddm
+
+		for (int i = 0; i < selecetedMidi.size(); i++) {
+			if (selecetedMidi[i] == ddm_track->GetStringSelection() ) {		//verifico si el nombre está dentro de vector
+				removeString = true;
+				i = selecetedMidi.size();
+			}
+		}
+		if (removeString) {
+			selecetedMidi.erase(selecetedMidi.begin() + ddm_track->GetCurrentSelection());
+			ddm_track->Delete(ddm_track->GetCurrentSelection());
+		}
+	}
+
+	evt.Skip();
+}
+*/
+
+
 //void cMainMenu::OnButtonClicked1(wxCommandEvent& evt)
 //{
 //	m_list1->AppendString(m_txt1->GetValue());
