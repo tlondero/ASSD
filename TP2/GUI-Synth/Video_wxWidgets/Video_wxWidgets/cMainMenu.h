@@ -5,7 +5,9 @@
 #include <wx/clntdata.h>
 #include <wx/sizer.h>
 #include <wx/gbsizer.h>
-
+#include <vector>
+#include "Utils/Tracks.h"
+#include "MidiParser.h"
 #define BUTTON_X 150
 #define BUTTON_Y 50
 #define BUTTON_SP 5
@@ -83,7 +85,9 @@ private:
 	wxStaticText* t_previewDdm = nullptr;
 	wxStaticText* t_effectWavDdm = nullptr;
 	wxStaticText* t_effectMicDdm = nullptr;
-
+	//Clases de soporte.
+	MidiParser midi;
+	vector<Tracks> midiTranslated;
 	//Functions
 	void AddMidiToProgram(wxCommandEvent& evt);
 
@@ -93,6 +97,9 @@ private:
 	
 	string selecetedMidi;			//vector de strings que tiene los mismos que el DDM y en el mismo orden
 	
+	vector<string> midiToStringDdm(vector<Tracks> MidiParsed);//Funció que recibe el vector de tracks que devuelve el midi parser
+	//y devuelve el vector de strings que utilizará el ddm para mostrar los tracks.
+
 									/*
 	void OnButtonClicked1(wxCommandEvent& evt);
 	void AddWavToList(wxCommandEvent& evt);

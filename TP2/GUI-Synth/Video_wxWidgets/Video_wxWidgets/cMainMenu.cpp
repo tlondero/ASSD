@@ -143,6 +143,14 @@ void cMainMenu::AddMidiToProgram(wxCommandEvent& evt) {
 	}
 	else if (selecetedMidi != pathSelected) {			//verifico si el string ya está dentro de vector
 		selecetedMidi = pathSelected;
+		if (this->midi.addMidi(this->selecetedMidi)) {
+				this->midiTranslated=this->midi.getTracks();
+				addToDdm(midiToStringDdm(this->midiTranslated), ddm_track);
+		}
+		else {
+			//algun tipo de error;
+		}
+		
 	}
 	evt.Skip();
 }
@@ -151,6 +159,12 @@ cMainMenu::~cMainMenu() {
 
 }
 
+vector<string> cMainMenu::midiToStringDdm(vector<Tracks> MidiParsed) {
+	vector<string> myddmtext;
+	for (unsigned int i = 0; i < MidiParsed.size(); i++) {
+		myddmtext.push_back("Track " + to_string(i) + " [" + MidiParsed[i].instrumentName + "] " + "(Notes : " + to_string(MidiParsed[i].Notes.size()) + ")");
+	}
+}
 /*
 void cMainMenu::AddTrackToDdm(wxCommandEvent& evt)
 {
