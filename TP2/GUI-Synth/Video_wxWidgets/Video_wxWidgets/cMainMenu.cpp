@@ -143,7 +143,7 @@ void cMainMenu::AddMidiToProgram(wxCommandEvent& evt) {
 	}
 	else {
 		for (int i = 0; i < selecetedMidi.size(); i++) {
-			if (selecetedMidi[i] == stringSelected) {			//verifico si el string ya está dentro de vector
+			if (selecetedMidi[i] == pathSelected) {			//verifico si el string ya está dentro de vector
 				addString = false;
 				i = selecetedMidi.size();
 			}
