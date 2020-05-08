@@ -91,7 +91,7 @@ private:
 	void DeleteTrackToDdm(wxCommandEvent& evt);
 
 	
-	vector<string> selecetedMidi;			//vector de strings que tiene los mismos que el DDM y en el mismo orden
+	string selecetedMidi;			//vector de strings que tiene los mismos que el DDM y en el mismo orden
 	
 									/*
 	void OnButtonClicked1(wxCommandEvent& evt);

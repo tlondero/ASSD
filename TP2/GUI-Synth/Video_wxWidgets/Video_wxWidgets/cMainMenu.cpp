@@ -135,24 +135,15 @@ void cMainMenu::AddMidiToProgram(wxCommandEvent& evt) {
 
 	string pathSelected = openFileDialog.GetPath();				//Path completo
 
-	string stringSelected = pathSelected.substr(pathSelected.find_last_of('\\') + 1);
-	stringSelected = stringSelected.substr(stringSelected.find_last_of('\\') + 1, stringSelected.size() - 4);		//Solo el nombre sin el .wav
+	//string stringSelected = pathSelected.substr(pathSelected.find_last_of('\\') + 1);
+	//stringSelected = stringSelected.substr(stringSelected.find_last_of('\\') + 1, stringSelected.size() - 4);		//Solo el nombre sin el .wav
 
 	if (!input_stream.IsOk()) {
 		wxLogError("Cannot open file '%s'.", openFileDialog.GetPath());
 	}
-	else {
-		for (int i = 0; i < selecetedMidi.size(); i++) {
-			if (selecetedMidi[i] == pathSelected) {			//verifico si el string ya está dentro de vector
-				addString = false;
-				i = selecetedMidi.size();
-			}
-		}
-		if (addString) {
-			selecetedMidi.push_back(stringSelected);		//agrego el string al vector
-		}
+	else if (selecetedMidi != pathSelected) {			//verifico si el string ya está dentro de vector
+		selecetedMidi = pathSelected;
 	}
-
 	evt.Skip();
 }
 
