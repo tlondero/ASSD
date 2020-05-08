@@ -94,6 +94,7 @@ private:
 	void AddTrackToDdm(wxCommandEvent& evt);
 	void DeleteTrackToDdm(wxCommandEvent& evt);
 	void addToDdm(vector<string> tracks, wxComboBox* ddm);
+	void AddTrack(wxCommandEvent& evt);
 	
 	string selecetedMidi;			//vector de strings que tiene los mismos que el DDM y en el mismo orden
 	

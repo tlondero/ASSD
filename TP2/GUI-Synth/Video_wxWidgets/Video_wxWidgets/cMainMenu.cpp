@@ -2,7 +2,7 @@
 
 wxBEGIN_EVENT_TABLE(cMainMenu, wxFrame)
 	EVT_BUTTON(10001, AddMidiToProgram)
-	//EVT_BUTTON(10002, AddWavToList)
+	EVT_BUTTON(10002, AddTrack)
 	//EVT_BUTTON(10003, AddWavToList)
 	//EVT_BUTTON(10004, DeleteWavFromList)
 	EVT_MENU(10005, cMainMenu::OnMenuExit)
@@ -33,7 +33,7 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	//Botones
 	b_cargarMidi = new wxButton(this, 10001, "Load MIDI file", wxPoint(BUTTON_SP, BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
 	b_crearWav = new wxButton(this, wxID_ANY, "Create WAV file", wxPoint(BUTTON_SP, BUTTON_Y + 2*BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
-	b_addTrack = new wxButton(this, wxID_ANY, "Add track", wxPoint(COL2, BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
+	b_addTrack = new wxButton(this, 10002, "Add track", wxPoint(COL2, BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
 	b_removeTrack = new wxButton(this, wxID_ANY, "Remove track", wxPoint(COL2 + BUTTON_SP + BUTTON_X, BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
 	b_preview = new wxButton(this, wxID_ANY, "Listen preview track", wxPoint(COL2, 6 * BUTTON_SP + BUTTON_Y + TEXT_Y + LB_Y/2), wxSize(2*BUTTON_X, BUTTON_Y));
 	b_addEffWav = new wxButton(this, wxID_ANY, "Add effect to WAV", wxPoint(COL2, 12 * BUTTON_SP + 2 * BUTTON_Y + 2 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(BUTTON_X, BUTTON_Y));
@@ -120,6 +120,14 @@ void cMainMenu::OnMenuFullsecreen(wxCommandEvent& evt) {
 
 void cMainMenu::OnMenuExit(wxCommandEvent & evt) {
 	Close();
+	evt.Skip();
+}
+
+void cMainMenu::AddTrack(wxCommandEvent& evt) {
+	if (!(ddm_instrumento->IsTextEmpty()) && !(ddm_track->IsTextEmpty())) {
+		ddm_instrumento->GetStringSelection();
+		ddm_track->GetStringSelection();
+	}
 	evt.Skip();
 }
 
