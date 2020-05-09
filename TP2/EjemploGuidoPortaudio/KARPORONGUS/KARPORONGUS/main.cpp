@@ -19,7 +19,7 @@ int main(void) {
 
 
 	MidiParser myMidi;
-	if (myMidi.addMidi("twinkle")) {
+	if (myMidi.addMidi("twinkle.mid")) {
 		vector<Tracks> myTracks = myMidi.getTracks();
 		double duration = myMidi.getTotalDuration() + 1;
 		ControllerOfControllers myCC;
@@ -29,16 +29,16 @@ int main(void) {
 		double rf = 1;
 
 		//Síntesis preview
-		uc.TrackInstrument = "FLUTE";
-		uc.InstrumentPreview = true;
-		ui.wavName = "preview" + uc.TrackInstrument;
+		uc.TrackInstrument = "GUITAR";
+		uc.InstrumentPreview = false;
+		ui.wavName = "C:/Users/Guido/Documents/GitHub/ASSD/TP2/EjemploGuidoPortaudio/KARPORONGUS/KARPORONGUS/midi/chiquita.wav" + uc.TrackInstrument;
 		uc.params.GuitarParam_rf = 1;
 		uc.TrackNumber = 0;
 		myTracks[uc.TrackNumber].userInstrumentChoice = uc.TrackInstrument;
 		ui.pairTrackInst.push_back(uc);
 		vector<SynthTrack> synthtrack_preview;
 		synthtrack_preview = myCC.sytnsynthesisProject(myTracks, ui);
-		myWavController.compileWav(synthtrack_preview, synthtrack_preview[0].previewDuration, ui.wavName, 1000);
+		myWavController.compileWav(synthtrack_preview, myMidi.getTotalDuration()+1, ui.wavName, 1000);
 		myWavController.makeWav();
 		ui.pairTrackInst.clear();
 

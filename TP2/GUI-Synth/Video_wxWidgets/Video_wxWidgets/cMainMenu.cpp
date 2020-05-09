@@ -64,7 +64,7 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 		
 	//Images
 	//wxStaticBitmap* img_Spectogram = nullptr;
-
+	//this->prev_Sound = new prev_Sound
 
 	//Text
 	t_tackDdm = new wxStaticText(this, wxID_ANY, "Tracks:", wxPoint(BUTTON_SP, 2*BUTTON_Y + 4*BUTTON_SP), wxSize(TEXT_X, TEXT_Y));
@@ -449,6 +449,7 @@ void cMainMenu::CreatePreview(wxCommandEvent& evt) {
 		
 		myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, uiPrev), PREVIEW_DURATION, "namePrev", 1000);
 		myWC.makeWav();
+
 	}
 	evt.Skip();
 }
