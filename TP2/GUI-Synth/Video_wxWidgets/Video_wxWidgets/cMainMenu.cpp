@@ -393,8 +393,9 @@ void cMainMenu::AddMidiToProgram(wxCommandEvent& evt) {
 
 void cMainMenu::CreateWav(wxCommandEvent& evt) {
 	if (!(lb_tracks->IsEmpty())) {
-		myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, this->ui), this->midi.getTotalDuration() + 1, pathSelected, 1000);
+		myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, this->ui), this->midi.getTotalDuration() + 1, "TUVI", 1000);
 		myWC.makeWav();
+
 		//wxFileDialog saveFileDialog(this, _("Save WAV file"), "", "", "WAV files (*.wav)|*.wav", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
 		//if (saveFileDialog.ShowModal() == wxID_CANCEL) {			//Esto está por si se cierra el explorador sin elegir archivos
 		//	return;
@@ -407,6 +408,8 @@ void cMainMenu::CreateWav(wxCommandEvent& evt) {
 		//	wxLogError("Cannot save file '%s'.", pathSelected);
 		//}
 		//else {
+		//	int estodeberiaserdesdewav = pathSelected.find_first_of(".wav");
+
 		//	pathSelected = pathSelected.erase(pathSelected.find_first_of(".wav"), pathSelected.size());
 
 		//	myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, this->ui), this->midi.getTotalDuration() + 1, pathSelected, 1000);
