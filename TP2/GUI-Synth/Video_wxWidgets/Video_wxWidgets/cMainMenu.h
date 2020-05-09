@@ -110,6 +110,7 @@ private:
 	MidiParser midi;
 	vector<Tracks> midiTranslated;
 	UserInput ui;
+	UserInput uiPreview;
 	ControllerOfControllers myCC;
 	vector<wxStaticText*> t_toShow;
 	vector<wxTextCtrl*> tx_toShow;
@@ -130,6 +131,7 @@ private:
 	void addValueToParam(wxCommandEvent& evt);
 	void RemoveTrack(wxCommandEvent& evt);
 	void CreateWav(wxCommandEvent& evt);
+	void CreatePreview(wxCommandEvent& evt);
 	vector<string> midiToStringDdm(vector<Tracks> MidiParsed);		//Funció que recibe el vector de tracks que devuelve el midi parser
 																	//y devuelve el vector de strings que utilizará el ddm para mostrar los tracks.
 	
