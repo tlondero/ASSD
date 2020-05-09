@@ -103,6 +103,11 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 
 	t_guitarRf = new wxStaticText(this, wxID_ANY, "RL:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 7 * BUTTON_SP + 3 * DDM_Y + TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 	
+	t_bell = new wxStaticText(this, wxID_ANY, "No parameters needed for this instrument", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 7 * BUTTON_SP + 3 * DDM_Y + TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	//t_clarinet = new wxStaticText(this, wxID_ANY, "No parameters needed for this instrument", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 7 * BUTTON_SP + 3 * DDM_Y + TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	//t_trombone = new wxStaticText(this, wxID_ANY, "No parameters needed for this instrument", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 7 * BUTTON_SP + 3 * DDM_Y + TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	//t_trumpet = new wxStaticText(this, wxID_ANY, "No parameters needed for this instrument", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 7 * BUTTON_SP + 3 * DDM_Y + TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+
 	t_toShow.push_back(t_organA);
 	t_toShow.push_back(t_organR);
 	t_toShow.push_back(t_organS);
@@ -111,9 +116,13 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	t_toShow.push_back(t_fluteR);
 	t_toShow.push_back(t_fluteS);
 	
-	t_toShow.push_back(t_guitarRf);
+	t_toShow.push_back(t_bell);
+	//t_toShow.push_back(t_clarinet);
+	//t_toShow.push_back(t_trombone);
+	//t_toShow.push_back(t_trumpet);
 
-	
+	t_toShow.push_back(t_guitarRf);
+		
 	for (int i = 0; i < tx_toShow.size(); i++) {
 		tx_toShow[i]->Hide();
 		t_toShow[i]->Hide();
@@ -236,6 +245,21 @@ void cMainMenu::AddTrack(wxCommandEvent& evt) {
 				lb_tracks->Append(track + ' ' + instrument);
 			}
 		}
+		if ((instrument == InstrumentList[3]) || (instrument == InstrumentList[4]) || (instrument == InstrumentList[5]) || (instrument == InstrumentList[6])) {							//BELL, CLARINET, TROMBONE y TRUMPET 
+			uc.TrackInstrument = instrument;
+			int n = track.size() - (track.substr(track.find('['))).size() - 7;
+			uc.TrackNumber = stoi(track.substr(6, n));
+			
+			for (int i = 0; i < ui.pairTrackInst.size(); i++) {
+				if (ui.pairTrackInst[i].TrackNumber == uc.TrackNumber) {
+					letsPush = false;
+				}
+			}
+			if (letsPush) {
+				ui.pairTrackInst.push_back(uc);
+				lb_tracks->Append(track + ' ' + instrument);
+			}
+		}
 	}
 	evt.Skip();
 }
@@ -252,8 +276,11 @@ void cMainMenu::detectInstrumentChange(wxCommandEvent& evt) {
 	for (int i = 0; i < tx_toShow.size(); i++) {
 		tx_toShow[i]->Clear();
 		tx_toShow[i]->Hide();
+	}
+	for (int i = 0; i < t_toShow.size(); i++) {
 		t_toShow[i]->Hide();
 	}
+
 	string intrumentoElegido = ddm_instrumento->GetStringSelection();						//verificar que el imput esté en la lista de esa mierda
 	
 	if (intrumentoElegido == InstrumentList[0]) {								//GUITARRA
@@ -275,6 +302,9 @@ void cMainMenu::detectInstrumentChange(wxCommandEvent& evt) {
 		t_fluteA->Show();
 		t_fluteS->Show();
 		t_fluteR->Show();
+	}
+	else if ((intrumentoElegido == InstrumentList[3]) || (intrumentoElegido == InstrumentList[4]) || (intrumentoElegido == InstrumentList[5]) || (intrumentoElegido == InstrumentList[6])) {								//BELL, CLARINET, TROMBONE y TRUMPET
+		t_bell->Show();
 	}
 	evt.Skip();
 }

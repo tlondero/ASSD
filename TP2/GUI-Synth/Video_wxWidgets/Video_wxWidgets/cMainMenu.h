@@ -35,8 +35,8 @@
 #define COL4 3*450
 
 //INSTRUMENTOS
-#define  NUMBER_OF_INSTRUMETS	3
-const string  InstrumentList[NUMBER_OF_INSTRUMETS] = { "GUITAR", "ORGAN", "FLUTE" };
+#define  NUMBER_OF_INSTRUMETS	7
+const string  InstrumentList[NUMBER_OF_INSTRUMETS] = { "GUITAR", "ORGAN", "FLUTE", "BELL", "CLARINET", "TROMBONE", "TRUMPET" };
 #define PREVIEW_DURATION 6
 using namespace std;
 
@@ -113,6 +113,11 @@ private:
 	wxStaticText* t_fluteS = nullptr;
 
 	wxStaticText* t_guitarRf = nullptr;
+
+	wxStaticText* t_bell = nullptr;
+	//wxStaticText* t_clarinet = nullptr;
+	//wxStaticText* t_trombone = nullptr;
+	//wxStaticText* t_trumpet = nullptr;
 
 
 	//Clases de soporte y las que se nos hacian lindas poner acá
