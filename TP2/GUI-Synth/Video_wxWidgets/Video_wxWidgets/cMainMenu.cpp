@@ -411,34 +411,36 @@ vector<string> cMainMenu::midiToStringDdm(vector<Tracks> MidiParsed) {
 
 void cMainMenu::CreateWav(wxCommandEvent& evt) {
 	if (!(lb_tracks->IsEmpty())) {
-		wxFileDialog SaveDialog(this, _("Save File As _?"), wxEmptyString, wxEmptyString, _("Wav files (*.wav)|*.wav|C++ Source Files (*.cpp)|*.cpp| C Source files(*.c) | *.c | C header files(*.h) | *.h"),
-			wxFD_SAVE | wxFD_OVERWRITE_PROMPT, wxDefaultPosition);
-		if (SaveDialog.ShowModal() == wxID_CANCEL) {			//Esto está por si se cierra el explorador sin elegir archivos
-			return;
-		}
-
-		wxFileInputStream input_stream(SaveDialog.GetPath());	//Verifico que todo ande joya
-
-		string path = SaveDialog.GetPath();				//Path completo
-
-		if (!input_stream.IsOk()) {
-			wxLogError("Cannot save file '%s'.", SaveDialog.GetPath());
-		}
-		else {
-			path = SaveDialog.GetPath();
-			SetTitle(wxString("Edit - ") << SaveDialog.GetFilename());
-
-			SaveDialog.Destroy();
-
-			path = path.erase(path.size() - 4, path.size());
-
-			if (!(lb_tracks->IsEmpty())) {
-				myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, this->ui), this->midi.getTotalDuration() + 1, path, 1000);
-				myWC.makeWav();
-			}
-		}
-
+		myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, this->ui), this->midi.getTotalDuration() + 1, "created wav", 1000);
+		myWC.makeWav();
 	}
+
+	//if (!(lb_tracks->IsEmpty())) {
+	//	wxFileDialog SaveDialog(this, _("Save WAV file"), "", "", "WAV files (*.wav)|*.wav", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+	//	if (SaveDialog.ShowModal() == wxID_CANCEL) {			//Esto está por si se cierra el explorador sin elegir archivos
+	//		return;
+	//	}
+
+	//	string pathSelected = SaveDialog.GetPath();				//Path completo
+
+	//	if (SaveDialog.ShowModal() == wxID_OK) {
+	//		//SetTitle(wxString("Edit - ") << SaveDialog.GetFilename());
+
+	//		SaveDialog.Destroy();
+
+	//		pathSelected = pathSelected.erase(pathSelected.size() - 4, pathSelected.size());
+
+	//		if (!(lb_tracks->IsEmpty())) {
+	//			myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, this->ui), this->midi.getTotalDuration() + 1, pathSelected, 1000);
+	//			myWC.makeWav();
+	//		}
+	//		else {
+	//			wxLogError("Cannot save file '%s'.", pathSelected);
+	//			SaveDialog.Destroy();
+	//		}
+	//	}
+
+	//}
 	evt.Skip();
 }
 
