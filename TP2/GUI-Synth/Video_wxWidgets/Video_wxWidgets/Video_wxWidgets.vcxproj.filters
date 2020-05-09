@@ -13,6 +13,36 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Midi">
+      <UniqueIdentifier>{320e9037-ef5b-4170-9c9f-809284821acb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Midi">
+      <UniqueIdentifier>{0c8ad873-7ad5-42c6-b1d8-9609c8233d66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utils">
+      <UniqueIdentifier>{5b24a757-e60c-49b1-aad4-20c26be04649}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utils">
+      <UniqueIdentifier>{facdd393-b072-46d6-8a54-5d4953b2a782}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\UserInput">
+      <UniqueIdentifier>{4500ccd9-4650-41d8-8ac3-fbecccbdbf62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UserInput">
+      <UniqueIdentifier>{5e72d86c-5a62-4206-abf4-e047371b6860}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Instrumentos">
+      <UniqueIdentifier>{fdcc1e5c-b7b4-4344-bf09-9d8ad3497fcc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Instrumentos">
+      <UniqueIdentifier>{6ff3813a-5887-4bed-bacc-00c15cf1a261}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Controllers">
+      <UniqueIdentifier>{fc47d0a7-ce07-40cd-bf00-f167c64bbbd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Controllers">
+      <UniqueIdentifier>{5e742e80-c13c-4c04-b788-e521094b8bc0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cApp.cpp">
@@ -21,6 +51,111 @@
     <ClCompile Include="cMainMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="midi\Binasc.cpp">
+      <Filter>Source Files\Midi</Filter>
+    </ClCompile>
+    <ClCompile Include="midi\MidiEvent.cpp">
+      <Filter>Source Files\Midi</Filter>
+    </ClCompile>
+    <ClCompile Include="midi\MidiEventList.cpp">
+      <Filter>Source Files\Midi</Filter>
+    </ClCompile>
+    <ClCompile Include="midi\MidiFile.cpp">
+      <Filter>Source Files\Midi</Filter>
+    </ClCompile>
+    <ClCompile Include="midi\MidiMessage.cpp">
+      <Filter>Source Files\Midi</Filter>
+    </ClCompile>
+    <ClCompile Include="MidiParser.cpp">
+      <Filter>Source Files\Midi</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\MusicData.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\Note.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\SynthTrack.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\Tracks.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\Utils.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInput\InstParams.cpp">
+      <Filter>Source Files\UserInput</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInput\UserChoice.cpp">
+      <Filter>Source Files\UserInput</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInput\UserInput.cpp">
+      <Filter>Source Files\UserInput</Filter>
+    </ClCompile>
+    <ClCompile Include="Instrumentos\Banjo.cpp">
+      <Filter>Source Files\Instrumentos</Filter>
+    </ClCompile>
+    <ClCompile Include="Instrumentos\Bell.cpp">
+      <Filter>Source Files\Instrumentos</Filter>
+    </ClCompile>
+    <ClCompile Include="Instrumentos\Clarinet.cpp">
+      <Filter>Source Files\Instrumentos</Filter>
+    </ClCompile>
+    <ClCompile Include="Instrumentos\Drum.cpp">
+      <Filter>Source Files\Instrumentos</Filter>
+    </ClCompile>
+    <ClCompile Include="Instrumentos\GuitarClassic.cpp">
+      <Filter>Source Files\Instrumentos</Filter>
+    </ClCompile>
+    <ClCompile Include="Instrumentos\GuitarImproved.cpp">
+      <Filter>Source Files\Instrumentos</Filter>
+    </ClCompile>
+    <ClCompile Include="Instrumentos\Instrument.cpp">
+      <Filter>Source Files\Instrumentos</Filter>
+    </ClCompile>
+    <ClCompile Include="Instrumentos\Organ.cpp">
+      <Filter>Source Files\Instrumentos</Filter>
+    </ClCompile>
+    <ClCompile Include="Instrumentos\Trombone.cpp">
+      <Filter>Source Files\Instrumentos</Filter>
+    </ClCompile>
+    <ClCompile Include="Instrumentos\Trumpet.cpp">
+      <Filter>Source Files\Instrumentos</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\AcousticGuitarController.cpp">
+      <Filter>Source Files\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\BanjoController.cpp">
+      <Filter>Source Files\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\BellController.cpp">
+      <Filter>Source Files\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\ClarinetController.cpp">
+      <Filter>Source Files\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\ControllerOfControllers.cpp">
+      <Filter>Source Files\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\DrumController .cpp">
+      <Filter>Source Files\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\ElectricGuitarController.cpp">
+      <Filter>Source Files\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\OrganController.cpp">
+      <Filter>Source Files\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\TromboneController.cpp">
+      <Filter>Source Files\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\TrumpetController.cpp">
+      <Filter>Source Files\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\WavController.cpp">
+      <Filter>Source Files\Controllers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cApp.h">
@@ -28,6 +163,114 @@
     </ClInclude>
     <ClInclude Include="cMainMenu.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="midi\Binasc.h">
+      <Filter>Header Files\Midi</Filter>
+    </ClInclude>
+    <ClInclude Include="midi\MidiEvent.h">
+      <Filter>Header Files\Midi</Filter>
+    </ClInclude>
+    <ClInclude Include="midi\MidiEventList.h">
+      <Filter>Header Files\Midi</Filter>
+    </ClInclude>
+    <ClInclude Include="midi\MidiFile.h">
+      <Filter>Header Files\Midi</Filter>
+    </ClInclude>
+    <ClInclude Include="midi\MidiMessage.h">
+      <Filter>Header Files\Midi</Filter>
+    </ClInclude>
+    <ClInclude Include="MidiParser.h">
+      <Filter>Header Files\Midi</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\MusicData.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\Note.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\SynthTrack.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\Tracks.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\Utils.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInput\InstParams.h">
+      <Filter>Header Files\UserInput</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInput\UserChoice.h">
+      <Filter>Header Files\UserInput</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInput\UserInput.h">
+      <Filter>Header Files\UserInput</Filter>
+    </ClInclude>
+    <ClInclude Include="Instrumentos\Banjo.h">
+      <Filter>Header Files\Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="Instrumentos\Bell.h">
+      <Filter>Header Files\Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="Instrumentos\Clarinet.h">
+      <Filter>Header Files\Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="Instrumentos\Drum.h">
+      <Filter>Header Files\Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="Instrumentos\GuitarClassic.h">
+      <Filter>Header Files\Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="Instrumentos\GuitarImproved.h">
+      <Filter>Header Files\Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="Instrumentos\Instrument.h">
+      <Filter>Header Files\Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="Instrumentos\Organ.h">
+      <Filter>Header Files\Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="Instrumentos\Trombone.h">
+      <Filter>Header Files\Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="Instrumentos\Trumpet.h">
+      <Filter>Header Files\Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\AcousticGuitarController.h">
+      <Filter>Header Files\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\BanjoController.h">
+      <Filter>Header Files\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\BellController.h">
+      <Filter>Header Files\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\ClarinetController.h">
+      <Filter>Header Files\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\ControllerOfControllers.h">
+      <Filter>Header Files\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\DrumController.h">
+      <Filter>Header Files\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\ElectricGuitarController.h">
+      <Filter>Header Files\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\OrganController.h">
+      <Filter>Header Files\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\TromboneController.h">
+      <Filter>Header Files\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\TrumpetController.h">
+      <Filter>Header Files\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\WavController.h">
+      <Filter>Header Files\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="General.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

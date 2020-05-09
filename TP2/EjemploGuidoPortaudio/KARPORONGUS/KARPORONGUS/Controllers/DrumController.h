@@ -6,7 +6,7 @@ class DrumController
 {
 public:
 	DrumController();
-	SynthTrack sytnsynthesisTrack(Tracks GuitarTrack);
+	SynthTrack sytnsynthesisTrack(Tracks GuitarTrack,bool preview);
 	void setParam(double rf, double prob);
 	~DrumController();
 private:

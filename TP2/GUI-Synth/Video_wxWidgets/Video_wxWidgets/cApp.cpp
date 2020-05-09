@@ -7,8 +7,7 @@ cApp::cApp()
 
 }
 
-cApp::~cApp()
-{
+cApp::~cApp(){
 
 }
 

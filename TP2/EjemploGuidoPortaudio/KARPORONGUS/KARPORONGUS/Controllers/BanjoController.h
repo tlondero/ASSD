@@ -6,7 +6,7 @@ class BanjoController
 {
 public:
 	BanjoController();
-	SynthTrack sytnsynthesisTrack(Tracks GuitarTrack);
+	SynthTrack sytnsynthesisTrack(Tracks GuitarTrack, bool preview);
 	~BanjoController();
 private:
 	Banjo banjo;

@@ -52,7 +52,7 @@ vector<Tracks> MidiParser::getTracks() {
 	return trackVector;
 }
 bool MidiParser::addMidi(std::string filename) {
-	this->midiFile = MidiFile(filename + ".mid");
+	this->midiFile = MidiFile(filename );
 	return this->midiFile.status();
 }
 MidiParser::~MidiParser()
