@@ -391,6 +391,43 @@ void cMainMenu::AddMidiToProgram(wxCommandEvent& evt) {
 	evt.Skip();
 }
 
+void cMainMenu::CreateWav(wxCommandEvent& evt) {
+	if (!(lb_tracks->IsEmpty())) {
+		wxFileDialog saveFileDialog(this, _("Save WAV file"), "", "", "WAV files (*.wav)|*.wav", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+		if (saveFileDialog.ShowModal() == wxID_CANCEL) {			//Esto está por si se cierra el explorador sin elegir archivos
+			return;
+		}
+
+		string pathSelected = saveFileDialog.GetPath();				//Path completo
+		wxFileOutputStream output_stream(saveFileDialog.GetPath());
+
+		if (!output_stream.IsOk()) {
+			wxLogError("Cannot save file '%s'.", pathSelected);
+		}
+		else {
+			pathSelected = pathSelected.erase(pathSelected.find_first_of(".wav"), pathSelected.size());
+
+			myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, this->ui), this->midi.getTotalDuration() + 1, pathSelected, 1000);
+			myWC.makeWav();
+		}
+	}
+	evt.Skip();
+}
+
+void cMainMenu::CreatePreview(wxCommandEvent& evt) {
+	if (lb_tracks->GetSelection() != wxNOT_FOUND) {
+		UserChoice ucPrev = ui.pairTrackInst[lb_tracks->GetSelection()];
+		UserInput uiPrev;
+		ucPrev.InstrumentPreview = true;
+		uiPrev.pairTrackInst.push_back(ucPrev);
+		
+		myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, uiPrev), PREVIEW_DURATION, "namePrev", 1000);
+		myWC.makeWav();
+
+	}
+	evt.Skip();
+}
+
 cMainMenu::~cMainMenu() {
 
 }
@@ -407,53 +444,4 @@ vector<string> cMainMenu::midiToStringDdm(vector<Tracks> MidiParsed) {
 		myddmtext.push_back("Track " + to_string(i) + " [" + MidiParsed[i].instrumentName + "] " + "(Notes : " + to_string(MidiParsed[i].Notes.size()) + ")");
 	}
 	return myddmtext;
-}
-
-void cMainMenu::CreateWav(wxCommandEvent& evt) {
-	if (!(lb_tracks->IsEmpty())) {
-		myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, this->ui), this->midi.getTotalDuration() + 1, "created wav", 1000);
-		myWC.makeWav();
-	}
-
-	//if (!(lb_tracks->IsEmpty())) {
-	//	wxFileDialog SaveDialog(this, _("Save WAV file"), "", "", "WAV files (*.wav)|*.wav", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
-	//	if (SaveDialog.ShowModal() == wxID_CANCEL) {			//Esto está por si se cierra el explorador sin elegir archivos
-	//		return;
-	//	}
-
-	//	string pathSelected = SaveDialog.GetPath();				//Path completo
-
-	//	if (SaveDialog.ShowModal() == wxID_OK) {
-	//		//SetTitle(wxString("Edit - ") << SaveDialog.GetFilename());
-
-	//		SaveDialog.Destroy();
-
-	//		pathSelected = pathSelected.erase(pathSelected.size() - 4, pathSelected.size());
-
-	//		if (!(lb_tracks->IsEmpty())) {
-	//			myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, this->ui), this->midi.getTotalDuration() + 1, pathSelected, 1000);
-	//			myWC.makeWav();
-	//		}
-	//		else {
-	//			wxLogError("Cannot save file '%s'.", pathSelected);
-	//			SaveDialog.Destroy();
-	//		}
-	//	}
-
-	//}
-	evt.Skip();
-}
-
-void cMainMenu::CreatePreview(wxCommandEvent& evt) {
-	if (lb_tracks->GetSelection() != wxNOT_FOUND) {
-		UserChoice ucPrev = ui.pairTrackInst[lb_tracks->GetSelection()];
-		UserInput uiPrev;
-		ucPrev.InstrumentPreview = true;
-		uiPrev.pairTrackInst.push_back(ucPrev);
-		
-		myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, uiPrev), PREVIEW_DURATION, "namePrev", 1000);
-		myWC.makeWav();
-
-	}
-	evt.Skip();
 }
