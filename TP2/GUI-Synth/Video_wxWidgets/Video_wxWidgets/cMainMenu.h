@@ -6,10 +6,13 @@
 #include <wx/sizer.h>
 #include <wx/gbsizer.h>
 #include <wx/textctrl.h>
+
 #include <vector>
+#include <map>
 #include "Utils/Tracks.h"
 #include "MidiParser.h"
 #include "UserInput/UserInput.h"
+
 
 #define BUTTON_X 150
 #define BUTTON_Y 50
@@ -29,8 +32,8 @@
 #define COL4 3*450
 
 //INSTRUMENTOS
-#define GUITAR "Guitar"
-#define ORGANO "Organ"
+#define  NUMBER_OF_INSTRUMETS	2
+const string  InstrumentList[NUMBER_OF_INSTRUMETS] = { "Guitar", "Organ" };
 
 using namespace std;
 
@@ -117,12 +120,15 @@ private:
 	void addToDdm(vector<string> tracks, wxComboBox* ddm);
 	void AddTrack(wxCommandEvent& evt);
 	void detectInstrumentChange(wxCommandEvent& evt);
-	//void addValueToParam(wxCommandEvent& evt);
+	void addValueToParam(wxCommandEvent& evt);
+	void RemoveTrack(wxCommandEvent& evt);
 
 	vector<wxStaticText*> t_toShow;
 	vector<wxTextCtrl*> tx_toShow;
 
 	string selecetedMidi;			//vector de strings que tiene los mismos que el DDM y en el mismo orden
+
+	map<string, string> listOfInstruments;
 	
 	vector<string> midiToStringDdm(vector<Tracks> MidiParsed);//Funció que recibe el vector de tracks que devuelve el midi parser
 	//y devuelve el vector de strings que utilizará el ddm para mostrar los tracks.
