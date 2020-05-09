@@ -6,6 +6,7 @@
 #include <wx/sizer.h>
 #include <wx/gbsizer.h>
 #include <wx/textctrl.h>
+#include <wx/event.h>
 
 #include <vector>
 
@@ -119,7 +120,7 @@ private:
 
 
 	//Functions
-	void OnMenuFullsecreen(wxCommandEvent& evt);			//En desarrollo
+	void OnMenuFullscreen(wxCommandEvent& evt);			//En desarrollo
 	void OnMenuExit(wxCommandEvent& evt);
 
 	void AddMidiToProgram(wxCommandEvent& evt);

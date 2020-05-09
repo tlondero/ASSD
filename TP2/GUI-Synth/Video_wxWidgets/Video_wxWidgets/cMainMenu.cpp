@@ -5,7 +5,7 @@ wxBEGIN_EVENT_TABLE(cMainMenu, wxFrame)
 	EVT_BUTTON(10002, AddTrack)
 	EVT_TEXT(10003, detectInstrumentChange)
 	EVT_MENU(10005, OnMenuExit)
-	EVT_MENU(10006, OnMenuFullsecreen)
+	EVT_MENU(10006, OnMenuFullscreen)
 	EVT_BUTTON(10007, RemoveTrack)
 	EVT_BUTTON(10008, CreateWav)
 	EVT_BUTTON(10009, CreatePreview)
@@ -146,7 +146,7 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 
 }
 
-void cMainMenu::OnMenuFullsecreen(wxCommandEvent& evt) {
+void cMainMenu::OnMenuFullscreen(wxCommandEvent& evt) {
 	this->ShowFullScreen(!fullscreen, wxFULLSCREEN_ALL ^ wxFULLSCREEN_NOSTATUSBAR);
 	fullscreen = !fullscreen;
 	evt.Skip();
