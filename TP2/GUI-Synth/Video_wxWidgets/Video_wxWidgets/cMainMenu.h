@@ -35,8 +35,8 @@
 #define COL4 3*450
 
 //INSTRUMENTOS
-#define  NUMBER_OF_INSTRUMETS	8
-const string  InstrumentList[NUMBER_OF_INSTRUMETS] = { "GUITAR", "ORGAN", "FLUTE", "BELL", "CLARINET", "TROMBONE", "TRUMPET", "DRUM"};
+#define  NUMBER_OF_INSTRUMETS	10
+const string  InstrumentList[NUMBER_OF_INSTRUMETS] = { "GUITAR", "ORGAN", "FLUTE", "BELL", "CLARINET", "TROMBONE", "TRUMPET", "DRUM", "BANJO", "ELECTRIC_GUITAR"};
 #define PREVIEW_DURATION 6
 using namespace std;
 
@@ -93,7 +93,7 @@ private:
 	wxStaticText* t_effectMicDdm = nullptr;
 
 
-	//Dinmac Texts
+	//Dinmac Control Texts
 	wxTextCtrl* tx_organA = nullptr;
 	wxTextCtrl* tx_organR = nullptr;
 	wxTextCtrl* tx_organS = nullptr;
@@ -103,10 +103,12 @@ private:
 	wxTextCtrl* tx_fluteS = nullptr;
 
 	wxTextCtrl* tx_guitarRf = nullptr;
-	
+	wxTextCtrl* tx_eguitarRf = nullptr;
+
 	wxTextCtrl* tx_drumRf = nullptr;
 	wxTextCtrl* tx_drumB = nullptr;
 
+	//Dinmac Static Texts
 	wxStaticText* t_organA = nullptr;
 	wxStaticText* t_organR = nullptr;
 	wxStaticText* t_organS = nullptr;
@@ -116,14 +118,12 @@ private:
 	wxStaticText* t_fluteS = nullptr;
 
 	wxStaticText* t_guitarRf = nullptr;
+	wxStaticText* t_eguitarRf = nullptr;
 
 	wxStaticText* t_drumRf = nullptr;
 	wxStaticText* t_drumB = nullptr;
 
 	wxStaticText* t_bell = nullptr;
-	//wxStaticText* t_clarinet = nullptr;
-	//wxStaticText* t_trombone = nullptr;
-	//wxStaticText* t_trumpet = nullptr;
 
 
 	//Clases de soporte y las que se nos hacian lindas poner acá

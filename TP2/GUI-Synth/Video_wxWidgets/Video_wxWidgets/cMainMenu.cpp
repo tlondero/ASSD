@@ -82,6 +82,7 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	tx_fluteS = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 12 * BUTTON_SP + 3 * DDM_Y + 6 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 
 	tx_guitarRf = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 8 * BUTTON_SP + 3 * DDM_Y + 2 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	tx_eguitarRf = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 8 * BUTTON_SP + 3 * DDM_Y + 2 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 
 	tx_drumRf = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 8 * BUTTON_SP + 3 * DDM_Y + 2 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 	tx_drumB = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 10 * BUTTON_SP + 3 * DDM_Y + 4 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
@@ -95,6 +96,7 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	tx_toShow.push_back(tx_fluteS);
 
 	tx_toShow.push_back(tx_guitarRf);
+	tx_toShow.push_back(tx_eguitarRf);
 
 	tx_toShow.push_back(tx_drumRf);
 	tx_toShow.push_back(tx_drumB);
@@ -108,7 +110,9 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	t_fluteS = new wxStaticText(this, wxID_ANY, "S:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 11 * BUTTON_SP + 3 * DDM_Y + 5 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 
 	t_guitarRf = new wxStaticText(this, wxID_ANY, "RL:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 7 * BUTTON_SP + 3 * DDM_Y + TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
-	t_bell = new wxStaticText(this, wxID_ANY, "No parameters needed", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 7 * BUTTON_SP + 3 * DDM_Y + TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));		//Same for trumpet, trombone and clarinet
+	t_eguitarRf = new wxStaticText(this, wxID_ANY, "RL:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 7 * BUTTON_SP + 3 * DDM_Y + TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	
+	t_bell = new wxStaticText(this, wxID_ANY, "No parameters needed", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 7 * BUTTON_SP + 3 * DDM_Y + TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));		//Same for trumpet, trombone, clarinet and banjo
 	
 	t_drumRf = new wxStaticText(this, wxID_ANY, "RL:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 7 * BUTTON_SP + 3 * DDM_Y + TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 	t_drumB = new wxStaticText(this, wxID_ANY, "B:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 9 * BUTTON_SP + 3 * DDM_Y + 3 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
@@ -121,12 +125,14 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	t_toShow.push_back(t_fluteR);
 	t_toShow.push_back(t_fluteS);
 	
-	t_toShow.push_back(t_bell);
 	t_toShow.push_back(t_guitarRf);
+	t_toShow.push_back(t_eguitarRf);
 
 	t_toShow.push_back(t_drumRf);
 	t_toShow.push_back(t_drumB);
-		
+	
+	t_toShow.push_back(t_bell);
+
 	for (int i = 0; i < tx_toShow.size(); i++) {
 		tx_toShow[i]->Hide();
 	}
@@ -199,12 +205,16 @@ void cMainMenu::AddTrack(wxCommandEvent& evt) {
 	bool letsPush = true;
 	
 	if (!(ddm_instrumento->IsTextEmpty()) && !(ddm_track->IsTextEmpty())) {
-		if ((instrument == InstrumentList[0]) && !(tx_guitarRf->IsEmpty())) {							//GUITARRA
+		if (((instrument == InstrumentList[0]) && !(tx_guitarRf->IsEmpty())) || ((instrument == InstrumentList[9]) && !(tx_eguitarRf->IsEmpty()))) {							//GUITARRA
 			uc.TrackInstrument = instrument;
 			int n = track.size() - (track.substr(track.find('['))).size() - 7;
 			uc.TrackNumber = stoi(track.substr(6, n));
-			uc.params.GuitarParam_rf = stod((string) tx_guitarRf->GetValue());
-
+			if (instrument == InstrumentList[0]) {
+				uc.params.GuitarParam_rf = stod((string)tx_guitarRf->GetValue());
+			}
+			else {
+				uc.params.GuitarParam_rf = stod((string)tx_eguitarRf->GetValue());
+			}
 			for (int i = 0; i < ui.pairTrackInst.size(); i++) {
 				if (ui.pairTrackInst[i].TrackNumber == uc.TrackNumber) {
 					letsPush = false;
@@ -251,7 +261,7 @@ void cMainMenu::AddTrack(wxCommandEvent& evt) {
 				lb_tracks->Append(track + ' ' + instrument);
 			}
 		}
-		else if ((instrument == InstrumentList[3]) || (instrument == InstrumentList[4]) || (instrument == InstrumentList[5]) || (instrument == InstrumentList[6])) {							//BELL, CLARINET, TROMBONE y TRUMPET 
+		else if ((instrument == InstrumentList[3]) || (instrument == InstrumentList[4]) || (instrument == InstrumentList[5]) || (instrument == InstrumentList[6]) || (instrument == InstrumentList[8])) {							//BELL, CLARINET, TROMBONE, TRUMPET AND BANJO
 			uc.TrackInstrument = instrument;
 			int n = track.size() - (track.substr(track.find('['))).size() - 7;
 			uc.TrackNumber = stoi(track.substr(6, n));
@@ -326,7 +336,8 @@ void cMainMenu::detectInstrumentChange(wxCommandEvent& evt) {
 		t_fluteS->Show();
 		t_fluteR->Show();
 	}
-	else if ((intrumentoElegido == InstrumentList[3]) || (intrumentoElegido == InstrumentList[4]) || (intrumentoElegido == InstrumentList[5]) || (intrumentoElegido == InstrumentList[6])) {								//BELL, CLARINET, TROMBONE y TRUMPET
+	else if ((intrumentoElegido == InstrumentList[3]) || (intrumentoElegido == InstrumentList[4]) || (intrumentoElegido == InstrumentList[5]) || (intrumentoElegido == InstrumentList[6]) || (intrumentoElegido == InstrumentList[8])) {
+		//BELL, CLARINET, TROMBONE, TRUMPET AND BANJO
 		t_bell->Show();
 	}
 	else if (intrumentoElegido == InstrumentList[7]) {							//DRUM
@@ -334,6 +345,10 @@ void cMainMenu::detectInstrumentChange(wxCommandEvent& evt) {
 		tx_drumB->Show();
 		t_drumRf->Show();
 		t_drumB->Show();
+	}
+	else if (intrumentoElegido == InstrumentList[9]) {							//E GUITAR
+		tx_eguitarRf->Show();
+		t_eguitarRf->Show();
 	}
 	evt.Skip();
 }
@@ -358,6 +373,8 @@ void cMainMenu::AddMidiToProgram(wxCommandEvent& evt) {
 	}
 	else if (selecetedMidi != pathSelected) {			//verifico si el string ya está dentro de vector
 		ddm_track->Clear();
+		lb_tracks->Clear();
+		lb_wavEff->Clear();
 		selecetedMidi = pathSelected;
 		if (this->midi.addMidi(this->selecetedMidi)) {
 				this->midiTranslated=this->midi.getTracks();
