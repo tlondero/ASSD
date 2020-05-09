@@ -47,6 +47,8 @@ public:
 	~cMainMenu();
 
 private:
+	//Load Bar
+	wxGauge* loadBar = nullptr;
 
 	//Toolbar
 	wxToolBar* m_ToolBar = nullptr;

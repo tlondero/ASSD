@@ -22,6 +22,9 @@ wxEND_EVENT_TABLE()
 
 cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(30,30), wxSize(1080,720))
 {
+	//Load bar
+	loadBar = new wxGauge(this, wxID_ANY, 15, wxPoint(COL4, COL2), wxSize(BUTTON_X, BUTTON_Y));
+
 	//Menu y tool bar
 	m_MenuBar = new wxMenuBar();
 	this->SetMenuBar(m_MenuBar);
@@ -407,9 +410,32 @@ vector<string> cMainMenu::midiToStringDdm(vector<Tracks> MidiParsed) {
 }
 
 void cMainMenu::CreateWav(wxCommandEvent& evt) {
+
 	if (!(lb_tracks->IsEmpty())) {
-		myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, this->ui), this->midi.getTotalDuration() + 1, "name", 1000);
-		myWC.makeWav();
+		wxFileDialog* SaveDialog = new wxFileDialog(this, _("Save File As _?"), wxEmptyString, wxEmptyString, _("Wav files (*.wav)|*.wav|C++ Source Files (*.cpp)|*.cpp| C Source files(*.c) | *.c | C header files(*.h) | *.h"),
+			wxFD_SAVE | wxFD_OVERWRITE_PROMPT, wxDefaultPosition);
+
+		wxFileInputStream input_stream(SaveDialog->GetPath());	//Verifico que todo ande joya
+
+		string path = SaveDialog->GetPath();				//Path completo
+
+		if (SaveDialog->ShowModal() == wxID_OK)
+		{
+			path = SaveDialog->GetPath();
+			SetTitle(wxString("Edit - ") << SaveDialog->GetFilename());
+
+			SaveDialog->Destroy();
+
+			path = path.erase(path.size() - 4, path.size());
+
+			if (!(lb_tracks->IsEmpty())) {
+				myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, this->ui), this->midi.getTotalDuration() + 1, path, 1000);
+				myWC.makeWav();
+			}
+		}
+		else if (SaveDialog->ShowModal() == wxID_CANCEL) {			//Esto está por si se cierra el explorador sin elegir archivos
+			return;
+		}
 	}
 	evt.Skip();
 }
