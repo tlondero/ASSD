@@ -156,12 +156,12 @@
     <ClCompile Include="Controllers\WavController.cpp">
       <Filter>Source Files\Controllers</Filter>
     </ClCompile>
+    <ClCompile Include="Utils\cMainPanel.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cApp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="cMainMenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="midi\Binasc.h">
@@ -271,6 +271,12 @@
     </ClInclude>
     <ClInclude Include="General.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cMainMenu.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\cMainPanel.h">
+      <Filter>Header Files\Utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

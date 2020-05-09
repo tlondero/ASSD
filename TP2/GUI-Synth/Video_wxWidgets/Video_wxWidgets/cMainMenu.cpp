@@ -9,6 +9,7 @@ wxBEGIN_EVENT_TABLE(cMainMenu, wxFrame)
 	EVT_BUTTON(10007, RemoveTrack)
 	EVT_BUTTON(10008, CreateWav)
 	EVT_BUTTON(10009, CreatePreview)
+	EVT_KEY_DOWN(OnKeyDown)
 wxEND_EVENT_TABLE()
 
 /*
@@ -143,6 +144,8 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 		t_toShow[i]->Hide();
 	}
 
+	//MoveAfterInTabOrder(this);
+
 	////Grid Sizer
 
 	//wxGridBagSizer* grid = new wxGridBagSizer();
@@ -187,7 +190,6 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	for (int i = 0; i < NUMBER_OF_INSTRUMETS; i++) {
 		ddm_instrumento->AppendString(InstrumentList[i]);
 	}
-
 }
 
 void cMainMenu::OnMenuFullscreen(wxCommandEvent& evt) {
@@ -446,4 +448,12 @@ vector<string> cMainMenu::midiToStringDdm(vector<Tracks> MidiParsed) {
 		myddmtext.push_back("Track " + to_string(i) + " [" + MidiParsed[i].instrumentName + "] " + "(Notes : " + to_string(MidiParsed[i].Notes.size()) + ")");
 	}
 	return myddmtext;
+}
+
+void cMainMenu::OnKeyDown(wxKeyEvent& evt) {
+	if (evt.GetKeyCode() == WXK_F11) {
+		this->ShowFullScreen(!fullscreen, wxFULLSCREEN_ALL ^ wxFULLSCREEN_NOSTATUSBAR);
+		fullscreen = !fullscreen;
+	}
+	evt.Skip();
 }

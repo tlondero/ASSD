@@ -4,7 +4,7 @@
 #include <wx/combobox.h>
 #include <wx/clntdata.h>
 #include <wx/sizer.h>
-#include <wx/gbsizer.h>
+//#include <wx/gbsizer.h>
 #include <wx/textctrl.h>
 #include <wx/event.h>
 
@@ -47,6 +47,7 @@ public:
 	~cMainMenu();
 
 private:
+	
 	//Load Bar
 	wxGauge* loadBar = nullptr;
 
@@ -146,6 +147,8 @@ private:
 	//Functions
 	void OnMenuFullscreen(wxCommandEvent& evt);			//En desarrollo
 	void OnMenuExit(wxCommandEvent& evt);
+
+	void OnKeyDown(wxKeyEvent& evt);
 
 	void AddMidiToProgram(wxCommandEvent& evt);
 	void AddTrackToDdm(wxCommandEvent& evt);
