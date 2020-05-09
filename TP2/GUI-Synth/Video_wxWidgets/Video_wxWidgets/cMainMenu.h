@@ -97,11 +97,12 @@ private:
 	wxTextCtrl* tx_organA = nullptr;
 	wxTextCtrl* tx_organR = nullptr;
 	wxTextCtrl* tx_organS = nullptr;
+	wxTextCtrl* tx_guitarRf = nullptr;
 
 	wxStaticText* t_organA = nullptr;
 	wxStaticText* t_organR = nullptr;
 	wxStaticText* t_organS = nullptr;
-
+	wxStaticText* t_guitarRf = nullptr;
 
 	//Clases de soporte.
 	MidiParser midi;
