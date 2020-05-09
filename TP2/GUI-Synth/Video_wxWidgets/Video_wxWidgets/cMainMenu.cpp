@@ -54,7 +54,6 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 
 
 	//Lists Box
-	//lb_trackParam = new wxListBox(this, wxID_ANY, wxPoint(BUTTON_SP, 2 * BUTTON_Y + 6 * BUTTON_SP + 3 * DDM_Y + TEXT_Y), wxSize(LB_X/2, LB_Y));
 	lb_tracks = new wxListBox(this, wxID_ANY, wxPoint(COL2, 4 * BUTTON_SP + BUTTON_Y + TEXT_Y), wxSize(LB_X, LB_Y/2));
 	lb_wavEff = new wxListBox(this, wxID_ANY, wxPoint(COL2, 14 * BUTTON_SP + 3 * BUTTON_Y + 2 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(LB_X, LB_Y/2));
 	lb_micEff = new wxListBox(this, wxID_ANY, wxPoint(COL3, 3 * BUTTON_SP + 2 * BUTTON_Y + TEXT_Y + DDM_Y), wxSize(300, 300));
@@ -73,25 +72,45 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	t_effectMicDdm = new wxStaticText(this, wxID_ANY, "MIC Effects:", wxPoint(COL3, 2 * BUTTON_SP + BUTTON_Y), wxSize(TEXT_X, TEXT_Y));
 
 
-
 	//Dynamic TextCtrl
 	tx_organA = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 8 * BUTTON_SP + 3 * DDM_Y + 2 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 	tx_organR = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 10 * BUTTON_SP + 3 * DDM_Y + 4 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 	tx_organS = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 12 * BUTTON_SP + 3 * DDM_Y + 6 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+
+	tx_fluteA = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 8 * BUTTON_SP + 3 * DDM_Y + 2 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	tx_fluteR = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 10 * BUTTON_SP + 3 * DDM_Y + 4 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	tx_fluteS = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 12 * BUTTON_SP + 3 * DDM_Y + 6 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+
 	tx_guitarRf = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 8 * BUTTON_SP + 3 * DDM_Y + 2 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 
 	tx_toShow.push_back(tx_organA);
 	tx_toShow.push_back(tx_organR);
 	tx_toShow.push_back(tx_organS);
+
+	tx_toShow.push_back(tx_fluteA);
+	tx_toShow.push_back(tx_fluteR);
+	tx_toShow.push_back(tx_fluteS);
+
 	tx_toShow.push_back(tx_guitarRf);
 
 	t_organA = new wxStaticText(this, wxID_ANY, "A:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 7 * BUTTON_SP + 3 * DDM_Y + TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 	t_organR = new wxStaticText(this, wxID_ANY, "R:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 9 * BUTTON_SP + 3 * DDM_Y + 3 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 	t_organS = new wxStaticText(this, wxID_ANY, "S:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 11 * BUTTON_SP + 3 * DDM_Y + 5 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	
+	t_fluteA = new wxStaticText(this, wxID_ANY, "A:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 7 * BUTTON_SP + 3 * DDM_Y + TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	t_fluteR = new wxStaticText(this, wxID_ANY, "R:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 9 * BUTTON_SP + 3 * DDM_Y + 3 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	t_fluteS = new wxStaticText(this, wxID_ANY, "S:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 11 * BUTTON_SP + 3 * DDM_Y + 5 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+
 	t_guitarRf = new wxStaticText(this, wxID_ANY, "RL:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 7 * BUTTON_SP + 3 * DDM_Y + TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	
 	t_toShow.push_back(t_organA);
 	t_toShow.push_back(t_organR);
 	t_toShow.push_back(t_organS);
+	
+	t_toShow.push_back(t_fluteA);
+	t_toShow.push_back(t_fluteR);
+	t_toShow.push_back(t_fluteS);
+	
 	t_toShow.push_back(t_guitarRf);
 
 	
@@ -138,8 +157,9 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 
 	//this->SetSizer(grid);
 
-	//CARGAR LOS DDM
 
+
+	//CARGAR LOS DDM
 	for (int i = 0; i < NUMBER_OF_INSTRUMETS; i++) {
 		ddm_instrumento->AppendString(InstrumentList[i]);
 	}
@@ -198,6 +218,24 @@ void cMainMenu::AddTrack(wxCommandEvent& evt) {
 				lb_tracks->Append(track + ' ' + instrument);
 			}	
 		}
+		else if ((instrument == InstrumentList[2]) && !(tx_fluteA->IsEmpty()) && !(tx_fluteS->IsEmpty()) && !(tx_fluteR->IsEmpty())) {							//FLUTE
+			uc.TrackInstrument = instrument;
+			int i = track.size() - (track.substr(track.find('['))).size() - 7;
+			uc.TrackNumber = stoi(track.substr(6, i));
+			uc.params.A = stod((string)tx_fluteA->GetValue());
+			uc.params.S = stod((string)tx_fluteS->GetValue());
+			uc.params.R = stod((string)tx_fluteR->GetValue());
+
+			for (int i = 0; i < ui.pairTrackInst.size(); i++) {
+				if (ui.pairTrackInst[i].TrackNumber == uc.TrackNumber) {
+					letsPush = false;
+				}
+			}
+			if (letsPush) {
+				ui.pairTrackInst.push_back(uc);
+				lb_tracks->Append(track + ' ' + instrument);
+			}
+		}
 	}
 	evt.Skip();
 }
@@ -229,6 +267,14 @@ void cMainMenu::detectInstrumentChange(wxCommandEvent& evt) {
 		t_organA->Show();
 		t_organS->Show();
 		t_organR->Show();	
+	}
+	else if (intrumentoElegido == InstrumentList[2]) {							//fluteO
+		tx_fluteA->Show();
+		tx_fluteS->Show();
+		tx_fluteR->Show();
+		t_fluteA->Show();
+		t_fluteS->Show();
+		t_fluteR->Show();
 	}
 	evt.Skip();
 }

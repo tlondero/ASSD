@@ -35,8 +35,8 @@
 #define COL4 3*450
 
 //INSTRUMENTOS
-#define  NUMBER_OF_INSTRUMETS	2
-const string  InstrumentList[NUMBER_OF_INSTRUMETS] = { "GUITAR", "ORGAN" };
+#define  NUMBER_OF_INSTRUMETS	3
+const string  InstrumentList[NUMBER_OF_INSTRUMETS] = { "GUITAR", "ORGAN", "FLUTE" };
 #define PREVIEW_DURATION 6
 using namespace std;
 
@@ -97,11 +97,21 @@ private:
 	wxTextCtrl* tx_organA = nullptr;
 	wxTextCtrl* tx_organR = nullptr;
 	wxTextCtrl* tx_organS = nullptr;
+
+	wxTextCtrl* tx_fluteA = nullptr;
+	wxTextCtrl* tx_fluteR = nullptr;
+	wxTextCtrl* tx_fluteS = nullptr;
+
 	wxTextCtrl* tx_guitarRf = nullptr;
 
 	wxStaticText* t_organA = nullptr;
 	wxStaticText* t_organR = nullptr;
 	wxStaticText* t_organS = nullptr;
+
+	wxStaticText* t_fluteA = nullptr;
+	wxStaticText* t_fluteR = nullptr;
+	wxStaticText* t_fluteS = nullptr;
+
 	wxStaticText* t_guitarRf = nullptr;
 
 

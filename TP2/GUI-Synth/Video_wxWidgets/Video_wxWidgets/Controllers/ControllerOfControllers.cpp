@@ -31,6 +31,7 @@ vector<SynthTrack> ControllerOfControllers::sytnsynthesisProject(vector<Tracks> 
 			mySynthTrackVector.push_back(this->CController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber]));
 		}
 		else if (userData.pairTrackInst[track].TrackInstrument == "ORGAN" || userData.pairTrackInst[track].TrackInstrument == "FLUTE") {
+			projectTracks[userData.pairTrackInst[track].TrackNumber].userInstrumentChoice = userData.pairTrackInst[track].TrackInstrument;
 			mySynthTrackVector.push_back(this->OController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber]));
 		}
 		else if (userData.pairTrackInst[track].TrackInstrument == "TRUMPET") {
