@@ -8,10 +8,12 @@
 #include <wx/textctrl.h>
 
 #include <vector>
-#include <map>
+
 #include "Utils/Tracks.h"
 #include "MidiParser.h"
 #include "UserInput/UserInput.h"
+#include "Controllers/ControllerOfControllers.h"
+#include "Controllers/WavController.h"
 
 
 #define BUTTON_X 150
@@ -45,14 +47,6 @@ public:
 
 private:
 
-	void OnMenuFullsecreen(wxCommandEvent& evt);
-	void OnMenuExit(wxCommandEvent &evt);
-
-
-
-	bool fullscreen = false;
-
-
 	//Toolbar
 	wxToolBar* m_ToolBar = nullptr;
 	wxMenuBar* m_MenuBar = nullptr;
@@ -69,8 +63,8 @@ private:
 	wxButton* b_toggleMic = nullptr;
 	wxButton* b_addEffMic = nullptr;
 	wxButton* b_removeEffMic = nullptr;
-
 	//wxButton* b_generateSpect = nullptr;
+
 
 	//Drop Down Menu (Combo Box)
 	wxComboBox* ddm_track = nullptr;
@@ -78,8 +72,8 @@ private:
 	wxComboBox* ddm_wavEff = nullptr;
 	wxComboBox* ddm_micEff = nullptr;
 
+
 	//Lists Box
-	//wxListBox* lb_trackParam = nullptr;
 	wxListBox* lb_tracks = nullptr;
 	wxListBox* lb_wavEff = nullptr;
 	wxListBox* lb_micEff = nullptr;
@@ -88,6 +82,7 @@ private:
 	//Images
 	//wxStaticBitmap* img_Spectogram = nullptr;
 
+
 	//Text
 	wxStaticText* t_tackDdm = nullptr;
 	wxStaticText* t_instrumentoDdm = nullptr;
@@ -95,6 +90,7 @@ private:
 	wxStaticText* t_previewDdm = nullptr;
 	wxStaticText* t_effectWavDdm = nullptr;
 	wxStaticText* t_effectMicDdm = nullptr;
+
 
 	//Dinmac Texts
 	wxTextCtrl* tx_organA = nullptr;
@@ -107,14 +103,25 @@ private:
 	wxStaticText* t_organS = nullptr;
 	wxStaticText* t_guitarRf = nullptr;
 
-	//Clases de soporte.
+
+	//Clases de soporte y las que se nos hacian lindas poner acá
+	bool fullscreen = false;
+
 	MidiParser midi;
 	vector<Tracks> midiTranslated;
 	UserInput ui;
+	ControllerOfControllers myCC;
+	vector<wxStaticText*> t_toShow;
+	vector<wxTextCtrl*> tx_toShow;
+	string selecetedMidi;											//vector de strings que tiene los mismos que el DDM y en el mismo orden
+	WavController myWC;
+
 
 	//Functions
-	void AddMidiToProgram(wxCommandEvent& evt);
+	void OnMenuFullsecreen(wxCommandEvent& evt);			//En desarrollo
+	void OnMenuExit(wxCommandEvent& evt);
 
+	void AddMidiToProgram(wxCommandEvent& evt);
 	void AddTrackToDdm(wxCommandEvent& evt);
 	void DeleteTrackToDdm(wxCommandEvent& evt);
 	void addToDdm(vector<string> tracks, wxComboBox* ddm);
@@ -122,16 +129,10 @@ private:
 	void detectInstrumentChange(wxCommandEvent& evt);
 	void addValueToParam(wxCommandEvent& evt);
 	void RemoveTrack(wxCommandEvent& evt);
-
-	vector<wxStaticText*> t_toShow;
-	vector<wxTextCtrl*> tx_toShow;
-
-	string selecetedMidi;			//vector de strings que tiene los mismos que el DDM y en el mismo orden
-
-	map<string, string> listOfInstruments;
+	void CreateWav(wxCommandEvent& evt);
+	vector<string> midiToStringDdm(vector<Tracks> MidiParsed);		//Funció que recibe el vector de tracks que devuelve el midi parser
+																	//y devuelve el vector de strings que utilizará el ddm para mostrar los tracks.
 	
-	vector<string> midiToStringDdm(vector<Tracks> MidiParsed);//Funció que recibe el vector de tracks que devuelve el midi parser
-	//y devuelve el vector de strings que utilizará el ddm para mostrar los tracks.
 
 	wxDECLARE_EVENT_TABLE();
 };

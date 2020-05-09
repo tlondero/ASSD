@@ -10,7 +10,6 @@ public:
 	~UserChoice();
 	int TrackNumber;
 	string TrackInstrument;
-	bool InstrumentPreview;
+	bool InstrumentPreview = false;
 	InstParams params;
 };
-
