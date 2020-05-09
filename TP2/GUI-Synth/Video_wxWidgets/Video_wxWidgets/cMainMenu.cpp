@@ -6,7 +6,7 @@ wxBEGIN_EVENT_TABLE(cMainMenu, wxFrame)
 	EVT_TEXT(10003, detectInstrumentChange)
 	EVT_MENU(10005, OnMenuExit)
 	EVT_MENU(10006, OnMenuFullsecreen)
-	
+	EVT_BUTTON(10007, RemoveTrack)
 wxEND_EVENT_TABLE()
 
 /*
@@ -34,7 +34,7 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	b_cargarMidi = new wxButton(this, 10001, "Load MIDI file", wxPoint(BUTTON_SP, BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
 	b_crearWav = new wxButton(this, wxID_ANY, "Create WAV file", wxPoint(BUTTON_SP, BUTTON_Y + 2*BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
 	b_addTrack = new wxButton(this, 10002, "Add track", wxPoint(COL2, BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
-	b_removeTrack = new wxButton(this, wxID_ANY, "Remove track", wxPoint(COL2 + BUTTON_SP + BUTTON_X, BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
+	b_removeTrack = new wxButton(this, 10007, "Remove track", wxPoint(COL2 + BUTTON_SP + BUTTON_X, BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
 	b_preview = new wxButton(this, wxID_ANY, "Listen preview track", wxPoint(COL2, 6 * BUTTON_SP + BUTTON_Y + TEXT_Y + LB_Y/2), wxSize(2*BUTTON_X, BUTTON_Y));
 	b_addEffWav = new wxButton(this, wxID_ANY, "Add effect to WAV", wxPoint(COL2, 12 * BUTTON_SP + 2 * BUTTON_Y + 2 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(BUTTON_X, BUTTON_Y));
 	b_removeEffWav = new wxButton(this, wxID_ANY, "Remove effect from WAV", wxPoint(COL2 + BUTTON_SP + BUTTON_X, 12 * BUTTON_SP + 2 * BUTTON_Y + 2 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(BUTTON_X, BUTTON_Y));
@@ -138,9 +138,9 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 
 	//CARGAR LOS DDM
 
-	ddm_instrumento->AppendString(GUITAR);		//FORMA RUDIMENTARIA PARA DEBUGGEAR
-	ddm_instrumento->AppendString(ORGANO);
-
+	for (int i = 0; i < NUMBER_OF_INSTRUMETS; i++) {
+		ddm_instrumento->AppendString(InstrumentList[i]);
+	}
 
 }
 
@@ -156,11 +156,52 @@ void cMainMenu::OnMenuExit(wxCommandEvent & evt) {
 }
 
 void cMainMenu::AddTrack(wxCommandEvent& evt) {
+	string instrument = ddm_instrumento->GetStringSelection();
+	string track = ddm_track->GetStringSelection();
+	UserChoice uc;
+	bool letsPush = true;
+	
 	if (!(ddm_instrumento->IsTextEmpty()) && !(ddm_track->IsTextEmpty())) {
-		ddm_instrumento->GetStringSelection();
-		ddm_track->GetStringSelection();
+		if ((instrument == InstrumentList[0]) && !(tx_guitarRf->IsEmpty())) {							//GUITARRA
+			uc.TrackInstrument = instrument;
+			int n = track.size() - (track.substr(track.find('['))).size() - 7;
+			uc.TrackNumber = stoi(track.substr(6, n));
+			uc.params.GuitarParam_rf = stod((string) tx_guitarRf->GetValue());
+
+			for (int i = 0; i < ui.pairTrackInst.size(); i++) {
+				if (ui.pairTrackInst[i].TrackNumber == uc.TrackNumber) {
+					letsPush = false;
+				}
+			}
+			if (letsPush) {
+				ui.pairTrackInst.push_back(uc);
+				lb_tracks->Append(track + ' ' + instrument);
+			}
+		}
+		else if ((instrument == InstrumentList[1]) && !(tx_organA->IsEmpty()) && !(tx_organS->IsEmpty()) && !(tx_organR->IsEmpty())) {							//ORGANO
+			uc.TrackInstrument = instrument;
+			int i = track.size() - (track.substr(track.find('['))).size() - 7;
+			uc.TrackNumber = stoi(track.substr(6, i));
+			uc.params.A = stod((string)tx_organA->GetValue());
+			uc.params.S = stod((string)tx_organS->GetValue());
+			uc.params.R = stod((string)tx_organR->GetValue());
+
+			for (int i = 0; i < ui.pairTrackInst.size(); i++) {
+				if (ui.pairTrackInst[i].TrackNumber == uc.TrackNumber) {
+					letsPush = false;
+				}
+			}
+			if (letsPush) {
+				ui.pairTrackInst.push_back(uc);
+				lb_tracks->Append(track + ' ' + instrument);
+			}	
+		}
 	}
 	evt.Skip();
+}
+
+void cMainMenu::RemoveTrack(wxCommandEvent& evt) {
+	lb_tracks->GetSelection();
 }
 
 void cMainMenu::detectInstrumentChange(wxCommandEvent& evt) {
@@ -171,11 +212,11 @@ void cMainMenu::detectInstrumentChange(wxCommandEvent& evt) {
 	}
 	string intrumentoElegido = ddm_instrumento->GetStringSelection();						//verificar que el imput esté en la lista de esa mierda
 	
-	if (intrumentoElegido == GUITAR) {
+	if (intrumentoElegido == InstrumentList[0]) {								//GUITARRA
 		tx_guitarRf->Show();
 		t_guitarRf->Show();
 	}
-	else if (intrumentoElegido == ORGANO) {
+	else if (intrumentoElegido == InstrumentList[1]) {
 		tx_organA->Show();
 		tx_organS->Show();
 		tx_organR->Show();
@@ -185,34 +226,6 @@ void cMainMenu::detectInstrumentChange(wxCommandEvent& evt) {
 	}
 	evt.Skip();
 }
-
-/*
-void cMainMenu::addValueToParam(wxCommandEvent& evt) {
-	string track = ddm_track->GetStringSelection();
-	string instrument = ddm_instrumento->GetStringSelection();
-	string param = lb_trackParam->GetStringSelection();
-	double value = stod(string(tx_trackValue->GetStringSelection()));
-	UserChoice uc;
-
-	if (instrument == GUITAR) {
-
-	}
-	else if (instrument == ORGANO) {
-		if (param == "A") {
-			uc.params.A = value;
-		}
-		else if (param == "D") {
-			uc.params.D = value;
-		}
-		else if (param == "R") {
-			uc.params.R = value;
-		}
-	}
-
-	this->ui.pairTrackInst.push_back(uc);
-}
-*/
-
 
 void cMainMenu::AddMidiToProgram(wxCommandEvent& evt) {
 
@@ -257,7 +270,6 @@ void cMainMenu::addToDdm(vector<string> tracks, wxComboBox* ddm) {
 	}
 }
 
-
 vector<string> cMainMenu::midiToStringDdm(vector<Tracks> MidiParsed) {
 	vector<string> myddmtext;
 	for (unsigned int i = 0; i < MidiParsed.size(); i++) {
@@ -266,122 +278,3 @@ vector<string> cMainMenu::midiToStringDdm(vector<Tracks> MidiParsed) {
 	return myddmtext;
 }
 
-/*
-void cMainMenu::AddTrackToDdm(wxCommandEvent& evt)
-{
-	wxFileDialog openFileDialog(this, _("Open MIDI file"), "", "", "MIDI files (*.mid)|*.mid", wxFD_OPEN | wxFD_FILE_MUST_EXIST);  //Abro explorador de archivos
-	bool addString = true;
-	if (openFileDialog.ShowModal() == wxID_CANCEL) {			//Esto está por si se cierra el explorador sin elegir archivos
-		return;
-	}
-
-	wxFileInputStream input_stream(openFileDialog.GetPath());	//Verifico que todo ande joya
-
-	string pathSelected = openFileDialog.GetPath();				//Path completo
-
-	string stringSelected = pathSelected.substr(pathSelected.find_last_of('\\') + 1);
-	stringSelected = stringSelected.substr(stringSelected.find_last_of('\\') + 1, stringSelected.size() - 4);		//Solo el nombre sin el .wav
-
-	if (!input_stream.IsOk()) {
-		wxLogError("Cannot open file '%s'.", openFileDialog.GetPath());
-	}
-	else {
-		for (int i = 0; i < selecetedMidi.size(); i++) {
-			if (selecetedMidi[i] == stringSelected) {			//verifico si el string ya está dentro de vector
-				addString = false;
-				i = selecetedMidi.size();
-			}
-		}
-		if (addString) {
-			selecetedMidi.push_back(stringSelected);		//agrego el string al vector
-			ddm_track->Append(stringSelected);			//agrego el string al DDM
-		}
-	}
-
-	evt.Skip();
-}
-
-void cMainMenu::DeleteTrackToDdm(wxCommandEvent& evt){
-
-	if (!(ddm_track->IsTextEmpty()))
-	{
-		bool removeString = false;							//existe la posibilidad que el usuario escriba cualquier cosa en el ddm
-
-		for (int i = 0; i < selecetedMidi.size(); i++) {
-			if (selecetedMidi[i] == ddm_track->GetStringSelection() ) {		//verifico si el nombre está dentro de vector
-				removeString = true;
-				i = selecetedMidi.size();
-			}
-		}
-		if (removeString) {
-			selecetedMidi.erase(selecetedMidi.begin() + ddm_track->GetCurrentSelection());
-			ddm_track->Delete(ddm_track->GetCurrentSelection());
-		}
-	}
-
-	evt.Skip();
-}
-*/
-
-
-//void cMainMenu::OnButtonClicked1(wxCommandEvent& evt)
-//{
-//	m_list1->AppendString(m_txt1->GetValue());
-//	evt.Skip();
-//}
-//
-//void cMainMenu::AddWavToList(wxCommandEvent& evt)
-//{
-//	wxFileDialog openFileDialog(this, _("Open WAV file"), "", "", "WAV files (*.wav)|*.wav", wxFD_OPEN | wxFD_FILE_MUST_EXIST);  //Abro explorador de archivos
-//	bool addString = true;
-//
-//	if (openFileDialog.ShowModal() == wxID_CANCEL) {			//Esto está por si se cierra el explorador sin elegir archivos
-//		return;
-//	}
-//
-//	wxFileInputStream input_stream(openFileDialog.GetPath());	//Verifico que todo ande joya
-//	
-//	string pathSelected = openFileDialog.GetPath();				//Path completo
-//
-//	string stringSelected = pathSelected.substr(pathSelected.find_last_of('\\') + 1);					
-//	stringSelected = stringSelected.substr(stringSelected.find_last_of('\\') + 1, stringSelected.size() - 4);		//Solo el nombre sin el .wav
-//
-//	if (!input_stream.IsOk()) {
-//		wxLogError("Cannot open file '%s'.", openFileDialog.GetPath());				
-//	}
-//	else {
-//		for (int i = 0; i < choices.size(); i++) {
-//			if (choices[i] == stringSelected) {			//verifico si el string ya está dentro de vector
-//				addString = false;
-//				i = choices.size();
-//			}
-//		}
-//		if (addString) {
-//			choices.push_back(stringSelected);		//agrego el string al vector
-//			m_ddm->Append(stringSelected);			//agrego el string al DDM
-//		}
-//	}
-//
-//	evt.Skip();
-//}
-//
-//void cMainMenu::DeleteWavFromList(wxCommandEvent& evt)
-//{
-//	if (!(m_ddm->IsTextEmpty()))
-//	{
-//		bool removeString = false;							//existe la posibilidad que el usuario escriba cualquier cosa en el ddm
-//
-//		for (int i = 0; i < choices.size(); i++) {
-//			if (choices[i] == m_ddm->GetStringSelection() ) {		//verifico si el nombre está dentro de vector
-//				removeString = true;
-//				i = choices.size();
-//			}
-//		}
-//		if (removeString) {
-//			choices.erase(choices.begin() + m_ddm->GetCurrentSelection());
-//			m_ddm->Delete(m_ddm->GetCurrentSelection());
-//		}
-//	}
-//
-//	evt.Skip();
-//}
