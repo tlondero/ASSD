@@ -221,7 +221,7 @@ void cMainMenu::detectInstrumentChange(wxCommandEvent& evt) {
 		tx_guitarRf->Show();
 		t_guitarRf->Show();
 	}
-	else if (intrumentoElegido == InstrumentList[1]) {
+	else if (intrumentoElegido == InstrumentList[1]) {							//ORGANO
 		tx_organA->Show();
 		tx_organS->Show();
 		tx_organR->Show();

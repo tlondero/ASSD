@@ -35,7 +35,7 @@
 
 //INSTRUMENTOS
 #define  NUMBER_OF_INSTRUMETS	2
-const string  InstrumentList[NUMBER_OF_INSTRUMETS] = { "Guitar", "Organ" };
+const string  InstrumentList[NUMBER_OF_INSTRUMETS] = { "GUITAR", "ORGAN" };
 
 using namespace std;
 
