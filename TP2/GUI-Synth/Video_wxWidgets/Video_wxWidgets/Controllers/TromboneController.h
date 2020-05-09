@@ -7,7 +7,7 @@ class TromboneController
 {
 public:
 	TromboneController();
-	SynthTrack sytnsynthesisTrack(Tracks TromboneTrack);
+	SynthTrack sytnsynthesisTrack(Tracks TromboneTrack, bool preview);
 	~TromboneController();
 
 private:

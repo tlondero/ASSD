@@ -7,7 +7,7 @@ class TrumpetController
 {
 public:
 	TrumpetController();
-	SynthTrack sytnsynthesisTrack(Tracks TrumpetTrack);
+	SynthTrack sytnsynthesisTrack(Tracks TrumpetTrack, bool preview);
 	~TrumpetController();
 
 private:
