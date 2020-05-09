@@ -15,7 +15,7 @@
 #include "UserInput/UserInput.h"
 #include "Controllers/ControllerOfControllers.h"
 #include "Controllers/WavController.h"
-
+#include <wx/sound.h>
 
 #define BUTTON_X 150
 #define BUTTON_Y 50
@@ -47,6 +47,8 @@ public:
 	~cMainMenu();
 
 private:
+	//Load Bar
+	wxGauge* loadBar = nullptr;
 
 	//Toolbar
 	wxToolBar* m_ToolBar = nullptr;
@@ -82,7 +84,8 @@ private:
 
 	//Images
 	//wxStaticBitmap* img_Spectogram = nullptr;
-
+	//Sound
+	wxSound * prev_Sound = nullptr;
 
 	//Text
 	wxStaticText* t_tackDdm = nullptr;

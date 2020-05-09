@@ -58,10 +58,13 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	lb_wavEff = new wxListBox(this, wxID_ANY, wxPoint(COL2, 14 * BUTTON_SP + 3 * BUTTON_Y + 2 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(LB_X, LB_Y/2));
 	lb_micEff = new wxListBox(this, wxID_ANY, wxPoint(COL3, 3 * BUTTON_SP + 2 * BUTTON_Y + TEXT_Y + DDM_Y), wxSize(300, 300));
 
+	//Load bar
+	loadBar = new wxGauge(this, wxID_ANY, 15, wxPoint(COL4, COL3), wxSize(BUTTON_X, BUTTON_Y));
+
 		
 	//Images
 	//wxStaticBitmap* img_Spectogram = nullptr;
-
+	//this->prev_Sound = new prev_Sound
 
 	//Text
 	t_tackDdm = new wxStaticText(this, wxID_ANY, "Tracks:", wxPoint(BUTTON_SP, 2*BUTTON_Y + 4*BUTTON_SP), wxSize(TEXT_X, TEXT_Y));
@@ -354,7 +357,7 @@ void cMainMenu::detectInstrumentChange(wxCommandEvent& evt) {
 }
 
 void cMainMenu::AddMidiToProgram(wxCommandEvent& evt) {
-
+	this->ui.pairTrackInst.clear();
 	wxFileDialog openFileDialog(this, _("Open MIDI file"), "", "", "MIDI files (*.mid)|*.mid", wxFD_OPEN | wxFD_FILE_MUST_EXIST);  //Abro explorador de archivos
 	bool addString = true;
 	if (openFileDialog.ShowModal() == wxID_CANCEL) {			//Esto está por si se cierra el explorador sin elegir archivos
@@ -388,6 +391,45 @@ void cMainMenu::AddMidiToProgram(wxCommandEvent& evt) {
 	evt.Skip();
 }
 
+void cMainMenu::CreateWav(wxCommandEvent& evt) {
+	if (!(lb_tracks->IsEmpty())) {
+		wxFileDialog saveFileDialog(this, _("Save WAV file"), "", "", "WAV files (*.wav)|*.wav", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+		if (saveFileDialog.ShowModal() == wxID_CANCEL) {			//Esto está por si se cierra el explorador sin elegir archivos
+			return;
+		}
+
+		string pathSelected = saveFileDialog.GetPath();				//Path completo
+		wxFileOutputStream output_stream(saveFileDialog.GetPath());
+
+		if (!output_stream.IsOk()) {
+			wxLogError("Cannot save file '%s'.", pathSelected);
+		}
+		else {
+			int cutFrom = pathSelected.find_first_of('.');
+			int cutUpto = pathSelected.size() - cutFrom;
+			pathSelected = pathSelected.erase(cutFrom, cutUpto);
+
+			myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, this->ui), this->midi.getTotalDuration() + 1, pathSelected, 1000);
+			myWC.makeWav();
+		}
+	}
+	evt.Skip();
+}
+
+void cMainMenu::CreatePreview(wxCommandEvent& evt) {
+	if (lb_tracks->GetSelection() != wxNOT_FOUND) {
+		UserChoice ucPrev = ui.pairTrackInst[lb_tracks->GetSelection()];
+		UserInput uiPrev;
+		ucPrev.InstrumentPreview = true;
+		uiPrev.pairTrackInst.push_back(ucPrev);
+		
+		myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, uiPrev), PREVIEW_DURATION, "namePrev", 1000);
+		myWC.makeWav();
+
+	}
+	evt.Skip();
+}
+
 cMainMenu::~cMainMenu() {
 
 }
@@ -404,25 +446,4 @@ vector<string> cMainMenu::midiToStringDdm(vector<Tracks> MidiParsed) {
 		myddmtext.push_back("Track " + to_string(i) + " [" + MidiParsed[i].instrumentName + "] " + "(Notes : " + to_string(MidiParsed[i].Notes.size()) + ")");
 	}
 	return myddmtext;
-}
-
-void cMainMenu::CreateWav(wxCommandEvent& evt) {
-	if (!(lb_tracks->IsEmpty())) {
-		myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, this->ui), this->midi.getTotalDuration() + 1, "name", 1000);
-		myWC.makeWav();
-	}
-	evt.Skip();
-}
-
-void cMainMenu::CreatePreview(wxCommandEvent& evt) {
-	if (lb_tracks->GetSelection() != wxNOT_FOUND) {
-		UserChoice ucPrev = ui.pairTrackInst[lb_tracks->GetSelection()];
-		UserInput uiPrev;
-		ucPrev.InstrumentPreview = true;
-		uiPrev.pairTrackInst.push_back(ucPrev);
-		
-		myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, uiPrev), PREVIEW_DURATION, "namePrev", 1000);
-		myWC.makeWav();
-	}
-	evt.Skip();
 }
