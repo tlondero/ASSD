@@ -22,20 +22,20 @@ vector<SynthTrack> ControllerOfControllers::sytnsynthesisProject(vector<Tracks> 
 			mySynthTrackVector.push_back(this->DController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber], userData.pairTrackInst[track].InstrumentPreview));
 		}
 		else if (userData.pairTrackInst[track].TrackInstrument == "TROMBONE") {
-			mySynthTrackVector.push_back(this->TController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber]));
+			mySynthTrackVector.push_back(this->TController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber], userData.pairTrackInst[track].InstrumentPreview));
 		}
 		else if (userData.pairTrackInst[track].TrackInstrument == "BELL") {
-			mySynthTrackVector.push_back(this->bellController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber]));
+			mySynthTrackVector.push_back(this->bellController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber],userData.pairTrackInst[track].InstrumentPreview));
 		}
 		else if (userData.pairTrackInst[track].TrackInstrument == "CLARINET") {
-			mySynthTrackVector.push_back(this->CController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber]));
+			mySynthTrackVector.push_back(this->CController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber], userData.pairTrackInst[track].InstrumentPreview));
 		}
 		else if (userData.pairTrackInst[track].TrackInstrument == "ORGAN" || userData.pairTrackInst[track].TrackInstrument == "FLUTE") {
 			projectTracks[userData.pairTrackInst[track].TrackNumber].userInstrumentChoice = userData.pairTrackInst[track].TrackInstrument;
 			mySynthTrackVector.push_back(this->OController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber]));
 		}
 		else if (userData.pairTrackInst[track].TrackInstrument == "TRUMPET") {
-			mySynthTrackVector.push_back(this->TrumpController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber]));
+			mySynthTrackVector.push_back(this->TrumpController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber], userData.pairTrackInst[track].InstrumentPreview));
 		}
 		//else if (other instrument) {
 		//}

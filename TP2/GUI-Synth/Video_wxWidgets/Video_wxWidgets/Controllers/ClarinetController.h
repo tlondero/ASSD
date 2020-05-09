@@ -7,7 +7,7 @@ class ClarinetController
 {
 public:
 	ClarinetController();
-	SynthTrack sytnsynthesisTrack(Tracks TromboneTrack);
+	SynthTrack sytnsynthesisTrack(Tracks TromboneTrack, bool preview);
 	~ClarinetController();
 
 private:
