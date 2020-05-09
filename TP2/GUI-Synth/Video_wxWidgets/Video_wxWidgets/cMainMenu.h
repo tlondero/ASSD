@@ -6,6 +6,7 @@
 #include <wx/sizer.h>
 #include <wx/gbsizer.h>
 #include <wx/textctrl.h>
+
 #include <vector>
 #include <map>
 #include "Utils/Tracks.h"

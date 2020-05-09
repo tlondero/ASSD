@@ -201,7 +201,11 @@ void cMainMenu::AddTrack(wxCommandEvent& evt) {
 }
 
 void cMainMenu::RemoveTrack(wxCommandEvent& evt) {
-	lb_tracks->GetSelection();
+	if (lb_tracks->GetSelection() != wxNOT_FOUND) {
+		ui.pairTrackInst.erase(ui.pairTrackInst.begin() + lb_tracks->GetSelection());
+		lb_tracks->Delete(lb_tracks->GetSelection());
+	}
+	evt.Skip();
 }
 
 void cMainMenu::detectInstrumentChange(wxCommandEvent& evt) {
