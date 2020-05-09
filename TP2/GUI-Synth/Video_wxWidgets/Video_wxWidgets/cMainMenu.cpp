@@ -299,7 +299,7 @@ void cMainMenu::CreatePreview(wxCommandEvent& evt) {
 		ucPrev.InstrumentPreview = true;
 		uiPrev.pairTrackInst.push_back(ucPrev);
 		
-		myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, uiPrev), 5, "namePrev", 1000);
+		myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, uiPrev), PREVIEW_DURATION, "namePrev", 1000);
 		myWC.makeWav();
 	}
 	evt.Skip();

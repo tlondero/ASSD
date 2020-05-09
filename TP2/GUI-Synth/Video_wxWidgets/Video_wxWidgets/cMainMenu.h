@@ -36,7 +36,7 @@
 //INSTRUMENTOS
 #define  NUMBER_OF_INSTRUMETS	2
 const string  InstrumentList[NUMBER_OF_INSTRUMETS] = { "GUITAR", "ORGAN" };
-
+#define PREVIEW_DURATION 6
 using namespace std;
 
 class cMainMenu : public wxFrame
