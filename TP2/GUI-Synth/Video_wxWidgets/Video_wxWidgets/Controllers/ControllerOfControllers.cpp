@@ -87,6 +87,7 @@ vector<SynthTrack> ControllerOfControllers::sytnsynthesisProject(vector<Tracks> 
 		//else if (other instrument) {
 		//}
 	}
+	mySynthTrackVector = this->EController.applyEfects(mySynthTrackVector);
 
 	return mySynthTrackVector;
 }
