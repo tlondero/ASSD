@@ -87,6 +87,7 @@ private:
 	//Lists Box
 	wxListBox* lb_tracks = nullptr;
 	wxListBox* lb_wavEff = nullptr;
+	wxListBox* lb_wavEffFinal = nullptr;
 	wxListBox* lb_micEff = nullptr;
 
 
@@ -171,6 +172,8 @@ private:
 
 	vector<wxStaticText*> t_WavEfftoShow;
 	vector<wxTextCtrl*> tx_WavEfftoShow;
+
+	vector <int> tracksAddedEfects;
 
 	string selecetedMidi;											//vector de strings que tiene los mismos que el DDM y en el mismo orden
 	WavController myWC;
