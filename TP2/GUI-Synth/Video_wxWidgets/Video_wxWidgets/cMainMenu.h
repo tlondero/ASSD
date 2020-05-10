@@ -13,17 +13,12 @@
 #include <wx/sound.h>
 #include <vector>
 
+#include "General.h"
 #include "Utils/Tracks.h"
 #include "MidiParser.h"
 #include "UserInput/UserInput.h"
 #include "Controllers/ControllerOfControllers.h"
 #include "Controllers/WavController.h"
-
-//INSTRUMENTOS
-#define PREVIEW_DURATION		6
-#define  NUMBER_OF_INSTRUMETS	10
-const string  InstrumentList[NUMBER_OF_INSTRUMETS] = { "GUITAR", "ORGAN", "FLUTE", "BELL", "CLARINET", "TROMBONE", "TRUMPET", "DRUM", "BANJO", "ELECTRIC_GUITAR" };
-
 
 #define BUTTON_X 150
 #define BUTTON_Y 50
@@ -67,10 +62,12 @@ private:
 	wxButton* b_toggleMic = nullptr;
 	wxButton* b_addEffMic = nullptr;
 	wxButton* b_removeEffMic = nullptr;
-	//wxButton* b_generateSpect = nullptr;
+
 	wxButton* b_savePreview = nullptr;
 	wxButton* b_replay = nullptr;
 
+	wxButton* b_loadSpec = nullptr;
+	wxButton* b_updateSpec = nullptr;
 
 
 	//Drop Down Menu (Combo Box)
@@ -79,6 +76,7 @@ private:
 	wxComboBox* ddm_wavEff = nullptr;
 	wxComboBox* ddm_micEff = nullptr;
 
+	wxComboBox* ddm_spect = nullptr;
 
 	//Lists Box
 	wxListBox* lb_tracks = nullptr;
@@ -86,10 +84,6 @@ private:
 	wxListBox* lb_micEff = nullptr;
 
 
-	//Images
-	//wxStaticBitmap* img_Spectogram = nullptr;
-
-	
 	//Text
 	wxStaticText* t_tackDdm = nullptr;
 	wxStaticText* t_instrumentoDdm = nullptr;
@@ -97,9 +91,10 @@ private:
 	wxStaticText* t_previewDdm = nullptr;
 	wxStaticText* t_effectWavDdm = nullptr;
 	wxStaticText* t_effectMicDdm = nullptr;
+	wxStaticText* t_specWindParam = nullptr;
+	
 
-
-	//Dinmac Control Texts
+	//Dinmac Control Texts (INSTRUMENTOS)
 	wxTextCtrl* tx_organA = nullptr;
 	wxTextCtrl* tx_organR = nullptr;
 	wxTextCtrl* tx_organS = nullptr;
@@ -114,7 +109,10 @@ private:
 	wxTextCtrl* tx_drumRf = nullptr;
 	wxTextCtrl* tx_drumB = nullptr;
 
-	//Dinmac Static Texts
+	//Dinmac Control Texts (VENTANAS)
+	wxTextCtrl* tx_specWindParam = nullptr;
+
+	//Dinmac Static Texts (INSTRUMENTOS)
 	wxStaticText* t_organA = nullptr;
 	wxStaticText* t_organR = nullptr;
 	wxStaticText* t_organS = nullptr;
@@ -132,6 +130,9 @@ private:
 	wxStaticText* t_bell = nullptr;
 
 	wxStaticText* t_playMusic = nullptr;
+
+	//Dinmac Static Texts (VENTANAS)
+	wxStaticText* t_specWindNoParam = nullptr;
 
 	//Clases de soporte y las que se nos hacian lindas poner acá
 	bool fullscreen = false;
@@ -166,6 +167,10 @@ private:
 	void CreatePreview(wxCommandEvent& evt);
 	void savePreview(wxCommandEvent& evt);
 	void Replay(wxCommandEvent& evt);
+	void loadWavSpec(wxCommandEvent& evt);
+	void createSpec(wxCommandEvent& evt);
+	void detectWindowChange(wxCommandEvent& evt);
+
 	bool portAudioOpen(void);
 
 	vector<string> midiToStringDdm(vector<Tracks> MidiParsed);		//Funció que recibe el vector de tracks que devuelve el midi parser
