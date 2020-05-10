@@ -8,7 +8,7 @@ class WavController
 public:
 	WavController();
 	~WavController();
-	void compileWav(vector<SynthTrack> allTracks, double duration_, string wavName_, double volume_);
+	void compileWav(vector<SynthTrack> allTracks, double duration_, string wavName_, double volume_,string efect, double g, int M);
 	void makeWav();
 	double volume;
 private:
