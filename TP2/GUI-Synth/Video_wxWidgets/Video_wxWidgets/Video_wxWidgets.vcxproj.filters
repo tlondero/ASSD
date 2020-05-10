@@ -290,12 +290,6 @@
     <ClInclude Include="Controllers\WavController.h">
       <Filter>Header Files\Controllers</Filter>
     </ClInclude>
-    <ClInclude Include="General.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="cMainMenu.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="Utils\cMainPanel.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
@@ -307,6 +301,12 @@
     </ClInclude>
     <ClInclude Include="Efectos\EfectController.h">
       <Filter>Header Files\Efectos</Filter>
+    </ClInclude>
+    <ClInclude Include="General.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cMainMenu.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

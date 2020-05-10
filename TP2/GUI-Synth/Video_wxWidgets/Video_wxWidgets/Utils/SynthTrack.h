@@ -11,6 +11,10 @@ public:
 	string instrumentName;
 	vector<MusicData> track;
 	double previewDuration;
-	int effect2Apply;
+	string effect2Apply;
+//parametros efectos!
+	double g;
+	int M;
+	double treverb;
 };
 

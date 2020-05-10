@@ -12,5 +12,9 @@ public:
 	string TrackInstrument;
 	bool InstrumentPreview = false;
 	InstParams params;
-	int effect2Apply;
+	string effect2Apply;
+//Parametros efectos.
+	double g;
+	int M;
+	double treverb;
 };

@@ -6,6 +6,7 @@
 #include "BellController.h"
 #include "ClarinetController.h"
 #include "TromboneController.h"
+#include "../Efectos/EfectController.h"
 #include "OrganController.h"
 #include "TrumpetController.h"
 
@@ -29,6 +30,8 @@ private:
 	TromboneController TController;
 	OrganController OController;
 	TrumpetController TrumpController;
+	EfectController EController;
 	// aca agregas tus instrumentos
+
 };
 
