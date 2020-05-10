@@ -1,5 +1,4 @@
 #pragma once
-#pragma comment(lib, "winmm.lib")
 
 #include "wx/wx.h"
 #include <wx/wfstream.h>
@@ -13,8 +12,6 @@
 #include <fstream>
 #include <wx/sound.h>
 #include <vector>
-#include <Windows.h>
-#include <mmsystem.h>
 
 #include "Utils/Tracks.h"
 #include "MidiParser.h"
@@ -91,9 +88,7 @@ private:
 	//Images
 	//wxStaticBitmap* img_Spectogram = nullptr;
 
-	//Sound
-	wxSound* soundPlayer = nullptr;
-
+	
 	//Text
 	wxStaticText* t_tackDdm = nullptr;
 	wxStaticText* t_instrumentoDdm = nullptr;

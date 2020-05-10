@@ -439,6 +439,7 @@ void cMainMenu::CreatePreview(wxCommandEvent& evt) {
 	}
 
 	if (firstTime) {
+		Pa_StartStream();
 		//soundPlayer = new wxSound("Previews/prevTrack.wav", wxSOUND_SYNC);
 		firstTime = false;
 	}
