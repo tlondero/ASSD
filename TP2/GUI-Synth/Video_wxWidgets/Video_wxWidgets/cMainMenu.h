@@ -4,9 +4,10 @@
 #include <wx/combobox.h>
 #include <wx/clntdata.h>
 #include <wx/sizer.h>
-#include <wx/gbsizer.h>
+//#include <wx/gbsizer.h>
 #include <wx/textctrl.h>
 #include <wx/event.h>
+#include <wx/msgdlg.h>
 
 #include <vector>
 
@@ -47,14 +48,11 @@ public:
 	~cMainMenu();
 
 private:
-	//Load Bar
-	wxGauge* loadBar = nullptr;
-
+	
 	//Toolbar
 	wxToolBar* m_ToolBar = nullptr;
 	wxMenuBar* m_MenuBar = nullptr;
-
-	
+		
 	//Botones
 	wxButton* b_cargarMidi = nullptr;
 	wxButton* b_crearWav = nullptr;
@@ -146,6 +144,8 @@ private:
 	//Functions
 	void OnMenuFullscreen(wxCommandEvent& evt);			//En desarrollo
 	void OnMenuExit(wxCommandEvent& evt);
+
+	void OnKeyDown(wxKeyEvent& evt);
 
 	void AddMidiToProgram(wxCommandEvent& evt);
 	void AddTrackToDdm(wxCommandEvent& evt);

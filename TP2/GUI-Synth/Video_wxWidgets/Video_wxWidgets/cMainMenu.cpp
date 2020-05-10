@@ -9,6 +9,7 @@ wxBEGIN_EVENT_TABLE(cMainMenu, wxFrame)
 	EVT_BUTTON(10007, RemoveTrack)
 	EVT_BUTTON(10008, CreateWav)
 	EVT_BUTTON(10009, CreatePreview)
+	EVT_KEY_DOWN(OnKeyDown)
 wxEND_EVENT_TABLE()
 
 /*
@@ -57,9 +58,6 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	lb_tracks = new wxListBox(this, wxID_ANY, wxPoint(COL2, 4 * BUTTON_SP + BUTTON_Y + TEXT_Y), wxSize(LB_X, LB_Y/2));
 	lb_wavEff = new wxListBox(this, wxID_ANY, wxPoint(COL2, 14 * BUTTON_SP + 3 * BUTTON_Y + 2 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(LB_X, LB_Y/2));
 	lb_micEff = new wxListBox(this, wxID_ANY, wxPoint(COL3, 3 * BUTTON_SP + 2 * BUTTON_Y + TEXT_Y + DDM_Y), wxSize(300, 300));
-
-	//Load bar
-	loadBar = new wxGauge(this, wxID_ANY, 15, wxPoint(COL4, COL3), wxSize(BUTTON_X, BUTTON_Y));
 
 		
 	//Images
@@ -143,6 +141,8 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 		t_toShow[i]->Hide();
 	}
 
+	//MoveAfterInTabOrder(this);
+
 	////Grid Sizer
 
 	//wxGridBagSizer* grid = new wxGridBagSizer();
@@ -187,7 +187,6 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	for (int i = 0; i < NUMBER_OF_INSTRUMETS; i++) {
 		ddm_instrumento->AppendString(InstrumentList[i]);
 	}
-
 }
 
 void cMainMenu::OnMenuFullscreen(wxCommandEvent& evt) {
@@ -405,12 +404,19 @@ void cMainMenu::CreateWav(wxCommandEvent& evt) {
 			wxLogError("Cannot save file '%s'.", pathSelected);
 		}
 		else {
+
 			int cutFrom = pathSelected.find_first_of('.');
 			int cutUpto = pathSelected.size() - cutFrom;
 			pathSelected = pathSelected.erase(cutFrom, cutUpto);
 
+			//Load Bar
+			wxMessageDialog loadBar(this, "Creating WAV", "Loading");
+			loadBar.Center();
+			loadBar.SetExtendedMessage("This could take a few minutes, please wait");
+			loadBar.ShowModal();
 			myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, this->ui), this->midi.getTotalDuration() + 1, pathSelected, 1000);
 			myWC.makeWav();
+			loadBar.Hide();
 		}
 	}
 	evt.Skip();
@@ -423,7 +429,7 @@ void cMainMenu::CreatePreview(wxCommandEvent& evt) {
 		ucPrev.InstrumentPreview = true;
 		uiPrev.pairTrackInst.push_back(ucPrev);
 		
-		myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, uiPrev), PREVIEW_DURATION, "namePrev", 1000);
+		myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, uiPrev), PREVIEW_DURATION, "Previews/prevTrack", 1000);
 		myWC.makeWav();
 
 	}
@@ -446,4 +452,12 @@ vector<string> cMainMenu::midiToStringDdm(vector<Tracks> MidiParsed) {
 		myddmtext.push_back("Track " + to_string(i) + " [" + MidiParsed[i].instrumentName + "] " + "(Notes : " + to_string(MidiParsed[i].Notes.size()) + ")");
 	}
 	return myddmtext;
+}
+
+void cMainMenu::OnKeyDown(wxKeyEvent& evt) {
+	if (evt.GetKeyCode() == WXK_F11) {
+		this->ShowFullScreen(!fullscreen, wxFULLSCREEN_ALL ^ wxFULLSCREEN_NOSTATUSBAR);
+		fullscreen = !fullscreen;
+	}
+	evt.Skip();
 }
