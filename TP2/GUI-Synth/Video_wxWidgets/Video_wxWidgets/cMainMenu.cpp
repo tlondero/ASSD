@@ -486,7 +486,8 @@ void cMainMenu::CreateWav(wxCommandEvent& evt) {
 			loadBar.Center();
 			loadBar.SetExtendedMessage("This could take a few minutes, please wait.");
 			loadBar.ShowModal();
-			myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, this->ui), this->midi.getTotalDuration() + 1, pathSelected, 1000);
+
+			myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, this->ui), this->midi.getTotalDuration() + 1, pathSelected, 1000, this->ui.finalEfect,this->ui.g,this->ui.M);
 			myWC.makeWav();
 			loadBar.Hide();
 		}
@@ -509,7 +510,7 @@ void cMainMenu::CreatePreview(wxCommandEvent& evt) {
 		ucPrev.InstrumentPreview = true;
 		uiPrev.pairTrackInst.push_back(ucPrev);
 
-		myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, uiPrev), PREVIEW_DURATION, "Previews/prevTrack", 1000);
+		myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, uiPrev), PREVIEW_DURATION, "Previews/prevTrack", 1000, this->ui.finalEfect, this->ui.g, this->ui.M);
 		myWC.makeWav();
 
 
