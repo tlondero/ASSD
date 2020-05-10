@@ -49,6 +49,12 @@
     <Filter Include="Header Files\Espectrograma">
       <UniqueIdentifier>{e6502436-2fae-45d2-966e-b530b1a5c9c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Efectos">
+      <UniqueIdentifier>{6c25313e-dc48-46c1-b14d-0cee4c52ef07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Efectos">
+      <UniqueIdentifier>{b3b02476-5cdd-4610-8450-771033690fcb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cApp.cpp">
@@ -167,6 +173,12 @@
     </ClCompile>
     <ClCompile Include="Espectrograma\EspectroGenerator.cpp">
       <Filter>Source Files\Espectrograma</Filter>
+    </ClCompile>
+    <ClCompile Include="Efectos\EcoSimple.cpp">
+      <Filter>Source Files\Efectos</Filter>
+    </ClCompile>
+    <ClCompile Include="Efectos\EfectController.cpp">
+      <Filter>Source Files\Efectos</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -289,6 +301,12 @@
     </ClInclude>
     <ClInclude Include="Espectrograma\EspectroGenerator.h">
       <Filter>Header Files\Espectrograma</Filter>
+    </ClInclude>
+    <ClInclude Include="Efectos\EcoSimple.h">
+      <Filter>Header Files\Efectos</Filter>
+    </ClInclude>
+    <ClInclude Include="Efectos\EfectController.h">
+      <Filter>Header Files\Efectos</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

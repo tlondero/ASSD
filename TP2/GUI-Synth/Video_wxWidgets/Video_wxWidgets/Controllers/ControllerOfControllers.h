@@ -18,7 +18,6 @@ public:
 	ControllerOfControllers();
 	~ControllerOfControllers();
 	vector<SynthTrack> sytnsynthesisProject(vector<Tracks> projectTracks,UserInput userData);
-	vector<SynthTrack> sytnsynthesisPreview(vector<Tracks> projectTracks, UserInput userData);
 	
 private:
 	AcousticGuitarController AGController;

@@ -12,4 +12,5 @@ public:
 	string TrackInstrument;
 	bool InstrumentPreview = false;
 	InstParams params;
+	int effect2Apply;
 };

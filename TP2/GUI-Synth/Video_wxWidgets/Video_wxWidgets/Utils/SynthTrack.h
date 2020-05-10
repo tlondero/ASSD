@@ -11,5 +11,6 @@ public:
 	string instrumentName;
 	vector<MusicData> track;
 	double previewDuration;
+	int effect2Apply;
 };
 
