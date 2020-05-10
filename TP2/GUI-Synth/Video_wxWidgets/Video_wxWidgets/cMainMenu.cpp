@@ -10,6 +10,8 @@ wxBEGIN_EVENT_TABLE(cMainMenu, wxFrame)
 	EVT_BUTTON(10008, CreateWav)
 	EVT_BUTTON(10009, CreatePreview)
 	EVT_KEY_DOWN(OnKeyDown)
+	EVT_BUTTON(10010, savePreview)
+	EVT_BUTTON(10011, Replay)
 wxEND_EVENT_TABLE()
 
 /*
@@ -46,6 +48,8 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	b_removeEffMic = new wxButton(this, wxID_ANY, "Remove effect from Mic", wxPoint(COL3 + BUTTON_X + BUTTON_SP, 2 * BUTTON_SP + BUTTON_Y + TEXT_Y + DDM_Y), wxSize(BUTTON_X, BUTTON_Y));
 	//b_generateSpect = nullptr;
 
+	b_savePreview = new wxButton(this, 10010, "Save preview", wxPoint(COL4, COL2), wxSize(BUTTON_X / 2, BUTTON_Y));
+	b_replay = new wxButton(this, 10011, "Replay", wxPoint(COL4 + TEXT_X / 2, COL2), wxSize(BUTTON_X / 2, BUTTON_Y));
 	
 	//Drop Down Menu (Combo Box)
 	ddm_track = new wxComboBox(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 4 * BUTTON_SP + TEXT_Y), wxSize(DDM_X, DDM_Y));
@@ -72,6 +76,7 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	t_effectWavDdm = new wxStaticText(this, wxID_ANY, "WAV Effects:", wxPoint(COL2, 6 * BUTTON_SP + 2 * BUTTON_Y + 2 * TEXT_Y + LB_Y / 2), wxSize(TEXT_X, TEXT_Y));
 	t_effectMicDdm = new wxStaticText(this, wxID_ANY, "MIC Effects:", wxPoint(COL3, 2 * BUTTON_SP + BUTTON_Y), wxSize(TEXT_X, TEXT_Y));
 
+	t_playMusic = new wxStaticText(this, wxID_ANY, "Currently not playing music. Create a preview to listen!", wxPoint(COL4, COL2 - 3 * TEXT_Y), wxSize(BUTTON_X, TEXT_Y));
 
 	//Dynamic TextCtrl
 	tx_organA = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 8 * BUTTON_SP + 3 * DDM_Y + 2 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
@@ -431,7 +436,17 @@ void cMainMenu::CreatePreview(wxCommandEvent& evt) {
 		
 		myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, uiPrev), PREVIEW_DURATION, "Previews/prevTrack", 1000);
 		myWC.makeWav();
+	}
 
+	//songPlaying = "Previews/prevTrack";
+	if (firstTime) {
+		soundPlayer = new wxSound("Previews/prevTrack.wav", wxSOUND_SYNC);
+		firstTime = false;
+	}
+	
+	if (soundPlayer->Play("Previews/prevTrack.wav")) {
+		t_playMusic->SetLabel("Now playing: " + lb_tracks->GetStringSelection());
+		t_playMusic->Refresh();
 	}
 	evt.Skip();
 }
@@ -459,5 +474,28 @@ void cMainMenu::OnKeyDown(wxKeyEvent& evt) {
 		this->ShowFullScreen(!fullscreen, wxFULLSCREEN_ALL ^ wxFULLSCREEN_NOSTATUSBAR);
 		fullscreen = !fullscreen;
 	}
+	evt.Skip();
+}
+
+void cMainMenu::savePreview(wxCommandEvent& evt) {
+	wxFileDialog saveFileDialog(this, _("Save WAV file"), "", "", "WAV files (*.wav)|*.wav", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+	if (saveFileDialog.ShowModal() == wxID_CANCEL) {			//Esto está por si se cierra el explorador sin elegir archivos
+		return;
+	}
+
+	string pathSelected = saveFileDialog.GetPath();				//Path completo
+	wxFileOutputStream output_stream(saveFileDialog.GetPath());
+
+	if (!output_stream.IsOk()) {
+		wxLogError("Cannot save file '%s'.", pathSelected);
+	}
+	else {
+		wxCopyFile("Previews/prevTrack.wav", pathSelected);
+	}
+	evt.Skip();
+}
+
+void cMainMenu::Replay(wxCommandEvent& evt) {
+	soundPlayer->Play("Previews/prevTrack.wav");
 	evt.Skip();
 }

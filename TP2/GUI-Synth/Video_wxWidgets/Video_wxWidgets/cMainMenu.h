@@ -8,7 +8,8 @@
 #include <wx/textctrl.h>
 #include <wx/event.h>
 #include <wx/msgdlg.h>
-
+#include <fstream>
+#include <wx/sound.h>
 #include <vector>
 
 #include "Utils/Tracks.h"
@@ -16,7 +17,7 @@
 #include "UserInput/UserInput.h"
 #include "Controllers/ControllerOfControllers.h"
 #include "Controllers/WavController.h"
-#include <wx/sound.h>
+
 
 #define BUTTON_X 150
 #define BUTTON_Y 50
@@ -65,6 +66,9 @@ private:
 	wxButton* b_addEffMic = nullptr;
 	wxButton* b_removeEffMic = nullptr;
 	//wxButton* b_generateSpect = nullptr;
+	wxButton* b_savePreview = nullptr;
+	wxButton* b_replay = nullptr;
+
 
 
 	//Drop Down Menu (Combo Box)
@@ -82,8 +86,9 @@ private:
 
 	//Images
 	//wxStaticBitmap* img_Spectogram = nullptr;
+
 	//Sound
-	wxSound * prev_Sound = nullptr;
+	wxSound* soundPlayer = nullptr;
 
 	//Text
 	wxStaticText* t_tackDdm = nullptr;
@@ -126,6 +131,7 @@ private:
 
 	wxStaticText* t_bell = nullptr;
 
+	wxStaticText* t_playMusic = nullptr;
 
 	//Clases de soporte y las que se nos hacian lindas poner acá
 	bool fullscreen = false;
@@ -139,6 +145,8 @@ private:
 	vector<wxTextCtrl*> tx_toShow;
 	string selecetedMidi;											//vector de strings que tiene los mismos que el DDM y en el mismo orden
 	WavController myWC;
+	//string songPlaying;
+	bool firstTime = true;
 
 
 	//Functions
@@ -146,7 +154,6 @@ private:
 	void OnMenuExit(wxCommandEvent& evt);
 
 	void OnKeyDown(wxKeyEvent& evt);
-
 	void AddMidiToProgram(wxCommandEvent& evt);
 	void AddTrackToDdm(wxCommandEvent& evt);
 	void DeleteTrackToDdm(wxCommandEvent& evt);
@@ -157,6 +164,9 @@ private:
 	void RemoveTrack(wxCommandEvent& evt);
 	void CreateWav(wxCommandEvent& evt);
 	void CreatePreview(wxCommandEvent& evt);
+	void savePreview(wxCommandEvent& evt);
+	void Replay(wxCommandEvent& evt);
+
 	vector<string> midiToStringDdm(vector<Tracks> MidiParsed);		//Funció que recibe el vector de tracks que devuelve el midi parser
 																	//y devuelve el vector de strings que utilizará el ddm para mostrar los tracks.
 	
