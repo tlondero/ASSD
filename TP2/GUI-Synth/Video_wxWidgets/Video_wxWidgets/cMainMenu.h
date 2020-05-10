@@ -11,6 +11,8 @@
 #include <fstream>
 #include <wx/sound.h>
 #include <vector>
+#include <Windows.h>
+#include <mmsystem.h>
 
 #include "Utils/Tracks.h"
 #include "MidiParser.h"

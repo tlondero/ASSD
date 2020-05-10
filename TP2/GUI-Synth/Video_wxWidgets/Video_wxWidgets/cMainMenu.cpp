@@ -48,8 +48,8 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	b_removeEffMic = new wxButton(this, wxID_ANY, "Remove effect from Mic", wxPoint(COL3 + BUTTON_X + BUTTON_SP, 2 * BUTTON_SP + BUTTON_Y + TEXT_Y + DDM_Y), wxSize(BUTTON_X, BUTTON_Y));
 	//b_generateSpect = nullptr;
 
-	b_savePreview = new wxButton(this, 10010, "Save preview", wxPoint(COL4, COL2), wxSize(BUTTON_X / 2, BUTTON_Y));
-	b_replay = new wxButton(this, 10011, "Replay", wxPoint(COL4 + TEXT_X / 2, COL2), wxSize(BUTTON_X / 2, BUTTON_Y));
+	b_savePreview = new wxButton(this, 10010, "Save preview", wxPoint(COL4, COL2), wxSize(BUTTON_X, BUTTON_Y));
+	b_replay = new wxButton(this, 10011, "Replay", wxPoint(COL4 + TEXT_X, COL2), wxSize(BUTTON_X, BUTTON_Y));
 	
 	//Drop Down Menu (Combo Box)
 	ddm_track = new wxComboBox(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 4 * BUTTON_SP + TEXT_Y), wxSize(DDM_X, DDM_Y));
@@ -76,7 +76,7 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	t_effectWavDdm = new wxStaticText(this, wxID_ANY, "WAV Effects:", wxPoint(COL2, 6 * BUTTON_SP + 2 * BUTTON_Y + 2 * TEXT_Y + LB_Y / 2), wxSize(TEXT_X, TEXT_Y));
 	t_effectMicDdm = new wxStaticText(this, wxID_ANY, "MIC Effects:", wxPoint(COL3, 2 * BUTTON_SP + BUTTON_Y), wxSize(TEXT_X, TEXT_Y));
 
-	t_playMusic = new wxStaticText(this, wxID_ANY, "Currently not playing music. Create a preview to listen!", wxPoint(COL4, COL2 - 3 * TEXT_Y), wxSize(BUTTON_X, TEXT_Y));
+	t_playMusic = new wxStaticText(this, wxID_ANY, "Currently not playing music. Create a preview to listen!", wxPoint(COL4 - BUTTON_SP, COL2 - 3 * TEXT_Y), wxSize(TEXT_X, BUTTON_Y));
 
 	//Dynamic TextCtrl
 	tx_organA = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 8 * BUTTON_SP + 3 * DDM_Y + 2 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
@@ -438,12 +438,11 @@ void cMainMenu::CreatePreview(wxCommandEvent& evt) {
 		myWC.makeWav();
 	}
 
-	//songPlaying = "Previews/prevTrack";
 	if (firstTime) {
 		soundPlayer = new wxSound("Previews/prevTrack.wav", wxSOUND_SYNC);
 		firstTime = false;
 	}
-	
+
 	if (soundPlayer->Play("Previews/prevTrack.wav")) {
 		t_playMusic->SetLabel("Now playing: " + lb_tracks->GetStringSelection());
 		t_playMusic->Refresh();
