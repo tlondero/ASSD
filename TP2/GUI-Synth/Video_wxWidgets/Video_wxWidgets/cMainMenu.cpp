@@ -12,6 +12,11 @@ wxBEGIN_EVENT_TABLE(cMainMenu, wxFrame)
 	EVT_KEY_DOWN(OnKeyDown)
 	EVT_BUTTON(10010, savePreview)
 	EVT_BUTTON(10011, Replay)
+
+	EVT_BUTTON(10012, loadWavSpec)
+	EVT_BUTTON(10013, createSpec)
+	EVT_TEXT(10014, detectWindowChange)
+
 wxEND_EVENT_TABLE()
 
 /*
@@ -23,7 +28,7 @@ wxEND_EVENT_TABLE()
 	- Armar funciones jajaaaa
 */
 
-cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(30,30), wxSize(1080,720))
+cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(30, 30), wxSize(1080, 720))
 {
 	//Menu y tool bar
 	m_MenuBar = new wxMenuBar();
@@ -37,39 +42,41 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 
 	//Botones
 	b_cargarMidi = new wxButton(this, 10001, "Load MIDI file", wxPoint(BUTTON_SP, BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
-	b_crearWav = new wxButton(this, 10008, "Create WAV file", wxPoint(BUTTON_SP, BUTTON_Y + 2*BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
+	b_crearWav = new wxButton(this, 10008, "Create WAV file", wxPoint(BUTTON_SP, BUTTON_Y + 2 * BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
 	b_addTrack = new wxButton(this, 10002, "Add track", wxPoint(COL2, BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
 	b_removeTrack = new wxButton(this, 10007, "Remove track", wxPoint(COL2 + BUTTON_SP + BUTTON_X, BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
-	b_preview = new wxButton(this, 10009, "Listen preview track", wxPoint(COL2, 6 * BUTTON_SP + BUTTON_Y + TEXT_Y + LB_Y/2), wxSize(2*BUTTON_X, BUTTON_Y));
+	b_preview = new wxButton(this, 10009, "Listen preview track", wxPoint(COL2, 6 * BUTTON_SP + BUTTON_Y + TEXT_Y + LB_Y / 2), wxSize(2 * BUTTON_X, BUTTON_Y));
 	b_addEffWav = new wxButton(this, wxID_ANY, "Add effect to WAV", wxPoint(COL2, 12 * BUTTON_SP + 2 * BUTTON_Y + 2 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(BUTTON_X, BUTTON_Y));
 	b_removeEffWav = new wxButton(this, wxID_ANY, "Remove effect from WAV", wxPoint(COL2 + BUTTON_SP + BUTTON_X, 12 * BUTTON_SP + 2 * BUTTON_Y + 2 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(BUTTON_X, BUTTON_Y));
 	b_toggleMic = new wxButton(this, wxID_ANY, "MIC On / Off ", wxPoint(COL3, BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
 	b_addEffMic = new wxButton(this, wxID_ANY, "Add effect to Mic", wxPoint(COL3, 2 * BUTTON_SP + BUTTON_Y + TEXT_Y + DDM_Y), wxSize(BUTTON_X, BUTTON_Y));
 	b_removeEffMic = new wxButton(this, wxID_ANY, "Remove effect from Mic", wxPoint(COL3 + BUTTON_X + BUTTON_SP, 2 * BUTTON_SP + BUTTON_Y + TEXT_Y + DDM_Y), wxSize(BUTTON_X, BUTTON_Y));
-	//b_generateSpect = nullptr;
-
+	
 	b_savePreview = new wxButton(this, 10010, "Save preview", wxPoint(COL4, COL2), wxSize(BUTTON_X, BUTTON_Y));
 	b_replay = new wxButton(this, 10011, "Replay", wxPoint(COL4 + TEXT_X, COL2), wxSize(BUTTON_X, BUTTON_Y));
-	
+
+	b_loadSpec = new wxButton(this, 10012, "Load WAV for spectogram", wxPoint(COL4, 2 * BUTTON_SP + TEXT_Y), wxSize(BUTTON_X, BUTTON_Y));
+	b_updateSpec = new wxButton(this, 10013, "Create spectogram", wxPoint(COL4 + TEXT_X, 2 * BUTTON_SP + TEXT_Y), wxSize(BUTTON_X, BUTTON_Y));
+
 	//Drop Down Menu (Combo Box)
 	ddm_track = new wxComboBox(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 4 * BUTTON_SP + TEXT_Y), wxSize(DDM_X, DDM_Y));
 	ddm_instrumento = new wxComboBox(this, 10003, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 6 * BUTTON_SP + 2 * DDM_Y), wxSize(DDM_X, DDM_Y));
 	ddm_wavEff = new wxComboBox(this, wxID_ANY, "", wxPoint(COL2, 10 * BUTTON_SP + 2 * BUTTON_Y + 2 * TEXT_Y + LB_Y / 2), wxSize(DDM_X, DDM_Y));
 	ddm_micEff = new wxComboBox(this, wxID_ANY, "", wxPoint(COL3, 2 * BUTTON_SP + BUTTON_Y + TEXT_Y), wxSize(DDM_X, DDM_Y));
 
+	ddm_spect = new wxComboBox(this, 10014, "", wxPoint(COL4, BUTTON_Y + 3 * TEXT_Y + BUTTON_SP), wxSize(DDM_X, DDM_Y));
+	for (int i = 0; i < NUMBER_OF_WINDOWS; i++) {
+		ddm_spect->AppendString(WindowsList[i]);
+	}
 
 	//Lists Box
-	lb_tracks = new wxListBox(this, wxID_ANY, wxPoint(COL2, 4 * BUTTON_SP + BUTTON_Y + TEXT_Y), wxSize(LB_X, LB_Y/2));
-	lb_wavEff = new wxListBox(this, wxID_ANY, wxPoint(COL2, 14 * BUTTON_SP + 3 * BUTTON_Y + 2 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(LB_X, LB_Y/2));
+	lb_tracks = new wxListBox(this, wxID_ANY, wxPoint(COL2, 4 * BUTTON_SP + BUTTON_Y + TEXT_Y), wxSize(LB_X, LB_Y / 2));
+	lb_wavEff = new wxListBox(this, wxID_ANY, wxPoint(COL2, 14 * BUTTON_SP + 3 * BUTTON_Y + 2 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(LB_X, LB_Y / 2));
 	lb_micEff = new wxListBox(this, wxID_ANY, wxPoint(COL3, 3 * BUTTON_SP + 2 * BUTTON_Y + TEXT_Y + DDM_Y), wxSize(300, 300));
 
-		
-	//Images
-	//wxStaticBitmap* img_Spectogram = nullptr;
-	//this->prev_Sound = new prev_Sound
 
 	//Text
-	t_tackDdm = new wxStaticText(this, wxID_ANY, "Tracks:", wxPoint(BUTTON_SP, 2*BUTTON_Y + 4*BUTTON_SP), wxSize(TEXT_X, TEXT_Y));
+	t_tackDdm = new wxStaticText(this, wxID_ANY, "Tracks:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 4 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y));
 	t_instrumentoDdm = new wxStaticText(this, wxID_ANY, "Instruments:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 6 * BUTTON_SP + DDM_Y), wxSize(TEXT_X, TEXT_Y));
 	t_paramList = new wxStaticText(this, wxID_ANY, "Parameters:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 6 * BUTTON_SP + 3 * DDM_Y), wxSize(TEXT_X, TEXT_Y));
 	t_previewDdm = new wxStaticText(this, wxID_ANY, "Lista de tracks agregados:", wxPoint(COL2, 4 * BUTTON_SP + BUTTON_Y), wxSize(TEXT_X, TEXT_Y));
@@ -78,7 +85,11 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 
 	t_playMusic = new wxStaticText(this, wxID_ANY, "Currently not playing music. Create a preview to listen!", wxPoint(COL4 - BUTTON_SP, COL2 - 3 * TEXT_Y), wxSize(TEXT_X, TEXT_Y));
 
-	//Dynamic TextCtrl
+	t_currentSpec = new wxStaticText(this, wxID_ANY, "No spectogram selected.", wxPoint(COL4, BUTTON_SP), wxSize(TEXT_X, TEXT_Y));
+	t_specWindType = new wxStaticText(this, wxID_ANY, "Select window type:", wxPoint(COL4, BUTTON_Y + 2 * TEXT_Y + BUTTON_SP), wxSize(TEXT_X, TEXT_Y));
+	t_specWindParam = new wxStaticText(this, wxID_ANY, "Select window parameter:", wxPoint(COL4, BUTTON_Y + 3 * TEXT_Y + DDM_Y + 2 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y));
+
+	//Dinmac Control Texts (INSTRUMENTOS)
 	tx_organA = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 8 * BUTTON_SP + 3 * DDM_Y + 2 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 	tx_organR = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 10 * BUTTON_SP + 3 * DDM_Y + 4 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 	tx_organS = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 12 * BUTTON_SP + 3 * DDM_Y + 6 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
@@ -107,36 +118,42 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	tx_toShow.push_back(tx_drumRf);
 	tx_toShow.push_back(tx_drumB);
 
+	//Dinmac Control Texts (VENTANAS)
+	tx_specWindParam = new wxTextCtrl(this, wxID_ANY, "", wxPoint(COL4, BUTTON_Y + 5 * TEXT_Y + DDM_Y + 3 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y + 5));
+	tx_specWindParam->Hide();
+
+
+	//Dinmac Static Texts (INSTRUMENTOS)
 	t_organA = new wxStaticText(this, wxID_ANY, "A:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 7 * BUTTON_SP + 3 * DDM_Y + TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 	t_organR = new wxStaticText(this, wxID_ANY, "R:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 9 * BUTTON_SP + 3 * DDM_Y + 3 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 	t_organS = new wxStaticText(this, wxID_ANY, "S:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 11 * BUTTON_SP + 3 * DDM_Y + 5 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
-	
+
 	t_fluteA = new wxStaticText(this, wxID_ANY, "A:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 7 * BUTTON_SP + 3 * DDM_Y + TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 	t_fluteR = new wxStaticText(this, wxID_ANY, "R:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 9 * BUTTON_SP + 3 * DDM_Y + 3 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 	t_fluteS = new wxStaticText(this, wxID_ANY, "S:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 11 * BUTTON_SP + 3 * DDM_Y + 5 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 
 	t_guitarRf = new wxStaticText(this, wxID_ANY, "RL:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 7 * BUTTON_SP + 3 * DDM_Y + TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 	t_eguitarRf = new wxStaticText(this, wxID_ANY, "RL:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 7 * BUTTON_SP + 3 * DDM_Y + TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
-	
+
 	t_bell = new wxStaticText(this, wxID_ANY, "No parameters needed", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 7 * BUTTON_SP + 3 * DDM_Y + TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));		//Same for trumpet, trombone, clarinet and banjo
-	
+
 	t_drumRf = new wxStaticText(this, wxID_ANY, "RL:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 7 * BUTTON_SP + 3 * DDM_Y + TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 	t_drumB = new wxStaticText(this, wxID_ANY, "B:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 9 * BUTTON_SP + 3 * DDM_Y + 3 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 
 	t_toShow.push_back(t_organA);
 	t_toShow.push_back(t_organR);
 	t_toShow.push_back(t_organS);
-	
+
 	t_toShow.push_back(t_fluteA);
 	t_toShow.push_back(t_fluteR);
 	t_toShow.push_back(t_fluteS);
-	
+
 	t_toShow.push_back(t_guitarRf);
 	t_toShow.push_back(t_eguitarRf);
 
 	t_toShow.push_back(t_drumRf);
 	t_toShow.push_back(t_drumB);
-	
+
 	t_toShow.push_back(t_bell);
 
 	for (int i = 0; i < tx_toShow.size(); i++) {
@@ -146,7 +163,16 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 		t_toShow[i]->Hide();
 	}
 
-	//MoveAfterInTabOrder(this);
+	//Dinmac Static Texts (VENTANAS)
+	t_specWindNoParam = new wxStaticText(this, wxID_ANY, "No parameters needed", wxPoint(COL4, BUTTON_Y + 4 * TEXT_Y + DDM_Y + 2 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y + 5));
+	t_specGauss = new wxStaticText(this, wxID_ANY, "Standar Deviation:", wxPoint(COL4, BUTTON_Y + 4 * TEXT_Y + DDM_Y + 2 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y + 5));
+	t_specExp = new wxStaticText(this, wxID_ANY, "Decay Scale:", wxPoint(COL4, BUTTON_Y + 4 * TEXT_Y + DDM_Y + 2 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y + 5));
+	t_specKaiser = new wxStaticText(this, wxID_ANY, "Beta:", wxPoint(COL4, BUTTON_Y + 4 * TEXT_Y + DDM_Y + 2 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y + 5));
+	
+	t_specWindNoParam->Hide();
+	t_specGauss->Hide();
+	t_specExp->Hide();
+	t_specKaiser->Hide();
 
 	////Grid Sizer
 
@@ -300,6 +326,22 @@ void cMainMenu::AddTrack(wxCommandEvent& evt) {
 				lb_tracks->Append(track + ' ' + instrument);
 			}
 		}
+		else {
+			//Warning
+			wxMessageDialog warning(this, "No parameters selected", "Can't add track");
+			warning.Center();
+			warning.SetExtendedMessage("The instrument selected requires specific parameters. Please, configure the parameters to add the track.");
+			warning.ShowModal();
+			warning.Hide();
+		}
+	}
+	else {
+		//Warning
+		wxMessageDialog warning(this, "No parameters selected", "Can't add track");
+		warning.Center();
+		warning.SetExtendedMessage("Please, select a track and an instrument to configure and add the track.");
+		warning.ShowModal();
+		warning.Hide();
 	}
 	evt.Skip();
 }
@@ -308,6 +350,14 @@ void cMainMenu::RemoveTrack(wxCommandEvent& evt) {
 	if (lb_tracks->GetSelection() != wxNOT_FOUND) {
 		ui.pairTrackInst.erase(ui.pairTrackInst.begin() + lb_tracks->GetSelection());
 		lb_tracks->Delete(lb_tracks->GetSelection());
+	}
+	else {
+		//Warning
+		wxMessageDialog warning(this, "No tracks selected", "Can't remove track");
+		warning.Center();
+		warning.SetExtendedMessage("Please, select a track to remove.");
+		warning.ShowModal();
+		warning.Hide();
 	}
 	evt.Skip();
 }
@@ -424,6 +474,14 @@ void cMainMenu::CreateWav(wxCommandEvent& evt) {
 			loadBar.Hide();
 		}
 	}
+	else {
+		//Warning
+		wxMessageDialog warning(this, "No tracks available", "Can't create WAV file");
+		warning.Center();
+		warning.SetExtendedMessage("Please, add some tracks to create a WAV file.");
+		warning.ShowModal();
+		warning.Hide();
+	}
 	evt.Skip();
 }
 
@@ -433,20 +491,29 @@ void cMainMenu::CreatePreview(wxCommandEvent& evt) {
 		UserInput uiPrev;
 		ucPrev.InstrumentPreview = true;
 		uiPrev.pairTrackInst.push_back(ucPrev);
-		
+
 		myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, uiPrev), PREVIEW_DURATION, "Previews/prevTrack", 1000);
 		myWC.makeWav();
-	}
 
-	if (firstTime) {
-		//soundPlayer = new wxSound("Previews/prevTrack.wav", wxSOUND_SYNC);
-		firstTime = false;
-	}
 
-	//if (PlaySound(TEXT("Previews/prevTrack.wav"), NULL, SND_FILENAME | SND_ASYNC)){ //(soundPlayer->Play("Previews/prevTrack.wav")) {
-	//	t_playMusic->SetLabel("Now playing: " + lb_tracks->GetStringSelection());
-	//	t_playMusic->Refresh();
-	//}
+		if (firstTime) {
+			//soundPlayer = new wxSound("Previews/prevTrack.wav", wxSOUND_SYNC);
+			firstTime = false;
+		}
+
+		//if (PlaySound(TEXT("Previews/prevTrack.wav"), NULL, SND_FILENAME | SND_ASYNC)){ //(soundPlayer->Play("Previews/prevTrack.wav")) {
+		//	t_playMusic->SetLabel("Now playing: " + lb_tracks->GetStringSelection());
+		//	t_playMusic->Refresh();
+		//}
+	}
+	else {
+		//Warning
+		wxMessageDialog warning(this, "No tracks selected", "Can't create a preview");
+		warning.Center();
+		warning.SetExtendedMessage("Please, select a track to listen the preview.");
+		warning.ShowModal();
+		warning.Hide();
+	}
 	evt.Skip();
 }
 
@@ -477,25 +544,145 @@ void cMainMenu::OnKeyDown(wxKeyEvent& evt) {
 }
 
 void cMainMenu::savePreview(wxCommandEvent& evt) {
-	wxFileDialog saveFileDialog(this, _("Save WAV file"), "", "", "WAV files (*.wav)|*.wav", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
-	if (saveFileDialog.ShowModal() == wxID_CANCEL) {			//Esto está por si se cierra el explorador sin elegir archivos
-		return;
-	}
+	if (!firstTime) {
+		wxFileDialog saveFileDialog(this, _("Save WAV file"), "", "", "WAV files (*.wav)|*.wav", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+		if (saveFileDialog.ShowModal() == wxID_CANCEL) {			//Esto está por si se cierra el explorador sin elegir archivos
+			return;
+		}
 
-	string pathSelected = saveFileDialog.GetPath();				//Path completo
-	wxFileOutputStream output_stream(saveFileDialog.GetPath());
+		string pathSelected = saveFileDialog.GetPath();				//Path completo
+		wxFileOutputStream output_stream(saveFileDialog.GetPath());
 
-	if (!output_stream.IsOk()) {
-		wxLogError("Cannot save file '%s'.", pathSelected);
+		if (!output_stream.IsOk()) {
+			wxLogError("Cannot save file '%s'.", pathSelected);
+		}
+		else {
+			wxCopyFile("Previews/prevTrack.wav", pathSelected);
+		}
 	}
 	else {
-		wxCopyFile("Previews/prevTrack.wav", pathSelected);
+		//Warning
+		wxMessageDialog warning(this, "No preview created", "Can't play preview");
+		warning.Center();
+		warning.SetExtendedMessage("Please, add track a and create a preview.");
+		warning.ShowModal();
+		warning.Hide();
 	}
 	evt.Skip();
 }
 
 void cMainMenu::Replay(wxCommandEvent& evt) {
-	//soundPlayer->Play("Previews/prevTrack.wav");
+	if (!firstTime) {
+		//soundPlayer->Play("Previews/prevTrack.wav");
+	}
+	else {
+		//Warning
+		wxMessageDialog warning(this, "No preview created", "Can't play preview");
+		warning.Center();
+		warning.SetExtendedMessage("Please, add track a and create a preview.");
+		warning.ShowModal();
+		warning.Hide();
+	}
+	evt.Skip();
+}
+
+void cMainMenu::loadWavSpec(wxCommandEvent& evt) {
+	wxFileDialog openFileDialog(this, _("Open WAV file"), "", "", "WAV files (*.wav)|*.wav", wxFD_OPEN | wxFD_FILE_MUST_EXIST);  //Abro explorador de archivos
+	bool addString = true;
+	if (openFileDialog.ShowModal() == wxID_CANCEL) {			//Esto está por si se cierra el explorador sin elegir archivos
+		return;
+	}
+
+	wxFileInputStream input_stream(openFileDialog.GetPath());	//Verifico que todo ande joya
+
+	string pathSelected = openFileDialog.GetPath();				//Path completo
+
+	string stringSelected = pathSelected.substr(pathSelected.find_last_of('\\') + 1);
+	stringSelected = stringSelected.substr(stringSelected.find_last_of('\\') + 1, stringSelected.size() - 4);		//Solo el nombre sin el .wav
+
+	if (!input_stream.IsOk()) {
+		wxLogError("Cannot open file '%s'.", openFileDialog.GetPath());
+	}
+	else {			//verifico si el string ya está dentro de vector
+		wavToSpecPath = pathSelected;
+		wavToSpecName = stringSelected;
+		t_currentSpec->SetLabel("Current WAV selected: " + wavToSpecName);
+		t_currentSpec->Refresh();
+	}
+	evt.Skip();
+}
+
+void cMainMenu::createSpec(wxCommandEvent& evt) {
+	string ventanaElegida = ddm_spect->GetStringSelection();
+	if (!(wavToSpecName.empty())) {
+		if (ventanaElegida.empty()) {
+			//No se elegió ninguna ventana
+			//Warning
+			wxMessageDialog warning(this, "No window chosen", "Can't create spectogram");
+			warning.Center();
+			warning.SetExtendedMessage("Please, select a type of window to create a spectogram.");
+			warning.ShowModal();
+			warning.Hide();
+		}
+		else if (!(tx_specWindParam->IsEmpty())) {
+			//Si el textbox tiene algo es porque está la 8, 9 o 10, porque solo se vacía si cambíe de ventana 
+			double param = stod((string)tx_specWindParam->GetStringSelection());
+
+			//LLAMAR A LA FUNCIÓN DE VENTANA CON PARAMETRO Y NOMBRE
+			es.generateSpectrum(wavToSpecPath, 256, 128, ventanaElegida, param, param, param);
+		}
+		else if (!((ventanaElegida == WindowsList[8]) || (ventanaElegida == WindowsList[9]) || (ventanaElegida == WindowsList[10]))) {
+			//Si el text box está vacío y si no es la ventana 8, 9 o 10, está todo joya, tengo una ventana sin parámetro
+
+			//LLAMAR A LA FUNCIÓN DE VENTANA CON NOMBRE
+			es.generateSpectrum(wavToSpecPath, 256, 128, ventanaElegida, 0, 0, 0);
+		}
+		else {
+			//El text box está vacío y la ventana es la 8, 9 o 10...Falta parámetro
+			//Warning
+			wxMessageDialog warning(this, "No parameter chosen", "Can't create spectogram");
+			warning.Center();
+			warning.SetExtendedMessage("Please, write a valid parameter for this type of window.");
+			warning.ShowModal();
+			warning.Hide();
+		}
+	}
+	else {
+		//Warning
+		wxMessageDialog warning(this, "No WAV file loaded", "Can't create spectogram");
+		warning.Center();
+		warning.SetExtendedMessage("Please, select a WAV file to create a spectogram.");
+		warning.ShowModal();
+		warning.Hide();
+	}
+	evt.Skip();
+}
+void cMainMenu::detectWindowChange(wxCommandEvent& evt) {
+	t_specWindNoParam->Hide();
+	t_specGauss->Hide();
+	t_specExp->Hide();
+	t_specKaiser->Hide();
+	tx_specWindParam->Clear();
+	tx_specWindParam->Hide();
+	
+
+	string ventanaElegida = ddm_spect->GetStringSelection();						//verificar que el imput esté en la lista de esa mierda
+
+	if (ventanaElegida == WindowsList[8]) {
+		t_specGauss->Show();
+		tx_specWindParam->Show();
+	}
+	else if (ventanaElegida == WindowsList[9]) {
+		t_specExp->Show();
+		tx_specWindParam->Show();
+	}
+	else if (ventanaElegida == WindowsList[10]) {
+		t_specKaiser->Show();
+		tx_specWindParam->Show();
+	}
+	else {
+		t_specWindNoParam->Show();
+	}
 	evt.Skip();
 }
 
