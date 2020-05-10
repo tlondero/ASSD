@@ -629,12 +629,13 @@ void cMainMenu::createSpec(wxCommandEvent& evt) {
 			double param = stod((string)tx_specWindParam->GetStringSelection());
 
 			//LLAMAR A LA FUNCIÓN DE VENTANA CON PARAMETRO Y NOMBRE
+			es.generateSpectrum(wavToSpecPath, 256, 128, ventanaElegida, param, param, param);
 		}
 		else if (!((ventanaElegida == WindowsList[8]) || (ventanaElegida == WindowsList[9]) || (ventanaElegida == WindowsList[10]))) {
 			//Si el text box está vacío y si no es la ventana 8, 9 o 10, está todo joya, tengo una ventana sin parámetro
 
 			//LLAMAR A LA FUNCIÓN DE VENTANA CON NOMBRE
-
+			es.generateSpectrum(wavToSpecPath, 256, 128, ventanaElegida, 0, 0, 0);
 		}
 		else {
 			//El text box está vacío y la ventana es la 8, 9 o 10...Falta parámetro

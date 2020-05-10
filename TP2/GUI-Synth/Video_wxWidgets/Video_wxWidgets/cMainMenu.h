@@ -19,6 +19,7 @@
 #include "UserInput/UserInput.h"
 #include "Controllers/ControllerOfControllers.h"
 #include "Controllers/WavController.h"
+#include "Espectrograma/EspectroGenerator.h"
 
 #define BUTTON_X 150
 #define BUTTON_Y 50
@@ -155,6 +156,7 @@ private:
 	bool firstTime = true;
 	string wavToSpecPath;
 	string wavToSpecName;
+	EspectroGenerator es;
 
 
 	//Functions
