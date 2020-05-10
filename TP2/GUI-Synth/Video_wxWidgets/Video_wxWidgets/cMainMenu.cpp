@@ -85,7 +85,7 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	//Lists Box
 	lb_tracks = new wxListBox(this, wxID_ANY, wxPoint(COL2, 4 * BUTTON_SP + BUTTON_Y + TEXT_Y), wxSize(LB_X, LB_Y / 2));
 	lb_wavEff = new wxListBox(this, wxID_ANY, wxPoint(COL2, 13 * BUTTON_SP + 3 * BUTTON_Y + 2 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(LB_X, LB_Y / 2));
-	lb_wavEffFinal = new wxListBox(this, wxID_ANY, wxPoint(BUTTON_SP, 13 * BUTTON_SP + 4 * BUTTON_Y + 2 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(LB_X, LB_Y / 2));
+	lb_wavEffFinal = new wxListBox(this, wxID_ANY, wxPoint(BUTTON_SP, 19 * BUTTON_SP + 4 * BUTTON_Y + 7 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(LB_X, LB_Y / 2));
 	lb_micEff = new wxListBox(this, wxID_ANY, wxPoint(COL3, 3 * BUTTON_SP + 2 * BUTTON_Y + TEXT_Y + DDM_Y), wxSize(300, 300));
 
 	
@@ -881,20 +881,18 @@ void cMainMenu::addEffWav(wxCommandEvent& evt) {
 				}
 				else {
 					if (lb_wavEffFinal->FindString(effName) == wxNOT_FOUND) {
+						ui.finalEfect = effName;
+						ui.g = stod((string)tx_effGEco->GetValue());
+						ui.M = stod((string)tx_effMEco->GetValue());
+						lb_wavEffFinal->Append(effName);
+					}
+					else {
 						//Warning
 						wxMessageDialog warning(this, "Effect already added", "Can't add an effect");
 						warning.Center();
 						warning.SetExtendedMessage("Select a different effect to add.");
 						warning.ShowModal();
 						warning.Hide();
-						
-					}
-					else {
-						ui.pairTrackInst[lb_tracks->GetSelection()].effect2Apply = effName;
-						ui.pairTrackInst[lb_tracks->GetSelection()].g = stod((string)tx_effGEco->GetValue());
-						ui.pairTrackInst[lb_tracks->GetSelection()].M = stod((string)tx_effMEco->GetValue());
-
-						lb_wavEffFinal->Append(effName);
 					}
 				}
 			}
@@ -908,9 +906,19 @@ void cMainMenu::addEffWav(wxCommandEvent& evt) {
 					warning.Hide();
 				}
 				else {
-					ui.pairTrackInst[lb_tracks->GetSelection()].effect2Apply = effName;
-					//ui.pairTrackInst[lb_tracks->GetSelection()].Trev = stod((string) tx_effRev->GetStringSelection());
-					lb_wavEff->Append("Track " + to_string(lb_tracks->GetSelection()) + ", Effect " + effName);
+					if (lb_wavEffFinal->FindString(effName) == wxNOT_FOUND) {
+					//ui.finalEfect = effName;
+						//ui.Trev = stod((string)tx_effRev->GetValue());
+						//lb_wavEffFinal->Append(effName);
+					}
+					else {
+						//Warning
+						wxMessageDialog warning(this, "Effect already added", "Can't add an effect");
+						warning.Center();
+						warning.SetExtendedMessage("Select a different effect to add.");
+						warning.ShowModal();
+						warning.Hide();
+					}
 				}
 			}
 		}
@@ -927,19 +935,28 @@ void cMainMenu::addEffWav(wxCommandEvent& evt) {
 }
 
 void cMainMenu::removeEffWav(wxCommandEvent& evt) {
-	if (!(lb_wavEff->IsEmpty())) {
-		int max = lb_wavEff->GetCount();
-		tracksAddedEfects.clear();
-		for (int i = 0; i < max; i++) {
-			ui.pairTrackInst[0].effect2Apply.clear();
-			lb_wavEff->Delete(0);
+	if (!(lb_wavEffFinal->IsEmpty())) {
+		if (lb_wavEffFinal->GetSelection() != wxNOT_FOUND) {
+			ui.finalEfect.clear();
+			lb_wavEffFinal->Delete(lb_wavEffFinal->GetSelection());
+
+			//ui.pairTrackInst.erase(ui.pairTrackInst.begin() + lb_tracks->GetSelection());
+			//lb_tracks->Delete(lb_tracks->GetSelection());
+		}
+		else {
+			//Warning
+			wxMessageDialog warning(this, "No effect selected", "Can't delete an effect");
+			warning.Center();
+			warning.SetExtendedMessage("Please select an effect to delete.");
+			warning.ShowModal();
+			warning.Hide();
 		}
 	}
 	else {
 		//Warning
 		wxMessageDialog warning(this, "No effects available", "Can't delete an effect");
 		warning.Center();
-		warning.SetExtendedMessage("Effect list is already empty.");
+		warning.SetExtendedMessage("Effect list is empty.");
 		warning.ShowModal();
 		warning.Hide();
 	}
