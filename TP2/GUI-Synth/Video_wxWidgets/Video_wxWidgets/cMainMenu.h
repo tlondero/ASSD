@@ -19,6 +19,11 @@
 #include "Controllers/ControllerOfControllers.h"
 #include "Controllers/WavController.h"
 
+//INSTRUMENTOS
+#define PREVIEW_DURATION		6
+#define  NUMBER_OF_INSTRUMETS	10
+const string  InstrumentList[NUMBER_OF_INSTRUMETS] = { "GUITAR", "ORGAN", "FLUTE", "BELL", "CLARINET", "TROMBONE", "TRUMPET", "DRUM", "BANJO", "ELECTRIC_GUITAR" };
+
 
 #define BUTTON_X 150
 #define BUTTON_Y 50
@@ -37,10 +42,6 @@
 #define COL3 2*450
 #define COL4 3*450
 
-//INSTRUMENTOS
-#define  NUMBER_OF_INSTRUMETS	10
-const string  InstrumentList[NUMBER_OF_INSTRUMETS] = { "GUITAR", "ORGAN", "FLUTE", "BELL", "CLARINET", "TROMBONE", "TRUMPET", "DRUM", "BANJO", "ELECTRIC_GUITAR"};
-#define PREVIEW_DURATION 6
 using namespace std;
 
 class cMainMenu : public wxFrame
@@ -165,6 +166,7 @@ private:
 	void CreatePreview(wxCommandEvent& evt);
 	void savePreview(wxCommandEvent& evt);
 	void Replay(wxCommandEvent& evt);
+	bool portAudioOpen(void);
 
 	vector<string> midiToStringDdm(vector<Tracks> MidiParsed);		//Funció que recibe el vector de tracks que devuelve el midi parser
 																	//y devuelve el vector de strings que utilizará el ddm para mostrar los tracks.

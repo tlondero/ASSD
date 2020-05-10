@@ -439,15 +439,14 @@ void cMainMenu::CreatePreview(wxCommandEvent& evt) {
 	}
 
 	if (firstTime) {
-		Pa_StartStream();
 		//soundPlayer = new wxSound("Previews/prevTrack.wav", wxSOUND_SYNC);
 		firstTime = false;
 	}
 
-	if (PlaySound(TEXT("Previews/prevTrack.wav"), NULL, SND_FILENAME | SND_ASYNC)){ //(soundPlayer->Play("Previews/prevTrack.wav")) {
-		t_playMusic->SetLabel("Now playing: " + lb_tracks->GetStringSelection());
-		t_playMusic->Refresh();
-	}
+	//if (PlaySound(TEXT("Previews/prevTrack.wav"), NULL, SND_FILENAME | SND_ASYNC)){ //(soundPlayer->Play("Previews/prevTrack.wav")) {
+	//	t_playMusic->SetLabel("Now playing: " + lb_tracks->GetStringSelection());
+	//	t_playMusic->Refresh();
+	//}
 	evt.Skip();
 }
 
@@ -496,6 +495,42 @@ void cMainMenu::savePreview(wxCommandEvent& evt) {
 }
 
 void cMainMenu::Replay(wxCommandEvent& evt) {
-	soundPlayer->Play("Previews/prevTrack.wav");
+	//soundPlayer->Play("Previews/prevTrack.wav");
 	evt.Skip();
 }
+
+//bool cMainMenu::portAudioOpen(void) {
+//	
+//	PaStreamParameters outputParameters;
+//
+//	outputParameters.device = Pa_GetDefaultOutputDevice();
+//	
+//	outputParameters.channelCount = NUM_CHANNELS;
+//	outputParameters.sampleFormat = BITS_PER_SAMPLE;
+//	outputParameters.suggestedLatency = Pa_GetDeviceInfo(outputParameters.device)->defaultHighOutputLatency;
+//
+//	PaError ret = Pa_OpenStream(&stream, NULL, &outputParameters, 16, paFramesPerBufferUnspecified, 0, &paStreamCallback, NULL, void *userData);
+//
+//	if (ret != paNoError) {
+//		fprintf(stderr, "Pa_OpenStream failed: (err %i) %s\n", ret, Pa_GetErrorText(ret));
+//		if (stream)
+//			Pa_CloseStream(stream);
+//		return false;
+//	}
+//
+//	return true;
+//}
+//
+//int paStreamCallback(const void* input, void* output, unsigned long frameCount, const PaStreamCallbackTimeInfo* timeInfo, PaStreamCallbackFlags statusFlags, void* userData) {
+//	
+//	size_t numRead = fread(output, BITS_PER_SAMPLE * NUM_CHANNELS, frameCount, fopen("Previews/prevTrack.wav"));
+//	output = (uint8_t*)output + numRead * NUM_CHANNELS * BITS_PER_SAMPLE;
+//	frameCount -= numRead;
+//
+//	if (frameCount > 0) {
+//		memset(output, 0, frameCount * NUM_CHANNELS * BITS_PER_SAMPLE);
+//		return paComplete;
+//	}
+//
+//	return paContinue;
+//}
