@@ -5,12 +5,12 @@
 #include <wx/combobox.h>
 #include <wx/clntdata.h>
 #include <wx/sizer.h>
-//#include <wx/gbsizer.h>
 #include <wx/textctrl.h>
 #include <wx/event.h>
 #include <wx/msgdlg.h>
-#include <fstream>
 #include <wx/sound.h>
+
+#include <fstream>
 #include <vector>
 
 #include "General.h"
@@ -58,6 +58,8 @@ private:
 	wxButton* b_addTrack = nullptr;
 	wxButton* b_removeTrack = nullptr;
 	wxButton* b_preview = nullptr;
+	wxButton* b_addEffTrack = nullptr;
+	wxButton* b_removeEffTrack = nullptr;
 	wxButton* b_addEffWav = nullptr;
 	wxButton* b_removeEffWav = nullptr;
 	wxButton* b_toggleMic = nullptr;
@@ -103,7 +105,7 @@ private:
 	wxStaticText* t_overlap = nullptr;
 
 	
-	//Dinmac Control Texts (INSTRUMENTOS)
+	//Text Control (INSTRUMENTOS)
 	wxTextCtrl* tx_organA = nullptr;
 	wxTextCtrl* tx_organR = nullptr;
 	wxTextCtrl* tx_organS = nullptr;
@@ -118,10 +120,16 @@ private:
 	wxTextCtrl* tx_drumRf = nullptr;
 	wxTextCtrl* tx_drumB = nullptr;
 
-	//Dinmac Control Texts (VENTANAS)
+	//Text Control (WavEff)
+	wxTextCtrl* tx_effGEco = nullptr;
+	wxTextCtrl* tx_effMEco = nullptr;
+	wxTextCtrl* tx_effRev = nullptr;
+
+	//Text Control (VENTANAS)
 	wxTextCtrl* tx_specWindParam = nullptr;
 
-	//Dinmac Static Texts (INSTRUMENTOS)
+
+	//Dinmac Texts (INSTRUMENTOS)
 	wxStaticText* t_organA = nullptr;
 	wxStaticText* t_organR = nullptr;
 	wxStaticText* t_organS = nullptr;
@@ -140,7 +148,12 @@ private:
 
 	wxStaticText* t_playMusic = nullptr;
 
-	//Dinmac Static Texts (VENTANAS)
+	//Dinamic Text (WavEff)
+	wxStaticText* t_effGEco = nullptr;
+	wxStaticText* t_effMEco = nullptr;
+	wxStaticText* t_effRev = nullptr;
+
+	//Dinamic Texts (VENTANAS)
 	wxStaticText* t_specGauss = nullptr;
 	wxStaticText* t_specExp = nullptr;
 	wxStaticText* t_specKaiser = nullptr;
@@ -155,6 +168,10 @@ private:
 	ControllerOfControllers myCC;
 	vector<wxStaticText*> t_toShow;
 	vector<wxTextCtrl*> tx_toShow;
+
+	vector<wxStaticText*> t_WavEfftoShow;
+	vector<wxTextCtrl*> tx_WavEfftoShow;
+
 	string selecetedMidi;											//vector de strings que tiene los mismos que el DDM y en el mismo orden
 	WavController myWC;
 	//string songPlaying;
@@ -165,14 +182,14 @@ private:
 
 
 	//Functions
-	void OnMenuFullscreen(wxCommandEvent& evt);			//En desarrollo
-	void OnMenuExit(wxCommandEvent& evt);
-
 	void OnKeyDown(wxKeyEvent& evt);
+
+	void OnMenuFullscreen(wxCommandEvent& evt);			
+	void OnMenuExit(wxCommandEvent& evt);	
+
 	void AddMidiToProgram(wxCommandEvent& evt);
 	void AddTrackToDdm(wxCommandEvent& evt);
 	void DeleteTrackToDdm(wxCommandEvent& evt);
-	void addToDdm(vector<string> tracks, wxComboBox* ddm);
 	void AddTrack(wxCommandEvent& evt);
 	void detectInstrumentChange(wxCommandEvent& evt);
 	void addValueToParam(wxCommandEvent& evt);
@@ -184,12 +201,17 @@ private:
 	void loadWavSpec(wxCommandEvent& evt);
 	void createSpec(wxCommandEvent& evt);
 	void detectWindowChange(wxCommandEvent& evt);
+	void addEffTrack(wxCommandEvent& evt);
+	void removeEffTrack(wxCommandEvent& evt);
+	void addEffWav(wxCommandEvent& evt);
+	void removeEffWav(wxCommandEvent& evt);
+	void detectWavEffChange(wxCommandEvent& evt);
 
 	bool portAudioOpen(void);
 
+	void addToDdm(vector<string> tracks, wxComboBox* ddm);
 	vector<string> midiToStringDdm(vector<Tracks> MidiParsed);		//Funció que recibe el vector de tracks que devuelve el midi parser
 																	//y devuelve el vector de strings que utilizará el ddm para mostrar los tracks.
 	
-
 	wxDECLARE_EVENT_TABLE();
 };

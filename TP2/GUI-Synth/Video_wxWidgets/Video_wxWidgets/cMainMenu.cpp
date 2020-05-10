@@ -1,21 +1,28 @@
 #include "cMainMenu.h"
 
 wxBEGIN_EVENT_TABLE(cMainMenu, wxFrame)
-	EVT_BUTTON(10001, AddMidiToProgram)
-	EVT_BUTTON(10002, AddTrack)
+	EVT_KEY_DOWN(OnKeyDown)
+
 	EVT_TEXT(10003, detectInstrumentChange)
+	EVT_TEXT(10004, detectWavEffChange)
+	EVT_TEXT(10014, detectWindowChange)
+
 	EVT_MENU(10005, OnMenuExit)
 	EVT_MENU(10006, OnMenuFullscreen)
+
+	EVT_BUTTON(10001, AddMidiToProgram)
+	EVT_BUTTON(10002, AddTrack)
 	EVT_BUTTON(10007, RemoveTrack)
 	EVT_BUTTON(10008, CreateWav)
 	EVT_BUTTON(10009, CreatePreview)
-	EVT_KEY_DOWN(OnKeyDown)
 	EVT_BUTTON(10010, savePreview)
 	EVT_BUTTON(10011, Replay)
-
 	EVT_BUTTON(10012, loadWavSpec)
 	EVT_BUTTON(10013, createSpec)
-	EVT_TEXT(10014, detectWindowChange)
+	EVT_BUTTON(10015, addEffTrack)
+	EVT_BUTTON(10016, removeEffTrack)
+	EVT_BUTTON(10017, addEffWav)
+	EVT_BUTTON(10018, removeEffWav)
 
 wxEND_EVENT_TABLE()
 
@@ -35,22 +42,27 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	this->SetMenuBar(m_MenuBar);
 
 	wxMenu* menuFile = new wxMenu();
-	menuFile->Append(10006, "Fullscreen");
-	menuFile->Append(wxID_ANY, "Help");
-	menuFile->Append(10005, "Exit");
+	menuFile->Append(wxID_ANY, "Help			F9");
+	menuFile->Append(10006, "Fullscreen			F11");
+	menuFile->Append(10005, "Exit				F12");
 	m_MenuBar->Append(menuFile, "More");
 
 	//Botones
-	b_cargarMidi = new wxButton(this, 10001, "Load MIDI file", wxPoint(BUTTON_SP, BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
-	b_crearWav = new wxButton(this, 10008, "Create WAV file", wxPoint(BUTTON_SP, BUTTON_Y + 2 * BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
+	b_cargarMidi = new wxButton(this, 10001, "Load MIDI file", wxPoint(BUTTON_SP, BUTTON_SP), wxSize(BUTTON_X * 2, BUTTON_Y));
+	b_crearWav = new wxButton(this, 10008, "Create WAV file", wxPoint(BUTTON_SP, BUTTON_Y + BUTTON_SP), wxSize(BUTTON_X * 2, BUTTON_Y));
 	b_addTrack = new wxButton(this, 10002, "Add track", wxPoint(COL2, BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
-	b_removeTrack = new wxButton(this, 10007, "Remove track", wxPoint(COL2 + BUTTON_SP + BUTTON_X, BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
+	b_removeTrack = new wxButton(this, 10007, "Remove track", wxPoint(COL2 + BUTTON_X, BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
 	b_preview = new wxButton(this, 10009, "Listen preview track", wxPoint(COL2, 6 * BUTTON_SP + BUTTON_Y + TEXT_Y + LB_Y / 2), wxSize(2 * BUTTON_X, BUTTON_Y));
-	b_addEffWav = new wxButton(this, wxID_ANY, "Add effect to WAV", wxPoint(COL2, 12 * BUTTON_SP + 2 * BUTTON_Y + 2 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(BUTTON_X, BUTTON_Y));
-	b_removeEffWav = new wxButton(this, wxID_ANY, "Remove effect from WAV", wxPoint(COL2 + BUTTON_SP + BUTTON_X, 12 * BUTTON_SP + 2 * BUTTON_Y + 2 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(BUTTON_X, BUTTON_Y));
+
+	b_addEffTrack = new wxButton(this, 10015, "Add effect to track", wxPoint(COL2, 12 * BUTTON_SP + 2 * BUTTON_Y + 2 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(BUTTON_X, BUTTON_Y));
+	b_removeEffTrack = new wxButton(this, 10016, "Remove effect from track", wxPoint(COL2 + BUTTON_X, 12 * BUTTON_SP + 2 * BUTTON_Y + 2 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(BUTTON_X, BUTTON_Y));
+	b_addEffWav = new wxButton(this, 10017, "Add effect to all tracks", wxPoint(BUTTON_SP, 12 * BUTTON_SP + 2 * BUTTON_Y + 2 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize( 2 *BUTTON_X, BUTTON_Y));
+	b_removeEffWav = new wxButton(this, 10018, "Reomve effect from all tracks", wxPoint(BUTTON_SP, 12 * BUTTON_SP + 3 * BUTTON_Y + 2 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(2 * BUTTON_X, BUTTON_Y));
+
+
 	b_toggleMic = new wxButton(this, wxID_ANY, "MIC On / Off ", wxPoint(COL3, BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
 	b_addEffMic = new wxButton(this, wxID_ANY, "Add effect to Mic", wxPoint(COL3, 2 * BUTTON_SP + BUTTON_Y + TEXT_Y + DDM_Y), wxSize(BUTTON_X, BUTTON_Y));
-	b_removeEffMic = new wxButton(this, wxID_ANY, "Remove effect from Mic", wxPoint(COL3 + BUTTON_X + BUTTON_SP, 2 * BUTTON_SP + BUTTON_Y + TEXT_Y + DDM_Y), wxSize(BUTTON_X, BUTTON_Y));
+	b_removeEffMic = new wxButton(this, wxID_ANY, "Remove effect from Mic", wxPoint(COL3 + BUTTON_X, 2 * BUTTON_SP + BUTTON_Y + TEXT_Y + DDM_Y), wxSize(BUTTON_X, BUTTON_Y));
 	
 	b_savePreview = new wxButton(this, 10010, "Save preview", wxPoint(COL4, COL2), wxSize(BUTTON_X, BUTTON_Y));
 	b_replay = new wxButton(this, 10011, "Replay", wxPoint(COL4 + TEXT_X, COL2), wxSize(BUTTON_X, BUTTON_Y));
@@ -61,23 +73,14 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	//Drop Down Menu (Combo Box)
 	ddm_track = new wxComboBox(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 4 * BUTTON_SP + TEXT_Y), wxSize(DDM_X, DDM_Y));
 	ddm_instrumento = new wxComboBox(this, 10003, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 6 * BUTTON_SP + 2 * DDM_Y), wxSize(DDM_X, DDM_Y));
-	ddm_wavEff = new wxComboBox(this, wxID_ANY, "", wxPoint(COL2, 10 * BUTTON_SP + 2 * BUTTON_Y + 2 * TEXT_Y + LB_Y / 2), wxSize(DDM_X, DDM_Y));
+	ddm_wavEff = new wxComboBox(this, 10004, "", wxPoint(COL2, 10 * BUTTON_SP + 2 * BUTTON_Y + 2 * TEXT_Y + LB_Y / 2), wxSize(DDM_X, DDM_Y));
 	ddm_micEff = new wxComboBox(this, wxID_ANY, "", wxPoint(COL3, 2 * BUTTON_SP + BUTTON_Y + TEXT_Y), wxSize(DDM_X, DDM_Y));
 
 	ddm_spect = new wxComboBox(this, 10014, "", wxPoint(COL4, BUTTON_Y + 3 * TEXT_Y + BUTTON_SP), wxSize(DDM_X, DDM_Y));
-	for (int i = 0; i < NUMBER_OF_WINDOWS; i++) {
-		ddm_spect->AppendString(WindowsList[i]);
-	}
 
 	ddm_nfft = new wxComboBox(this, wxID_ANY, "", wxPoint(COL4, BUTTON_Y + 5 * TEXT_Y + DDM_Y + 3 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y + 5));
 	ddm_overlap = new wxComboBox(this, wxID_ANY, "", wxPoint(COL4, BUTTON_Y + 7 * TEXT_Y + DDM_Y + 5 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y + 5));
-	
-	for (int i = 1; i <= 11; i++) {
-		double n = pow(2.0, i);
-		ddm_nfft->AppendString(to_string((int) pow(2.0, i) ));
-		ddm_overlap->AppendString(to_string((int) pow(2.0, i) ));
-	}
-	ddm_nfft->AppendString(to_string(4096));
+
 
 	//Lists Box
 	lb_tracks = new wxListBox(this, wxID_ANY, wxPoint(COL2, 4 * BUTTON_SP + BUTTON_Y + TEXT_Y), wxSize(LB_X, LB_Y / 2));
@@ -102,7 +105,8 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	t_nfft = new wxStaticText(this, wxID_ANY, "NFFT:", wxPoint(COL4, BUTTON_Y + 4 * TEXT_Y + DDM_Y + 2 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y));
 	t_overlap = new wxStaticText(this, wxID_ANY, "Overlap:", wxPoint(COL4, BUTTON_Y + 6 * TEXT_Y + DDM_Y + 5 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y));
 
-	//Dinmac Control Texts (INSTRUMENTOS)
+
+	//Text Control (INSTRUMENTOS)
 	tx_organA = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 8 * BUTTON_SP + 3 * DDM_Y + 2 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 	tx_organR = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 10 * BUTTON_SP + 3 * DDM_Y + 4 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 	tx_organS = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 12 * BUTTON_SP + 3 * DDM_Y + 6 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
@@ -131,12 +135,28 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	tx_toShow.push_back(tx_drumRf);
 	tx_toShow.push_back(tx_drumB);
 
-	//Dinmac Control Texts (VENTANAS)
+	for (int i = 0; i < tx_toShow.size(); i++) {
+		tx_toShow[i]->Hide();
+	}
+
+	//Text Control (WavEff)
+	tx_effGEco = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 15 * BUTTON_SP + 4 * BUTTON_Y + 3 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	tx_effMEco = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 17 * BUTTON_SP + 4 * BUTTON_Y + 6 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	tx_effRev = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 15 * BUTTON_SP + 4 * BUTTON_Y + 3 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	
+	tx_WavEfftoShow.push_back(tx_effGEco);
+	tx_WavEfftoShow.push_back(tx_effMEco);
+	tx_WavEfftoShow.push_back(tx_effRev);
+	for (int i = 0; i < tx_WavEfftoShow.size(); i++) {
+		tx_WavEfftoShow[i]->Hide();
+	}
+	
+	//Text Control (VENTANAS)
 	tx_specWindParam = new wxTextCtrl(this, wxID_ANY, "", wxPoint(COL4, BUTTON_Y + 8 * TEXT_Y + 2 * DDM_Y + 6 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y + 5));
 	tx_specWindParam->Hide();
 
 
-	//Dinmac Static Texts (INSTRUMENTOS)
+	//Dinmac Texts (INSTRUMENTOS)
 	t_organA = new wxStaticText(this, wxID_ANY, "A:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 7 * BUTTON_SP + 3 * DDM_Y + TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 	t_organR = new wxStaticText(this, wxID_ANY, "R:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 9 * BUTTON_SP + 3 * DDM_Y + 3 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 	t_organS = new wxStaticText(this, wxID_ANY, "S:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 11 * BUTTON_SP + 3 * DDM_Y + 5 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
@@ -169,66 +189,51 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 
 	t_toShow.push_back(t_bell);
 
-	for (int i = 0; i < tx_toShow.size(); i++) {
-		tx_toShow[i]->Hide();
-	}
 	for (int i = 0; i < t_toShow.size(); i++) {
 		t_toShow[i]->Hide();
 	}
+
+	//Dinamic Text (WavEff)
+	t_effGEco = new wxStaticText(this, wxID_ANY, "G (between 0 y 1):", wxPoint(BUTTON_SP, 14 * BUTTON_SP + 4 * BUTTON_Y + 2 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	t_effMEco = new wxStaticText(this, wxID_ANY, "M:", wxPoint(BUTTON_SP, 16 * BUTTON_SP + 4 * BUTTON_Y + 5 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	t_effRev = new wxStaticText(this, wxID_ANY, "Reveb. Time:", wxPoint(BUTTON_SP, 14 * BUTTON_SP + 4 * BUTTON_Y + 2 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	t_WavEfftoShow.push_back(t_effGEco);
+	t_WavEfftoShow.push_back(t_effMEco);
+	t_WavEfftoShow.push_back(t_effRev);
+	for (int i = 0; i < t_WavEfftoShow.size(); i++) {
+		t_WavEfftoShow[i]->Hide();
+	}
+
 
 	//Dinmac Static Texts (VENTANAS)
 	t_specGauss = new wxStaticText(this, wxID_ANY, "Standar Deviation:", wxPoint(COL4, BUTTON_Y + 7 * TEXT_Y + 2 * DDM_Y + 5 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y + 5));
 	t_specExp = new wxStaticText(this, wxID_ANY, "Decay Scale:", wxPoint(COL4, BUTTON_Y + 7 * TEXT_Y + 2 * DDM_Y + 5 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y + 5));
 	t_specKaiser = new wxStaticText(this, wxID_ANY, "Beta:", wxPoint(COL4, BUTTON_Y + 7 * TEXT_Y + 2 * DDM_Y + 5 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y + 5));
-	
 	t_specGauss->Hide();
 	t_specExp->Hide();
 	t_specKaiser->Hide();
 
-	////Grid Sizer
 
-	//wxGridBagSizer* grid = new wxGridBagSizer();
-
-	//grid->Add(b_cargarMidi, wxGBPosition(0, 0), wxGBSpan(1, 1), wxALL, BUTTON_SP);		//Cargo en el grid los elementos
-	//grid->Add(b_crearWav, wxGBPosition(1, 0), wxGBSpan(1, 1), wxALL, BUTTON_SP);
-	//grid->Add(b_addTrack, wxGBPosition(2, 3), wxGBSpan(1, 1), wxALL, BUTTON_SP);
-	//grid->Add(b_removeTrack, wxGBPosition(2, 4), wxGBSpan(1, 1), wxALL, BUTTON_SP);
-	//grid->Add(b_preview, wxGBPosition(0, 3), wxGBSpan(1, 1), wxALL, BUTTON_SP);
-	//grid->Add(b_addEffWav, wxGBPosition(7, 3), wxGBSpan(1, 1), wxALL, BUTTON_SP);
-	//grid->Add(b_removeEffWav, wxGBPosition(7, 4), wxGBSpan(1, 1), wxALL, BUTTON_SP);
-	//grid->Add(b_toggleMic, wxGBPosition(3, 6), wxGBSpan(1, 1), wxALL, BUTTON_SP);
-	//grid->Add(b_addEffMic, wxGBPosition(5, 6), wxGBSpan(1, 1), wxALL, BUTTON_SP);
-	//grid->Add(b_removeEffMic, wxGBPosition(5, 7), wxGBSpan(1, 1), wxALL, BUTTON_SP);
-
-	//grid->Add(ddm_track, wxGBPosition(4, 0), wxGBSpan(1, 2), wxALL, BUTTON_SP);
-	//grid->Add(ddm_instrumento, wxGBPosition(6, 0), wxGBSpan(1, 2), wxALL, BUTTON_SP);
-	//grid->Add(ddm_wavEff, wxGBPosition(14, 3), wxGBSpan(1, 2), wxALL, BUTTON_SP);
-	//grid->Add(ddm_micEff, wxGBPosition(6, 6), wxGBSpan(1, 2), wxALL, BUTTON_SP);
-
-	//grid->Add(t_tackDdm, wxGBPosition(3, 0), wxGBSpan(1, 2), wxALL, BUTTON_SP);
-	//grid->Add(t_instrumentoDdm, wxGBPosition(5, 0), wxGBSpan(1, 2), wxALL, BUTTON_SP);
-	//grid->Add(t_paramList, wxGBPosition(9, 0), wxGBSpan(1, 1), wxALL, BUTTON_SP);
-	//grid->Add(t_valueList, wxGBPosition(9, 1), wxGBSpan(1, 1), wxALL, BUTTON_SP);
-	//grid->Add(t_previewDdm, wxGBPosition(4, 0), wxGBSpan(1, 2), wxALL, BUTTON_SP);
-	//grid->Add(t_effectWavDdm, wxGBPosition(13, 3), wxGBSpan(1, 2), wxALL, BUTTON_SP);
-	//grid->Add(t_effectMicDdm, wxGBPosition(6, 6), wxGBSpan(1, 2), wxALL, BUTTON_SP);
-
-	//grid->AddGrowableCol(0, 0);
-
-	////int gridSize = 10;
-	////for (int i = 0; i < gridSize; i++) {
-	////	grid->AddGrowableCol(i, 0);
-	////	grid->AddGrowableRow(i, 0);
-	////}
-
-	//this->SetSizer(grid);
-
-
-
-	//CARGAR LOS DDM
-	for (int i = 0; i < NUMBER_OF_INSTRUMETS; i++) {
+	//Carga de DDM's
+	for (int i = 0; i < NUMBER_OF_INSTRUMETS; i++) {				//Instruments
 		ddm_instrumento->AppendString(InstrumentList[i]);
 	}
+
+	for (int i = 0; i < NUMBER_OF_EFF; i++) {				//Wav and Mic Eff.
+		ddm_wavEff->Append(EffList[i]);
+		ddm_micEff->Append(EffList[i]);
+	}
+
+	for (int i = 0; i < NUMBER_OF_WINDOWS; i++) {				//Spec. Windows.
+		ddm_spect->AppendString(WindowsList[i]);
+	}
+
+	for (int i = 1; i <= 11; i++) {				//Spec nfft and overlap.
+		double n = pow(2.0, i);
+		ddm_nfft->AppendString(to_string((int)pow(2.0, i)));
+		ddm_overlap->AppendString(to_string((int)pow(2.0, i)));
+	}
+	ddm_nfft->AppendString(to_string(4096));
 }
 
 void cMainMenu::OnMenuFullscreen(wxCommandEvent& evt) {
@@ -341,7 +346,7 @@ void cMainMenu::AddTrack(wxCommandEvent& evt) {
 			//Warning
 			wxMessageDialog warning(this, "No parameters selected", "Can't add track");
 			warning.Center();
-			warning.SetExtendedMessage("The instrument selected requires specific parameters. Please, configure the parameters to add the track.");
+			warning.SetExtendedMessage("The instrument selected requires specific parameters. Please configure the parameters to add the track.");
 			warning.ShowModal();
 			warning.Hide();
 		}
@@ -350,7 +355,7 @@ void cMainMenu::AddTrack(wxCommandEvent& evt) {
 		//Warning
 		wxMessageDialog warning(this, "No parameters selected", "Can't add track");
 		warning.Center();
-		warning.SetExtendedMessage("Please, select a track and an instrument to configure and add the track.");
+		warning.SetExtendedMessage("Please select a track and an instrument to configure and add the track.");
 		warning.ShowModal();
 		warning.Hide();
 	}
@@ -366,7 +371,7 @@ void cMainMenu::RemoveTrack(wxCommandEvent& evt) {
 		//Warning
 		wxMessageDialog warning(this, "No tracks selected", "Can't remove track");
 		warning.Center();
-		warning.SetExtendedMessage("Please, select a track to remove.");
+		warning.SetExtendedMessage("Please select a track to remove.");
 		warning.ShowModal();
 		warning.Hide();
 	}
@@ -489,7 +494,7 @@ void cMainMenu::CreateWav(wxCommandEvent& evt) {
 		//Warning
 		wxMessageDialog warning(this, "No tracks available", "Can't create WAV file");
 		warning.Center();
-		warning.SetExtendedMessage("Please, add some tracks to create a WAV file.");
+		warning.SetExtendedMessage("Please add some tracks to create a WAV file.");
 		warning.ShowModal();
 		warning.Hide();
 	}
@@ -521,7 +526,7 @@ void cMainMenu::CreatePreview(wxCommandEvent& evt) {
 		//Warning
 		wxMessageDialog warning(this, "No tracks selected", "Can't create a preview");
 		warning.Center();
-		warning.SetExtendedMessage("Please, select a track to listen the preview.");
+		warning.SetExtendedMessage("Please select a track to listen the preview.");
 		warning.ShowModal();
 		warning.Hide();
 	}
@@ -551,6 +556,9 @@ void cMainMenu::OnKeyDown(wxKeyEvent& evt) {
 		this->ShowFullScreen(!fullscreen, wxFULLSCREEN_ALL ^ wxFULLSCREEN_NOSTATUSBAR);
 		fullscreen = !fullscreen;
 	}
+	else if (evt.GetKeyCode() == WXK_F12) {
+		Close();
+	}
 	evt.Skip();
 }
 
@@ -575,7 +583,7 @@ void cMainMenu::savePreview(wxCommandEvent& evt) {
 		//Warning
 		wxMessageDialog warning(this, "No preview created", "Can't play preview");
 		warning.Center();
-		warning.SetExtendedMessage("Please, add track a and create a preview.");
+		warning.SetExtendedMessage("Please add track a and create a preview.");
 		warning.ShowModal();
 		warning.Hide();
 	}
@@ -590,7 +598,7 @@ void cMainMenu::Replay(wxCommandEvent& evt) {
 		//Warning
 		wxMessageDialog warning(this, "No preview created", "Can't play preview");
 		warning.Center();
-		warning.SetExtendedMessage("Please, add track a and create a preview.");
+		warning.SetExtendedMessage("Please add track a and create a preview.");
 		warning.ShowModal();
 		warning.Hide();
 	}
@@ -636,7 +644,7 @@ void cMainMenu::createSpec(wxCommandEvent& evt) {
 			//Warning
 			wxMessageDialog warning(this, "No parameter chosen", "Can't create spectogram");
 			warning.Center();
-			warning.SetExtendedMessage("Please, write a valid parameter for this type of window.");
+			warning.SetExtendedMessage("Please write a valid parameter for this type of window.");
 			warning.ShowModal();
 			warning.Hide();
 		}
@@ -659,13 +667,13 @@ void cMainMenu::createSpec(wxCommandEvent& evt) {
 					//Warning
 					wxMessageDialog warning(this, "No window chosen", "Can't create spectogram");
 					warning.Center();
-					warning.SetExtendedMessage("Please, select a type of window to create a spectogram.");
+					warning.SetExtendedMessage("Please select a type of window to create a spectogram.");
 					warning.ShowModal();
 					warning.Hide();
 				}
 				else if (!(tx_specWindParam->IsEmpty())) {
 					//Si el textbox tiene algo es porque está la 8, 9 o 10, porque solo se vacía si cambíe de ventana 
-					double param = stod((string)tx_specWindParam->GetStringSelection());
+					double param = stod((string)tx_specWindParam->GetValue());
 
 					//LLAMAR A LA FUNCIÓN DE VENTANA CON PARAMETRO Y NOMBRE
 					es.generateSpectrum(wavToSpecPath, nfft, overlap, ventanaElegida, param, param, param);
@@ -681,7 +689,7 @@ void cMainMenu::createSpec(wxCommandEvent& evt) {
 					//Warning
 					wxMessageDialog warning(this, "No parameter chosen", "Can't create spectogram");
 					warning.Center();
-					warning.SetExtendedMessage("Please, write a valid parameter for this type of window.");
+					warning.SetExtendedMessage("Please write a valid parameter for this type of window.");
 					warning.ShowModal();
 					warning.Hide();
 				}
@@ -692,19 +700,19 @@ void cMainMenu::createSpec(wxCommandEvent& evt) {
 		//Warning
 		wxMessageDialog warning(this, "No WAV file loaded", "Can't create spectogram");
 		warning.Center();
-		warning.SetExtendedMessage("Please, select a WAV file to create a spectogram.");
+		warning.SetExtendedMessage("Please select a WAV file to create a spectogram.");
 		warning.ShowModal();
 		warning.Hide();
 	}
 	evt.Skip();
 }
+
 void cMainMenu::detectWindowChange(wxCommandEvent& evt) {
 	t_specGauss->Hide();
 	t_specExp->Hide();
 	t_specKaiser->Hide();
 	tx_specWindParam->Clear();
-	tx_specWindParam->Hide();
-	
+	tx_specWindParam->Hide();	
 
 	string ventanaElegida = ddm_spect->GetStringSelection();						//verificar que el imput esté en la lista de esa mierda
 
@@ -723,38 +731,172 @@ void cMainMenu::detectWindowChange(wxCommandEvent& evt) {
 	evt.Skip();
 }
 
-//bool cMainMenu::portAudioOpen(void) {
-//	
-//	PaStreamParameters outputParameters;
-//
-//	outputParameters.device = Pa_GetDefaultOutputDevice();
-//	
-//	outputParameters.channelCount = NUM_CHANNELS;
-//	outputParameters.sampleFormat = BITS_PER_SAMPLE;
-//	outputParameters.suggestedLatency = Pa_GetDeviceInfo(outputParameters.device)->defaultHighOutputLatency;
-//
-//	PaError ret = Pa_OpenStream(&stream, NULL, &outputParameters, 16, paFramesPerBufferUnspecified, 0, &paStreamCallback, NULL, void *userData);
-//
-//	if (ret != paNoError) {
-//		fprintf(stderr, "Pa_OpenStream failed: (err %i) %s\n", ret, Pa_GetErrorText(ret));
-//		if (stream)
-//			Pa_CloseStream(stream);
-//		return false;
-//	}
-//
-//	return true;
-//}
-//
-//int paStreamCallback(const void* input, void* output, unsigned long frameCount, const PaStreamCallbackTimeInfo* timeInfo, PaStreamCallbackFlags statusFlags, void* userData) {
-//	
-//	size_t numRead = fread(output, BITS_PER_SAMPLE * NUM_CHANNELS, frameCount, fopen("Previews/prevTrack.wav"));
-//	output = (uint8_t*)output + numRead * NUM_CHANNELS * BITS_PER_SAMPLE;
-//	frameCount -= numRead;
-//
-//	if (frameCount > 0) {
-//		memset(output, 0, frameCount * NUM_CHANNELS * BITS_PER_SAMPLE);
-//		return paComplete;
-//	}
-//
-//	return paContinue;
-//}
+void cMainMenu::addEffTrack(wxCommandEvent& evt) {
+	if (lb_tracks->GetSelection() != wxNOT_FOUND) {
+		string effName = ddm_wavEff->GetStringSelection();
+		if (effName.empty()) {
+			//Warning
+			wxMessageDialog warning(this, "No effect selected", "Can't add an effect");
+			warning.Center();
+			warning.SetExtendedMessage("Please select effect an to add.");
+			warning.ShowModal();
+			warning.Hide();
+		}
+		else {
+			if (effName == EffList[0]) {
+				if ((tx_effGEco->IsEmpty()) || (tx_effMEco->IsEmpty())) {
+					//Warning
+					wxMessageDialog warning(this, "No parameters set", "Can't add an effect");
+					warning.Center();
+					warning.SetExtendedMessage("Please configure the parameters to add an effect.");
+					warning.ShowModal();
+					warning.Hide();
+				}
+				else {
+					ui.pairTrackInst[lb_tracks->GetSelection()].effect2Apply = effName;
+					ui.pairTrackInst[lb_tracks->GetSelection()].g = stod((string)tx_effGEco->GetValue());
+					ui.pairTrackInst[lb_tracks->GetSelection()].M = stod((string)tx_effMEco->GetValue());
+					lb_wavEff->Append("Track " + to_string(lb_tracks->GetSelection()) + ", Effect " + effName);
+				}
+			}
+			else if (effName == EffList[1]) {
+				if (tx_effRev->IsEmpty()) {
+					//Warning
+					wxMessageDialog warning(this, "No parameters set", "Can't add an effect");
+					warning.Center();
+					warning.SetExtendedMessage("Please configure the parameters to add an effect.");
+					warning.ShowModal();
+					warning.Hide();
+				}
+				else {
+					ui.pairTrackInst[lb_tracks->GetSelection()].effect2Apply = effName;
+					//ui.pairTrackInst[lb_tracks->GetSelection()].Trev = stod((string) tx_effRev->GetStringSelection());
+					lb_wavEff->Append("Track " + to_string(lb_tracks->GetSelection()) + ", Effect " + effName);
+				}
+			}
+		}
+	}
+	else {
+		//Warning
+		wxMessageDialog warning(this, "No tracks selected", "Can't add an effect");
+		warning.Center();
+		warning.SetExtendedMessage("Please select a track to add an effect.");
+		warning.ShowModal();
+		warning.Hide();
+	}
+	evt.Skip();
+}
+
+void cMainMenu::removeEffTrack(wxCommandEvent& evt) {
+	if (lb_wavEff->GetSelection() != wxNOT_FOUND) {
+		ui.pairTrackInst[lb_wavEff->GetSelection()].effect2Apply.clear();
+		lb_wavEff->Delete(lb_wavEff->GetSelection());
+	}
+	else {
+		//Warning
+		wxMessageDialog warning(this, "No effects selected", "Can't delete an effect");
+		warning.Center();
+		warning.SetExtendedMessage("Please select an effect to delete.");
+		warning.ShowModal();
+		warning.Hide();
+	}
+	evt.Skip();
+}
+
+void cMainMenu::addEffWav(wxCommandEvent& evt) {
+	if (!(lb_tracks->IsEmpty())) {
+		string effName = ddm_wavEff->GetStringSelection();
+		if (effName.empty()) {
+			//Warning
+			wxMessageDialog warning(this, "No effect selected", "Can't add an effect");
+			warning.Center();
+			warning.SetExtendedMessage("Please select effect an to add.");
+			warning.ShowModal();
+			warning.Hide();
+		}
+		else {
+			if (effName == EffList[0]) {
+				if ((tx_effGEco->IsEmpty()) || (tx_effMEco->IsEmpty())) {
+					//Warning
+					wxMessageDialog warning(this, "No parameters set", "Can't add an effect");
+					warning.Center();
+					warning.SetExtendedMessage("Please configure the parameters to add an effect.");
+					warning.ShowModal();
+					warning.Hide();
+				}
+				else {
+					for (int i = 0; i < lb_tracks->GetCount(); i++) {
+						ui.pairTrackInst[i].effect2Apply = effName;
+						ui.pairTrackInst[i].g = stod((string)tx_effGEco->GetValue());
+						ui.pairTrackInst[i].M = stod((string)tx_effMEco->GetValue());
+						lb_wavEff->Append("Track " + to_string(i) + ", Effect " + effName);
+					}
+				}
+			}
+			else if (effName == EffList[1]) {
+				if (tx_effRev->IsEmpty()) {
+					//Warning
+					wxMessageDialog warning(this, "No parameters set", "Can't add an effect");
+					warning.Center();
+					warning.SetExtendedMessage("Please configure the parameters to add an effect.");
+					warning.ShowModal();
+					warning.Hide();
+				}
+				else {
+					ui.pairTrackInst[lb_tracks->GetSelection()].effect2Apply = effName;
+					//ui.pairTrackInst[lb_tracks->GetSelection()].Trev = stod((string) tx_effRev->GetStringSelection());
+					lb_wavEff->Append("Track " + to_string(lb_tracks->GetSelection()) + ", Effect " + effName);
+				}
+			}
+		}
+	}
+	else {
+		//Warning
+		wxMessageDialog warning(this, "No tracks available", "Can't add an effect");
+		warning.Center();
+		warning.SetExtendedMessage("Please create a track to add an effect.");
+		warning.ShowModal();
+		warning.Hide();
+	}
+	evt.Skip();
+}
+
+void cMainMenu::removeEffWav(wxCommandEvent& evt) {
+	if (!(lb_wavEff->IsEmpty())) {
+		int max = lb_wavEff->GetCount();
+		for (int i = 0; i < max; i++) {
+			ui.pairTrackInst[0].effect2Apply.clear();
+			lb_wavEff->Delete(0);
+		}
+	}
+	else {
+		//Warning
+		wxMessageDialog warning(this, "No effects available", "Can't delete an effect");
+		warning.Center();
+		warning.SetExtendedMessage("Effect list is already empty.");
+		warning.ShowModal();
+		warning.Hide();
+	}
+	evt.Skip();
+}
+
+void cMainMenu::detectWavEffChange(wxCommandEvent& evt) {
+
+	for (int i = 0; i < tx_WavEfftoShow.size(); i++) {
+		tx_WavEfftoShow[i]->Clear();
+		tx_WavEfftoShow[i]->Hide();
+		t_WavEfftoShow[i]->Hide();
+	}
+	
+	if (ddm_wavEff->GetStringSelection() == EffList[0]) {			//ECO
+		tx_effGEco->Show();
+		tx_effMEco->Show();
+		t_effGEco->Show();
+		t_effMEco->Show();
+	}
+	else if (ddm_wavEff->GetStringSelection() == EffList[1]) {			//REVERBUIASDB
+		tx_effRev->Show();
+		t_effRev->Show();
+	}
+	evt.Skip();
+}
