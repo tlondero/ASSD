@@ -326,6 +326,22 @@ void cMainMenu::AddTrack(wxCommandEvent& evt) {
 				lb_tracks->Append(track + ' ' + instrument);
 			}
 		}
+		else {
+			//Warning
+			wxMessageDialog warning(this, "No parameters selected", "Can't add track");
+			warning.Center();
+			warning.SetExtendedMessage("The instrument selected requires specific parameters. Please, configure the parameters to add the track.");
+			warning.ShowModal();
+			warning.Hide();
+		}
+	}
+	else {
+		//Warning
+		wxMessageDialog warning(this, "No parameters selected", "Can't add track");
+		warning.Center();
+		warning.SetExtendedMessage("Please, select a track and an instrument to configure and add the track.");
+		warning.ShowModal();
+		warning.Hide();
 	}
 	evt.Skip();
 }
@@ -334,6 +350,14 @@ void cMainMenu::RemoveTrack(wxCommandEvent& evt) {
 	if (lb_tracks->GetSelection() != wxNOT_FOUND) {
 		ui.pairTrackInst.erase(ui.pairTrackInst.begin() + lb_tracks->GetSelection());
 		lb_tracks->Delete(lb_tracks->GetSelection());
+	}
+	else {
+		//Warning
+		wxMessageDialog warning(this, "No tracks selected", "Can't remove track");
+		warning.Center();
+		warning.SetExtendedMessage("Please, select a track to remove.");
+		warning.ShowModal();
+		warning.Hide();
 	}
 	evt.Skip();
 }
@@ -450,7 +474,15 @@ void cMainMenu::CreateWav(wxCommandEvent& evt) {
 			loadBar.Hide();
 		}
 	}
-evt.Skip();
+	else {
+		//Warning
+		wxMessageDialog warning(this, "No tracks available", "Can't create WAV file");
+		warning.Center();
+		warning.SetExtendedMessage("Please, add some tracks to create a WAV file.");
+		warning.ShowModal();
+		warning.Hide();
+	}
+	evt.Skip();
 }
 
 void cMainMenu::CreatePreview(wxCommandEvent& evt) {
@@ -462,17 +494,26 @@ void cMainMenu::CreatePreview(wxCommandEvent& evt) {
 
 		myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, uiPrev), PREVIEW_DURATION, "Previews/prevTrack", 1000);
 		myWC.makeWav();
-	}
 
-	if (firstTime) {
-		//soundPlayer = new wxSound("Previews/prevTrack.wav", wxSOUND_SYNC);
-		firstTime = false;
-	}
 
-	//if (PlaySound(TEXT("Previews/prevTrack.wav"), NULL, SND_FILENAME | SND_ASYNC)){ //(soundPlayer->Play("Previews/prevTrack.wav")) {
-	//	t_playMusic->SetLabel("Now playing: " + lb_tracks->GetStringSelection());
-	//	t_playMusic->Refresh();
-	//}
+		if (firstTime) {
+			//soundPlayer = new wxSound("Previews/prevTrack.wav", wxSOUND_SYNC);
+			firstTime = false;
+		}
+
+		//if (PlaySound(TEXT("Previews/prevTrack.wav"), NULL, SND_FILENAME | SND_ASYNC)){ //(soundPlayer->Play("Previews/prevTrack.wav")) {
+		//	t_playMusic->SetLabel("Now playing: " + lb_tracks->GetStringSelection());
+		//	t_playMusic->Refresh();
+		//}
+	}
+	else {
+		//Warning
+		wxMessageDialog warning(this, "No tracks selected", "Can't create a preview");
+		warning.Center();
+		warning.SetExtendedMessage("Please, select a track to listen the preview.");
+		warning.ShowModal();
+		warning.Hide();
+	}
 	evt.Skip();
 }
 
@@ -503,25 +544,45 @@ void cMainMenu::OnKeyDown(wxKeyEvent& evt) {
 }
 
 void cMainMenu::savePreview(wxCommandEvent& evt) {
-	wxFileDialog saveFileDialog(this, _("Save WAV file"), "", "", "WAV files (*.wav)|*.wav", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
-	if (saveFileDialog.ShowModal() == wxID_CANCEL) {			//Esto está por si se cierra el explorador sin elegir archivos
-		return;
-	}
+	if (!firstTime) {
+		wxFileDialog saveFileDialog(this, _("Save WAV file"), "", "", "WAV files (*.wav)|*.wav", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+		if (saveFileDialog.ShowModal() == wxID_CANCEL) {			//Esto está por si se cierra el explorador sin elegir archivos
+			return;
+		}
 
-	string pathSelected = saveFileDialog.GetPath();				//Path completo
-	wxFileOutputStream output_stream(saveFileDialog.GetPath());
+		string pathSelected = saveFileDialog.GetPath();				//Path completo
+		wxFileOutputStream output_stream(saveFileDialog.GetPath());
 
-	if (!output_stream.IsOk()) {
-		wxLogError("Cannot save file '%s'.", pathSelected);
+		if (!output_stream.IsOk()) {
+			wxLogError("Cannot save file '%s'.", pathSelected);
+		}
+		else {
+			wxCopyFile("Previews/prevTrack.wav", pathSelected);
+		}
 	}
 	else {
-		wxCopyFile("Previews/prevTrack.wav", pathSelected);
+		//Warning
+		wxMessageDialog warning(this, "No preview created", "Can't play preview");
+		warning.Center();
+		warning.SetExtendedMessage("Please, add track a and create a preview.");
+		warning.ShowModal();
+		warning.Hide();
 	}
 	evt.Skip();
 }
 
 void cMainMenu::Replay(wxCommandEvent& evt) {
-	//soundPlayer->Play("Previews/prevTrack.wav");
+	if (!firstTime) {
+		//soundPlayer->Play("Previews/prevTrack.wav");
+	}
+	else {
+		//Warning
+		wxMessageDialog warning(this, "No preview created", "Can't play preview");
+		warning.Center();
+		warning.SetExtendedMessage("Please, add track a and create a preview.");
+		warning.ShowModal();
+		warning.Hide();
+	}
 	evt.Skip();
 }
 
