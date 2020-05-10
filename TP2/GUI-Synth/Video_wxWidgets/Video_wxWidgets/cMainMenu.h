@@ -1,4 +1,6 @@
 #pragma once
+#pragma comment(lib, "winmm.lib")
+
 #include "wx/wx.h"
 #include <wx/wfstream.h>
 #include <wx/combobox.h>

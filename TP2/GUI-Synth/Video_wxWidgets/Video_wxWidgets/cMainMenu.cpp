@@ -76,7 +76,7 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	t_effectWavDdm = new wxStaticText(this, wxID_ANY, "WAV Effects:", wxPoint(COL2, 6 * BUTTON_SP + 2 * BUTTON_Y + 2 * TEXT_Y + LB_Y / 2), wxSize(TEXT_X, TEXT_Y));
 	t_effectMicDdm = new wxStaticText(this, wxID_ANY, "MIC Effects:", wxPoint(COL3, 2 * BUTTON_SP + BUTTON_Y), wxSize(TEXT_X, TEXT_Y));
 
-	t_playMusic = new wxStaticText(this, wxID_ANY, "Currently not playing music. Create a preview to listen!", wxPoint(COL4 - BUTTON_SP, COL2 - 3 * TEXT_Y), wxSize(TEXT_X, BUTTON_Y));
+	t_playMusic = new wxStaticText(this, wxID_ANY, "Currently not playing music. Create a preview to listen!", wxPoint(COL4 - BUTTON_SP, COL2 - 3 * TEXT_Y), wxSize(TEXT_X, TEXT_Y));
 
 	//Dynamic TextCtrl
 	tx_organA = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 8 * BUTTON_SP + 3 * DDM_Y + 2 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
@@ -417,7 +417,7 @@ void cMainMenu::CreateWav(wxCommandEvent& evt) {
 			//Load Bar
 			wxMessageDialog loadBar(this, "Creating WAV", "Loading");
 			loadBar.Center();
-			loadBar.SetExtendedMessage("This could take a few minutes, please wait");
+			loadBar.SetExtendedMessage("This could take a few minutes, please wait.");
 			loadBar.ShowModal();
 			myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, this->ui), this->midi.getTotalDuration() + 1, pathSelected, 1000);
 			myWC.makeWav();
@@ -439,11 +439,11 @@ void cMainMenu::CreatePreview(wxCommandEvent& evt) {
 	}
 
 	if (firstTime) {
-		soundPlayer = new wxSound("Previews/prevTrack.wav", wxSOUND_SYNC);
+		//soundPlayer = new wxSound("Previews/prevTrack.wav", wxSOUND_SYNC);
 		firstTime = false;
 	}
 
-	if (soundPlayer->Play("Previews/prevTrack.wav")) {
+	if (PlaySound(TEXT("Previews/prevTrack.wav"), NULL, SND_FILENAME | SND_ASYNC)){ //(soundPlayer->Play("Previews/prevTrack.wav")) {
 		t_playMusic->SetLabel("Now playing: " + lb_tracks->GetStringSelection());
 		t_playMusic->Refresh();
 	}
