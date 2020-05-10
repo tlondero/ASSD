@@ -91,8 +91,10 @@ private:
 	wxStaticText* t_previewDdm = nullptr;
 	wxStaticText* t_effectWavDdm = nullptr;
 	wxStaticText* t_effectMicDdm = nullptr;
+	wxStaticText* t_specWindType = nullptr;
+	wxStaticText* t_currentSpec = nullptr;
 	wxStaticText* t_specWindParam = nullptr;
-	
+
 
 	//Dinmac Control Texts (INSTRUMENTOS)
 	wxTextCtrl* tx_organA = nullptr;
@@ -133,6 +135,9 @@ private:
 
 	//Dinmac Static Texts (VENTANAS)
 	wxStaticText* t_specWindNoParam = nullptr;
+	wxStaticText* t_specGauss = nullptr;
+	wxStaticText* t_specExp = nullptr;
+	wxStaticText* t_specKaiser = nullptr;
 
 	//Clases de soporte y las que se nos hacian lindas poner acá
 	bool fullscreen = false;
@@ -148,6 +153,8 @@ private:
 	WavController myWC;
 	//string songPlaying;
 	bool firstTime = true;
+	string wavToSpecPath;
+	string wavToSpecName;
 
 
 	//Functions
