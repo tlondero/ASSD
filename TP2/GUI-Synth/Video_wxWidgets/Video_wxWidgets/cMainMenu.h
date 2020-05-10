@@ -79,6 +79,9 @@ private:
 
 	wxComboBox* ddm_spect = nullptr;
 
+	wxComboBox* ddm_nfft = nullptr;
+	wxComboBox* ddm_overlap = nullptr;
+
 	//Lists Box
 	wxListBox* lb_tracks = nullptr;
 	wxListBox* lb_wavEff = nullptr;
@@ -99,10 +102,7 @@ private:
 	wxStaticText* t_nfft = nullptr;
 	wxStaticText* t_overlap = nullptr;
 
-	wxTextCtrl* tx_nfft = nullptr;
-	wxTextCtrl* tx_overlap = nullptr;
-
-
+	
 	//Dinmac Control Texts (INSTRUMENTOS)
 	wxTextCtrl* tx_organA = nullptr;
 	wxTextCtrl* tx_organR = nullptr;
