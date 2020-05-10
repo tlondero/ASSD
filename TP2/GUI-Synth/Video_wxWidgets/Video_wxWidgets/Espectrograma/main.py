@@ -28,15 +28,15 @@ def generatePlot(path,Nfft,overlap,window,kaiserparam,gaussianparam,expparam):
     axs[0].set_title("Spectogram and time domain plot")
 
     #Computing the spectogram in the first will allow us to use its time axes
-    if(window == "boxcar" or window == "TRIANGULAR" or window == "BLACKMAN" or window == "HAMMING" or window == "HANNING" or window == "BARTLETT" or window == "flattop" or window == "parzen"or window == "bohman"or window == "BLACKMAN-HARRIS"or window == "nuttall"or window == "BARTHANN"):
+    if(window == "boxcar" or window == "triang" or window == "blackman" or window == "hamming" or window == "hanning" or window == "bartlett" or window == "flattop" or window == "parzen"or window == "bohman"or window == "blackmanharris"or window == "nuttall"or window == "barthann"):
         spec = axs[1].specgram(channel1_samples, NFFT=Nfft, Fs=sample_rate,noverlap=overlap,window= signal.get_window(window,Nfft))
-    elif(window == "KAISER"):
+    elif(window == "kaiser"):
         spec = axs[1].specgram(channel1_samples,NFFT=Nfft,Fs=sample_rate,noverlap=overlap,window= signal.windows.kaiser(Nfft,kaiserparam) )
-    elif(window == "GAUSSIAN"):
+    elif(window == "gaussian"):
         spec = axs[1].specgram(channel1_samples,NFFT=Nfft,Fs=sample_rate,noverlap=overlap,window= signal.windows.gaussian(Nfft,gaussianparam) )
-    elif(window == "EXPONENTIAL"):
+    elif(window == "exponential"):
         spec = axs[1].specgram(channel1_samples,NFFT=Nfft,Fs=sample_rate,noverlap=overlap,window= signal.windows.exponential(Nfft,expparam) )
-    elif(window == "RECTANGULAR"):
+    elif(window == "rectangular"):
         spec = axs[1].specgram(channel1_samples,NFFT=Nfft,Fs=sample_rate,noverlap=overlap,window= signal.windows.tukey(Nfft,0) )
 
     axs[1].set_xlabel("time [$s$]")
