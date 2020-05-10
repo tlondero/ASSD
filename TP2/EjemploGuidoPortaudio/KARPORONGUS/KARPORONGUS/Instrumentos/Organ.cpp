@@ -87,7 +87,7 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 			}
 			else if (n > (A) && n <= (T - R)) {
 				if ((T / SAMPLE_RATE) > 0.5) {
-					ADSR = 1 + ((2 / (1 + exp(-9 * T*(n - A)))) - 1) * s * sin(TWO_PI * (n - A) * (2 / (T - R - A)));
+					ADSR = 1 + ((2 / (1 + exp(-9 * T*(n - A)))) - 1) * s * sin(TWO_PI * (n - A) * (15 / (T - R - A)));
 				/*	if (i == 0) {
 						debug.push_back(ADSR);
 					}*/
@@ -101,7 +101,7 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 			}
 			else if (n > (T - R)) {
 				if ((volume >= 0.3)&&(T > 0.5)) {
-					ADSR = (1 + s * sin(TWO_PI * (T - R - A) * (2 / (T - R - A)))) * cos((n - (T - R))*(TWO_PI / (4 * R))) * (1 - ((s*F*(volume + 0.1)*sin(TWO_PI * 21  * ((n - (T - R))/SAMPLE_RATE))) * (sin(TWO_PI * (1 / (4 * R) * (n - (T - R)))))));
+					ADSR = (1 + s * sin(TWO_PI * (T - R - A) * (2 / (T - R - A)))) * cos((n - (T - R))*(TWO_PI / (4 * R))) * (1 - ((s*0.5*F*(volume + 0.1)*sin(TWO_PI * 13  * ((n - (T - R))/SAMPLE_RATE))) * (sin(TWO_PI * (1 / (4 * R) * (n - (T - R)))))));
 					/*if (i == 0) {
 						debug.push_back(ADSR);
 					}*/
@@ -133,7 +133,7 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 		}
 		else if (n > (A) && n <= (T - R)) {
 			if ((T / SAMPLE_RATE) > 0.5) {
-				ADSR = 1 + ((2 / (1 + exp(-9 * T*(n - A)))) - 1) * s * sin(TWO_PI * (n - A) * (2 / (T - R - A)));
+				ADSR = 1 + ((2 / (1 + exp(-9 * T*(n - A)))) - 1) * s * sin(TWO_PI * (n - A) * (15 / (T - R - A)));
 			}
 			else {
 				ADSR = 1;
@@ -174,7 +174,7 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 				}
 				else if (n > (A) && n <= (T - R)) {
 					if ((T / SAMPLE_RATE) > 0.5) {
-						ADSR = 1 + ((2 / (1 + exp(-9 * T*(n - A)))) - 1) * s * sin(TWO_PI * (n - A) * (2 / (T - R - A)));
+						ADSR = 1 + ((2 / (1 + exp(-9 * T*(n - A)))) - 1) * s * sin(TWO_PI * (n - A) * (15 / (T - R - A)));
 					}
 					else {
 						ADSR = 1;
@@ -182,7 +182,7 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 				}
 				else if (n > (T - R)) {
 					if ((volume >= 0.3)&&(T > 0.5)) {
-						ADSR = (1 + s * sin(TWO_PI * (T - R - A) * (2 / (T - R - A)))) * cos((n - (T - R))*(TWO_PI / (4 * R))) * (1 - ((s*F*(volume + 0.1)*sin(TWO_PI * 21  * ((n - (T - R))/SAMPLE_RATE))) * (sin(TWO_PI * (1 / (4 * R) * (n - (T - R)))))));
+						ADSR = (1 + s * sin(TWO_PI * (T - R - A) * (2 / (T - R - A)))) * cos((n - (T - R))*(TWO_PI / (4 * R))) * (1 - ((s*0.5*F*(volume + 0.1)*sin(TWO_PI * 13  * ((n - (T - R))/SAMPLE_RATE))) * (sin(TWO_PI * (1 / (4 * R) * (n - (T - R)))))));
 					}
 					else {
 						ADSR = cos((n - (T - R))*(TWO_PI / (4 * R)));
@@ -209,7 +209,7 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 				}
 				else if (n > (A) && n <= (T - R)) {
 					if ((T / SAMPLE_RATE) > 0.5) {
-						ADSR = 1 + ((2 / (1 + exp(-9 * T*(n - A)))) - 1) * s * sin(TWO_PI * (n - A) * (2 / (T - R - A)));
+						ADSR = 1 + ((2 / (1 + exp(-9 * T*(n - A)))) - 1) * s * sin(TWO_PI * (n - A) * (15 / (T - R - A)));
 					}
 					else {
 						ADSR = 1;
@@ -217,7 +217,7 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 				}
 				else if (n > (T - R)) {
 					if ((volume >= 0.3)&&(T > 0.5)) {
-						ADSR = (1 + s * sin(TWO_PI * (T - R - A) * (2 / (T - R - A)))) * cos((n - (T - R))*(TWO_PI / (4 * R))) * (1 - ((s*F*(volume + 0.1)*sin(TWO_PI * 21  * ((n - (T - R))/SAMPLE_RATE))) * (sin(TWO_PI * (1 / (4 * R) * (n - (T - R)))))));
+						ADSR = (1 + s * sin(TWO_PI * (T - R - A) * (2 / (T - R - A)))) * cos((n - (T - R))*(TWO_PI / (4 * R))) * (1 - ((s*0.5*F*(volume + 0.1)*sin(TWO_PI * 13  * ((n - (T - R))/SAMPLE_RATE))) * (sin(TWO_PI * (1 / (4 * R) * (n - (T - R)))))));
 					}
 					else {
 						ADSR = cos((n - (T - R))*(TWO_PI / (4 * R)));
@@ -245,7 +245,7 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 				}
 				else if (n > (A) && n <= (T - R)) {
 					if ((T / SAMPLE_RATE) > 0.5) {
-						ADSR = 1 + ((2 / (1 + exp(-9 * T*(n - A)))) - 1) * s * sin(TWO_PI * (n - A) * (2 / (T - R - A)));
+						ADSR = 1 + ((2 / (1 + exp(-9 * T*(n - A)))) - 1) * s * sin(TWO_PI * (n - A) * (15 / (T - R - A)));
 					}
 					else {
 						ADSR = 1;
@@ -253,7 +253,7 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 				}
 				else if (n > (T - R)) {
 					if ((volume >= 0.3)&&(T > 0.5)) {
-						ADSR = (1 + s * sin(TWO_PI * (T - R - A) * (2 / (T - R - A)))) * cos((n - (T - R))*(TWO_PI / (4 * R))) * (1 - ((s*F*(volume + 0.1)*sin(TWO_PI * 21  * ((n - (T - R))/SAMPLE_RATE))) * (sin(TWO_PI * (1 / (4 * R) * (n - (T - R)))))));
+						ADSR = (1 + s * sin(TWO_PI * (T - R - A) * (2 / (T - R - A)))) * cos((n - (T - R))*(TWO_PI / (4 * R))) * (1 - ((s*0.5*F*(volume + 0.1)*sin(TWO_PI * 13  * ((n - (T - R))/SAMPLE_RATE))) * (sin(TWO_PI * (1 / (4 * R) * (n - (T - R)))))));
 					}
 					else {
 						ADSR = cos((n - (T - R))*(TWO_PI / (4 * R)));
@@ -281,7 +281,7 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 				}
 				else if (n > (A) && n <= (T - R)) {
 					if ((T / SAMPLE_RATE) > 0.5) {
-						ADSR = 1 + ((2 / (1 + exp(-9 * T*(n - A)))) - 1) * s * sin(TWO_PI * (n - A) * (2 / (T - R - A)));
+						ADSR = 1 + ((2 / (1 + exp(-9 * T*(n - A)))) - 1) * s * sin(TWO_PI * (n - A) * (15 / (T - R - A)));
 					}
 					else {
 						ADSR = 1;
@@ -289,7 +289,7 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 				}
 				else if (n > (T - R)) {
 					if ((volume >= 0.3)&&(T > 0.5)) {
-						ADSR = (1 + s * sin(TWO_PI * (T - R - A) * (2 / (T - R - A)))) * cos((n - (T - R))*(TWO_PI / (4 * R))) * (1 - ((s*F*(volume + 0.1)*sin(TWO_PI * 21  * ((n - (T - R))/SAMPLE_RATE))) * (sin(TWO_PI * (1 / (4 * R) * (n - (T - R)))))));
+						ADSR = (1 + s * sin(TWO_PI * (T - R - A) * (2 / (T - R - A)))) * cos((n - (T - R))*(TWO_PI / (4 * R))) * (1 - ((s*0.5*F*(volume + 0.1)*sin(TWO_PI * 13  * ((n - (T - R))/SAMPLE_RATE))) * (sin(TWO_PI * (1 / (4 * R) * (n - (T - R)))))));
 					}
 					else {
 						ADSR = cos((n - (T - R))*(TWO_PI / (4 * R)));
@@ -317,7 +317,7 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 				}
 				else if (n > (A) && n <= (T - R)) {
 					if ((T / SAMPLE_RATE) > 0.5) {
-						ADSR = 1 + ((2 / (1 + exp(-9 * T*(n - A)))) - 1) * s * sin(TWO_PI * (n - A) * (2 / (T - R - A)));
+						ADSR = 1 + ((2 / (1 + exp(-9 * T*(n - A)))) - 1) * s * sin(TWO_PI * (n - A) * (15 / (T - R - A)));
 					}
 					else {
 						ADSR = 1;
@@ -325,7 +325,7 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 				}
 				else if (n > (T - R)) {
 					if ((volume >= 0.3)&&(T > 0.5)) {
-						ADSR = (1 + s * sin(TWO_PI * (T - R - A) * (2 / (T - R - A)))) * cos((n - (T - R))*(TWO_PI / (4 * R))) * (1 - ((s*F*(volume + 0.1)*sin(TWO_PI * 21  * ((n - (T - R))/SAMPLE_RATE))) * (sin(TWO_PI * (1 / (4 * R) * (n - (T - R)))))));
+						ADSR = (1 + s * sin(TWO_PI * (T - R - A) * (2 / (T - R - A)))) * cos((n - (T - R))*(TWO_PI / (4 * R))) * (1 - ((s*0.5*F*(volume + 0.1)*sin(TWO_PI * 13  * ((n - (T - R))/SAMPLE_RATE))) * (sin(TWO_PI * (1 / (4 * R) * (n - (T - R)))))));
 					}
 					else {
 						ADSR = cos((n - (T - R))*(TWO_PI / (4 * R)));
@@ -352,7 +352,7 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 				}
 				else if (n > (A) && n <= (T - R)) {
 					if ((T / SAMPLE_RATE) > 0.5) {
-						ADSR = 1 + ((2 / (1 + exp(-9 * T*(n - A)))) - 1) * s * sin(TWO_PI * (n - A) * (2 / (T - R - A)));
+						ADSR = 1 + ((2 / (1 + exp(-9 * T*(n - A)))) - 1) * s * sin(TWO_PI * (n - A) * (15 / (T - R - A)));
 					}
 					else {
 						ADSR = 1;
@@ -360,7 +360,7 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 				}
 				else if (n > (T - R)) {
 					if ((volume >= 0.3)&&(T > 0.5)) {
-						ADSR = (1 + s * sin(TWO_PI * (T - R - A) * (2 / (T - R - A)))) * cos((n - (T - R))*(TWO_PI / (4 * R))) * (1 - ((s*F*(volume + 0.1)*sin(TWO_PI * 21  * ((n - (T - R))/SAMPLE_RATE))) * (sin(TWO_PI * (1 / (4 * R) * (n - (T - R)))))));
+						ADSR = (1 + s * sin(TWO_PI * (T - R - A) * (2 / (T - R - A)))) * cos((n - (T - R))*(TWO_PI / (4 * R))) * (1 - ((s*0.5*F*(volume + 0.1)*sin(TWO_PI * 13  * ((n - (T - R))/SAMPLE_RATE))) * (sin(TWO_PI * (1 / (4 * R) * (n - (T - R)))))));
 					}
 					else {
 						ADSR = cos((n - (T - R))*(TWO_PI / (4 * R)));
@@ -387,7 +387,7 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 				}
 				else if (n > (A) && n <= (T - R)) {
 					if ((T / SAMPLE_RATE) > 0.5) {
-						ADSR = 1 + ((2 / (1 + exp(-9 * T*(n - A)))) - 1) * s * sin(TWO_PI * (n - A) * (2 / (T - R - A)));
+						ADSR = 1 + ((2 / (1 + exp(-9 * T*(n - A)))) - 1) * s * sin(TWO_PI * (n - A) * (15 / (T - R - A)));
 					}
 					else {
 						ADSR = 1;
@@ -395,7 +395,7 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 				}
 				else if (n > (T - R)) {
 					if ((volume >= 0.3)&&(T > 0.5)) {
-						ADSR = (1 + s * sin(TWO_PI * (T - R - A) * (2 / (T - R - A)))) * cos((n - (T - R))*(TWO_PI / (4 * R))) * (1 - ((s*F*(volume + 0.1)*sin(TWO_PI * 21  * ((n - (T - R))/SAMPLE_RATE))) * (sin(TWO_PI * (1 / (4 * R) * (n - (T - R)))))));
+						ADSR = (1 + s * sin(TWO_PI * (T - R - A) * (2 / (T - R - A)))) * cos((n - (T - R))*(TWO_PI / (4 * R))) * (1 - ((s*0.5*F*(volume + 0.1)*sin(TWO_PI * 13  * ((n - (T - R))/SAMPLE_RATE))) * (sin(TWO_PI * (1 / (4 * R) * (n - (T - R)))))));
 					}
 					else {
 						ADSR = cos((n - (T - R))*(TWO_PI / (4 * R)));
@@ -422,7 +422,7 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 				}
 				else if (n > (A) && n <= (T - R)) {
 					if ((T / SAMPLE_RATE) > 0.5) {
-						ADSR = 1 + ((2 / (1 + exp(-9 * T*(n - A)))) - 1) * s * sin(TWO_PI * (n - A) * (2 / (T - R - A)));
+						ADSR = 1 + ((2 / (1 + exp(-9 * T*(n - A)))) - 1) * s * sin(TWO_PI * (n - A) * (15 / (T - R - A)));
 					}
 					else {
 						ADSR = 1;
@@ -430,7 +430,7 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 				}
 				else if (n > (T - R)) {
 					if ((volume >= 0.3)&&(T > 0.5)) {
-						ADSR = (1 + s * sin(TWO_PI * (T - R - A) * (2 / (T - R - A)))) * cos((n - (T - R))*(TWO_PI / (4 * R))) * (1 - ((s*F*(volume + 0.1)*sin(TWO_PI * 21  * ((n - (T - R))/SAMPLE_RATE))) * (sin(TWO_PI * (1 / (4 * R) * (n - (T - R)))))));
+						ADSR = (1 + s * sin(TWO_PI * (T - R - A) * (2 / (T - R - A)))) * cos((n - (T - R))*(TWO_PI / (4 * R))) * (1 - ((s*0.5*F*(volume + 0.1)*sin(TWO_PI * 13  * ((n - (T - R))/SAMPLE_RATE))) * (sin(TWO_PI * (1 / (4 * R) * (n - (T - R)))))));
 					}
 					else {
 						ADSR = cos((n - (T - R))*(TWO_PI / (4 * R)));
@@ -457,7 +457,7 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 				}
 				else if (n > (A) && n <= (T - R)) {
 					if ((T / SAMPLE_RATE) > 0.5) {
-						ADSR = 1 + ((2 / (1 + exp(-9 * T*(n - A)))) - 1) * s * sin(TWO_PI * (n - A) * (2 / (T - R - A)));
+						ADSR = 1 + ((2 / (1 + exp(-9 * T*(n - A)))) - 1) * s * sin(TWO_PI * (n - A) * (15 / (T - R - A)));
 					}
 					else {
 						ADSR = 1;
@@ -465,7 +465,7 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 				}
 				else if (n > (T - R)) {
 					if ((volume >= 0.3)&&(T > 0.5)) {
-						ADSR = (1 + s * sin(TWO_PI * (T - R - A) * (2 / (T - R - A)))) * cos((n - (T - R))*(TWO_PI / (4 * R))) * (1 - ((s*F*(volume + 0.1)*sin(TWO_PI * 21  * ((n - (T - R))/SAMPLE_RATE))) * (sin(TWO_PI * (1 / (4 * R) * (n - (T - R)))))));
+						ADSR = (1 + s * sin(TWO_PI * (T - R - A) * (2 / (T - R - A)))) * cos((n - (T - R))*(TWO_PI / (4 * R))) * (1 - ((s*0.5*F*(volume + 0.1)*sin(TWO_PI * 13  * ((n - (T - R))/SAMPLE_RATE))) * (sin(TWO_PI * (1 / (4 * R) * (n - (T - R)))))));
 					}
 					else {
 						ADSR = cos((n - (T - R))*(TWO_PI / (4 * R)));
@@ -492,7 +492,7 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 				}
 				else if (n > (A) && n <= (T - R)) {
 					if ((T / SAMPLE_RATE) > 0.5) {
-						ADSR = 1 + ((2 / (1 + exp(-9 * T*(n - A)))) - 1) * s * sin(TWO_PI * (n - A) * (2 / (T - R - A)));
+						ADSR = 1 + ((2 / (1 + exp(-9 * T*(n - A)))) - 1) * s * sin(TWO_PI * (n - A) * (15 / (T - R - A)));
 					}
 					else {
 						ADSR = 1;
@@ -500,7 +500,7 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 				}
 				else if (n > (T - R)) {
 					if ((volume >= 0.3)&&(T > 0.5)) {
-						ADSR = (1 + s * sin(TWO_PI * (T - R - A) * (2 / (T - R - A)))) * cos((n - (T - R))*(TWO_PI / (4 * R))) * (1 - ((s*F*(volume + 0.1)*sin(TWO_PI * 21  * ((n - (T - R))/SAMPLE_RATE))) * (sin(TWO_PI * (1 / (4 * R) * (n - (T - R)))))));
+						ADSR = (1 + s * sin(TWO_PI * (T - R - A) * (2 / (T - R - A)))) * cos((n - (T - R))*(TWO_PI / (4 * R))) * (1 - ((s*0.5*F*(volume + 0.1)*sin(TWO_PI * 13  * ((n - (T - R))/SAMPLE_RATE))) * (sin(TWO_PI * (1 / (4 * R) * (n - (T - R)))))));
 					}
 					else {
 						ADSR = cos((n - (T - R))*(TWO_PI / (4 * R)));
@@ -521,7 +521,7 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 		}
 		else if (n > (A) && n <= (T - R)) {
 			if ((T / SAMPLE_RATE) > 0.5) {
-				ADSR = 1 + ((2 / (1 + exp(-9 * T*(n - A)))) - 1) * s * sin(TWO_PI * (n - A) * (2 / (T - R - A)));
+				ADSR = 1 + ((2 / (1 + exp(-9 * T*(n - A)))) - 1) * s * sin(TWO_PI * (n - A) * (15 / (T - R - A)));
 			}
 			else {
 				ADSR = 1;
@@ -529,7 +529,7 @@ std::vector<double> Organ::generateNote(double duration, double frequency, doubl
 		}
 		else if (n > (T - R)) {
 			if ((volume >= 0.3)&&(T > 0.5)) {
-				ADSR = (1 + s * sin(TWO_PI * (T - R - A) * (2 / (T - R - A)))) * cos((n - (T - R))*(TWO_PI / (4 * R))) * (1 - ((s*F*(volume + 0.1)*sin(TWO_PI * 21  * ((n - (T - R))/SAMPLE_RATE))) * (sin(TWO_PI * (1 / (4 * R) * (n - (T - R)))))));
+				ADSR = (1 + s * sin(TWO_PI * (T - R - A) * (2 / (T - R - A)))) * cos((n - (T - R))*(TWO_PI / (4 * R))) * (1 - ((s*0.5*F*(volume + 0.1)*sin(TWO_PI * 13  * ((n - (T - R))/SAMPLE_RATE))) * (sin(TWO_PI * (1 / (4 * R) * (n - (T - R)))))));
 			}
 			else {
 				ADSR = cos((n - (T - R))*(TWO_PI / (4 * R)));

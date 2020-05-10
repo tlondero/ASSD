@@ -22,12 +22,65 @@ void WavController::compileWav(vector<SynthTrack> allTracks, double duration_, s
 	this->volume = volume_;
 	for (unsigned int track = 0; track < allTracks.size(); track++) {
 		for (unsigned int note = 0; note < allTracks[track].track.size(); note++) {
-			int T= floor(allTracks[track].track[note].t_on*SAMPLE_RATE);
-			for (unsigned int i = 0; i < allTracks[track].track[note].sound.size();i++) {
+			int T = floor(allTracks[track].track[note].t_on * SAMPLE_RATE);
+			for (unsigned int i = 0; i < allTracks[track].track[note].sound.size(); i++) {
 				this->wavVector[i + T] += allTracks[track].track[note].sound[i];
 			}
 		}
 	}
+
+	//reverb
+
+	//T = 3tn/(-log|gn|) para comb paralelo
+
+	std::vector<double> M_parallel = { 4799, 4999, 5399, 5801 , 6013};
+	std::vector<double> g_parallel = { -0.742, -0.733, -0.715, -0.697 , -0.656};
+	std::vector<double> M_series = { 1051, 337 };
+	std::vector<double> g_series = { -0.7, -0.7 };
+	std::vector<double> wavVector2(this->wavVector.size(), 0);
+	std::vector<double> temp(this->wavVector.size(), 0);
+	double mix_ratio = 1;
+
+
+	for (int j = 0; j < M_parallel.size(); j++) {
+		for (int i = 0; i < this->wavVector.size(); i++) {
+			if (i - M_parallel[j] > 0) {
+				temp[i] = this->wavVector[i] + g_parallel[j] * this->wavVector[i - M_parallel[j]];
+			}
+			else {
+				temp[i] = this->wavVector[i];
+			}
+			wavVector2[i] += temp[i];
+		}
+	}
+
+	for (int j = 0; j < M_series.size(); j++) {
+		for (int i = 0; i < this->wavVector.size(); i++) {
+			if (i - M_series[j] > 0) {
+				temp[i] = -1 * g_series[j] * wavVector2[i] + wavVector2[i - M_series[j]] + g_series[j] * temp[i - M_series[j]];
+			}
+			else {
+				temp[i] = wavVector2[i];
+			}
+		}
+		wavVector2 = temp;
+	}
+
+	for (int i = 0; i < this->wavVector.size(); i++) {
+		this->wavVector[i] += mix_ratio * wavVector2[i];
+	}
+
+
+	//Eco simple
+	/*	double M = 10000;
+	double g = -0.7;
+
+	for (int i = 0; i < this->wavVector.size(); i++) {
+		if(i - M > 0)
+			this->wavVector[i] = this->wavVector[i] + g * this->wavVector[i - M];
+	} 
+	*/
+
 	double max = *max_element(wavVector.begin(), wavVector.end());
 	for (int i = 0; i < wavVector.size(); i++) {
 		wavVector[i] = wavVector[i] / max;
@@ -65,8 +118,8 @@ void WavController::makeWav() {
 		if (n >= this->wavVector.size())this->wavVector.push_back(0);
 		double amplitude = 1;
 		double value = this->wavVector[n];
-		write_word(f, (int)((amplitude)* value*volume), 2);
-		write_word(f, (int)((amplitude)* value*volume), 2);
+		write_word(f, (int)((amplitude)*value * volume), 2);
+		write_word(f, (int)((amplitude)*value * volume), 2);
 	}
 
 	// (We'll need the final file size to fix the chunk sizes above)

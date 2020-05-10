@@ -16,7 +16,7 @@ SynthTrack AcousticGuitarController::sytnsynthesisTrack(Tracks GuitarTrack,bool 
 		double time_first = 0;
 		double time_last = 0;
 		for (unsigned int note = 0; note < GuitarTrack.Notes.size(); note++) {
-			if (time_last - time_first < 5) {
+			if (time_last - time_first < 8) {
 				MusicData noteData;
 				noteData.t_on = GuitarTrack.Notes[note].t_on;                             // ESTO DE ACA ES DURACION DEBUG
 				noteData.sound = this->Guitar.generateNote(GuitarTrack.Notes[note].Duration + 0.5, GuitarTrack.Notes[note].frequency, GuitarTrack.Notes[note].velocity / 100.0, 0.5, 'G');
