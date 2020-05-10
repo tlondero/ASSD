@@ -834,9 +834,6 @@ void cMainMenu::addEffTrack(wxCommandEvent& evt) {
 
 void cMainMenu::removeEffTrack(wxCommandEvent& evt) {
 	if (lb_wavEff->GetSelection() != wxNOT_FOUND) {
-		ui.pairTrackInst[lb_wavEff->GetSelection()].effect2Apply.clear();
-		lb_wavEff->Delete(lb_wavEff->GetSelection());
-
 		string stringTrack = (string)lb_wavEff->GetStringSelection();
 		int last = stringTrack.size() - stringTrack.find_first_of('[');
 		int trackToDelete = stoi(stringTrack.substr(6, last));
@@ -846,6 +843,8 @@ void cMainMenu::removeEffTrack(wxCommandEvent& evt) {
 				tracksAddedEfects.erase(tracksAddedEfects.begin() + i);
 			}
 		}
+		ui.pairTrackInst[lb_wavEff->GetSelection()].effect2Apply.clear();
+		lb_wavEff->Delete(lb_wavEff->GetSelection());
 	}
 	else {
 		//Warning
@@ -907,7 +906,7 @@ void cMainMenu::addEffWav(wxCommandEvent& evt) {
 				}
 				else {
 					if (lb_wavEffFinal->FindString(effName) == wxNOT_FOUND) {
-					//ui.finalEfect = effName;
+						//ui.finalEfect = effName;
 						//ui.Trev = stod((string)tx_effRev->GetValue());
 						//lb_wavEffFinal->Append(effName);
 					}
@@ -939,9 +938,6 @@ void cMainMenu::removeEffWav(wxCommandEvent& evt) {
 		if (lb_wavEffFinal->GetSelection() != wxNOT_FOUND) {
 			ui.finalEfect.clear();
 			lb_wavEffFinal->Delete(lb_wavEffFinal->GetSelection());
-
-			//ui.pairTrackInst.erase(ui.pairTrackInst.begin() + lb_tracks->GetSelection());
-			//lb_tracks->Delete(lb_tracks->GetSelection());
 		}
 		else {
 			//Warning
