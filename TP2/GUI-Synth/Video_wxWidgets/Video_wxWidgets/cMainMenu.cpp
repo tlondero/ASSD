@@ -644,7 +644,7 @@ void cMainMenu::createSpec(wxCommandEvent& evt) {
 			int nfft = stoi(nfft_s);
 			int overlap = stoi(overlap_s);
 
-			if (nfft < overlap) {
+			if (nfft <= overlap) {
 				//Warning
 				wxMessageDialog warning(this, "Invalid parameter chosen", "Can't create spectogram");
 				warning.Center();
