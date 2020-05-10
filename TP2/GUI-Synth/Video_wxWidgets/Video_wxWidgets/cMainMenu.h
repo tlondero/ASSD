@@ -96,6 +96,12 @@ private:
 	wxStaticText* t_currentSpec = nullptr;
 	wxStaticText* t_specWindParam = nullptr;
 
+	wxStaticText* t_nfft = nullptr;
+	wxStaticText* t_overlap = nullptr;
+
+	wxTextCtrl* tx_nfft = nullptr;
+	wxTextCtrl* tx_overlap = nullptr;
+
 
 	//Dinmac Control Texts (INSTRUMENTOS)
 	wxTextCtrl* tx_organA = nullptr;
@@ -135,7 +141,6 @@ private:
 	wxStaticText* t_playMusic = nullptr;
 
 	//Dinmac Static Texts (VENTANAS)
-	wxStaticText* t_specWindNoParam = nullptr;
 	wxStaticText* t_specGauss = nullptr;
 	wxStaticText* t_specExp = nullptr;
 	wxStaticText* t_specKaiser = nullptr;

@@ -11,4 +11,3 @@ void EspectroGenerator::generateSpectrum(string path, int nfft,int overlap, stri
 	const char *commandPtr = command.c_str();
 	system(commandPtr); //Invoke python to compute plots
 }
-

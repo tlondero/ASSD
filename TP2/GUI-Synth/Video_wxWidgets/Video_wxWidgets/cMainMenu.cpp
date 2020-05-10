@@ -74,6 +74,9 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	lb_wavEff = new wxListBox(this, wxID_ANY, wxPoint(COL2, 14 * BUTTON_SP + 3 * BUTTON_Y + 2 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(LB_X, LB_Y / 2));
 	lb_micEff = new wxListBox(this, wxID_ANY, wxPoint(COL3, 3 * BUTTON_SP + 2 * BUTTON_Y + TEXT_Y + DDM_Y), wxSize(300, 300));
 
+	//Static control text
+	tx_nfft = new wxTextCtrl(this, wxID_ANY, "", wxPoint(COL4, BUTTON_Y + 5 * TEXT_Y + DDM_Y + 3 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y + 5));
+	tx_overlap = new wxTextCtrl(this, wxID_ANY, "", wxPoint(COL4, BUTTON_Y + 7 * TEXT_Y + DDM_Y + 5 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y + 5));
 
 	//Text
 	t_tackDdm = new wxStaticText(this, wxID_ANY, "Tracks:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 4 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y));
@@ -88,6 +91,9 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	t_currentSpec = new wxStaticText(this, wxID_ANY, "No spectogram selected.", wxPoint(COL4, BUTTON_SP), wxSize(TEXT_X, TEXT_Y));
 	t_specWindType = new wxStaticText(this, wxID_ANY, "Select window type:", wxPoint(COL4, BUTTON_Y + 2 * TEXT_Y + BUTTON_SP), wxSize(TEXT_X, TEXT_Y));
 	t_specWindParam = new wxStaticText(this, wxID_ANY, "Select window parameter:", wxPoint(COL4, BUTTON_Y + 3 * TEXT_Y + DDM_Y + 2 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y));
+
+	t_nfft = new wxStaticText(this, wxID_ANY, "NFFT:", wxPoint(COL4, BUTTON_Y + 4 * TEXT_Y + DDM_Y + 2 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y));
+	t_overlap = new wxStaticText(this, wxID_ANY, "Overlap:", wxPoint(COL4, BUTTON_Y + 6 * TEXT_Y + DDM_Y + 5 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y));
 
 	//Dinmac Control Texts (INSTRUMENTOS)
 	tx_organA = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 8 * BUTTON_SP + 3 * DDM_Y + 2 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
@@ -119,7 +125,7 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	tx_toShow.push_back(tx_drumB);
 
 	//Dinmac Control Texts (VENTANAS)
-	tx_specWindParam = new wxTextCtrl(this, wxID_ANY, "", wxPoint(COL4, BUTTON_Y + 5 * TEXT_Y + DDM_Y + 3 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y + 5));
+	tx_specWindParam = new wxTextCtrl(this, wxID_ANY, "", wxPoint(COL4, BUTTON_Y + 8 * TEXT_Y + 2 * DDM_Y + 6 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y + 5));
 	tx_specWindParam->Hide();
 
 
@@ -164,12 +170,10 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	}
 
 	//Dinmac Static Texts (VENTANAS)
-	t_specWindNoParam = new wxStaticText(this, wxID_ANY, "No parameters needed", wxPoint(COL4, BUTTON_Y + 4 * TEXT_Y + DDM_Y + 2 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y + 5));
-	t_specGauss = new wxStaticText(this, wxID_ANY, "Standar Deviation:", wxPoint(COL4, BUTTON_Y + 4 * TEXT_Y + DDM_Y + 2 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y + 5));
-	t_specExp = new wxStaticText(this, wxID_ANY, "Decay Scale:", wxPoint(COL4, BUTTON_Y + 4 * TEXT_Y + DDM_Y + 2 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y + 5));
-	t_specKaiser = new wxStaticText(this, wxID_ANY, "Beta:", wxPoint(COL4, BUTTON_Y + 4 * TEXT_Y + DDM_Y + 2 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y + 5));
+	t_specGauss = new wxStaticText(this, wxID_ANY, "Standar Deviation:", wxPoint(COL4, BUTTON_Y + 7 * TEXT_Y + 2 * DDM_Y + 5 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y + 5));
+	t_specExp = new wxStaticText(this, wxID_ANY, "Decay Scale:", wxPoint(COL4, BUTTON_Y + 7 * TEXT_Y + 2 * DDM_Y + 5 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y + 5));
+	t_specKaiser = new wxStaticText(this, wxID_ANY, "Beta:", wxPoint(COL4, BUTTON_Y + 7 * TEXT_Y + 2 * DDM_Y + 5 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y + 5));
 	
-	t_specWindNoParam->Hide();
 	t_specGauss->Hide();
 	t_specExp->Hide();
 	t_specKaiser->Hide();
@@ -658,7 +662,6 @@ void cMainMenu::createSpec(wxCommandEvent& evt) {
 	evt.Skip();
 }
 void cMainMenu::detectWindowChange(wxCommandEvent& evt) {
-	t_specWindNoParam->Hide();
 	t_specGauss->Hide();
 	t_specExp->Hide();
 	t_specKaiser->Hide();
@@ -679,9 +682,6 @@ void cMainMenu::detectWindowChange(wxCommandEvent& evt) {
 	else if (ventanaElegida == WindowsList[10]) {
 		t_specKaiser->Show();
 		tx_specWindParam->Show();
-	}
-	else {
-		t_specWindNoParam->Show();
 	}
 	evt.Skip();
 }
