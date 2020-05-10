@@ -28,7 +28,7 @@ d=np.zeros(50)
 d[0]=1
 uniform = np.random.uniform(low=0.0, high=1.0, size=50)
 binary=2 * np.random.randint(0, 2, 50) - 1
-
+normal = np.random.normal(0,1,50)
 input = d
 print("Input: ")
 print(d)
