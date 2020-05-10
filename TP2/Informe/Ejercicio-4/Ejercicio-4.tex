@@ -33,9 +33,31 @@ H(z) = \frac{\frac{1}{2} \cdot z^{L+1} +\frac{1}{2} \cdot z^{L} }{z^{L+1} - \fra
 Vale la pena mencionar que de la ecuación (\ref{eq:eqdif}) es una ecuación en diferencias que cuenta como condiciones iniciales la wavetable suministrada por el ruido.
 \subsubsection{Análisis singularidades}
 Se observa que la expresión (\ref{eq:hzks}) cuenta con L+1 polos y L+1 ceros. A continuación se muestra un diagrama de polos y ceros del sistema:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{ImagenesEjercicio4/pzks.PNG}
+\caption{Diagrama de polos y ceros.}
+	\label{fig:zpdig}
+\end{figure}
+Adicionalmente se graficó el diagrama de bode del sistema.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{ImagenesEjercicio4/bodeks.PNG}
+\caption{Diagrama de Bode.}
+Considerando que los parámetros eran: $f_s = 44.1kHz$, $L=10$ y $R_L=1$
+	\label{fig:bode}
+\end{figure}
 
 \subsubsection{Sintonización de frecuencia}
+En cuanto a la elección de una frecuencia de oscialción se puede observar en los úlitmos gráficos que existe un valor de frecuencia, la cual tiene mayor probabilidad de cumplir el criterio de Barkhausen, la cual corresponde a $f_r = \frac{f_s}{L+0.5}$, esto se debe a que el sistema es la superposición de una linea de retraso  L y otra sistema de retraso L+1, la señal al recorrer el lazo lo hace cada $\frac{L+L+1}{2}$ cambiando esto por frecuencia se obtiene $f_r=\frac{f_s}{L+0.5}$.
 \subsubsection{Tipos de ruido}
+Se propuso exitar el sistema con distintos tipos de ruido de entrada, siendo estos:
+\begin{itemize}
+\item Ruido Gaussiano
+\item Ruido Uniforme
+\item Ruido Binario
+
+\end{itemize}
 \subsubsection{Estabilidad}
 La estabilidad del sistema será determinada por la ecuación (\ref{eq:hzks}) se puede observar que si RL es mayor o igual a uno el sistema será inestable, si bien teóricamente esto es cierto, en la realidad se encuentra que si RL = 1 no solo no provocará inestablidad, sino que es recomendable este valor dado que logrará extender las oscilaciones  un mayor tiempo.
 \subsubsection{Cálculo Fase}
