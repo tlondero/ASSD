@@ -7,6 +7,7 @@
 //#include <wx/gbsizer.h>
 #include <wx/textctrl.h>
 #include <wx/event.h>
+#include <wx/msgdlg.h>
 
 #include <vector>
 
@@ -48,14 +49,10 @@ public:
 
 private:
 	
-	//Load Bar
-	wxGauge* loadBar = nullptr;
-
 	//Toolbar
 	wxToolBar* m_ToolBar = nullptr;
 	wxMenuBar* m_MenuBar = nullptr;
-
-	
+		
 	//Botones
 	wxButton* b_cargarMidi = nullptr;
 	wxButton* b_crearWav = nullptr;

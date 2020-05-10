@@ -59,9 +59,6 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	lb_wavEff = new wxListBox(this, wxID_ANY, wxPoint(COL2, 14 * BUTTON_SP + 3 * BUTTON_Y + 2 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(LB_X, LB_Y/2));
 	lb_micEff = new wxListBox(this, wxID_ANY, wxPoint(COL3, 3 * BUTTON_SP + 2 * BUTTON_Y + TEXT_Y + DDM_Y), wxSize(300, 300));
 
-	//Load bar
-	loadBar = new wxGauge(this, wxID_ANY, 15, wxPoint(COL4, COL3), wxSize(BUTTON_X, BUTTON_Y));
-
 		
 	//Images
 	//wxStaticBitmap* img_Spectogram = nullptr;
@@ -407,12 +404,19 @@ void cMainMenu::CreateWav(wxCommandEvent& evt) {
 			wxLogError("Cannot save file '%s'.", pathSelected);
 		}
 		else {
+
 			int cutFrom = pathSelected.find_first_of('.');
 			int cutUpto = pathSelected.size() - cutFrom;
 			pathSelected = pathSelected.erase(cutFrom, cutUpto);
 
+			//Load Bar
+			wxMessageDialog loadBar(this, "Creating WAV", "Loading");
+			loadBar.Center();
+			loadBar.SetExtendedMessage("This could take a few minutes, please wait");
+			loadBar.ShowModal();
 			myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, this->ui), this->midi.getTotalDuration() + 1, pathSelected, 1000);
 			myWC.makeWav();
+			loadBar.Hide();
 		}
 	}
 	evt.Skip();
