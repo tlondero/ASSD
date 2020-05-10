@@ -24,4 +24,4 @@ const std::string  WindowsList[NUMBER_OF_WINDOWS] = { "triang", "blackman", "han
 
 //EFECTOS
 #define NUMBER_OF_EFF		2
-const std::string  WindowsList[NUMBER_OF_EFF] = { "Eco", "Reverberation"};
+const std::string  EffList[NUMBER_OF_EFF] = { "Eco", "Reverberation"};
