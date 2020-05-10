@@ -72,9 +72,10 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	ddm_nfft = new wxComboBox(this, wxID_ANY, "", wxPoint(COL4, BUTTON_Y + 5 * TEXT_Y + DDM_Y + 3 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y + 5));
 	ddm_overlap = new wxComboBox(this, wxID_ANY, "", wxPoint(COL4, BUTTON_Y + 7 * TEXT_Y + DDM_Y + 5 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y + 5));
 	
-	for (double i = 2; i <= 2048; i = pow(i, 2.0)) {
-		ddm_nfft->AppendString(to_string((int) i));
-		ddm_overlap->AppendString(to_string((int) i));
+	for (int i = 1; i <= 11; i++) {
+		double n = pow(2.0, i);
+		ddm_nfft->AppendString(to_string((int) pow(2.0, i) ));
+		ddm_overlap->AppendString(to_string((int) pow(2.0, i) ));
 	}
 	ddm_nfft->AppendString(to_string(4096));
 
@@ -624,60 +625,67 @@ void cMainMenu::loadWavSpec(wxCommandEvent& evt) {
 
 void cMainMenu::createSpec(wxCommandEvent& evt) {
 	string ventanaElegida = ddm_spect->GetStringSelection();
-	string nfft_s = ddm_nfft->GetStringSelection();
-	string overlap_s = ddm_overlap->GetStringSelection();
+	if (!(wavToSpecName.empty())) {
 
-	int nfft = stoi(nfft_s);
-	int overlap = stoi(overlap_s);
+		string nfft_s = ddm_nfft->GetStringSelection();
+		string overlap_s = ddm_overlap->GetStringSelection();
 
-	if (nfft_s.empty() || overlap_s.empty()) {
-		//Warning
-		wxMessageDialog warning(this, "No parameter chosen", "Can't create spectogram");
-		warning.Center();
-		warning.SetExtendedMessage("Please, write a valid parameter for this type of window.");
-		warning.ShowModal();
-		warning.Hide();
-	}
-	else if (nfft < overlap) {
-		//Warning
-		wxMessageDialog warning(this, "Invalid parameter chosen", "Can't create spectogram");
-		warning.Center();
-		warning.SetExtendedMessage("NFFT must be greater than overlap.");
-		warning.ShowModal();
-		warning.Hide();
-	}
-	else if (!(wavToSpecName.empty())) {
+		
 
-		if (ventanaElegida.empty()) {
-			//No se elegió ninguna ventana
-			//Warning
-			wxMessageDialog warning(this, "No window chosen", "Can't create spectogram");
-			warning.Center();
-			warning.SetExtendedMessage("Please, select a type of window to create a spectogram.");
-			warning.ShowModal();
-			warning.Hide();
-		}
-		else if (!(tx_specWindParam->IsEmpty())) {
-			//Si el textbox tiene algo es porque está la 8, 9 o 10, porque solo se vacía si cambíe de ventana 
-			double param = stod((string)tx_specWindParam->GetStringSelection());
-
-			//LLAMAR A LA FUNCIÓN DE VENTANA CON PARAMETRO Y NOMBRE
-			es.generateSpectrum(wavToSpecPath, nfft, overlap, ventanaElegida, param, param, param);
-		}
-		else if (!((ventanaElegida == WindowsList[8]) || (ventanaElegida == WindowsList[9]) || (ventanaElegida == WindowsList[10]))) {
-			//Si el text box está vacío y si no es la ventana 8, 9 o 10, está todo joya, tengo una ventana sin parámetro
-
-			//LLAMAR A LA FUNCIÓN DE VENTANA CON NOMBRE
-			es.generateSpectrum(wavToSpecPath, nfft, overlap, ventanaElegida, 0, 0, 0);
-		}
-		else {
-			//El text box está vacío y la ventana es la 8, 9 o 10...Falta parámetro
+		if (nfft_s.empty() || overlap_s.empty()) {
 			//Warning
 			wxMessageDialog warning(this, "No parameter chosen", "Can't create spectogram");
 			warning.Center();
 			warning.SetExtendedMessage("Please, write a valid parameter for this type of window.");
 			warning.ShowModal();
 			warning.Hide();
+		}
+		else {
+			int nfft = stoi(nfft_s);
+			int overlap = stoi(overlap_s);
+
+			if (nfft < overlap) {
+				//Warning
+				wxMessageDialog warning(this, "Invalid parameter chosen", "Can't create spectogram");
+				warning.Center();
+				warning.SetExtendedMessage("NFFT must be greater than overlap.");
+				warning.ShowModal();
+				warning.Hide();
+			}
+			else {
+
+				if (ventanaElegida.empty()) {
+					//No se elegió ninguna ventana
+					//Warning
+					wxMessageDialog warning(this, "No window chosen", "Can't create spectogram");
+					warning.Center();
+					warning.SetExtendedMessage("Please, select a type of window to create a spectogram.");
+					warning.ShowModal();
+					warning.Hide();
+				}
+				else if (!(tx_specWindParam->IsEmpty())) {
+					//Si el textbox tiene algo es porque está la 8, 9 o 10, porque solo se vacía si cambíe de ventana 
+					double param = stod((string)tx_specWindParam->GetStringSelection());
+
+					//LLAMAR A LA FUNCIÓN DE VENTANA CON PARAMETRO Y NOMBRE
+					es.generateSpectrum(wavToSpecPath, nfft, overlap, ventanaElegida, param, param, param);
+				}
+				else if (!((ventanaElegida == WindowsList[8]) || (ventanaElegida == WindowsList[9]) || (ventanaElegida == WindowsList[10]))) {
+					//Si el text box está vacío y si no es la ventana 8, 9 o 10, está todo joya, tengo una ventana sin parámetro
+
+					//LLAMAR A LA FUNCIÓN DE VENTANA CON NOMBRE
+					es.generateSpectrum(wavToSpecPath, nfft, overlap, ventanaElegida, 0, 0, 0);
+				}
+				else {
+					//El text box está vacío y la ventana es la 8, 9 o 10...Falta parámetro
+					//Warning
+					wxMessageDialog warning(this, "No parameter chosen", "Can't create spectogram");
+					warning.Center();
+					warning.SetExtendedMessage("Please, write a valid parameter for this type of window.");
+					warning.ShowModal();
+					warning.Hide();
+				}
+			}
 		}
 	}
 	else {
