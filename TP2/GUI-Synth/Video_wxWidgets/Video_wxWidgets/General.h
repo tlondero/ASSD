@@ -20,4 +20,4 @@ const std::string  InstrumentList[NUMBER_OF_INSTRUMETS] = { "GUITAR", "ORGAN", "
 
 //VENTANAS
 #define NUMBER_OF_WINDOWS		11
-const std::string  WindowsList[NUMBER_OF_WINDOWS] = { "TRIANGULAR", "BLACKMAN", "HANNING", "HAMMING", "BARTLETT", "BLACKMAN-HARRIS", "BARTHANN", "RECTANGULAR", "GAUSSIAN", "EXPONENTIAL", "KAISER" };
+const std::string  WindowsList[NUMBER_OF_WINDOWS] = { "triang", "blackman", "hanning", "hamming", "bartlett", "blackmanharris", "barthann", "rectangular", "gaussian", "exponential", "kaiser" };
