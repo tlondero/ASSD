@@ -30,9 +30,8 @@ void WavController::compileWav(vector<SynthTrack> allTracks, double duration_, s
 	}
 
 	//reverb
-
 	//T = 3tn/(-log|gn|) para comb paralelo
-
+	/*
 	std::vector<double> M_parallel = { 4799, 4999, 5399, 5801 , 6013};
 	std::vector<double> g_parallel = { -0.742, -0.733, -0.715, -0.697 , -0.656};
 	std::vector<double> M_series = { 1051, 337 };
@@ -69,7 +68,7 @@ void WavController::compileWav(vector<SynthTrack> allTracks, double duration_, s
 	for (int i = 0; i < this->wavVector.size(); i++) {
 		this->wavVector[i] += mix_ratio * wavVector2[i];
 	}
-
+	*/
 
 	//Eco simple
 	/*	double M = 10000;
