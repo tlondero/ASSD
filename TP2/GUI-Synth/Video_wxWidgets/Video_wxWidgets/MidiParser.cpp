@@ -33,9 +33,8 @@ vector<Tracks> MidiParser::getTracks() {
 						actualNote.velocity = midiFile[track][event].getVelocity();
 						actualNote.frequency = pow(2, (midiFile[track][event].getKeyNumber() - 69.0) / 12.0) * 440;
 						actualTrack.Notes.push_back(actualNote);
-					}
-					if (midiFile[track][event].isNoteOff()) {
-						toff.push_back(midiFile[track][event].seconds);
+						toff.push_back(actualNote.t_on + actualNote.Duration);
+						
 					}
 				}
 			}
