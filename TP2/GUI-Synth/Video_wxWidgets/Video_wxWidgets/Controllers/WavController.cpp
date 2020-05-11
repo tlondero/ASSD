@@ -16,6 +16,7 @@ WavController::WavController() {
 }
 
 void WavController::compileWav(vector<SynthTrack> allTracks, double duration_, string wavName_, double volume_, string efect, double g, int M) {
+
 	this->duration = duration_;
 	this->wavName = wavName_;
 	this->wavVector = vector<double>(ceil(this->duration * SAMPLE_RATE), 0);
