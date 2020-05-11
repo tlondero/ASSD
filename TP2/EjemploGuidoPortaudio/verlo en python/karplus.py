@@ -26,21 +26,16 @@ def karplus_strong(input, L,rf,N):
 
 d=np.zeros(50)
 d[0]=1
-print("Input: ")
-print(d)
+uniform = np.random.uniform(low=-1, high=1.0, size=50)
+binary=2 * np.random.randint(0, 2, 50) - 1
+normal = np.random.normal(0,1,50)
+input = normal
+
 N=10000
 T=1/41300
-out= karplus_strong(d,20,1,N)
-print("Output:")
-print(out)
-yf = scipy.fftpack.fft(out)
-xf = np.linspace(0.0, 1.0/(2.0*T),int(N/2))
-yfin = scipy.fftpack.fft(d)
-xfin = np.linspace(0.0, 1.0/(2.0*T),int(50/2))
-plt.plot(out)
-plt.plot(d)
-plt.show()
-fig, ax = plt.subplots()
-ax.plot(xf, 2.0/N * np.abs(yf[:N//2]))
-ax.plot(xfin, 2.0/50 * np.abs(yfin[:50//2]))
+out= karplus_strong(input,20,1,N)
+plt.plot(out,label="Tensión de salida")
+plt.ylabel("Tensión [V]")
+plt.xlabel("Tiempo [mS]")
+plt.legend()
 plt.show()

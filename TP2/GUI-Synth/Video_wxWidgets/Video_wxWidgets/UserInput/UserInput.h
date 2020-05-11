@@ -10,7 +10,10 @@ public:
 	~UserInput();
 	string wavName;
 	vector<UserChoice> pairTrackInst;
-	
+	string finalEfect;
+	double T;
+	double D;
+	double M;
 	
 };
 

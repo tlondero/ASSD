@@ -11,7 +11,5 @@ public:
 	~AcousticGuitarController();
 private:
 	GuitarImproved Guitar;
-
-
 };
 

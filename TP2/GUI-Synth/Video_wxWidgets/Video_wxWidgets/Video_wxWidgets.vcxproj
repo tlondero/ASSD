@@ -32,6 +32,10 @@
     <ClCompile Include="Controllers\TromboneController.cpp" />
     <ClCompile Include="Controllers\TrumpetController.cpp" />
     <ClCompile Include="Controllers\WavController.cpp" />
+    <ClCompile Include="Efectos\EcoSimple.cpp" />
+    <ClCompile Include="Efectos\EfectController.cpp" />
+    <ClCompile Include="Efectos\Reverberator.cpp" />
+    <ClCompile Include="Espectrograma\EspectroGenerator.cpp" />
     <ClCompile Include="Instrumentos\Banjo.cpp" />
     <ClCompile Include="Instrumentos\Bell.cpp" />
     <ClCompile Include="Instrumentos\Clarinet.cpp" />
@@ -51,6 +55,7 @@
     <ClCompile Include="UserInput\InstParams.cpp" />
     <ClCompile Include="UserInput\UserChoice.cpp" />
     <ClCompile Include="UserInput\UserInput.cpp" />
+    <ClCompile Include="Utils\cMainPanel.cpp" />
     <ClCompile Include="Utils\MusicData.cpp" />
     <ClCompile Include="Utils\Note.cpp" />
     <ClCompile Include="Utils\SynthTrack.cpp" />
@@ -71,6 +76,10 @@
     <ClInclude Include="Controllers\TromboneController.h" />
     <ClInclude Include="Controllers\TrumpetController.h" />
     <ClInclude Include="Controllers\WavController.h" />
+    <ClInclude Include="Efectos\EcoSimple.h" />
+    <ClInclude Include="Efectos\EfectController.h" />
+    <ClInclude Include="Efectos\Reverberator.h" />
+    <ClInclude Include="Espectrograma\EspectroGenerator.h" />
     <ClInclude Include="General.h" />
     <ClInclude Include="Instrumentos\Banjo.h" />
     <ClInclude Include="Instrumentos\Bell.h" />
@@ -91,11 +100,15 @@
     <ClInclude Include="UserInput\InstParams.h" />
     <ClInclude Include="UserInput\UserChoice.h" />
     <ClInclude Include="UserInput\UserInput.h" />
+    <ClInclude Include="Utils\cMainPanel.h" />
     <ClInclude Include="Utils\MusicData.h" />
     <ClInclude Include="Utils\Note.h" />
     <ClInclude Include="Utils\SynthTrack.h" />
     <ClInclude Include="Utils\Tracks.h" />
     <ClInclude Include="Utils\Utils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Espectrograma\main.py" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

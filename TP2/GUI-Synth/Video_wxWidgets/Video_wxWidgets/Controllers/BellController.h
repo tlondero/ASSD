@@ -7,7 +7,7 @@ class BellController
 {
 public:
 	BellController();
-	SynthTrack sytnsynthesisTrack(Tracks BellTrack);
+	SynthTrack sytnsynthesisTrack(Tracks BellTrack, bool preview);
 	~BellController();
 
 private:

@@ -16,14 +16,15 @@ WavController::WavController() {
 }
 
 void WavController::compileWav(vector<SynthTrack> allTracks, double duration_, string wavName_, double volume_) {
+
 	this->duration = duration_;
 	this->wavName = wavName_;
 	this->wavVector = vector<double>(ceil(this->duration * SAMPLE_RATE), 0);
 	this->volume = volume_;
 	for (unsigned int track = 0; track < allTracks.size(); track++) {
 		for (unsigned int note = 0; note < allTracks[track].track.size(); note++) {
-			int T= floor(allTracks[track].track[note].t_on*SAMPLE_RATE);
-			for (unsigned int i = 0; i < allTracks[track].track[note].sound.size();i++) {
+			int T = floor(allTracks[track].track[note].t_on * SAMPLE_RATE);
+			for (unsigned int i = 0; i < allTracks[track].track[note].sound.size(); i++) {
 				this->wavVector[i + T] += allTracks[track].track[note].sound[i];
 			}
 		}
@@ -65,8 +66,8 @@ void WavController::makeWav() {
 		if (n >= this->wavVector.size())this->wavVector.push_back(0);
 		double amplitude = 1;
 		double value = this->wavVector[n];
-		write_word(f, (int)((amplitude)* value*volume), 2);
-		write_word(f, (int)((amplitude)* value*volume), 2);
+		write_word(f, (int)((amplitude)*value * volume), 2);
+		write_word(f, (int)((amplitude)*value * volume), 2);
 	}
 
 	// (We'll need the final file size to fix the chunk sizes above)

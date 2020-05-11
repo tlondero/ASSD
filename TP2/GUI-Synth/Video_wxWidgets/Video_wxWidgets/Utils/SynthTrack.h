@@ -11,5 +11,10 @@ public:
 	string instrumentName;
 	vector<MusicData> track;
 	double previewDuration;
+	string effect2Apply;
+//parametros efectos!
+	double D;
+	double T;
+	double M;
 };
 

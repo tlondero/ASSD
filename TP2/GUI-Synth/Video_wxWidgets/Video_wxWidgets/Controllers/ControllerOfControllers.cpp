@@ -2,43 +2,93 @@
 
 ControllerOfControllers::ControllerOfControllers(){
 }
+
 vector<SynthTrack> ControllerOfControllers::sytnsynthesisProject(vector<Tracks> projectTracks, UserInput userData) {
 	vector<SynthTrack> mySynthTrackVector;
 	for (unsigned int track = 0; track < userData.pairTrackInst.size(); track++) {
-		if (userData.pairTrackInst[track].TrackInstrument == "GUITAR") {
+		SynthTrack tempTrack;
+		if (userData.pairTrackInst[track].TrackInstrument == InstrumentList[0]) {
 			//AGREGAR EL BOOL DE PREVIEW
 			this->AGController.setParam(userData.pairTrackInst[track].params.GuitarParam_rf);
-			mySynthTrackVector.push_back(this->AGController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber],userData.pairTrackInst[track].InstrumentPreview));
+			tempTrack = this->AGController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber], userData.pairTrackInst[track].InstrumentPreview);
+			tempTrack.effect2Apply = userData.pairTrackInst[track].effect2Apply;
+			tempTrack.T = userData.pairTrackInst[track].T;
+			tempTrack.M = userData.pairTrackInst[track].M;
+			tempTrack.D = userData.pairTrackInst[track].D;
+			mySynthTrackVector.push_back(tempTrack);
 		}
-		else if (userData.pairTrackInst[track].TrackInstrument == "ELECTRIC_GUITAR") {
+		else if (userData.pairTrackInst[track].TrackInstrument == InstrumentList[9]) {
 			this->EGController.setParam(userData.pairTrackInst[track].params.GuitarParam_rf);
-			mySynthTrackVector.push_back(this->EGController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber], userData.pairTrackInst[track].InstrumentPreview));
+			tempTrack = this->EGController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber], userData.pairTrackInst[track].InstrumentPreview);
+			tempTrack.effect2Apply = userData.pairTrackInst[track].effect2Apply;
+			tempTrack.T = userData.pairTrackInst[track].T;
+			tempTrack.M = userData.pairTrackInst[track].M;
+			tempTrack.D = userData.pairTrackInst[track].D;
+			mySynthTrackVector.push_back(tempTrack);
 		}
-		else if (userData.pairTrackInst[track].TrackInstrument == "BANJO") {
-			mySynthTrackVector.push_back(this->BController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber], userData.pairTrackInst[track].InstrumentPreview));
+		else if (userData.pairTrackInst[track].TrackInstrument == InstrumentList[8]) {
+			tempTrack = this->BController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber], userData.pairTrackInst[track].InstrumentPreview);
+			tempTrack.effect2Apply = userData.pairTrackInst[track].effect2Apply;
+			tempTrack.T = userData.pairTrackInst[track].T;
+			tempTrack.M = userData.pairTrackInst[track].M;
+			tempTrack.D = userData.pairTrackInst[track].D;
+			mySynthTrackVector.push_back(tempTrack);
 		}
-		else if (userData.pairTrackInst[track].TrackInstrument == "DRUM") {
+		else if (userData.pairTrackInst[track].TrackInstrument == InstrumentList[7]) {
 			this->DController.setParam(userData.pairTrackInst[track].params.DrumParam_rf, userData.pairTrackInst[track].params.DrumProb);
-			mySynthTrackVector.push_back(this->DController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber], userData.pairTrackInst[track].InstrumentPreview));
+			tempTrack = this->DController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber], userData.pairTrackInst[track].InstrumentPreview);
+			tempTrack.effect2Apply = userData.pairTrackInst[track].effect2Apply;
+			tempTrack.T = userData.pairTrackInst[track].T;
+			tempTrack.M = userData.pairTrackInst[track].M;
+			tempTrack.D = userData.pairTrackInst[track].D;
+			mySynthTrackVector.push_back(tempTrack);
 		}
-		else if (userData.pairTrackInst[track].TrackInstrument == "TROMBONE") {
-			mySynthTrackVector.push_back(this->TController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber]));
+		else if (userData.pairTrackInst[track].TrackInstrument == InstrumentList[5]) {
+			tempTrack = this->TController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber], userData.pairTrackInst[track].InstrumentPreview);
+			tempTrack.effect2Apply = userData.pairTrackInst[track].effect2Apply;
+			tempTrack.T = userData.pairTrackInst[track].T;
+			tempTrack.M = userData.pairTrackInst[track].M;
+			tempTrack.D = userData.pairTrackInst[track].D;
+			mySynthTrackVector.push_back(tempTrack);
 		}
-		else if (userData.pairTrackInst[track].TrackInstrument == "BELL") {
-			mySynthTrackVector.push_back(this->bellController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber]));
+		else if (userData.pairTrackInst[track].TrackInstrument == InstrumentList[3]) {
+			tempTrack = this->bellController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber],userData.pairTrackInst[track].InstrumentPreview);
+			tempTrack.effect2Apply = userData.pairTrackInst[track].effect2Apply;
+			tempTrack.T = userData.pairTrackInst[track].T;
+			tempTrack.M = userData.pairTrackInst[track].M;
+			tempTrack.D = userData.pairTrackInst[track].D;
+			mySynthTrackVector.push_back(tempTrack);
 		}
-		else if (userData.pairTrackInst[track].TrackInstrument == "CLARINET") {
-			mySynthTrackVector.push_back(this->CController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber]));
+		else if (userData.pairTrackInst[track].TrackInstrument == InstrumentList[4]) {
+			tempTrack = this->CController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber], userData.pairTrackInst[track].InstrumentPreview);
+			tempTrack.effect2Apply = userData.pairTrackInst[track].effect2Apply;
+			tempTrack.T = userData.pairTrackInst[track].T;
+			tempTrack.M = userData.pairTrackInst[track].M;
+			tempTrack.D = userData.pairTrackInst[track].D;
+			mySynthTrackVector.push_back(tempTrack);
 		}
-		else if (userData.pairTrackInst[track].TrackInstrument == "ORGAN" || userData.pairTrackInst[track].TrackInstrument == "FLUTE") {
-			mySynthTrackVector.push_back(this->OController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber]));
+		else if (userData.pairTrackInst[track].TrackInstrument == InstrumentList[1] || userData.pairTrackInst[track].TrackInstrument == InstrumentList[2]) {
+			projectTracks[userData.pairTrackInst[track].TrackNumber].userInstrumentChoice = userData.pairTrackInst[track].TrackInstrument;
+			tempTrack = this->OController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber], userData.pairTrackInst[track].InstrumentPreview);
+			tempTrack.effect2Apply = userData.pairTrackInst[track].effect2Apply;
+			tempTrack.T = userData.pairTrackInst[track].T;
+			tempTrack.M = userData.pairTrackInst[track].M;
+			tempTrack.D = userData.pairTrackInst[track].D;
+			mySynthTrackVector.push_back(tempTrack);
 		}
-		else if (userData.pairTrackInst[track].TrackInstrument == "TRUMPET") {
-			mySynthTrackVector.push_back(this->TrumpController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber]));
+		else if (userData.pairTrackInst[track].TrackInstrument == InstrumentList[6]) {
+			tempTrack = this->TrumpController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber], userData.pairTrackInst[track].InstrumentPreview);
+			tempTrack.effect2Apply = userData.pairTrackInst[track].effect2Apply;
+			tempTrack.T = userData.pairTrackInst[track].T;
+			tempTrack.M = userData.pairTrackInst[track].M;
+			tempTrack.D = userData.pairTrackInst[track].D;
+			mySynthTrackVector.push_back(tempTrack);
 		}
 		//else if (other instrument) {
 		//}
 	}
+	mySynthTrackVector = this->EController.applyEfects(mySynthTrackVector);
+
 	return mySynthTrackVector;
 }
 

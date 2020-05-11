@@ -6,8 +6,10 @@
 #include "BellController.h"
 #include "ClarinetController.h"
 #include "TromboneController.h"
+#include "../Efectos/EfectController.h"
 #include "OrganController.h"
 #include "TrumpetController.h"
+#include "../General.h"
 
 // Aca se incluyen todos los instrumentos
 #include "../Utils/Tracks.h"
@@ -18,7 +20,6 @@ public:
 	ControllerOfControllers();
 	~ControllerOfControllers();
 	vector<SynthTrack> sytnsynthesisProject(vector<Tracks> projectTracks,UserInput userData);
-	vector<SynthTrack> sytnsynthesisPreview(vector<Tracks> projectTracks, UserInput userData);
 	
 private:
 	AcousticGuitarController AGController;
@@ -30,6 +31,8 @@ private:
 	TromboneController TController;
 	OrganController OController;
 	TrumpetController TrumpController;
+	EfectController EController;
 	// aca agregas tus instrumentos
+
 };
 
