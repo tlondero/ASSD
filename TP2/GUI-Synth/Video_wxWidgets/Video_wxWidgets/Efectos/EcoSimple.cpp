@@ -11,7 +11,7 @@ vector<double> EcoSimple::applyEffect(vector<double> input, double T, double D) 
 
     std::vector<double> output(input.size(), 0);
 
-    double m = T * SAMPLE_RATE * (-1 * log10(abs(D)) / 3);
+    double m = T * SAMPLE_RATE * (-1 * log10(abs(D)) / 3.0);
 
     for (int i = 0; i < input.size(); i++) {
         if (i - m > 0)
