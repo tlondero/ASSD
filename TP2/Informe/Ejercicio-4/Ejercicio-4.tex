@@ -32,7 +32,7 @@ H(z) = \frac{\frac{1}{2} \cdot z^{L+1} +\frac{1}{2} \cdot z^{L} }{z^{L+1} - \fra
 \end{align}  
 Vale la pena mencionar que de la ecuación (\ref{eq:eqdif}) es una ecuación en diferencias que cuenta como condiciones iniciales la wavetable suministrada por el ruido.
 \subsubsection{Análisis singularidades}
-Se observa que la expresión (\ref{eq:hzks}) cuenta con L+1 polos y L+1 ceros. A continuación se muestra un diagrama de polos y ceros del sistema:
+Se observa que la expresión (\ref{eq:hzks}) cuenta con L+1 polos y L+1 ceros (de los cuales L de esos ceros se encuentran en el origen). A continuación se muestra un diagrama de polos y ceros del sistema:
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\textwidth]{ImagenesEjercicio4/pzks.PNG}
@@ -164,7 +164,12 @@ Se tuvo en cuenta que el sonido sea una función suave, dado que cambios bruscos
 \end{figure}
 Esto aumenta la calidad de la síntesis en gran medida si se combina con la idea de que la duración de la nota y la del sonido son cosas distintas.
 \subsubsection{Caja de resonancia}
-Respecto a la caja de resonancia...
+La caja de resonancia es una parte primordial de la gran mayoría de instrumentos acústicos, principalmente de cuerda y percusión, que tiene la finalidad de amplificar o modular un sonido (en los instrumentos de cuerda generalmente a través de un puente). 
+Los instrumentos que cubren rangos de sonidos más graves, como el contrabajo, el violonchelo o el bombo, necesitan una caja de resonancia bastante mayor que el resto.
+La necesidad de utilizar una caja de resonancia en una guitarra se debe justamente a que la vibración de las cuerdas, que generan los frente de onda esféricos propios del sonido, tienen una gran dificutad para propagarse por el medio (el aire) debido a su reducida amplitud. La manera elegida de sopesar este problema suele ser la utilización de una caja de resonancia, esta cumple la función de capturar parte del frente de onda en su cavidad, allí las frecuencias producidas por las cuerdas son amplificadas en igual magnitud y luego liberadas al medio, ahora con la intesidad suficienste para que pueda propagarse y que sea apreciable el sonido.\\
+Finalmente cabe destacar que en el ámbito de señales realmente no es necesario dicha caja, al igual que tampoco un filtro que la emule, debido a que su función es amplificar, y eso se puede hacer digitalmente sin ningún problema. 
+
+
 \subsection{Karplus-Strong percusión}
 Se puede realizar una modificación al modelo inicial agregando un factor aleatorio como se observa a continuación:
 \begin{figure}[H]
