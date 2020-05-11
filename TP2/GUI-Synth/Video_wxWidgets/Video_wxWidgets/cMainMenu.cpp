@@ -473,8 +473,8 @@ void cMainMenu::AddMidiToProgram(wxCommandEvent& evt) {
 
 	string pathSelected = openFileDialog.GetPath();				//Path completo
 
-	//string stringSelected = pathSelected.substr(pathSelected.find_last_of('\\') + 1);
-	//stringSelected = stringSelected.substr(stringSelected.find_last_of('\\') + 1, stringSelected.size() - 4);		//Solo el nombre sin el .wav
+	string stringSelected = pathSelected.substr(pathSelected.find_last_of('\\') + 1);
+	stringSelected = stringSelected.substr(stringSelected.find_last_of('\\') + 1, stringSelected.size() - 4);		//Solo el nombre sin el .wav
 
 	if (!input_stream.IsOk()) {
 		wxLogError("Cannot open file '%s'.", openFileDialog.GetPath());
@@ -487,6 +487,7 @@ void cMainMenu::AddMidiToProgram(wxCommandEvent& evt) {
 		if (this->midi.addMidi(this->selecetedMidi)) {
 				this->midiTranslated=this->midi.getTracks();
 				addToDdm(midiToStringDdm(this->midiTranslated), ddm_track);
+				t_loadR->SetLabel("Current MIDI: " + stringSelected + ". I'm ready! Giveme some work...");
 		}
 		else {
 			//algun tipo de error;
