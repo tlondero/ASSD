@@ -26,14 +26,16 @@ def karplus_strong(input, L,rf,N):
 
 d=np.zeros(50)
 d[0]=1
-uniform = np.random.uniform(low=0.0, high=1.0, size=50)
+uniform = np.random.uniform(low=-1, high=1.0, size=50)
 binary=2 * np.random.randint(0, 2, 50) - 1
 normal = np.random.normal(0,1,50)
-input = d
-print("Input: ")
-print(d)
+input = normal
+
 N=10000
 T=1/41300
 out= karplus_strong(input,20,1,N)
-plt.plot(out)
+plt.plot(out,label="Tensión de salida")
+plt.ylabel("Tensión [V]")
+plt.xlabel("Tiempo [mS]")
+plt.legend()
 plt.show()
