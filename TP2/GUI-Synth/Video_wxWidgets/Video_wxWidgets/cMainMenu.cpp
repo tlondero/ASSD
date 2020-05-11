@@ -392,21 +392,31 @@ void cMainMenu::AddTrack(wxCommandEvent& evt) {
 			}
 		}
 		else if ((instrument == InstrumentList[7]) && !(tx_drumRf->IsEmpty()) && !(tx_drumB->IsEmpty())) {							//DRUM
-			uc.TrackInstrument = instrument;
-			int i = track.size() - (track.substr(track.find('['))).size() - 7;
-			uc.TrackNumber = stoi(track.substr(6, i));
-			uc.params.DrumParam_rf = stod((string)tx_drumRf->GetValue());
-			uc.params.DrumProb = stod((string)tx_drumB->GetValue());
+			if ( stod((string)tx_drumRf->GetValue()) > 0 && stod((string)tx_drumRf->GetValue()) < 2 && stod((string)tx_drumB->GetValue()) > 0 && stod((string)tx_drumB->GetValue()) < 1 ) {
+				uc.TrackInstrument = instrument;
+				int i = track.size() - (track.substr(track.find('['))).size() - 7;
+				uc.TrackNumber = stoi(track.substr(6, i));
+				uc.params.DrumParam_rf = stod((string)tx_drumRf->GetValue());
+				uc.params.DrumProb = stod((string)tx_drumB->GetValue());
 
-			for (int i = 0; i < ui.pairTrackInst.size(); i++) {
-				if (ui.pairTrackInst[i].TrackNumber == uc.TrackNumber) {
-					letsPush = false;
+				for (int i = 0; i < ui.pairTrackInst.size(); i++) {
+					if (ui.pairTrackInst[i].TrackNumber == uc.TrackNumber) {
+						letsPush = false;
+					}
+				}
+				if (letsPush) {
+					ui.pairTrackInst.push_back(uc);
+					lb_tracks->Append(track + ' ' + instrument);
 				}
 			}
-			if (letsPush) {
-				ui.pairTrackInst.push_back(uc);
-				lb_tracks->Append(track + ' ' + instrument);
+			else {
+				wxMessageDialog warning(this, "The parameters selected are invalid", "Can't add an track");
+				warning.Center();
+				warning.SetExtendedMessage("Remember: \n0 < RF < 2 \n0 < B < 1");
+				warning.ShowModal();
+				warning.Hide();
 			}
+		
 		}
 		else {
 			//Warning
