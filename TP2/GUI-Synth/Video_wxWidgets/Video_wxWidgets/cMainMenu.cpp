@@ -9,6 +9,7 @@ wxBEGIN_EVENT_TABLE(cMainMenu, wxFrame)
 
 	EVT_MENU(10005, OnMenuExit)
 	EVT_MENU(10006, OnMenuFullscreen)
+	EVT_MENU(10019, OnMenuHelp)
 
 	EVT_BUTTON(10001, AddMidiToProgram)
 	EVT_BUTTON(10002, AddTrack)
@@ -42,7 +43,7 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	this->SetMenuBar(m_MenuBar);
 
 	wxMenu* menuFile = new wxMenu();
-	menuFile->Append(wxID_ANY, "Help			F9");
+	menuFile->Append(10019, "Help			F9");
 	menuFile->Append(10006, "Fullscreen			F11");
 	menuFile->Append(10005, "Exit				F12");
 	m_MenuBar->Append(menuFile, "More");
@@ -93,7 +94,7 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	t_tackDdm = new wxStaticText(this, wxID_ANY, "Tracks:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 4 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y));
 	t_instrumentoDdm = new wxStaticText(this, wxID_ANY, "Instruments:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 6 * BUTTON_SP + DDM_Y), wxSize(TEXT_X, TEXT_Y));
 	t_paramList = new wxStaticText(this, wxID_ANY, "Parameters:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 6 * BUTTON_SP + 3 * DDM_Y), wxSize(TEXT_X, TEXT_Y));
-	t_previewDdm = new wxStaticText(this, wxID_ANY, "Lista de tracks agregados:", wxPoint(COL2, 4 * BUTTON_SP + BUTTON_Y), wxSize(TEXT_X, TEXT_Y));
+	t_previewDdm = new wxStaticText(this, wxID_ANY, "List of added tracks:", wxPoint(COL2, 4 * BUTTON_SP + BUTTON_Y), wxSize(TEXT_X, TEXT_Y));
 	t_effectWavDdm = new wxStaticText(this, wxID_ANY, "WAV Effects:", wxPoint(COL2, 6 * BUTTON_SP + 2 * BUTTON_Y + 2 * TEXT_Y + LB_Y / 2), wxSize(TEXT_X, TEXT_Y));
 	t_effectMicDdm = new wxStaticText(this, wxID_ANY, "MIC Effects:", wxPoint(COL3, 2 * BUTTON_SP + BUTTON_Y), wxSize(TEXT_X, TEXT_Y));
 
@@ -155,6 +156,12 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	//Text Control (VENTANAS)
 	tx_specWindParam = new wxTextCtrl(this, wxID_ANY, "", wxPoint(COL4, BUTTON_Y + 8 * TEXT_Y + 2 * DDM_Y + 6 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y + 5));
 	tx_specWindParam->Hide();
+
+
+	//Dinmac Texts (LOAD)
+	t_loadR = new wxStaticText(this, wxID_ANY, "I'm ready! Giveme some work...", wxPoint(2 * BUTTON_SP + 2*BUTTON_X, BUTTON_SP), wxSize(TEXT_X/2, 2 * TEXT_Y));
+	t_loadW = new wxStaticText(this, wxID_ANY, "I'm too busy, pleas wait while I'm thinkig...", wxPoint(2 * BUTTON_SP + 2 * BUTTON_X, BUTTON_SP), wxSize(TEXT_X / 2, 2 * TEXT_Y));
+	t_loadW->Hide();
 
 
 	//Dinmac Texts (INSTRUMENTOS)
@@ -245,6 +252,16 @@ void cMainMenu::OnMenuFullscreen(wxCommandEvent& evt) {
 
 void cMainMenu::OnMenuExit(wxCommandEvent & evt) {
 	Close();
+	evt.Skip();
+}
+
+void cMainMenu::OnMenuHelp(wxCommandEvent& evt) {
+	//Warning
+	wxMessageDialog warning(this, "Some little advices to use this program", "Help");
+	warning.Center();
+	warning.SetExtendedMessage("First load a MIDI file. Configure the tracks you want, with the instrument and paramters you like. Once you fill every parameter for an instrument,	you wil be able to add the track to the track list. Then you will be able to add effects to a single track o to the final wav. \nFeel free to save a preview of the track selected, load any wav file to use it in the spectogram.");
+	warning.ShowModal();
+	warning.Hide();
 	evt.Skip();
 }
 
@@ -496,6 +513,8 @@ void cMainMenu::CreateWav(wxCommandEvent& evt) {
 			pathSelected = pathSelected.erase(cutFrom, cutUpto);
 
 			//Load Bar
+			t_loadR->Hide();
+			t_loadW->Show();
 			wxMessageDialog loadBar(this, "Creating WAV", "Loading");
 			loadBar.Center();
 			loadBar.SetExtendedMessage("This could take a few minutes, please wait.");
@@ -504,6 +523,8 @@ void cMainMenu::CreateWav(wxCommandEvent& evt) {
 			myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, this->ui), this->midi.getTotalDuration() + 1, pathSelected, 1000, this->ui.finalEfect,this->ui.g,this->ui.M);
 			myWC.makeWav();
 			loadBar.Hide();
+			t_loadR->Show();
+			t_loadW->Hide();
 		}
 	}
 	else {
@@ -571,6 +592,14 @@ void cMainMenu::OnKeyDown(wxKeyEvent& evt) {
 	if (evt.GetKeyCode() == WXK_F11) {
 		this->ShowFullScreen(!fullscreen, wxFULLSCREEN_ALL ^ wxFULLSCREEN_NOSTATUSBAR);
 		fullscreen = !fullscreen;
+	}
+	else if (evt.GetKeyCode() == WXK_F9) {
+		//Warning
+		wxMessageDialog warning(this, "Some little advices to use this program", "Help");
+		warning.Center();
+		warning.SetExtendedMessage("First load a MIDI file. Configure the tracks you want, with the instrument and paramters you like. Once you fill every parameter for an instrument,	you wil be able to add the track to the track list. Then you will be able to add effects to a single track o to the final wav. \nFeel free to save a preview of the track selected, load any wav file to use it in the spectogram.");
+		warning.ShowModal();
+		warning.Hide();
 	}
 	else if (evt.GetKeyCode() == WXK_F12) {
 		Close();

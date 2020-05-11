@@ -130,6 +130,10 @@ private:
 	wxTextCtrl* tx_specWindParam = nullptr;
 
 
+	//Dinmac Texts (LOAD)
+	wxStaticText* t_loadR = nullptr;
+	wxStaticText* t_loadW = nullptr;
+
 	//Dinmac Texts (INSTRUMENTOS)
 	wxStaticText* t_organA = nullptr;
 	wxStaticText* t_organR = nullptr;
@@ -189,6 +193,7 @@ private:
 
 	void OnMenuFullscreen(wxCommandEvent& evt);			
 	void OnMenuExit(wxCommandEvent& evt);	
+	void OnMenuHelp(wxCommandEvent& evt);
 
 	void AddMidiToProgram(wxCommandEvent& evt);
 	void AddTrackToDdm(wxCommandEvent& evt);
