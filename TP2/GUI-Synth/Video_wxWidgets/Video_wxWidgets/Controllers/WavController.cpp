@@ -15,7 +15,7 @@ WavController::WavController() {
 
 }
 
-void WavController::compileWav(vector<SynthTrack> allTracks, double duration_, string wavName_, double volume_, string efect, double g, int M) {
+void WavController::compileWav(vector<SynthTrack> allTracks, double duration_, string wavName_, double volume_) {
 
 	this->duration = duration_;
 	this->wavName = wavName_;
@@ -29,11 +29,6 @@ void WavController::compileWav(vector<SynthTrack> allTracks, double duration_, s
 			}
 		}
 	}
-	//if (efect == EffList[0])
-	//	for (int i = 0; i < wavVector.size(); i++) {
-	//		if (i - M > 0)
-	//			wavVector[i] = wavVector[i] + (-g) * wavVector[i - M];
-	//	}
 	double max = *max_element(wavVector.begin(), wavVector.end());
 	for (int i = 0; i < wavVector.size(); i++) {
 		wavVector[i] = wavVector[i] / max;

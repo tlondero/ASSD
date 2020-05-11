@@ -530,7 +530,7 @@ void cMainMenu::CreateWav(wxCommandEvent& evt) {
 			loadBar.Center();
 			loadBar.SetExtendedMessage("This could take a few minutes, please wait.");
 			loadBar.ShowModal();
-			myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, this->ui), this->midi.getTotalDuration() + 5, pathSelected, 1000, this->ui.finalEfect,this->ui.g,this->ui.M);
+			myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, this->ui), this->midi.getTotalDuration() + 5, pathSelected, 1000);
 			myWC.makeWav();
 			loadBar.Hide();
 			t_loadR->Show();
@@ -555,7 +555,7 @@ void cMainMenu::CreatePreview(wxCommandEvent& evt) {
 		ucPrev.InstrumentPreview = true;
 		uiPrev.pairTrackInst.push_back(ucPrev);
 
-		myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, uiPrev), PREVIEW_DURATION, "Previews/prevTrack", 1000, this->ui.finalEfect, this->ui.g, this->ui.M);
+		myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, uiPrev), PREVIEW_DURATION, "Previews/prevTrack", 1000);
 		myWC.makeWav();
 
 
@@ -820,8 +820,8 @@ void cMainMenu::addEffTrack(wxCommandEvent& evt) {
 					if (addingTrack) {
 						tracksAddedEfects.push_back(trackToAdd);
 						ui.pairTrackInst[lb_tracks->GetSelection()].effect2Apply = effName;
-						ui.pairTrackInst[lb_tracks->GetSelection()].g = stod((string)tx_effGEco->GetValue());
-						ui.pairTrackInst[lb_tracks->GetSelection()].M = stod((string)tx_effMEco->GetValue());
+						ui.pairTrackInst[lb_tracks->GetSelection()].T = stod((string)tx_effGEco->GetValue());
+						ui.pairTrackInst[lb_tracks->GetSelection()].D = stod((string)tx_effMEco->GetValue());
 						lb_wavEff->Append("Track " + to_string(lb_tracks->GetSelection()) + ", Effect " + effName);
 					}
 					else {
@@ -855,11 +855,11 @@ void cMainMenu::addEffTrack(wxCommandEvent& evt) {
 					}
 
 					if (addingTrack) {
-						//tracksAddedEfects.push_back(trackToAdd);
-						//ui.pairTrackInst[lb_tracks->GetSelection()].effect2Apply = effName;
-						//ui.pairTrackInst[lb_tracks->GetSelection()].treverb = stod((string) tx_effRev->GetStringSelection());
-						//ui.pairTrackInst[lb_tracks->GetSelection()].M = stod((string) tx_effMix->GetStringSelection());
-						//lb_wavEff->Append("Track " + to_string(lb_tracks->GetSelection()) + ", Effect " + effName);
+						tracksAddedEfects.push_back(trackToAdd);
+						ui.pairTrackInst[lb_tracks->GetSelection()].effect2Apply = effName;
+						ui.pairTrackInst[lb_tracks->GetSelection()].T = stod((string) tx_effRev->GetStringSelection());
+						ui.pairTrackInst[lb_tracks->GetSelection()].M = stod((string) tx_effMix->GetStringSelection());
+						lb_wavEff->Append("Track " + to_string(lb_tracks->GetSelection()) + ", Effect " + effName);
 					}
 					else {
 						//Warning
@@ -933,8 +933,8 @@ void cMainMenu::addEffWav(wxCommandEvent& evt) {
 				else {
 					if (lb_wavEffFinal->FindString(effName) == wxNOT_FOUND) {
 						ui.finalEfect = effName;
-						ui.g = stod((string)tx_effGEco->GetValue());
-						ui.M = stod((string)tx_effMEco->GetValue());
+						ui.T = stod((string)tx_effGEco->GetValue());
+						ui.D = stod((string)tx_effMEco->GetValue());
 						lb_wavEffFinal->Append(effName);
 					}
 					else {
@@ -958,10 +958,10 @@ void cMainMenu::addEffWav(wxCommandEvent& evt) {
 				}
 				else {
 					if (lb_wavEffFinal->FindString(effName) == wxNOT_FOUND) {
-						//ui.finalEfect = effName;
-						//ui.treverb = stod((string)tx_effRev->GetValue());		
-						//ui.M = stod((string)tx_effMix->GetValue());
-						//lb_wavEffFinal->Append(effName);
+						ui.finalEfect = effName;
+						ui.T = stod((string)tx_effRev->GetValue());		
+						ui.M = stod((string)tx_effMix->GetValue());
+						lb_wavEffFinal->Append(effName);
 					}
 					else {
 						//Warning

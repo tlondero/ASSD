@@ -14,7 +14,7 @@ public:
 	InstParams params;
 	string effect2Apply;
 //Parametros efectos.
-	double g;
-	int M;
-	double treverb;
+	double D;
+	double M;
+	double T;
 };
