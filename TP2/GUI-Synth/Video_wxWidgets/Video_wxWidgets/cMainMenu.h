@@ -34,9 +34,9 @@
 #define LB_X 300
 #define LB_Y 300
 
-#define COL2 450
-#define COL3 2*450
-#define COL4 3*450
+#define COL2 325
+#define COL3 2*COL2
+#define COL4 3*COL2
 
 using namespace std;
 
