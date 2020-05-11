@@ -530,8 +530,7 @@ void cMainMenu::CreateWav(wxCommandEvent& evt) {
 			loadBar.Center();
 			loadBar.SetExtendedMessage("This could take a few minutes, please wait.");
 			loadBar.ShowModal();
-
-			myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, this->ui), this->midi.getTotalDuration() + 1, pathSelected, 1000, this->ui.finalEfect,this->ui.g,this->ui.M);
+			myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, this->ui), this->midi.getTotalDuration() + 5, pathSelected, 1000, this->ui.finalEfect,this->ui.g,this->ui.M);
 			myWC.makeWav();
 			loadBar.Hide();
 			t_loadR->Show();
