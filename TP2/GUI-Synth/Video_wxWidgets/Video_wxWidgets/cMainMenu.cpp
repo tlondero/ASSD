@@ -167,7 +167,7 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 
 	//Dinmac Texts (LOAD)
 	t_loadR = new wxStaticText(this, wxID_ANY, "I'm ready! Give me some work...", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 2 * BUTTON_SP), wxSize(BUTTON_X * 2 , TEXT_Y * 2));
-	t_loadW = new wxStaticText(this, wxID_ANY, "I'm too bussy, please wait while I'm thinkig...", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 2 * BUTTON_SP), wxSize(BUTTON_X * 2, TEXT_Y * 2));
+	t_loadW = new wxStaticText(this, wxID_ANY, "I'm too bussy, please wait while I'm thinking...", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 2 * BUTTON_SP), wxSize(BUTTON_X * 2, TEXT_Y * 2));
 	t_loadW->Hide();
 
 
@@ -508,13 +508,17 @@ void cMainMenu::AddMidiToProgram(wxCommandEvent& evt) {
 		ddm_track->Clear();
 		lb_tracks->Clear();
 		lb_wavEff->Clear();
+		lb_wavEffFinal->Clear();
+		tracksAddedEfects.clear();
 		selecetedMidi = pathSelected;
+		
+		
 		if (this->midi.addMidi(this->selecetedMidi)) {
-				this->midiTranslated=this->midi.getTracks();
-				addToDdm(midiToStringDdm(this->midiTranslated), ddm_track);
-				t_loadR->SetLabel("Current MIDI: " + stringSelected + ". I'm ready! Give me some work...");
-				t_loadR->SetSize(wxSize(BUTTON_X * 2, TEXT_Y * 2));
-				t_loadR->Update();
+			this->midiTranslated=this->midi.getTracks();
+			addToDdm(midiToStringDdm(this->midiTranslated), ddm_track);
+			t_loadR->SetLabel("Current MIDI: " + stringSelected + ". I'm ready! Give me some work...");
+			t_loadR->SetSize(wxSize(BUTTON_X * 2, TEXT_Y * 2));
+			t_loadR->Update();
 		}
 		else {
 			//algun tipo de error;
@@ -874,11 +878,13 @@ void cMainMenu::addEffTrack(wxCommandEvent& evt) {
 						}
 					}
 
+					double t = stod((string)tx_effRev->GetStringSelection());
+
 					if (addingTrack) {
 						tracksAddedEfects.push_back(trackToAdd);
 						ui.pairTrackInst[lb_tracks->GetSelection()].effect2Apply = effName;
-						ui.pairTrackInst[lb_tracks->GetSelection()].T = stod((string) tx_effRev->GetStringSelection());
-						ui.pairTrackInst[lb_tracks->GetSelection()].M = stod((string) tx_effMix->GetStringSelection());
+						ui.pairTrackInst[lb_tracks->GetSelection()].T = stod((string) tx_effRev->GetValue());
+						ui.pairTrackInst[lb_tracks->GetSelection()].M = stod((string) tx_effMix->GetValue());
 						lb_wavEff->Append("Track " + to_string(lb_tracks->GetSelection()) + ", Effect " + effName);
 					}
 					else {
