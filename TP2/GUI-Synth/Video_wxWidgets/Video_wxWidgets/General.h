@@ -16,11 +16,11 @@
 //INSTRUMENTOS
 #define PREVIEW_DURATION		6
 #define NUMBER_OF_INSTRUMETS	10
-const std::string  InstrumentList[NUMBER_OF_INSTRUMETS] = { "GUITAR", "ORGAN", "FLUTE", "BELL", "CLARINET", "TROMBONE", "TRUMPET", "DRUM", "BANJO", "ELECTRIC_GUITAR" };
+const std::string  InstrumentList[NUMBER_OF_INSTRUMETS] = { "Guitar", "Organ", "Flute", "Bell", "Clarinet", "Trombone", "Trumpet", "Drum", "Banjo", "Eelectric Guitar" };
 
 //VENTANAS
 #define NUMBER_OF_WINDOWS		11
-const std::string  WindowsList[NUMBER_OF_WINDOWS] = { "triang", "blackman", "hanning", "hamming", "bartlett", "blackmanharris", "barthann", "rectangular", "gaussian", "exponential", "kaiser" };
+const std::string  WindowsList[NUMBER_OF_WINDOWS] = { "Triangular", "Blackman", "Hanning", "Hamming", "Bartlett", "Blackmanharris", "Barthann", "Rectangular", "Gaussian", "Exponential", "Kaiser" };
 
 //EFECTOS
 #define NUMBER_OF_EFF		2

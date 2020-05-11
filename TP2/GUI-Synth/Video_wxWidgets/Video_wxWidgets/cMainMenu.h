@@ -101,7 +101,9 @@ private:
 	wxStaticText* t_specWindType = nullptr;
 	wxStaticText* t_currentSpec = nullptr;
 	wxStaticText* t_specWindParam = nullptr;
-
+	wxStaticText* t_wavEff = nullptr;
+	wxStaticText* t_wavTrack = nullptr;
+	wxStaticText* t_micEff = nullptr;
 	wxStaticText* t_nfft = nullptr;
 	wxStaticText* t_overlap = nullptr;
 
@@ -129,6 +131,10 @@ private:
 	//Text Control (VENTANAS)
 	wxTextCtrl* tx_specWindParam = nullptr;
 
+
+	//Dinmac Texts (LOAD)
+	wxStaticText* t_loadR = nullptr;
+	wxStaticText* t_loadW = nullptr;
 
 	//Dinmac Texts (INSTRUMENTOS)
 	wxStaticText* t_organA = nullptr;
@@ -189,6 +195,7 @@ private:
 
 	void OnMenuFullscreen(wxCommandEvent& evt);			
 	void OnMenuExit(wxCommandEvent& evt);	
+	void OnMenuHelp(wxCommandEvent& evt);
 
 	void AddMidiToProgram(wxCommandEvent& evt);
 	void AddTrackToDdm(wxCommandEvent& evt);

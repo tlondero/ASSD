@@ -9,6 +9,7 @@
 #include "../Efectos/EfectController.h"
 #include "OrganController.h"
 #include "TrumpetController.h"
+#include "../General.h"
 
 // Aca se incluyen todos los instrumentos
 #include "../Utils/Tracks.h"

@@ -39,16 +39,16 @@ def generatePlot(path,Nfft,overlap,window,kaiserparam,gaussianparam,expparam):
     elif(window == "rectangular"):
         spec = axs[1].specgram(channel1_samples,NFFT=Nfft,Fs=sample_rate,noverlap=overlap,window= signal.windows.tukey(Nfft,0) )
 
-    axs[1].set_xlabel("time [$s$]")
+    axs[1].set_xlabel("Time [$s$]")
     axs[1].set_ylabel("Frecuency [$Hz$]")
 
     #Matching Spectogram and time domain axes
     x_axis = np.linspace(spec[2][0],spec[2][-1],len(channel1_samples))
     axs[0].plot(x_axis,channel1_samples/np.max(np.abs(channel1_samples)))
-    axs[0].set_ylabel("amplitude")
+    axs[0].set_ylabel("Amplitude")
 
     #Save the image
-    plt.savefig(path[:-3]+"png", format="png")
+    #plt.savefig(path[:-3]+"png", format="png")
     plt.show()
 
 if __name__ == '__main__':
