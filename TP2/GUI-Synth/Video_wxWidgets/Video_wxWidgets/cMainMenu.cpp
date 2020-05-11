@@ -72,7 +72,7 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	b_updateSpec = new wxButton(this, 10013, "Create spectogram", wxPoint(COL4 + TEXT_X, 2 * BUTTON_SP + TEXT_Y), wxSize(BUTTON_X, BUTTON_Y));
 
 	//Drop Down Menu (Combo Box)
-	ddm_track = new wxComboBox(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 4 * BUTTON_SP + TEXT_Y), wxSize(DDM_X, DDM_Y));
+	ddm_track = new wxComboBox(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 6 * BUTTON_SP + TEXT_Y), wxSize(DDM_X, DDM_Y));
 	ddm_instrumento = new wxComboBox(this, 10003, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 6 * BUTTON_SP + 2 * DDM_Y), wxSize(DDM_X, DDM_Y));
 	ddm_wavEff = new wxComboBox(this, 10004, "", wxPoint(COL2, 10 * BUTTON_SP + 2 * BUTTON_Y + 2 * TEXT_Y + LB_Y / 2), wxSize(DDM_X, DDM_Y));
 	ddm_micEff = new wxComboBox(this, wxID_ANY, "", wxPoint(COL3, 2 * BUTTON_SP + BUTTON_Y + TEXT_Y), wxSize(DDM_X, DDM_Y));
@@ -91,8 +91,8 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 
 	
 	//Text
-	t_tackDdm = new wxStaticText(this, wxID_ANY, "Tracks:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 4 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y));
-	t_instrumentoDdm = new wxStaticText(this, wxID_ANY, "Instruments:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 6 * BUTTON_SP + DDM_Y), wxSize(TEXT_X, TEXT_Y));
+	t_tackDdm = new wxStaticText(this, wxID_ANY, "Tracks:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 6 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y));
+	t_instrumentoDdm = new wxStaticText(this, wxID_ANY, "Instruments:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 9 * BUTTON_SP + DDM_Y), wxSize(TEXT_X, TEXT_Y));
 	t_paramList = new wxStaticText(this, wxID_ANY, "Parameters:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 6 * BUTTON_SP + 3 * DDM_Y), wxSize(TEXT_X, TEXT_Y));
 	t_previewDdm = new wxStaticText(this, wxID_ANY, "List of added tracks:", wxPoint(COL2, 4 * BUTTON_SP + BUTTON_Y), wxSize(TEXT_X, TEXT_Y));
 	t_effectWavDdm = new wxStaticText(this, wxID_ANY, "WAV Effects:", wxPoint(COL2, 6 * BUTTON_SP + 2 * BUTTON_Y + 2 * TEXT_Y + LB_Y / 2), wxSize(TEXT_X, TEXT_Y));
@@ -159,8 +159,8 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 
 
 	//Dinmac Texts (LOAD)
-	t_loadR = new wxStaticText(this, wxID_ANY, "I'm ready! Giveme some work...", wxPoint(2 * BUTTON_SP + 2*BUTTON_X, BUTTON_SP), wxSize(TEXT_X/2, 2 * TEXT_Y));
-	t_loadW = new wxStaticText(this, wxID_ANY, "I'm too busy, pleas wait while I'm thinkig...", wxPoint(2 * BUTTON_SP + 2 * BUTTON_X, BUTTON_SP), wxSize(TEXT_X / 2, 2 * TEXT_Y));
+	t_loadR = new wxStaticText(this, wxID_ANY, "I'm ready! Giveme some work...", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 2 * BUTTON_SP), wxSize(TEXT_X * 2, TEXT_Y));
+	t_loadW = new wxStaticText(this, wxID_ANY, "I'm too busy, pleas wait while I'm thinkig...", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 2 * BUTTON_SP), wxSize(TEXT_X * 2, TEXT_Y));
 	t_loadW->Hide();
 
 
