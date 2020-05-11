@@ -301,39 +301,59 @@ void cMainMenu::AddTrack(wxCommandEvent& evt) {
 			}
 		}
 		else if ((instrument == InstrumentList[1]) && !(tx_organA->IsEmpty()) && !(tx_organS->IsEmpty()) && !(tx_organR->IsEmpty())) {							//ORGANO
-			uc.TrackInstrument = instrument;
-			int i = track.size() - (track.substr(track.find('['))).size() - 7;
-			uc.TrackNumber = stoi(track.substr(6, i));
-			uc.params.A = stod((string)tx_organA->GetValue());
-			uc.params.S = stod((string)tx_organS->GetValue());
-			uc.params.R = stod((string)tx_organR->GetValue());
+			if (stod((string)tx_organA->GetValue()) < 1 && stod((string)tx_organA->GetValue()) > 0 && stod((string)tx_organS->GetValue()) < 1 && stod((string)tx_organS->GetValue()) && stod((string)tx_organR->GetValue()) < 1 && stod((string)tx_organR->GetValue())) {
+				uc.TrackInstrument = instrument;
+				int i = track.size() - (track.substr(track.find('['))).size() - 7;
+				uc.TrackNumber = stoi(track.substr(6, i));
+				uc.params.A = stod((string)tx_organA->GetValue());
+				uc.params.S = stod((string)tx_organS->GetValue());
+				uc.params.R = stod((string)tx_organR->GetValue());
 
-			for (int i = 0; i < ui.pairTrackInst.size(); i++) {
-				if (ui.pairTrackInst[i].TrackNumber == uc.TrackNumber) {
-					letsPush = false;
+				for (int i = 0; i < ui.pairTrackInst.size(); i++) {
+					if (ui.pairTrackInst[i].TrackNumber == uc.TrackNumber) {
+						letsPush = false;
+					}
+				}
+				if (letsPush) {
+					ui.pairTrackInst.push_back(uc);
+					lb_tracks->Append(track + ' ' + instrument);
 				}
 			}
-			if (letsPush) {
-				ui.pairTrackInst.push_back(uc);
-				lb_tracks->Append(track + ' ' + instrument);
+			else {
+				//Warning
+				wxMessageDialog warning(this, "The parameters selected are invalid", "Can't add an track");
+				warning.Center();
+				warning.SetExtendedMessage("Remember: \n0 < A < 1 \n0 < S < 1 \n0 < R < 1");
+				warning.ShowModal();
+				warning.Hide();
 			}	
 		}
 		else if ((instrument == InstrumentList[2]) && !(tx_fluteA->IsEmpty()) && !(tx_fluteS->IsEmpty()) && !(tx_fluteR->IsEmpty())) {							//FLUTE
-			uc.TrackInstrument = instrument;
-			int i = track.size() - (track.substr(track.find('['))).size() - 7;
-			uc.TrackNumber = stoi(track.substr(6, i));
-			uc.params.A = stod((string)tx_fluteA->GetValue());
-			uc.params.S = stod((string)tx_fluteS->GetValue());
-			uc.params.R = stod((string)tx_fluteR->GetValue());
+			if (stod((string)tx_organA->GetValue()) < 1 && stod((string)tx_organA->GetValue()) > 0 && stod((string)tx_organS->GetValue()) < 1 && stod((string)tx_organS->GetValue()) && stod((string)tx_organR->GetValue()) < 1 && stod((string)tx_organR->GetValue())) {
+				uc.TrackInstrument = instrument;
+				int i = track.size() - (track.substr(track.find('['))).size() - 7;
+				uc.TrackNumber = stoi(track.substr(6, i));
+				uc.params.A = stod((string)tx_fluteA->GetValue());
+				uc.params.S = stod((string)tx_fluteS->GetValue());
+				uc.params.R = stod((string)tx_fluteR->GetValue());
 
-			for (int i = 0; i < ui.pairTrackInst.size(); i++) {
-				if (ui.pairTrackInst[i].TrackNumber == uc.TrackNumber) {
-					letsPush = false;
+				for (int i = 0; i < ui.pairTrackInst.size(); i++) {
+					if (ui.pairTrackInst[i].TrackNumber == uc.TrackNumber) {
+						letsPush = false;
+					}
+				}
+				if (letsPush) {
+					ui.pairTrackInst.push_back(uc);
+					lb_tracks->Append(track + ' ' + instrument);
 				}
 			}
-			if (letsPush) {
-				ui.pairTrackInst.push_back(uc);
-				lb_tracks->Append(track + ' ' + instrument);
+			else {
+				//Warning
+				wxMessageDialog warning(this, "The parameters selected are invalid", "Can't add an track");
+				warning.Center();
+				warning.SetExtendedMessage("Remember: \n0 < A < 1 \n0 < S < 1 \n0 < R < 1");
+				warning.ShowModal();
+				warning.Hide();
 			}
 		}
 		else if ((instrument == InstrumentList[3]) || (instrument == InstrumentList[4]) || (instrument == InstrumentList[5]) || (instrument == InstrumentList[6]) || (instrument == InstrumentList[8])) {							//BELL, CLARINET, TROMBONE, TRUMPET AND BANJO
