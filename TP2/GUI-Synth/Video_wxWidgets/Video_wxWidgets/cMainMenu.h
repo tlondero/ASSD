@@ -34,9 +34,9 @@
 #define LB_X 300
 #define LB_Y 300
 
-#define COL2 450
-#define COL3 2*450
-#define COL4 3*450
+#define COL2 325
+#define COL3 2*COL2
+#define COL4 3*COL2
 
 using namespace std;
 
@@ -128,6 +128,7 @@ private:
 	wxTextCtrl* tx_effGEco = nullptr;
 	wxTextCtrl* tx_effMEco = nullptr;
 	wxTextCtrl* tx_effRev = nullptr;
+	wxTextCtrl* tx_effMix = nullptr;
 
 	//Text Control (VENTANAS)
 	wxTextCtrl* tx_specWindParam = nullptr;
@@ -160,6 +161,7 @@ private:
 	wxStaticText* t_effGEco = nullptr;
 	wxStaticText* t_effMEco = nullptr;
 	wxStaticText* t_effRev = nullptr;
+	wxStaticText* t_effMix = nullptr;
 
 	//Dinamic Texts (VENTANAS)
 	wxStaticText* t_specGauss = nullptr;

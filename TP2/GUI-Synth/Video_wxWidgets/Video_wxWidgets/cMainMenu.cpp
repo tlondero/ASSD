@@ -36,7 +36,7 @@ wxEND_EVENT_TABLE()
 	- Armar funciones jajaaaa
 */
 
-cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(30, 30), wxSize(1250, 800))
+cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(30, 30), wxSize(970, 775))
 {
 	//Menu y tool bar
 	m_MenuBar = new wxMenuBar();
@@ -75,8 +75,8 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	b_updateSpec = new wxButton(this, 10013, "Create spectogram", wxPoint(COL3 + TEXT_X, 2 * BUTTON_SP + TEXT_Y), wxSize(BUTTON_X, BUTTON_Y));
 
 	//Drop Down Menu (Combo Box)
-	ddm_track = new wxComboBox(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 6 * BUTTON_SP + TEXT_Y), wxSize(DDM_X, DDM_Y));
-	ddm_instrumento = new wxComboBox(this, 10003, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 6 * BUTTON_SP + 2 * DDM_Y), wxSize(DDM_X, DDM_Y));
+	ddm_track = new wxComboBox(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 6 * BUTTON_SP + 2 * TEXT_Y), wxSize(DDM_X, DDM_Y));
+	ddm_instrumento = new wxComboBox(this, 10003, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 6 * BUTTON_SP + 2 * DDM_Y + TEXT_Y), wxSize(DDM_X, DDM_Y));
 	ddm_wavEff = new wxComboBox(this, 10004, "", wxPoint(COL2, 14 * BUTTON_SP + 2 * BUTTON_Y + 3 * TEXT_Y + LB_Y / 2), wxSize(DDM_X, DDM_Y));
 	//ddm_micEff = new wxComboBox(this, wxID_ANY, "", wxPoint(COL3, 2 * BUTTON_SP + BUTTON_Y + TEXT_Y), wxSize(DDM_X, DDM_Y));
 
@@ -94,9 +94,9 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 
 	
 	//Text
-	t_tackDdm = new wxStaticText(this, wxID_ANY, "Tracks:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 6 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y));
-	t_instrumentoDdm = new wxStaticText(this, wxID_ANY, "Instruments:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 9 * BUTTON_SP + DDM_Y), wxSize(TEXT_X, TEXT_Y));
-	t_paramList = new wxStaticText(this, wxID_ANY, "Parameters:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 6 * BUTTON_SP + 3 * DDM_Y), wxSize(TEXT_X, TEXT_Y));
+	t_tackDdm = new wxStaticText(this, wxID_ANY, "Tracks:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 6 * BUTTON_SP + TEXT_Y), wxSize(TEXT_X, TEXT_Y));
+	t_instrumentoDdm = new wxStaticText(this, wxID_ANY, "Instruments:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 9 * BUTTON_SP + DDM_Y + TEXT_Y), wxSize(TEXT_X, TEXT_Y));
+	t_paramList = new wxStaticText(this, wxID_ANY, "Parameters:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 6 * BUTTON_SP + 3 * DDM_Y + TEXT_Y), wxSize(TEXT_X, TEXT_Y));
 	t_previewDdm = new wxStaticText(this, wxID_ANY, "List of added tracks:", wxPoint(BUTTON_SP, 14 * BUTTON_SP + 3 * BUTTON_Y + 3 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X, TEXT_Y));
 	t_wavTrack = new wxStaticText(this, wxID_ANY, "Effects added to tracks::", wxPoint(COL2, 14 * BUTTON_SP + 3 * BUTTON_Y + 3 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X, TEXT_Y));
 	t_effectWavDdm = new wxStaticText(this, wxID_ANY, "WAV Effects:", wxPoint(COL2, 8 * BUTTON_SP + 2 * BUTTON_Y + 4 * TEXT_Y + LB_Y / 2), wxSize(TEXT_X, TEXT_Y));
@@ -113,19 +113,19 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 
 
 	//Text Control (INSTRUMENTOS)
-	tx_organA = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 8 * BUTTON_SP + 3 * DDM_Y + 2 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
-	tx_organR = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 10 * BUTTON_SP + 3 * DDM_Y + 4 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
-	tx_organS = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 12 * BUTTON_SP + 3 * DDM_Y + 6 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	tx_organA = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 8 * BUTTON_SP + 3 * DDM_Y + 3 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	tx_organR = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 10 * BUTTON_SP + 3 * DDM_Y + 5 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	tx_organS = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 12 * BUTTON_SP + 3 * DDM_Y + 7 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 
-	tx_fluteA = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 8 * BUTTON_SP + 3 * DDM_Y + 2 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
-	tx_fluteR = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 10 * BUTTON_SP + 3 * DDM_Y + 4 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
-	tx_fluteS = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 12 * BUTTON_SP + 3 * DDM_Y + 6 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	tx_fluteA = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 8 * BUTTON_SP + 3 * DDM_Y + 3 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	tx_fluteR = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 10 * BUTTON_SP + 3 * DDM_Y + 5 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	tx_fluteS = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 12 * BUTTON_SP + 3 * DDM_Y + 7 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 
-	tx_guitarRf = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 8 * BUTTON_SP + 3 * DDM_Y + 2 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
-	tx_eguitarRf = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 8 * BUTTON_SP + 3 * DDM_Y + 2 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	tx_guitarRf = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 8 * BUTTON_SP + 3 * DDM_Y + 3 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	tx_eguitarRf = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 8 * BUTTON_SP + 3 * DDM_Y + 3 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 
-	tx_drumRf = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 8 * BUTTON_SP + 3 * DDM_Y + 2 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
-	tx_drumB = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 10 * BUTTON_SP + 3 * DDM_Y + 4 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	tx_drumRf = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 8 * BUTTON_SP + 3 * DDM_Y + 3 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	tx_drumB = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 10 * BUTTON_SP + 3 * DDM_Y + 5 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 
 	tx_toShow.push_back(tx_organA);
 	tx_toShow.push_back(tx_organR);
@@ -149,10 +149,13 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	tx_effGEco = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 20 * BUTTON_SP + 5 * BUTTON_Y + 8 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X, TEXT_Y + 5));
 	tx_effMEco = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 22 * BUTTON_SP + 5 * BUTTON_Y + 10 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X, TEXT_Y + 5));
 	tx_effRev = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 20 * BUTTON_SP + 5 * BUTTON_Y + 8 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X, TEXT_Y + 5));
-	
+	tx_effMix = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 22 * BUTTON_SP + 5 * BUTTON_Y + 10 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X, TEXT_Y + 5));
+
+
 	tx_WavEfftoShow.push_back(tx_effGEco);
 	tx_WavEfftoShow.push_back(tx_effMEco);
 	tx_WavEfftoShow.push_back(tx_effRev);
+	tx_WavEfftoShow.push_back(tx_effMix);
 	for (int i = 0; i < tx_WavEfftoShow.size(); i++) {
 		tx_WavEfftoShow[i]->Hide();
 	}
@@ -163,27 +166,27 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 
 
 	//Dinmac Texts (LOAD)
-	t_loadR = new wxStaticText(this, wxID_ANY, "I'm ready! Give me some work...", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 2 * BUTTON_SP), wxSize(TEXT_X * 2, TEXT_Y));
-	t_loadW = new wxStaticText(this, wxID_ANY, "I'm too bussy, please wait while I'm thinkig...", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 2 * BUTTON_SP), wxSize(TEXT_X * 2, TEXT_Y));
+	t_loadR = new wxStaticText(this, wxID_ANY, "I'm ready! Give me some work...", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 2 * BUTTON_SP), wxSize(BUTTON_X * 2 , TEXT_Y * 2));
+	t_loadW = new wxStaticText(this, wxID_ANY, "I'm too bussy, please wait while I'm thinkig...", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 2 * BUTTON_SP), wxSize(BUTTON_X * 2, TEXT_Y * 2));
 	t_loadW->Hide();
 
 
 	//Dinmac Texts (INSTRUMENTOS)
-	t_organA = new wxStaticText(this, wxID_ANY, "A:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 7 * BUTTON_SP + 3 * DDM_Y + TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
-	t_organS = new wxStaticText(this, wxID_ANY, "S:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 9 * BUTTON_SP + 3 * DDM_Y + 3 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
-	t_organR = new wxStaticText(this, wxID_ANY, "R:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 11 * BUTTON_SP + 3 * DDM_Y + 5 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	t_organA = new wxStaticText(this, wxID_ANY, "A:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 7 * BUTTON_SP + 3 * DDM_Y + 2 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	t_organS = new wxStaticText(this, wxID_ANY, "S:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 9 * BUTTON_SP + 3 * DDM_Y + 4 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	t_organR = new wxStaticText(this, wxID_ANY, "R:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 11 * BUTTON_SP + 3 * DDM_Y + 6 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 
-	t_fluteA = new wxStaticText(this, wxID_ANY, "A:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 7 * BUTTON_SP + 3 * DDM_Y + TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
-	t_fluteS = new wxStaticText(this, wxID_ANY, "S:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 9 * BUTTON_SP + 3 * DDM_Y + 3 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
-	t_fluteR = new wxStaticText(this, wxID_ANY, "R:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 11 * BUTTON_SP + 3 * DDM_Y + 5 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	t_fluteA = new wxStaticText(this, wxID_ANY, "A:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 7 * BUTTON_SP + 3 * DDM_Y + 2 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	t_fluteS = new wxStaticText(this, wxID_ANY, "S:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 9 * BUTTON_SP + 3 * DDM_Y + 4 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	t_fluteR = new wxStaticText(this, wxID_ANY, "R:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 11 * BUTTON_SP + 3 * DDM_Y + 6 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 
-	t_guitarRf = new wxStaticText(this, wxID_ANY, "RL:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 7 * BUTTON_SP + 3 * DDM_Y + TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
-	t_eguitarRf = new wxStaticText(this, wxID_ANY, "RL:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 7 * BUTTON_SP + 3 * DDM_Y + TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	t_guitarRf = new wxStaticText(this, wxID_ANY, "RL:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 7 * BUTTON_SP + 3 * DDM_Y + 2 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	t_eguitarRf = new wxStaticText(this, wxID_ANY, "RL:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 7 * BUTTON_SP + 3 * DDM_Y + 2 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 
-	t_bell = new wxStaticText(this, wxID_ANY, "No parameters needed", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 7 * BUTTON_SP + 3 * DDM_Y + TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));		//Same for trumpet, trombone, clarinet and banjo
+	t_bell = new wxStaticText(this, wxID_ANY, "No parameters needed", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 7 * BUTTON_SP + 4 * DDM_Y), wxSize(TEXT_X, TEXT_Y + 5));		//Same for trumpet, trombone, clarinet and banjo
 
-	t_drumRf = new wxStaticText(this, wxID_ANY, "RL:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 7 * BUTTON_SP + 3 * DDM_Y + TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
-	t_drumB = new wxStaticText(this, wxID_ANY, "B:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 9 * BUTTON_SP + 3 * DDM_Y + 3 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	t_drumRf = new wxStaticText(this, wxID_ANY, "RL:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 7 * BUTTON_SP + 3 * DDM_Y + 2 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	t_drumB = new wxStaticText(this, wxID_ANY, "B:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 9 * BUTTON_SP + 3 * DDM_Y + 4 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 
 	t_toShow.push_back(t_organA);
 	t_toShow.push_back(t_organR);
@@ -209,9 +212,11 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	t_effGEco = new wxStaticText(this, wxID_ANY, "G (between 0 y 1):", wxPoint(BUTTON_SP, 19 * BUTTON_SP + 5 * BUTTON_Y + 7 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X, TEXT_Y + 5));
 	t_effMEco = new wxStaticText(this, wxID_ANY, "M:", wxPoint(BUTTON_SP, 21 * BUTTON_SP + 5 * BUTTON_Y + 9 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X, TEXT_Y + 5));
 	t_effRev = new wxStaticText(this, wxID_ANY, "Reveb. Time:", wxPoint(BUTTON_SP, 19 * BUTTON_SP + 5 * BUTTON_Y + 7 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	t_effMix = new wxStaticText(this, wxID_ANY, "Mix Time:", wxPoint(BUTTON_SP, 21 * BUTTON_SP + 5 * BUTTON_Y + 9 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X, TEXT_Y + 5));
 	t_WavEfftoShow.push_back(t_effGEco);
 	t_WavEfftoShow.push_back(t_effMEco);
 	t_WavEfftoShow.push_back(t_effRev);
+	t_WavEfftoShow.push_back(t_effMix);
 	for (int i = 0; i < t_WavEfftoShow.size(); i++) {
 		t_WavEfftoShow[i]->Hide();
 	}
@@ -488,6 +493,8 @@ void cMainMenu::AddMidiToProgram(wxCommandEvent& evt) {
 				this->midiTranslated=this->midi.getTracks();
 				addToDdm(midiToStringDdm(this->midiTranslated), ddm_track);
 				t_loadR->SetLabel("Current MIDI: " + stringSelected + ". I'm ready! Give me some work...");
+				t_loadR->SetSize(wxSize(BUTTON_X * 2, TEXT_Y * 2));
+				t_loadR->Update();
 		}
 		else {
 			//algun tipo de error;
@@ -523,8 +530,7 @@ void cMainMenu::CreateWav(wxCommandEvent& evt) {
 			loadBar.Center();
 			loadBar.SetExtendedMessage("This could take a few minutes, please wait.");
 			loadBar.ShowModal();
-
-			myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, this->ui), this->midi.getTotalDuration() + 1, pathSelected, 1000, this->ui.finalEfect,this->ui.g,this->ui.M);
+			myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, this->ui), this->midi.getTotalDuration() + 5, pathSelected, 1000, this->ui.finalEfect,this->ui.g,this->ui.M);
 			myWC.makeWav();
 			loadBar.Hide();
 			t_loadR->Show();
@@ -829,7 +835,7 @@ void cMainMenu::addEffTrack(wxCommandEvent& evt) {
 				}
 			}
 			else if (effName == EffList[1]) {
-				if (tx_effRev->IsEmpty()) {
+				if (tx_effRev->IsEmpty() || tx_effMix->IsEmpty()) {
 					//Warning
 					wxMessageDialog warning(this, "No parameters set", "Can't add an effect");
 					warning.Center();
@@ -849,10 +855,11 @@ void cMainMenu::addEffTrack(wxCommandEvent& evt) {
 					}
 
 					if (addingTrack) {
-						tracksAddedEfects.push_back(trackToAdd);
-						ui.pairTrackInst[lb_tracks->GetSelection()].effect2Apply = effName;
-						//ui.pairTrackInst[lb_tracks->GetSelection()].Trev = stod((string) tx_effRev->GetStringSelection());
-						lb_wavEff->Append("Track " + to_string(lb_tracks->GetSelection()) + ", Effect " + effName);
+						//tracksAddedEfects.push_back(trackToAdd);
+						//ui.pairTrackInst[lb_tracks->GetSelection()].effect2Apply = effName;
+						//ui.pairTrackInst[lb_tracks->GetSelection()].treverb = stod((string) tx_effRev->GetStringSelection());
+						//ui.pairTrackInst[lb_tracks->GetSelection()].M = stod((string) tx_effMix->GetStringSelection());
+						//lb_wavEff->Append("Track " + to_string(lb_tracks->GetSelection()) + ", Effect " + effName);
 					}
 					else {
 						//Warning
@@ -941,7 +948,7 @@ void cMainMenu::addEffWav(wxCommandEvent& evt) {
 				}
 			}
 			else if (effName == EffList[1]) {
-				if (tx_effRev->IsEmpty()) {
+				if (tx_effRev->IsEmpty() || tx_effMix->IsEmpty()) {
 					//Warning
 					wxMessageDialog warning(this, "No parameters set", "Can't add an effect");
 					warning.Center();
@@ -952,7 +959,8 @@ void cMainMenu::addEffWav(wxCommandEvent& evt) {
 				else {
 					if (lb_wavEffFinal->FindString(effName) == wxNOT_FOUND) {
 						//ui.finalEfect = effName;
-						//ui.Trev = stod((string)tx_effRev->GetValue());
+						//ui.treverb = stod((string)tx_effRev->GetValue());		
+						//ui.M = stod((string)tx_effMix->GetValue());
 						//lb_wavEffFinal->Append(effName);
 					}
 					else {
@@ -1021,6 +1029,8 @@ void cMainMenu::detectWavEffChange(wxCommandEvent& evt) {
 	else if (ddm_wavEff->GetStringSelection() == EffList[1]) {			//REVERBUIASDB
 		tx_effRev->Show();
 		t_effRev->Show();
+		tx_effMix->Show();
+		t_effMix->Show();
 	}
 	evt.Skip();
 }

@@ -14,9 +14,9 @@
 #define BITS_PER_SAMPLE 16	//sino 8... sino 32... PROBAR HASTA QUE DE
 
 //INSTRUMENTOS
-#define PREVIEW_DURATION		6
+#define PREVIEW_DURATION		7
 #define NUMBER_OF_INSTRUMETS	10
-const std::string  InstrumentList[NUMBER_OF_INSTRUMETS] = { "Guitar", "Organ", "Flute", "Bell", "Clarinet", "Trombone", "Trumpet", "Drum", "Banjo", "Eelectric Guitar" };
+const std::string  InstrumentList[NUMBER_OF_INSTRUMETS] = { "Guitar", "Organ", "Flute", "Bell", "Clarinet", "Trombone", "Trumpet", "Drum", "Banjo", "Electric Guitar" };
 
 //VENTANAS
 #define NUMBER_OF_WINDOWS		11
