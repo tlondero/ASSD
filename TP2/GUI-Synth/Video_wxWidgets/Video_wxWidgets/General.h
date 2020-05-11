@@ -16,7 +16,7 @@
 //INSTRUMENTOS
 #define PREVIEW_DURATION		6
 #define NUMBER_OF_INSTRUMETS	10
-const std::string  InstrumentList[NUMBER_OF_INSTRUMETS] = { "GUITAR", "ORGAN", "FLUTE", "BELL", "CLARINET", "TROMBONE", "TRUMPET", "DRUM", "BANJO", "ELECTRIC_GUITAR" };
+const std::string  InstrumentList[NUMBER_OF_INSTRUMETS] = { "Guitar", "Organ", "Flute", "Bell", "Clarinet", "Trombone", "Trumpet", "Drum", "Banjo", "Eelectric Guitar" };
 
 //VENTANAS
 #define NUMBER_OF_WINDOWS		11
