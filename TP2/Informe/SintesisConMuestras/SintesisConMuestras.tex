@@ -1,0 +1,17 @@
+\subsection{Síntesis basada en muestras PSOLA}
+
+\subsubsection{Introducción}
+La expansión o contracción de sonidos en el tiempo es bien conocida por el publico general. Cuando un vídeo es reproducido en "camára lenta" los sonidos se vuelven más graves, por el contrario cuando se reproduce a mayor velocidad obtenemos un sonido más chillón. 
+
+
+
+PSOLA (“Pitch-Synchronous Overlap and Add”) is a method used to manipulate the pitch of a speech signal to match it to that of the target speaker.
+
+PSOLA deals with diphones, which are the units of speech that extend from the middle of one region of steady-state sound to the middle of the next; thus, they represent transitions between speech sounds. Some researchers have suggested that this classification of transitions between sounds is the key element in humans understanding and recognizing segments of speech.
+
+The basic algorithm for the PSOLA technique consists of three steps. First, the speech signal is divided into separate but overlapping smaller signals. This is accomplished by windowing segments around each “pitch mark” or peak amplitude in the original signal. The windowed segments usually contain two to four pitch periods. Secondly, the smaller signals are modified by either repeating or leaving out speech segments, depending on whether the pitch of the target speaker is higher or lower than the pitch of the source speaker. This modifies the duration of the signal, therefore changing the fundamental frequency. Lastly, the remaining smaller segments are recombined through overlapping and adding. The result is a signal with the same spectrum as the original but with a different fundamental frequency. Thus, the pitch changes, but the other vocal qualities remain the same.
+
+The original PSOLA is now often referred to as the TD-PSOLA, for “time domain.” An alternative is referred to as the LP-PSOLA. Rather than storing the diphone waveforms, the LP-PSOLA stores LP (“linear predictor”) coefficients in order to represent the segment of a signal.
+
+
+%https://cnx.org/contents/bAg_SAUt@3/Changing-Pitch-with-PSOLA-for-Voice-Conversion

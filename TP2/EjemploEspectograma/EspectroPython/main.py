@@ -20,8 +20,11 @@ def generatePlot(path):
     except:
         print("The given file could not be opened")
     #We only need mono, getting rid of channel 2
-    channel1_samples = samples[:,1] 
-
+    try:
+        channel1_samples = samples[:,1] 
+    except:
+        channel1_samples = samples 
+        
     #Setting up our subplot
     fig, axs = plt.subplots(2, 1, sharex=True);
     axs[0].set_title("Spectogram and time domain plot");
@@ -38,6 +41,8 @@ def generatePlot(path):
 
     #Save the image
     plt.savefig(path[:-3]+"png", format="png")
+
+    plt.show()
 
 if __name__ == '__main__':
     #Create parser

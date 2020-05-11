@@ -5,7 +5,8 @@
 using namespace std;
 int main(void) {
 	MidiParser MyMidi;
-MyMidi.addMidi(string "sample");
+	string name = "sample";
+	MyMidi.addMidi(name);
 
 vector <Tracks>  MyTracks = MyMidi.getTracks();
 

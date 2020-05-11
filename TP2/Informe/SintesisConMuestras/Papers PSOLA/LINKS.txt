@@ -1,0 +1,8 @@
+- https://rapmag.com/a/150-06/jul06/2686-technology-audio-time-compression
+- https://web.archive.org/web/20090621190254/http://members.fortunecity.es/zemogd/timestretching.html
+
+-https://www.researchgate.net/publication/224143428_An_efficient_and_robust_pitch_marking_algorithm_on_the_speech_waveform_for_TD-PSOLA/figures?
+lo=1
+-https://www.semanticscholar.org/paper/Voice-Conversion-Using-Pitch-Shifting-Algorithm-by-Mousa/22fc22f7f8a6ec05339951e89f639635adcc8c60
+
+- https://www.slideserve.com/sacha-conrad/prosodic-manipulation
