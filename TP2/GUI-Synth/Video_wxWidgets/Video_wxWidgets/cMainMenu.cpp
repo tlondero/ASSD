@@ -856,11 +856,11 @@ void cMainMenu::addEffTrack(wxCommandEvent& evt) {
 					}
 
 					if (addingTrack) {
-						tracksAddedEfects.push_back(trackToAdd);
-						ui.pairTrackInst[lb_tracks->GetSelection()].effect2Apply = effName;
-						//ui.pairTrackInst[lb_tracks->GetSelection()].Trev = stod((string) tx_effRev->GetStringSelection());
-						//ui.pairTrackInst[lb_tracks->GetSelection()].Mix = stod((string) tx_effMix->GetStringSelection());
-						lb_wavEff->Append("Track " + to_string(lb_tracks->GetSelection()) + ", Effect " + effName);
+						//tracksAddedEfects.push_back(trackToAdd);
+						//ui.pairTrackInst[lb_tracks->GetSelection()].effect2Apply = effName;
+						//ui.pairTrackInst[lb_tracks->GetSelection()].treverb = stod((string) tx_effRev->GetStringSelection());
+						//ui.pairTrackInst[lb_tracks->GetSelection()].M = stod((string) tx_effMix->GetStringSelection());
+						//lb_wavEff->Append("Track " + to_string(lb_tracks->GetSelection()) + ", Effect " + effName);
 					}
 					else {
 						//Warning
@@ -960,8 +960,8 @@ void cMainMenu::addEffWav(wxCommandEvent& evt) {
 				else {
 					if (lb_wavEffFinal->FindString(effName) == wxNOT_FOUND) {
 						//ui.finalEfect = effName;
-						//ui.Trev = stod((string)tx_effRev->GetValue());		Trev y mix los puse yo, que alan ponga los nombres posta
-						//ui.Mix = stod((string)tx_effMix->GetValue());
+						//ui.treverb = stod((string)tx_effRev->GetValue());		
+						//ui.M = stod((string)tx_effMix->GetValue());
 						//lb_wavEffFinal->Append(effName);
 					}
 					else {
