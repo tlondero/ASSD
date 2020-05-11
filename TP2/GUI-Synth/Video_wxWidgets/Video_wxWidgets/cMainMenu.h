@@ -101,7 +101,9 @@ private:
 	wxStaticText* t_specWindType = nullptr;
 	wxStaticText* t_currentSpec = nullptr;
 	wxStaticText* t_specWindParam = nullptr;
-
+	wxStaticText* t_wavEff = nullptr;
+	wxStaticText* t_wavTrack = nullptr;
+	wxStaticText* t_micEff = nullptr;
 	wxStaticText* t_nfft = nullptr;
 	wxStaticText* t_overlap = nullptr;
 
