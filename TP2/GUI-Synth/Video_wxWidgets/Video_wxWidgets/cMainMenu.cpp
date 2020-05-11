@@ -163,8 +163,8 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 
 
 	//Dinmac Texts (LOAD)
-	t_loadR = new wxStaticText(this, wxID_ANY, "I'm ready! Giveme some work...", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 2 * BUTTON_SP), wxSize(TEXT_X * 2, TEXT_Y));
-	t_loadW = new wxStaticText(this, wxID_ANY, "I'm too busy, pleas wait while I'm thinkig...", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 2 * BUTTON_SP), wxSize(TEXT_X * 2, TEXT_Y));
+	t_loadR = new wxStaticText(this, wxID_ANY, "I'm ready! Give me some work...", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 2 * BUTTON_SP), wxSize(TEXT_X * 2, TEXT_Y));
+	t_loadW = new wxStaticText(this, wxID_ANY, "I'm too bussy, please wait while I'm thinkig...", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 2 * BUTTON_SP), wxSize(TEXT_X * 2, TEXT_Y));
 	t_loadW->Hide();
 
 
@@ -487,7 +487,7 @@ void cMainMenu::AddMidiToProgram(wxCommandEvent& evt) {
 		if (this->midi.addMidi(this->selecetedMidi)) {
 				this->midiTranslated=this->midi.getTracks();
 				addToDdm(midiToStringDdm(this->midiTranslated), ddm_track);
-				t_loadR->SetLabel("Current MIDI: " + stringSelected + ". I'm ready! Giveme some work...");
+				t_loadR->SetLabel("Current MIDI: " + stringSelected + ". I'm ready! Give me some work...");
 		}
 		else {
 			//algun tipo de error;
