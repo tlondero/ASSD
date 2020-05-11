@@ -365,6 +365,20 @@ void cMainMenu::AddTrack(wxCommandEvent& evt) {
 
 void cMainMenu::RemoveTrack(wxCommandEvent& evt) {
 	if (lb_tracks->GetSelection() != wxNOT_FOUND) {
+		string stringTrack = (string)lb_tracks->GetStringSelection();
+		
+		int last = stringTrack.size() - stringTrack.find_first_of('[');
+		int trackToDelete = stoi(stringTrack.substr(6, last));
+
+		for (int i = 0; i < tracksAddedEfects.size(); i++) {
+			if (trackToDelete == tracksAddedEfects[i]) {
+				tracksAddedEfects.erase(tracksAddedEfects.begin() + i);
+				ui.pairTrackInst[i].effect2Apply.clear();
+				lb_wavEff->Delete(i);
+				i = tracksAddedEfects.size();
+			}
+		}
+
 		ui.pairTrackInst.erase(ui.pairTrackInst.begin() + lb_tracks->GetSelection());
 		lb_tracks->Delete(lb_tracks->GetSelection());
 	}
@@ -639,9 +653,7 @@ void cMainMenu::createSpec(wxCommandEvent& evt) {
 
 		string nfft_s = ddm_nfft->GetStringSelection();
 		string overlap_s = ddm_overlap->GetStringSelection();
-
 		
-
 		if (nfft_s.empty() || overlap_s.empty()) {
 			//Warning
 			wxMessageDialog warning(this, "No parameter chosen", "Can't create spectogram");
@@ -765,7 +777,7 @@ void cMainMenu::addEffTrack(wxCommandEvent& evt) {
 							addingTrack = false;
 						}
 					}
-
+					
 					if (addingTrack) {
 						tracksAddedEfects.push_back(trackToAdd);
 						ui.pairTrackInst[lb_tracks->GetSelection()].effect2Apply = effName;
