@@ -31,11 +31,11 @@ def generatePlot(path,Nfft,overlap,window,kaiserparam,gaussianparam,expparam):
     if(window == "boxcar" or window == "triang" or window == "blackman" or window == "hamming" or window == "hanning" or window == "bartlett" or window == "flattop" or window == "parzen"or window == "bohman"or window == "blackmanharris"or window == "nuttall"or window == "barthann"):
         spec = axs[1].specgram(channel1_samples, NFFT=Nfft, Fs=sample_rate,noverlap=overlap,window= signal.get_window(window,Nfft))
     elif(window == "kaiser"):
-        spec = axs[1].specgram(channel1_samples,NFFT=Nfft,Fs=sample_rate,noverlap=overlap,window= signal.windows.kaiser(Nfft,kaiserparam) )
+        spec = axs[1].specgram(channel1_samples,NFFT=Nfft,Fs=sample_rate,noverlap=overlap,window= signal.windows.kaiser(Nfft,beta = kaiserparam) )
     elif(window == "gaussian"):
-        spec = axs[1].specgram(channel1_samples,NFFT=Nfft,Fs=sample_rate,noverlap=overlap,window= signal.windows.gaussian(Nfft,gaussianparam) )
+        spec = axs[1].specgram(channel1_samples,NFFT=Nfft,Fs=sample_rate,noverlap=overlap,window= signal.windows.gaussian(Nfft,std= gaussianparam) )
     elif(window == "exponential"):
-        spec = axs[1].specgram(channel1_samples,NFFT=Nfft,Fs=sample_rate,noverlap=overlap,window= signal.windows.exponential(Nfft,expparam) )
+        spec = axs[1].specgram(channel1_samples,NFFT=Nfft,Fs=sample_rate,noverlap=overlap,window= signal.windows.exponential(Nfft,tau = expparam) )
     elif(window == "rectangular"):
         spec = axs[1].specgram(channel1_samples,NFFT=Nfft,Fs=sample_rate,noverlap=overlap,window= signal.windows.tukey(Nfft,0) )
 
@@ -69,6 +69,6 @@ if __name__ == '__main__':
     kaiserparam=args.kaiserparam
     gaussianparam=args.gaussianparam
     expparam=args.expparam
-    generatePlot(path,int(nfft),int(overlap),window,kaiserparam,gaussianparam,expparam)
+    generatePlot(path,int(nfft),int(overlap),window,float(kaiserparam),float(gaussianparam),float(expparam))
 #    generatePlot(path)
  #   generatePlot("twinkle.wav")

@@ -43,8 +43,9 @@ void EspectroGenerator::generateSpectrum(string path, int nfft,int overlap, stri
 		newWindow = "kaiser";
 	}
 
-	string command = "start pythonw Espectrograma\\main.py ";
+	string command = "python Espectrograma\\main.py ";
 	command += path +" "+ to_string(nfft) + " " + to_string(overlap) + " " + newWindow + " " + to_string(kaiserparam) + " " + to_string(gaussianparam) +" "+ to_string(expparam);
 	const char *commandPtr = command.c_str();
 	system(commandPtr); //Invoke python to compute plots
 }
+//python Espectrograma\\main.py  C:\\Users\\Guido\\Documents\\GitHub\\ASSD\\TP2\\EjemploGuidoPortaudio\\KARPORONGUS\\KARPORONGUS\\twinkle.wav 1024 512 exponential 0.3 0.3 0.3
