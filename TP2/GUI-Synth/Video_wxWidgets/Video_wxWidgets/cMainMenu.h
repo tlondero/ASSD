@@ -62,12 +62,13 @@ private:
 	wxButton* b_removeEffTrack = nullptr;
 	wxButton* b_addEffWav = nullptr;
 	wxButton* b_removeEffWav = nullptr;
-	wxButton* b_toggleMic = nullptr;
-	wxButton* b_addEffMic = nullptr;
-	wxButton* b_removeEffMic = nullptr;
 
-	wxButton* b_savePreview = nullptr;
-	wxButton* b_replay = nullptr;
+	//wxButton* b_toggleMic = nullptr;
+	//wxButton* b_addEffMic = nullptr;
+	//wxButton* b_removeEffMic = nullptr;
+
+	//wxButton* b_savePreview = nullptr;
+	//wxButton* b_replay = nullptr;
 
 	wxButton* b_loadSpec = nullptr;
 	wxButton* b_updateSpec = nullptr;
@@ -77,10 +78,10 @@ private:
 	wxComboBox* ddm_track = nullptr;
 	wxComboBox* ddm_instrumento = nullptr;
 	wxComboBox* ddm_wavEff = nullptr;
-	wxComboBox* ddm_micEff = nullptr;
+	
+	//wxComboBox* ddm_micEff = nullptr;
 
 	wxComboBox* ddm_spect = nullptr;
-
 	wxComboBox* ddm_nfft = nullptr;
 	wxComboBox* ddm_overlap = nullptr;
 
@@ -88,7 +89,7 @@ private:
 	wxListBox* lb_tracks = nullptr;
 	wxListBox* lb_wavEff = nullptr;
 	wxListBox* lb_wavEffFinal = nullptr;
-	wxListBox* lb_micEff = nullptr;
+	//wxListBox* lb_micEff = nullptr;
 
 
 	//Text
@@ -97,13 +98,13 @@ private:
 	wxStaticText* t_paramList = nullptr;
 	wxStaticText* t_previewDdm = nullptr;
 	wxStaticText* t_effectWavDdm = nullptr;
-	wxStaticText* t_effectMicDdm = nullptr;
+	//wxStaticText* t_effectMicDdm = nullptr;
 	wxStaticText* t_specWindType = nullptr;
 	wxStaticText* t_currentSpec = nullptr;
 	wxStaticText* t_specWindParam = nullptr;
 	wxStaticText* t_wavEff = nullptr;
 	wxStaticText* t_wavTrack = nullptr;
-	wxStaticText* t_micEff = nullptr;
+	//wxStaticText* t_micEff = nullptr;
 	wxStaticText* t_nfft = nullptr;
 	wxStaticText* t_overlap = nullptr;
 
@@ -153,7 +154,7 @@ private:
 
 	wxStaticText* t_bell = nullptr;
 
-	wxStaticText* t_playMusic = nullptr;
+	//wxStaticText* t_playMusic = nullptr;
 
 	//Dinamic Text (WavEff)
 	wxStaticText* t_effGEco = nullptr;

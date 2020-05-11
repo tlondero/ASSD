@@ -2,6 +2,7 @@
 #include "../Utils/SynthTrack.h"
 #include "../Utils/Tracks.h"
 #include "../Instrumentos/Organ.h"
+#include "../General.h"
 
 class OrganController
 {

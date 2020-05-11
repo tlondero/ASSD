@@ -35,7 +35,7 @@ vector <double> Clarinet::generateNote(double duration, double pitch, double Nor
 			Adet = 0.5 + cos( (PI*11/2) * i / normtime - (9*PI/2) ) / 2 ;
 		}
 
-		ClarinetSound.push_back(Normvelocity*Adet*( cos( (DOSPI * fc * i / SAMPLE_RATE) + Idet * cos(DOSPI * fm * i / SAMPLE_RATE) ) ));
+		ClarinetSound.push_back(Normvelocity*Adet*(sin( (DOSPI * fc * i / SAMPLE_RATE) + Idet * sin(DOSPI * fm * i / SAMPLE_RATE) ) ));
 	}
 
 	double max = *max_element(ClarinetSound.begin(), ClarinetSound.end());

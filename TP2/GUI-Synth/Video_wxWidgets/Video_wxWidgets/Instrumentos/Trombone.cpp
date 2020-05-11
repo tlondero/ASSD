@@ -49,7 +49,7 @@ vector <double> Trombone::generateNote(double duration, double pitch, double Nor
 			Adet = 0;
 		}
 
-		TromboneSound.push_back( Adet*( cos( (DOSPI * fc * i / SAMPLE_RATE) + Idet * cos(DOSPI * fm * i / SAMPLE_RATE))*Normvelocity ));
+		TromboneSound.push_back( Adet*( sin( (DOSPI * fc * i / SAMPLE_RATE) + Idet * sin(DOSPI * fm * i / SAMPLE_RATE))*Normvelocity ));
 	}
 
 	double max = *max_element(TromboneSound.begin(), TromboneSound.end());

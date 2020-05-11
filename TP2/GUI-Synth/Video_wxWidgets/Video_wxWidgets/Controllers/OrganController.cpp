@@ -53,7 +53,7 @@ SynthTrack OrganController::sytnsynthesisTrack(Tracks Track, bool preview) {
 	if (!preview) {
 		mySynthesis.instrumentName = Track.instrumentName;
 		//aca va un for por el cual se llama a la guitarra con la duración de la nota, la velocity y la frecuencia, lo que devuelve la guitarra se guarda  en mySynth en los vectores de nota con la info del ton
-		if (Track.userInstrumentChoice == "ORGAN") {
+		if (Track.userInstrumentChoice == InstrumentList[1]) {
 			for (unsigned int note = 0; note < Track.Notes.size(); note++) {
 				MusicData noteData;
 				noteData.t_on = Track.Notes[note].t_on;
@@ -61,7 +61,7 @@ SynthTrack OrganController::sytnsynthesisTrack(Tracks Track, bool preview) {
 				mySynthesis.track.push_back(noteData);
 			}
 		}
-		if (Track.userInstrumentChoice == "FLUTE") {
+		if (Track.userInstrumentChoice == InstrumentList[2]) {
 			for (unsigned int note = 0; note < Track.Notes.size(); note++) {
 				MusicData noteData;
 				noteData.t_on = Track.Notes[note].t_on;
