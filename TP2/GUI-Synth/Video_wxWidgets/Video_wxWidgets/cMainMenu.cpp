@@ -36,7 +36,7 @@ wxEND_EVENT_TABLE()
 	- Armar funciones jajaaaa
 */
 
-cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(30, 30), wxSize(970, 775))
+cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(30, 30), wxSize(970, 740))
 {
 	//Menu y tool bar
 	m_MenuBar = new wxMenuBar();
@@ -146,10 +146,10 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	}
 
 	//Text Control (WavEff)
-	tx_effGEco = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 20 * BUTTON_SP + 5 * BUTTON_Y + 8 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X, TEXT_Y + 5));
-	tx_effMEco = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 22 * BUTTON_SP + 5 * BUTTON_Y + 10 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X, TEXT_Y + 5));
-	tx_effRev = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 20 * BUTTON_SP + 5 * BUTTON_Y + 8 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X, TEXT_Y + 5));
-	tx_effMix = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 22 * BUTTON_SP + 5 * BUTTON_Y + 10 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	tx_effGEco = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 20 * BUTTON_SP + 5 * BUTTON_Y + 8 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X - 5, TEXT_Y + 5));
+	tx_effMEco = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP + TEXT_X + BUTTON_SP, 20 * BUTTON_SP + 5 * BUTTON_Y + 8 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X - 5, TEXT_Y + 5));
+	tx_effRev = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 20 * BUTTON_SP + 5 * BUTTON_Y + 8 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X - 5, TEXT_Y + 5));
+	tx_effMix = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP + TEXT_X + BUTTON_SP, 20 * BUTTON_SP + 5 * BUTTON_Y + 8 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X - 5, TEXT_Y + 5));
 
 
 	tx_WavEfftoShow.push_back(tx_effGEco);
@@ -210,9 +210,9 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 
 	//Dinamic Text (WavEff)
 	t_effGEco = new wxStaticText(this, wxID_ANY, "Time Eco:", wxPoint(BUTTON_SP, 19 * BUTTON_SP + 5 * BUTTON_Y + 7 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X, TEXT_Y + 5));
-	t_effMEco = new wxStaticText(this, wxID_ANY, "Decay Factor:", wxPoint(BUTTON_SP, 21 * BUTTON_SP + 5 * BUTTON_Y + 9 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	t_effMEco = new wxStaticText(this, wxID_ANY, "Decay Factor:", wxPoint(BUTTON_SP + TEXT_X + BUTTON_SP, 19 * BUTTON_SP + 5 * BUTTON_Y + 7 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X, TEXT_Y + 5));
 	t_effRev = new wxStaticText(this, wxID_ANY, "Reveb. Time:", wxPoint(BUTTON_SP, 19 * BUTTON_SP + 5 * BUTTON_Y + 7 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X, TEXT_Y + 5));
-	t_effMix = new wxStaticText(this, wxID_ANY, "Mix Factor:", wxPoint(BUTTON_SP, 21 * BUTTON_SP + 5 * BUTTON_Y + 9 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	t_effMix = new wxStaticText(this, wxID_ANY, "Mix Factor:", wxPoint(BUTTON_SP + TEXT_X + BUTTON_SP, 19 * BUTTON_SP + 5 * BUTTON_Y + 7 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X, TEXT_Y + 5));
 	t_WavEfftoShow.push_back(t_effGEco);
 	t_WavEfftoShow.push_back(t_effMEco);
 	t_WavEfftoShow.push_back(t_effRev);
@@ -285,14 +285,34 @@ void cMainMenu::AddTrack(wxCommandEvent& evt) {
 			int n = track.size() - (track.substr(track.find('['))).size() - 7;
 			uc.TrackNumber = stoi(track.substr(6, n));
 			if (instrument == InstrumentList[0]) {
-				uc.params.GuitarParam_rf = stod((string)tx_guitarRf->GetValue());
+				if (stod((string)tx_guitarRf->GetValue()) < 2 && stod((string)tx_guitarRf->GetValue()) > 0) {
+					uc.params.GuitarParam_rf = stod((string)tx_guitarRf->GetValue());
+				}
+				else {
+					//Warning
+					wxMessageDialog warning(this, "The parameters selected are invalid", "Can't add an track");
+					warning.Center();
+					warning.SetExtendedMessage("Remember: \n0 < RL < 2");
+					warning.ShowModal();
+					warning.Hide();
+				}
 			}
 			else {
-				uc.params.GuitarParam_rf = stod((string)tx_eguitarRf->GetValue());
+				if (stod((string)tx_eguitarRf->GetValue()) < 2 && stod((string)tx_eguitarRf->GetValue()) > 0) {
+					uc.params.GuitarParam_rf = stod((string)tx_eguitarRf->GetValue());
+				}
 			}
 			for (int i = 0; i < ui.pairTrackInst.size(); i++) {
 				if (ui.pairTrackInst[i].TrackNumber == uc.TrackNumber) {
 					letsPush = false;
+				}
+				else {
+					//Warning
+					wxMessageDialog warning(this, "The parameters selected are invalid", "Can't add an track");
+					warning.Center();
+					warning.SetExtendedMessage("Remember: \n0 < RL < 2");
+					warning.ShowModal();
+					warning.Hide();
 				}
 			}
 			if (letsPush) {
@@ -372,21 +392,31 @@ void cMainMenu::AddTrack(wxCommandEvent& evt) {
 			}
 		}
 		else if ((instrument == InstrumentList[7]) && !(tx_drumRf->IsEmpty()) && !(tx_drumB->IsEmpty())) {							//DRUM
-			uc.TrackInstrument = instrument;
-			int i = track.size() - (track.substr(track.find('['))).size() - 7;
-			uc.TrackNumber = stoi(track.substr(6, i));
-			uc.params.DrumParam_rf = stod((string)tx_drumRf->GetValue());
-			uc.params.DrumProb = stod((string)tx_drumB->GetValue());
+			if ( stod((string)tx_drumRf->GetValue()) > 0 && stod((string)tx_drumRf->GetValue()) < 2 && stod((string)tx_drumB->GetValue()) > 0 && stod((string)tx_drumB->GetValue()) < 1 ) {
+				uc.TrackInstrument = instrument;
+				int i = track.size() - (track.substr(track.find('['))).size() - 7;
+				uc.TrackNumber = stoi(track.substr(6, i));
+				uc.params.DrumParam_rf = stod((string)tx_drumRf->GetValue());
+				uc.params.DrumProb = stod((string)tx_drumB->GetValue());
 
-			for (int i = 0; i < ui.pairTrackInst.size(); i++) {
-				if (ui.pairTrackInst[i].TrackNumber == uc.TrackNumber) {
-					letsPush = false;
+				for (int i = 0; i < ui.pairTrackInst.size(); i++) {
+					if (ui.pairTrackInst[i].TrackNumber == uc.TrackNumber) {
+						letsPush = false;
+					}
+				}
+				if (letsPush) {
+					ui.pairTrackInst.push_back(uc);
+					lb_tracks->Append(track + ' ' + instrument);
 				}
 			}
-			if (letsPush) {
-				ui.pairTrackInst.push_back(uc);
-				lb_tracks->Append(track + ' ' + instrument);
+			else {
+				wxMessageDialog warning(this, "The parameters selected are invalid", "Can't add an track");
+				warning.Center();
+				warning.SetExtendedMessage("Remember: \n0 < RF < 2 \n0 < B < 1");
+				warning.ShowModal();
+				warning.Hide();
 			}
+		
 		}
 		else {
 			//Warning
