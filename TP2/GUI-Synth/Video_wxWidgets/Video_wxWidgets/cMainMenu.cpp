@@ -512,6 +512,9 @@ void cMainMenu::AddMidiToProgram(wxCommandEvent& evt) {
 		tracksAddedEfects.clear();
 		selecetedMidi = pathSelected;
 		
+		ui.finalEfect.clear();
+		ui.pairTrackInst.clear();
+		ui.wavName.clear();		
 		
 		if (this->midi.addMidi(this->selecetedMidi)) {
 			this->midiTranslated=this->midi.getTracks();
