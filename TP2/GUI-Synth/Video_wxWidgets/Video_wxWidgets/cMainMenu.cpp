@@ -36,7 +36,7 @@ wxEND_EVENT_TABLE()
 	- Armar funciones jajaaaa
 */
 
-cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(30, 30), wxSize(970, 775))
+cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(30, 30), wxSize(970, 740))
 {
 	//Menu y tool bar
 	m_MenuBar = new wxMenuBar();
@@ -285,14 +285,34 @@ void cMainMenu::AddTrack(wxCommandEvent& evt) {
 			int n = track.size() - (track.substr(track.find('['))).size() - 7;
 			uc.TrackNumber = stoi(track.substr(6, n));
 			if (instrument == InstrumentList[0]) {
-				uc.params.GuitarParam_rf = stod((string)tx_guitarRf->GetValue());
+				if (stod((string)tx_guitarRf->GetValue()) < 2 && stod((string)tx_guitarRf->GetValue()) > 0) {
+					uc.params.GuitarParam_rf = stod((string)tx_guitarRf->GetValue());
+				}
+				else {
+					//Warning
+					wxMessageDialog warning(this, "The parameters selected are invalid", "Can't add an track");
+					warning.Center();
+					warning.SetExtendedMessage("Remember: \n0 < RL < 2");
+					warning.ShowModal();
+					warning.Hide();
+				}
 			}
 			else {
-				uc.params.GuitarParam_rf = stod((string)tx_eguitarRf->GetValue());
+				if (stod((string)tx_eguitarRf->GetValue()) < 2 && stod((string)tx_eguitarRf->GetValue()) > 0) {
+					uc.params.GuitarParam_rf = stod((string)tx_eguitarRf->GetValue());
+				}
 			}
 			for (int i = 0; i < ui.pairTrackInst.size(); i++) {
 				if (ui.pairTrackInst[i].TrackNumber == uc.TrackNumber) {
 					letsPush = false;
+				}
+				else {
+					//Warning
+					wxMessageDialog warning(this, "The parameters selected are invalid", "Can't add an track");
+					warning.Center();
+					warning.SetExtendedMessage("Remember: \n0 < RL < 2");
+					warning.ShowModal();
+					warning.Hide();
 				}
 			}
 			if (letsPush) {
