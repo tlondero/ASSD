@@ -13,8 +13,8 @@ public:
 	double previewDuration;
 	string effect2Apply;
 //parametros efectos!
-	double g;
-	int M;
-	double treverb;
+	double D;
+	double T;
+	double M;
 };
 

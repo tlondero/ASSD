@@ -29,11 +29,11 @@ void WavController::compileWav(vector<SynthTrack> allTracks, double duration_, s
 			}
 		}
 	}
-	if (efect == EffList[0])
-		for (int i = 0; i < wavVector.size(); i++) {
-			if (i - M > 0)
-				wavVector[i] = wavVector[i] + (-g) * wavVector[i - M];
-		}
+	//if (efect == EffList[0])
+	//	for (int i = 0; i < wavVector.size(); i++) {
+	//		if (i - M > 0)
+	//			wavVector[i] = wavVector[i] + (-g) * wavVector[i - M];
+	//	}
 	double max = *max_element(wavVector.begin(), wavVector.end());
 	for (int i = 0; i < wavVector.size(); i++) {
 		wavVector[i] = wavVector[i] / max;

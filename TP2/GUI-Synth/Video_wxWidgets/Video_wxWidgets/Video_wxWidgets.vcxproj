@@ -34,6 +34,7 @@
     <ClCompile Include="Controllers\WavController.cpp" />
     <ClCompile Include="Efectos\EcoSimple.cpp" />
     <ClCompile Include="Efectos\EfectController.cpp" />
+    <ClCompile Include="Efectos\Reverberator.cpp" />
     <ClCompile Include="Espectrograma\EspectroGenerator.cpp" />
     <ClCompile Include="Instrumentos\Banjo.cpp" />
     <ClCompile Include="Instrumentos\Bell.cpp" />
@@ -77,6 +78,7 @@
     <ClInclude Include="Controllers\WavController.h" />
     <ClInclude Include="Efectos\EcoSimple.h" />
     <ClInclude Include="Efectos\EfectController.h" />
+    <ClInclude Include="Efectos\Reverberator.h" />
     <ClInclude Include="Espectrograma\EspectroGenerator.h" />
     <ClInclude Include="General.h" />
     <ClInclude Include="Instrumentos\Banjo.h" />

@@ -180,6 +180,9 @@
     <ClCompile Include="Efectos\EfectController.cpp">
       <Filter>Source Files\Efectos</Filter>
     </ClCompile>
+    <ClCompile Include="Efectos\Reverberator.cpp">
+      <Filter>Source Files\Efectos</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cApp.h">
@@ -307,6 +310,9 @@
     </ClInclude>
     <ClInclude Include="cMainMenu.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Efectos\Reverberator.h">
+      <Filter>Header Files\Efectos</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
