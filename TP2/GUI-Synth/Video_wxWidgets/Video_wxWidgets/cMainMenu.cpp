@@ -36,7 +36,7 @@ wxEND_EVENT_TABLE()
 	- Armar funciones jajaaaa
 */
 
-cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(30, 30), wxSize(1250, 720))
+cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(30, 30), wxSize(1250, 800))
 {
 	//Menu y tool bar
 	m_MenuBar = new wxMenuBar();
