@@ -36,7 +36,7 @@ wxEND_EVENT_TABLE()
 	- Armar funciones jajaaaa
 */
 
-cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(30, 30), wxSize(1250, 800))
+cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(30, 30), wxSize(1250, 850))
 {
 	//Menu y tool bar
 	m_MenuBar = new wxMenuBar();
@@ -149,10 +149,13 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	tx_effGEco = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 20 * BUTTON_SP + 5 * BUTTON_Y + 8 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X, TEXT_Y + 5));
 	tx_effMEco = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 22 * BUTTON_SP + 5 * BUTTON_Y + 10 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X, TEXT_Y + 5));
 	tx_effRev = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 20 * BUTTON_SP + 5 * BUTTON_Y + 8 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X, TEXT_Y + 5));
-	
+	tx_effMix = new wxTextCtrl(this, wxID_ANY, "", wxPoint(BUTTON_SP, 22 * BUTTON_SP + 5 * BUTTON_Y + 10 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X, TEXT_Y + 5));
+
+
 	tx_WavEfftoShow.push_back(tx_effGEco);
 	tx_WavEfftoShow.push_back(tx_effMEco);
 	tx_WavEfftoShow.push_back(tx_effRev);
+	tx_WavEfftoShow.push_back(tx_effMix);
 	for (int i = 0; i < tx_WavEfftoShow.size(); i++) {
 		tx_WavEfftoShow[i]->Hide();
 	}
@@ -209,9 +212,11 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	t_effGEco = new wxStaticText(this, wxID_ANY, "G (between 0 y 1):", wxPoint(BUTTON_SP, 19 * BUTTON_SP + 5 * BUTTON_Y + 7 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X, TEXT_Y + 5));
 	t_effMEco = new wxStaticText(this, wxID_ANY, "M:", wxPoint(BUTTON_SP, 21 * BUTTON_SP + 5 * BUTTON_Y + 9 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X, TEXT_Y + 5));
 	t_effRev = new wxStaticText(this, wxID_ANY, "Reveb. Time:", wxPoint(BUTTON_SP, 19 * BUTTON_SP + 5 * BUTTON_Y + 7 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	t_effMix = new wxStaticText(this, wxID_ANY, "Mix Time:", wxPoint(BUTTON_SP, 21 * BUTTON_SP + 5 * BUTTON_Y + 9 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(TEXT_X, TEXT_Y + 5));
 	t_WavEfftoShow.push_back(t_effGEco);
 	t_WavEfftoShow.push_back(t_effMEco);
 	t_WavEfftoShow.push_back(t_effRev);
+	t_WavEfftoShow.push_back(t_effMix);
 	for (int i = 0; i < t_WavEfftoShow.size(); i++) {
 		t_WavEfftoShow[i]->Hide();
 	}
@@ -831,7 +836,7 @@ void cMainMenu::addEffTrack(wxCommandEvent& evt) {
 				}
 			}
 			else if (effName == EffList[1]) {
-				if (tx_effRev->IsEmpty()) {
+				if (tx_effRev->IsEmpty() || tx_effMix->IsEmpty()) {
 					//Warning
 					wxMessageDialog warning(this, "No parameters set", "Can't add an effect");
 					warning.Center();
@@ -854,6 +859,7 @@ void cMainMenu::addEffTrack(wxCommandEvent& evt) {
 						tracksAddedEfects.push_back(trackToAdd);
 						ui.pairTrackInst[lb_tracks->GetSelection()].effect2Apply = effName;
 						//ui.pairTrackInst[lb_tracks->GetSelection()].Trev = stod((string) tx_effRev->GetStringSelection());
+						//ui.pairTrackInst[lb_tracks->GetSelection()].Mix = stod((string) tx_effMix->GetStringSelection());
 						lb_wavEff->Append("Track " + to_string(lb_tracks->GetSelection()) + ", Effect " + effName);
 					}
 					else {
@@ -943,7 +949,7 @@ void cMainMenu::addEffWav(wxCommandEvent& evt) {
 				}
 			}
 			else if (effName == EffList[1]) {
-				if (tx_effRev->IsEmpty()) {
+				if (tx_effRev->IsEmpty() || tx_effMix->IsEmpty()) {
 					//Warning
 					wxMessageDialog warning(this, "No parameters set", "Can't add an effect");
 					warning.Center();
@@ -954,7 +960,8 @@ void cMainMenu::addEffWav(wxCommandEvent& evt) {
 				else {
 					if (lb_wavEffFinal->FindString(effName) == wxNOT_FOUND) {
 						//ui.finalEfect = effName;
-						//ui.Trev = stod((string)tx_effRev->GetValue());
+						//ui.Trev = stod((string)tx_effRev->GetValue());		Trev y mix los puse yo, que alan ponga los nombres posta
+						//ui.Mix = stod((string)tx_effMix->GetValue());
 						//lb_wavEffFinal->Append(effName);
 					}
 					else {
@@ -1023,6 +1030,8 @@ void cMainMenu::detectWavEffChange(wxCommandEvent& evt) {
 	else if (ddm_wavEff->GetStringSelection() == EffList[1]) {			//REVERBUIASDB
 		tx_effRev->Show();
 		t_effRev->Show();
+		tx_effMix->Show();
+		t_effMix->Show();
 	}
 	evt.Skip();
 }
