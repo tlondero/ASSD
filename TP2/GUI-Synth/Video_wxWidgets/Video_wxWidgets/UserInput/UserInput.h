@@ -11,9 +11,9 @@ public:
 	string wavName;
 	vector<UserChoice> pairTrackInst;
 	string finalEfect;
-	double T;
-	double D;
-	double M;
+	double T=0;
+	double D=0.9;
+	double M=0;
 	
 };
 

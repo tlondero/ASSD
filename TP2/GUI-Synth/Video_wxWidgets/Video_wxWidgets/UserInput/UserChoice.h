@@ -14,7 +14,7 @@ public:
 	InstParams params;
 	string effect2Apply;
 //Parametros efectos.
-	double D;
-	double M;
-	double T;
+	double D=0.9;
+	double M=0;
+	double T=0;
 };
