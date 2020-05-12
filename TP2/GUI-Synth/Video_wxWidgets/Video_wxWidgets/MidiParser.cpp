@@ -34,21 +34,25 @@ vector<Tracks> MidiParser::getTracks() {
 						actualNote.frequency = pow(2, (midiFile[track][event].getKeyNumber() - 69.0) / 12.0) * 440;
 						actualTrack.Notes.push_back(actualNote);
 						toff.push_back(actualNote.t_on + actualNote.Duration);
-						
+
 					}
 				}
 			}
 
 		}
-		if (strcmp(actualTrack.instrumentName.c_str(),"") && (actualTrack.Notes.size()>=1))
+		if (strcmp(actualTrack.instrumentName.c_str(), "") && (actualTrack.Notes.size() >= 1))
 			trackVector.push_back(actualTrack);
 		else if (actualTrack.Notes.size() > 1) {
 			actualTrack.instrumentName = "UNKNOWN";
 			trackVector.push_back(actualTrack);
 		}
 	}
-	this->totalDuration = *max_element(toff.begin(), toff.end());
+	if (toff.size() > 0)
+		this->totalDuration = *max_element(toff.begin(), toff.end());
+	else
+		this->totalDuration = 0;
 	return trackVector;
+
 }
 bool MidiParser::addMidi(std::string filename) {
 	this->midiFile = MidiFile(filename);
