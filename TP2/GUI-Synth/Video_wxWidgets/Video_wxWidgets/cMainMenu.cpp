@@ -539,7 +539,8 @@ void cMainMenu::AddMidiToProgram(wxCommandEvent& evt) {
 		ui.wavName.clear();
 
 		if (this->midi.addMidi(this->selecetedMidi)) {
-			this->midiTranslated = this->midi.getTracks();
+			//this->midiTranslated = this->midi.getTracks();
+			this->midiTranslated = this->midi.getTracks()[0];
 			if (this->midi.getTotalDuration() == 0) {
 				//Warning
 				wxMessageDialog warning(this, "This MIDI file is empty", "Can't open MIDI");

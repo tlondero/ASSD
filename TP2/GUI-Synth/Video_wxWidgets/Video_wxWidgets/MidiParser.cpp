@@ -8,12 +8,13 @@ MidiParser::MidiParser()
 {
 
 }
-vector<Tracks> MidiParser::getTracks() {
+vector<vector<Tracks>> MidiParser::getTracks() {
 	vector<double> toff;
 	midiFile.doTimeAnalysis();
 	midiFile.linkNotePairs();
 	int tracks = midiFile.getTrackCount();
-	vector<Tracks> trackVector;
+	vector<vector<Tracks>> trackVector;
+	double tmax = TMAX;
 	for (int track = 0; track < tracks; track++) {
 		Tracks actualTrack;
 		for (int event = 0; event < midiFile[track].size(); event++) {
@@ -40,18 +41,67 @@ vector<Tracks> MidiParser::getTracks() {
 			}
 
 		}
-		if (strcmp(actualTrack.instrumentName.c_str(), "") && (actualTrack.Notes.size() >= 1))
-			trackVector.push_back(actualTrack);
-		else if (actualTrack.Notes.size() > 1) {
+		//if (strcmp(actualTrack.instrumentName.c_str(), "") && (actualTrack.Notes.size() >= 1))
+			//trackVector.push_back(actualTrack);
+		/*else*/ if (actualTrack.Notes.size() >= 1) {
 			actualTrack.instrumentName = "UNKNOWN";
-			trackVector.push_back(actualTrack);
+			//trackVector.push_back(actualTrack);
+
+
+
+			vector<Tracks> partialTracks;
+			double tcorr = 0;
+			double icorr = 0;
+			bool break_j = false;
+			for (int j = 0;;) {
+				Tracks tempTrack;
+				Note tempNote;
+				partialTracks.push_back(tempTrack);
+				partialTracks[j].instrumentName = actualTrack.instrumentName;
+				partialTracks[j].userInstrumentChoice = actualTrack.userInstrumentChoice;
+				for (int i = icorr; i < actualTrack.Notes.size(); i++) {
+					if (actualTrack.Notes[i].t_on - tcorr > tmax) {
+						tcorr += tmax;
+						j++;
+						icorr = i;     //ME FUI A BUSCAR ALGO DE COMER, GUIDO CREO QUE ROMPI TODAS LAS REGLAS DE PROGRA 1
+						break;			//PORFIS FIJATE SI LO QUE HICE ESTA BIEN.
+					}
+					tempNote.Duration = actualTrack.Notes[i].Duration;
+					tempNote.frequency = actualTrack.Notes[i].frequency;
+					tempNote.t_on = actualTrack.Notes[i].t_on - tcorr;
+					tempNote.velocity = actualTrack.Notes[i].velocity;
+					partialTracks[j].Notes.push_back(tempNote);
+					if (i == (actualTrack.Notes.size() - 1)) {
+						break_j = true;
+					}
+				}
+				if (break_j) {
+					break;
+				}
+			}
+
+			trackVector.push_back(partialTracks);
 		}
 	}
+
+	vector<vector<Tracks>> ordenado;
+
+	for (int subTrack = 0; subTrack < trackVector[0].size(); subTrack++) {
+		vector<Tracks> sub_ordenado;
+		for (int instrumento = 0; instrumento < trackVector.size(); instrumento++) {
+			sub_ordenado.push_back(trackVector[instrumento][subTrack]);
+		}
+		ordenado.push_back(sub_ordenado);
+	}
+
+
+
 	if (toff.size() > 0)
 		this->totalDuration = *max_element(toff.begin(), toff.end());
 	else
 		this->totalDuration = 0;
-	return trackVector;
+
+	return ordenado;
 
 }
 bool MidiParser::addMidi(std::string filename) {
