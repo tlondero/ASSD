@@ -910,31 +910,40 @@ void cMainMenu::addEffTrack(wxCommandEvent& evt) {
 					warning.Hide();
 				}
 				else {
-					string stringTrack = (string)lb_tracks->GetStringSelection();
-					int last = stringTrack.size() - stringTrack.find_first_of('[');
-					int trackToAdd = stoi(stringTrack.substr(6, last));
-					bool addingTrack = true;
+					if (stod((string)tx_effRev->GetValue()) > 0 && stod((string)tx_effRev->GetValue()) < 5 && stod((string)tx_effMix->GetValue()) > 0 && stod((string)tx_effMix->GetValue()) < 1) {
+						string stringTrack = (string)lb_tracks->GetStringSelection();
+						int last = stringTrack.size() - stringTrack.find_first_of('[');
+						int trackToAdd = stoi(stringTrack.substr(6, last));
+						bool addingTrack = true;
 
-					for (int i = 0; i < tracksAddedEfects.size(); i++) {
-						if (trackToAdd == tracksAddedEfects[i]) {
-							addingTrack = false;
+						for (int i = 0; i < tracksAddedEfects.size(); i++) {
+							if (trackToAdd == tracksAddedEfects[i]) {
+								addingTrack = false;
+							}
+						}
+
+						double t = stod((string)tx_effRev->GetValue());
+
+						if (addingTrack) {
+							tracksAddedEfects.push_back(trackToAdd);
+							ui.pairTrackInst[lb_tracks->GetSelection()].effect2Apply = effName;
+							ui.pairTrackInst[lb_tracks->GetSelection()].T = stod((string)tx_effRev->GetValue());
+							ui.pairTrackInst[lb_tracks->GetSelection()].M = stod((string)tx_effMix->GetValue());
+							lb_wavEff->Append("Track " + to_string(lb_tracks->GetSelection()) + ", Effect " + effName);
+						}
+						else {
+							//Warning
+							wxMessageDialog warning(this, "Track already added", "Can't add an effect");
+							warning.Center();
+							warning.SetExtendedMessage("Please select a different track.");
+							warning.ShowModal();
+							warning.Hide();
 						}
 					}
-
-					double t = stod((string)tx_effRev->GetValue());
-
-					if (addingTrack) {
-						tracksAddedEfects.push_back(trackToAdd);
-						ui.pairTrackInst[lb_tracks->GetSelection()].effect2Apply = effName;
-						ui.pairTrackInst[lb_tracks->GetSelection()].T = stod((string) tx_effRev->GetValue());
-						ui.pairTrackInst[lb_tracks->GetSelection()].M = stod((string) tx_effMix->GetValue());
-						lb_wavEff->Append("Track " + to_string(lb_tracks->GetSelection()) + ", Effect " + effName);
-					}
 					else {
-						//Warning
-						wxMessageDialog warning(this, "Track already added", "Can't add an effect");
+						wxMessageDialog warning(this, "The parameters selected are invalid", "Can't add an track");
 						warning.Center();
-						warning.SetExtendedMessage("Please select a different track.");
+						warning.SetExtendedMessage("Remember: \n0 < Time Eco < 5 \n0 < Mix Factor < 1");
 						warning.ShowModal();
 						warning.Hide();
 					}
@@ -1035,17 +1044,27 @@ void cMainMenu::addEffWav(wxCommandEvent& evt) {
 					warning.Hide();
 				}
 				else {
-					if (lb_wavEffFinal->FindString(effName) == wxNOT_FOUND) {
-						ui.finalEfect = effName;
-						ui.T = stod((string)tx_effRev->GetValue());		
-						ui.M = stod((string)tx_effMix->GetValue());
-						lb_wavEffFinal->Append(effName);
+					if (stod((string)tx_effRev->GetValue()) > 0 && stod((string)tx_effRev->GetValue()) < 5 && stod((string)tx_effMix->GetValue()) > 0 && stod((string)tx_effMix->GetValue()) < 1) {
+						if (lb_wavEffFinal->FindString(effName) == wxNOT_FOUND) {
+							ui.finalEfect = effName;
+							ui.T = stod((string)tx_effRev->GetValue());
+							ui.M = stod((string)tx_effMix->GetValue());
+							lb_wavEffFinal->Append(effName);
+						}
+						else {
+							//Warning
+							wxMessageDialog warning(this, "Effect already added", "Can't add an effect");
+							warning.Center();
+							warning.SetExtendedMessage("Select a different effect to add.");
+							warning.ShowModal();
+							warning.Hide();
+						}
 					}
 					else {
 						//Warning
-						wxMessageDialog warning(this, "Effect already added", "Can't add an effect");
+						wxMessageDialog warning(this, "The parameters selected are invalid", "Can't add an track");
 						warning.Center();
-						warning.SetExtendedMessage("Select a different effect to add.");
+						warning.SetExtendedMessage("Remember: \n0 < Time Eco < 5 \n0 < Mix Factor < 1");
 						warning.ShowModal();
 						warning.Hide();
 					}
