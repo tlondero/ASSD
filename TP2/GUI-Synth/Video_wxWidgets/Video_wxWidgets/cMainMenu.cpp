@@ -281,40 +281,32 @@ void cMainMenu::AddTrack(wxCommandEvent& evt) {
 
 	if (!(ddm_instrumento->IsTextEmpty()) && !(ddm_track->IsTextEmpty())) {
 		if (((instrument == InstrumentList[0]) && !(tx_guitarRf->IsEmpty())) || ((instrument == InstrumentList[9]) && !(tx_eguitarRf->IsEmpty()))) {							//GUITARRA
+
 			uc.TrackInstrument = instrument;
 			int n = track.size() - (track.substr(track.find('['))).size() - 7;
 			uc.TrackNumber = stoi(track.substr(6, n));
-			if (instrument == InstrumentList[0]) {
-				if (stod((string)tx_guitarRf->GetValue()) < 2 && stod((string)tx_guitarRf->GetValue()) > 0) {
+			if ((instrument == InstrumentList[0]) && (stod((string)tx_guitarRf->GetValue()) < 2 && stod((string)tx_guitarRf->GetValue()) > 0)) {
 					uc.params.GuitarParam_rf = stod((string)tx_guitarRf->GetValue());
-				}
-				else {
-					//Warning
-					wxMessageDialog warning(this, "The parameters selected are invalid", "Can't add an track");
-					warning.Center();
-					warning.SetExtendedMessage("Remember: \n0 < RL < 2");
-					warning.ShowModal();
-					warning.Hide();
-				}
+			}
+			else if ((instrument == InstrumentList[9]) && (stod((string)tx_eguitarRf->GetValue()) < 2 && stod((string)tx_eguitarRf->GetValue()) > 0)) {
+					uc.params.GuitarParam_rf = stod((string)tx_eguitarRf->GetValue());
 			}
 			else {
-				if (stod((string)tx_eguitarRf->GetValue()) < 2 && stod((string)tx_eguitarRf->GetValue()) > 0) {
-					uc.params.GuitarParam_rf = stod((string)tx_eguitarRf->GetValue());
-				}
+				//Warning
+				wxMessageDialog warning(this, "The parameters selected are invalid", "Can't add an track");
+				warning.Center();
+				warning.SetExtendedMessage("Remember: \n0 < RL < 2");
+				warning.ShowModal();
+				warning.Hide();
+				letsPush = false;
 			}
+
 			for (int i = 0; i < ui.pairTrackInst.size(); i++) {
 				if (ui.pairTrackInst[i].TrackNumber == uc.TrackNumber) {
 					letsPush = false;
-				}
-				else {
-					//Warning
-					wxMessageDialog warning(this, "The parameters selected are invalid", "Can't add an track");
-					warning.Center();
-					warning.SetExtendedMessage("Remember: \n0 < RL < 2");
-					warning.ShowModal();
-					warning.Hide();
-				}
+				}				
 			}
+
 			if (letsPush) {
 				ui.pairTrackInst.push_back(uc);
 				lb_tracks->Append(track + ' ' + instrument);
