@@ -539,11 +539,21 @@ void cMainMenu::AddMidiToProgram(wxCommandEvent& evt) {
 		ui.wavName.clear();
 
 		if (this->midi.addMidi(this->selecetedMidi)) {
-			this->midiTranslated = this->midi.getTracks();
-			addToDdm(midiToStringDdm(this->midiTranslated), ddm_track);
-			t_loadR->SetLabel("Current MIDI: " + stringSelected + ". I'm ready! Give me some work...");
-			t_loadR->SetSize(wxSize(BUTTON_X * 2, TEXT_Y * 2));
-			t_loadR->Update();
+			if (this->midi.getTotalDuration() == 0) {
+				//Warning
+				wxMessageDialog warning(this, "This MIDI file is empty", "Can't open MIDI");
+				warning.Center();
+				warning.SetExtendedMessage("Please select a valid MIDI.");
+				warning.ShowModal();
+				warning.Hide();
+			}
+			else {
+				this->midiTranslated = this->midi.getTracks();
+				addToDdm(midiToStringDdm(this->midiTranslated), ddm_track);
+				t_loadR->SetLabel("Current MIDI: " + stringSelected + ". I'm ready! Give me some work...");
+				t_loadR->SetSize(wxSize(BUTTON_X * 2, TEXT_Y * 2));
+				t_loadR->Update();
+			}
 		}
 		else {
 			//algun tipo de error;
