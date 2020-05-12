@@ -7,7 +7,7 @@ vector<SynthTrack> ControllerOfControllers::sytnsynthesisProject(vector<Tracks> 
 	vector<SynthTrack> mySynthTrackVector;
 	for (unsigned int track = 0; track < userData.pairTrackInst.size(); track++) {
 		SynthTrack tempTrack;
-		if (userData.finalEfect != "") {
+		if (!userData.finalEfect.empty()) {
 			tempTrack.effect2Apply = userData.finalEfect;
 		}
 		if (userData.pairTrackInst[track].TrackInstrument == InstrumentList[0]) {
