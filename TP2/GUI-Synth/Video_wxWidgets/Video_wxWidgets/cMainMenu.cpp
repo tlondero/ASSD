@@ -581,12 +581,13 @@ void cMainMenu::CreateWav(wxCommandEvent& evt) {
 			pathSelected = pathSelected.erase(cutFrom, cutUpto);
 
 			//Load Bar
-			t_loadR->Hide();
+			/*t_loadR->Hide();
 			t_loadW->Show();
 			wxMessageDialog loadBar(this, "Creating WAV", "Loading");
 			loadBar.Center();
 			loadBar.SetExtendedMessage("This could take a few minutes, please wait.");
-			loadBar.ShowModal();
+			loadBar.ShowModal();*/
+			wxBusyInfo wait("Please wait, working...");
 			double extraTime = 0;
 			vector<double> extratimes;
 			if (this->ui.finalEfect == EffList[0]) {
@@ -608,7 +609,7 @@ void cMainMenu::CreateWav(wxCommandEvent& evt) {
 			double max = *max_element(extratimes.begin(), extratimes.end());
 			myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, this->ui), this->midi.getTotalDuration() + max+0.5, pathSelected, 1000);
 			myWC.makeWav();
-			loadBar.Hide();
+			/*loadBar.Hide();*/
 			t_loadR->Show();
 			t_loadW->Hide();
 		}

@@ -8,7 +8,7 @@
 #include <wx/textctrl.h>
 #include <wx/event.h>
 #include <wx/msgdlg.h>
-#include <wx/sound.h>
+#include <wx/busyinfo.h>
 
 #include <fstream>
 #include <vector>
