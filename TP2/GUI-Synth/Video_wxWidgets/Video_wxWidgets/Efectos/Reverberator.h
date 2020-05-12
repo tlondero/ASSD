@@ -6,6 +6,6 @@ class Reverberator
 public:
 	Reverberator();
 	~Reverberator();
-	std::vector<double> applyEffect(std::vector<double> input, double T, int mix);
+	std::vector<double> applyEffect(std::vector<double> input, double T, double mix);
 };
 
