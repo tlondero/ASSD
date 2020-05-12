@@ -905,6 +905,7 @@ void cMainMenu::addEffTrack(wxCommandEvent& evt) {
 					//Warning
 					wxMessageDialog warning(this, "No parameters set", "Can't add an effect");
 					warning.Center();
+					warning.SetExtendedMessage("Please configure the parameters to add an effect.");
 					warning.ShowModal();
 					warning.Hide();
 				}
@@ -920,7 +921,7 @@ void cMainMenu::addEffTrack(wxCommandEvent& evt) {
 						}
 					}
 
-					double t = stod((string)tx_effRev->GetStringSelection());
+					double t = stod((string)tx_effRev->GetValue());
 
 					if (addingTrack) {
 						tracksAddedEfects.push_back(trackToAdd);
