@@ -15,7 +15,8 @@ vector<SynthTrack> ControllerOfControllers::sytnsynthesisProject(vector<Tracks> 
 			if (!userData.pairTrackInst[track].effect2Apply.empty()) {
 				tempTrack.effect2Apply = userData.pairTrackInst[track].effect2Apply;
 			}
-			tempTrack.effect2Apply = noteborres;
+			if (!userData.pairTrackInst[track].effect2Apply.empty())
+				tempTrack.effect2Apply = noteborres;
 			tempTrack.T = userData.pairTrackInst[track].T;
 			tempTrack.M = userData.pairTrackInst[track].M;
 			tempTrack.D = userData.pairTrackInst[track].D;
@@ -27,7 +28,8 @@ vector<SynthTrack> ControllerOfControllers::sytnsynthesisProject(vector<Tracks> 
 			if (!userData.pairTrackInst[track].effect2Apply.empty()) {
 				tempTrack.effect2Apply = userData.pairTrackInst[track].effect2Apply;
 			}
-			tempTrack.effect2Apply = noteborres;
+			if (!userData.pairTrackInst[track].effect2Apply.empty())
+				tempTrack.effect2Apply = noteborres;
 			tempTrack.T = userData.pairTrackInst[track].T;
 			tempTrack.M = userData.pairTrackInst[track].M;
 			tempTrack.D = userData.pairTrackInst[track].D;
@@ -38,7 +40,8 @@ vector<SynthTrack> ControllerOfControllers::sytnsynthesisProject(vector<Tracks> 
 			if (!userData.pairTrackInst[track].effect2Apply.empty()) {
 				tempTrack.effect2Apply = userData.pairTrackInst[track].effect2Apply;
 			}
-			tempTrack.effect2Apply = noteborres;
+			if (!userData.pairTrackInst[track].effect2Apply.empty())
+				tempTrack.effect2Apply = noteborres;
 			tempTrack.T = userData.pairTrackInst[track].T;
 			tempTrack.M = userData.pairTrackInst[track].M;
 			tempTrack.D = userData.pairTrackInst[track].D;
@@ -50,7 +53,8 @@ vector<SynthTrack> ControllerOfControllers::sytnsynthesisProject(vector<Tracks> 
 			if (!userData.pairTrackInst[track].effect2Apply.empty()) {
 				tempTrack.effect2Apply = userData.pairTrackInst[track].effect2Apply;
 			}
-			tempTrack.effect2Apply = noteborres;
+			if (!userData.pairTrackInst[track].effect2Apply.empty())
+				tempTrack.effect2Apply = noteborres;
 			tempTrack.T = userData.pairTrackInst[track].T;
 			tempTrack.M = userData.pairTrackInst[track].M;
 			tempTrack.D = userData.pairTrackInst[track].D;
@@ -61,7 +65,8 @@ vector<SynthTrack> ControllerOfControllers::sytnsynthesisProject(vector<Tracks> 
 			if (!userData.pairTrackInst[track].effect2Apply.empty()) {
 				tempTrack.effect2Apply = userData.pairTrackInst[track].effect2Apply;
 			}
-			tempTrack.effect2Apply = noteborres;
+			if (!userData.pairTrackInst[track].effect2Apply.empty())
+				tempTrack.effect2Apply = noteborres;
 			tempTrack.T = userData.pairTrackInst[track].T;
 			tempTrack.M = userData.pairTrackInst[track].M;
 			tempTrack.D = userData.pairTrackInst[track].D;
@@ -72,7 +77,8 @@ vector<SynthTrack> ControllerOfControllers::sytnsynthesisProject(vector<Tracks> 
 			if (!userData.pairTrackInst[track].effect2Apply.empty()) {
 				tempTrack.effect2Apply = userData.pairTrackInst[track].effect2Apply;
 			}
-			tempTrack.effect2Apply = noteborres;
+			if (!userData.pairTrackInst[track].effect2Apply.empty())
+				tempTrack.effect2Apply = noteborres;
 			tempTrack.T = userData.pairTrackInst[track].T;
 			tempTrack.M = userData.pairTrackInst[track].M;
 			tempTrack.D = userData.pairTrackInst[track].D;
@@ -83,7 +89,8 @@ vector<SynthTrack> ControllerOfControllers::sytnsynthesisProject(vector<Tracks> 
 			if (!userData.pairTrackInst[track].effect2Apply.empty()) {
 				tempTrack.effect2Apply = userData.pairTrackInst[track].effect2Apply;
 			}
-			tempTrack.effect2Apply = noteborres;
+			if (!userData.pairTrackInst[track].effect2Apply.empty())
+				tempTrack.effect2Apply = noteborres;
 			tempTrack.T = userData.pairTrackInst[track].T;
 			tempTrack.M = userData.pairTrackInst[track].M;
 			tempTrack.D = userData.pairTrackInst[track].D;
@@ -95,7 +102,8 @@ vector<SynthTrack> ControllerOfControllers::sytnsynthesisProject(vector<Tracks> 
 			if (!userData.pairTrackInst[track].effect2Apply.empty()) {
 				tempTrack.effect2Apply = userData.pairTrackInst[track].effect2Apply;
 			}
-			tempTrack.effect2Apply = noteborres;
+			if (!userData.pairTrackInst[track].effect2Apply.empty())
+				tempTrack.effect2Apply = noteborres;
 			tempTrack.T = userData.pairTrackInst[track].T;
 			tempTrack.M = userData.pairTrackInst[track].M;
 			tempTrack.D = userData.pairTrackInst[track].D;
@@ -106,7 +114,8 @@ vector<SynthTrack> ControllerOfControllers::sytnsynthesisProject(vector<Tracks> 
 			if (!userData.pairTrackInst[track].effect2Apply.empty()) {
 				tempTrack.effect2Apply = userData.pairTrackInst[track].effect2Apply;
 			}
-			tempTrack.effect2Apply = noteborres;
+			if (!userData.pairTrackInst[track].effect2Apply.empty())
+				tempTrack.effect2Apply = noteborres;
 			tempTrack.T = userData.pairTrackInst[track].T;
 			tempTrack.M = userData.pairTrackInst[track].M;
 			tempTrack.D = userData.pairTrackInst[track].D;
