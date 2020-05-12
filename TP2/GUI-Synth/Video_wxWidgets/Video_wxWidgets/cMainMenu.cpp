@@ -61,7 +61,7 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	b_removeEffTrack = new wxButton(this, 10016, "Remove effect from track", wxPoint(COL2 + BUTTON_X, 13 * BUTTON_SP + 2 * BUTTON_Y + 3 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(BUTTON_X, BUTTON_Y));
 
 	b_addEffWav = new wxButton(this, 10017, "Add effect to final WAV", wxPoint(COL2, BUTTON_SP), wxSize( 2 *BUTTON_X, BUTTON_Y));
-	b_removeEffWav = new wxButton(this, 10018, "Reomve effect from final WAV", wxPoint(COL2, BUTTON_SP + BUTTON_Y), wxSize(2 * BUTTON_X, BUTTON_Y));
+	b_removeEffWav = new wxButton(this, 10018, "Remove effect from final WAV", wxPoint(COL2, BUTTON_SP + BUTTON_Y), wxSize(2 * BUTTON_X, BUTTON_Y));
 
 
 	//b_toggleMic = new wxButton(this, wxID_ANY, "MIC On / Off ", wxPoint(COL3, BUTTON_SP), wxSize(BUTTON_X * 2, BUTTON_Y));
