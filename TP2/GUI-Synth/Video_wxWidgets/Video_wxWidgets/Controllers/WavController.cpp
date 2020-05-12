@@ -19,13 +19,13 @@ void WavController::compileWav(vector<SynthTrack> allTracks, double duration_, s
 
 	this->duration = duration_;
 	this->wavName = wavName_;
-	this->wavVector = vector<double>(ceil(this->duration * SAMPLE_RATE), 0);
+	vector <double> wavVector = vector<double>(ceil(this->duration * SAMPLE_RATE), 0);
 	this->volume = volume_;
 	for (unsigned int track = 0; track < allTracks.size(); track++) {
 		for (unsigned int note = 0; note < allTracks[track].track.size(); note++) {
 			int T = floor(allTracks[track].track[note].t_on * SAMPLE_RATE);
 			for (unsigned int i = 0; i < allTracks[track].track[note].sound.size(); i++) {
-				this->wavVector[i + T] += allTracks[track].track[note].sound[i];
+				wavVector[i + T] += allTracks[track].track[note].sound[i];
 			}
 		}
 	}
@@ -33,6 +33,7 @@ void WavController::compileWav(vector<SynthTrack> allTracks, double duration_, s
 	for (int i = 0; i < wavVector.size(); i++) {
 		wavVector[i] = wavVector[i] / max;
 	}
+	LaJEEPETA.push_back(wavVector);
 }
 
 void WavController::makeWav() {
@@ -80,7 +81,7 @@ void WavController::makeWav() {
 	// Fix the file header to contain the proper RIFF chunk size, which is (file size - 8) bytes
 	f.seekp(0 + 4);
 	write_word(f, file_length - 8, 4);
-
+	this->wavVector.clear();
 }
 WavController::~WavController() {
 }

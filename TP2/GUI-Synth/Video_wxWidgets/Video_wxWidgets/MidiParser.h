@@ -3,7 +3,7 @@
 #include"utils\Tracks.h"
 #include <string>
 #include <vector>
-#define TMAX 2.0
+#define TMAX 30.0
 using namespace std;
 using namespace smf;
 class MidiParser
@@ -16,9 +16,11 @@ public:
 	vector<vector<Tracks>> getTracks();
 	//Devuelve un vector de tracks
 	double getTotalDuration(void);
+	double getSubDuration(int i);
 private:
 	MidiFile midiFile;
 	double totalDuration;
+	vector<double> subDurations;
 
 };
 

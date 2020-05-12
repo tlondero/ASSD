@@ -172,7 +172,7 @@ private:
 	bool fullscreen = false;
 
 	MidiParser midi;
-	vector<Tracks> midiTranslated;
+	vector<vector<Tracks>> midiTranslated;
 	UserInput ui;
 	UserInput uiPreview;
 	ControllerOfControllers myCC;

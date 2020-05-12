@@ -10,6 +10,7 @@ MidiParser::MidiParser()
 }
 vector<vector<Tracks>> MidiParser::getTracks() {
 	vector<double> toff;
+	vector<double> tofft;
 	midiFile.doTimeAnalysis();
 	midiFile.linkNotePairs();
 	int tracks = midiFile.getTrackCount();
@@ -43,10 +44,13 @@ vector<vector<Tracks>> MidiParser::getTracks() {
 		}
 		//if (strcmp(actualTrack.instrumentName.c_str(), "") && (actualTrack.Notes.size() >= 1))
 			//trackVector.push_back(actualTrack);
-		/*else*/ if (actualTrack.Notes.size() >= 1) {
-			actualTrack.instrumentName = "UNKNOWN";
+		/*else*/ 
+		if (actualTrack.Notes.size() >= 1) {
+			if(actualTrack.instrumentName == "")
+			actualTrack.instrumentName="UNKNOWN";
 			//trackVector.push_back(actualTrack);
-
+			
+				
 
 
 			vector<Tracks> partialTracks;
@@ -66,6 +70,7 @@ vector<vector<Tracks>> MidiParser::getTracks() {
 						icorr = i;     //ME FUI A BUSCAR ALGO DE COMER, GUIDO CREO QUE ROMPI TODAS LAS REGLAS DE PROGRA 1
 						break;			//PORFIS FIJATE SI LO QUE HICE ESTA BIEN.
 					}
+
 					tempNote.Duration = actualTrack.Notes[i].Duration;
 					tempNote.frequency = actualTrack.Notes[i].frequency;
 					tempNote.t_on = actualTrack.Notes[i].t_on - tcorr;
@@ -74,11 +79,14 @@ vector<vector<Tracks>> MidiParser::getTracks() {
 					if (i == (actualTrack.Notes.size() - 1)) {
 						break_j = true;
 					}
+
 				}
+
 				if (break_j) {
 					break;
 				}
 			}
+			
 
 			trackVector.push_back(partialTracks);
 		}
@@ -93,9 +101,16 @@ vector<vector<Tracks>> MidiParser::getTracks() {
 		}
 		ordenado.push_back(sub_ordenado);
 	}
+	vector<double> temptoff;
+	vector<double> maxToff;
+	for (unsigned int subtrack=0; subtrack < ordenado.size();subtrack++) {
+		for (unsigned int instrument = 0; instrument < ordenado[subtrack].size(); instrument++)
+			for (unsigned int i = 0; i < ordenado[subtrack][instrument].Notes.size(); i++)
+				temptoff.push_back(ordenado[subtrack][instrument].Notes[i].t_on + ordenado[subtrack][instrument].Notes[i].Duration);
+		maxToff.push_back(*max_element(temptoff.begin(), temptoff.end()));
+	}
 
-
-
+	this->subDurations = maxToff;
 	if (toff.size() > 0)
 		this->totalDuration = *max_element(toff.begin(), toff.end());
 	else
@@ -103,6 +118,10 @@ vector<vector<Tracks>> MidiParser::getTracks() {
 
 	return ordenado;
 
+}
+
+double MidiParser::getSubDuration(int i) {
+	return this->subDurations[i];
 }
 bool MidiParser::addMidi(std::string filename) {
 	this->midiFile = MidiFile(filename);

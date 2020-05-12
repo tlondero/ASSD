@@ -12,9 +12,8 @@ public:
 	void makeWav();
 	double volume;
 private:
-	vector<double> wavVector;
 	string wavName;
 	double duration;
-
+	vector<vector<double>> LaJEEPETA;
 };
 

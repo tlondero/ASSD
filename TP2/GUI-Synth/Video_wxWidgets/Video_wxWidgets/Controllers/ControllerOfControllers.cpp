@@ -5,6 +5,7 @@ ControllerOfControllers::ControllerOfControllers() {
 
 vector<SynthTrack> ControllerOfControllers::sytnsynthesisProject(vector<Tracks> projectTracks, UserInput userData) {
 	vector<SynthTrack> mySynthTrackVector;
+	
 	for (unsigned int track = 0; track < userData.pairTrackInst.size(); track++) {
 		SynthTrack tempTrack;
 		string noteborres = userData.finalEfect;
