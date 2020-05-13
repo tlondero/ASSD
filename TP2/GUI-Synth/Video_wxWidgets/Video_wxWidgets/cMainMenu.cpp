@@ -586,6 +586,7 @@ void cMainMenu::CreateWav(wxCommandEvent& evt) {
 			//Load Bar
 			t_loadR->Hide();
 			t_loadW->Show();
+			t_loadW->Update();
 			wxBusyInfo wait("Creating WAV, this could take a few minutes, please wait.");
 			
 			double extraTime = 0;
@@ -610,7 +611,7 @@ void cMainMenu::CreateWav(wxCommandEvent& evt) {
 			vector<Tracks> subMidi;
 			for (unsigned int i = 0; i < this->midiTranslated.size(); i++) {
 				subMidi = this->midiTranslated[i];
-				myWC.compileWav(myCC.sytnsynthesisProject(subMidi, this->ui), this->midi.getSubDuration(i) + max + 0.5, pathSelected + to_string(i), 1000);
+				myWC.compileWav(myCC.sytnsynthesisProject(subMidi, this->ui), this->midi.getSubDuration(i) + max + 0.5, pathSelected, 1000); // + to_string(i), 1000);
 			}
 
 			myWC.makeWav();

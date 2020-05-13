@@ -69,6 +69,7 @@ void WavController::makeWav() {
 
 	for (unsigned int n = 0; n < LaJEEPETA.size(); n++) {
 		for (int k = 0; k < LaJEEPETA[n].size(); k++) { 
+			//antiAereo[k + n * T] += LaJEEPETA[n][k];
 			if (k + n*T < N) {
 				antiAereo[k + n * T] += LaJEEPETA[n][k];
 			}
@@ -86,8 +87,6 @@ void WavController::makeWav() {
 		write_word(f, (int)((amplitude)*value * volume), 2);
 	}
 	
-	
-
 	// (We'll need the final file size to fix the chunk sizes above)
 	size_t file_length = f.tellp();
 
