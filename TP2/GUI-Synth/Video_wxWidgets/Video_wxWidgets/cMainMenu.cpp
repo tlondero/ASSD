@@ -36,7 +36,7 @@ wxEND_EVENT_TABLE()
 	- Armar funciones jajaaaa
 */
 
-cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(30, 30), wxSize(970, 740))
+cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(30, 30), wxSize(970, 745))
 {
 	//Menu y tool bar
 	m_MenuBar = new wxMenuBar();
@@ -819,7 +819,17 @@ void cMainMenu::createSpec(wxCommandEvent& evt) {
 					double param = stod((string)tx_specWindParam->GetValue());
 
 					//LLAMAR A LA FUNCIÓN DE VENTANA CON PARAMETRO Y NOMBRE
-					es.generateSpectrum(wavToSpecPath, nfft, overlap, ventanaElegida, param, param, param);
+					if (param > 0) {
+						es.generateSpectrum(wavToSpecPath, nfft, overlap, ventanaElegida, param, param, param);
+					}
+					else {
+						//Warning
+						wxMessageDialog warning(this, "Invalid parameter chosen", "Can't create spectogram");
+						warning.Center();
+						warning.SetExtendedMessage("Value must be positive.");
+						warning.ShowModal();
+						warning.Hide();
+					}
 				}
 				else if (!((ventanaElegida == WindowsList[8]) || (ventanaElegida == WindowsList[9]) || (ventanaElegida == WindowsList[10]))) {
 					//Si el text box está vacío y si no es la ventana 8, 9 o 10, está todo joya, tengo una ventana sin parámetro
