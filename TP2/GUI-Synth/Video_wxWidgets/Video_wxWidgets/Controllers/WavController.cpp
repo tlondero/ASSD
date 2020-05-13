@@ -64,21 +64,16 @@ void WavController::makeWav() {
 	int N = SAMPLE_RATE * seconds;  // total number of samples
 	int T = TMAX * SAMPLE_RATE;
 	vector<double> antiAereo;
-	
-	antiAereo.resize(N);		//10 716 217		g11 477 155
+
+	antiAereo.resize(N+1);		//10 716 217		g11 477 155
 
 	for (unsigned int n = 0; n < LaJEEPETA.size(); n++) {
-		for (int k = 0; k < LaJEEPETA[n].size(); k++) { 
-			//antiAereo[k + n * T] += LaJEEPETA[n][k];
-			if (k + n*T < N) {
-				antiAereo[k + n * T] += LaJEEPETA[n][k];
-			}
-			else {
-				k = LaJEEPETA[n].size();
-				n = LaJEEPETA.size() - 1;
-			}			
+		for (int k = 0; k < LaJEEPETA[n].size(); k++) {
+
+			antiAereo[k + n * T] += LaJEEPETA[n][k];
 		}
 	}
+
 
 	double amplitude = 1;
 	for (int i = 0; i < N; i++) {
@@ -86,7 +81,7 @@ void WavController::makeWav() {
 		write_word(f, (int)((amplitude)*value * volume), 2);
 		write_word(f, (int)((amplitude)*value * volume), 2);
 	}
-	
+
 	// (We'll need the final file size to fix the chunk sizes above)
 	size_t file_length = f.tellp();
 
