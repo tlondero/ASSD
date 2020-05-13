@@ -69,7 +69,13 @@ void WavController::makeWav() {
 
 	for (unsigned int n = 0; n < LaJEEPETA.size(); n++) {
 		for (int k = 0; k < LaJEEPETA[n].size(); k++) { 
-			antiAereo[k + n * T] += LaJEEPETA[n][k];
+			if (k + n*T < N) {
+				antiAereo[k + n * T] += LaJEEPETA[n][k];
+			}
+			else {
+				k = LaJEEPETA[n].size();
+				n = LaJEEPETA.size() - 1;
+			}			
 		}
 	}
 

@@ -584,14 +584,10 @@ void cMainMenu::CreateWav(wxCommandEvent& evt) {
 			pathSelected = pathSelected.erase(cutFrom, cutUpto);
 
 			//Load Bar
-			/*t_loadR->Hide();
+			t_loadR->Hide();
 			t_loadW->Show();
-			wxMessageDialog loadBar(this, "Creating WAV", "Loading");
-			loadBar.Center();
-			loadBar.SetExtendedMessage("This could take a few minutes, please wait.");
-			loadBar.ShowModal();*/
+			wxBusyInfo wait("Creating WAV, this could take a few minutes, please wait.");
 			
-			//wxBusyInfo wait("Creating WAV, this could take a few minutes, please wait.");
 			double extraTime = 0;
 			vector<double> extratimes;
 			if (this->ui.finalEfect == EffList[0]) {
@@ -618,7 +614,7 @@ void cMainMenu::CreateWav(wxCommandEvent& evt) {
 			}
 
 			myWC.makeWav();
-			/*loadBar.Hide();*/
+
 			t_loadR->Show();
 			t_loadW->Hide();
 		}
