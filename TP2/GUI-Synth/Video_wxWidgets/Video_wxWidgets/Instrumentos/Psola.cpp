@@ -187,7 +187,7 @@ vector<double> Psola::hanningN(int N)
 	vector<double> window;
 	for (int n = 0; n <= N; n++)
 	{
-		window.push_back(pow(sin((PI * n) / N), 2.0));
+		window.push_back(pow(sin((PI_ * n) / N), 2.0));
 	}
 	return window;
 }

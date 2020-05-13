@@ -10,7 +10,7 @@
 #define SAMPLE_RATE 44100
 #define MAX_AMP 32760
 
-const double PI = 3.141592653589793238460;
+const double PI_ = 3.141592653589793238460;
 
 using namespace std;
 class Data
