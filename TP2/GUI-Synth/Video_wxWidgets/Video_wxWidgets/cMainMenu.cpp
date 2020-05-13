@@ -587,7 +587,7 @@ void cMainMenu::CreateWav(wxCommandEvent& evt) {
 			t_loadR->Hide();
 			t_loadW->Show();
 			t_loadW->Update();
-			//wxBusyInfo wait("Creating WAV, this could take a few minutes, please wait.");
+			wxBusyInfo wait("Creating WAV, this could take a few minutes, please wait.");
 			
 			double extraTime = 0;
 			vector<double> extratimes;
