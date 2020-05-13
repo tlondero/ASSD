@@ -509,7 +509,6 @@ void cMainMenu::detectInstrumentChange(wxCommandEvent& evt) {
 }
 
 void cMainMenu::AddMidiToProgram(wxCommandEvent& evt) {
-	this->ui.pairTrackInst.clear();
 	wxFileDialog openFileDialog(this, _("Open MIDI file"), "", "", "MIDI files (*.mid)|*.mid", wxFD_OPEN | wxFD_FILE_MUST_EXIST);  //Abro explorador de archivos
 	bool addString = true;
 	if (openFileDialog.ShowModal() == wxID_CANCEL) {			//Esto está por si se cierra el explorador sin elegir archivos
@@ -527,6 +526,7 @@ void cMainMenu::AddMidiToProgram(wxCommandEvent& evt) {
 		wxLogError("Cannot open file '%s'.", openFileDialog.GetPath());
 	}
 	else if (selecetedMidi != pathSelected) {			//verifico si el string ya está dentro de vector
+		this->ui.pairTrackInst.clear();
 		ddm_track->Clear();
 		lb_tracks->Clear();
 		lb_wavEff->Clear();
