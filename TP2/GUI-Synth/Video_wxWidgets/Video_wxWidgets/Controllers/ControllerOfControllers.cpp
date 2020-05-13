@@ -99,6 +99,12 @@ vector<SynthTrack> ControllerOfControllers::sytnsynthesisProject(vector<Tracks> 
 		}
 		else if (userData.pairTrackInst[track].TrackInstrument == InstrumentList[1] || userData.pairTrackInst[track].TrackInstrument == InstrumentList[2]) {
 			projectTracks[userData.pairTrackInst[track].TrackNumber].userInstrumentChoice = userData.pairTrackInst[track].TrackInstrument;
+			if (userData.pairTrackInst[track].TrackInstrument == InstrumentList[1]) {
+				this->OController.set_organ_param(userData.pairTrackInst[track].params.A, userData.pairTrackInst[track].params.R, userData.pairTrackInst[track].params.S);
+			}
+			else {
+				this->OController.set_flute_param(userData.pairTrackInst[track].params.A, userData.pairTrackInst[track].params.R, userData.pairTrackInst[track].params.S);
+			}
 			tempTrack = this->OController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber], userData.pairTrackInst[track].InstrumentPreview);
 			if (!userData.pairTrackInst[track].effect2Apply.empty()) {
 				tempTrack.effect2Apply = userData.pairTrackInst[track].effect2Apply;
