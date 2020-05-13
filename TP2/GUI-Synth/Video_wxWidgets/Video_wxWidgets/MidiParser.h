@@ -1,9 +1,10 @@
 #pragma once
 #include "midi/MidiFile.h"
-#include"utils\Tracks.h"
+#include "utils\Tracks.h"
+#include "General.h"
 #include <string>
 #include <vector>
-#define TMAX 30.0
+
 using namespace std;
 using namespace smf;
 class MidiParser

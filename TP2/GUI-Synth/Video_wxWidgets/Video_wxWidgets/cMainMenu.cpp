@@ -590,7 +590,8 @@ void cMainMenu::CreateWav(wxCommandEvent& evt) {
 			loadBar.Center();
 			loadBar.SetExtendedMessage("This could take a few minutes, please wait.");
 			loadBar.ShowModal();*/
-			wxBusyInfo wait("Creating WAV, this could take a few minutes, please wait.");
+			
+			//wxBusyInfo wait("Creating WAV, this could take a few minutes, please wait.");
 			double extraTime = 0;
 			vector<double> extratimes;
 			if (this->ui.finalEfect == EffList[0]) {
@@ -614,9 +615,9 @@ void cMainMenu::CreateWav(wxCommandEvent& evt) {
 			for (unsigned int i = 0; i < this->midiTranslated.size(); i++) {
 				subMidi = this->midiTranslated[i];
 				myWC.compileWav(myCC.sytnsynthesisProject(subMidi, this->ui), this->midi.getSubDuration(i) + max + 0.5, pathSelected + to_string(i), 1000);
-				myWC.makeWav();
 			}
 
+			myWC.makeWav();
 			/*loadBar.Hide();*/
 			t_loadR->Show();
 			t_loadW->Hide();
