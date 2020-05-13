@@ -9,6 +9,7 @@
 #include "../Efectos/EfectController.h"
 #include "OrganController.h"
 #include "TrumpetController.h"
+#include "SaxoPsolaController.h"
 #include "../General.h"
 // Aca se incluyen todos los instrumentos
 #include "../Utils/Tracks.h"
@@ -31,5 +32,6 @@ private:
 	OrganController OController;
 	TrumpetController TrumpController;
 	EfectController EController;
+	SaxoPsolaController SaxoController;
 	// aca agregas tus instrumentos
 };
