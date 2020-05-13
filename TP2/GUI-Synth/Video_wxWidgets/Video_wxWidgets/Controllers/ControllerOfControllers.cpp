@@ -15,12 +15,16 @@ vector<SynthTrack> ControllerOfControllers::sytnsynthesisProject(vector<Tracks> 
 			tempTrack = this->AGController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber], userData.pairTrackInst[track].InstrumentPreview);
 			if (!userData.pairTrackInst[track].effect2Apply.empty()) {
 				tempTrack.effect2Apply = userData.pairTrackInst[track].effect2Apply;
+				tempTrack.T = userData.pairTrackInst[track].T;
+				tempTrack.M = userData.pairTrackInst[track].M;
+				tempTrack.D = userData.pairTrackInst[track].D;
 			}
-			if (!userData.finalEfect.empty())
+			if (!userData.finalEfect.empty()) {
 				tempTrack.effect2Apply = noteborres;
-			tempTrack.T = userData.pairTrackInst[track].T;
-			tempTrack.M = userData.pairTrackInst[track].M;
-			tempTrack.D = userData.pairTrackInst[track].D;
+				tempTrack.T = userData.T;
+				tempTrack.M = userData.M;
+				tempTrack.D = userData.D;
+			}
 			mySynthTrackVector.push_back(tempTrack);
 		}
 		else if (userData.pairTrackInst[track].TrackInstrument == InstrumentList[9]) {
@@ -28,24 +32,32 @@ vector<SynthTrack> ControllerOfControllers::sytnsynthesisProject(vector<Tracks> 
 			tempTrack = this->EGController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber], userData.pairTrackInst[track].InstrumentPreview);
 			if (!userData.pairTrackInst[track].effect2Apply.empty()) {
 				tempTrack.effect2Apply = userData.pairTrackInst[track].effect2Apply;
+				tempTrack.T = userData.pairTrackInst[track].T;
+				tempTrack.M = userData.pairTrackInst[track].M;
+				tempTrack.D = userData.pairTrackInst[track].D;
 			}
-			if (!userData.finalEfect.empty())
+			if (!userData.finalEfect.empty()) {
 				tempTrack.effect2Apply = noteborres;
-			tempTrack.T = userData.pairTrackInst[track].T;
-			tempTrack.M = userData.pairTrackInst[track].M;
-			tempTrack.D = userData.pairTrackInst[track].D;
+				tempTrack.T = userData.T;
+				tempTrack.M = userData.M;
+				tempTrack.D = userData.D;
+			}
 			mySynthTrackVector.push_back(tempTrack);
 		}
 		else if (userData.pairTrackInst[track].TrackInstrument == InstrumentList[8]) {
 			tempTrack = this->BController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber], userData.pairTrackInst[track].InstrumentPreview);
 			if (!userData.pairTrackInst[track].effect2Apply.empty()) {
 				tempTrack.effect2Apply = userData.pairTrackInst[track].effect2Apply;
+				tempTrack.T = userData.pairTrackInst[track].T;
+				tempTrack.M = userData.pairTrackInst[track].M;
+				tempTrack.D = userData.pairTrackInst[track].D;
 			}
-			if (!userData.finalEfect.empty())
+			if (!userData.finalEfect.empty()) {
 				tempTrack.effect2Apply = noteborres;
-			tempTrack.T = userData.pairTrackInst[track].T;
-			tempTrack.M = userData.pairTrackInst[track].M;
-			tempTrack.D = userData.pairTrackInst[track].D;
+				tempTrack.T = userData.T;
+				tempTrack.M = userData.M;
+				tempTrack.D = userData.D;
+			}
 			mySynthTrackVector.push_back(tempTrack);
 		}
 		else if (userData.pairTrackInst[track].TrackInstrument == InstrumentList[7]) {
@@ -53,48 +65,64 @@ vector<SynthTrack> ControllerOfControllers::sytnsynthesisProject(vector<Tracks> 
 			tempTrack = this->DController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber], userData.pairTrackInst[track].InstrumentPreview);
 			if (!userData.pairTrackInst[track].effect2Apply.empty()) {
 				tempTrack.effect2Apply = userData.pairTrackInst[track].effect2Apply;
+				tempTrack.T = userData.pairTrackInst[track].T;
+				tempTrack.M = userData.pairTrackInst[track].M;
+				tempTrack.D = userData.pairTrackInst[track].D;
 			}
-			if (!userData.finalEfect.empty())
+			if (!userData.finalEfect.empty()) {
 				tempTrack.effect2Apply = noteborres;
-			tempTrack.T = userData.pairTrackInst[track].T;
-			tempTrack.M = userData.pairTrackInst[track].M;
-			tempTrack.D = userData.pairTrackInst[track].D;
+				tempTrack.T = userData.T;
+				tempTrack.M = userData.M;
+				tempTrack.D = userData.D;
+			}
 			mySynthTrackVector.push_back(tempTrack);
 		}
 		else if (userData.pairTrackInst[track].TrackInstrument == InstrumentList[5]) {
 			tempTrack = this->TController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber], userData.pairTrackInst[track].InstrumentPreview);
 			if (!userData.pairTrackInst[track].effect2Apply.empty()) {
 				tempTrack.effect2Apply = userData.pairTrackInst[track].effect2Apply;
+				tempTrack.T = userData.pairTrackInst[track].T;
+				tempTrack.M = userData.pairTrackInst[track].M;
+				tempTrack.D = userData.pairTrackInst[track].D;
 			}
-			if (!userData.finalEfect.empty())
+			if (!userData.finalEfect.empty()) {
 				tempTrack.effect2Apply = noteborres;
-			tempTrack.T = userData.pairTrackInst[track].T;
-			tempTrack.M = userData.pairTrackInst[track].M;
-			tempTrack.D = userData.pairTrackInst[track].D;
+				tempTrack.T = userData.T;
+				tempTrack.M = userData.M;
+				tempTrack.D = userData.D;
+			}
 			mySynthTrackVector.push_back(tempTrack);
 		}
 		else if (userData.pairTrackInst[track].TrackInstrument == InstrumentList[3]) {
 			tempTrack = this->bellController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber], userData.pairTrackInst[track].InstrumentPreview);
 			if (!userData.pairTrackInst[track].effect2Apply.empty()) {
 				tempTrack.effect2Apply = userData.pairTrackInst[track].effect2Apply;
+				tempTrack.T = userData.pairTrackInst[track].T;
+				tempTrack.M = userData.pairTrackInst[track].M;
+				tempTrack.D = userData.pairTrackInst[track].D;
 			}
-			if (!userData.finalEfect.empty())
+			if (!userData.finalEfect.empty()) {
 				tempTrack.effect2Apply = noteborres;
-			tempTrack.T = userData.pairTrackInst[track].T;
-			tempTrack.M = userData.pairTrackInst[track].M;
-			tempTrack.D = userData.pairTrackInst[track].D;
+				tempTrack.T = userData.T;
+				tempTrack.M = userData.M;
+				tempTrack.D = userData.D;
+			}
 			mySynthTrackVector.push_back(tempTrack);
 		}
 		else if (userData.pairTrackInst[track].TrackInstrument == InstrumentList[4]) {
 			tempTrack = this->CController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber], userData.pairTrackInst[track].InstrumentPreview);
 			if (!userData.pairTrackInst[track].effect2Apply.empty()) {
 				tempTrack.effect2Apply = userData.pairTrackInst[track].effect2Apply;
+				tempTrack.T = userData.pairTrackInst[track].T;
+				tempTrack.M = userData.pairTrackInst[track].M;
+				tempTrack.D = userData.pairTrackInst[track].D;
 			}
-			if (!userData.finalEfect.empty())
+			if (!userData.finalEfect.empty()) {
 				tempTrack.effect2Apply = noteborres;
-			tempTrack.T = userData.pairTrackInst[track].T;
-			tempTrack.M = userData.pairTrackInst[track].M;
-			tempTrack.D = userData.pairTrackInst[track].D;
+				tempTrack.T = userData.T;
+				tempTrack.M = userData.M;
+				tempTrack.D = userData.D;
+			}
 			mySynthTrackVector.push_back(tempTrack);
 		}
 		else if (userData.pairTrackInst[track].TrackInstrument == InstrumentList[1] || userData.pairTrackInst[track].TrackInstrument == InstrumentList[2]) {
@@ -108,24 +136,34 @@ vector<SynthTrack> ControllerOfControllers::sytnsynthesisProject(vector<Tracks> 
 			tempTrack = this->OController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber], userData.pairTrackInst[track].InstrumentPreview);
 			if (!userData.pairTrackInst[track].effect2Apply.empty()) {
 				tempTrack.effect2Apply = userData.pairTrackInst[track].effect2Apply;
+				tempTrack.T = userData.pairTrackInst[track].T;
+				tempTrack.M = userData.pairTrackInst[track].M;
+				tempTrack.D = userData.pairTrackInst[track].D;
 			}
-			if (!userData.finalEfect.empty())
+			if (!userData.finalEfect.empty()){
 				tempTrack.effect2Apply = noteborres;
-			tempTrack.T = userData.pairTrackInst[track].T;
-			tempTrack.M = userData.pairTrackInst[track].M;
-			tempTrack.D = userData.pairTrackInst[track].D;
+				tempTrack.T = userData.T;
+				tempTrack.M = userData.M;
+				tempTrack.D = userData.D;
+			}
 			mySynthTrackVector.push_back(tempTrack);
 		}
 		else if (userData.pairTrackInst[track].TrackInstrument == InstrumentList[6]) {
 			tempTrack = this->TrumpController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber], userData.pairTrackInst[track].InstrumentPreview);
 			if (!userData.pairTrackInst[track].effect2Apply.empty()) {
 				tempTrack.effect2Apply = userData.pairTrackInst[track].effect2Apply;
+				tempTrack.T = userData.pairTrackInst[track].T;
+				tempTrack.M = userData.pairTrackInst[track].M;
+				tempTrack.D = userData.pairTrackInst[track].D;
 			}
-			if (!userData.finalEfect.empty())
+			if (!userData.finalEfect.empty()){
 				tempTrack.effect2Apply = noteborres;
-			tempTrack.T = userData.pairTrackInst[track].T;
-			tempTrack.M = userData.pairTrackInst[track].M;
-			tempTrack.D = userData.pairTrackInst[track].D;
+				tempTrack.T = userData.T;
+				tempTrack.M = userData.M;
+				tempTrack.D = userData.D;
+
+			}
+
 			mySynthTrackVector.push_back(tempTrack);
 		}
 		//else if (other instrument) {
