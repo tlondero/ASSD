@@ -21,10 +21,11 @@ Psola::Psola() {}
 
 vector<double> Psola::generateNote(double new_frequency, double new_duration, string wav_path, string data_path)
 {
-	sample.load(wav_path.c_str());
 	//Load data
 	Data data = load_data(data_path.c_str());
 
+	sample.load(wav_path.c_str());
+	
 	//The First step is finding out the fundamental frequency
 	double f0 = data.get_f0();	  //Hz Assume constant pitch
 	double pitch_period = 1 / f0; //Periodo fundamental <--

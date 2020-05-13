@@ -6,9 +6,7 @@
 #include <numeric>
 #include <math.h>
 #include <fstream>
-
-#define SAMPLE_RATE 44100
-#define MAX_AMP 32760
+#include "../General.h"
 
 const double PI_ = 3.141592653589793238460;
 

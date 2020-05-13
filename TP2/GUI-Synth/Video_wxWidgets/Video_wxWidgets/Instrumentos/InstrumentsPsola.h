@@ -8,8 +8,8 @@ public:
 private:
 	Psola ps;
 	string select_note(double frequency);
-	string wavRelPath = "../assets/saxofono/Notes";
-	string dataRelPath = "../assets/saxofono/data/";
+	string wavRelPath = "assets/saxofono/Notes/";
+	string dataRelPath = "assets/saxofono/data/";
 
 	vector<string> notes = {"A4", "A5", "A6", "Asharp3", "Asharp4", "Asharp5",
 							"Asharp6", "G4", "G5", "G6", "Gsharp4", "Gsharp5",

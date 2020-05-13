@@ -45,7 +45,7 @@ SynthTrack SaxoPsolaController::sytnsynthesisTrack(Tracks SaxoTrack, bool previe
 
             noteData.t_on = SaxoTrack.Notes[note].t_on;
 
-            noteData.sound = this->saxo.generateNote(SaxoTrack.Notes[note].frequency, SaxoTrack.Notes[note].Duration, , SaxoTrack.Notes[note].velocity / 100.0);
+            noteData.sound = this->saxo.generateNote(SaxoTrack.Notes[note].frequency, SaxoTrack.Notes[note].Duration, SaxoTrack.Notes[note].velocity / 100.0);
 
             mySynthesis.track.push_back(noteData);
         }
