@@ -4,48 +4,6 @@
 
 OrganController::OrganController()
 {
-	this->flute.set_parameters(
-		2, //Subharmonic count
-		2, //Mixharmonic count
-		0.4,  //Sub
-		1e-10,  //Fifth
-		0.6,  //Primary
-		1e-15,  //Eighth
-		1e-5,  //Twelveth
-		0,  //Fifteenth
-		0,  //Seventeenth
-		1e-10,  //Nineteenth
-		0.005,  //Below
-		0.001,  //Major Third
-		0.000001,  //Perfect Fourth
-		0.00001,  //Perfect Fifth
-		0.05, //Attack
-		0.4,  //sustain
-		0.03, ////sustain oscillation
-		0.000005 //Noise factor
-	);
-
-	this->organ.set_parameters(
-
-
-		2, //Subharmonic count
-		3, //Mixharmonic count
-		0.8,  //Sub
-		0.6,  //Fifth
-		0.9,  //Primary
-		0.7,  //Eighth
-		0.6,  //Twelveth
-		0.5,  //Fifteenth
-		0.5,  //Seventeenth
-		0.7,  //Nineteenth
-		0.8,  //Below
-		0.002,  //Major Third
-		0.00001,  //Perfect Fourth
-		0.00005,  //Perfect Fifth
-		0.05, //Attack
-		0.90,  //Recovery
-		0.005,
-		0.002);//Noise factor
 }
 
 SynthTrack OrganController::sytnsynthesisTrack(Tracks Track, bool preview) {
@@ -117,6 +75,57 @@ SynthTrack OrganController::sytnsynthesisTrack(Tracks Track, bool preview) {
 		}
 	}
 	return mySynthesis;
+}
+
+void OrganController::set_organ_param(double a, double s, double r)
+{
+	this->organ.set_parameters(
+
+		2, //Subharmonic count
+		3, //Mixharmonic count
+		0.8,  //Sub
+		0.6,  //Fifth
+		0.9,  //Primary
+		0.7,  //Eighth
+		0.6,  //Twelveth
+		0.5,  //Fifteenth
+		0.5,  //Seventeenth
+		0.7,  //Nineteenth
+		0.8,  //Below
+		0.002,  //Major Third
+		0.00001,  //Perfect Fourth
+		0.00005,  //Perfect Fifth
+		a, //Attack
+		r,  //Recovery
+		s,
+		0.002);//Noise factor
+	
+}
+
+void OrganController::set_flute_param(double a, double s, double r)
+{
+	this->flute.set_parameters(
+
+		4, //Subharmonic count
+		2, //Mixharmonic count
+		0.4,  //Sub
+		0.0001,  //Fifth
+		0.6,  //Primary
+		0.0001,  //Eighth
+		0,  //Twelveth
+		0,  //Fifteenth
+		0,  //Seventeenth
+		0,  //Nineteenth
+		0.001,  //Below
+		0.00001,  //Major Third
+		0.000001,  //Perfect Fourth
+		0.00001,  //Perfect Fifth
+		a, //Attack
+		r,  //sustain
+		s, //realeasr
+		0.0005 //Noise factor
+
+	);
 }
 
 OrganController::~OrganController()
