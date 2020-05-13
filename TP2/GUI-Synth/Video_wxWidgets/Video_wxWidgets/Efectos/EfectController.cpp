@@ -17,7 +17,7 @@ vector<SynthTrack> EfectController::applyEfects(vector<SynthTrack> tracketeo) {
 			}
 		}
 	}
-	return tracketeo;
+	return temp;
 }
 EfectController::~EfectController() {
 

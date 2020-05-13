@@ -1,29 +1,29 @@
 #include "cMainMenu.h"
 
 wxBEGIN_EVENT_TABLE(cMainMenu, wxFrame)
-	EVT_KEY_DOWN(OnKeyDown)
+EVT_KEY_DOWN(OnKeyDown)
 
-	EVT_TEXT(10003, detectInstrumentChange)
-	EVT_TEXT(10004, detectWavEffChange)
-	EVT_TEXT(10014, detectWindowChange)
+EVT_TEXT(10003, detectInstrumentChange)
+EVT_TEXT(10004, detectWavEffChange)
+EVT_TEXT(10014, detectWindowChange)
 
-	EVT_MENU(10005, OnMenuExit)
-	EVT_MENU(10006, OnMenuFullscreen)
-	EVT_MENU(10019, OnMenuHelp)
+EVT_MENU(10005, OnMenuExit)
+EVT_MENU(10006, OnMenuFullscreen)
+EVT_MENU(10019, OnMenuHelp)
 
-	EVT_BUTTON(10001, AddMidiToProgram)
-	EVT_BUTTON(10002, AddTrack)
-	EVT_BUTTON(10007, RemoveTrack)
-	EVT_BUTTON(10008, CreateWav)
-	EVT_BUTTON(10009, CreatePreview)
-	EVT_BUTTON(10010, savePreview)
-	EVT_BUTTON(10011, Replay)
-	EVT_BUTTON(10012, loadWavSpec)
-	EVT_BUTTON(10013, createSpec)
-	EVT_BUTTON(10015, addEffTrack)
-	EVT_BUTTON(10016, removeEffTrack)
-	EVT_BUTTON(10017, addEffWav)
-	EVT_BUTTON(10018, removeEffWav)
+EVT_BUTTON(10001, AddMidiToProgram)
+EVT_BUTTON(10002, AddTrack)
+EVT_BUTTON(10007, RemoveTrack)
+EVT_BUTTON(10008, CreateWav)
+EVT_BUTTON(10009, CreatePreview)
+EVT_BUTTON(10010, savePreview)
+EVT_BUTTON(10011, Replay)
+EVT_BUTTON(10012, loadWavSpec)
+EVT_BUTTON(10013, createSpec)
+EVT_BUTTON(10015, addEffTrack)
+EVT_BUTTON(10016, removeEffTrack)
+EVT_BUTTON(10017, addEffWav)
+EVT_BUTTON(10018, removeEffWav)
 
 wxEND_EVENT_TABLE()
 
@@ -51,23 +51,23 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	//Botones
 	b_cargarMidi = new wxButton(this, 10001, "Load MIDI file", wxPoint(BUTTON_SP, BUTTON_SP), wxSize(BUTTON_X * 2, BUTTON_Y));
 	b_crearWav = new wxButton(this, 10008, "Create WAV file", wxPoint(BUTTON_SP, BUTTON_Y + BUTTON_SP), wxSize(BUTTON_X * 2, BUTTON_Y));
-	
+
 	b_addTrack = new wxButton(this, 10002, "Add track", wxPoint(BUTTON_SP, 13 * BUTTON_SP + 2 * BUTTON_Y + 3 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(BUTTON_X, BUTTON_Y));
 	b_removeTrack = new wxButton(this, 10007, "Remove track", wxPoint(BUTTON_SP + BUTTON_X, 13 * BUTTON_SP + 2 * BUTTON_Y + 3 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(BUTTON_X, BUTTON_Y));
-	
-	b_preview = new wxButton(this, 10009, "Listen preview track", wxPoint(COL2, 8 * BUTTON_SP + BUTTON_Y + 3*TEXT_Y + LB_Y / 2), wxSize(2 * BUTTON_X, BUTTON_Y));
+
+	b_preview = new wxButton(this, 10009, "Listen preview track", wxPoint(COL2, 8 * BUTTON_SP + BUTTON_Y + 3 * TEXT_Y + LB_Y / 2), wxSize(2 * BUTTON_X, BUTTON_Y));
 
 	b_addEffTrack = new wxButton(this, 10015, "Add effect to track", wxPoint(COL2, 13 * BUTTON_SP + 2 * BUTTON_Y + 3 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(BUTTON_X, BUTTON_Y));
 	b_removeEffTrack = new wxButton(this, 10016, "Remove effect from track", wxPoint(COL2 + BUTTON_X, 13 * BUTTON_SP + 2 * BUTTON_Y + 3 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(BUTTON_X, BUTTON_Y));
 
-	b_addEffWav = new wxButton(this, 10017, "Add effect to final WAV", wxPoint(COL2, BUTTON_SP), wxSize( 2 *BUTTON_X, BUTTON_Y));
-	b_removeEffWav = new wxButton(this, 10018, "Reomve effect from final WAV", wxPoint(COL2, BUTTON_SP + BUTTON_Y), wxSize(2 * BUTTON_X, BUTTON_Y));
+	b_addEffWav = new wxButton(this, 10017, "Add effect to final WAV", wxPoint(COL2, BUTTON_SP), wxSize(2 * BUTTON_X, BUTTON_Y));
+	b_removeEffWav = new wxButton(this, 10018, "Remove effect from final WAV", wxPoint(COL2, BUTTON_SP + BUTTON_Y), wxSize(2 * BUTTON_X, BUTTON_Y));
 
 
 	//b_toggleMic = new wxButton(this, wxID_ANY, "MIC On / Off ", wxPoint(COL3, BUTTON_SP), wxSize(BUTTON_X * 2, BUTTON_Y));
 	//b_addEffMic = new wxButton(this, wxID_ANY, "Add effect to Mic", wxPoint(COL3, 2 * BUTTON_SP + BUTTON_Y + TEXT_Y + DDM_Y), wxSize(BUTTON_X, BUTTON_Y));
 	//b_removeEffMic = new wxButton(this, wxID_ANY, "Remove effect from Mic", wxPoint(COL3 + BUTTON_X, 2 * BUTTON_SP + BUTTON_Y + TEXT_Y + DDM_Y), wxSize(BUTTON_X, BUTTON_Y));
-	
+
 	//b_savePreview = new wxButton(this, 10010, "Save preview", wxPoint(COL3, 23 * TEXT_Y + 4 * BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
 	//b_replay = new wxButton(this, 10011, "Replay", wxPoint(COL3 + TEXT_X, 23 * TEXT_Y + 4 * BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
 
@@ -88,11 +88,11 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 
 	//Lists Box
 	lb_tracks = new wxListBox(this, wxID_ANY, wxPoint(BUTTON_SP, 15 * BUTTON_SP + 3 * BUTTON_Y + 4 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(LB_X, LB_Y / 2));
-	lb_wavEff = new wxListBox(this, wxID_ANY,  wxPoint(COL2, 15 * BUTTON_SP + 3 * BUTTON_Y + 4 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(LB_X, LB_Y / 2));
+	lb_wavEff = new wxListBox(this, wxID_ANY, wxPoint(COL2, 15 * BUTTON_SP + 3 * BUTTON_Y + 4 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(LB_X, LB_Y / 2));
 	lb_wavEffFinal = new wxListBox(this, wxID_ANY, wxPoint(COL2, TEXT_Y + 2 * BUTTON_SP + 2 * BUTTON_Y), wxSize(LB_X, LB_Y / 2));
 	//lb_micEff = new wxListBox(this, wxID_ANY, wxPoint(COL3, 4 * BUTTON_SP + 2 * BUTTON_Y + 2 * TEXT_Y + DDM_Y), wxSize(LB_X, LB_Y / 2));
 
-	
+
 	//Text
 	t_tackDdm = new wxStaticText(this, wxID_ANY, "Tracks:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 6 * BUTTON_SP + TEXT_Y), wxSize(TEXT_X, TEXT_Y));
 	t_instrumentoDdm = new wxStaticText(this, wxID_ANY, "Instruments:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 9 * BUTTON_SP + DDM_Y + TEXT_Y), wxSize(TEXT_X, TEXT_Y));
@@ -159,15 +159,15 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	for (int i = 0; i < tx_WavEfftoShow.size(); i++) {
 		tx_WavEfftoShow[i]->Hide();
 	}
-	
+
 	//Text Control (VENTANAS)
 	tx_specWindParam = new wxTextCtrl(this, wxID_ANY, "", wxPoint(COL3, BUTTON_Y + 8 * TEXT_Y + 2 * DDM_Y + 6 * BUTTON_SP), wxSize(TEXT_X, TEXT_Y + 5));
 	tx_specWindParam->Hide();
 
 
 	//Dinmac Texts (LOAD)
-	t_loadR = new wxStaticText(this, wxID_ANY, "I'm ready! Give me some work...", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 2 * BUTTON_SP), wxSize(BUTTON_X * 2 , TEXT_Y * 2));
-	t_loadW = new wxStaticText(this, wxID_ANY, "I'm too bussy, please wait while I'm thinking...", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 2 * BUTTON_SP), wxSize(BUTTON_X * 2, TEXT_Y * 2));
+	t_loadR = new wxStaticText(this, wxID_ANY, "I'm ready! Give me some work...", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 2 * BUTTON_SP), wxSize(BUTTON_X * 2, TEXT_Y * 2));
+	t_loadW = new wxStaticText(this, wxID_ANY, "I'm too busy, please wait while I'm thinking...", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 2 * BUTTON_SP), wxSize(BUTTON_X * 2, TEXT_Y * 2));
 	t_loadW->Hide();
 
 
@@ -258,7 +258,7 @@ void cMainMenu::OnMenuFullscreen(wxCommandEvent& evt) {
 	evt.Skip();
 }
 
-void cMainMenu::OnMenuExit(wxCommandEvent & evt) {
+void cMainMenu::OnMenuExit(wxCommandEvent& evt) {
 	Close();
 	evt.Skip();
 }
@@ -278,43 +278,35 @@ void cMainMenu::AddTrack(wxCommandEvent& evt) {
 	string track = ddm_track->GetStringSelection();
 	UserChoice uc;
 	bool letsPush = true;
-	
+
 	if (!(ddm_instrumento->IsTextEmpty()) && !(ddm_track->IsTextEmpty())) {
 		if (((instrument == InstrumentList[0]) && !(tx_guitarRf->IsEmpty())) || ((instrument == InstrumentList[9]) && !(tx_eguitarRf->IsEmpty()))) {							//GUITARRA
+
 			uc.TrackInstrument = instrument;
 			int n = track.size() - (track.substr(track.find('['))).size() - 7;
 			uc.TrackNumber = stoi(track.substr(6, n));
-			if (instrument == InstrumentList[0]) {
-				if (stod((string)tx_guitarRf->GetValue()) < 2 && stod((string)tx_guitarRf->GetValue()) > 0) {
+			if ((instrument == InstrumentList[0]) && (stod((string)tx_guitarRf->GetValue()) < 2 && stod((string)tx_guitarRf->GetValue()) > 0)) {
 					uc.params.GuitarParam_rf = stod((string)tx_guitarRf->GetValue());
-				}
-				else {
-					//Warning
-					wxMessageDialog warning(this, "The parameters selected are invalid", "Can't add an track");
-					warning.Center();
-					warning.SetExtendedMessage("Remember: \n0 < RL < 2");
-					warning.ShowModal();
-					warning.Hide();
-				}
+			}
+			else if ((instrument == InstrumentList[9]) && (stod((string)tx_eguitarRf->GetValue()) < 2 && stod((string)tx_eguitarRf->GetValue()) > 0)) {
+					uc.params.GuitarParam_rf = stod((string)tx_eguitarRf->GetValue());
 			}
 			else {
-				if (stod((string)tx_eguitarRf->GetValue()) < 2 && stod((string)tx_eguitarRf->GetValue()) > 0) {
-					uc.params.GuitarParam_rf = stod((string)tx_eguitarRf->GetValue());
-				}
+				//Warning
+				wxMessageDialog warning(this, "The parameters selected are invalid", "Can't add an track");
+				warning.Center();
+				warning.SetExtendedMessage("Remember: \n0 < RL < 2");
+				warning.ShowModal();
+				warning.Hide();
+				letsPush = false;
 			}
+
 			for (int i = 0; i < ui.pairTrackInst.size(); i++) {
 				if (ui.pairTrackInst[i].TrackNumber == uc.TrackNumber) {
 					letsPush = false;
-				}
-				else {
-					//Warning
-					wxMessageDialog warning(this, "The parameters selected are invalid", "Can't add an track");
-					warning.Center();
-					warning.SetExtendedMessage("Remember: \n0 < RL < 2");
-					warning.ShowModal();
-					warning.Hide();
-				}
+				}				
 			}
+
 			if (letsPush) {
 				ui.pairTrackInst.push_back(uc);
 				lb_tracks->Append(track + ' ' + instrument);
@@ -346,7 +338,7 @@ void cMainMenu::AddTrack(wxCommandEvent& evt) {
 				warning.SetExtendedMessage("Remember: \n0 < A < 1 \n0 < S < 1 \n0 < R < 1");
 				warning.ShowModal();
 				warning.Hide();
-			}	
+			}
 		}
 		else if ((instrument == InstrumentList[2]) && !(tx_fluteA->IsEmpty()) && !(tx_fluteS->IsEmpty()) && !(tx_fluteR->IsEmpty())) {							//FLUTE
 			if (stod((string)tx_fluteA->GetValue()) < 1 && stod((string)tx_fluteA->GetValue()) > 0 && stod((string)tx_fluteS->GetValue()) < 1 && stod((string)tx_fluteS->GetValue()) && stod((string)tx_fluteR->GetValue()) < 1 && stod((string)tx_fluteR->GetValue())) {
@@ -380,7 +372,7 @@ void cMainMenu::AddTrack(wxCommandEvent& evt) {
 			uc.TrackInstrument = instrument;
 			int n = track.size() - (track.substr(track.find('['))).size() - 7;
 			uc.TrackNumber = stoi(track.substr(6, n));
-			
+
 			for (int i = 0; i < ui.pairTrackInst.size(); i++) {
 				if (ui.pairTrackInst[i].TrackNumber == uc.TrackNumber) {
 					letsPush = false;
@@ -392,7 +384,7 @@ void cMainMenu::AddTrack(wxCommandEvent& evt) {
 			}
 		}
 		else if ((instrument == InstrumentList[7]) && !(tx_drumRf->IsEmpty()) && !(tx_drumB->IsEmpty())) {							//DRUM
-			if ( stod((string)tx_drumRf->GetValue()) > 0 && stod((string)tx_drumRf->GetValue()) < 2 && stod((string)tx_drumB->GetValue()) > 0 && stod((string)tx_drumB->GetValue()) < 1 ) {
+			if (stod((string)tx_drumRf->GetValue()) > 0 && stod((string)tx_drumRf->GetValue()) < 2 && stod((string)tx_drumB->GetValue()) > 0 && stod((string)tx_drumB->GetValue()) < 1) {
 				uc.TrackInstrument = instrument;
 				int i = track.size() - (track.substr(track.find('['))).size() - 7;
 				uc.TrackNumber = stoi(track.substr(6, i));
@@ -416,7 +408,7 @@ void cMainMenu::AddTrack(wxCommandEvent& evt) {
 				warning.ShowModal();
 				warning.Hide();
 			}
-		
+
 		}
 		else {
 			//Warning
@@ -441,7 +433,7 @@ void cMainMenu::AddTrack(wxCommandEvent& evt) {
 void cMainMenu::RemoveTrack(wxCommandEvent& evt) {
 	if (lb_tracks->GetSelection() != wxNOT_FOUND) {
 		string stringTrack = (string)lb_tracks->GetStringSelection();
-		
+
 		int last = stringTrack.size() - stringTrack.find_first_of('[');
 		int trackToDelete = stoi(stringTrack.substr(6, last));
 
@@ -478,7 +470,7 @@ void cMainMenu::detectInstrumentChange(wxCommandEvent& evt) {
 	}
 
 	string intrumentoElegido = ddm_instrumento->GetStringSelection();						//verificar que el imput esté en la lista de esa mierda
-	
+
 	if (intrumentoElegido == InstrumentList[0]) {								//GUITARRA
 		tx_guitarRf->Show();
 		t_guitarRf->Show();
@@ -489,7 +481,7 @@ void cMainMenu::detectInstrumentChange(wxCommandEvent& evt) {
 		tx_organR->Show();
 		t_organA->Show();
 		t_organS->Show();
-		t_organR->Show();	
+		t_organR->Show();
 	}
 	else if (intrumentoElegido == InstrumentList[2]) {							//FLUTE
 		tx_fluteA->Show();
@@ -541,22 +533,33 @@ void cMainMenu::AddMidiToProgram(wxCommandEvent& evt) {
 		lb_wavEffFinal->Clear();
 		tracksAddedEfects.clear();
 		selecetedMidi = pathSelected;
-		
+
 		ui.finalEfect.clear();
 		ui.pairTrackInst.clear();
-		ui.wavName.clear();		
-		
+		ui.wavName.clear();
+
 		if (this->midi.addMidi(this->selecetedMidi)) {
-			this->midiTranslated=this->midi.getTracks();
-			addToDdm(midiToStringDdm(this->midiTranslated), ddm_track);
-			t_loadR->SetLabel("Current MIDI: " + stringSelected + ". I'm ready! Give me some work...");
-			t_loadR->SetSize(wxSize(BUTTON_X * 2, TEXT_Y * 2));
-			t_loadR->Update();
+			//this->midiTranslated = this->midi.getTracks();
+			this->midiTranslated = this->midi.getTracks();
+			if (this->midi.getTotalDuration() == 0) {
+				//Warning
+				wxMessageDialog warning(this, "This MIDI file is empty", "Can't open MIDI");
+				warning.Center();
+				warning.SetExtendedMessage("Please select a valid MIDI.");
+				warning.ShowModal();
+				warning.Hide();
+			}
+			else {
+				addToDdm(midiToStringDdm(this->midiTranslated[0]), ddm_track);
+				t_loadR->SetLabel("Current MIDI: " + stringSelected + ". I'm ready! Give me some work...");
+				t_loadR->SetSize(wxSize(BUTTON_X * 2, TEXT_Y * 2));
+				t_loadR->Update();
+			}
 		}
 		else {
 			//algun tipo de error;
 		}
-		
+
 	}
 	evt.Skip();
 }
@@ -583,13 +586,36 @@ void cMainMenu::CreateWav(wxCommandEvent& evt) {
 			//Load Bar
 			t_loadR->Hide();
 			t_loadW->Show();
-			wxMessageDialog loadBar(this, "Creating WAV", "Loading");
-			loadBar.Center();
-			loadBar.SetExtendedMessage("This could take a few minutes, please wait.");
-			loadBar.ShowModal();
-			myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, this->ui), this->midi.getTotalDuration() + 5, pathSelected, 1000);
+			t_loadW->Update();
+			wxBusyInfo wait("Creating WAV, this could take a few minutes, please wait.");
+			
+			double extraTime = 0;
+			vector<double> extratimes;
+			if (this->ui.finalEfect == EffList[0]) {
+				extraTime = this->ui.T * 3.0 / (-1 * log10(abs(this->ui.D)));
+			}
+			else if (this->ui.finalEfect == EffList[1]) {
+				extraTime = this->ui.T;
+			}
+			for (unsigned int i = 0; i < this->ui.pairTrackInst.size(); i++) {
+
+				if (this->ui.pairTrackInst[i].effect2Apply == EffList[0]) {
+					extratimes.push_back(-3.0 * (this->ui.pairTrackInst[i].T) / (log10(abs(this->ui.pairTrackInst[i].D))));
+				}
+				else if (this->ui.pairTrackInst[i].effect2Apply == EffList[1]) {
+					extratimes.push_back(this->ui.pairTrackInst[i].T);
+				}
+			}
+			extratimes.push_back(extraTime);
+			double max = *max_element(extratimes.begin(), extratimes.end());
+			vector<Tracks> subMidi;
+			for (unsigned int i = 0; i < this->midiTranslated.size(); i++) {
+				subMidi = this->midiTranslated[i];
+				myWC.compileWav(myCC.sytnsynthesisProject(subMidi, this->ui), this->midi.getSubDuration(i) + max + 0.5, pathSelected, 1000); // + to_string(i), 1000);
+			}
+
 			myWC.makeWav();
-			loadBar.Hide();
+
 			t_loadR->Show();
 			t_loadW->Hide();
 		}
@@ -611,9 +637,12 @@ void cMainMenu::CreatePreview(wxCommandEvent& evt) {
 		UserInput uiPrev;
 		ucPrev.InstrumentPreview = true;
 		uiPrev.pairTrackInst.push_back(ucPrev);
-
-		myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, uiPrev), PREVIEW_DURATION, "Previews/prevTrack", 1000);
-		myWC.makeWav();
+		vector<Tracks> subMidi;
+		for (unsigned int i = 0; i < this->midiTranslated.size(); i++) {
+			subMidi = this->midiTranslated[i];
+			myWC.compileWav(myCC.sytnsynthesisProject(subMidi, this->ui), PREVIEW_DURATION , "Previews/prevTrack" + to_string(i), 1000);
+			myWC.makeWav();
+		}
 
 
 		if (firstTime) {
@@ -749,7 +778,7 @@ void cMainMenu::createSpec(wxCommandEvent& evt) {
 
 		string nfft_s = ddm_nfft->GetStringSelection();
 		string overlap_s = ddm_overlap->GetStringSelection();
-		
+
 		if (nfft_s.empty() || overlap_s.empty()) {
 			//Warning
 			wxMessageDialog warning(this, "No parameter chosen", "Can't create spectogram");
@@ -822,7 +851,7 @@ void cMainMenu::detectWindowChange(wxCommandEvent& evt) {
 	t_specExp->Hide();
 	t_specKaiser->Hide();
 	tx_specWindParam->Clear();
-	tx_specWindParam->Hide();	
+	tx_specWindParam->Hide();
 
 	string ventanaElegida = ddm_spect->GetStringSelection();						//verificar que el imput esté en la lista de esa mierda
 
@@ -863,29 +892,38 @@ void cMainMenu::addEffTrack(wxCommandEvent& evt) {
 					warning.Hide();
 				}
 				else {
-					string stringTrack = (string)lb_tracks->GetStringSelection();
-					int last = stringTrack.size() - stringTrack.find_first_of('[');
-					int trackToAdd = stoi(stringTrack.substr(6, last));
-					bool addingTrack = true;
+					if (stod((string)tx_effGEco->GetValue()) > 0 && stod((string)tx_effGEco->GetValue()) < 2 && stod((string)tx_effMEco->GetValue()) > 0 && stod((string)tx_effMEco->GetValue()) < 1) {
+						string stringTrack = (string)lb_tracks->GetStringSelection();
+						int last = stringTrack.size() - stringTrack.find_first_of('[');
+						int trackToAdd = stoi(stringTrack.substr(6, last));
+						bool addingTrack = true;
 
-					for (int i = 0; i < tracksAddedEfects.size(); i++) {
-						if (trackToAdd == tracksAddedEfects[i]) {
-							addingTrack = false;
+						for (int i = 0; i < tracksAddedEfects.size(); i++) {
+							if (trackToAdd == tracksAddedEfects[i]) {
+								addingTrack = false;
+							}
+						}
+
+						if (addingTrack) {
+							tracksAddedEfects.push_back(trackToAdd);
+							ui.pairTrackInst[lb_tracks->GetSelection()].effect2Apply = effName;
+							ui.pairTrackInst[lb_tracks->GetSelection()].T = stod((string)tx_effGEco->GetValue());
+							ui.pairTrackInst[lb_tracks->GetSelection()].D = stod((string)tx_effMEco->GetValue());
+							lb_wavEff->Append("Track " + to_string(lb_tracks->GetSelection()) + ", Effect " + effName);
+						}
+						else {
+							//Warning
+							wxMessageDialog warning(this, "Track already added", "Can't add an effect");
+							warning.Center();
+							warning.SetExtendedMessage("Please select a different track.");
+							warning.ShowModal();
+							warning.Hide();
 						}
 					}
-					
-					if (addingTrack) {
-						tracksAddedEfects.push_back(trackToAdd);
-						ui.pairTrackInst[lb_tracks->GetSelection()].effect2Apply = effName;
-						ui.pairTrackInst[lb_tracks->GetSelection()].T = stod((string)tx_effGEco->GetValue());
-						ui.pairTrackInst[lb_tracks->GetSelection()].D = stod((string)tx_effMEco->GetValue());
-						lb_wavEff->Append("Track " + to_string(lb_tracks->GetSelection()) + ", Effect " + effName);
-					}
 					else {
-						//Warning
-						wxMessageDialog warning(this, "Track already added", "Can't add an effect");
+						wxMessageDialog warning(this, "The parameters selected are invalid", "Can't add an track");
 						warning.Center();
-						warning.SetExtendedMessage("Please select a different track.");
+						warning.SetExtendedMessage("Remember: \n0 < Time Eco < 2 \n0 < Decay Factor < 1");
 						warning.ShowModal();
 						warning.Hide();
 					}
@@ -896,35 +934,45 @@ void cMainMenu::addEffTrack(wxCommandEvent& evt) {
 					//Warning
 					wxMessageDialog warning(this, "No parameters set", "Can't add an effect");
 					warning.Center();
+					warning.SetExtendedMessage("Please configure the parameters to add an effect.");
 					warning.ShowModal();
 					warning.Hide();
 				}
 				else {
-					string stringTrack = (string)lb_tracks->GetStringSelection();
-					int last = stringTrack.size() - stringTrack.find_first_of('[');
-					int trackToAdd = stoi(stringTrack.substr(6, last));
-					bool addingTrack = true;
+					if (stod((string)tx_effRev->GetValue()) > 0 && stod((string)tx_effRev->GetValue()) < 5 && stod((string)tx_effMix->GetValue()) > 0 && stod((string)tx_effMix->GetValue()) < 1) {
+						string stringTrack = (string)lb_tracks->GetStringSelection();
+						int last = stringTrack.size() - stringTrack.find_first_of('[');
+						int trackToAdd = stoi(stringTrack.substr(6, last));
+						bool addingTrack = true;
 
-					for (int i = 0; i < tracksAddedEfects.size(); i++) {
-						if (trackToAdd == tracksAddedEfects[i]) {
-							addingTrack = false;
+						for (int i = 0; i < tracksAddedEfects.size(); i++) {
+							if (trackToAdd == tracksAddedEfects[i]) {
+								addingTrack = false;
+							}
+						}
+
+						double t = stod((string)tx_effRev->GetValue());
+
+						if (addingTrack) {
+							tracksAddedEfects.push_back(trackToAdd);
+							ui.pairTrackInst[lb_tracks->GetSelection()].effect2Apply = effName;
+							ui.pairTrackInst[lb_tracks->GetSelection()].T = stod((string)tx_effRev->GetValue());
+							ui.pairTrackInst[lb_tracks->GetSelection()].M = stod((string)tx_effMix->GetValue());
+							lb_wavEff->Append("Track " + to_string(lb_tracks->GetSelection()) + ", Effect " + effName);
+						}
+						else {
+							//Warning
+							wxMessageDialog warning(this, "Track already added", "Can't add an effect");
+							warning.Center();
+							warning.SetExtendedMessage("Please select a different track.");
+							warning.ShowModal();
+							warning.Hide();
 						}
 					}
-
-					double t = stod((string)tx_effRev->GetStringSelection());
-
-					if (addingTrack) {
-						tracksAddedEfects.push_back(trackToAdd);
-						ui.pairTrackInst[lb_tracks->GetSelection()].effect2Apply = effName;
-						ui.pairTrackInst[lb_tracks->GetSelection()].T = stod((string) tx_effRev->GetValue());
-						ui.pairTrackInst[lb_tracks->GetSelection()].M = stod((string) tx_effMix->GetValue());
-						lb_wavEff->Append("Track " + to_string(lb_tracks->GetSelection()) + ", Effect " + effName);
-					}
 					else {
-						//Warning
-						wxMessageDialog warning(this, "Track already added", "Can't add an effect");
+						wxMessageDialog warning(this, "The parameters selected are invalid", "Can't add an track");
 						warning.Center();
-						warning.SetExtendedMessage("Please select a different track.");
+						warning.SetExtendedMessage("Remember: \n0 < Time Eco < 5 \n0 < Mix Factor < 1");
 						warning.ShowModal();
 						warning.Hide();
 					}
@@ -990,17 +1038,26 @@ void cMainMenu::addEffWav(wxCommandEvent& evt) {
 					warning.Hide();
 				}
 				else {
-					if (lb_wavEffFinal->FindString(effName) == wxNOT_FOUND) {
-						ui.finalEfect = effName;
-						ui.T = stod((string)tx_effGEco->GetValue());
-						ui.D = stod((string)tx_effMEco->GetValue());
-						lb_wavEffFinal->Append(effName);
+					if (stod((string)tx_effGEco->GetValue()) > 0 && stod((string)tx_effGEco->GetValue()) < 2 && stod((string)tx_effMEco->GetValue()) > 0 && stod((string)tx_effMEco->GetValue()) < 1) {
+						if (lb_wavEffFinal->FindString(effName) == wxNOT_FOUND) {
+							ui.finalEfect = effName;
+							ui.T = stod((string)tx_effGEco->GetValue());
+							ui.D = stod((string)tx_effMEco->GetValue());
+							lb_wavEffFinal->Append(effName);
+						}
+						else {
+							//Warning
+							wxMessageDialog warning(this, "Effect already added", "Can't add an effect");
+							warning.Center();
+							warning.SetExtendedMessage("Select a different effect to add.");
+							warning.ShowModal();
+							warning.Hide();
+						}
 					}
 					else {
-						//Warning
-						wxMessageDialog warning(this, "Effect already added", "Can't add an effect");
+						wxMessageDialog warning(this, "The parameters selected are invalid", "Can't add an track");
 						warning.Center();
-						warning.SetExtendedMessage("Select a different effect to add.");
+						warning.SetExtendedMessage("Remember: \n0 < Time Eco < 2 \n0 < Decay Factor < 1");
 						warning.ShowModal();
 						warning.Hide();
 					}
@@ -1016,17 +1073,27 @@ void cMainMenu::addEffWav(wxCommandEvent& evt) {
 					warning.Hide();
 				}
 				else {
-					if (lb_wavEffFinal->FindString(effName) == wxNOT_FOUND) {
-						ui.finalEfect = effName;
-						ui.T = stod((string)tx_effRev->GetValue());		
-						ui.M = stod((string)tx_effMix->GetValue());
-						lb_wavEffFinal->Append(effName);
+					if (stod((string)tx_effRev->GetValue()) > 0 && stod((string)tx_effRev->GetValue()) < 5 && stod((string)tx_effMix->GetValue()) > 0 && stod((string)tx_effMix->GetValue()) < 1) {
+						if (lb_wavEffFinal->FindString(effName) == wxNOT_FOUND) {
+							ui.finalEfect = effName;
+							ui.T = stod((string)tx_effRev->GetValue());
+							ui.M = stod((string)tx_effMix->GetValue());
+							lb_wavEffFinal->Append(effName);
+						}
+						else {
+							//Warning
+							wxMessageDialog warning(this, "Effect already added", "Can't add an effect");
+							warning.Center();
+							warning.SetExtendedMessage("Select a different effect to add.");
+							warning.ShowModal();
+							warning.Hide();
+						}
 					}
 					else {
 						//Warning
-						wxMessageDialog warning(this, "Effect already added", "Can't add an effect");
+						wxMessageDialog warning(this, "The parameters selected are invalid", "Can't add an track");
 						warning.Center();
-						warning.SetExtendedMessage("Select a different effect to add.");
+						warning.SetExtendedMessage("Remember: \n0 < Time Eco < 5 \n0 < Mix Factor < 1");
 						warning.ShowModal();
 						warning.Hide();
 					}
@@ -1078,7 +1145,7 @@ void cMainMenu::detectWavEffChange(wxCommandEvent& evt) {
 		tx_WavEfftoShow[i]->Hide();
 		t_WavEfftoShow[i]->Hide();
 	}
-	
+
 	if (ddm_wavEff->GetStringSelection() == EffList[0]) {			//ECO
 		tx_effGEco->Show();
 		tx_effMEco->Show();

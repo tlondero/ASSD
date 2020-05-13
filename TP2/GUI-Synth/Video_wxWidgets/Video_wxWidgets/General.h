@@ -7,11 +7,12 @@
 #include <fstream>
 #include <iostream>
 
-#define SAMPLE_RATE		44100
-#define MAX_AMP         32760
-#define TWO_PI          6.283185307179586476925286766559
-#define NUM_CHANNELS	2
-#define BITS_PER_SAMPLE 16	//sino 8... sino 32... PROBAR HASTA QUE DE
+#define SAMPLE_RATE			44100
+#define MAX_AMP				32760
+#define TWO_PI				6.283185307179586476925286766559
+#define NUM_CHANNELS		2
+#define BITS_PER_SAMPLE		16	//sino 8... sino 32... PROBAR HASTA QUE DE
+#define TMAX				30.0
 
 //INSTRUMENTOS
 #define PREVIEW_DURATION		7

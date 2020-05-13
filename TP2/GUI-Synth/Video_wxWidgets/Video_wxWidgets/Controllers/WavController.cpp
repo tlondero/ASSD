@@ -16,16 +16,15 @@ WavController::WavController() {
 }
 
 void WavController::compileWav(vector<SynthTrack> allTracks, double duration_, string wavName_, double volume_) {
-
 	this->duration = duration_;
 	this->wavName = wavName_;
-	this->wavVector = vector<double>(ceil(this->duration * SAMPLE_RATE), 0);
+	vector <double> wavVector = vector<double>(ceil(this->duration * SAMPLE_RATE), 0);
 	this->volume = volume_;
 	for (unsigned int track = 0; track < allTracks.size(); track++) {
 		for (unsigned int note = 0; note < allTracks[track].track.size(); note++) {
 			int T = floor(allTracks[track].track[note].t_on * SAMPLE_RATE);
 			for (unsigned int i = 0; i < allTracks[track].track[note].sound.size(); i++) {
-				this->wavVector[i + T] += allTracks[track].track[note].sound[i];
+				wavVector[i + T] += allTracks[track].track[note].sound[i];
 			}
 		}
 	}
@@ -33,11 +32,12 @@ void WavController::compileWav(vector<SynthTrack> allTracks, double duration_, s
 	for (int i = 0; i < wavVector.size(); i++) {
 		wavVector[i] = wavVector[i] / max;
 	}
+	LaJEEPETA.push_back(wavVector);
 }
 
 void WavController::makeWav() {
 	int channels = 2;
-	double seconds = this->duration;
+	double seconds = (LaJEEPETA.size() - 1) * TMAX + this->duration; //this->duration;
 	string name = this->wavName;
 	ofstream f(name + ".wav", ios::binary);
 
@@ -60,12 +60,24 @@ void WavController::makeWav() {
 	// Write the audio samples
 	double max_amplitude = volume;  // "volume"
 
+
 	int N = SAMPLE_RATE * seconds;  // total number of samples
-	for (unsigned int n = 0; n < N; n++)
-	{
-		if (n >= this->wavVector.size())this->wavVector.push_back(0);
-		double amplitude = 1;
-		double value = this->wavVector[n];
+	int T = TMAX * SAMPLE_RATE;
+	vector<double> antiAereo;
+
+	antiAereo.resize(N+1);		//10 716 217		g11 477 155
+
+	for (unsigned int n = 0; n < LaJEEPETA.size(); n++) {
+		for (int k = 0; k < LaJEEPETA[n].size(); k++) {
+
+			antiAereo[k + n * T] += LaJEEPETA[n][k];
+		}
+	}
+
+
+	double amplitude = 1;
+	for (int i = 0; i < N; i++) {
+		double value = antiAereo[i];
 		write_word(f, (int)((amplitude)*value * volume), 2);
 		write_word(f, (int)((amplitude)*value * volume), 2);
 	}
@@ -81,6 +93,8 @@ void WavController::makeWav() {
 	f.seekp(0 + 4);
 	write_word(f, file_length - 8, 4);
 
+	this->LaJEEPETA.clear();
 }
+
 WavController::~WavController() {
 }

@@ -8,7 +8,7 @@
 #include <wx/textctrl.h>
 #include <wx/event.h>
 #include <wx/msgdlg.h>
-#include <wx/sound.h>
+#include <wx/busyinfo.h>
 
 #include <fstream>
 #include <vector>
@@ -172,7 +172,7 @@ private:
 	bool fullscreen = false;
 
 	MidiParser midi;
-	vector<Tracks> midiTranslated;
+	vector<vector<Tracks>> midiTranslated;
 	UserInput ui;
 	UserInput uiPreview;
 	ControllerOfControllers myCC;
