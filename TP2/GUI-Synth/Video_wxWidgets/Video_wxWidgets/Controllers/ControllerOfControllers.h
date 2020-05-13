@@ -10,7 +10,6 @@
 #include "OrganController.h"
 #include "TrumpetController.h"
 #include "../General.h"
-
 // Aca se incluyen todos los instrumentos
 #include "../Utils/Tracks.h"
 #include "../UserInput/UserInput.h"
@@ -19,8 +18,8 @@ class ControllerOfControllers
 public:
 	ControllerOfControllers();
 	~ControllerOfControllers();
-	vector<SynthTrack> sytnsynthesisProject(vector<Tracks> projectTracks,UserInput userData);
-	
+	vector<SynthTrack> sytnsynthesisProject(vector<Tracks> projectTracks, UserInput userData);
+
 private:
 	AcousticGuitarController AGController;
 	ElectricGuitarController EGController;
@@ -33,6 +32,4 @@ private:
 	TrumpetController TrumpController;
 	EfectController EController;
 	// aca agregas tus instrumentos
-
 };
-

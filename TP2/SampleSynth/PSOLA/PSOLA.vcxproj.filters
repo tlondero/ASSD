@@ -18,7 +18,10 @@
     <ClInclude Include="Psola.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SaxoPsola.h">
+    <ClInclude Include="InstrumentsPsola.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\AudioFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -29,7 +32,7 @@
     <ClCompile Include="Psola.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SaxoPsola.cpp">
+    <ClCompile Include="InstrumentsPsola.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
