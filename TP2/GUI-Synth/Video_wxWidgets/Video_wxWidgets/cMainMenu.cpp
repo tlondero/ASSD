@@ -368,7 +368,7 @@ void cMainMenu::AddTrack(wxCommandEvent& evt) {
 				warning.Hide();
 			}
 		}
-		else if ((instrument == InstrumentList[3]) || (instrument == InstrumentList[4]) || (instrument == InstrumentList[5]) || (instrument == InstrumentList[6]) || (instrument == InstrumentList[8])) {							//BELL, CLARINET, TROMBONE, TRUMPET AND BANJO
+		else if ((instrument == InstrumentList[3]) || (instrument == InstrumentList[4]) || (instrument == InstrumentList[5]) || (instrument == InstrumentList[6]) || (instrument == InstrumentList[8]) || (instrument == InstrumentList[10])) {							//BELL, CLARINET, TROMBONE, TRUMPET AND BANJO
 			uc.TrackInstrument = instrument;
 			int n = track.size() - (track.substr(track.find('['))).size() - 7;
 			uc.TrackNumber = stoi(track.substr(6, n));
@@ -491,8 +491,8 @@ void cMainMenu::detectInstrumentChange(wxCommandEvent& evt) {
 		t_fluteS->Show();
 		t_fluteR->Show();
 	}
-	else if ((intrumentoElegido == InstrumentList[3]) || (intrumentoElegido == InstrumentList[4]) || (intrumentoElegido == InstrumentList[5]) || (intrumentoElegido == InstrumentList[6]) || (intrumentoElegido == InstrumentList[8])) {
-		//BELL, CLARINET, TROMBONE, TRUMPET AND BANJO
+	else if ((intrumentoElegido == InstrumentList[3]) || (intrumentoElegido == InstrumentList[4]) || (intrumentoElegido == InstrumentList[5]) || (intrumentoElegido == InstrumentList[6]) || (intrumentoElegido == InstrumentList[8]) || (intrumentoElegido == InstrumentList[10])) {
+		//BELL, CLARINET, TROMBONE, TRUMPET, SAXOPHONE AND BANJO
 		t_bell->Show();
 	}
 	else if (intrumentoElegido == InstrumentList[7]) {							//DRUM
