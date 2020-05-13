@@ -1,5 +1,5 @@
 #pragma once
-#include "../Controllers/lib/AudioFile.h"
+#include "../Controllers/dependecies/AudioFile.h"
 #include <vector>
 #include <functional>
 #include <algorithm>
