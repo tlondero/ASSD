@@ -1,7 +1,18 @@
 \input{../Informe/Header.tex}
 
 \begin{document}
-
-\subsection{Introducción}
+\subsection{FFT}
+Se implementó la FFT utilizando el algoritmo de Cooley-Tukey de manera recursiva.
+Se probó con diversas entradas reales aleatorias, de tamaño 4096, con una media temporal de 40$\mu$s.
+\subsection{Programa Principal}
+La GUI implementada es la siguiente:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{ImagenesEjercicio8/GUI.PNG}
+\caption{GUI Implementada.}
+	\label{fig:gui}
+\end{figure}
+Permite agregar midis de cualquier duración, sintetizar cada track con el instrumento deseado, al igual que escuchar un preview del mismo, funcionalidad de pantalla completa, una sección de ayuda al usuari; Ademas permite la mezcla tracks, agregar efectos tanto a los tracks como al proyecto entero. Realizar espectrogramas de los wavs generados, pudiendo elegir el tipo de ventana, la cantidad de puntos de la FFT y el overlap. Ademas permite manejar los parametros de algunos instrumentos y efectos.\\
+El front-end del programa se implemento en WxWidgets. El programa fue desarrollado en C++. \\
 
 \end{document}
