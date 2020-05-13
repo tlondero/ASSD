@@ -34,7 +34,7 @@ std::vector<double> Reverberator::applyEffect(std::vector<double> input, double 
 	for (int j = 0; j < M_parallel.size(); j++) {
 		for (int i = 0; i < input.size(); i++) {
 			if (i - (M_parallel[j]) >= 0) {
-				temp[i] = input[i] + g_parallel[j] * input[i - (M_parallel[j])];
+				temp[i] = input[i] + g_parallel[j] * temp[i - (M_parallel[j])];
 			}
 			else {
 				temp[i] = input[i];
