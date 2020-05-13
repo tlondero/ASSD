@@ -1,5 +1,5 @@
 #pragma once
-#include "AudioFile.h"
+#include "lib/AudioFile.h"
 
 #include<vector>
 #include <functional>
@@ -14,6 +14,20 @@
 const double PI = 3.141592653589793238460;
 
 using namespace std;
+class Data
+{
+public:
+	void set_f0(int f0);
+	void set_pm(vector<int> pitch_marks);
+
+	vector<int> get_pm(void);
+	int get_f0(void);
+
+private:
+	int f0;
+	vector<int> pitch_marks;
+};
+
 
 class Psola
 {
@@ -30,7 +44,7 @@ public:
 	
 	AudioFile<double> sample;
 
-	vector<int> load_pitm(const char* path);
+	Data load_data(const char* path);
 
 private:
 	vector<double> hanningN(int N);

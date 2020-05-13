@@ -5,7 +5,7 @@ using namespace std;
 int main(void)
 {	
 
-	Psola s("A4.wav",true);
-	s.generateNote(1.3,220);
+	Psola s("G4.wav",true);
+	s.generateNote(3,450);
 	
 }

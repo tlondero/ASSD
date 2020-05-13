@@ -15,19 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Instrument.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Trumpet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AudioFile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="hanning.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Psola.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SaxoPsola.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -35,13 +26,10 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Trumpet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Instrument.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Psola.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SaxoPsola.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

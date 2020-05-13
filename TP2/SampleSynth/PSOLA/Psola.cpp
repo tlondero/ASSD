@@ -1,5 +1,21 @@
 #include "Psola.h"
 
+
+
+void Data::set_f0(int f0) {
+	this->f0 = f0;
+}
+void Data::set_pm(vector<int> pitch_marks) {
+	this->pitch_marks = pitch_marks;
+}
+vector<int> Data::get_pm(void) {
+	return pitch_marks;
+}
+int Data::get_f0(void) {
+	return f0;
+}
+
+
 //Psola constructor 
 //Input:
 //Path: sample note path. Must .wav extension
@@ -24,13 +40,16 @@ Psola::Psola(const char* path, bool verbose)
 
 
 vector<double> Psola::generateNote(double new_duration, double new_frequency)
-{
+{	
 
+	//Load data
+	Data data = load_data("A4.csv");
+	
 	//The First step is finding out the fundamental frequency 
-	double f0 = 440; //Hz Assume constant pitch
+	double f0 = data.get_f0(); //Hz Assume constant pitch
 	double pitch_period = 1 / f0; //Periodo fundamental <--
 	double sample_rate = sample.getSampleRate();
-	
+
 	double original_duration = sample.getLengthInSeconds();
 	long int num_samples = sample.getNumSamplesPerChannel();
 	vector<double> input_signal = sample.samples[0];
@@ -40,16 +59,17 @@ vector<double> Psola::generateNote(double new_duration, double new_frequency)
 	//Pitch shifting factor
 	double beta = new_frequency / f0;
 
-	//Load pitch marks
-	vector<int> p_marks = load_pitm("a4_peaks.csv");
+	//Get pitch marks
+	vector<int> p_marks = data.get_pm();
+
 	vector<int> pitch_periods(p_marks.size());
 	for (int i = 0; i < p_marks.size(); i++) {
 		if (i == 0)
 			pitch_periods[0] = p_marks[0];
-		else{
+		else {
 			pitch_periods[i] = p_marks[i] - p_marks[i - 1];
 		}
-			
+
 	}
 
 	//Remove first pitch mark
@@ -58,7 +78,8 @@ vector<double> Psola::generateNote(double new_duration, double new_frequency)
 		pitch_periods.erase(pitch_periods.begin());
 	}
 
-	if (p_marks.back() + pitch_periods.back() > sample.getNumSamplesPerChannel())
+	//¿El ultimo solapamiento se pasa de la cantidad de muestras?
+	if ((p_marks.back() + pitch_periods.back()) > sample.getNumSamplesPerChannel())
 	{
 		p_marks.pop_back();
 	}
@@ -67,7 +88,7 @@ vector<double> Psola::generateNote(double new_duration, double new_frequency)
 	}
 
 	//Output length
-	int output_length = ceil(num_samples * alpha);															
+	int output_length = ceil(num_samples * alpha);
 
 	//Create output vector
 	vector<double> outputSignal(output_length);
@@ -94,6 +115,9 @@ vector<double> Psola::generateNote(double new_duration, double new_frequency)
 
 
 		for (int i = p_marks[min_index] - pit, h = 0; i < p_marks[min_index] + pit; i++, h++) {
+			if (i >= input_signal.size()) {
+				break;
+			}
 			overllaped_segment[h] = input_signal[i] * hanning_window[h];
 		}
 		cout << "termine" << endl;
@@ -106,17 +130,20 @@ vector<double> Psola::generateNote(double new_duration, double new_frequency)
 		if (fin_overlapp > output_length)
 			break;
 		//Sino procedemos a solapar y sumar
-		for (int s = inicio_overlapp,i=0; s < fin_overlapp; s++,i++) {
-			if(s < 0)
+		for (int s = inicio_overlapp, i = 0; s < fin_overlapp; s++, i++) {
+			if (s < 0)
 			{
 				continue;
 			}
-			if (s > outputSignal.size()) {
+			if (s >= outputSignal.size()) {
 				break;
 			}
 			outputSignal[s] += overllaped_segment[i];
 		}
 
+		if (min_index >= pitch_periods.size()) {
+			break;
+		}
 		tk = tk + pitch_periods[min_index] / beta;
 		cout << tk << endl;
 	}
@@ -138,20 +165,31 @@ void Psola::samplePrint(int N)
 		cout << sample.samples[0][n] << " ";
 }
 
-vector<int> Psola::load_pitm(const char* path)
+Data Psola::load_data(const char* path)
 {
+	Data data; // Data structure like to store fundamental freq and pitch_marks
 	vector<int> data_points;
 
 	ifstream myPitchMarks;
 	myPitchMarks.open(path);
+	int count = 0;
 	while (myPitchMarks.good()) {
 		string line;
 		string empty("");
 		getline(myPitchMarks, line, '\n');
 		if (line != empty)
-			data_points.push_back(stoi(line));
+			if (count == 0) {
+				data.set_f0(stoi(line));
+				count = 1;
+			}
+			else {
+				data_points.push_back(stoi(line));
+			}
 	}
-	return data_points;
+	//Set pms ready to send
+	data.set_pm(data_points);
+
+	return data;
 }
 
 vector<double> Psola::hanningN(int N)
