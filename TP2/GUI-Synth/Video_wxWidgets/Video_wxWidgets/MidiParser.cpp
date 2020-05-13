@@ -57,7 +57,9 @@ vector<vector<Tracks>> MidiParser::getTracks() {
 			double tcorr = 0;
 			double icorr = 0;
 			bool break_j = false;
-			for (int j = 0;;) {
+			int j = 0;
+
+			while(!break_j) {
 				Tracks tempTrack;
 				Note tempNote;
 				partialTracks.push_back(tempTrack);
@@ -67,23 +69,18 @@ vector<vector<Tracks>> MidiParser::getTracks() {
 					if (actualTrack.Notes[i].t_on - tcorr > tmax) {
 						tcorr += tmax;
 						j++;
-						icorr = i;     //ME FUI A BUSCAR ALGO DE COMER, GUIDO CREO QUE ROMPI TODAS LAS REGLAS DE PROGRA 1
-						break;			//PORFIS FIJATE SI LO QUE HICE ESTA BIEN.
+						icorr = i;     
+						break;			
 					}
-
 					tempNote.Duration = actualTrack.Notes[i].Duration;
 					tempNote.frequency = actualTrack.Notes[i].frequency;
 					tempNote.t_on = actualTrack.Notes[i].t_on - tcorr;
 					tempNote.velocity = actualTrack.Notes[i].velocity;
 					partialTracks[j].Notes.push_back(tempNote);
-					if (i == (actualTrack.Notes.size() - 1)) {
+					if (i == (actualTrack.Notes.size()-1 )) {
 						break_j = true;
 					}
 
-				}
-
-				if (break_j) {
-					break;
 				}
 			}
 			
@@ -91,7 +88,16 @@ vector<vector<Tracks>> MidiParser::getTracks() {
 			trackVector.push_back(partialTracks);
 		}
 	}
-
+	vector<int> vectorSize;
+	for (unsigned int i=0; i < trackVector.size(); i++) {
+		vectorSize.push_back(trackVector[i].size());
+	}
+	int maxSize = *max_element(vectorSize.begin(), vectorSize.end());
+	for (unsigned int i=0; i < trackVector.size(); i++) {
+		while ((trackVector[i].size() < maxSize)) {
+			trackVector[i].push_back(Tracks());
+		}	
+	}
 	vector<vector<Tracks>> ordenado;
 
 	for (int subTrack = 0; subTrack < trackVector[0].size(); subTrack++) {

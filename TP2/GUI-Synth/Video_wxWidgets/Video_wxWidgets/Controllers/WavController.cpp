@@ -19,7 +19,7 @@ void WavController::compileWav(vector<SynthTrack> allTracks, double duration_, s
 	this->duration = duration_;
 	this->wavName = wavName_;
 	vector <double> wavVector = vector<double>(ceil(this->duration * SAMPLE_RATE), 0);
-	this->volume = volume_;
+	this->volume = volume_+1000;
 	for (unsigned int track = 0; track < allTracks.size(); track++) {
 		for (unsigned int note = 0; note < allTracks[track].track.size(); note++) {
 			int T = floor(allTracks[track].track[note].t_on * SAMPLE_RATE);

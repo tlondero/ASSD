@@ -550,7 +550,7 @@ void cMainMenu::AddMidiToProgram(wxCommandEvent& evt) {
 				warning.Hide();
 			}
 			else {
-				addToDdm(midiToStringDdm(this->midiTranslated[0]), ddm_track);
+				addToDdm(midiToStringDdm(this->midiTranslated), ddm_track);
 				t_loadR->SetLabel("Current MIDI: " + stringSelected + ". I'm ready! Give me some work...");
 				t_loadR->SetSize(wxSize(BUTTON_X * 2, TEXT_Y * 2));
 				t_loadR->Update();
@@ -676,10 +676,14 @@ void cMainMenu::addToDdm(vector<string> tracks, wxComboBox* ddm) {
 	}
 }
 
-vector<string> cMainMenu::midiToStringDdm(vector<Tracks> MidiParsed) {
+vector<string> cMainMenu::midiToStringDdm(vector<vector<Tracks>> MidiParsed) {
 	vector<string> myddmtext;
-	for (unsigned int i = 0; i < MidiParsed.size(); i++) {
-		myddmtext.push_back("Track " + to_string(i) + " [" + MidiParsed[i].instrumentName + "] " + "(Notes : " + to_string(MidiParsed[i].Notes.size()) + ")");
+	for (unsigned int i = 0; i < MidiParsed[0].size(); i++) {
+		int notes = 0;
+		for (int j = 0; j < MidiParsed.size(); j++) {
+			notes += MidiParsed[j][i].Notes.size();
+		}
+		myddmtext.push_back("Track " + to_string(i) + " [" + MidiParsed[0][i].instrumentName + "] " + "(Notes : " + to_string(notes) + ")");
 	}
 	return myddmtext;
 }

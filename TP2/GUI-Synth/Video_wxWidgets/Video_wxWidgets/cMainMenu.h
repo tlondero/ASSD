@@ -223,7 +223,7 @@ private:
 	bool portAudioOpen(void);
 
 	void addToDdm(vector<string> tracks, wxComboBox* ddm);
-	vector<string> midiToStringDdm(vector<Tracks> MidiParsed);		//Funció que recibe el vector de tracks que devuelve el midi parser
+	vector<string> midiToStringDdm(vector<vector<Tracks>> MidiParsed);		//Funció que recibe el vector de tracks que devuelve el midi parser
 																	//y devuelve el vector de strings que utilizará el ddm para mostrar los tracks.
 	
 	wxDECLARE_EVENT_TABLE();
