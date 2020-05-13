@@ -539,6 +539,7 @@ void cMainMenu::AddMidiToProgram(wxCommandEvent& evt) {
 		ui.wavName.clear();
 
 		if (this->midi.addMidi(this->selecetedMidi)) {
+			//this->midiTranslated = this->midi.getTracks();
 			this->midiTranslated = this->midi.getTracks();
 			if (this->midi.getTotalDuration() == 0) {
 				//Warning
@@ -549,7 +550,7 @@ void cMainMenu::AddMidiToProgram(wxCommandEvent& evt) {
 				warning.Hide();
 			}
 			else {
-				addToDdm(midiToStringDdm(this->midiTranslated), ddm_track);
+				addToDdm(midiToStringDdm(this->midiTranslated[0]), ddm_track);
 				t_loadR->SetLabel("Current MIDI: " + stringSelected + ". I'm ready! Give me some work...");
 				t_loadR->SetSize(wxSize(BUTTON_X * 2, TEXT_Y * 2));
 				t_loadR->Update();
@@ -583,13 +584,11 @@ void cMainMenu::CreateWav(wxCommandEvent& evt) {
 			pathSelected = pathSelected.erase(cutFrom, cutUpto);
 
 			//Load Bar
-			/*t_loadR->Hide();
+			t_loadR->Hide();
 			t_loadW->Show();
-			wxMessageDialog loadBar(this, "Creating WAV", "Loading");
-			loadBar.Center();
-			loadBar.SetExtendedMessage("This could take a few minutes, please wait.");
-			loadBar.ShowModal();*/
+			t_loadW->Update();
 			wxBusyInfo wait("Creating WAV, this could take a few minutes, please wait.");
+			
 			double extraTime = 0;
 			vector<double> extratimes;
 			if (this->ui.finalEfect == EffList[0]) {
@@ -609,9 +608,14 @@ void cMainMenu::CreateWav(wxCommandEvent& evt) {
 			}
 			extratimes.push_back(extraTime);
 			double max = *max_element(extratimes.begin(), extratimes.end());
-			myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, this->ui), this->midi.getTotalDuration() + max+0.5, pathSelected, 1000);
+			vector<Tracks> subMidi;
+			for (unsigned int i = 0; i < this->midiTranslated.size(); i++) {
+				subMidi = this->midiTranslated[i];
+				myWC.compileWav(myCC.sytnsynthesisProject(subMidi, this->ui), this->midi.getSubDuration(i) + max + 0.5, pathSelected, 1000); // + to_string(i), 1000);
+			}
+
 			myWC.makeWav();
-			/*loadBar.Hide();*/
+
 			t_loadR->Show();
 			t_loadW->Hide();
 		}
@@ -633,9 +637,12 @@ void cMainMenu::CreatePreview(wxCommandEvent& evt) {
 		UserInput uiPrev;
 		ucPrev.InstrumentPreview = true;
 		uiPrev.pairTrackInst.push_back(ucPrev);
-
-		myWC.compileWav(myCC.sytnsynthesisProject(this->midiTranslated, uiPrev), PREVIEW_DURATION, "Previews/prevTrack", 1000);
-		myWC.makeWav();
+		vector<Tracks> subMidi;
+		for (unsigned int i = 0; i < this->midiTranslated.size(); i++) {
+			subMidi = this->midiTranslated[i];
+			myWC.compileWav(myCC.sytnsynthesisProject(subMidi, this->ui), PREVIEW_DURATION , "Previews/prevTrack" + to_string(i), 1000);
+			myWC.makeWav();
+		}
 
 
 		if (firstTime) {
