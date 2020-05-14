@@ -43,7 +43,7 @@ void EspectroGenerator::generateSpectrum(string path, int nfft,int overlap, stri
 		newWindow = "kaiser";
 	}
 
-	string command = "python Espectrograma\\main.py ";
+	string command = "pythonw Espectrograma\\main.py ";
 	command += path +" "+ to_string(nfft) + " " + to_string(overlap) + " " + newWindow + " " + to_string(kaiserparam) + " " + to_string(gaussianparam) +" "+ to_string(expparam);
 	const char *commandPtr = command.c_str();
 	system(commandPtr); //Invoke python to compute plots

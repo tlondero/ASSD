@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 from scipy import fftpack
 from scipy.io import wavfile
 from scipy.signal import find_peaks
+from scipy import signal
 import numpy as np
 import os
 
@@ -29,7 +30,7 @@ def getSamples(path):
 # Get fundamental frequency
 
 
-def get_f0(samples, time):
+def get_f0(samples, sample_rate, time):
     '''
     Computes fundamental frequency using the fft
     Parameters
@@ -44,14 +45,16 @@ def get_f0(samples, time):
     peak_freq: float,
              Greatest power frequency component
     '''
-    yf = fftpack.fft(samples, len(time))
-    amp = np.abs(yf)  # get amplitude spectrum
-    freq = fftpack.fftfreq(len(time), time[-1]/len(time))
-    freqsize = freq.size
-    yf = yf[0:freqsize//2]
-    freq = freq[0:freqsize//2]
-    return freq[np.argmax(yf)]
-
+    # yf = fftpack.fft(samples, len(time))
+    # amp = np.abs(yf)  # get amplitude spectrum
+    # freq = fftpack.fftfreq(len(time), time[-1]/len(time))
+    # freqsize = freq.size
+    # yf = yf[0:freqsize//2]
+    # freq = freq[0:freqsize//2]
+    # return freq[np.argmax(yf)]
+    f, Pxx_den = signal.periodogram(
+        samples, sample_rate, nfft=1024, return_onesided=True)
+    return f[np.argmax(Pxx_den)]
 # Return properly spaced time axis
 
 
@@ -111,18 +114,22 @@ if __name__ == '__main__':
     # Path: indicates current working directory to store images and pitch_marks
 
     print(wav_paths)
-    '''
+    f0s = []
     for path, name in zip(wav_paths, wav_list):
         sample_rate, samples = getSamples(path)  # Read wav file
         time = get_time(samples, sample_rate)  # Auxiliary time axis
-        f0 = int(np.ceil(get_f0(samples, time))) # Obtain note's fundamnetal frequency
+        # Obtain note's fundamnetal frequency
+        f0 = int(np.ceil(get_f0(samples, sample_rate, time)))
+        f0s.append(f0)
         print(f'name: {name} f0: {f0} sample rate: {sample_rate}')
 
-        pitch_marks = compute_pitch_marks(samples, sample_rate, f0) #Compute pitch marks using an educated guess via peak_finder
+        # Compute pitch marks using an educated guess via peak_finder
+        pitch_marks = compute_pitch_marks(samples, sample_rate, f0)
         store_data(f"{path[:-3]}csv", pitch_marks, f0)
 
         # Uncomment to store pictures /!\ WARNING LONG PROCESS AHEAD/!\
         # take_pictures(samples, pitch_marks, f"{path[:-3]}png")
 
-        print("Work done")
-    '''
+    print(wav_paths)
+    print(wav_list)
+    print("Work done")
