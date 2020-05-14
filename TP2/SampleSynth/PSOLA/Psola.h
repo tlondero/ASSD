@@ -32,11 +32,12 @@ private:
 class Psola
 {
 public:
+	Psola();
 	Psola(const char* path,bool verbose);
 	Psola(const char* path);
 
 
-	vector<double> generateNote(double new_duration, double new_frequency);
+	vector<double> generateNote(double new_frequency, double new_duration, string wav_path, string data_path);
 	//vector<double> synthMidi(vector<double, double>);
 
 	void samplePrint(int N);

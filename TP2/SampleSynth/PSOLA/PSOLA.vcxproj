@@ -138,13 +138,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="InstrumentsPsola.h" />
+    <ClInclude Include="lib\AudioFile.h" />
     <ClInclude Include="Psola.h" />
-    <ClInclude Include="SaxoPsola.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="InstrumentsPsola.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Psola.cpp" />
-    <ClCompile Include="SaxoPsola.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

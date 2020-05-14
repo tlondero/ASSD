@@ -36,7 +36,7 @@ wxEND_EVENT_TABLE()
 	- Armar funciones jajaaaa
 */
 
-cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(30, 30), wxSize(970, 740))
+cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(30, 30), wxSize(970, 745))
 {
 	//Menu y tool bar
 	m_MenuBar = new wxMenuBar();
@@ -368,7 +368,7 @@ void cMainMenu::AddTrack(wxCommandEvent& evt) {
 				warning.Hide();
 			}
 		}
-		else if ((instrument == InstrumentList[3]) || (instrument == InstrumentList[4]) || (instrument == InstrumentList[5]) || (instrument == InstrumentList[6]) || (instrument == InstrumentList[8])) {							//BELL, CLARINET, TROMBONE, TRUMPET AND BANJO
+		else if ((instrument == InstrumentList[3]) || (instrument == InstrumentList[4]) || (instrument == InstrumentList[5]) || (instrument == InstrumentList[6]) || (instrument == InstrumentList[8]) || (instrument == InstrumentList[10])) {							//BELL, CLARINET, TROMBONE, TRUMPET AND BANJO
 			uc.TrackInstrument = instrument;
 			int n = track.size() - (track.substr(track.find('['))).size() - 7;
 			uc.TrackNumber = stoi(track.substr(6, n));
@@ -491,8 +491,8 @@ void cMainMenu::detectInstrumentChange(wxCommandEvent& evt) {
 		t_fluteS->Show();
 		t_fluteR->Show();
 	}
-	else if ((intrumentoElegido == InstrumentList[3]) || (intrumentoElegido == InstrumentList[4]) || (intrumentoElegido == InstrumentList[5]) || (intrumentoElegido == InstrumentList[6]) || (intrumentoElegido == InstrumentList[8])) {
-		//BELL, CLARINET, TROMBONE, TRUMPET AND BANJO
+	else if ((intrumentoElegido == InstrumentList[3]) || (intrumentoElegido == InstrumentList[4]) || (intrumentoElegido == InstrumentList[5]) || (intrumentoElegido == InstrumentList[6]) || (intrumentoElegido == InstrumentList[8]) || (intrumentoElegido == InstrumentList[10])) {
+		//BELL, CLARINET, TROMBONE, TRUMPET, SAXOPHONE AND BANJO
 		t_bell->Show();
 	}
 	else if (intrumentoElegido == InstrumentList[7]) {							//DRUM
@@ -509,7 +509,6 @@ void cMainMenu::detectInstrumentChange(wxCommandEvent& evt) {
 }
 
 void cMainMenu::AddMidiToProgram(wxCommandEvent& evt) {
-	this->ui.pairTrackInst.clear();
 	wxFileDialog openFileDialog(this, _("Open MIDI file"), "", "", "MIDI files (*.mid)|*.mid", wxFD_OPEN | wxFD_FILE_MUST_EXIST);  //Abro explorador de archivos
 	bool addString = true;
 	if (openFileDialog.ShowModal() == wxID_CANCEL) {			//Esto está por si se cierra el explorador sin elegir archivos
@@ -527,6 +526,7 @@ void cMainMenu::AddMidiToProgram(wxCommandEvent& evt) {
 		wxLogError("Cannot open file '%s'.", openFileDialog.GetPath());
 	}
 	else if (selecetedMidi != pathSelected) {			//verifico si el string ya está dentro de vector
+		this->ui.pairTrackInst.clear();
 		ddm_track->Clear();
 		lb_tracks->Clear();
 		lb_wavEff->Clear();
@@ -819,7 +819,17 @@ void cMainMenu::createSpec(wxCommandEvent& evt) {
 					double param = stod((string)tx_specWindParam->GetValue());
 
 					//LLAMAR A LA FUNCIÓN DE VENTANA CON PARAMETRO Y NOMBRE
-					es.generateSpectrum(wavToSpecPath, nfft, overlap, ventanaElegida, param, param, param);
+					if (param > 0) {
+						es.generateSpectrum(wavToSpecPath, nfft, overlap, ventanaElegida, param, param, param);
+					}
+					else {
+						//Warning
+						wxMessageDialog warning(this, "Invalid parameter chosen", "Can't create spectogram");
+						warning.Center();
+						warning.SetExtendedMessage("Value must be positive.");
+						warning.ShowModal();
+						warning.Hide();
+					}
 				}
 				else if (!((ventanaElegida == WindowsList[8]) || (ventanaElegida == WindowsList[9]) || (ventanaElegida == WindowsList[10]))) {
 					//Si el text box está vacío y si no es la ventana 8, 9 o 10, está todo joya, tengo una ventana sin parámetro

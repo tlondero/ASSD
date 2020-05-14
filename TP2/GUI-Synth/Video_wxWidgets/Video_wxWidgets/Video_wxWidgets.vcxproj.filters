@@ -183,6 +183,15 @@
     <ClCompile Include="Efectos\Reverberator.cpp">
       <Filter>Source Files\Efectos</Filter>
     </ClCompile>
+    <ClCompile Include="Controllers\SaxoPsolaController.cpp">
+      <Filter>Source Files\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="Instrumentos\Psola.cpp">
+      <Filter>Source Files\Instrumentos</Filter>
+    </ClCompile>
+    <ClCompile Include="Instrumentos\InstrumentsPsola.cpp">
+      <Filter>Source Files\Instrumentos</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cApp.h">
@@ -313,6 +322,18 @@
     </ClInclude>
     <ClInclude Include="Efectos\Reverberator.h">
       <Filter>Header Files\Efectos</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\SaxoPsolaController.h">
+      <Filter>Header Files\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\dependecies\AudioFile.h">
+      <Filter>Header Files\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="Instrumentos\Psola.h">
+      <Filter>Header Files\Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="Instrumentos\InstrumentsPsola.h">
+      <Filter>Header Files\Instrumentos</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -16,6 +16,9 @@ int Data::get_f0(void) {
 }
 
 
+Psola::Psola() {
+
+}
 //Psola constructor 
 //Input:
 //Path: sample note path. Must .wav extension
@@ -39,11 +42,11 @@ Psola::Psola(const char* path, bool verbose)
 }
 
 
-vector<double> Psola::generateNote(double new_duration, double new_frequency)
-{	
-
+vector<double> Psola::generateNote(double new_frequency, double new_duration, string wav_path, string data_path)
+{		
+	sample.load(wav_path.c_str());
 	//Load data
-	Data data = load_data("A4.csv");
+	Data data = load_data(data_path.c_str());
 	
 	//The First step is finding out the fundamental frequency 
 	double f0 = data.get_f0(); //Hz Assume constant pitch
@@ -153,7 +156,7 @@ vector<double> Psola::generateNote(double new_duration, double new_frequency)
 	output_note.setNumChannels(1);
 	output_note.samples[0] = outputSignal;
 	output_note.setSampleRate(sample.getSampleRate());
-	output_note.save("out1.wav");
+	output_note.save("out1500.wav");
 
 	return outputSignal;
 }
