@@ -173,11 +173,11 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 
 	//Dinmac Texts (INSTRUMENTOS)
 	t_organA = new wxStaticText(this, wxID_ANY, "A:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 7 * BUTTON_SP + 3 * DDM_Y + 2 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
-	t_organS = new wxStaticText(this, wxID_ANY, "H:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 9 * BUTTON_SP + 3 * DDM_Y + 4 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	t_organS = new wxStaticText(this, wxID_ANY, "S:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 9 * BUTTON_SP + 3 * DDM_Y + 4 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 	t_organR = new wxStaticText(this, wxID_ANY, "R:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 11 * BUTTON_SP + 3 * DDM_Y + 6 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 
 	t_fluteA = new wxStaticText(this, wxID_ANY, "A:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 7 * BUTTON_SP + 3 * DDM_Y + 2 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
-	t_fluteS = new wxStaticText(this, wxID_ANY, "H:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 9 * BUTTON_SP + 3 * DDM_Y + 4 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
+	t_fluteS = new wxStaticText(this, wxID_ANY, "S:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 9 * BUTTON_SP + 3 * DDM_Y + 4 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 	t_fluteR = new wxStaticText(this, wxID_ANY, "R:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 11 * BUTTON_SP + 3 * DDM_Y + 6 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
 
 	t_guitarRf = new wxStaticText(this, wxID_ANY, "RL:", wxPoint(BUTTON_SP, 2 * BUTTON_Y + 7 * BUTTON_SP + 3 * DDM_Y + 2 * TEXT_Y), wxSize(TEXT_X, TEXT_Y + 5));
@@ -335,7 +335,7 @@ void cMainMenu::AddTrack(wxCommandEvent& evt) {
 				//Warning
 				wxMessageDialog warning(this, "The parameters selected are invalid", "Can't add an track");
 				warning.Center();
-				warning.SetExtendedMessage("Remember: \n0 < A < 1 \n0 < H < 1 \n0 < R < 1");
+				warning.SetExtendedMessage("Remember: \n0 < A < 1 \n0 < S < 1 \n0 < R < 1");
 				warning.ShowModal();
 				warning.Hide();
 			}
@@ -363,7 +363,7 @@ void cMainMenu::AddTrack(wxCommandEvent& evt) {
 				//Warning
 				wxMessageDialog warning(this, "The parameters selected are invalid", "Can't add an track");
 				warning.Center();
-				warning.SetExtendedMessage("Remember: \n0 < A < 1 \n0 < H < 1 \n0 < R < 1");
+				warning.SetExtendedMessage("Remember: \n0 < A < 1 \n0 < S < 1 \n0 < R < 1");
 				warning.ShowModal();
 				warning.Hide();
 			}
