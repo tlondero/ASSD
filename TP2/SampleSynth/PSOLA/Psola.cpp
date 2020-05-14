@@ -156,7 +156,7 @@ vector<double> Psola::generateNote(double new_frequency, double new_duration, st
 	output_note.setNumChannels(1);
 	output_note.samples[0] = outputSignal;
 	output_note.setSampleRate(sample.getSampleRate());
-	output_note.save("out1500.wav");
+	output_note.save("out1405.wav");
 
 	return outputSignal;
 }

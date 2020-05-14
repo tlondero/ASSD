@@ -117,18 +117,17 @@ if __name__ == '__main__':
     f0s = []
     for path, name in zip(wav_paths, wav_list):
         sample_rate, samples = getSamples(path)  # Read wav file
-        time = get_time(samples, sample_rate)  # Auxiliary time axis
+        # time = get_time(samples, sample_rate)  # Auxiliary time axis
         # Obtain note's fundamnetal frequency
-        f0 = int(np.ceil(get_f0(samples, sample_rate, time)))
-        f0s.append(f0)
+        f0 = 390.265  # int(np.ceil(get_f0(samples, sample_rate, time)))
         print(f'name: {name} f0: {f0} sample rate: {sample_rate}')
 
         # Compute pitch marks using an educated guess via peak_finder
         pitch_marks = compute_pitch_marks(samples, sample_rate, f0)
-        store_data(f"{path[:-3]}csv", pitch_marks, f0)
+        store_data(f"{path[:-3]}csv", pitch_marks, int(f0))
 
         # Uncomment to store pictures /!\ WARNING LONG PROCESS AHEAD/!\
-        # take_pictures(samples, pitch_marks, f"{path[:-3]}png")
+        take_pictures(samples, pitch_marks, f"{path[:-3]}png")
 
     print(wav_paths)
     print(wav_list)
