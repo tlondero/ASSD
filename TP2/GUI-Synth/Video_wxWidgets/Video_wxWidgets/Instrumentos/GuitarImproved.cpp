@@ -23,14 +23,14 @@ double GuitarImproved::getSample() {
 vector<double> GuitarImproved::generateNote(double duration, double pitch, double Normvelocity, double cutFactor, char noiseType) {
 	srand(time(NULL));
 	this->waveTable.clear();
-	//this->b = ((double)SAMPLE_RATE/( pitch )) - (int)((double)SAMPLE_RATE / ( pitch));
-	//this->a = 1 - this->b;
-	//if (b < .1 || pitch<300) {
-	//	a = 0.5;
-	//	b = 0.5;
-	//}
-	a = 0.5;
-	b = 0.5;
+	this->b = ((double)SAMPLE_RATE/( pitch )) - (int)((double)SAMPLE_RATE / ( pitch));
+	this->a = 1 - this->b;
+	if (b < 0.05 || pitch<200) {
+		a = 0.5;
+		b = 0.5;
+	}
+	//a = 0.5;
+	//b = 0.5;
 	vector<double> Guitarsound;
 	if (noiseType == 'B')
 		for (unsigned int i = 0; i < floor((SAMPLE_RATE / (double)pitch) ); i++)
