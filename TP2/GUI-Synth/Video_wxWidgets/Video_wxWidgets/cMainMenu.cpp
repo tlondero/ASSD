@@ -635,11 +635,21 @@ void cMainMenu::CreatePreview(wxCommandEvent& evt) {
 	if (lb_tracks->GetSelection() != wxNOT_FOUND) {
 		UserChoice ucPrev = ui.pairTrackInst[lb_tracks->GetSelection()];
 		UserInput uiPrev;
+		
+		string stringTrack = (string)lb_tracks->GetStringSelection();
+		int last = stringTrack.size() - stringTrack.find_first_of('[');
+		int trackToAdd = stoi(stringTrack.substr(6, last));
+
 		ucPrev.InstrumentPreview = true;
 		uiPrev.pairTrackInst.push_back(ucPrev);
 		vector<Tracks> subMidi;
-		subMidi = this->midiTranslated[0];
-		myWC.compileWav(myCC.sytnsynthesisProject(subMidi, this->ui), PREVIEW_DURATION, "Previews/prevTrack" , 1000);
+		for (unsigned int i = 0; i < midiTranslated.size(); i++) {
+			if (midiTranslated[i][trackToAdd].Notes.size() > 0) {
+				subMidi.push_back( midiTranslated[i][trackToAdd]);
+			}
+		}
+
+		myWC.compileWav(myCC.sytnsynthesisProject(subMidi, uiPrev), PREVIEW_DURATION, "Previews/prevTrack" , 1000);
 		myWC.makeWav();
 
 
