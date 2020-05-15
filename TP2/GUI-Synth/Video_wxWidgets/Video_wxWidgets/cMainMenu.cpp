@@ -286,10 +286,10 @@ void cMainMenu::AddTrack(wxCommandEvent& evt) {
 			int n = track.size() - (track.substr(track.find('['))).size() - 7;
 			uc.TrackNumber = stoi(track.substr(6, n));
 			if ((instrument == InstrumentList[0]) && (stod((string)tx_guitarRf->GetValue()) < 2 && stod((string)tx_guitarRf->GetValue()) > 0)) {
-					uc.params.GuitarParam_rf = stod((string)tx_guitarRf->GetValue());
+				uc.params.GuitarParam_rf = stod((string)tx_guitarRf->GetValue());
 			}
 			else if ((instrument == InstrumentList[9]) && (stod((string)tx_eguitarRf->GetValue()) < 2 && stod((string)tx_eguitarRf->GetValue()) > 0)) {
-					uc.params.GuitarParam_rf = stod((string)tx_eguitarRf->GetValue());
+				uc.params.GuitarParam_rf = stod((string)tx_eguitarRf->GetValue());
 			}
 			else {
 				//Warning
@@ -304,7 +304,7 @@ void cMainMenu::AddTrack(wxCommandEvent& evt) {
 			for (int i = 0; i < ui.pairTrackInst.size(); i++) {
 				if (ui.pairTrackInst[i].TrackNumber == uc.TrackNumber) {
 					letsPush = false;
-				}				
+				}
 			}
 
 			if (letsPush) {
@@ -588,7 +588,7 @@ void cMainMenu::CreateWav(wxCommandEvent& evt) {
 			t_loadW->Show();
 			t_loadW->Update();
 			wxBusyInfo wait("Creating WAV, this could take a few minutes, please wait.");
-			
+
 			double extraTime = 0;
 			vector<double> extratimes;
 			if (this->ui.finalEfect == EffList[0]) {
@@ -638,11 +638,10 @@ void cMainMenu::CreatePreview(wxCommandEvent& evt) {
 		ucPrev.InstrumentPreview = true;
 		uiPrev.pairTrackInst.push_back(ucPrev);
 		vector<Tracks> subMidi;
-		for (unsigned int i = 0; i < this->midiTranslated.size(); i++) {
-			subMidi = this->midiTranslated[i];
-			myWC.compileWav(myCC.sytnsynthesisProject(subMidi, this->ui), PREVIEW_DURATION , "Previews/prevTrack" + to_string(i), 1000);
-			myWC.makeWav();
-		}
+		subMidi = this->midiTranslated[0];
+		myWC.compileWav(myCC.sytnsynthesisProject(subMidi, this->ui), PREVIEW_DURATION, "Previews/prevTrack" , 1000);
+		myWC.makeWav();
+
 
 
 		if (firstTime) {
