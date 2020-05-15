@@ -7,7 +7,7 @@ class SaxoPsolaController
 {
 public:
     SaxoPsolaController();
-    SynthTrack sytnsynthesisTrack(Tracks TrumpetTrack, bool preview);
+    SynthTrack sytnsynthesisTrack(Tracks SaxoTrack, bool preview);
     ~SaxoPsolaController();
 
 private:

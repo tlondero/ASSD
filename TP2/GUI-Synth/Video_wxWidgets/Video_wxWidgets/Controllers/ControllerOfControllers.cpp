@@ -217,6 +217,26 @@ vector<SynthTrack> ControllerOfControllers::sytnsynthesisProject(vector<Tracks> 
 
 			mySynthTrackVector.push_back(tempTrack);
 		}
+		else if (userData.pairTrackInst[track].TrackInstrument == InstrumentList[11])
+		{
+			tempTrack = this->ModernFlauteController.sytnsynthesisTrack(projectTracks[userData.pairTrackInst[track].TrackNumber], userData.pairTrackInst[track].InstrumentPreview);
+			if (!userData.pairTrackInst[track].effect2Apply.empty())
+			{
+				tempTrack.effect2Apply = userData.pairTrackInst[track].effect2Apply;
+				tempTrack.T = userData.pairTrackInst[track].T;
+				tempTrack.M = userData.pairTrackInst[track].M;
+				tempTrack.D = userData.pairTrackInst[track].D;
+			}
+			if (!userData.finalEfect.empty())
+			{
+				tempTrack.effect2Apply = noteborres;
+				tempTrack.T = userData.T;
+				tempTrack.M = userData.M;
+				tempTrack.D = userData.D;
+			}
+
+			mySynthTrackVector.push_back(tempTrack);
+		}
 	}
 
 	mySynthTrackVector = this->EController.applyEfects(mySynthTrackVector);
