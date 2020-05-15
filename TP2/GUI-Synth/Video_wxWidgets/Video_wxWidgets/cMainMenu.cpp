@@ -634,20 +634,20 @@ void cMainMenu::CreatePreview(wxCommandEvent& evt) {
 		myWC.compileWav(myCC.sytnsynthesisProject(subMidi, uiPrev), PREVIEW_DURATION, "Previews/prevTrack" , 1000);
 		myWC.makeWav();
 
-		wxFileDialog saveFileDialog(this, _("Save WAV file"), "", "", "WAV files (*.wav)|*.wav", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
-		if (saveFileDialog.ShowModal() == wxID_CANCEL) {			//Esto está por si se cierra el explorador sin elegir archivos
-			return;
-		}
+		//wxFileDialog saveFileDialog(this, _("Save WAV file"), "", "", "WAV files (*.wav)|*.wav", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+		//if (saveFileDialog.ShowModal() == wxID_CANCEL) {			//Esto está por si se cierra el explorador sin elegir archivos
+		//	return;
+		//}
 
-		string pathSelected = saveFileDialog.GetPath();				//Path completo
-		wxFileOutputStream output_stream(saveFileDialog.GetPath());
+		//string pathSelected = saveFileDialog.GetPath();				//Path completo
+		//wxFileOutputStream output_stream(saveFileDialog.GetPath());
 
-		if (!output_stream.IsOk()) {
-			wxLogError("Cannot save file '%s'.", pathSelected);
-		}
-		else {
-			wxCopyFile("Previews/prevTrack.wav", pathSelected);
-		}
+		//if (!output_stream.IsOk()) {
+		//	wxLogError("Cannot save file '%s'.", pathSelected);
+		//}
+		//else {
+		//	wxCopyFile("Previews/prevTrack.wav", pathSelected);
+		//}
 
 	}
 	else {
