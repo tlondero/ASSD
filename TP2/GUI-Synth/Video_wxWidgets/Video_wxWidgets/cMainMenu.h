@@ -186,8 +186,6 @@ private:
 
 	string selecetedMidi;											//vector de strings que tiene los mismos que el DDM y en el mismo orden
 	WavController myWC;
-	//string songPlaying;
-	bool firstTime = true;
 	string wavToSpecPath;
 	string wavToSpecName;
 	EspectroGenerator es;
@@ -209,8 +207,6 @@ private:
 	void RemoveTrack(wxCommandEvent& evt);
 	void CreateWav(wxCommandEvent& evt);
 	void CreatePreview(wxCommandEvent& evt);
-	void savePreview(wxCommandEvent& evt);
-	void Replay(wxCommandEvent& evt);
 	void loadWavSpec(wxCommandEvent& evt);
 	void createSpec(wxCommandEvent& evt);
 	void detectWindowChange(wxCommandEvent& evt);

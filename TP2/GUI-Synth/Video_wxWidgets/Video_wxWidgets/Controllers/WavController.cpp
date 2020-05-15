@@ -24,7 +24,9 @@ void WavController::compileWav(vector<SynthTrack> allTracks, double duration_, s
 		for (unsigned int note = 0; note < allTracks[track].track.size(); note++) {
 			int T = floor(allTracks[track].track[note].t_on * SAMPLE_RATE);
 			for (unsigned int i = 0; i < allTracks[track].track[note].sound.size(); i++) {
+				if (i + T == wavVector.size()) break;
 				wavVector[i + T] += allTracks[track].track[note].sound[i];
+
 			}
 		}
 	}

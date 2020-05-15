@@ -16,8 +16,6 @@ EVT_BUTTON(10002, AddTrack)
 EVT_BUTTON(10007, RemoveTrack)
 EVT_BUTTON(10008, CreateWav)
 EVT_BUTTON(10009, CreatePreview)
-EVT_BUTTON(10010, savePreview)
-EVT_BUTTON(10011, Replay)
 EVT_BUTTON(10012, loadWavSpec)
 EVT_BUTTON(10013, createSpec)
 EVT_BUTTON(10015, addEffTrack)
@@ -26,15 +24,6 @@ EVT_BUTTON(10017, addEffWav)
 EVT_BUTTON(10018, removeEffWav)
 
 wxEND_EVENT_TABLE()
-
-/*
-	TO DO:
-	- Colocar bein las cosas (GridBagSizer u otra forma)
-	- Cargar imagenes dinamicamente
-	- Cambiar las fonts y sizes
-	- HACER APARECER LA TOOLBAR EN FULLSCREEN PORQUE NO SE PEUDE SALIR
-	- Armar funciones jajaaaa
-*/
 
 cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(30, 30), wxSize(970, 745))
 {
@@ -55,21 +44,13 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	b_addTrack = new wxButton(this, 10002, "Add track", wxPoint(BUTTON_SP, 13 * BUTTON_SP + 2 * BUTTON_Y + 3 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(BUTTON_X, BUTTON_Y));
 	b_removeTrack = new wxButton(this, 10007, "Remove track", wxPoint(BUTTON_SP + BUTTON_X, 13 * BUTTON_SP + 2 * BUTTON_Y + 3 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(BUTTON_X, BUTTON_Y));
 
-	b_preview = new wxButton(this, 10009, "Listen preview track", wxPoint(COL2, 8 * BUTTON_SP + BUTTON_Y + 3 * TEXT_Y + LB_Y / 2), wxSize(2 * BUTTON_X, BUTTON_Y));
+	b_preview = new wxButton(this, 10009, "Create preview track", wxPoint(COL2, 8 * BUTTON_SP + BUTTON_Y + 3 * TEXT_Y + LB_Y / 2), wxSize(2 * BUTTON_X, BUTTON_Y));
 
 	b_addEffTrack = new wxButton(this, 10015, "Add effect to track", wxPoint(COL2, 13 * BUTTON_SP + 2 * BUTTON_Y + 3 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(BUTTON_X, BUTTON_Y));
 	b_removeEffTrack = new wxButton(this, 10016, "Remove effect from track", wxPoint(COL2 + BUTTON_X, 13 * BUTTON_SP + 2 * BUTTON_Y + 3 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(BUTTON_X, BUTTON_Y));
 
 	b_addEffWav = new wxButton(this, 10017, "Add effect to final WAV", wxPoint(COL2, BUTTON_SP), wxSize(2 * BUTTON_X, BUTTON_Y));
 	b_removeEffWav = new wxButton(this, 10018, "Remove effect from final WAV", wxPoint(COL2, BUTTON_SP + BUTTON_Y), wxSize(2 * BUTTON_X, BUTTON_Y));
-
-
-	//b_toggleMic = new wxButton(this, wxID_ANY, "MIC On / Off ", wxPoint(COL3, BUTTON_SP), wxSize(BUTTON_X * 2, BUTTON_Y));
-	//b_addEffMic = new wxButton(this, wxID_ANY, "Add effect to Mic", wxPoint(COL3, 2 * BUTTON_SP + BUTTON_Y + TEXT_Y + DDM_Y), wxSize(BUTTON_X, BUTTON_Y));
-	//b_removeEffMic = new wxButton(this, wxID_ANY, "Remove effect from Mic", wxPoint(COL3 + BUTTON_X, 2 * BUTTON_SP + BUTTON_Y + TEXT_Y + DDM_Y), wxSize(BUTTON_X, BUTTON_Y));
-
-	//b_savePreview = new wxButton(this, 10010, "Save preview", wxPoint(COL3, 23 * TEXT_Y + 4 * BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
-	//b_replay = new wxButton(this, 10011, "Replay", wxPoint(COL3 + TEXT_X, 23 * TEXT_Y + 4 * BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
 
 	b_loadSpec = new wxButton(this, 10012, "Load WAV for spectogram", wxPoint(COL3, 2 * BUTTON_SP + TEXT_Y), wxSize(BUTTON_X, BUTTON_Y));
 	b_updateSpec = new wxButton(this, 10013, "Create spectogram", wxPoint(COL3 + TEXT_X, 2 * BUTTON_SP + TEXT_Y), wxSize(BUTTON_X, BUTTON_Y));
@@ -286,10 +267,10 @@ void cMainMenu::AddTrack(wxCommandEvent& evt) {
 			int n = track.size() - (track.substr(track.find('['))).size() - 7;
 			uc.TrackNumber = stoi(track.substr(6, n));
 			if ((instrument == InstrumentList[0]) && (stod((string)tx_guitarRf->GetValue()) < 2 && stod((string)tx_guitarRf->GetValue()) > 0)) {
-					uc.params.GuitarParam_rf = stod((string)tx_guitarRf->GetValue());
+				uc.params.GuitarParam_rf = stod((string)tx_guitarRf->GetValue());
 			}
 			else if ((instrument == InstrumentList[9]) && (stod((string)tx_eguitarRf->GetValue()) < 2 && stod((string)tx_eguitarRf->GetValue()) > 0)) {
-					uc.params.GuitarParam_rf = stod((string)tx_eguitarRf->GetValue());
+				uc.params.GuitarParam_rf = stod((string)tx_eguitarRf->GetValue());
 			}
 			else {
 				//Warning
@@ -304,7 +285,7 @@ void cMainMenu::AddTrack(wxCommandEvent& evt) {
 			for (int i = 0; i < ui.pairTrackInst.size(); i++) {
 				if (ui.pairTrackInst[i].TrackNumber == uc.TrackNumber) {
 					letsPush = false;
-				}				
+				}
 			}
 
 			if (letsPush) {
@@ -368,7 +349,7 @@ void cMainMenu::AddTrack(wxCommandEvent& evt) {
 				warning.Hide();
 			}
 		}
-		else if ((instrument == InstrumentList[3]) || (instrument == InstrumentList[4]) || (instrument == InstrumentList[5]) || (instrument == InstrumentList[6]) || (instrument == InstrumentList[8]) || (instrument == InstrumentList[10])) {							//BELL, CLARINET, TROMBONE, TRUMPET AND BANJO
+		else if ((instrument == InstrumentList[3]) || (instrument == InstrumentList[4]) || (instrument == InstrumentList[5]) || (instrument == InstrumentList[6]) || (instrument == InstrumentList[8]) || (instrument == InstrumentList[10]) || (instrument == InstrumentList[11])) {							//BELL, CLARINET, TROMBONE, TRUMPET, MODERN FLUTE AND BANJO
 			uc.TrackInstrument = instrument;
 			int n = track.size() - (track.substr(track.find('['))).size() - 7;
 			uc.TrackNumber = stoi(track.substr(6, n));
@@ -491,7 +472,7 @@ void cMainMenu::detectInstrumentChange(wxCommandEvent& evt) {
 		t_fluteS->Show();
 		t_fluteR->Show();
 	}
-	else if ((intrumentoElegido == InstrumentList[3]) || (intrumentoElegido == InstrumentList[4]) || (intrumentoElegido == InstrumentList[5]) || (intrumentoElegido == InstrumentList[6]) || (intrumentoElegido == InstrumentList[8]) || (intrumentoElegido == InstrumentList[10])) {
+	else if ((intrumentoElegido == InstrumentList[3]) || (intrumentoElegido == InstrumentList[4]) || (intrumentoElegido == InstrumentList[5]) || (intrumentoElegido == InstrumentList[6]) || (intrumentoElegido == InstrumentList[8]) || (intrumentoElegido == InstrumentList[10]) || (intrumentoElegido == InstrumentList[11]) ) {
 		//BELL, CLARINET, TROMBONE, TRUMPET, SAXOPHONE AND BANJO
 		t_bell->Show();
 	}
@@ -588,7 +569,7 @@ void cMainMenu::CreateWav(wxCommandEvent& evt) {
 			t_loadW->Show();
 			t_loadW->Update();
 			wxBusyInfo wait("Creating WAV, this could take a few minutes, please wait.");
-			
+
 			double extraTime = 0;
 			vector<double> extratimes;
 			if (this->ui.finalEfect == EffList[0]) {
@@ -635,25 +616,38 @@ void cMainMenu::CreatePreview(wxCommandEvent& evt) {
 	if (lb_tracks->GetSelection() != wxNOT_FOUND) {
 		UserChoice ucPrev = ui.pairTrackInst[lb_tracks->GetSelection()];
 		UserInput uiPrev;
+		
+		string stringTrack = (string)lb_tracks->GetStringSelection();
+		int last = stringTrack.size() - stringTrack.find_first_of('[');
+		int trackToAdd = stoi(stringTrack.substr(6, last));
+
 		ucPrev.InstrumentPreview = true;
 		uiPrev.pairTrackInst.push_back(ucPrev);
 		vector<Tracks> subMidi;
-		for (unsigned int i = 0; i < this->midiTranslated.size(); i++) {
-			subMidi = this->midiTranslated[i];
-			myWC.compileWav(myCC.sytnsynthesisProject(subMidi, this->ui), PREVIEW_DURATION , "Previews/prevTrack" + to_string(i), 1000);
-			myWC.makeWav();
+		for (unsigned int i = 0; i < midiTranslated.size(); i++) {
+			if (midiTranslated[i][trackToAdd].Notes.size() > 0) {
+				subMidi.push_back( midiTranslated[i][trackToAdd]);
+			}
 		}
 
+		myWC.compileWav(myCC.sytnsynthesisProject(subMidi, uiPrev), PREVIEW_DURATION, "Previews/prevTrack" , 1000);
+		myWC.makeWav();
 
-		if (firstTime) {
-			//soundPlayer = new wxSound("Previews/prevTrack.wav", wxSOUND_SYNC);
-			firstTime = false;
+		wxFileDialog saveFileDialog(this, _("Save WAV file"), "", "", "WAV files (*.wav)|*.wav", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+		if (saveFileDialog.ShowModal() == wxID_CANCEL) {			//Esto está por si se cierra el explorador sin elegir archivos
+			return;
 		}
 
-		//if (PlaySound(TEXT("Previews/prevTrack.wav"), NULL, SND_FILENAME | SND_ASYNC)){ //(soundPlayer->Play("Previews/prevTrack.wav")) {
-		//	t_playMusic->SetLabel("Now playing: " + lb_tracks->GetStringSelection());
-		//	t_playMusic->Refresh();
-		//}
+		string pathSelected = saveFileDialog.GetPath();				//Path completo
+		wxFileOutputStream output_stream(saveFileDialog.GetPath());
+
+		if (!output_stream.IsOk()) {
+			wxLogError("Cannot save file '%s'.", pathSelected);
+		}
+		else {
+			wxCopyFile("Previews/prevTrack.wav", pathSelected);
+		}
+
 	}
 	else {
 		//Warning
@@ -703,49 +697,6 @@ void cMainMenu::OnKeyDown(wxKeyEvent& evt) {
 	}
 	else if (evt.GetKeyCode() == WXK_F12) {
 		Close();
-	}
-	evt.Skip();
-}
-
-void cMainMenu::savePreview(wxCommandEvent& evt) {
-	if (!firstTime) {
-		wxFileDialog saveFileDialog(this, _("Save WAV file"), "", "", "WAV files (*.wav)|*.wav", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
-		if (saveFileDialog.ShowModal() == wxID_CANCEL) {			//Esto está por si se cierra el explorador sin elegir archivos
-			return;
-		}
-
-		string pathSelected = saveFileDialog.GetPath();				//Path completo
-		wxFileOutputStream output_stream(saveFileDialog.GetPath());
-
-		if (!output_stream.IsOk()) {
-			wxLogError("Cannot save file '%s'.", pathSelected);
-		}
-		else {
-			wxCopyFile("Previews/prevTrack.wav", pathSelected);
-		}
-	}
-	else {
-		//Warning
-		wxMessageDialog warning(this, "No preview created", "Can't play preview");
-		warning.Center();
-		warning.SetExtendedMessage("Please add track a and create a preview.");
-		warning.ShowModal();
-		warning.Hide();
-	}
-	evt.Skip();
-}
-
-void cMainMenu::Replay(wxCommandEvent& evt) {
-	if (!firstTime) {
-		//soundPlayer->Play("Previews/prevTrack.wav");
-	}
-	else {
-		//Warning
-		wxMessageDialog warning(this, "No preview created", "Can't play preview");
-		warning.Center();
-		warning.SetExtendedMessage("Please add track a and create a preview.");
-		warning.ShowModal();
-		warning.Hide();
 	}
 	evt.Skip();
 }

@@ -1,7 +1,3 @@
-\input{../Informe/Header.tex}
-
-\begin{document}
-
 La síntesis aditiva consiste en formar el sonido de un instrumento sumando todas las señales sinusoidales por las cual este está formado. Si bien existen muchas nomenclaturas que refieren a lo mismo, a lo largo de esta implementación se utilizarán las denominaciones \textit{primer armónico} como la componente de menor frecuencia de un sonido; \textit{segundo, tercero, ..., n armónico} como las componentes de frecuencia múltiplos del primer armónico del sonido; y \textit{sobretonos} como cualquier componente de frecuencia del sonido mayor al primer armónico que no es múltiplo de este.
 
 \subsection{Grupos armónicos}
@@ -112,5 +108,3 @@ Por último, se utilizó una función sigmoidea modificada, la cual mapea valore
 Al añadir un grupo de armónicos al instrumento, se puede pensar como que se agrega una nueva frecuencia fundamental junto a sus armónicos, sin embargo, estos armónicos no tienen la misma amplitud que su fundamental, sino que decrecen linealmente en una escala logarítmica. La pendiente de esta envolvente lineal fue hallada observando el espectro de varias notas de instrumentos reales.
 
 Además, esta pendiente decae con la frecuencia, lo que fue experimentalmente hallado como una mejora.
-
-\end{document}
