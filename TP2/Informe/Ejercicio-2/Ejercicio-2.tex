@@ -8,9 +8,9 @@ Sin embargo, un órgano de hoy en día posee alrededor de 20000 tubos y 300 rang
 
 \begin{table}[H]
 \centering
-\begin{tabular}{@{}ll@{}}
+\begin{tabular}{@{}cc@{}}
 \toprule
-\textbf{Grupo armónico} & Frecuencias \\ \midrule
+\textbf{Grupo armónico} & \textbf{Frecuencias} \\ \midrule
 Fundamental & $\sum_{i = 1}^{\infty} f_0 + 2\cdot i \cdot f_0$ \\ 
 Quinta & $\sum_{i = 1}^{+\infty} 3f_0 + 6\cdot i \cdot f_0$ \\ 
  Primaria& $\sum_{i = 1}^{+\infty} 2f_0 + 4\cdot i \cdot f_0$ \\ 
@@ -30,7 +30,7 @@ Asimismo, se permite configurar la cantidad de armónicos que se añaden del gru
 \begin{multicols}{2}
 \begin{table}[H]
 \centering
-\begin{tabular}{@{}ll@{}}
+\begin{tabular}{@{}cc@{}}
 \toprule
 \textbf{Grupo armónico} & \textbf{Proporción} \\ \midrule
 Fundamental & $0.3$ \\ 
@@ -48,7 +48,7 @@ Quinta & $0$ \\
 \end{table}
 \begin{table}[H]
 \centering
-\begin{tabular}{@{}ll@{}}
+\begin{tabular}{@{}cc@{}}
 \toprule
 \textbf{Grupo armónico} & \textbf{Proporción} \\ \midrule
 Fundamental & $0.15$ \\ 
@@ -79,7 +79,7 @@ Se basó la ventana temporal utilizada en esta implementación en la clásica ve
 \begin{array}{ll}
       -e^{-t \cdot \left( \frac{10F}{A\cdot T} \right) } + 1 & 0\leq t \leq \frac{A \cdot T}{F} \\
       \\
-     \left( 1 + \left( \frac{2}{1 + e ^{-\cdot T \cdot \left( t - \frac{A \cdot T}{F} \right) }} - 1 \right) \cdot H \cdot sin\left( 2\pi \cdot \left( t - \frac{A \cdot T}{F} \right) \frac{4T}{\frac{T}{F} \cdot \left( 1 - R - A \right)} \right) \right) & \frac{A \cdot T}{F} \leq x \leq T\cdot (1-\frac{R}{F}) \\
+      1 + \left( \frac{2}{1 + e ^{-\cdot T \cdot \left( t - \frac{A \cdot T}{F} \right) }} - 1 \right) \cdot H \cdot sin\left( 2\pi \cdot \left( t - \frac{A \cdot T}{F} \right) \frac{4T}{\frac{T}{F} \cdot \left( 1 - R - A \right)} \right) & \frac{A \cdot T}{F} \leq x \leq T\cdot (1-\frac{R}{F}) \\
       \\
       -e^{t \cdot \left( \frac{10F}{R\cdot T} \right) } + 1 & T\cdot (1-\frac{R}{F}) \leq t \leq T \\
 \end{array} 
