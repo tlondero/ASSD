@@ -108,7 +108,7 @@ def take_pictures(samples, pitch_marks, path):
 
 
 if __name__ == '__main__':
-    instruments = ["saxofono", "clarinete", "violin","flautaModernB"]
+    instruments = ["saxofono", "clarinete", "violin", "flautaModernB"]
     wav_paths, wav_list = get_wav_files_list("flautaModernB")
     # Name include extension mywav.wav
     # Path: indicates current working directory to store images and pitch_marks
@@ -119,7 +119,8 @@ if __name__ == '__main__':
         sample_rate, samples = getSamples(path)  # Read wav file
         # time = get_time(samples, sample_rate)  # Auxiliary time axis
         # Obtain note's fundamnetal frequency
-        f0 = 250.56#390.265  # int(np.ceil(get_f0(samples, sample_rate, time)))
+        # 250.56#390.265  # int(np.ceil(get_f0(samples, sample_rate, time)))
+        f0 = 531.325
         print(f'name: {name} f0: {f0} sample rate: {sample_rate}')
 
         # Compute pitch marks using an educated guess via peak_finder
