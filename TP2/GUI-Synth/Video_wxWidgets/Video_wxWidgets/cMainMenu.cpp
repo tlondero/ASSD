@@ -16,8 +16,6 @@ EVT_BUTTON(10002, AddTrack)
 EVT_BUTTON(10007, RemoveTrack)
 EVT_BUTTON(10008, CreateWav)
 EVT_BUTTON(10009, CreatePreview)
-EVT_BUTTON(10010, savePreview)
-EVT_BUTTON(10011, Replay)
 EVT_BUTTON(10012, loadWavSpec)
 EVT_BUTTON(10013, createSpec)
 EVT_BUTTON(10015, addEffTrack)
@@ -26,15 +24,6 @@ EVT_BUTTON(10017, addEffWav)
 EVT_BUTTON(10018, removeEffWav)
 
 wxEND_EVENT_TABLE()
-
-/*
-	TO DO:
-	- Colocar bein las cosas (GridBagSizer u otra forma)
-	- Cargar imagenes dinamicamente
-	- Cambiar las fonts y sizes
-	- HACER APARECER LA TOOLBAR EN FULLSCREEN PORQUE NO SE PEUDE SALIR
-	- Armar funciones jajaaaa
-*/
 
 cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(30, 30), wxSize(970, 745))
 {
@@ -55,21 +44,13 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 	b_addTrack = new wxButton(this, 10002, "Add track", wxPoint(BUTTON_SP, 13 * BUTTON_SP + 2 * BUTTON_Y + 3 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(BUTTON_X, BUTTON_Y));
 	b_removeTrack = new wxButton(this, 10007, "Remove track", wxPoint(BUTTON_SP + BUTTON_X, 13 * BUTTON_SP + 2 * BUTTON_Y + 3 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(BUTTON_X, BUTTON_Y));
 
-	b_preview = new wxButton(this, 10009, "Listen preview track", wxPoint(COL2, 8 * BUTTON_SP + BUTTON_Y + 3 * TEXT_Y + LB_Y / 2), wxSize(2 * BUTTON_X, BUTTON_Y));
+	b_preview = new wxButton(this, 10009, "Create preview track", wxPoint(COL2, 8 * BUTTON_SP + BUTTON_Y + 3 * TEXT_Y + LB_Y / 2), wxSize(2 * BUTTON_X, BUTTON_Y));
 
 	b_addEffTrack = new wxButton(this, 10015, "Add effect to track", wxPoint(COL2, 13 * BUTTON_SP + 2 * BUTTON_Y + 3 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(BUTTON_X, BUTTON_Y));
 	b_removeEffTrack = new wxButton(this, 10016, "Remove effect from track", wxPoint(COL2 + BUTTON_X, 13 * BUTTON_SP + 2 * BUTTON_Y + 3 * TEXT_Y + LB_Y / 2 + DDM_Y), wxSize(BUTTON_X, BUTTON_Y));
 
 	b_addEffWav = new wxButton(this, 10017, "Add effect to final WAV", wxPoint(COL2, BUTTON_SP), wxSize(2 * BUTTON_X, BUTTON_Y));
 	b_removeEffWav = new wxButton(this, 10018, "Remove effect from final WAV", wxPoint(COL2, BUTTON_SP + BUTTON_Y), wxSize(2 * BUTTON_X, BUTTON_Y));
-
-
-	//b_toggleMic = new wxButton(this, wxID_ANY, "MIC On / Off ", wxPoint(COL3, BUTTON_SP), wxSize(BUTTON_X * 2, BUTTON_Y));
-	//b_addEffMic = new wxButton(this, wxID_ANY, "Add effect to Mic", wxPoint(COL3, 2 * BUTTON_SP + BUTTON_Y + TEXT_Y + DDM_Y), wxSize(BUTTON_X, BUTTON_Y));
-	//b_removeEffMic = new wxButton(this, wxID_ANY, "Remove effect from Mic", wxPoint(COL3 + BUTTON_X, 2 * BUTTON_SP + BUTTON_Y + TEXT_Y + DDM_Y), wxSize(BUTTON_X, BUTTON_Y));
-
-	//b_savePreview = new wxButton(this, 10010, "Save preview", wxPoint(COL3, 23 * TEXT_Y + 4 * BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
-	//b_replay = new wxButton(this, 10011, "Replay", wxPoint(COL3 + TEXT_X, 23 * TEXT_Y + 4 * BUTTON_SP), wxSize(BUTTON_X, BUTTON_Y));
 
 	b_loadSpec = new wxButton(this, 10012, "Load WAV for spectogram", wxPoint(COL3, 2 * BUTTON_SP + TEXT_Y), wxSize(BUTTON_X, BUTTON_Y));
 	b_updateSpec = new wxButton(this, 10013, "Create spectogram", wxPoint(COL3 + TEXT_X, 2 * BUTTON_SP + TEXT_Y), wxSize(BUTTON_X, BUTTON_Y));
@@ -652,17 +633,21 @@ void cMainMenu::CreatePreview(wxCommandEvent& evt) {
 		myWC.compileWav(myCC.sytnsynthesisProject(subMidi, uiPrev), PREVIEW_DURATION, "Previews/prevTrack" , 1000);
 		myWC.makeWav();
 
-
-
-		if (firstTime) {
-			//soundPlayer = new wxSound("Previews/prevTrack.wav", wxSOUND_SYNC);
-			firstTime = false;
+		wxFileDialog saveFileDialog(this, _("Save WAV file"), "", "", "WAV files (*.wav)|*.wav", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+		if (saveFileDialog.ShowModal() == wxID_CANCEL) {			//Esto está por si se cierra el explorador sin elegir archivos
+			return;
 		}
 
-		//if (PlaySound(TEXT("Previews/prevTrack.wav"), NULL, SND_FILENAME | SND_ASYNC)){ //(soundPlayer->Play("Previews/prevTrack.wav")) {
-		//	t_playMusic->SetLabel("Now playing: " + lb_tracks->GetStringSelection());
-		//	t_playMusic->Refresh();
-		//}
+		string pathSelected = saveFileDialog.GetPath();				//Path completo
+		wxFileOutputStream output_stream(saveFileDialog.GetPath());
+
+		if (!output_stream.IsOk()) {
+			wxLogError("Cannot save file '%s'.", pathSelected);
+		}
+		else {
+			wxCopyFile("Previews/prevTrack.wav", pathSelected);
+		}
+
 	}
 	else {
 		//Warning
@@ -712,49 +697,6 @@ void cMainMenu::OnKeyDown(wxKeyEvent& evt) {
 	}
 	else if (evt.GetKeyCode() == WXK_F12) {
 		Close();
-	}
-	evt.Skip();
-}
-
-void cMainMenu::savePreview(wxCommandEvent& evt) {
-	if (!firstTime) {
-		wxFileDialog saveFileDialog(this, _("Save WAV file"), "", "", "WAV files (*.wav)|*.wav", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
-		if (saveFileDialog.ShowModal() == wxID_CANCEL) {			//Esto está por si se cierra el explorador sin elegir archivos
-			return;
-		}
-
-		string pathSelected = saveFileDialog.GetPath();				//Path completo
-		wxFileOutputStream output_stream(saveFileDialog.GetPath());
-
-		if (!output_stream.IsOk()) {
-			wxLogError("Cannot save file '%s'.", pathSelected);
-		}
-		else {
-			wxCopyFile("Previews/prevTrack.wav", pathSelected);
-		}
-	}
-	else {
-		//Warning
-		wxMessageDialog warning(this, "No preview created", "Can't play preview");
-		warning.Center();
-		warning.SetExtendedMessage("Please add track a and create a preview.");
-		warning.ShowModal();
-		warning.Hide();
-	}
-	evt.Skip();
-}
-
-void cMainMenu::Replay(wxCommandEvent& evt) {
-	if (!firstTime) {
-		//soundPlayer->Play("Previews/prevTrack.wav");
-	}
-	else {
-		//Warning
-		wxMessageDialog warning(this, "No preview created", "Can't play preview");
-		warning.Center();
-		warning.SetExtendedMessage("Please add track a and create a preview.");
-		warning.ShowModal();
-		warning.Hide();
 	}
 	evt.Skip();
 }
