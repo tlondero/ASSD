@@ -45,16 +45,16 @@ def get_f0(samples, sample_rate, time):
     peak_freq: float,
              Greatest power frequency component
     '''
-    # yf = fftpack.fft(samples, len(time))
-    # amp = np.abs(yf)  # get amplitude spectrum
-    # freq = fftpack.fftfreq(len(time), time[-1]/len(time))
-    # freqsize = freq.size
-    # yf = yf[0:freqsize//2]
-    # freq = freq[0:freqsize//2]
-    # return freq[np.argmax(yf)]
-    f, Pxx_den = signal.periodogram(
-        samples, sample_rate, nfft=1024, return_onesided=True)
-    return f[np.argmax(Pxx_den)]
+    yf = fftpack.fft(samples, len(time))
+    amp = np.abs(yf)  # get amplitude spectrum
+    freq = fftpack.fftfreq(len(time), time[-1]/len(time))
+    freqsize = freq.size
+    yf = yf[0:freqsize//2]
+    freq = freq[0:freqsize//2]
+    return freq[np.argmax(yf)]
+    # f, Pxx_den = signal.periodogram(
+    #     samples, sample_rate, nfft=1024, return_onesided=True)
+    # return f[np.argmax(Pxx_den)]
 # Return properly spaced time axis
 
 
@@ -108,8 +108,9 @@ def take_pictures(samples, pitch_marks, path):
 
 
 if __name__ == '__main__':
-    instruments = ["saxofono", "clarinete", "violin", "flautaModernB"]
-    wav_paths, wav_list = get_wav_files_list("flautaModernB")
+    instruments = ["saxofono", "clarinete",
+                   "violin", "flautaModernB", "flautaClasica"]
+    wav_paths, wav_list = get_wav_files_list("violin")
     # Name include extension mywav.wav
     # Path: indicates current working directory to store images and pitch_marks
 
@@ -121,7 +122,7 @@ if __name__ == '__main__':
         # Obtain note's fundamnetal frequency
         # 250.56#390.265  # int(np.ceil(get_f0(samples, sample_rate, time)))
         # f0 = 1621#531.325
-        f0 = int(np.ceil(get_f0(samples, sample_rate, time)))
+        f0 =  int(np.ceil(get_f0(samples, sample_rate, time)))
         print(f'name: {name} f0: {f0} sample rate: {sample_rate}')
 
         # Compute pitch marks using an educated guess via peak_finder
