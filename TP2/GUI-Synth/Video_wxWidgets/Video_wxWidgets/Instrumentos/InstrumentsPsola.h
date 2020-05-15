@@ -35,8 +35,8 @@ private:
 	string wavRelPath = "assets/flautaModernB/Notes/";
 	string dataRelPath = "assets/flautaModernB/data/";
 
-	vector<string> notes = {"G6"}; //{"B3"};
-	vector<int> freqs = {1206};	   //{250};
+	vector<string> notes = {"G6long"}; //{"B3"};
+	vector<int> freqs = {302};		   //{250};
 
 	string get_data_path(string note);
 	string get_wav_path(string note);
