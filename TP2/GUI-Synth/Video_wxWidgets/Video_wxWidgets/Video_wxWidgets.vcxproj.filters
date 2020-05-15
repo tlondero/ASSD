@@ -192,6 +192,9 @@
     <ClCompile Include="Instrumentos\InstrumentsPsola.cpp">
       <Filter>Source Files\Instrumentos</Filter>
     </ClCompile>
+    <ClCompile Include="Controllers\ModernFlauteController.cpp">
+      <Filter>Source Files\Controllers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cApp.h">
@@ -334,6 +337,9 @@
     </ClInclude>
     <ClInclude Include="Instrumentos\InstrumentsPsola.h">
       <Filter>Header Files\Instrumentos</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\ModernFlauteController.h">
+      <Filter>Header Files\Controllers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
