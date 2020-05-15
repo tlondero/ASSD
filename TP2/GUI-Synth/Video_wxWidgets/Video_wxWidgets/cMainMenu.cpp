@@ -213,7 +213,7 @@ cMainMenu::cMainMenu() : wxFrame(nullptr, wxID_ANY, "MAGT Synthesizer", wxPoint(
 
 
 	//Carga de DDM's
-	for (int i = 0; i < NUMBER_OF_INSTRUMETS; i++) {				//Instruments
+	for (int i = 0; i < NUMBER_OF_INSTRUMETS - 1; i++) {				//Instruments
 		ddm_instrumento->AppendString(InstrumentList[i]);
 	}
 
@@ -472,7 +472,8 @@ void cMainMenu::detectInstrumentChange(wxCommandEvent& evt) {
 		t_fluteS->Show();
 		t_fluteR->Show();
 	}
-	else if ((intrumentoElegido == InstrumentList[3]) || (intrumentoElegido == InstrumentList[4]) || (intrumentoElegido == InstrumentList[5]) || (intrumentoElegido == InstrumentList[6]) || (intrumentoElegido == InstrumentList[8]) || (intrumentoElegido == InstrumentList[10]) || (intrumentoElegido == InstrumentList[11]) ) {
+	//else if ((intrumentoElegido == InstrumentList[3]) || (intrumentoElegido == InstrumentList[4]) || (intrumentoElegido == InstrumentList[5]) || (intrumentoElegido == InstrumentList[6]) || (intrumentoElegido == InstrumentList[8]) || (intrumentoElegido == InstrumentList[10]) || (intrumentoElegido == InstrumentList[11]) ) {
+	else if ((intrumentoElegido == InstrumentList[3]) || (intrumentoElegido == InstrumentList[4]) || (intrumentoElegido == InstrumentList[5]) || (intrumentoElegido == InstrumentList[6]) || (intrumentoElegido == InstrumentList[8]) || (intrumentoElegido == InstrumentList[10])) {
 		//BELL, CLARINET, TROMBONE, TRUMPET, SAXOPHONE AND BANJO
 		t_bell->Show();
 	}
