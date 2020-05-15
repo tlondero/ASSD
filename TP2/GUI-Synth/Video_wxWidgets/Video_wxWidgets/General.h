@@ -15,8 +15,8 @@
 
 //INSTRUMENTOS
 #define PREVIEW_DURATION 7
-#define NUMBER_OF_INSTRUMETS 11
-const std::string InstrumentList[NUMBER_OF_INSTRUMETS] = {"Guitar", "Organ", "Flute", "Bell", "Clarinet", "Trombone", "Trumpet", "Drum", "Banjo", "Electric Guitar", "Saxophone"};
+#define NUMBER_OF_INSTRUMETS 12
+const std::string InstrumentList[NUMBER_OF_INSTRUMETS] = {"Guitar", "Organ", "Flute", "Bell", "Clarinet", "Trombone", "Trumpet", "Drum", "Banjo", "Electric Guitar", "Saxophone", "Modern Flaute"};
 
 //VENTANAS
 #define NUMBER_OF_WINDOWS 11
@@ -25,3 +25,4 @@ const std::string WindowsList[NUMBER_OF_WINDOWS] = {"Triangular", "Blackman", "H
 //EFECTOS
 #define NUMBER_OF_EFF 2
 const std::string EffList[NUMBER_OF_EFF] = {"Eco", "Reverberation"};
+
