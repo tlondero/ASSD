@@ -120,7 +120,7 @@ if __name__ == '__main__':
         # time = get_time(samples, sample_rate)  # Auxiliary time axis
         # Obtain note's fundamnetal frequency
         # 250.56#390.265  # int(np.ceil(get_f0(samples, sample_rate, time)))
-        f0 = 531.325
+        f0 = 1621#531.325
         print(f'name: {name} f0: {f0} sample rate: {sample_rate}')
 
         # Compute pitch marks using an educated guess via peak_finder
