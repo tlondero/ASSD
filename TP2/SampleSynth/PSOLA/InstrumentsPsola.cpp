@@ -2,7 +2,7 @@
 
 vector<double>SaxoPsola::generateNote(double frequency, double duration, double velocity) {
 
-	string note = select_note(frequency);
+	string note = "A4CT";//select_note(frequency);
 	string data_path = get_data_path(note);
 	string wav_path = get_wav_path(note);
 	vector<double> synthNote = ps.generateNote(frequency, duration, wav_path, data_path);
