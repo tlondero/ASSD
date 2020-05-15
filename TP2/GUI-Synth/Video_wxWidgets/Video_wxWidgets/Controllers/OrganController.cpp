@@ -104,24 +104,24 @@ void OrganController::set_flute_param(double a, double s, double r)
 {
 	this->flute.set_parameters(
 
-		4, //Subharmonic count
+		2, //Subharmonic count
 		2, //Mixharmonic count
-		0.4,  //Sub
-		0.0001,  //Fifth
+		0.3,  //Sub
+		0.001,  //Fifth
 		0.6,  //Primary
-		0.0001,  //Eighth
-		0,  //Twelveth
-		0,  //Fifteenth
+		0.001,  //Eighth
+		0.002,  //Twelveth
+		0.1,  //Fifteenth
 		0,  //Seventeenth
 		0,  //Nineteenth
 		0.001,  //Below
-		0.00001,  //Major Third
-		0.000001,  //Perfect Fourth
-		0.00001,  //Perfect Fifth
+		0.0001,  //Major Third
+		0.0001,  //Perfect Fourth
+		0.001,  //Perfect Fifth
 		a, //Attack
 		r,  //sustain
 		s, //realeasr
-		0.0005 //Noise factor
+		0.001 //Noise factor
 
 	);
 }
