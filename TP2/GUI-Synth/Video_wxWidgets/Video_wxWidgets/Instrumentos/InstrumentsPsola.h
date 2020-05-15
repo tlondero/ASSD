@@ -23,6 +23,7 @@ private:
 	string get_wav_path(string note);
 };
 
+//Begin Modern Flaute
 class ModernFlautePsola
 {
 public:
@@ -31,9 +32,8 @@ public:
 private:
 	Psola ps;
 	string select_note(double frequency);
-	string wavRelPath = "assets/modernFlaute/Notes/";
-	string dataRelPath = "assets/modernFlaute/data/";
-
+	string wavRelPath = "assets/flautaModernB/Notes/";
+	string dataRelPath = "assets/flautaModernB/data/";
 
 	vector<string> notes = {"B3"};
 	vector<int> freqs = {250};

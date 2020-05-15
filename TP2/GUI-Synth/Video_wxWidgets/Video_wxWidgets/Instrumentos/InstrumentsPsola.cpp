@@ -32,14 +32,12 @@ string SaxoPsola::get_wav_path(string note)
 {
 	return this->wavRelPath + note + ".wav";
 }
-string ModernFlautePsola::get_data_path(string note)
+string SaxoPsola::get_data_path(string note)
 {
 	return this->dataRelPath + note + ".csv";
 }
 
-
-
-//Modern Flaute 
+//########Modern Flaute######//
 vector<double> ModernFlautePsola::generateNote(double frequency, double duration, double velocity)
 {
 
@@ -76,4 +74,3 @@ string ModernFlautePsola::get_data_path(string note)
 {
 	return this->dataRelPath + note + ".csv";
 }
-
