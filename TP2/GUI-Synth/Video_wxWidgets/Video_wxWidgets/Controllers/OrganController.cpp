@@ -111,17 +111,17 @@ void OrganController::set_flute_param(double a, double s, double r)
 		0.6,  //Primary
 		0.001,  //Eighth
 		0.002,  //Twelveth
-		0.1,  //Fifteenth
+		0.003,  //Fifteenth
 		0,  //Seventeenth
 		0,  //Nineteenth
-		0.001,  //Below
+		0.01,  //Below
 		0.0001,  //Major Third
 		0.0001,  //Perfect Fourth
 		0.001,  //Perfect Fifth
 		a, //Attack
 		r,  //sustain
 		s, //realeasr
-		0.001 //Noise factor
+		0.0045 //Noise factor
 
 	);
 }

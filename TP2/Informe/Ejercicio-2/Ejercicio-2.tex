@@ -34,17 +34,18 @@ Asimismo, se permite configurar la cantidad de armónicos que se añaden del gru
 \toprule
 \textbf{Grupo armónico} & \textbf{Proporción} \\ \midrule
 Fundamental & $0.3$ \\ 
-Quinta & $0$ \\ 
+Quinta & $0.001$ \\ 
  Primaria& $0.65$ \\ 
- Octava& $0$ \\ 
- Duodécima& $0$ \\ 
- Decimoquinta& $0$ \\ 
+ Octava& $0.001$ \\ 
+ Duodécima& $0.002$ \\ 
+ Decimoquinta& $0.003$ \\ 
  Decimoséptima& $0$ \\ 
  Decimonovena& $0$ \\ 
- Tercera mayor& $0.03$ \\ 
- Cuarta perfecta& $0$ \\ 
- Quinta perfecta& $0.02$ \\ \bottomrule
+ Tercera mayor& $0.0001$ \\ 
+ Cuarta perfecta& $0.0001$ \\ 
+ Quinta perfecta& $0.001$ \\ \bottomrule
 \end{tabular}
+\caption{Composición armónica de la flauta.}
 \end{table}
 \begin{table}[H]
 \centering
@@ -63,8 +64,11 @@ Quinta & $0.11$ \\
  Cuarta perfecta& $0.003$ \\ 
  Quinta perfecta& $0.002$ \\ \bottomrule
 \end{tabular}
+\caption{Composición armónica del órgano.}
 \end{table}
 \end{multicols}
+
+No es necesario que las proporciones sumen uno, dado que en la sintetización se normalizan automáticamente. Se presenta sin embargo los valores normalizados.
 
 \subsection{Ruido}
 
@@ -108,3 +112,7 @@ Por último, se utilizó una función sigmoidea modificada, la cual mapea valore
 Al añadir un grupo de armónicos al instrumento, se puede pensar como que se agrega una nueva frecuencia fundamental junto a sus armónicos, sin embargo, estos armónicos no tienen la misma amplitud que su fundamental, sino que decrecen linealmente en una escala logarítmica. La pendiente de esta envolvente lineal fue hallada observando el espectro de varias notas de instrumentos reales.
 
 Además, esta pendiente decae con la frecuencia, lo que fue experimentalmente hallado como una mejora.
+
+\subsection{Resultados}
+
+Se pueden apreciar dos ejemplos en una carpeta adjuntada con el informe los cuales incluyen extractos de BWV565 o más conocido como Toccata e Fuga en D menor de Bach, sintetizado con reverberación de 1 segundo y mix de 0.9; y un concierto de flauta de Mozart.
