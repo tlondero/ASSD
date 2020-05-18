@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pnd
 
 omega = np.logspace(0, 6, 5000)
 
@@ -28,7 +27,6 @@ H = h1*h2*h3
 
 hi = np.abs(H)**2
 hii = np.abs(2 * np.real(H))
-
 
 #plt.title("Bode del filtro en módulo")
 plt.xlabel("Frecuencia [rad/s]")
@@ -69,3 +67,4 @@ plt.xscale('log')
 plt.legend()
 plt.grid()
 plt.show()
+
