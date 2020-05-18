@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pnd
-from SpiceParser import SpiceParser
 
 omega = np.logspace(0, 6, 5000)
 
@@ -21,12 +20,11 @@ h3a=np.abs((1 + (1j * omega/(q1*w3)) + (1j * omega/w3)**2 )**(-1))
 
 Ha = h1a*h2a*h3a
 
-h1=(1 + (ws/(np.pi * w1 *q1))*(np.exp( 1j * omega/ws) - 1)/(np.exp( 1j * omega/ws) + 1) + ((ws/(np.pi * w1))*(np.exp( 1j * omega/ws) - 1)/(np.exp( 1j * omega/ws) + 1))**2)**(-1)
-h2=(1 + (ws/(np.pi * w2 *q2))*(np.exp( 1j * omega/ws) - 1)/(np.exp( 1j * omega/ws) + 1) + ((ws/(np.pi * w2))*(np.exp( 1j * omega/ws) - 1)/(np.exp( 1j * omega/ws) + 1))**2)**(-1)
-h3=(1 + (ws/(np.pi * w3 *q3))*(np.exp( 1j * omega/ws) - 1)/(np.exp( 1j * omega/ws) + 1) + ((ws/(np.pi * w3))*(np.exp( 1j * omega/ws) - 1)/(np.exp( 1j * omega/ws) + 1))**2)**(-1)
+h1=(1 + (2*ws/(w1 *q1))*(np.exp( 1j * omega/ws) - 1)/(np.exp( 1j * omega/ws) + 1) + ((2*ws/(w1))*(np.exp( 1j * omega/ws) - 1)/(np.exp( 1j * omega/ws) + 1))**2)**(-1)
+h2=(1 + (2*ws/(w2 *q2))*(np.exp( 1j * omega/ws) - 1)/(np.exp( 1j * omega/ws) + 1) + ((2*ws/(w2))*(np.exp( 1j * omega/ws) - 1)/(np.exp( 1j * omega/ws) + 1))**2)**(-1)
+h3=(1 + (2*ws/(w3 *q3))*(np.exp( 1j * omega/ws) - 1)/(np.exp( 1j * omega/ws) + 1) + ((2*ws/(w3))*(np.exp( 1j * omega/ws) - 1)/(np.exp( 1j * omega/ws) + 1))**2)**(-1)
 
 H = h1*h2*h3
-
 
 hi = np.abs(H)**2
 hii = np.abs(2 * np.real(H))
