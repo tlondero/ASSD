@@ -9,13 +9,11 @@ lk_params = dict(winSize=(15, 15), maxLevel=2, criteria=(
     cv.TERM_CRITERIA_EPS | cv.TERM_CRITERIA_COUNT, 10, 0.03))
 # The video feed is read in as a VideoCapture object
 # cap = cv.VideoCapture("shibuya.mp4")
-cap = cv.VideoCapture("videoPeq2.mp4")
-
+cap = cv.VideoCapture(0)
 # Variable for color to draw optical flow track
 color = (0, 255, 0)
 # ret = a boolean return value from getting the frame, first_frame = the first frame in the entire video sequence
 ret, first_frame = cap.read()
-# Converts frame to grayscale because we only need the luminance channel for detecting edges - less computationally expensive
 prev_gray = cv.cvtColor(first_frame, cv.COLOR_BGR2GRAY)
 # Finds the strongest corners in the first frame by Shi-Tomasi method - we will track the optical flow for these corners
 # https://docs.opencv.org/3.0-beta/modules/imgproc/doc/feature_detection.html#goodfeaturestotrack
@@ -36,6 +34,7 @@ while(cap.isOpened()):
     good_old = prev[status == 1]
     # Selects good feature points for next position
     good_new = next[status == 1]
+
     # Draws the optical flow tracks
     for i, (new, old) in enumerate(zip(good_new, good_old)):
         # Returns a contiguous flattened array as (x, y) coordinates for new point
@@ -46,6 +45,7 @@ while(cap.isOpened()):
         mask = cv.line(mask, (a, b), (c, d), color, 2)
         # Draws filled circle (thickness of -1) at new position with green color and radius of 3
         frame = cv.circle(frame, (a, b), 3, color, -1)
+
     # Overlays the optical flow tracks on the original frame
     output = cv.add(frame, mask)
     # Updates previous frame
