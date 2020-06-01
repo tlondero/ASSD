@@ -11,6 +11,9 @@ class SigmaDelta:
         self.history = 0
         self.historyChannel = []
 
+        self._DA_V_LIMIT = 1
+        self._QUANTIZER_OUT = 1
+
     def faa(self, inputSignal):
         """
         Apply second order low pass filter
@@ -48,14 +51,16 @@ class SigmaDelta:
         def DA(value, begin):
             if value == 1:
                 return 1
-            elif value == 0 or begin == True:
+            elif value == -1 or begin == True:
+                return -1
+            else:
                 return -1
 
         def quantizer(x):
             """
             If the input value to the quantizer is greater than 0 ==> output 1, else ==> output 0
             """
-            return np.int((np.sign(x) + 1)/2)
+            return np.int(np.sign(x))
 
         def integrator(x, begin):
             if begin:
@@ -72,7 +77,7 @@ class SigmaDelta:
                 return x1-x2
 
         # Initialize buffers
-        out_binary_stream = [0, 0]
+        out_binary_stream = [-1, -1]
         begin = True
         # New output values are updated using past values
 
