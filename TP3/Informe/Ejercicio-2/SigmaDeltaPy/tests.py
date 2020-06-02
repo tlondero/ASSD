@@ -159,25 +159,129 @@ def test6():
 
 # Espectro
 def test7():
+      # PRUEBA A FULL SCALE
     sd = SigmaDelta()
     f = 5e+2  # Frecuencia fundamental de la senoidal de prueba
+    mf = 2*12.5
     fs = 25*f  # Frecuencia de sampleo de mi señal, con esto generamos las muestras
     # El espaciado entre las muestras es función de la frecuencia de muestreo
     time = np.arange(0, 8e-3, 1/fs)
-    sine = 0.8*np.sin(2*np.pi*f*time) + np.random.randn(len(time))/100
+    sine = 0.8*np.sin(2*np.pi*f*time)
     # Por el momento sd.modulator devuelve la señal resampleada (con más samples) para poder plotear
-    ry, rt, y = sd.modulator(time, sine, 300)
+    M = 10
+    ry, rt, y = sd.modulator(time, sine, M)
+    # Le quitamos los primeros 2 valores porque son artificiales
+    plt.step(rt, y[2:], label="Hola")
+    plt.plot(rt, ry)
+    plt.legend()
+    plt.show()
+    D = 1
+
+    scaling_factor = (mf*M)/D
+    signalDec = y[2:]
+    N = 64  # Con 6 anda muy bien
+    mean_filter = np.divide(np.ones(N), N)
+    filteredSignal = signal.fftconvolve(signalDec, mean_filter, mode="same")
+    # plt.step(np.arange(len(filteredSignal)),(scaling_factor*f), filteredSignal, color="black")
+
+    f, Pxx = signal.periodogram(y[2:], fs=M*25*f, window="boxcar")
+
+    plt.plot(f, 10*np.log(Pxx/1e-3))
+    plt.xlim(0, (M/2)*25*500)
+    plt.show()
+
+
+def test8():
+    # PRUEBA A FULL SCALE
+    sd = SigmaDelta()
+    f = 5e+2  # Frecuencia fundamental de la senoidal de prueba
+    mf = 2*12.5
+    fs = 25*f  # Frecuencia de sampleo de mi señal, con esto generamos las muestras
+    # El espaciado entre las muestras es función de la frecuencia de muestreo
+    time = np.arange(0, 8e-3, 1/fs)
+    sine = 0.8*np.sin(2*np.pi*f*time)
+    # Por el momento sd.modulator devuelve la señal resampleada (con más samples) para poder plotear
+    M = 30
+    ry, rt, y = sd.modulator(time, sine, M)
     # Le quitamos los primeros 2 valores porque son artificiales
     plt.plot(rt, y[2:])
     plt.plot(rt, ry)
+    D = 50
+    decimatedSignal = signal.decimate(y[2:], D, ftype='fir')
+    # decimatedSignal = signal.decimate(decimatedSignal, 10)
+    scaling_factor = (mf*M)/D
+    plt.step(np.arange(len(decimatedSignal)) /
+             (scaling_factor*f), decimatedSignal, label="dec", color="yellow")  # 75 = 25*30/10  oversampleado/decimacion
+
+    signalDec = decimatedSignal
+    # N = 64  # Con 6 anda muy bien
+    # mean_filter = np.divide(np.ones(N), N)
+    # filteredSignal = signal.fftconvolve(signalDec, mean_filter, mode="same")
+    # plt.step(np.arange(len(filteredSignal)) /
+    #          (scaling_factor*f), filteredSignal, color="black")
 
     plt.legend()
-    plt.title("TEST 5")
+    plt.title("TEST 8")
     plt.show()
 
-    f, Pxx = signal.periodogram(y[2:], fs=7500*f)
 
-    plt.plot(f, Pxx)
+def test9():
+      # PRUEBA A FULL SCALE
+    sd = SigmaDelta()
+    f = 5e+2  # Frecuencia fundamental de la senoidal de prueba
+    mf = 2*12.5
+    fs = 25*f  # Frecuencia de sampleo de mi señal, con esto generamos las muestras
+    # El espaciado entre las muestras es función de la frecuencia de muestreo
+    time = np.arange(0, 8e-3, 1/fs)
+    sine = 0.8*np.sin(2*np.pi*f*time)
+    # Por el momento sd.modulator devuelve la señal resampleada (con más samples) para poder plotear
+    M = 30
+    ry, rt, y = sd.modulator(time, sine, M)
+    # Le quitamos los primeros 2 valores porque son artificiales
+    plt.plot(rt, y[2:])
+    plt.plot(rt, ry)
+    D = 1
+
+    scaling_factor = (mf*M)/D
+    signalDec = y[2:]
+    N = 64  # Con 6 anda muy bien
+    mean_filter = np.divide(np.ones(N), N)
+    filteredSignal = signal.fftconvolve(signalDec, mean_filter, mode="same")
+    plt.step(np.arange(len(filteredSignal)) /
+             (scaling_factor*f), filteredSignal, color="black")
+
+    # plt.legend()
+    plt.title("TEST 9")
+    plt.show()
+
+
+def test10():
+      # PRUEBA A FULL SCALE
+    sd = SigmaDelta()
+    f = 5e+2  # Frecuencia fundamental de la senoidal de prueba
+    fn = 2*f  # Frecuencia de Nyquist
+    fs = 25*f  # Frecuencia de sampleo de mi señal, con esto generamos las muestras
+    # El espaciado entre las muestras es función de la frecuencia de muestreo
+    time = np.arange(0, 8e-3, 1/fs)
+    sine = 0.8*np.sin(2*np.pi*f*time)
+    # Por el momento sd.modulator devuelve la señal resampleada (con más samples) para poder plotear
+    M = 256
+    ry, rt, y = sd.modulator(time, sine, int((256*2)/16))
+    # Le quitamos los primeros 2 valores porque son artificiales
+    plt.plot(rt, y[2:])
+    plt.plot(rt, ry)
+    D = 1
+
+    scaling_factor = ((fn/fs)*M)/D
+    signalDec = y[2:]
+    N = 5  # Con 6 anda muy bien
+    mean_filter = np.divide(np.ones(N), N)
+    filteredSignal = signal.fftconvolve(signalDec, mean_filter, mode="same")
+    plt.step(np.arange(len(filteredSignal)) /
+             (scaling_factor*f), filteredSignal, color="black")
+
+    # plt.legend()
+    plt.title("TEST 10")
     plt.show()
 
 
@@ -187,4 +291,7 @@ def test7():
 # test4()
 # test5()
 # test6()
-test7()
+# test7()
+# test8()
+# test9()
+test10()

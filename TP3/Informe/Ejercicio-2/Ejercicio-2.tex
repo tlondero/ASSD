@@ -10,14 +10,39 @@ El conversor sigma-delta o delta-sigma según la literatura consultada, tuvo su 
 
 \subsubsection{Arquitectura}
 
+A continuación presentamos la topología implementada:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{ImagenesEjercicio2/diagramaEnBloques}
+	\caption{Modulador $\Sigma\Delta$ de primer orden}
+	\label{fig:diagramaenbloques}
+\end{figure}
+
+Como se puede observar el modulador $\Sigma\Delta$ se basa en un circuito de realimentación negativa que incorpora un un cuantificador y un DAC en su interior. 
+
+
+
 \subsubsection{Modulador}
+La salida del modulador $\Sigma\Delta$ es un bit-stream de 1's y 0's que representan los cambios que ocurren en la señal de entrada.
 
-\subsection{Demodulador}
 
-\subsection{Noise Shaping}
+
+\subsubsection{Demodulador}
+
+\subsubsection{Noise Shaping}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{ImagenesEjercicio2/NoiseShappingAN}
+	\caption{}
+	\label{fig:noiseshappingan}
+\end{figure}
+
 
 \subsubsection{Simulación de aplicación real}
+En este ejemplo vamos a simular la digitalización de una conversación, la voz humana... rango audible de ... por lo tanto es 
 
-\subsection{Ejemplos varios}
+\subsubsection{Ejemplos varios}
 
 \end{document}
