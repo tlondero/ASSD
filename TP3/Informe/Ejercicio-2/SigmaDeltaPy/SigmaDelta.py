@@ -30,7 +30,7 @@ class SigmaDelta:
         print(filteredSignal)
         return filteredSignal
 
-    def modulator(self, time, inputSignal, overS_factor=10):
+    def modulator(self, time, inputSignal, L=10):
         """
         Parameters
         ----------
@@ -43,9 +43,10 @@ class SigmaDelta:
         """
 
         # Oversample input signal
-        self.oversampling_factor = 10
+        self.oversampling_factor = L
+
         resampled_y, resampled_t = signal.resample(
-            inputSignal, overS_factor*len(time), time)
+            inputSignal, L*len(time), time)
 
         # Define 1-bit Digital to analog converter
         def DA(value, begin):
@@ -87,7 +88,7 @@ class SigmaDelta:
 
             begin = False
 
-        return resampled_y, resampled_t, out_binary_stream
+        return resampled_y, resampled_t, out_binary_stream[2:]
 
     def digital_filter(self, bitStream):
         """

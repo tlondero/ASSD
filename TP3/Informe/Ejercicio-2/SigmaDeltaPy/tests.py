@@ -86,7 +86,7 @@ def test4():
     # Por el momento sd.modulator devuelve la señal resampleada (con más samples) para poder plotear
     ry, rt, y = sd.modulator(time, sine, 30)
     # Le quitamos los primeros 2 valores porque son artificiales
-    plt.plot(rt, y[2:])
+    plt.plot(rt, y)
     plt.plot(rt, ry)
     N = 8
     mean_filter = np.divide(np.ones(N), N)
@@ -109,7 +109,7 @@ def test5():
     # Por el momento sd.modulator devuelve la señal resampleada (con más samples) para poder plotear
     ry, rt, y = sd.modulator(time, sine, 30)
     # Le quitamos los primeros 2 valores porque son artificiales
-    plt.plot(rt, y[2:])
+    plt.plot(rt, y)
     plt.plot(rt, ry)
 
     decimatedSignal = signal.decimate(y[2:], 10, ftype='fir')
@@ -171,14 +171,14 @@ def test7():
     M = 10
     ry, rt, y = sd.modulator(time, sine, M)
     # Le quitamos los primeros 2 valores porque son artificiales
-    plt.step(rt, y[2:], label="Hola")
+    plt.step(rt, y, label="Hola")
     plt.plot(rt, ry)
     plt.legend()
     plt.show()
     D = 1
 
     scaling_factor = (mf*M)/D
-    signalDec = y[2:]
+    signalDec = y
     N = 64  # Con 6 anda muy bien
     mean_filter = np.divide(np.ones(N), N)
     filteredSignal = signal.fftconvolve(signalDec, mean_filter, mode="same")
@@ -204,7 +204,7 @@ def test8():
     M = 30
     ry, rt, y = sd.modulator(time, sine, M)
     # Le quitamos los primeros 2 valores porque son artificiales
-    plt.plot(rt, y[2:])
+    plt.plot(rt, y)
     plt.plot(rt, ry)
     D = 50
     decimatedSignal = signal.decimate(y[2:], D, ftype='fir')
@@ -243,7 +243,7 @@ def test9():
     D = 1
 
     scaling_factor = (mf*M)/D
-    signalDec = y[2:]
+    signalDec = y
     N = 64  # Con 6 anda muy bien
     mean_filter = np.divide(np.ones(N), N)
     filteredSignal = signal.fftconvolve(signalDec, mean_filter, mode="same")
@@ -273,7 +273,7 @@ def test10():
     D = 1
 
     scaling_factor = ((fn/fs)*M)/D
-    signalDec = y[2:]
+    signalDec = y
     N = 5  # Con 6 anda muy bien
     mean_filter = np.divide(np.ones(N), N)
     filteredSignal = signal.fftconvolve(signalDec, mean_filter, mode="same")

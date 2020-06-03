@@ -5,7 +5,7 @@
 \subsection{Conversor Sigma Delta $\Sigma \Delta$}
 
 \subsubsection{Introducción}
-El conversor sigma-delta o delta-sigma según la literatura consultada, tuvo su aparición durante los años 60's y 70's. Aunque su nombre pueda sugerir un tipo de tecnología muy compleaja la realidad es que no lo es
+El conversor sigma-delta o delta-sigma según la literatura consultada, tuvo su aparición durante los años 60's y 70's. Aunque su nombre pueda sugerir un tipo de tecnología muy compleaja la realidad es que no lo es en términos constructivos. Los moduladores sigma-delta nos permiten alcanzar una digitalización de alta resolución (16bits o 24bits) sin la necesidad de utilizar ADC de ese porte. Esto se consigue dado que este diseño permite alcanzar un nivel de ruido de cuantización equivalente a la de un ADC de mayor porte utilizando un ADC más modesto.
 
 
 \subsubsection{Arquitectura}
@@ -19,18 +19,30 @@ A continuación presentamos la topología implementada:
 	\label{fig:diagramaenbloques}
 \end{figure}
 
-Como se puede observar el modulador $\Sigma\Delta$ se basa en un circuito de realimentación negativa que incorpora un un cuantificador y un DAC en su interior. 
+Como se puede observar el modulador $\Sigma\Delta$ se basa en un circuito con un solo camino de realimentación negativa que incorpora un un cuantificador y un DAC en su interior.
 
 
 
 \subsubsection{Modulador}
-La salida del modulador $\Sigma\Delta$ es un bit-stream de 1's y 0's que representan los cambios que ocurren en la señal de entrada.
+La salida del modulador $\Sigma\Delta$ es un bit-stream de valores binario arbitrarios. En esta secuencia se encuentra codificada toda la información necesaria para poder reconstruir la señal original. Aún más importante que reconstruir la señal original, es conseguir un valor preciso de la misma en un instante de tiempo. Es decir, poder tomar mediciones. Este tipo de conversores son famosos por la alta resolución que son capaces de proveer. Sin embargo, el limite de su funcionalidad aparece cuando se los quiere utilizar en un ambiente donde la señales cambian de forma abrupta.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{ImagenesEjercicio2/BitsStream64}
+	\caption{}
+	\label{fig:bitsstream64}
+\end{figure}
+
+
+
+
 
 
 
 \subsubsection{Demodulador}
 
 \subsubsection{Noise Shaping}
+Una de las más notables características de este tipo de modulación es el efecto llamado \textbf{noise-shaping}.
 
 \begin{figure}[H]
 	\centering
