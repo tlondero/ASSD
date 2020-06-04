@@ -30,7 +30,7 @@ class SigmaDelta:
         print(filteredSignal)
         return filteredSignal
 
-    def modulator(self, time, inputSignal, L=10):
+    def modulator(self, time, inputSignal, L=1):
         """
         Parameters
         ----------
@@ -50,9 +50,9 @@ class SigmaDelta:
 
         # Define 1-bit Digital to analog converter
         def DA(value, begin):
-            if value == 1:
+            if value == self._QUANTIZER_OUT:
                 return 1
-            elif value == -1 or begin == True:
+            elif value == -self._QUANTIZER_OUT or begin == True:
                 return -1
             else:
                 return -1
@@ -120,12 +120,7 @@ class SigmaDelta:
                       downsampled signal
         """
 
-        decimatedSignal = signal.decimate(inputSignal, decimationFactor)
+        decimatedSignal = signal.decimate(
+            inputSignal, decimationFactor, ftype="fir")
 
         return decimatedSignal
-
-    def plotSpectrum(self, x, y, fs):
-        pass
-
-    def plotTimeDomain(self, x, y):
-        pass

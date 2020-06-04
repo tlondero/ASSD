@@ -144,10 +144,10 @@ def test6():
 
     N = 64
     mean_filter = np.divide(np.ones(N), N)
-    filteredSignal = signal.fftconvolve(y[2:], mean_filter, mode="same")
+    filteredSignal = signal.fftconvolve(y, mean_filter, mode="same")
     plt.step(rt, filteredSignal, color="black")
 
-    decimatedSignal = signal.decimate(y[2:], 10, ftype='fir')
+    decimatedSignal = signal.decimate(y, 10, ftype='fir')
     # decimatedSignal = signal.decimate(decimatedSignal, 10)
     plt.plot(np.arange(len(decimatedSignal)) /
              (75*f), decimatedSignal, label="dec")  # 75 = 25*30/10  oversampleado/decimacion
@@ -184,7 +184,7 @@ def test7():
     filteredSignal = signal.fftconvolve(signalDec, mean_filter, mode="same")
     # plt.step(np.arange(len(filteredSignal)),(scaling_factor*f), filteredSignal, color="black")
 
-    f, Pxx = signal.periodogram(y[2:], fs=M*25*f, window="boxcar")
+    f, Pxx = signal.periodogram(y, fs=M*25*f, window="boxcar")
 
     plt.plot(f, 10*np.log(Pxx/1e-3))
     plt.xlim(0, (M/2)*25*500)
@@ -291,7 +291,7 @@ def test10():
 # test4()
 # test5()
 # test6()
-# test7()
+test7()
 # test8()
 # test9()
-test10()
+# test10()

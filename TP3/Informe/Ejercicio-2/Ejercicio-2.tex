@@ -34,15 +34,9 @@ La salida del modulador $\Sigma\Delta$ es un bit-stream de valores binario arbit
 \end{figure}
 
 
-
-
-
-
-
-\subsubsection{Demodulador}
-
 \subsubsection{Noise Shaping}
-Una de las más notables características de este tipo de modulación es el efecto llamado \textbf{noise-shaping}.
+Una de las más notables características de este tipo de modulación es el efecto llamado \textbf{noise-shaping}. Este efecto provoca que el ruido de cuantización sea "moldeado" hacia las altas frecuencias empujándolo lejos de la banda de interés.
+
 
 \begin{figure}[H]
 	\centering
@@ -52,9 +46,33 @@ Una de las más notables características de este tipo de modulación es el efec
 \end{figure}
 
 
-\subsubsection{Simulación de aplicación real}
-En este ejemplo vamos a simular la digitalización de una conversación, la voz humana... rango audible de ... por lo tanto es 
+Esto implica que el ruido de cuantización efectivo, dentro de la banda de interés, se ve reducido. Esto es equivalente a pensar que la señal fue cuantizada mediante un cuantizador que tiene un ruido de cuantización proporcional al ruido restante sobre la banda de interés.
 
-\subsubsection{Ejemplos varios}
+A continuación se muestran los resultados obtenidos luego de realizar el periodograma sobre los bits de salida
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{ImagenesEjercicio2/NoiseShappingDemo1zoom2solid.png}
+	\caption{Noise Shapping con diferentes niveles de sobremuestreo}
+	\label{fig:noiseshappingdemo1}
+\end{figure}
+En primer lugar podemos ver que a medida que aumentamos la tasa de oversampling, el ruido de cuantización se aleja más de la banda de interés e incursiona hacia posiciones más elevadas en el espectro.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{ImagenesEjercicio2/NoiseShappingSolidZoom.png}
+	\caption{Noise Shapping con diferentes niveles de sobremuestreo, acercamiento}
+	\label{fig:noiseshappingdemo1}
+\end{figure}
+
+Si reescalamos la potencia espectral y la epxresamos en dBm conseguimos apreciar notariamente el noise-shapping.
+
+El pico observado a bajas frecuencias corresponde a la frecuencia fundamental de nuestra información de entrada
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{ImagenesEjercicio2/NoiseShappingdbM.png}
+	\caption{Noise Shapping}
+	\label{fig:noiseshappingdemo1}
+\end{figure}
 
 \end{document}
