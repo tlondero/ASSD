@@ -4,6 +4,51 @@
 
 \subsection{Introducción}
 
+\subsection{Conversor ADC0808}
+
+El ADC0808 es un conversor analógico-digital de ocho bits con ocho canales multiplexados y salida binaria paralela. En el presente informe se utilizó un único canal analógico. Este conversor está compuesto por una red en escalera 256R conectada a un árbol de llaves, el cual compara los distintos valores proporcionados por la red 256R con la entrada analógica. Es así —mediante el registro de aproximaciones sucesivas, el cual realiza una búsqueda binaria con todos los valores posibles de la red escalera hasta converger a un valor digital óptimo— que logra el ADC0808 realizar la conversión analógica-digital.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\linewidth]{ImagenesEjercicio1/ADC_BLOCK.png}
+\caption{Diagrama en bloques simplificado del conversor ADC0808.}
+\label{ADC_BLOCK}
+\end{figure}
+
+A continuación, se detallará la funcionalidad de cada pin del integrado mostrado en la Figura (\ref{ADC_BLOCK}) de manera simplificada donde se puede observar el diagrama temporal en la Figura (\ref{ADC_TIMING}).
+
+\begin{itemize}
+\item \textbf{8 Analog Inputs}: Aquí se colocan las entradas analógicas que se desean convertir. Se utilizó únicamente una sola de estas entradas, mientras que el resto se las conectó a tierra para evitar el ruido electromagnético.
+\item \textbf{3-bit Adress}: Esta entrada binaria permite seleccionar qué entrada analógica se utilizará para realizar la conversión. Estas entradas se conectaron permanentemente a tierra, de manera tal que siempre se realice la conversión con la primer entrada analógica.
+\item \textbf{Adress Latch Enable}: Para un valor alto, el ADC0808 mantendrá registro del último adress ingresado. Se conectó a VCC.
+\item \textbf{VCC}: Tensión positiva de alimentación, se utilizó el valor de $5.12V$ de tal manera que la resolución a la salida sea de $20mV$ por bit.
+\item \textbf{GND}: Tierra del circuito
+\item \textbf{REF(+), REF(-)}: Tensiones de referencia para la red escalera 256R. Se conectó la referencia positiva a VCC y la negativa a GND.
+\item \textbf{Clock}: El clock utilizado fue el típico extraído de la datasheet, de $640kHz$.
+\item \textbf{Start}: Esta señal de control inicia un ciclo de conversión
+\item \textbf{End of Conversion}: Esta señal de interrupción pasa a un estado alto cuando se acaba un ciclo de conversión. Si se conecta esta señal a la señal de \textbf{Start} se logra la máxima frecuencia de conversión para una señal de \textbf{Clock} fija.
+\item \textbf{8-bit Outputs}: Salida digital paralela de ocho bits.
+\item \textbf{Output Enable}: Permite utilizar la funcionalidad tri-state del buffer de salida. Este pin no fue utilizado.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\linewidth]{ImagenesEjercicio1/ADC_TIMING.png}
+\caption{Diagrama temporal de las señales de entrada, salida y control del conversor ADC0808.}
+\label{ADC_TIMING}
+\end{figure}
+
+\subsection{Acondicionamiento de la señal de entrada}
+
+Dado que la señal que ingresa al ADC0808 debe estar contenida dentro del rango $0V$—$5.12V$ con un margen de $100mV$, se montó a la señal de entrada sobre un nivel de continua igual a $\frac{5.12V - 0V}{2} = 2.56V$ para luego limitar con un circuito enclavador a esta resultante entre los rangos permisibles del conversor. El circuito utilizado se detalla en la Figura (\ref{ACOND}).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{ImagenesEjercicio1/circuits.pdf}
+\caption{Circuito de acondicionamiento de la señal de entrada.}
+\label{ACOND}
+\end{figure}
+
 \subsection{Máxima frecuencia de entrada sin Sample \& Hold}
 
 De la datasheet del ADC0808, se tiene que si $V_{CC} = V_{REF+} = 5.12V$ y $V_{REF-} = 0V$, la resolución será de $20 \frac{mV}{bit}$. Si se utiliza la frecuencia de clock $f_{CLK}$ típica utilizada en la datasheet de $640kHz$, el tiempo de conversión $t_C$ máximo será de $116\mu s$. Esto implica que la entrada no deberá de tener una pendiente mayor a $\frac{20mV}{116\mu s}$ para no introducir error en la cuantización de la señal.
@@ -17,6 +62,8 @@ Si la señal de entrada se encuentra en el peor caso, es decir, con una excursi�
 \end{equation}
 \\
 
-Finalmente, se obtiene una frecuencia máxima de $f_{in_{max}} = 10.3Hz$.
+Finalmente, se obtiene que la componente de mayor frecuencia de la señal de entrada para no comprometer la precisión del ACD0808 deberá ser como máximo
+
+$$f_{in_{max}} = 10.3Hz$$
 
 \end{document}
