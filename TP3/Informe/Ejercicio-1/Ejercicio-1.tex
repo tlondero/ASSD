@@ -62,8 +62,29 @@ Si la señal de entrada se encuentra en el peor caso, es decir, con una excursi�
 \end{equation}
 \\
 
+
 Finalmente, se obtiene que la componente de mayor frecuencia de la señal de entrada para no comprometer la precisión del ACD0808 deberá ser como máximo
 
 $$f_{in_{max}} = 10.3Hz$$
+
+
+\subsection{DAC}
+Se utilizó el integrad DAC0800, un conversor D/A de 8 bits con salida diferencial de corriente.
+Para convertir esta corriente en un nivel de tensión se utilizó el circuito propuesto por la hoja de datos que se muestra a continuación:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{ImagenesEjercicio1/dacout.png}
+\caption{Configuración saldia DAC.}
+	\label{fig:dacout}
+\end{figure}
+La salida va de 0 a $V_{fs}= I_{fs}cdot R_L$.\\
+En cuanto al pinout del DAC es el siguiente:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{ImagenesEjercicio1/dacpinout.png}
+\caption{Pinout DAC0800.}
+	\label{fig:dapinout}
+\end{figure}
+Donde los pines desde B1 a B8 son las entradas digitales, siendo B1 el bit mas significativo. En cuanto a la salida, es por corriente, y corresponde a los pines 6 y 8, cabe mencionar que dichas corrientes son complementaria, osea su suma da 0. Los pines 2 y 3 son las tensiones $V^+$ Y $V^-$ fueron conectadas a 5V y a GND respectivamente, mientras que las tensiones de referencia, si bien dice tensiones, uno debe proveer corrientes de referencia, esto se hace utilizando una resistencia entre vcc y $V_{ref^+}$, al igual que una entre GND y $V_{ref^-}$. En cuanto al pin de threshold fue conectado a masa, finalmente en el pin de comp se conectó un capacitor de 100nF.
 
 \end{document}
