@@ -87,4 +87,8 @@ En cuanto al pinout del DAC es el siguiente:
 \end{figure}
 Donde los pines desde B1 a B8 son las entradas digitales, siendo B1 el bit mas significativo. En cuanto a la salida, es por corriente, y corresponde a los pines 6 y 8, cabe mencionar que dichas corrientes son complementaria, osea su suma da 0. Los pines 2 y 3 son las tensiones $V^+$ Y $V^-$ fueron conectadas a 5V y a GND respectivamente, mientras que las tensiones de referencia, si bien dice tensiones, uno debe proveer corrientes de referencia, esto se hace utilizando una resistencia entre vcc y $V_{ref^+}$, al igual que una entre GND y $V_{ref^-}$. En cuanto al pin de threshold fue conectado a masa, finalmente en el pin de comp se conectó un capacitor de 100nF.
 
+\subsection{Restricción temporal del clock}
+
+Si los componentes utilizados tuviesen un tiempo de operación ideal, se podría utilizar un clock tan rápido como se quiera. Sin embargo, esto no sucede. Por parte del integrado ADC0808, se tiene que el tiempo de conversión con una señal de sincronización de $640kHz$ es como máximo $116\mu s$. Luego, el DAC0800 posee un tiempo de estabilización de $100ns$. Por parte del sample & hold utilizado, el LF398N
+
 \end{document}
