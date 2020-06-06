@@ -72,12 +72,20 @@ A la hora de realizar el proceso de conversión, el comparador del ADC necesita 
  
 Por otro lado, un Sample \& Hold posterior a la etapa de acondicionamiento de la señal, cual cumple con la función de mantener constante el valor de entrada durante un tiempo deseado, brindando así la posibilidad de que se pueda realizar proceso de conversión, eligiendo adecuadamente el tiempo de Hold de este componente.
 
-El S\& H seleccionado es el \href{https://pdf1.alldatasheet.es/datasheet-pdf/view/8580/NSC/LF398N.html}{LF398N}. Sabiendo que se posee una taza de conversión máxima de $8.62 \ kHz$, lo que implica
+El S \& H seleccionado es el \href{https://pdf1.alldatasheet.es/datasheet-pdf/view/8580/NSC/LF398N.html}{LF398N}. Sabiendo que se posee una taza de conversión máxima de $8.62 \ kHz$, impuesta por el tiempo máximo de conversión del ADC0808 de $116 \mu s$, lo que implica que
+
 \begin{equation*}
-	T_{acq} = \frac{2}{8.62 \ kHz} = 232,02 \ s
+	T_{acq} = \frac{2}{8.62 \ kHz} \approx 232 \mu s
 \end{equation*}
 
-De esta forma, observando la hoja de datos del S\& H, se requiere un capacitor de $80 \ nF$.
+De esta forma, observando el gráfico de la hoja de datos mostrada en la Figura (\ref{chacqtime}) del S\& H, se requiere un capacitor de $80 \ nF$.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\textwidth]{ImagenesEjercicio1/chacqtime.png}
+\caption{Tiempo de adquisición del S \& H en función del capacitor de hold.}
+	\label{chacqtime}
+\end{figure}
 
 \subsection{DAC}
 Se utilizó el integrad DAC0800, un conversor D/A de 8 bits con salida diferencial de corriente.
@@ -98,23 +106,39 @@ En cuanto al pinout del DAC es el siguiente:
 \end{figure}
 Donde los pines desde B1 a B8 son las entradas digitales, siendo B1 el bit mas significativo. En cuanto a la salida, es por corriente, y corresponde a los pines 6 y 8, cabe mencionar que dichas corrientes son complementaria, osea su suma da 0. Los pines 2 y 3 son las tensiones $V^+$ Y $V^-$ fueron conectadas a 5V y a GND respectivamente, mientras que las tensiones de referencia, si bien dice tensiones, uno debe proveer corrientes de referencia, esto se hace utilizando una resistencia entre vcc y $V_{ref^+}$, al igual que una entre GND y $V_{ref^-}$. En cuanto al pin de threshold fue conectado a masa, finalmente en el pin de comp se conectó un capacitor de 100nF.
 
-\subsection{Restricciones temporales}
+\subsection{Señal de sincronización de conversión}
 
-\subsubsection{Sincronización del ADC}
+\subsubsection{Restricciones temporales}
 
-\subsubsection{Sincronización global}
-
-Si los componentes utilizados tuviesen un tiempo de operación ideal, se podría utilizar un clock tan rápido como se quiera. Sin embargo, esto no sucede. Por parte del integrado ADC0808, se tiene que el tiempo de conversión con una señal de sincronización de $640kHz$ es como máximo $116\mu s$. Luego, el DAC0800 posee un tiempo de estabilización de $100ns$. Por parte del sample \& hold utilizado, el LF398N, se tiene que el tiempo de adquisición máximo con un capacitor de hold de $XX F$ es de $XX\mu s$. Finalmente, se obtienen dos limitantes en tiempo: 
+Si los componentes utilizados tuviesen un tiempo de operación ideal, se podría utilizar un clock tan rápido como se quiera. Sin embargo, esto no sucede. Por parte del integrado ADC0808, se tiene que el tiempo de conversión con una señal de sincronización de $640kHz$ es como máximo $116\mu s$. Luego, el DAC0800 posee un tiempo de estabilización de $100ns$. Por parte del sample \& hold utilizado, el LF398N, se tiene que el tiempo de adquisición máximo con un capacitor de hold de $80 nF$ es de $20\mu s$. Finalmente, se obtienen dos limitantes en tiempo: 
 
 \begin{itemize}
 \item El ADC0808 tardará como máximo $116\mu s$ en convertir el valor holdeado de la señal analógica en digital.
-\item El LF398N tardará como máximo $XX\mu s$ en cargar el capacitor de hold con el valor de la señal analógica en la fase de sampleo.
+\item El LF398N tardará como máximo $20\mu s$ en cargar el capacitor de hold con el valor de la señal analógica en la fase de sampleo.
 \end{itemize}
 
-Es por esto, que la rapidez máxima del clock que gobierna la frecuencia de conversión del circuito será el mínimo entre la inversa de los dos limitantes temporales, es decir, $\frac{1}{116\mu s}$. Sin embargo, si que quisiese aumentar aún más las frecuencia de conversión del circuito, se podría implementar un clock cuyo duty cycle no sea del $50\%$, debido a que mientras el ADC se encuentra convirtiendo, el s\&h no posee ninguna restricción temporal más que la de fuga, mientras que si el s\&h está sampleando la señal, el ADC no posee ninguna restricción temporal.
+Es por esto, que la rapidez máxima del clock que gobierna la frecuencia de conversión del circuito será el doble del mínimo entre la inversa de los dos limitantes temporales, es decir, $\frac{1}{2\cdot 116\mu s} = 4.31kHz$. Sin embargo, si que quisiese aumentar aún más las frecuencia de conversión del circuito, se podría implementar un clock cuyo duty cycle no sea del $50\%$, debido a que mientras el ADC se encuentra convirtiendo, el s\&h no posee ninguna restricción temporal más que la de fuga, mientras que si el s\&h está sampleando la señal, el ADC no posee ninguna restricción temporal.
 
 %aca poner grafico de un clock con duty cycle no simetrico donde en la parte que dura poco se esta haciendo el sampleo y en la parte larga se esta haciendo la conversión
 
-Basta con que el duty cycle sea tal que el tiempo de holdeo sea igual al tiempo de conversión del ADC y el tiempo de sampleo se igual al tiempo máximo que tarda el s\&h en cargar su capacitor de hold.
+Basta con que el duty cycle sea tal que el tiempo de holdeo sea igual al tiempo de conversión del ADC y el tiempo de sampleo se igual al tiempo máximo que tarda el s\&h en cargar su capacitor de hold. Se tiene entonces que
+
+\begin{equation}
+DT_{optimo} = \frac{20\mu s}{116\mu s}\cdot 100 = 17.24\% 
+\end{equation}
+
+para simplificar el circuito, se tomó $DT = 25\%$ y la frecuencia de esta señal de sincronización deberá ser como máximo $\frac{1}{116\mu s + 20\mu s} = 7.352kHz$.
+
+\subsubsection{Circuito generador de la señal de sincronización}
+
+Se partió de un generador de onda cuadrada de $640kHz$, el cual será la señal de clock del ADC0808. Esta señal pasará además por un divisor de frecuencia que divide por $88$ veces para obtener una frecuencia menor pero cercana a $7.352kHz$, de $7.272kHz$. Luego, esta señal ingresa a dos divisores de frecuencia en cascada que dividen por dos. Se detalla en la Figura (\ref{DT}) esta operación. Luego, se realiza la operación AND entre la señal antes de pasar por los divisores en frecuencia, y las señales a la salida de cada divisor. Así se obtiene una señal de $DT$ del $25\%$ independientemente de la frecuencia de la señal original.
+
+%aca poner grafico de guido
+
+Esta señal posterior a la operación AND es la que se utilizará como señal de control del S\&H. Finalmente, se quiere enviar un pulso de una duración de al menos $t_{ws} = 200ns$ al pin de start del ADC0808 cuando el S\&H comience a holdear, por lo que se utilizará un negador seguido de un detector de flancos para generar esta señal de start.
+
+%aca poner grafico de alan
+
+Así se obtienen todas las señales de control del circuito de una misma señal de clock original, de tal manera que todas estén sincronizadas entre sí.
 
 \end{document}
