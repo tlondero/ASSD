@@ -87,8 +87,23 @@ En cuanto al pinout del DAC es el siguiente:
 \end{figure}
 Donde los pines desde B1 a B8 son las entradas digitales, siendo B1 el bit mas significativo. En cuanto a la salida, es por corriente, y corresponde a los pines 6 y 8, cabe mencionar que dichas corrientes son complementaria, osea su suma da 0. Los pines 2 y 3 son las tensiones $V^+$ Y $V^-$ fueron conectadas a 5V y a GND respectivamente, mientras que las tensiones de referencia, si bien dice tensiones, uno debe proveer corrientes de referencia, esto se hace utilizando una resistencia entre vcc y $V_{ref^+}$, al igual que una entre GND y $V_{ref^-}$. En cuanto al pin de threshold fue conectado a masa, finalmente en el pin de comp se conectó un capacitor de 100nF.
 
-\subsection{Restricción temporal del clock}
+\subsection{Restricciones temporales}
 
-Si los componentes utilizados tuviesen un tiempo de operación ideal, se podría utilizar un clock tan rápido como se quiera. Sin embargo, esto no sucede. Por parte del integrado ADC0808, se tiene que el tiempo de conversión con una señal de sincronización de $640kHz$ es como máximo $116\mu s$. Luego, el DAC0800 posee un tiempo de estabilización de $100ns$. Por parte del sample \& hold utilizado, el LF398N, se tiene que el tiempo de adquisición máximo con un capacitor de hold de $10n$ es de $25\mu s$.
+\subsubsection{Sincronización del ADC}
+
+\subsubsection{Sincronización global}
+
+Si los componentes utilizados tuviesen un tiempo de operación ideal, se podría utilizar un clock tan rápido como se quiera. Sin embargo, esto no sucede. Por parte del integrado ADC0808, se tiene que el tiempo de conversión con una señal de sincronización de $640kHz$ es como máximo $116\mu s$. Luego, el DAC0800 posee un tiempo de estabilización de $100ns$. Por parte del sample \& hold utilizado, el LF398N, se tiene que el tiempo de adquisición máximo con un capacitor de hold de $XX F$ es de $XX\mu s$. Finalmente, se obtienen dos limitantes en tiempo: 
+
+\begin{itemize}
+\item El ADC0808 tardará como máximo $116\mu s$ en convertir el valor holdeado de la señal analógica en digital.
+\item El LF398N tardará como máximo $XX\mu s$ en cargar el capacitor de hold con el valor de la señal analógica en la fase de sampleo.
+\end{itemize}
+
+Es por esto, que la rapidez máxima del clock que gobierna la frecuencia de conversión del circuito será el mínimo entre la inversa de los dos limitantes temporales, es decir, $\frac{1}{116\mu s}$. Sin embargo, si que quisiese aumentar aún más las frecuencia de conversión del circuito, se podría implementar un clock cuyo duty cycle no sea del $50\%$, debido a que mientras el ADC se encuentra convirtiendo, el s\&h no posee ninguna restricción temporal más que la de fuga, mientras que si el s\&h está sampleando la señal, el ADC no posee ninguna restricción temporal.
+
+%aca poner grafico de un clock con duty cycle no simetrico donde en la parte que dura poco se esta haciendo el sampleo y en la parte larga se esta haciendo la conversión
+
+Basta con que el duty cycle sea tal que el tiempo de holdeo sea igual al tiempo de conversión del ADC y el tiempo de sampleo se igual al tiempo máximo que tarda el s\&h en cargar su capacitor de hold.
 
 \end{document}
