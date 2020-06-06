@@ -67,6 +67,17 @@ Finalmente, se obtiene que la componente de mayor frecuencia de la señal de ent
 
 $$f_{in_{max}} = 10.3Hz$$
 
+\subsection{Sample and Hold}
+A la hora de realizar el proceso de conversión, el comparador del ADC necesita que la señal de entrada se mantenga continua. Como se vio en las sección anterior, la frecuencia de entrada debe ser baja para así poder mantener dicha señal lo suficientemente estable como para que el comparador logre hacer su trabajo. Este resultado limita ampliamente las señales de entrada.
+ 
+Por otro lado, un Sample \& Hold posterior a la etapa de acondicionamiento de la señal, cual cumple con la función de mantener constante el valor de entrada durante un tiempo deseado, brindando así la posibilidad de que se pueda realizar proceso de conversión, eligiendo adecuadamente el tiempo de Hold de este componente.
+
+El S\& H seleccionado es el \href{https://pdf1.alldatasheet.es/datasheet-pdf/view/8580/NSC/LF398N.html}{LF398N}. Sabiendo que se posee una taza de conversión máxima de $8.62 \ kHz$, lo que implica
+\begin{equation*}
+	T_{acq} = \frac{2}{8.62 \ kHz} = 232,02 \ s
+\end{equation*}
+
+De esta forma, observando la hoja de datos del S\& H, se requiere un capacitor de $80 \ nF$.
 
 \subsection{DAC}
 Se utilizó el integrad DAC0800, un conversor D/A de 8 bits con salida diferencial de corriente.
