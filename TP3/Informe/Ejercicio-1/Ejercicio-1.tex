@@ -25,7 +25,7 @@ A continuación, se detallará la funcionalidad de cada pin del integrado mostra
 \item \textbf{GND}: Tierra del circuito
 \item \textbf{REF(+), REF(-)}: Tensiones de referencia para la red escalera 256R. Se conectó la referencia positiva a VCC y la negativa a GND.
 \item \textbf{Clock}: El clock utilizado fue el típico extraído de la datasheet, de $640kHz$.
-\item \textbf{Start}: Esta señal de control inicia un ciclo de conversión
+\item \textbf{Start}: Esta señal de control inicia un ciclo de conversión.
 \item \textbf{End of Conversion}: Esta señal de interrupción pasa a un estado alto cuando se acaba un ciclo de conversión. Si se conecta esta señal a la señal de \textbf{Start} se logra la máxima frecuencia de conversión para una señal de \textbf{Clock} fija.
 \item \textbf{8-bit Outputs}: Salida digital paralela de ocho bits.
 \item \textbf{Output Enable}: Permite utilizar la funcionalidad tri-state del buffer de salida. Este pin no fue utilizado.
@@ -40,6 +40,8 @@ A continuación, se detallará la funcionalidad de cada pin del integrado mostra
 
 \subsection{Acondicionamiento de la señal de entrada}
 
+\subsubsection{Offset y enclavamiento}
+
 Dado que la señal que ingresa al ADC0808 debe estar contenida dentro del rango $0V$—$5.12V$ con un margen de $100mV$, se montó a la señal de entrada sobre un nivel de continua igual a $\frac{5.12V - 0V}{2} = 2.56V$ para luego limitar con un circuito enclavador a esta resultante entre los rangos permisibles del conversor. El circuito utilizado se detalla en la Figura (\ref{ACOND}).
 
 \begin{figure}[H]
@@ -47,6 +49,25 @@ Dado que la señal que ingresa al ADC0808 debe estar contenida dentro del rango 
 \includegraphics[width=0.8\linewidth]{ImagenesEjercicio1/ada.pdf}
 \caption{Circuito de acondicionamiento de la señal de entrada.}
 \label{ACOND}
+\end{figure}
+
+\subsubsection{Sample and Hold}
+
+A la hora de realizar el proceso de conversión, el comparador del ADC necesita que la señal de entrada se mantenga estable. Como se vio en la sección anterior, si no se utiliza un sample & hold, es necesario que la frecuencia de entrada sea lo suficientemente baja como para que el comparador logre hacer su trabajo sin comprometer la precisión de este.
+
+El S \& H seleccionado es el \href{https://pdf1.alldatasheet.es/datasheet-pdf/view/8580/NSC/LF398N.html}{LF398N}. Sabiendo que se posee una taza de conversión máxima de $8.62 \ kHz$, impuesta por el tiempo máximo de conversión del ADC0808 de $116 \mu s$, lo que implica que
+
+\begin{equation*}
+	T_{acq} = \frac{2}{8.62 \ kHz} \approx 232 \mu s
+\end{equation*}
+
+De esta forma, observando el gráfico de la hoja de datos mostrada en la Figura (\ref{chacqtime}) del S\& H, se requiere un capacitor de $80 \ nF$.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\textwidth]{ImagenesEjercicio1/chacqtime.png}
+\caption{Tiempo de adquisición del S \& H en función del capacitor de hold.}
+	\label{chacqtime}
 \end{figure}
 
 \subsection{Máxima frecuencia de entrada sin Sample \& Hold}
@@ -67,27 +88,7 @@ Finalmente, se obtiene que la componente de mayor frecuencia de la señal de ent
 
 $$f_{in_{max}} = 10.3Hz$$
 
-\subsection{Sample and Hold}
-A la hora de realizar el proceso de conversión, el comparador del ADC necesita que la señal de entrada se mantenga continua. Como se vio en las sección anterior, la frecuencia de entrada debe ser baja para así poder mantener dicha señal lo suficientemente estable como para que el comparador logre hacer su trabajo. Este resultado limita ampliamente las señales de entrada.
- 
-Por otro lado, un Sample \& Hold posterior a la etapa de acondicionamiento de la señal, cual cumple con la función de mantener constante el valor de entrada durante un tiempo deseado, brindando así la posibilidad de que se pueda realizar proceso de conversión, eligiendo adecuadamente el tiempo de Hold de este componente.
-
-El S \& H seleccionado es el \href{https://pdf1.alldatasheet.es/datasheet-pdf/view/8580/NSC/LF398N.html}{LF398N}. Sabiendo que se posee una taza de conversión máxima de $8.62 \ kHz$, impuesta por el tiempo máximo de conversión del ADC0808 de $116 \mu s$, lo que implica que
-
-\begin{equation*}
-	T_{acq} = \frac{2}{8.62 \ kHz} \approx 232 \mu s
-\end{equation*}
-
-De esta forma, observando el gráfico de la hoja de datos mostrada en la Figura (\ref{chacqtime}) del S\& H, se requiere un capacitor de $80 \ nF$.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.3\textwidth]{ImagenesEjercicio1/chacqtime.png}
-\caption{Tiempo de adquisición del S \& H en función del capacitor de hold.}
-	\label{chacqtime}
-\end{figure}
-
-\subsection{DAC}
+\subsection{Conversor DAC0800}
 Se utilizó el integrad DAC0800, un conversor D/A de 8 bits con salida diferencial de corriente.
 Para convertir esta corriente en un nivel de tensión se utilizó el circuito propuesto por la hoja de datos que se muestra a continuación:
 \begin{figure}[H]
@@ -135,10 +136,34 @@ Se partió de un generador de onda cuadrada de $640kHz$, el cual será la señal
 
 %aca poner grafico de guido
 
-Esta señal posterior a la operación AND es la que se utilizará como señal de control del S\&H. Finalmente, se quiere enviar un pulso de una duración de al menos $t_{ws} = 200ns$ al pin de start del ADC0808 cuando el S\&H comience a holdear, por lo que se utilizará un negador seguido de un detector de flancos para generar esta señal de start.
+Esta señal posterior a la operación AND es la que se utilizará como señal de control del S\&H. Finalmente, se quiere enviar un pulso de una duración de al menos $t_{ws} = 200ns$ al pin de start del ADC0808 cuando el S\&H comience a holdear, por lo que se utilizará un negador seguido de un detector de flancos para generar esta señal de start. El resultado se detalla en la Figura (\ref{START})
 
-%aca poner grafico de alan
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{ImagenesEjercicio1/Graficos.pdf}
+\caption{Diagrama temporal de las señales de control del circuito.}
+\label{START}
+\end{figure}
 
-Así se obtienen todas las señales de control del circuito de una misma señal de clock original, de tal manera que todas estén sincronizadas entre sí.
+Así se obtienen todas las señales de control del circuito de una misma señal de clock original, de tal manera que todas estén sincronizadas entre sí. Si se desea disminuir la frecuencia de conversión basta con disminuir la frecuencia 
+
+\subsubsection{Circuito oscilador}
+
+Se utilizó el circuito mostrado en la Figura (\ref{555}) para generar la señal de clock de $640kHz$ la cual no solo será ingresada al ADC0808 sino de la cual se generarán las señales de sincronización del S\&H y de start del conversor.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{ImagenesEjercicio1/Graficos.pdf}
+\caption{Circuito oscilador.}
+\label{START}
+\end{figure}
+
+Utilizando $R_{T} = 620 + 110\Omega$, $R_{POT} = 1k\Omega$ y $C_{T} = 1nF$ se logra obtener
+
+\[ 49kHz < f_CLK < 632kHz\]
+
+por lo que la frecuencia de conversión del circuito total será de
+
+\[ 557Hz < f_CONV < 7.2kHz \]
 
 \end{document}
