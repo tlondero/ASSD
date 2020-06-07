@@ -9,155 +9,155 @@
 %ADC
 \newcommand{\adc}[1] % #1 = name
 {node(#1_origin){}
-	node[dipchip, num pins=32, hide numbers, no topmark, external pins width=0](#1){}
+	node[dipchip, num pins=32, hide numbers, no topmark, external pins width=0](C1){}
 	
-	($ (#1.bpin 1) !.5! (#1.bpin 32) $) ++ (0,0.5) node[](){$ADC$}
+	($ (C1.bpin 1) !.5! (C1.bpin 32) $) ++ (0,0.5) node[](){$ADC$}
 
 	%LEFT NODES
-	node[right, font=\footnotesize] at (#1.bpin 1) {$IN_0$}
-	node[right, font=\footnotesize] at (#1.bpin 2) {$IN_1$}	
-	node[right, font=\footnotesize] at (#1.bpin 3) {$IN_3$}	
-	node[right, font=\footnotesize] at (#1.bpin 4) {$IN_4$}	
-	node[right, font=\footnotesize] at (#1.bpin 5) {$IN_5$}	
-	node[right, font=\footnotesize] at (#1.bpin 6) {$IN_6$}	
-	node[right, font=\footnotesize] at (#1.bpin 7) {$IN_7$}	
-	node[right, font=\footnotesize] at (#1.bpin 8) {$IN_8$}
+	node[right, font=\footnotesize] at (C1.bpin 1) {$IN_0$}
+	node[right, font=\footnotesize] at (C1.bpin 2) {$IN_1$}	
+	node[right, font=\footnotesize] at (C1.bpin 3) {$IN_3$}	
+	node[right, font=\footnotesize] at (C1.bpin 4) {$IN_4$}	
+	node[right, font=\footnotesize] at (C1.bpin 5) {$IN_5$}	
+	node[right, font=\footnotesize] at (C1.bpin 6) {$IN_6$}	
+	node[right, font=\footnotesize] at (C1.bpin 7) {$IN_7$}	
+	node[right, font=\footnotesize] at (C1.bpin 8) {$IN_8$}
 		
-	(#1.bpin 1) -- ++ (-0.5,0) node[](#1_in0){}	
-	(#1.bpin 2) -- ++ (-0.5,0) node[](#1_in1){}
-	(#1.bpin 3) -- ++ (-0.5,0) node[](#1_in2){}
-	(#1.bpin 4) -- ++ (-0.5,0) node[](#1_in3){}
-	(#1.bpin 5) -- ++ (-0.5,0) node[](#1_in4){}
-	(#1.bpin 6) -- ++ (-0.5,0) node[](#1_in5){}
-	(#1.bpin 7) -- ++ (-0.5,0) node[](#1_in6){}
-	(#1.bpin 8) -- ++ (-0.5,0) node[](#1_in7){}
+	(C1.bpin 1) -- ++ (-0.5,0) node[](#1_in0){}	
+	(C1.bpin 2) -- ++ (-0.5,0) node[](#1_in1){}
+	(C1.bpin 3) -- ++ (-0.5,0) node[](#1_in2){}
+	(C1.bpin 4) -- ++ (-0.5,0) node[](#1_in3){}
+	(C1.bpin 5) -- ++ (-0.5,0) node[](#1_in4){}
+	(C1.bpin 6) -- ++ (-0.5,0) node[](#1_in5){}
+	(C1.bpin 7) -- ++ (-0.5,0) node[](#1_in6){}
+	(C1.bpin 8) -- ++ (-0.5,0) node[](#1_in7){}
 	
-	node[right, font=\footnotesize] at (#1.bpin 10) {$ADD \ A$}
-	node[right, font=\footnotesize] at (#1.bpin 11) {$ADD \ B$}
-	node[right, font=\footnotesize] at (#1.bpin 12) {$ADD \ C$}
-	node[right, font=\footnotesize] at (#1.bpin 13) {$ALE$}
+	node[right, font=\footnotesize] at (C1.bpin 10) {$ADD \ A$}
+	node[right, font=\footnotesize] at (C1.bpin 11) {$ADD \ B$}
+	node[right, font=\footnotesize] at (C1.bpin 12) {$ADD \ C$}
+	node[right, font=\footnotesize] at (C1.bpin 13) {$ALE$}
 	
-	(#1.bpin 10) -- ++ (-0.5,0) node[](#1_adda){}	
-	(#1.bpin 11) -- ++ (-0.5,0) node[](#1_addb){}
-	(#1.bpin 12) -- ++ (-0.5,0) node[](#1_addc){}
-	(#1.bpin 13) ++ (-0.5,0) node[](#1_ale){}
+	(C1.bpin 10) -- ++ (-0.5,0) node[](#1_adda){}	
+	(C1.bpin 11) -- ++ (-0.5,0) node[](#1_addb){}
+	(C1.bpin 12) -- ++ (-0.5,0) node[](#1_addc){}
+	(C1.bpin 13) ++ (-0.5,0) node[](#1_ale){}
 	
-	node[right, font=\footnotesize] at (#1.bpin 15) {$+V_{REF}$}
-	node[right, font=\footnotesize] at (#1.bpin 16) {$-V_{REF}$}
+	node[right, font=\footnotesize] at (C1.bpin 15) {$+V_{REF}$}
+	node[right, font=\footnotesize] at (C1.bpin 16) {$-V_{REF}$}
 	
-	(#1.bpin 15) ++ (-0.5,0) node[](#1_v+){}	
-	(#1.bpin 16) -- ++ (-0.5,0) node[](#1_v-){}
+	(C1.bpin 15) ++ (-0.5,0) node[](#1_v+){}	
+	(C1.bpin 16) -- ++ (-0.5,0) node[](#1_v-){}
 	
 	%RIGHT NODES
-	node[left, font=\footnotesize] at (#1.bpin 32) {$CLOCK$}
-	node[left, font=\footnotesize] at (#1.bpin 31) {$START$}
+	node[left, font=\footnotesize] at (C1.bpin 32) {$CLOCK$}
+	node[left, font=\footnotesize] at (C1.bpin 31) {$START$}
 	
-	(#1.bpin 32) -- ++ (0.5,0) node[](#1_clock){}	
-	(#1.bpin 31) -- ++ (0.5,0) node[](#1_start){}
+	(C1.bpin 32) -- ++ (0.5,0) node[](#1_clock){}	
+	(C1.bpin 31) -- ++ (0.5,0) node[](#1_start){}
 	
-	node[left, font=\footnotesize] at (#1.bpin 29) {$EOC$}
+	node[left, font=\footnotesize] at (C1.bpin 29) {$EOC$}
 	
-	(#1.bpin 29) -- ++ (0.5,0) node[](#1_eoc){}
+	(C1.bpin 29) -- ++ (0.5,0) node[](#1_eoc){}
 	
-	node[left, font=\footnotesize] at (#1.bpin 27) {$OUT_1$}
-	node[left, font=\footnotesize] at (#1.bpin 26) {$OUT_2$}
-	node[left, font=\footnotesize] at (#1.bpin 25) {$OUT_3$}
-	node[left, font=\footnotesize] at (#1.bpin 24) {$OUT_4$}
-	node[left, font=\footnotesize] at (#1.bpin 23) {$OUT_5$}
-	node[left, font=\footnotesize] at (#1.bpin 22) {$OUT_6$}
-	node[left, font=\footnotesize] at (#1.bpin 21) {$OUT_7$}
-	node[left, font=\footnotesize] at (#1.bpin 20) {$OUT_8$}
+	node[left, font=\footnotesize] at (C1.bpin 27) {$OUT_1$}
+	node[left, font=\footnotesize] at (C1.bpin 26) {$OUT_2$}
+	node[left, font=\footnotesize] at (C1.bpin 25) {$OUT_3$}
+	node[left, font=\footnotesize] at (C1.bpin 24) {$OUT_4$}
+	node[left, font=\footnotesize] at (C1.bpin 23) {$OUT_5$}
+	node[left, font=\footnotesize] at (C1.bpin 22) {$OUT_6$}
+	node[left, font=\footnotesize] at (C1.bpin 21) {$OUT_7$}
+	node[left, font=\footnotesize] at (C1.bpin 20) {$OUT_8$}
 	
-	(#1.bpin 27) -- ++ (0.5,0) node[](#1_out1){}	
-	(#1.bpin 26) -- ++ (0.5,0) node[](#1_out2){}
-	(#1.bpin 25) -- ++ (0.5,0) node[](#1_out3){}
-	(#1.bpin 24) -- ++ (0.5,0) node[](#1_out4){}
-	(#1.bpin 23) -- ++ (0.5,0) node[](#1_out5){}
-	(#1.bpin 22) -- ++ (0.5,0) node[](#1_out6){}
-	(#1.bpin 21) -- ++ (0.5,0) node[](#1_out7){}
-	(#1.bpin 20) -- ++ (0.5,0) node[](#1_out8){}
+	(C1.bpin 27) -- ++ (0.5,0) node[](#1_out1){}	
+	(C1.bpin 26) -- ++ (0.5,0) node[](#1_out2){}
+	(C1.bpin 25) -- ++ (0.5,0) node[](#1_out3){}
+	(C1.bpin 24) -- ++ (0.5,0) node[](#1_out4){}
+	(C1.bpin 23) -- ++ (0.5,0) node[](#1_out5){}
+	(C1.bpin 22) -- ++ (0.5,0) node[](#1_out6){}
+	(C1.bpin 21) -- ++ (0.5,0) node[](#1_out7){}
+	(C1.bpin 20) -- ++ (0.5,0) node[](#1_out8){}
 	
-	node[left, font=\footnotesize] at (#1.bpin 17) {$OE$}	
+	node[left, font=\footnotesize] at (C1.bpin 17) {$OE$}	
 	
-	(#1.bpin 17) -- ++ (0.5,0) node[](#1_oe){}	
+	(C1.bpin 17) -- ++ (0.5,0) node[](#1_oe){}	
 }
 
 %DAC
 \newcommand{\dac}[2] % #1 = name #2 = anchor
 %
 {node(#1_origin){}
-	node[dipchip, num pins=16, hide numbers, no topmark, external pins width=0, anchor = bpin #2](#1){}
+	node[dipchip, num pins=16, hide numbers, no topmark, external pins width=0, anchor = bpin #2](C2){}
 	
-	($ (#1.bpin 1) !.5! (#1.bpin 16) $) ++ (0,0.5) node[](){$DAC$}
+	($ (C2.bpin 1) !.5! (C2.bpin 16) $) ++ (0,0.5) node[](){$DAC$}
 
 	%LEFT NODES
-	node[right, font=\footnotesize] at (#1.bpin 1) {$THR$}
-	node[right, font=\footnotesize] at (#1.bpin 2) {$\overline{IOUT}$}	
-	node[right, font=\footnotesize] at (#1.bpin 3) {$V-$}	
-	node[right, font=\footnotesize] at (#1.bpin 4) {$IOUT$}	
-	node[right, font=\footnotesize] at (#1.bpin 5) {$B_1$}	
-	node[right, font=\footnotesize] at (#1.bpin 6) {$B_2$}	
-	node[right, font=\footnotesize] at (#1.bpin 7) {$B_3$}	
-	node[right, font=\footnotesize] at (#1.bpin 8) {$B_4$}
+	node[right, font=\footnotesize] at (C2.bpin 1) {$THR$}
+	node[right, font=\footnotesize] at (C2.bpin 2) {$\overline{IOUT}$}	
+	node[right, font=\footnotesize] at (C2.bpin 3) {$V-$}	
+	node[right, font=\footnotesize] at (C2.bpin 4) {$IOUT$}	
+	node[right, font=\footnotesize] at (C2.bpin 5) {$B_1$}	
+	node[right, font=\footnotesize] at (C2.bpin 6) {$B_2$}	
+	node[right, font=\footnotesize] at (C2.bpin 7) {$B_3$}	
+	node[right, font=\footnotesize] at (C2.bpin 8) {$B_4$}
 		
-	(#1.bpin 1) -- ++ (-0.5,0) node[](#1_thr){}	
-	(#1.bpin 2) -- ++ (-0.5,0) node[](#1_ioutb){}
-	(#1.bpin 3) -- ++ (-0.5,0) node[](#1_v-){}
-	(#1.bpin 4) -- ++ (-0.5,0) node[](#1_iout){}
-	(#1.bpin 5) -- ++ (-0.5,0) node[](#1_b1){}
-	(#1.bpin 6) -- ++ (-0.5,0) node[](#1_b2){}
-	(#1.bpin 7) -- ++ (-0.5,0) node[](#1_b3){}
-	(#1.bpin 8) -- ++ (-0.5,0) node[](#1_b4){}
+	(C2.bpin 1) -- ++ (-0.5,0) node[](#1_thr){}	
+	(C2.bpin 2) -- ++ (-0.5,0) node[](#1_ioutb){}
+	(C2.bpin 3) -- ++ (-0.5,0) node[](#1_v-){}
+	(C2.bpin 4) -- ++ (-0.5,0) node[](#1_iout){}
+	(C2.bpin 5) -- ++ (-0.5,0) node[](#1_b1){}
+	(C2.bpin 6) -- ++ (-0.5,0) node[](#1_b2){}
+	(C2.bpin 7) -- ++ (-0.5,0) node[](#1_b3){}
+	(C2.bpin 8) -- ++ (-0.5,0) node[](#1_b4){}
 	
 	%RIGHT NODES
-	node[left, font=\footnotesize] at (#1.bpin 16) {$COMP$}
-	node[left, font=\footnotesize] at (#1.bpin 15) {$-V_{REF}$}
-	node[left, font=\footnotesize] at (#1.bpin 14) {$+V_{REF}$}
-	node[left, font=\footnotesize] at (#1.bpin 13) {$V+$}
-	node[left, font=\footnotesize] at (#1.bpin 12) {$B_8$}
-	node[left, font=\footnotesize] at (#1.bpin 11) {$B_7$}
-	node[left, font=\footnotesize] at (#1.bpin 10) {$B_6$}
-	node[left, font=\footnotesize] at (#1.bpin 9) {$B_5$}
+	node[left, font=\footnotesize] at (C2.bpin 16) {$COMP$}
+	node[left, font=\footnotesize] at (C2.bpin 15) {$-V_{REF}$}
+	node[left, font=\footnotesize] at (C2.bpin 14) {$+V_{REF}$}
+	node[left, font=\footnotesize] at (C2.bpin 13) {$V+$}
+	node[left, font=\footnotesize] at (C2.bpin 12) {$B_8$}
+	node[left, font=\footnotesize] at (C2.bpin 11) {$B_7$}
+	node[left, font=\footnotesize] at (C2.bpin 10) {$B_6$}
+	node[left, font=\footnotesize] at (C2.bpin 9) {$B_5$}
 	
-	(#1.bpin 16) -- ++ (0.5,0) node[](#1_comp){}	
-	(#1.bpin 15) -- ++ (0.5,0) node[](#1_vr-){}
-	(#1.bpin 14) -- ++ (0.5,0) node[](#1_vr+){}
-	(#1.bpin 13) -- ++ (0.5,0) node[](#1_v+){}
-	(#1.bpin 12) -- ++ (0.5,0) node[](#1_b8){}
-	(#1.bpin 11) -- ++ (0.5,0) node[](#1_b7){}
-	(#1.bpin 10) -- ++ (0.5,0) node[](#1_b6){}
-	(#1.bpin 9) -- ++ (0.5,0) node[](#1_b5){}		
+	(C2.bpin 16) -- ++ (0.5,0) node[](#1_comp){}	
+	(C2.bpin 15) -- ++ (0.5,0) node[](#1_vr-){}
+	(C2.bpin 14) -- ++ (0.5,0) node[](#1_vr+){}
+	(C2.bpin 13) -- ++ (0.5,0) node[](#1_v+){}
+	(C2.bpin 12) -- ++ (0.5,0) node[](#1_b8){}
+	(C2.bpin 11) -- ++ (0.5,0) node[](#1_b7){}
+	(C2.bpin 10) -- ++ (0.5,0) node[](#1_b6){}
+	(C2.bpin 9) -- ++ (0.5,0) node[](#1_b5){}		
 }
 
 %555
 \newcommand{\cincocincocinco}[1] % #1 = name
 {node(#1_origin){}
-	node[dipchip, num pins=12, hide numbers, no topmark, external pins width=0](#1){}
+	node[dipchip, num pins=12, hide numbers, no topmark, external pins width=0](C3){}
 	
-	($ (#1.bpin 1) !.5! (#1.bpin 12) $) ++ (0,0.5) node[](){$555$}
+	($ (C3.bpin 1) !.5! (C3.bpin 12) $) ++ (0,0.5) node[](){$555$}
 
 	%LEFT NODES
-	node[right, font=\footnotesize] at (#1.bpin 1) {$V_{CC}$}
-	node[right, font=\footnotesize] at (#1.bpin 2) {$RST$}	
-	node[right, font=\footnotesize] at (#1.bpin 3) {$DIS$}
-	node[right, font=\footnotesize] at (#1.bpin 4) {$THR$}	
-	node[right, font=\footnotesize] at (#1.bpin 5) {$TRI$}	
-	node[right, font=\footnotesize] at (#1.bpin 6) {$COM$}	
+	node[right, font=\footnotesize] at (C3.bpin 1) {$V_{CC}$}
+	node[right, font=\footnotesize] at (C3.bpin 2) {$RST$}	
+	node[right, font=\footnotesize] at (C3.bpin 3) {$DIS$}
+	node[right, font=\footnotesize] at (C3.bpin 4) {$THR$}	
+	node[right, font=\footnotesize] at (C3.bpin 5) {$TRI$}	
+	node[right, font=\footnotesize] at (C3.bpin 6) {$COM$}	
 
-	(#1.bpin 1) -- ++ (-0.5,0) node[](#1_vc){}	
-	(#1.bpin 2) -- ++ (-0.5,0) node[](#1_rst){}
-	(#1.bpin 3) -- ++ (-0.5,0) node[](#1_dis){}
-	(#1.bpin 4) -- ++ (-0.5,0) node[](#1_thr){}	
-	(#1.bpin 5) -- ++ (-0.5,0) node[](#1_tri){}
-	(#1.bpin 6) -- ++ (-0.5,0) node[](#1_com){}
+	(C3.bpin 1) -- ++ (-0.5,0) node[](#1_vc){}	
+	(C3.bpin 2) -- ++ (-0.5,0) node[](#1_rst){}
+	(C3.bpin 3) -- ++ (-0.5,0) node[](#1_dis){}
+	(C3.bpin 4) -- ++ (-0.5,0) node[](#1_thr){}	
+	(C3.bpin 5) -- ++ (-0.5,0) node[](#1_tri){}
+	(C3.bpin 6) -- ++ (-0.5,0) node[](#1_com){}
 
 
 	%RIGHT NODES
-	node[left, font=\footnotesize] at (#1.bpin 12) {$OUT$}
-	node[left, font=\footnotesize] at (#1.bpin 7) {$GND$}	
+	node[left, font=\footnotesize] at (C3.bpin 12) {$OUT$}
+	node[left, font=\footnotesize] at (C3.bpin 7) {$GND$}	
 	
-	(#1.bpin 12) -- ++ (0.5,0) node[](#1_out){}
-	(#1.bpin 7) -- ++ (0.5,0) node[](#1_gnd){}
+	(C3.bpin 12) -- ++ (0.5,0) node[](#1_out){}
+	(C3.bpin 7) -- ++ (0.5,0) node[](#1_gnd){}
 }
 
 %DIVISOR DE F
@@ -180,36 +180,6 @@
 	(#1.bpin 4) -- ++ (0.5,0) node[](#1_q){}
 }
 
-%SAMPLE AND HOLD
-\newcommand{\sandh}[2] % #1 = name #2 = anchor
-{node(#1_origin){}
-	node[dipchip, num pins=8, hide numbers, no topmark, external pins width=0, anchor = bpin #2](#1){}
-	
-	($ (#1.bpin 1) !.5! (#1.bpin 4) $) ++ (0,0.5) node[](){$S\&H$}
-
-	%LEFT NODES
-	node[right, font=\footnotesize] at (#1.bpin 1) {$CLK$}
-	node[right, font=\footnotesize] at (#1.bpin 2) {$RST$}
-	node[right, font=\footnotesize] at (#1.bpin 3) {$RST$}
-	node[right, font=\footnotesize] at (#1.bpin 4) {$RST$}
-		
-	(#1.bpin 1) -- ++ (-0.5,0) node[](#1_clk){}	
-	(#1.bpin 2) -- ++ (-0.5,0) node[](#1_rst){}
-	(#1.bpin 3) -- ++ (-0.5,0) node[](#1_rst){}
-	(#1.bpin 4) -- ++ (-0.5,0) node[](#1_rst){}
-	
-	%RIGHT NODES
-	node[left, font=\footnotesize] at (#1.bpin 8) {$CLK$}
-	node[left, font=\footnotesize] at (#1.bpin 7) {$RST$}
-	node[left, font=\footnotesize] at (#1.bpin 6) {$RST$}
-	node[left, font=\footnotesize] at (#1.bpin 5) {$RST$}
-		
-	(#1.bpin 8) -- ++ (0.5,0) node[](#1_clk){}	
-	(#1.bpin 7) -- ++ (0.5,0) node[](#1_rst){}
-	(#1.bpin 6) -- ++ (0.5,0) node[](#1_rst){}
-	(#1.bpin 5) -- ++ (0.5,0) node[](#1_rst){}
-}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %							CIRCUITOS								%
@@ -224,18 +194,18 @@
 	
 	\draw 
 		(0,0) ++ (2,0) \cincocincocinco{ccc}	
-		(ccc_rst.center) -- (ccc_vc.center) node[circ](){} -- ++ (0,0.5) node[vcc, label=north:$5 \ V$](){}
+		(ccc_rst.center) -- (ccc_vc.center) -- ++ (0,1) node[vcc, label=north:$5 \ V$](){}
 		(ccc_thr.center) -- (ccc_tri.center)
 		(ccc_com.center) to[C, label=$C_C$] ++ (0,-2) node[ground](){}
 		(ccc_gnd.center) -- ++ (0,-2) node[ground](){}
 		(ccc_out.center) -- ++ (1,0) node[ocirc,label=$V_{OUT}$](){}
 		
-		($ (ccc_thr.center) !.5! (ccc_tri.center) $) node[circ](){} -- ++ (-3,0) node[circ](aux1){} -- ++(0,0.5) to[pR, name=pr, l_=$R_{POT}$] ++(0,1.5) to[R, l_=$R_T$] ++(0,2) node[npn, anchor=E, label=left:$Q_{CHG}$, xscale=-1](q){}
+		($ (ccc_thr.center) !.5! (ccc_tri.center) $) node[circ](){} -- ++ (-3,0) node[circ](aux1){} to[pR, name=pr, l_=$R_{POT}$] ++(0,2) to[R, l_=$R_T$] ++(0,3) node[npn, anchor=E, label=left:$Q_{CHG}$, xscale=-1](q){}
 		(q.E) node[circ](){} to[D] ++(2,0) node[circ](aux2){} |- (ccc_dis.center)
 		
 		(aux2.center) |- (q.B)
-		(aux2.center) -- ++ (2,0) to[R, l=$R_B$] ++ (2,0) node[vcc, label=north:$5 \ V$](){}
-		(q.C) node[vcc, label=north:$5 \ V$](){}
+		(q.E) ++ (2,0) -- ++ (0,1) to[R, l_=$R_B$] ++ (0,2) node[vcc, label=north:$5 \ V$](){}
+		(q.C) -- ++ (0,1.5) node[vcc, label=north:$5 \ V$](){}
 		
 		(pr.wiper) -- ++ (-0.5,0) |- (aux1) to[C, l=$C_T$] ++ (0,-2.75) node[ground](){}
 	;
@@ -287,8 +257,8 @@
 		
 		(adc_v+.center) node[jump crossing, xscale=2, yscale=2](cross1){}
 		(adc_ale.center) node[jump crossing, xscale=2, yscale=2](cross2){}  
-		(adc.bpin 15) -- (cross1.east)
-		(adc.bpin 13) -- (cross2.east)
+		(C1.bpin 15) -- (cross1.east)
+		(C1.bpin 13) -- (cross2.east)
 		
 		(cross1.west) -- ++ (-1,0) node[circ](aux1){}
 		(cross2.west) -| (aux1.center) -- ++ (-1,0) node[ocirc, label=left:$5 \ V$](){}

@@ -186,14 +186,41 @@ Si bien hay una gran diferencia entre $640kHz$ y $632kHz$, esto será utilizado 
 
 frecuencia de corte $f_p = \frac{f_{conv}}{2} = \frac{7.2kHz}{2}$.
 
-\subsection{Circuito completo}
-
-tomi pls.
-
 \subsection{Resultados}
 
-Se observa en la Figura
+Se observan en la Figura (\ref{result1}) distintas señales características del circuito donde la señal amarilla se mide a la salida del filtro anti-alias, la señal azul a la salida del S\&H, la señal roja a la salida del DAC y finalmente la señal verde a la salida del filtro recuperador.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\linewidth, page=1]{ImagenesEjercicio1/result1.png}
+\caption{Señales características del circuito.}
+\label{result1}
+\end{figure}
+
+Se puede ver en la Figura (\ref{result2}) una pérdida de amplitud de más del $10\%$ debido al muestreo.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth, page=1]{ImagenesEjercicio1/result2.png}
+\caption{Comparación entre la señal a la salida del filtro anti-alias y el filtro recuperador.}
+\label{result2}
+\end{figure}
 
 \subsection{Mediciones}
+
+Finalmente para comprobar el correcto funcionamiento del circuito se utilizó la máxima $f_{clk}$ admisible por el circuito, de $632kHz$ generada por el circuito oscilador, una señal rampa de frecuencia $1kHz$ y una amplitud de $0V$ a $5V$.
+
+Según los cálculos realizados previamente, se tendrá una frecuencia de muestreo de $\frac{632kHz}{88} = 7.2kHz$. Se midió esta frecuencia de muestreo experimentalmente la cual fue de $XX.XXXkHz$ mostrado en la Figura (\ref{med1}).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\linewidth]{ImagenesEjercicio1/pend.jpg}
+\caption{Medición de la frecuencia de muestreo experimental.}
+\label{med1}
+\end{figure}
+
+Luego, se se midió el error de cuantización empleando el método de..
+
+
 
 \end{document}
