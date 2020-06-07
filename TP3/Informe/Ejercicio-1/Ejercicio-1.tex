@@ -46,27 +46,27 @@ Dado que la señal que ingresa al ADC0808 debe estar contenida dentro del rango 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\linewidth]{ImagenesEjercicio1/ada.pdf}
+\includegraphics[width=0.8\linewidth, page = 3]{ImagenesEjercicio1/Components.pdf}
 \caption{Circuito de acondicionamiento de la señal de entrada.}
 \label{ACOND}
 \end{figure}
 
-\subsubsection{Sample and Hold}
+\subsubsection{Sample \& Hold}
 
-A la hora de realizar el proceso de conversión, el comparador del ADC necesita que la señal de entrada se mantenga estable. Como se vio en la sección anterior, si no se utiliza un sample $\&$ hold, es necesario que la frecuencia de entrada sea lo suficientemente baja como para que el comparador logre hacer su trabajo sin comprometer la precisión de este.
+A la hora de realizar el proceso de conversión, el comparador del ADC necesita que la señal de entrada se mantenga estable. Como se vio en la sección anterior, si no se utiliza un Sample \& Hold, es necesario que la frecuencia de entrada sea lo suficientemente baja como para que el comparador logre hacer su trabajo sin comprometer la precisión de este.
 
-El S \& H seleccionado es el \href{https://pdf1.alldatasheet.es/datasheet-pdf/view/8580/NSC/LF398N.html}{LF398N}. Sabiendo que se posee una taza de conversión máxima de $8.62 \ kHz$, impuesta por el tiempo máximo de conversión del ADC0808 de $116 \mu s$, lo que implica que
+El S\&H seleccionado es el \href{https://pdf1.alldatasheet.es/datasheet-pdf/view/8580/NSC/LF398N.html}{LF398N}. Sabiendo que se posee una taza de conversión máxima de $8.62 \ kHz$, impuesta por el tiempo máximo de conversión del ADC0808 de $116 \mu s$, lo que implica que
 
 \begin{equation*}
 	T_{acq} = \frac{1}{2\cdot 8.62 \ kHz} \approx 58 \mu s
 \end{equation*}
 
-De esta forma, observando el gráfico de la hoja de datos mostrada en la Figura (\ref{chacqtime}) del S\& H, se requiere un capacitor de $20 \ nF$.
+De esta forma, observando el gráfico de la hoja de datos mostrada en la Figura (\ref{chacqtime}) del S\&H, se requiere un capacitor de $20 \ nF$.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.3\textwidth]{ImagenesEjercicio1/chacqtime.png}
-\caption{Tiempo de adquisición del S \& H en función del capacitor de hold.}
+	\includegraphics[width=0.5\textwidth]{ImagenesEjercicio1/chacqtime.png}
+\caption{Tiempo de adquisición del S\&H en función del capacitor de hold.}
 	\label{chacqtime}
 \end{figure}
 
