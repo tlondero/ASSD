@@ -365,4 +365,45 @@
 \end{circuitikz}
 \end{page}
 
+%SAMPLE AND HOLD
+\begin{page}
+\tikzset{syh/.style={muxdemux, muxdemux def={NL=1, Lh=5, NR=1, Rh=2, NB=3, NT=3, w = 6}, font=\scriptsize\ttfamily}}
+\begin{circuitikz}[american voltages]
+		
+	\draw
+		(0,0) node[syh, label=center:$S\&H$](a){}
+		(a.blpin 1) node[label=right:$3$](){}
+		(a.brpin 1) node[label=left:$5$](){}
+		
+		(a.btpin 1) node[label=below:$1$](){}
+		(a.btpin 2) node[label=below:$2$](){}
+		(a.btpin 3) node[label=below:$6$](){}
+		
+		(a.bbpin 1) node[label=above:$4$](){}
+		(a.bbpin 2) node[label=above:$8$](){}
+		(a.bbpin 3) node[label=above:$7$](){}
+		
+		(a.lpin 1) -- ++ (-1,0) node[ocirc, label=above:$V_{FAA}$](){}
+		(a.rpin 1) -- ++ (1,0) node[ocirc, label=above:$X_Q$](){}
+		(a.bpin 2) |- ++ (-3,-1) node[ocirc, label=above:$CLOCK_{SH}$](){}
+		
+		(a.bpin 1) -- ++ (0,-2)	node[](aux1){}
+		(a.bpin 3) |- (aux1.center)
+		(aux1.center) node[circ](){} -- ++ (0,-0.5) node[ground](){}
+		
+		(a.tpin 1) -- ++ (0,1) node[vcc, label=left:$5 \ V$](){}
+		(a.rpin 1) -- ++ (1,0) node[ocirc, label=above:$X_Q$](){}
+		(a.tpin 3) to[C, l_=$C_2$] ++ (0,2) -- ++(1,0) node[ground](gnd1){}
+		(a.tpin 2) |- (gnd1.center)
+
+	;
+		
+%	%NODOS AUXILIARES
+%	\draw[color = red]		
+%		(aux1.center) node[circ, label=left:aux1](){}
+%	;
+		
+\end{circuitikz}
+\end{page}
+
 \end{document}
