@@ -183,8 +183,25 @@ por lo que la frecuencia de conversión del circuito total será de
 Si bien hay una gran diferencia entre $640kHz$ y $632kHz$, esto será utilizado como margen de seguridad debido a las aproximaciones tomadas en tanto el duty cycle como en la división de frecuencias de la señal de sincronización del S\&H.
 
 \subsection{FAA y FR}
+Tanto para el filtor anti alias como el filtro recuperador se tomaron las mismas especificaciones.
+Tomando como $f_p= 3.5kHz$ que es levemente menor a $\frac{7.2kHz}{2}\approx 3.6kHz $ y una $f_r$= 6kHZ.
+Se optó por utilizar la aproximación elíptica de cauer, obteniendo para una $A_p$=1dB y $A_r$=40dB se obtiene un filtro de orden 4.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\linewidth, page=1]{ImagenesEjercicio1/magnitude.png}
 
-frecuencia de corte $f_p = \frac{f_{conv}}{2} = \frac{7.2kHz}{2}$.
+\includegraphics[width=0.5\linewidth, page=1]{ImagenesEjercicio1/pz.png}
+\caption{Filtro implementado.}
+\label{filtros}
+\end{figure}
+
+Las celdas utilizadas para implementar dicho filtro corresponde a la Sedra-Ghorab-Martin:
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth, page=1]{ImagenesEjercicio1/celdasSedras.png}
+\caption{Filtro implementado.}
+\label{filtros}
+\end{figure}
 
 \subsection{Circuito completo}
 
