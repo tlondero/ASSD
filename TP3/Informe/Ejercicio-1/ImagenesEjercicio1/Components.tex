@@ -180,6 +180,36 @@
 	(#1.bpin 4) -- ++ (0.5,0) node[](#1_q){}
 }
 
+%SAMPLE AND HOLD
+\newcommand{\sandh}[2] % #1 = name #2 = anchor
+{node(#1_origin){}
+	node[dipchip, num pins=8, hide numbers, no topmark, external pins width=0, anchor = bpin #2](#1){}
+	
+	($ (#1.bpin 1) !.5! (#1.bpin 4) $) ++ (0,0.5) node[](){$S\&H$}
+
+	%LEFT NODES
+	node[right, font=\footnotesize] at (#1.bpin 1) {$CLK$}
+	node[right, font=\footnotesize] at (#1.bpin 2) {$RST$}
+	node[right, font=\footnotesize] at (#1.bpin 3) {$RST$}
+	node[right, font=\footnotesize] at (#1.bpin 4) {$RST$}
+		
+	(#1.bpin 1) -- ++ (-0.5,0) node[](#1_clk){}	
+	(#1.bpin 2) -- ++ (-0.5,0) node[](#1_rst){}
+	(#1.bpin 3) -- ++ (-0.5,0) node[](#1_rst){}
+	(#1.bpin 4) -- ++ (-0.5,0) node[](#1_rst){}
+	
+	%RIGHT NODES
+	node[left, font=\footnotesize] at (#1.bpin 8) {$CLK$}
+	node[left, font=\footnotesize] at (#1.bpin 7) {$RST$}
+	node[left, font=\footnotesize] at (#1.bpin 6) {$RST$}
+	node[left, font=\footnotesize] at (#1.bpin 5) {$RST$}
+		
+	(#1.bpin 8) -- ++ (0.5,0) node[](#1_clk){}	
+	(#1.bpin 7) -- ++ (0.5,0) node[](#1_rst){}
+	(#1.bpin 6) -- ++ (0.5,0) node[](#1_rst){}
+	(#1.bpin 5) -- ++ (0.5,0) node[](#1_rst){}
+}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %							CIRCUITOS								%
@@ -194,18 +224,18 @@
 	
 	\draw 
 		(0,0) ++ (2,0) \cincocincocinco{ccc}	
-		(ccc_rst.center) -- (ccc_vc.center) -- ++ (0,1) node[vcc, label=north:$5 \ V$](){}
+		(ccc_rst.center) -- (ccc_vc.center) node[circ](){} -- ++ (0,0.5) node[vcc, label=north:$5 \ V$](){}
 		(ccc_thr.center) -- (ccc_tri.center)
 		(ccc_com.center) to[C, label=$C_C$] ++ (0,-2) node[ground](){}
 		(ccc_gnd.center) -- ++ (0,-2) node[ground](){}
 		(ccc_out.center) -- ++ (1,0) node[ocirc,label=$V_{OUT}$](){}
 		
-		($ (ccc_thr.center) !.5! (ccc_tri.center) $) node[circ](){} -- ++ (-3,0) node[circ](aux1){} to[pR, name=pr, l_=$R_{POT}$] ++(0,2) to[R, l_=$R_T$] ++(0,3) node[npn, anchor=E, label=left:$Q_{CHG}$, xscale=-1](q){}
+		($ (ccc_thr.center) !.5! (ccc_tri.center) $) node[circ](){} -- ++ (-3,0) node[circ](aux1){} -- ++(0,0.5) to[pR, name=pr, l_=$R_{POT}$] ++(0,1.5) to[R, l_=$R_T$] ++(0,2) node[npn, anchor=E, label=left:$Q_{CHG}$, xscale=-1](q){}
 		(q.E) node[circ](){} to[D] ++(2,0) node[circ](aux2){} |- (ccc_dis.center)
 		
 		(aux2.center) |- (q.B)
-		(q.E) ++ (2,0) -- ++ (0,1) to[R, l_=$R_B$] ++ (0,2) node[vcc, label=north:$5 \ V$](){}
-		(q.C) -- ++ (0,1.5) node[vcc, label=north:$5 \ V$](){}
+		(aux2.center) -- ++ (2,0) to[R, l=$R_B$] ++ (2,0) node[vcc, label=north:$5 \ V$](){}
+		(q.C) node[vcc, label=north:$5 \ V$](){}
 		
 		(pr.wiper) -- ++ (-0.5,0) |- (aux1) to[C, l=$C_T$] ++ (0,-2.75) node[ground](){}
 	;
