@@ -4,6 +4,14 @@
 
 \subsection{Introducción}
 
+En el presente informe se desarrolló un circuito el cual convierte una señal analógica en digital y luego de vuelta a analógica, con tres modos de funcionamiento distintos: frecuencia arbitraria de sampleo, step y free-running.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\linewidth]{ImagenesEjercicio1/consigna.png}
+\caption{Diagrama en bloques del circuito pedido.}
+\label{consigna}
+\end{figure}
 
 \subsection{Conversor ADC0808}
 
@@ -47,7 +55,7 @@ Dado que la señal que ingresa al ADC0808 debe estar contenida dentro del rango 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\linewidth, page = 3]{ImagenesEjercicio1/Components.pdf}
+\includegraphics[width=0.6\linewidth, page = 3]{ImagenesEjercicio1/Components.pdf}
 \caption{Circuito de acondicionamiento de la señal de entrada.}
 \label{ACOND}
 \end{figure}
@@ -90,7 +98,7 @@ Finalmente, se obtiene que la componente de mayor frecuencia de la señal de ent
 $$f_{in_{max}} = 10.3Hz$$
 
 \subsection{Conversor DAC0800}
-Se utilizó el integrad DAC0800, un conversor D/A de 8 bits con salida diferencial de corriente.
+Se utilizó el integrado DAC0800, un conversor D/A de 8 bits con salida diferencial de corriente.
 Para convertir esta corriente en un nivel de tensión se utilizó el circuito propuesto por la hoja de datos que se muestra a continuación:
 \begin{figure}[H]
 	\centering
@@ -159,7 +167,7 @@ Se utilizó el circuito mostrado en la Figura (\ref{555}) para generar la señal
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\linewidth]{ImagenesEjercicio1/pend.jpg}
+\includegraphics[width=0.8\linewidth, page=1]{ImagenesEjercicio1/Components.pdf}
 \caption{Circuito oscilador.}
 \label{555}
 \end{figure}
@@ -173,5 +181,19 @@ por lo que la frecuencia de conversión del circuito total será de
 \[ 557Hz < f_CONV < 7.2kHz \]
 
 Si bien hay una gran diferencia entre $640kHz$ y $632kHz$, esto será utilizado como margen de seguridad debido a las aproximaciones tomadas en tanto el duty cycle como en la división de frecuencias de la señal de sincronización del S\&H.
+
+\subsection{FAA y FR}
+
+frecuencia de corte $f_p = \frac{f_{conv}}{2} = \frac{7.2kHz}{2}$.
+
+\subsection{Circuito completo}
+
+tomi pls.
+
+\subsection{Resultados}
+
+Se observa en la Figura
+
+\subsection{Mediciones}
 
 \end{document}
