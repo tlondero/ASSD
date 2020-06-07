@@ -2,6 +2,10 @@
 
 \begin{document}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%							COMPONENTES								%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %ADC
 \newcommand{\adc}[1] % #1 = name
 {node(#1_origin){}
@@ -156,7 +160,32 @@
 	(C3.bpin 7) -- ++ (0.5,0) node[](#1_gnd){}
 }
 
-%CLOCK
+%DIVISOR DE F
+\newcommand{\divF}[3] % #1 = name #2 = title #3 = anchor
+{node(#1_origin){}
+	node[dipchip, num pins=4, hide numbers, no topmark, external pins width=0, anchor = bpin #3](#1){}
+	
+	($ (#1.bpin 1) !.5! (#1.bpin 4) $) ++ (0,0.5) node[](){$N_{#2} \div$}
+
+	%LEFT NODES
+	node[right, font=\footnotesize] at (#1.bpin 1) {$CLK$}
+	node[right, font=\footnotesize] at (#1.bpin 2) {$RST$}
+		
+	(#1.bpin 1) -- ++ (-0.5,0) node[](#1_clk){}	
+	(#1.bpin 2) -- ++ (-0.5,0) node[](#1_rst){}
+	
+	%RIGHT NODES
+	node[left, font=\footnotesize] at (#1.bpin 4) {$Q$}	
+	
+	(#1.bpin 4) -- ++ (0.5,0) node[](#1_q){}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%							CIRCUITOS								%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%OSCILADOR
 \begin{page}
 \begin{circuitikz}
 	\ctikzset{multipoles/thickness=3}				%Ancho de las lineas de las cajas
@@ -291,6 +320,46 @@
 %		(aux1.center) node[circ, label=right:aux1](){}
 %		(aux2.center) node[circ, label=below:aux2](){}
 %		(aux3.center) node[circ, label=south west:aux3](){}
+%	;
+		
+\end{circuitikz}
+\end{page}
+
+%Clock y vcc
+\begin{page}
+\begin{circuitikz}[american voltages]
+	
+	%\ctikzset{american not port/scale=0.6}	
+	
+	\draw
+		\divF{n1}{1}{1}
+		(n1_rst.center) node[ground](){}
+		(n1_clk.center) -- ++ (-1,0) node[ocirc, label=left:$CLOCK$](){}
+		(n1_clk.center) -- ++ (0,1) node[ocirc, label=above:$V_{OSC}$](){}
+		(n1_q.center) -- ++ (1,0) node[circ](aux1){} -- ++ (0,1) node[ocirc, label=above:$CLOCK_{IM}$](){}
+		(aux1.center) -- ++ (1,0) \divF{n2}{2}{1}
+		(n2_rst.center) node[ground](){}
+		
+		(n2_q.center) -- ++ (1,0) node[circ](aux2){} -- ++ (1,0) \divF{n3}{3}{1}
+		(n3_rst.center) node[ground](){}
+		
+		(aux2.center) -- ++ (0,-2) node[american and port, number inputs = 3, anchor = in 2, rotate=-90](a1){}
+		(aux1.center) |- (a1.in 3)
+		(n3_q.center) |- (a1.in 1)
+		(a1.out) -- ++ (1,0) node[ocirc,label=right:$CLOCK_{SH}$](){}
+		(a1.out) -- ++ (0,-0.5) node[american not port, anchor = in, yscale = 0.5, xscale = 0.5, rotate=-90](not1){}
+		(not1.out) -- ++ (0,-0.5) node[circ](aux3){} -- ++ (2,0) node[american and port, anchor = in 1](a2){}
+		(aux3.center) to[C, l=$C_3$] ++ (0,-2) node[circ](aux4){} to[R, l=$R_{11}$] ++ (0,-2) node[ground](){}
+		(aux4.center) -| (a2.in 2)
+		(a2.out) -- ++ (0.5,0) node[ocirc, label=above:$V_{START}$](){}
+	;
+		
+%	%NODOS AUXILIARES
+%	\draw[color = red]		
+%		(aux1.center) node[circ, label=below:aux1](){}
+%		(aux2.center) node[circ, label=above:aux2](){}
+%		(aux3.center) node[circ, label=above:aux3](){}
+%		(aux4.center) node[circ, label=left:aux4](){}
 %	;
 		
 \end{circuitikz}
