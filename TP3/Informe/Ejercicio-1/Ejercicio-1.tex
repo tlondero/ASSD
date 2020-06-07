@@ -135,10 +135,15 @@ Se partió de un generador de onda cuadrada de $640kHz$, el cual será la señal
 
 %aca poner grafico de guido
 
-Esta señal posterior a la operación AND es la que se utilizará como señal de control del S\&H. Finalmente, se quiere enviar un pulso de una duración de al menos $t_{ws} = 200ns$ al pin de start del ADC0808 cuando el S\&H comience a holdear, por lo que se utilizará un negador seguido de un detector de flancos para generar esta señal de start.
+Esta señal posterior a la operación AND es la que se utilizará como señal de control del S\&H. Finalmente, se quiere enviar un pulso de una duración de al menos $t_{ws} = 200ns$ al pin de start del ADC0808 cuando el S\&H comience a holdear, por lo que se utilizará un negador seguido de un detector de flancos para generar esta señal de start. El resultado se detalla en la Figura (\ref{START})
 
-%aca poner grafico de alan
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{ImagenesEjercicio1/Graficos.pdf}
+\caption{Diagrama temporal de las señales de control del circuito.}
+\label{START}
+\end{figure}
 
-Así se obtienen todas las señales de control del circuito de una misma señal de clock original, de tal manera que todas estén sincronizadas entre sí.
+Así se obtienen todas las señales de control del circuito de una misma señal de clock original, de tal manera que todas estén sincronizadas entre sí. Si se desea disminuir la frecuencia de conversión basta con disminuir la frecuencia 
 
 \end{document}
