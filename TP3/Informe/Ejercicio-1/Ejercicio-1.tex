@@ -225,19 +225,99 @@ Se puede ver en la Figura (\ref{result2}) una pérdida de amplitud de más del $
 
 \subsection{Mediciones}
 
-Finalmente para comprobar el correcto funcionamiento del circuito se utilizó la máxima $f_{clk}$ admisible por el circuito, de $632kHz$ generada por el circuito oscilador, una señal rampa de frecuencia $1kHz$ y una amplitud de $0V$ a $5V$.
+Finalmente para comprobar el correcto funcionamiento del circuito se utilizó la máxima $f_{clk}$ admisible por el circuito, de $1.2672MHz$ generada por una fuente de tensión ideal haciendo que la señal de sincronización del S\&H se divida por 176 en vez de 88, una señal rampa de frecuencia $1kHz$ y una amplitud de $0V$ a $5V$.
+\\
+Según los cálculos realizados previamente, se tendrá una frecuencia de muestreo de $\frac{632kHz \cdot 2}{88 \cdot 2} = 7.2kHz$. Se midió esta frecuencia de muestreo experimentalmente la cual fue de $7.28kHz$ mostrado en la Figura (\ref{med2}).
 
-Según los cálculos realizados previamente, se tendrá una frecuencia de muestreo de $\frac{632kHz}{88} = 7.2kHz$. Se midió esta frecuencia de muestreo experimentalmente la cual fue de $XX.XXXkHz$ mostrado en la Figura (\ref{med1}).
+\begin{multicols}{2}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.6\linewidth]{ImagenesEjercicio1/pend.jpg}
-\caption{Medición de la frecuencia de muestreo experimental.}
+\includegraphics[width=0.9\linewidth]{ImagenesEjercicio1/med1.png}
+\caption{Rampa a la salida del FAA y a la salida del DAC.}
 \label{med1}
 \end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\linewidth]{ImagenesEjercicio1/med2.png}
+\caption{Medición de la frecuencia de muestreo experimental.}
+\label{med2}
+\end{figure}
+
+\end{multicols}
 
 Luego, se se midió el error de cuantización empleando el método de..
 
 
+Por otro lado, se midió la forma de onda a la salida del ADC a medida que se eliminaban bits menos significativos. Se puede ver el resultado detallado en las siguientes Figuras.
+
+\begin{multicols}{2}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{ImagenesEjercicio1/bit1.png}
+\caption{1111 1110}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{ImagenesEjercicio1/bit2.png}
+\caption{1111 1100}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{ImagenesEjercicio1/bit3.png}
+\caption{1111 1000}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{ImagenesEjercicio1/bit4.png}
+\caption{1111 0000}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{ImagenesEjercicio1/bit5.png}
+\caption{1110 0000}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{ImagenesEjercicio1/bit6.png}
+\caption{1100 0000}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{ImagenesEjercicio1/bit7.png}
+\caption{1000 0000}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{ImagenesEjercicio1/bit8.png}
+\caption{0000 0000}
+\end{figure}
+\end{multicols}
+
+Se observa que a medida que se sacan bits no solo se pierde la resolución de la señal a la salida del DAC sino que también disminuye la frecuencia de muestreo.
+
+Finalmente, empleando tensiones continuas a la entrada y la funcionalidad de mediciones paso a paso, se completó la siguiente tabla
+
+\begin{table}[H]
+\begin{tabular}{@{}lll@{}}
+\toprule
+$Vi \ [mV]$ & $Vadc \ [Binario]$ & $Vo_{DAC} \ [mV]$ \\ \midrule
+416.666 &  &  \\
+833.333 &  &  \\
+1250 &  &  \\
+1666.66 &  &  \\
+2083.33 &  &  \\
+2500 &  &  \\
+2916.66 &  &  \\
+3333.33 &  &  \\
+3750 &  &  \\
+4166.66 &  &  \\
+4583.33 &  &  \\
+5000 &  &  \\ \bottomrule
+\end{tabular}
+\end{table}
+
+Se puede ver que..
 
 \end{document}
