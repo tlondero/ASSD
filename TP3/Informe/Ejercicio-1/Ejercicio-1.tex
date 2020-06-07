@@ -4,6 +4,7 @@
 
 \subsection{Introducción}
 
+
 \subsection{Conversor ADC0808}
 
 El ADC0808 es un conversor analógico-digital de ocho bits con ocho canales multiplexados y salida binaria paralela. En el presente informe se utilizó un único canal analógico. Este conversor está compuesto por una red en escalera 256R conectada a un árbol de llaves, el cual compara los distintos valores proporcionados por la red 256R con la entrada analógica. Es así —mediante el registro de aproximaciones sucesivas, el cual realiza una búsqueda binaria con todos los valores posibles de la red escalera hasta converger a un valor digital óptimo— que logra el ADC0808 realizar la conversión analógica-digital.
@@ -111,14 +112,14 @@ Donde los pines desde B1 a B8 son las entradas digitales, siendo B1 el bit mas s
 
 \subsubsection{Restricciones temporales}
 
-Si los componentes utilizados tuviesen un tiempo de operación ideal, se podría utilizar un clock tan rápido como se quiera. Sin embargo, esto no sucede. Por parte del integrado ADC0808, se tiene que el tiempo de conversión con una señal de sincronización de $640kHz$ es como máximo $116\mu s$. Luego, el DAC0800 posee un tiempo de estabilización de $100ns$. Por parte del sample \& hold utilizado, el LF398N, se tiene que el tiempo de adquisición máximo con un capacitor de hold de $80 nF$ es de $20\mu s$. Finalmente, se obtienen dos limitantes en tiempo: 
+Si los componentes utilizados tuviesen un tiempo de operación ideal, se podría utilizar un clock tan rápido como se quiera. Sin embargo, esto no sucede. Por parte del integrado ADC0808, se tiene que el tiempo de conversión con una señal de sincronización de $640kHz$ es como máximo $116\mu s$. Luego, el DAC0800 posee un tiempo de estabilización de $100ns$. Por parte del sample \& hold utilizado, el LF398N, se tiene que el tiempo de adquisición máximo con un capacitor de hold de $20 nF$ es de $\approx 20\mu s$. Finalmente, se obtienen dos limitantes en tiempo: 
 
 \begin{itemize}
 \item El ADC0808 tardará como máximo $116\mu s$ en convertir el valor holdeado de la señal analógica en digital.
 \item El LF398N tardará como máximo $20\mu s$ en cargar el capacitor de hold con el valor de la señal analógica en la fase de sampleo.
 \end{itemize}
 
-Es por esto, que la rapidez máxima del clock que gobierna la frecuencia de conversión del circuito será el doble del mínimo entre la inversa de los dos limitantes temporales, es decir, $\frac{1}{2\cdot 116\mu s} = 4.31kHz$. Sin embargo, si que quisiese aumentar aún más las frecuencia de conversión del circuito, se podría implementar un clock cuyo duty cycle no sea del $50\%$, debido a que mientras el ADC se encuentra convirtiendo, el s\&h no posee ninguna restricción temporal más que la de fuga, mientras que si el s\&h está sampleando la señal, el ADC no posee ninguna restricción temporal.
+Es por esto, que la rapidez máxima de la señal que gobierna la frecuencia de conversión del circuito será el doble del mínimo entre la inversa de los dos limitantes temporales, es decir, $\frac{1}{2\cdot 116\mu s} = 4.31kHz$. Sin embargo, si que quisiese aumentar aún más las frecuencia de conversión del circuito, se podría generar una señal de control cuyo duty cycle no sea del $50\%$, debido a que mientras el ADC se encuentra convirtiendo, el s\&h no posee ninguna restricción temporal más que la de fuga del capacitor, mientras que si el s\&h está sampleando la señal, el ADC no posee ninguna restricción temporal.
 
 %aca poner grafico de un clock con duty cycle no simetrico donde en la parte que dura poco se esta haciendo el sampleo y en la parte larga se esta haciendo la conversión
 
@@ -128,24 +129,29 @@ Basta con que el duty cycle sea tal que el tiempo de holdeo sea igual al tiempo 
 DT_{optimo} = \frac{20\mu s}{116\mu s}\cdot 100 = 17.24\% 
 \end{equation}
 
-para simplificar el circuito, se tomó $DT = 25\%$ y la frecuencia de esta señal de sincronización deberá ser como máximo $\frac{1}{116\mu s + 20\mu s} = 7.352kHz$.
+para simplificar el circuito, se tomó $DT = 25\%$ junto a recados en las próximas secciones y la frecuencia de esta señal de sincronización deberá ser como máximo $\frac{1}{116\mu s + 20\mu s} = 7.352kHz$.
 
 \subsubsection{Circuito generador de la señal de sincronización}
 
-Se partió de un generador de onda cuadrada de $640kHz$, el cual será la señal de clock del ADC0808. Esta señal pasará además por un divisor de frecuencia que divide por $88$ veces para obtener una frecuencia menor pero cercana a $7.352kHz$, de $7.272kHz$. Luego, esta señal ingresa a dos divisores de frecuencia en cascada que dividen por dos. Se detalla en la Figura (\ref{DT}) esta operación. Luego, se realiza la operación AND entre la señal antes de pasar por los divisores en frecuencia, y las señales a la salida de cada divisor. Así se obtiene una señal de $DT$ del $25\%$ independientemente de la frecuencia de la señal original.
-
-%aca poner grafico de guido
-
-Esta señal posterior a la operación AND es la que se utilizará como señal de control del S\&H. Finalmente, se quiere enviar un pulso de una duración de al menos $t_{ws} = 200ns$ al pin de start del ADC0808 cuando el S\&H comience a holdear, por lo que se utilizará un negador seguido de un detector de flancos para generar esta señal de start. El resultado se detalla en la Figura (\ref{START})
+Se partió de un generador de onda cuadrada de $640kHz$, detallado en la próxima sección, el cual será la señal de clock del ADC0808. Esta señal pasará además por un divisor de frecuencia que divide por $22$ veces. Luego, esta señal ingresa a dos divisores de frecuencia en cascada que dividen por dos. Se detalla en la Figura (\ref{DT}) esta operación. Seguido a esto, se realiza la operación AND entre la señal antes de pasar por los divisores en frecuencia, y las señales a la salida de cada divisor. Así se obtiene una señal de $DT$ del $25\%$ con una frecuencia menor pero cercana a $7.352kHz$, de $7.272kHz$ la cual se denominará $f_{conv}$.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\linewidth]{ImagenesEjercicio1/Graficos.pdf}
+\includegraphics[width=0.7\linewidth, page = 2]{ImagenesEjercicio1/Graficos.pdf}
+\caption{Diagrama temporal de las señales de control del circuito.}
+\label{DT}
+\end{figure}
+
+Esta señal de frecuencia $f_{conv}$ y duty cycle del $25\%$ posterior a la operación AND es la que se utilizará como señal de control del S\&H. Finalmente, se quiere enviar un pulso de una duración de al menos $t_{ws} = 200ns$ al pin de start del ADC0808 cuando el S\&H comience a holdear, por lo que se utilizará un negador seguido de un detector de flancos para generar esta señal de start. El resultado se detalla en la Figura (\ref{START})
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\linewidth]{ImagenesEjercicio1/Graficos.pdf}
 \caption{Diagrama temporal de las señales de control del circuito.}
 \label{START}
 \end{figure}
 
-Así se obtienen todas las señales de control del circuito de una misma señal de clock original, de tal manera que todas estén sincronizadas entre sí. Si se desea disminuir la frecuencia de conversión basta con disminuir la frecuencia 
+Así se obtienen todas las señales de control del circuito de una misma señal de clock original, de tal manera que todas estén sincronizadas entre sí. Si se desea disminuir la frecuencia de conversión basta con disminuir la frecuencia $f_{CLK}$ del circuito oscilador presentado a continuación. Si bien $T_{HOLD}$ fue calculado para que este sea exactamente el tiempo necesario para realizar una conversión, y esta comienza en el flanco descendente de la señal de start, no habrá problemas de tiempo debido a la aproximación tomada en el diseño del circuito oscilador.
 
 \subsubsection{Circuito oscilador}
 
@@ -153,9 +159,9 @@ Se utilizó el circuito mostrado en la Figura (\ref{555}) para generar la señal
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\linewidth]{ImagenesEjercicio1/Graficos.pdf}
+\includegraphics[width=0.8\linewidth]{ImagenesEjercicio1/pend.jpg}
 \caption{Circuito oscilador.}
-\label{START}
+\label{555}
 \end{figure}
 
 Utilizando $R_{T} = 620 + 110\Omega$, $R_{POT} = 1k\Omega$ y $C_{T} = 1nF$ se logra obtener
@@ -165,5 +171,7 @@ Utilizando $R_{T} = 620 + 110\Omega$, $R_{POT} = 1k\Omega$ y $C_{T} = 1nF$ se lo
 por lo que la frecuencia de conversión del circuito total será de
 
 \[ 557Hz < f_CONV < 7.2kHz \]
+
+Si bien hay una gran diferencia entre $640kHz$ y $632kHz$, esto será utilizado como margen de seguridad debido a las aproximaciones tomadas en tanto el duty cycle como en la división de frecuencias de la señal de sincronización del S\&H.
 
 \end{document}
