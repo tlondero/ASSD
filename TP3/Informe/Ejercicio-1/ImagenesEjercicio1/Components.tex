@@ -78,10 +78,10 @@
 	(C1.bpin 17) -- ++ (0.5,0) node[](#1_oe){}	
 }
 
-\newcommand{\dac}[1] % #1 = name
+\newcommand{\dac}[2] % #1 = name #2 = anchor
 %
 {node(#1_origin){}
-	node[dipchip, num pins=16, hide numbers, no topmark, external pins width=0](C1){}
+	node[dipchip, num pins=16, hide numbers, no topmark, external pins width=0, anchor = bpin #2](C1){}
 	
 	%($ (C1.bpin 1) !.5! (C1.bpin 16) $) ++ (0,0.5) node[](){$DAC$}
 
@@ -124,21 +124,106 @@
 	(C1.bpin 9) -- ++ (0.5,0) node[](#1_b5){}		
 }
 
+\newcommand{\cincocincocinco}[1] % #1 = name
+{node(#1_origin){}
+	node[dipchip, num pins=12, hide numbers, no topmark, external pins width=0](C3){}
+	
+	%($ (C3.bpin 1) !.5! (C3.bpin 12) $) ++ (0,0.5) node[](){$555$}
+
+	%LEFT NODES
+	node[right, font=\footnotesize] at (C3.bpin 1) {$V_{CC}$}
+	node[right, font=\footnotesize] at (C3.bpin 2) {$RST$}	
+	node[right, font=\footnotesize] at (C3.bpin 3) {$DIS$}
+	node[right, font=\footnotesize] at (C3.bpin 4) {$THR$}	
+	node[right, font=\footnotesize] at (C3.bpin 5) {$TRI$}	
+	node[right, font=\footnotesize] at (C3.bpin 6) {$COM$}	
+
+	(C3.bpin 1) -- ++ (-0.5,0) node[](#1_vc){}	
+	(C3.bpin 2) -- ++ (-0.5,0) node[](#1_rst){}
+	(C3.bpin 3) -- ++ (-0.5,0) node[](#1_dis){}
+	(C3.bpin 4) -- ++ (-0.5,0) node[](#1_thr){}	
+	(C3.bpin 5) -- ++ (-0.5,0) node[](#1_tri){}
+	(C3.bpin 6) -- ++ (-0.5,0) node[](#1_com){}
+
+
+	%RIGHT NODES
+	node[left, font=\footnotesize] at (C3.bpin 12) {$OUT$}
+	node[left, font=\footnotesize] at (C3.bpin 7) {$GND$}	
+	
+	(C3.bpin 12) -- ++ (0.5,0) node[](#1_out){}
+	(C3.bpin 7) -- ++ (0.5,0) node[](#1_gnd){}
+}
+
 \begin{page}
 \begin{circuitikz}
 	\ctikzset{multipoles/thickness=3}				%Ancho de las lineas de las cajas
-	\ctikzset{multipoles/dipchip/width=2.5}			%Ancho de las cajas
+	\ctikzset{diodes/scale=0.6}	
+	\ctikzset{multipoles/dipchip/width=2}			%Ancho del 555
 	
-	\draw
-		(0,0) ++ (2,0) \adc{myFirstAdc}				
+	\draw 
+		(0,0) ++ (2,0) \cincocincocinco{ccc}	
+		(ccc_rst.center) -- (ccc_vc.center) -- ++ (0,1) node[vcc, label=north:$5 \ V$](){}
+		(ccc_thr.center) -- (ccc_tri.center)
+		(ccc_com.center) to[C, label=$C_C$] ++ (0,-2) node[ground](){}
+		(ccc_gnd.center) -- ++ (0,-2) node[ground](){}
+		(ccc_out.center) -- ++ (1,0) node[ocirc,label=$V_{OUT}$](){}
+		
+		($ (ccc_thr.center) !.5! (ccc_tri.center) $) node[circ](){} -- ++ (-3,0) node[circ](aux1){} to[pR, name=pr, l_=$R_{POT}$] ++(0,2) to[R, l_=$R_T$] ++(0,3) node[npn, anchor=E, label=left:$Q_{CHG}$, xscale=-1](q){}
+		(q.E) node[circ](){} to[D] ++(2,0) node[circ](aux2){} |- (ccc_dis.center)
+		
+		(aux2.center) |- (q.B)
+		(q.E) ++ (2,0) -- ++ (0,1) to[R, l_=$R_B$] ++ (0,2) node[vcc, label=north:$5 \ V$](){}
+		(q.C) -- ++ (0,1.5) node[vcc, label=north:$5 \ V$](){}
+		
+		(pr.wiper) -- ++ (-0.5,0) |- (aux1) to[C, l=$C_T$] ++ (0,-2.75) node[ground](){}
 	;
-	
-	\ctikzset{multipoles/dipchip/width=4}
-	
-	\draw
-		(7,0) ++ (2,0) \dac{myFirstDac}
-	;
+		
+%	%NODOS AUXILIARES
+%	\draw[color = red]		
+%		(aux1.center) node[circ, label=south west:aux1](){}
+%		(aux2.center) node[circ, label=right:aux2](){}
+%	;	
 \end{circuitikz}
 \end{page}
+
+\begin{page}
+\begin{circuitikz}
+	\ctikzset{multipoles/thickness=3}				%Ancho de las lineas de las cajas
+	
+	\ctikzset{multipoles/dipchip/width=2.5}			%Ancho del adc
+	\draw (0,0) ++ (2,0) \adc{adc};
+	\ctikzset{multipoles/dipchip/width=4}			%Ancho del dac
+	\draw
+		
+		(adc_out1.center) ++ (5,0) \dac{dac}{5}
+	
+		(adc_out1.center) -| ($ (adc_out1.center) !.5! (dac_b1.center) $) |- (dac_b1.center)
+		(adc_out2.center) -| ($ (adc_out2.center) !.45! (dac_b2.center) $) |- (dac_b2.center)
+		(adc_out3.center) -| ($ (adc_out3.center) !.4! (dac_b3.center) $) |- (dac_b3.center)
+		(adc_out4.center) -| ($ (adc_out4.center) !.35! (dac_b4.center) $) |- (dac_b4.center)
+		
+		(adc_out5.center) -| (dac_b5.center)
+		(dac_b6.center) -| ++ (0.5,-0.1) |- (adc_out6.center)
+		(dac_b7.center) -| ++ (1,-0.1) |- (adc_out7.center)
+		(dac_b8.center) -| ++ (1.5,-0.1) |- (adc_out8.center)
+		
+		(adc_in1.center) node[circ](){}	
+		(adc_in2.center) node[circ](){}	
+		(adc_in3.center) node[circ](){}	
+		(adc_in4.center) node[circ](){}	
+		(adc_in5.center) node[circ](){}	
+		(adc_in6.center) node[circ](){}	
+		(adc_in7.center) node[circ](){}	
+		(adc_adda.center) node[circ](){}	
+		(adc_addb.center) node[circ](){}	
+		(adc_addc.center) node[circ](){}
+		(adc_v-.center) node[circ](){}
+		
+		(adc_in1.center) -- (adc_v-.center) -- ++(0,-1) node[ground](){}		
+	;	
+	
+\end{circuitikz}
+\end{page}
+
 
 \end{document}
