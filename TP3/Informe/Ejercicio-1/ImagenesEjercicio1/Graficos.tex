@@ -1,0 +1,78 @@
+\input{Header-Comp.tex}
+
+\begin{document}
+
+\begin{page}
+\begin{tikzpicture}[yscale=1]
+
+	\def\yMax{7.5}
+	\def\yMaxp{\yMax-0.5}
+	\def\xMax{7.5}
+	\def\xMaxp{\xMax-0.5}
+	\def\clkMax{0.4*\yMax}	
+	\def\startMin{0.5*\yMax}
+
+	%EJES
+	\draw[->][draw=black, very thick] (0,0) -- (0,\yMax);
+	\draw[->][draw=black, very thick] (0,0) -- (\xMax,0);
+
+	%CURVAS
+	\draw[draw=orange, thick] (0,0.025) -| (0.1*\xMax,\clkMax) -| (0.3*\xMax,0.025) -| (0.6*\xMax,\clkMax) -| (0.8*\xMax,0.025) -- (\xMaxp,0.025);
+	
+	\draw[draw=purple, thick] (0,\startMin) -| (0.3*\xMax,\yMaxp) -| (0.35*\xMax,\startMin) -| (0.8*\xMax,\yMaxp) -| (0.85*\xMax,\startMin) -- (\xMaxp,\startMin);
+	
+	%LABELS
+	\draw 
+		(0,1*\startMin+3) node[label=left:\tiny{\textcolor{purple}{$START$}}](){}
+		(0,0.1*\yMax-0.6+3) node[label=left:\tiny{\textcolor{orange}{$CLK_{SH}$}}](){}
+		(0.2*\xMax,0) node[label=below:\tiny{\textcolor{orange}{$T_{SAMPLE}$}}](){}
+		(0.45*\xMax,0) node[label=below:\tiny{\textcolor{orange}{$T_{HOLD}$}}](){}
+		(0.325*\xMax,1.1*\yMax) node[label=below:\tiny{\textcolor{purple}{$T_{WS}$}}](){}
+	;
+	
+	%DASHED
+	\draw[dashed]
+		(0.3*\xMax,0) -- (0.3*\xMax,\yMax)
+		(0.35*\xMax,0) -- (0.35*\xMax,\yMax)
+		(0.6*\xMax,0) -- (0.6*\xMax,\yMax)
+		(0.8*\xMax,0) -- (0.8*\xMax,\yMax)
+	;	
+	
+\end{tikzpicture}
+\end{page}
+
+\newcommand{\pulse}[3] % #1 = length #2 = duty cicle #3 = height 
+{
+	|- ++ (#2*#1, #3) |- ++ ($ (#1, -1*#3) !#2! (0,-1*#3) $)
+}
+
+\begin{page}
+\begin{tikzpicture}[yscale=1]
+
+	\def\yMax{7.5}
+	\def\yMaxp{7}
+	\def\xMax{7.5}
+	\def\xMaxp{7}
+	\def\rowHeigth{\yMaxp*0.25}
+	\def\rowForPulse{\rowHeigth*0.8}
+	
+	%PULSOS: AND (A, B, C)
+	\draw[draw=blue, thick] (0,0) \pulse{0.5*\xMaxp}{0.125}{\rowForPulse} \pulse{0.5*\xMaxp}{0.125}{\rowForPulse} ++ (1,1) node[label=right:{\textcolor{blue}{$AND(A,B,C)$}}](){};
+	
+	%PULSOS: C
+	\draw[draw=blue, thick] (0,\rowHeigth) \pulse{0.125*\xMaxp}{0.5}{\rowForPulse} \pulse{0.125*\xMaxp}{0.5}{\rowForPulse} \pulse{0.125*\xMaxp}{0.5}{\rowForPulse} \pulse{0.125*\xMaxp}{0.5}{\rowForPulse}  \pulse{0.125*\xMaxp}{0.5}{\rowForPulse} \pulse{0.125*\xMaxp}{0.5}{\rowForPulse} \pulse{0.125*\xMaxp}{0.5}{\rowForPulse} \pulse{0.125*\xMaxp}{0.5}{\rowForPulse} ++ (1,1) node[label=right:{\textcolor{blue}{$\frac{F_{CLK}}{4 \cdot 88} = C$}}](){};
+	
+	%PULSOS: B
+	\draw[draw=blue, thick] (0, 2*\rowHeigth) \pulse{0.5*\xMaxp}{0.5}{\rowForPulse} \pulse{0.5*\xMaxp}{0.5}{\rowForPulse} ++ (1,1) node[label=right:{\textcolor{blue}{$\frac{F_{CLK}}{2 \cdot 88} = B$}}](){};
+
+	%PULSOS: A
+	\draw[draw=blue, thick] (0, 3*\rowHeigth) \pulse{\xMaxp}{0.5}{\rowForPulse} ++ (1,1) node[label=right:{\textcolor{blue}{$\frac{F_{CLK}}{88} = A$}}](){};
+
+	%EJES
+	\draw[->][draw=black, very thick] (0,0) -- (0,\yMax);
+	\draw[->][draw=black, very thick] (0,0) -- (\xMax,0);
+	
+\end{tikzpicture}
+\end{page}
+
+\end{document}
