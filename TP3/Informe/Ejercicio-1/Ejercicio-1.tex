@@ -55,7 +55,7 @@ Dado que la señal que ingresa al ADC0808 debe estar contenida dentro del rango 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.6\linewidth, page = 3]{ImagenesEjercicio1/Components.pdf}
+\includegraphics[width=0.7\linewidth, page = 3]{ImagenesEjercicio1/Components.pdf}
 \caption{Circuito de acondicionamiento de la señal de entrada.}
 \label{ACOND}
 \end{figure}
@@ -63,6 +63,13 @@ Dado que la señal que ingresa al ADC0808 debe estar contenida dentro del rango 
 \subsubsection{Sample \& Hold}
 
 A la hora de realizar el proceso de conversión, el comparador del ADC necesita que la señal de entrada se mantenga estable. Como se vio en la sección anterior, si no se utiliza un Sample \& Hold, es necesario que la frecuencia de entrada sea lo suficientemente baja como para que el comparador logre hacer su trabajo sin comprometer la precisión de este.
+
+\begin{figure}[H]
+\centering
+	\includegraphics[width=0.5\linewidth, page = 5]{ImagenesEjercicio1/Components.pdf}
+	\caption{Sample \& Hold.}
+	\label{fig:sandhold}
+\end{figure}
 
 El S\&H seleccionado es el \href{https://pdf1.alldatasheet.es/datasheet-pdf/view/8580/NSC/LF398N.html}{LF398N}. Sabiendo que se posee una taza de conversión máxima de $8.62 \ kHz$, impuesta por el tiempo máximo de conversión del ADC0808 de $116 \mu s$, lo que implica que
 
@@ -74,7 +81,7 @@ De esta forma, observando el gráfico de la hoja de datos mostrada en la Figura 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{ImagenesEjercicio1/chacqtime.png}
+	\includegraphics[width=0.4\textwidth]{ImagenesEjercicio1/chacqtime.png}
 \caption{Tiempo de adquisición del S\&H en función del capacitor de hold.}
 	\label{chacqtime}
 \end{figure}
@@ -102,7 +109,7 @@ Se utilizó el integrado DAC0800, un conversor D/A de 8 bits con salida diferenc
 Para convertir esta corriente en un nivel de tensión se utilizó el circuito propuesto por la hoja de datos que se muestra a continuación:
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{ImagenesEjercicio1/dacout.png}
+	\includegraphics[width=0.7\textwidth]{ImagenesEjercicio1/dacout.png}
 \caption{Configuración saldia DAC.}
 	\label{fig:dacout}
 \end{figure}
@@ -115,6 +122,13 @@ En cuanto al pinout del DAC es el siguiente:
 	\label{fig:dapinout}
 \end{figure}
 Donde los pines desde B1 a B8 son las entradas digitales, siendo B1 el bit mas significativo. En cuanto a la salida, es por corriente, y corresponde a los pines 6 y 8, cabe mencionar que dichas corrientes son complementaria, osea su suma da 0. Los pines 2 y 3 son las tensiones $V^+$ Y $V^-$ fueron conectadas a 5V y a GND respectivamente, mientras que las tensiones de referencia, si bien dice tensiones, uno debe proveer corrientes de referencia, esto se hace utilizando una resistencia entre vcc y $V_{ref^+}$, al igual que una entre GND y $V_{ref^-}$. En cuanto al pin de threshold fue conectado a masa, finalmente en el pin de comp se conectó un capacitor de 100nF.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth, page = 2]{ImagenesEjercicio1/Components.pdf}
+\caption{DAC y ADC implementados.}
+\label{fig:dacydac}
+\end{figure}
 
 \subsection{Señal de sincronización de conversión}
 
@@ -154,7 +168,7 @@ Esta señal de frecuencia $f_{conv}$ y duty cycle del $25\%$ posterior a la oper
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.7\linewidth]{ImagenesEjercicio1/Graficos.pdf}
+\includegraphics[width=0.6\linewidth]{ImagenesEjercicio1/Graficos.pdf}
 \caption{Diagrama temporal de las señales de control del circuito.}
 \label{START}
 \end{figure}
@@ -167,7 +181,7 @@ Se utilizó el circuito mostrado en la Figura (\ref{555}) para generar la señal
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\linewidth, page=1]{ImagenesEjercicio1/Components.pdf}
+\includegraphics[width=0.6\linewidth, page=1]{ImagenesEjercicio1/Components.pdf}
 \caption{Circuito oscilador.}
 \label{555}
 \end{figure}
@@ -205,7 +219,7 @@ Las celdas utilizadas para implementar dicho filtro corresponde a la Sedra-Ghora
 
 \subsection{Resultados}
 
-Se observan en la Figura (\ref{result1}) distintas señales características del circuito donde la señal amarilla se mide a la salida del filtro anti-alias, la señal azul a la salida del S\&H, la señal roja a la salida del DAC y finalmente la señal verde a la salida del filtro recuperador.
+Se observan distintas señales características del circuito en la Figura (\ref{result1}), donde la señal amarilla se mide a la salida del filtro anti-alias, la señal azul a la salida del S\&H, la señal roja a la salida del DAC y finalmente la señal verde a la salida del filtro recuperador.
 
 \begin{figure}[H]
 \centering
@@ -250,47 +264,47 @@ Según los cálculos realizados previamente, se tendrá una frecuencia de muestr
 Luego, se se midió el error de cuantización empleando el método de..
 
 
-Por otro lado, se midió la forma de onda a la salida del ADC a medida que se eliminaban bits menos significativos. Se puede ver el resultado detallado en las siguientes Figuras.
+Por otro lado, se midió la forma de onda a la salida del ADC a medida que se eliminaban bits menos significativos. Se puede ver el resultado detallado en las siguientes Figuras:
 
 \begin{multicols}{2}
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\linewidth]{ImagenesEjercicio1/bit1.png}
+\includegraphics[width=0.5\linewidth]{ImagenesEjercicio1/bit1.png}
 \caption{1111 1110}
 \end{figure}
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\linewidth]{ImagenesEjercicio1/bit2.png}
+\includegraphics[width=0.5\linewidth]{ImagenesEjercicio1/bit2.png}
 \caption{1111 1100}
 \end{figure}
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\linewidth]{ImagenesEjercicio1/bit3.png}
+\includegraphics[width=0.5\linewidth]{ImagenesEjercicio1/bit3.png}
 \caption{1111 1000}
 \end{figure}
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\linewidth]{ImagenesEjercicio1/bit4.png}
+\includegraphics[width=0.5\linewidth]{ImagenesEjercicio1/bit4.png}
 \caption{1111 0000}
 \end{figure}
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\linewidth]{ImagenesEjercicio1/bit5.png}
+\includegraphics[width=0.5\linewidth]{ImagenesEjercicio1/bit5.png}
 \caption{1110 0000}
 \end{figure}
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\linewidth]{ImagenesEjercicio1/bit6.png}
+\includegraphics[width=0.5\linewidth]{ImagenesEjercicio1/bit6.png}
 \caption{1100 0000}
 \end{figure}
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\linewidth]{ImagenesEjercicio1/bit7.png}
+\includegraphics[width=0.5\linewidth]{ImagenesEjercicio1/bit7.png}
 \caption{1000 0000}
 \end{figure}
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\linewidth]{ImagenesEjercicio1/bit8.png}
+\includegraphics[width=0.5\linewidth]{ImagenesEjercicio1/bit8.png}
 \caption{0000 0000}
 \end{figure}
 \end{multicols}
@@ -300,7 +314,8 @@ Se observa que a medida que se sacan bits no solo se pierde la resolución de la
 Finalmente, empleando tensiones continuas a la entrada y la funcionalidad de mediciones paso a paso, se completó la siguiente tabla
 
 \begin{table}[H]
-\begin{tabular}{@{}lll@{}}
+\centering
+\begin{tabular}{ccc}
 \toprule
 $Vi \ [mV]$ & $Vadc \ [Binario]$ & $Vo_{DAC} \ [mV]$ \\ \midrule
 416.666 & 0001 0101 & 410.01 \\
@@ -316,6 +331,7 @@ $Vi \ [mV]$ & $Vadc \ [Binario]$ & $Vo_{DAC} \ [mV]$ \\ \midrule
 4583.33 & 1110 1010 & 4570.31 \\
 5000 & 1111 1111 & 4980.46 \\ \bottomrule
 \end{tabular}
+\caption{TUVIEJA}
 \end{table}
 
 Se puede ver que..
