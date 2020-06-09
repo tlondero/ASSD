@@ -106,7 +106,39 @@
 %    \legend{CuSO$_4\cdot$5H$_2$O}
 \end{axis}
 \end{tikzpicture}
+\end{page}
 
+\begin{page}
+\begin{tikzpicture}
+\begin{axis}[
+%    title={Temperature dependence of CuSO$_4\cdot$5H$_2$O solubility},
+    xlabel={$V_I \ \left[ mV \right]$},
+    ylabel={$Vo_{DAC} \ [mV]$},
+%    xmin=0, xmax=100,
+%    ymin=0, ymax=120,
+%    xtick={0,20,40,60,80,100},
+%    ytick={0,20,40,60,80,100,120},
+    legend pos=north west,
+    xmajorgrids=true,
+    ymajorgrids=true,
+    grid style=dashed,
+]
+
+\addplot[
+    color=blue,
+    mark=square,
+    ]
+	coordinates { (416.666, 410.01)(833.333, 839.84)(1250, 1250)(1666.66,1660.15)(2083.33,2070.3)(2500,2500)(2916.66,2910.15)(3333.33,3320.31)(3750,3730.46)(4166.66,4160.15)(4583.33,4570.31)(5000,4980.46)    
+    };
+\addplot[
+    color=red,
+    mark=square,
+    ]
+	coordinates { (416.666, 410.01)(833.333, 839.84)(1250, 1250)(1666.66,1660.15)(2083.33,2070.3)(2500,2500)(2916.66,2910.15)(3333.33,3320.31)(3750,3730.46)(4166.66,4160.15)(4583.33,4570.31)(5000,4980.46)    
+    };
+%    \legend{CuSO$_4\cdot$5H$_2$O}
+\end{axis}
+\end{tikzpicture}
 \end{page}
 
 \end{document}
