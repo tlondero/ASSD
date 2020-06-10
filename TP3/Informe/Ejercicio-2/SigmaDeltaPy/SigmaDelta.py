@@ -34,12 +34,19 @@ class SigmaDelta:
         """
         Parameters
         ----------
+        time: np.array
+              sampling times of input signal
+
         inputSignal: np.array
                     input analog signal
+        L: int
+            L=1 (default), does not alter your signal at all.
+            Use only if you can't oversample beforehand.
+            Otherwise use L to control oversampling.
         Returns
         -------
-        outBitStream: np.array
-                      1's and 0's modulator output
+        resampled_y, resampled_t, out_binary_stream: np.array
+                                                    oversampled signal and modulator output
         """
 
         # Oversample input signal
@@ -59,9 +66,19 @@ class SigmaDelta:
 
         def quantizer(x):
             """
+            Parameters
+            ----------
+            x: float
+                quantizer input
             If the input value to the quantizer is greater than 0 ==> output 1, else ==> output 0
+
+            Returns
+            ------
+            quantized: 1-bit quantized value
             """
-            return np.int(np.sign(x))
+            quantized_value = np.int(np.sign(x))
+
+            return quantized_value
 
         def integrator(x, begin):
             if begin:

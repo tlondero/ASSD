@@ -197,33 +197,52 @@ def quantizationNoiseShapingDemo():
     plt.show()
 
 
-def fullDemo():
-    f0 = 500
-    fn = 2*500
-    T0 = 1/500
-    K = 128
-    # Sampleamos nuestra señal 64 veces por encima de la frecuencia de Nyquist, es decir
-    # a unos 64Khz
-    time = np.arange(0, 4*T0, 1/(fn*K))
-    sineDemo = 0.5*np.sin(2*np.pi*time*f0)
+def signalRecoveryDemo():
+    f0 = 500  # Sine wave fundamental frequency
+    T0 = 1/f0
+    nyquist_factor = 2.2
+    fs = nyquist_factor*f0  # Nyquist frecuency
+    Ts = 1/fs  # Time between samples
+    p = 1  # Ammount of periods to display
+    L = 512  # 256  # Oversampling factor
+    A = 0.5  # Sinewave amplitud
+    D = 32  # Decimation factor
 
-    sigma_delta_ADC = SigmaDelta()
+    sd = SigmaDelta()
 
-    # Podemos simular una operación de sobremuestreo para expandir nuestra base de muestras
-    # pero en este caso no lo haremos
-    resampled_y, resampled_t, out_binary_stream = sigma_delta_ADC.modulator(
-        time, sineDemo, L=10)
+    time = np.arange(0, p*T0, Ts/L)
 
-    plt.xlabel("time [seg]")
-    plt.ylabel("amplitude [V]")
+    sine1 = A*np.sin(2*np.pi*f0*time)
 
-    plt.step(resampled_t, out_binary_stream)
-    plt.plot(time, sineDemo, label=f"original waveform f0: {f0} Hz")
+    resampled_y, resampled_t, out_binary_stream = sd.modulator(
+        time, sine1)
+
+    plt.step(resampled_t, out_binary_stream,
+             label="bit-stream", color="magenta")
+    plt.plot(resampled_t, resampled_y,
+             label="Oversampled Input signal", color="black")
+
+    recoveredSignal = signal.decimate(resampled_y, q=D, ftype="iir")
+    scaling_factor = resampled_t[-1]/(len(recoveredSignal)-1)
+
+    recoveredT = np.arange(0, len(recoveredSignal))*scaling_factor
+
+    plt.stem(recoveredT, recoveredSignal,
+             label="señal recuperada")
+    plt.step(recoveredT, recoveredSignal,
+             label="señal recuperada", color="yellow")
+
+    plt.title(
+        f"Salida del modulador OS factor L: {L}, D factor{D} $Fos$ = {fs*L}Hz ")
+    plt.xlabel("tiempo [segs]")
+    plt.ylabel("amplitud [V]")
+    plt.legend(loc="upper right")
+
     plt.show()
 
 
 # bitStreamDemo()
 # noiseShapingDemo1("linear")
 # noiseShapingDemo2("dbm")
-quantizationNoiseShapingDemo()
-# fullDemo()
+# quantizationNoiseShapingDemo()
+signalRecoveryDemo()
