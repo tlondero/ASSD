@@ -52,24 +52,21 @@
 \begin{page}
 \begin{tikzpicture}[yscale=1]
 
-	\def\yMax{7.5}
+	\def\yMax{5.5}
 	\def\yMaxp{7}
 	\def\xMax{7.5}
 	\def\xMaxp{7}
 	\def\rowHeigth{\yMaxp*0.25}
 	\def\rowForPulse{\rowHeigth*0.8}
 	
-	%PULSO: AND (A, B, C)
-	\draw[draw=red, thick] (0,0) \pulse{0.5*\xMaxp}{0.125}{\rowForPulse} \pulse{0.5*\xMaxp}{0.125}{\rowForPulse} ++ (1,0.5) node[label=right:{\textcolor{black}{$A\&B\&C = f_{conv}$}}](){};
+	%PULSO: AND (A, B)
+	\draw[draw=red, thick] (0,0) \pulse{0.5*\xMaxp}{0.25}{\rowForPulse} \pulse{0.5*\xMaxp}{0.25}{\rowForPulse} ++ (1,0.5) node[label=right:{\textcolor{black}{$A\&B = f_{conv}$}}](){};
 	
 	%PULSO: C
-	\draw[draw=magenta, thick] (0,\rowHeigth) \pulse{0.125*\xMaxp}{0.5}{\rowForPulse} \pulse{0.125*\xMaxp}{0.5}{\rowForPulse} \pulse{0.125*\xMaxp}{0.5}{\rowForPulse} \pulse{0.125*\xMaxp}{0.5}{\rowForPulse}  \pulse{0.125*\xMaxp}{0.5}{\rowForPulse} \pulse{0.125*\xMaxp}{0.5}{\rowForPulse} \pulse{0.125*\xMaxp}{0.5}{\rowForPulse} \pulse{0.125*\xMaxp}{0.5}{\rowForPulse} ++ (1,0.5) node[label=right:{\textcolor{black}{$\frac{f_{CLK}}{88} = C$}}](){};
+	\draw[draw=magenta, thick] (0,\rowHeigth) \pulse{0.25*\xMaxp}{0.5}{\rowForPulse} \pulse{0.25*\xMaxp}{0.5}{\rowForPulse} \pulse{0.25*\xMaxp}{0.5}{\rowForPulse}  \pulse{0.25*\xMaxp}{0.5}{\rowForPulse} ++ (1,0.5) node[label=right:{\textcolor{black}{$\frac{f_{CLK}}{96} = C$}}](){};
 	
 	%PULSO: B
-	\draw[draw=violet, thick] (0, 2*\rowHeigth) \pulse{0.5*\xMaxp}{0.5}{\rowForPulse} \pulse{0.5*\xMaxp}{0.5}{\rowForPulse} ++ (1,0.5) node[label=right:{\textcolor{black}{$\frac{f_{CLK}}{44} = B$}}](){};
-
-	%PULSO: A
-	\draw[draw=blue, thick] (0, 3*\rowHeigth) \pulse{\xMaxp}{0.5}{\rowForPulse} ++ (1,0.75) node[label=right:{\textcolor{black}{$\frac{f_{CLK}}{22} = A$}}](){};
+	\draw[draw=violet, thick] (0, 2*\rowHeigth) \pulse{0.5*\xMaxp}{0.5}{\rowForPulse} \pulse{0.5*\xMaxp}{0.5}{\rowForPulse} ++ (1,0.5) node[label=right:{\textcolor{black}{$\frac{f_{CLK}}{48} = B$}}](){};
 
 	%EJES
 	\draw[->][draw=black, very thick] (0,0) -- (0,\yMax);

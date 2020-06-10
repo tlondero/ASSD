@@ -51,7 +51,7 @@ A continuación, se detallará la funcionalidad de cada pin del integrado mostra
 
 \subsubsection{Offset y enclavamiento}
 
-Dado que la señal que ingresa al ADC0808 debe estar contenida dentro del rango $0V$—$5.12V$ con un margen de $100mV$, se montó a la señal de entrada sobre un nivel de continua igual a $\frac{5.12V - 0V}{2} = 2.56V$ para luego limitar con un circuito enclavador a esta resultante entre los rangos permisibles del conversor. El circuito utilizado se detalla en la Figura (\ref{ACOND}).
+Dado que la señal que ingresa al ADC0808 debe estar contenida dentro del rango $0V$—$5V$ con un margen de $100mV$, se montó a la señal de entrada sobre un nivel de continua igual a $\frac{5V - 0V}{2} = 2.5V$ para luego limitar con un circuito enclavador a esta resultante entre los rangos permisibles del conversor. El circuito utilizado se detalla en la Figura (\ref{ACOND}).
 
 \begin{figure}[H]
 \centering
@@ -62,7 +62,7 @@ Dado que la señal que ingresa al ADC0808 debe estar contenida dentro del rango 
 
 \subsubsection{Sample \& Hold}
 
-A la hora de realizar el proceso de conversión, el comparador del ADC necesita que la señal de entrada se mantenga estable. Como se vio en la sección anterior, si no se utiliza un Sample \& Hold, es necesario que la frecuencia de entrada sea lo suficientemente baja como para que el comparador logre hacer su trabajo sin comprometer la precisión de este.
+A la hora de realizar el proceso de conversión, el comparador del ADC necesita que la señal de entrada se mantenga estable. Como se verá en la sección siguiente, si no se utiliza un Sample \& Hold, es necesario que la frecuencia de entrada sea lo suficientemente baja como para que el comparador logre hacer su trabajo sin comprometer la precisión de este.
 
 \begin{figure}[H]
 \centering
@@ -71,13 +71,13 @@ A la hora de realizar el proceso de conversión, el comparador del ADC necesita 
 	\label{fig:sandhold}
 \end{figure}
 
-El S\&H seleccionado es el \href{https://pdf1.alldatasheet.es/datasheet-pdf/view/8580/NSC/LF398N.html}{LF398N}. Sabiendo que se posee una taza de conversión máxima de $8.62 \ kHz$, impuesta por el tiempo máximo de conversión del ADC0808 de $116 \mu s$, lo que implica que
+El S\&H seleccionado es el \href{https://pdf1.alldatasheet.es/datasheet-pdf/view/8580/NSC/LF398N.html}{LF398N}. Sabiendo que se posee una taza de conversión máxima de $18.6 \ kHz$, analizado en la sección de restricciones temporales, se tiene que
 
 \begin{equation*}
-	T_{acq} = \frac{1}{2\cdot 8.62 \ kHz} \approx 58 \mu s
+	T_{acq} = \frac{1}{2\cdot 18.6 \ kHz} \approx 26 \mu s
 \end{equation*}
 
-De esta forma, observando el gráfico de la hoja de datos mostrada en la Figura (\ref{chacqtime}) del S\&H, se requiere un capacitor de $20 \ nF$.
+De esta forma, observando el gráfico de la hoja de datos mostrada en la Figura (\ref{chacqtime}) del S\&H, se requiere un capacitor de $10 \ nF$.
 
 \begin{figure}[H]
 	\centering
@@ -88,14 +88,14 @@ De esta forma, observando el gráfico de la hoja de datos mostrada en la Figura 
 
 \subsection{Máxima frecuencia de entrada sin Sample \& Hold}
 
-De la datasheet del ADC0808, se tiene que si $V_{CC} = V_{REF+} = 5.12V$ y $V_{REF-} = 0V$, la resolución será de $20 \frac{mV}{bit}$. Si se utiliza la frecuencia de clock $f_{CLK}$ típica utilizada en la datasheet de $640kHz$, el tiempo de conversión $t_C$ máximo será de $116\mu s$. Esto implica que la entrada no deberá de tener una pendiente mayor a $\frac{20mV}{116\mu s}$ para no introducir error en la cuantización de la señal.
+De la datasheet del ADC0808, se tiene que si $V_{CC} = V_{REF+} = 5V$ y $V_{REF-} = 0V$, la resolución será de $19.53125 \frac{mV}{bit}$. Si se utiliza la única frecuencia de clock $f_{CLK}$ para la cual se especifica el tiempo de conversión $t_C$ máximo, este es de $116\mu s$. Esto implica que la entrada no deberá de tener una pendiente mayor a $\frac{19.53125mV}{116\mu s}$ para no introducir error en la cuantización de la señal.
 
 
-Si la señal de entrada se encuentra en el peor caso, es decir, con una excursión de tensión de $-0.1V + V_{REF-}$ a $5.12V + 0.1V$; esta se encuentra montada sobre un nivel de continua igual a $(5.22V - (-0.1V))/2 = 2.66V$; y esta se puede considerar senoidal gracias a la teoría desarrollada por Fourier; se tiene que la amplitud pico máxima de la senoidal podrá ser $2.66V$. Luego, asumiendo el peor caso de la pendiente de la senoidal, para un ángulo igual a cero radianes, lo que permite utilizar la aproximación paraxial, se tiene que
+Si la señal de entrada se encuentra en el peor caso, es decir, con una excursión de tensión de $-0.1V + V_{REF-}$ a $5V + 0.1V$; esta se encuentra montada sobre un nivel de continua igual a $(5.1V - (-0.1V))/2 = 2.6V$; y esta se puede considerar senoidal gracias a la teoría desarrollada por Fourier; se tiene que la amplitud pico máxima de la senoidal podrá ser $2.6V$. Luego, asumiendo el peor caso de la pendiente de la senoidal, para un ángulo igual a cero radianes, lo que permite utilizar la aproximación paraxial, se tiene que
 \\
 
 \begin{equation}
-\left. \frac{d \left( 2.66V \cdot Sin \left( 2\pi f_{in_{max}} t \right) \right)}{dt} \right|_{t=0} = 2.66V \cdot 2\pi f_{in_{max}} = \frac{20mV}{116\mu s}
+\left. \frac{d \left( 2.6V \cdot Sin \left( 2\pi f_{in_{max}} t \right) \right)}{dt} \right|_{t=0} = 2.6V \cdot 2\pi f_{in_{max}} = \frac{19.53125mV}{116\mu s}
 \end{equation}
 \\
 
@@ -133,15 +133,23 @@ Donde los pines desde B1 a B8 son las entradas digitales, siendo B1 el bit mas s
 \subsection{Señal de sincronización de conversión}
 
 \subsubsection{Restricciones temporales}
-
-Si los componentes utilizados tuviesen un tiempo de operación ideal, se podría utilizar un clock tan rápido como se quiera. Sin embargo, esto no sucede. Por parte del integrado ADC0808, se tiene que el tiempo de conversión con una señal de sincronización de $640kHz$ es como máximo $116\mu s$. Luego, el DAC0800 posee un tiempo de estabilización de $100ns$. Por parte del sample \& hold utilizado, el LF398N, se tiene que el tiempo de adquisición máximo con un capacitor de hold de $20 nF$ es de $\approx 20\mu s$. Finalmente, se obtienen dos limitantes en tiempo: 
+\vspace{0.2cm}
+\textbf{Restricciones teóricas}\\
+\\
+Si los componentes utilizados tuviesen un tiempo de operación ideal, se podría utilizar un clock tan rápido como se quiera. Sin embargo, esto no sucede. Por parte del integrado ADC0808, se tiene que el tiempo de conversión con una señal de sincronización de $640kHz$ es como máximo $116\mu s$. Luego, el DAC0800 posee un tiempo de estabilización de $100ns$. Por parte del sample \& hold utilizado, el LF398N, se tiene que el tiempo de adquisición máximo con un capacitor de hold de $10nF$ es de $\approx 26\mu s$ como calculado. Finalmente, se obtienen dos limitantes en tiempo: 
 
 \begin{itemize}
 \item El ADC0808 tardará como máximo $116\mu s$ en convertir el valor holdeado de la señal analógica en digital.
-\item El LF398N tardará como máximo $20\mu s$ en cargar el capacitor de hold con el valor de la señal analógica en la fase de sampleo.
+\item El LF398N tardará como máximo $26\mu s$ en cargar el capacitor de hold con el valor de la señal analógica en la fase de sampleo.
 \end{itemize}
 
-Es por esto, que la rapidez máxima de la señal que gobierna la frecuencia de conversión del circuito será el doble del mínimo entre la inversa de los dos limitantes temporales, es decir, $\frac{1}{2\cdot 116\mu s} = 4.31kHz$. Sin embargo, si que quisiese aumentar aún más las frecuencia de conversión del circuito, se podría generar una señal de control cuyo duty cycle no sea del $50\%$, debido a que mientras el ADC se encuentra convirtiendo, el s\&h no posee ninguna restricción temporal más que la de fuga del capacitor, mientras que si el s\&h está sampleando la señal, el ADC no posee ninguna restricción temporal.
+Es por esto, que la rapidez máxima de la señal que gobierna la frecuencia de conversión del circuito será el doble del mínimo entre la inversa de los dos limitantes temporales, es decir, $\frac{1}{2\cdot 116\mu s} = 4.31kHz$.
+
+
+\vspace{0.3cm}
+\textbf{Optimización de la frecuencia de muestreo}\\
+\\
+Si que quisiese aumentar aún más las frecuencia de conversión del circuito, se podría generar una señal de control cuyo duty cycle no sea del $50\%$, debido a que mientras el ADC se encuentra convirtiendo, el s\&h no posee ninguna restricción temporal más que la de fuga del capacitor, mientras que si el s\&h está sampleando la señal, el ADC no posee ninguna restricción temporal.
 
 %aca poner grafico de un clock con duty cycle no simetrico donde en la parte que dura poco se esta haciendo el sampleo y en la parte larga se esta haciendo la conversión
 
@@ -151,11 +159,25 @@ Basta con que el duty cycle sea tal que el tiempo de holdeo sea igual al tiempo 
 DT_{optimo} = \frac{20\mu s}{116\mu s}\cdot 100 = 17.24\% 
 \end{equation}
 
-para simplificar el circuito, se tomó $DT = 25\%$ junto a recados en las próximas secciones y la frecuencia de esta señal de sincronización deberá ser como máximo $\frac{1}{116\mu s + 20\mu s} = 7.352kHz$.
+para simplificar el circuito, se tomó $DT = 25\%$, por lo que se tiene que el tiempo de sampleo será de
+
+\begin{equation}
+T_{sample} = 0.25 \cdot 116\mu s = 29\mu s 
+\end{equation}
+
+Obteniendo una máxima frecuencia de sampleo teórica con las consideraciones tomadas será 
+$$\frac{1}{116\mu s + 29\mu s} = 6.896kHz$$
+\\
+\textbf{Aproximación a la máxima frecuencia de muestreo real}\\
+\\
+Como último paso, se obtuvo una aproximación empírica a la máxima frecuencia de muestreo posible, simulando el integrado ADC0808 con una sola entrada analógica, una frecuencia de clock de $1.28MHz$ y los pines de start y end of conversion cortocircuitados, lo que provee el menor tiempo de conversión posible, obteniendo $50.48\mu s$. Esto no resulta sorprendente, dado que un documento de Texas Instruments acerca del uso del ADC0808 afirma que con una sola entrada analógica se tiene un tiempo de conversión de alrededor de los $50\mu s$.
+Finalmente, se tomará una máxima frecuencia de muestreo teórica de $\frac{1}{52\mu s + 26\mu s} = 12.82kHz$, reservándose un margen de seguridad en el tiempo de conversión. Luego, se tiene que el duty cycle será de $\frac{26\mu s}{52\mu} = 25\%$.
 
 \subsubsection{Circuito generador de la señal de sincronización}
 
-Se partió de un generador de onda cuadrada de $640kHz$, detallado en la próxima sección, el cual será la señal de clock del ADC0808. Esta señal pasará además por un divisor de frecuencia que divide por $22$ veces. Luego, esta señal ingresa a dos divisores de frecuencia en cascada que dividen por dos. Se detalla en la Figura (\ref{DT}) esta operación. Seguido a esto, se realiza la operación AND entre la señal antes de pasar por los divisores en frecuencia, y las señales a la salida de cada divisor. Así se obtiene una señal de $DT$ del $25\%$ con una frecuencia menor pero cercana a $7.352kHz$, de $7.272kHz$ la cual se denominará $f_{conv}$.
+Se partió de un generador de onda cuadrada de $1.28 MHz$, detallado en la próxima sección, el cual será la señal de clock del ADC0808. A esta señal, se la deberá dividir por $\frac{1.28MHz}{12.82kHz} = 99.84$ veces para obtener una señal cercana a la frecuencia máxima de muestreo. Sin embargo, para simplificar la división de frecuencia, se dividirá por $96$ veces y se utilizará un clock de $1.2Mhz$, obteniendo una nueva máxima frecuencia de muestreo de $12.5kHz$.
+
+La división de frecuencia se efectuó de la siguiente manera: la señal de $1.2Mhz$ pasará por un divisor de frecuencia que divide por $48$ veces. Luego, esta señal ingresa a un divisor de frecuencia que divide por dos. Se detalla en la Figura (\ref{DT}) esta operación. Seguido a esto, se realiza la operación AND entre la señal antes de pasar por el divisor, y la señal a la salida del divisor. Así se obtiene una señal de $DT$ del $25\%$.
 
 \begin{figure}[H]
 \centering
@@ -173,11 +195,11 @@ Esta señal de frecuencia $f_{conv}$ y duty cycle del $25\%$ posterior a la oper
 \label{START}
 \end{figure}
 
-Así se obtienen todas las señales de control del circuito de una misma señal de clock original, de tal manera que todas estén sincronizadas entre sí. Si se desea disminuir la frecuencia de conversión basta con disminuir la frecuencia $f_{CLK}$ del circuito oscilador presentado a continuación. Si bien $T_{HOLD}$ fue calculado para que este sea exactamente el tiempo necesario para realizar una conversión, y esta comienza en el flanco descendente de la señal de start, no habrá problemas de tiempo debido a la aproximación tomada en el diseño del circuito oscilador.
+Así se obtienen todas las señales de control del circuito de una misma señal de clock original, de tal manera que todas estén sincronizadas entre sí. Si se desea disminuir la frecuencia de conversión basta con disminuir la frecuencia $f_{CLK}$ del circuito oscilador presentado a continuación.
 
 \subsubsection{Circuito oscilador}
 
-Se utilizó el circuito mostrado en la Figura (\ref{555}) para generar la señal de clock de $640kHz$ la cual no solo será ingresada al ADC0808 sino de la cual se generarán las señales de sincronización del S\&H y de start del conversor.
+Se utilizó el circuito mostrado en la Figura (\ref{555}) para generar la señal de clock de $1.2MHz$ la cual no solo será ingresada al ADC0808 sino de la cual se generarán las señales de sincronización del S\&H y de start del conversor.
 
 \begin{figure}[H]
 \centering
@@ -186,18 +208,17 @@ Se utilizó el circuito mostrado en la Figura (\ref{555}) para generar la señal
 \label{555}
 \end{figure}
 
-Utilizando $R_{T} = 620 + 110\Omega$, $R_{POT} = 1k\Omega$ y $C_{T} = 1nF$ se logra obtener
+Utilizando $R_{T} = 370\Omega$, $R_{POT} = 10k\Omega$ y $C_{T} = 1nF$ se logra obtener
 
-\[ 49kHz < f_CLK < 632kHz\]
+\[ 48.7kHz < f_{CLK} < 1.2MHz\]
 
 por lo que la frecuencia de conversión del circuito total será de
 
-\[ 557Hz < f_CONV < 7.2kHz \]
-
-Si bien hay una gran diferencia entre $640kHz$ y $632kHz$, esto será utilizado como margen de seguridad debido a las aproximaciones tomadas en tanto el duty cycle como en la división de frecuencias de la señal de sincronización del S\&H.
+\[ 507Hz < f_{CONV} < 12.5kHz \]
 
 \subsection{FAA y FR}
-Tanto para el filtor anti alias como el filtro recuperador se tomaron las mismas especificaciones.
+\large{CAMBIAR VALORES}
+Tanto para el filtro anti alias como el filtro recuperador se tomaron las mismas especificaciones.
 Tomando como $f_p= 3.5kHz$ que es levemente menor a $\frac{7.2kHz}{2}\approx 3.6kHz $ y una $f_r$= 6kHZ.
 Se optó por utilizar la aproximación elíptica de cauer, obteniendo para una $A_p$=1dB y $A_r$=40dB se obtiene un filtro de orden 4.
 \begin{figure}[H]
@@ -237,29 +258,34 @@ Se puede ver en la Figura (\ref{result2}) una pérdida de amplitud de más del $
 \label{result2}
 \end{figure}
 
-\subsection{Mediciones}
-
-Finalmente para comprobar el correcto funcionamiento del circuito se utilizó la máxima $f_{clk}$ admisible por el circuito, de $1.2672MHz$ generada por una fuente de tensión ideal haciendo que la señal de sincronización del S\&H se divida por 176 en vez de 88, una señal rampa de frecuencia $1kHz$ y una amplitud de $0V$ a $5V$.
-\\
-Según los cálculos realizados previamente, se tendrá una frecuencia de muestreo de $\frac{632kHz \cdot 2}{88 \cdot 2} = 7.2kHz$. Se midió esta frecuencia de muestreo experimentalmente la cual fue de $7.28kHz$ mostrado en la Figura (\ref{med2}).
-
-\begin{multicols}{2}
+En la Figura (\ref{sh}) se puede ver que los calculos realizados para la señal de control del S\&H fueron correctas.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.9\linewidth]{ImagenesEjercicio1/med1.png}
+\includegraphics[width=0.8\linewidth, page=1]{ImagenesEjercicio1/S_H.png}
+\caption{Señal de control del S\&H, señal de entrada y señal a la salida del S\&H.}
+\label{sh}
+\end{figure}
+
+\subsection{Mediciones}
+\large{MEDIR DE VUELTA}
+Finalmente para comprobar el correcto funcionamiento del circuito se utilizó la máxima $f_{clk}$ admisible por el circuito, de $1.2MHz$, una señal rampa de frecuencia $1kHz$ y una amplitud de $0V$ a $5V$.
+\\
+Según los cálculos realizados previamente, se tendrá una frecuencia de muestreo de $\frac{632kHz \cdot 2}{88 \cdot 2} = 7.2kHz$. Se midió esta frecuencia de muestreo experimentalmente la cual fue de $7.28kHz$ mostrado en la Figura (\ref{med2}).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{ImagenesEjercicio1/rampa1.png}
 \caption{Rampa a la salida del FAA y a la salida del DAC.}
 \label{med1}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.9\linewidth]{ImagenesEjercicio1/med2.png}
+\includegraphics[width=0.8\linewidth]{ImagenesEjercicio1/rampa1zoom.png}
 \caption{Medición de la frecuencia de muestreo experimental.}
 \label{med2}
 \end{figure}
-
-\end{multicols}
 
 Luego, se se midió el error de cuantización empleando el método de..
 
@@ -334,6 +360,6 @@ $Vi \ [mV]$ & $Vadc \ [Binario]$ & $Vo_{DAC} \ [mV]$ \\ \midrule
 \caption{Tensión a la salida del circuito para entradas dentro de todo el rango.}
 \end{table}
 
-Se puede ver que si bien algunos casos poseen un pequeño error, este nunca es mayor a $\approx 20mV$, lo cual tiene sentido, dado que la resolución del conversor es de ocho bits. Para esta cantidad de bits, se obtienen 256 estados posibles, de los cuales $\frac{5V}{256bit} \approx 20\frac{mV}{bit}$. Algunos valores no poseen error alguno, esto se debe a que $Vi\cdot \frac{5V}{256bit} \in \mathbb{Q}$??? $\mathbb{CHEQUEAR}$? 
+Se puede ver que si bien algunos casos poseen un pequeño error, este nunca es mayor a $\approx 19.6mV$ excepto para el fondo de escala, lo cual tiene sentido, dado que la resolución del conversor es de ocho bits. Para esta cantidad de bits, se obtienen 256 estados posibles, de los cuales $\frac{5V}{256bit} \approx 19.6\frac{mV}{bit}$. Algunos valores no poseen error alguno, esto se debe a que $Vi\cdot \frac{5V}{256bit} \in \mathbb{Q}$??? $\mathbb{CHEQUEAR}$? 
 
 \end{document}
