@@ -1,14 +1,9 @@
-\input{../Informe/Header.tex}
 
-\begin{document}
-
-\subsection{Conversor Sigma Delta $\Sigma \Delta$}
-
-\subsubsection{Introducción}
-El conversor sigma-delta o delta-sigma según la literatura consultada, tuvo su aparición durante los años 60's y 70's. Aunque su nombre pueda sugerir un tipo de tecnología muy compleaja la realidad es que no lo es en términos constructivos. Los moduladores sigma-delta nos permiten alcanzar una digitalización de alta resolución (16bits o 24bits) sin la necesidad de utilizar ADC de ese porte. Esto se consigue dado que este diseño permite alcanzar un nivel de ruido de cuantización equivalente a la de un ADC de mayor porte utilizando un ADC más modesto.
+\subsection{Introducción}
+El conversor sigma-delta o delta-sigma según la literatura consultada, tuvo su aparición durante los años 60's y 70's. Aunque su nombre pueda sugerir un tipo de tecnología muy compleja la realidad es que no lo es en términos constructivos. Los moduladores sigma-delta nos permiten alcanzar una digitalización de alta resolución (16bits o 24bits) sin la necesidad de utilizar ADC de ese porte. Esto se consigue dado que este diseño permite alcanzar un nivel de ruido de cuantización equivalente a la de un ADC de mayor porte utilizando un ADC más modesto.
 
 
-\subsubsection{Arquitectura}
+\subsection{Arquitectura}
 
 A continuación presentamos la topología implementada:
 
@@ -19,11 +14,11 @@ A continuación presentamos la topología implementada:
 	\label{fig:diagramaenbloques}
 \end{figure}
 
-Como se puede observar el modulador $\Sigma\Delta$ se basa en un circuito con un solo camino de realimentación negativa que incorpora un un cuantificador y un DAC en su interior.
+Como se puede observar el modulador $\Sigma\Delta$ se basa en un circuito con un solo camino de realimentación negativa que incorpora un cuantificador y un DAC en su interior.
 
 
 
-\subsubsection{Modulador}
+\subsection{Modulador}
 La salida del modulador $\Sigma\Delta$ es un bit-stream de valores binario arbitrarios. En esta secuencia se encuentra codificada toda la información necesaria para poder reconstruir la señal original. Aún más importante que reconstruir la señal original, es conseguir un valor preciso de la misma en un instante de tiempo. Es decir, poder tomar mediciones. Este tipo de conversores son famosos por la alta resolución que son capaces de proveer. Sin embargo, el limite de su funcionalidad aparece cuando se los quiere utilizar en un ambiente donde la señales cambian de forma abrupta.
 
 \begin{figure}[H]
@@ -34,7 +29,7 @@ La salida del modulador $\Sigma\Delta$ es un bit-stream de valores binario arbit
 \end{figure}
 
 
-\subsubsection{Noise Shaping}
+\subsection{Noise Shaping}
 Una de las más notables características de este tipo de modulación es el efecto llamado \textbf{noise-shaping}. Este efecto provoca que el ruido de cuantización sea "moldeado" hacia las altas frecuencias empujándolo lejos de la banda de interés.
 
 
@@ -65,7 +60,7 @@ En primer lugar podemos ver que a medida que aumentamos la tasa de oversampling,
 	\label{fig:noiseshappingdemo1}
 \end{figure}
 
-Si reescalamos la potencia espectral y la epxresamos en dBm conseguimos apreciar notariamente el noise-shapping.
+Si reescalamos la potencia espectral y la expresamos en dBm conseguimos apreciar notoriamente el noise-shapping.
 
 El pico observado a bajas frecuencias corresponde a la frecuencia fundamental de nuestra información de entrada
 \begin{figure}[H]
@@ -74,5 +69,3 @@ El pico observado a bajas frecuencias corresponde a la frecuencia fundamental de
 	\caption{Noise Shapping}
 	\label{fig:noiseshappingdemo1}
 \end{figure}
-
-\end{document}

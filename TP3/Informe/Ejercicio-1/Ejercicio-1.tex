@@ -1,6 +1,3 @@
-\input{../Informe/Header.tex}
-
-\begin{document}
 
 \subsection{Introducción}
 
@@ -274,21 +271,21 @@ Finalmente para comprobar el correcto funcionamiento del circuito se utilizó la
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\linewidth]{ImagenesEjercicio1/rampa1.png}
+\includegraphics[width=0.6\linewidth]{ImagenesEjercicio1/rampa1.png}
 \caption{Rampa a la salida del FAA y a la salida del DAC.}
 \label{med1}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\linewidth]{ImagenesEjercicio1/rampa1zoom.png}
+\includegraphics[width=0.6\linewidth]{ImagenesEjercicio1/rampa1zoom.png}
 \caption{Medición de la frecuencia de muestreo experimental.}
 \label{med2}
 \end{figure}
 Según los cálculos teóricos realizados en secciones anteriores, se tendrá una frecuencia de muestreo de $\frac{1.2MHz \cdot 2}{96 \cdot 2} = 12.5kHz$. Se midió esta frecuencia de muestreo experimentalmente la cual fue de $11.655kHz$ mostrado en la Figura (\ref{med2}).
 
 
-Luego, se se midió el error de cuantización empleando el método de la rampa, que consiste en simular una rampa cuya amplitud vaya de 0 al fondo de escala, y se fue midiendoron todos los errores entre la analógica y la digital en el momento de muestreo, de eso se calculó la media la cual dio $\approx$ 12mV
+Luego, se se midió el error de cuantización empleando el método de la rampa, que consiste en simular una rampa cuya amplitud vaya de 0 al fondo de escala, y se fue midiendoron todos los errores entre la analógica y la digital en el momento de muestreo, de eso se calculó la media la cual dio levemente menor a un LSB.
 
 Por otro lado, se midió la forma de onda a la salida del DAC a medida que se eliminaban bits menos significativos. Se puede ver el resultado detallado en las siguientes Figuras:
 
@@ -363,5 +360,3 @@ $Vi \ [mV]$ & $Vadc \ [Binario]$ & $Vo_{DAC} \ [mV]$ \\ \midrule
 \end{table}
 
 Se puede ver que si bien algunos casos poseen un pequeño error, este nunca es mayor a $19.6mV$ excepto para el fondo de escala que se sitúa en $4.98V$ y no $5V$. Para esta cantidad de bits, se obtienen 256 estados posibles, de los cuales $\frac{5V}{256bit} \approx 19.6\frac{mV}{bit}$. Algunos valores no poseen error alguno, esto se debe a que $Vi\cdot \frac{5V}{256bit} \in \mathbb{Q}$
-
-\end{document}
