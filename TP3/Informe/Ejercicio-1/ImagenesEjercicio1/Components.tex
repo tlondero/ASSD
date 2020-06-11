@@ -200,8 +200,8 @@
 		(ccc_gnd.center) -- ++ (0,-2) node[ground](){}
 		(ccc_out.center) -- ++ (1,0) node[ocirc,label=$V_{OUT}$](){}
 		
-		($ (ccc_thr.center) !.5! (ccc_tri.center) $) node[circ](){} -- ++ (-3,0) node[circ](aux1){} to[pR, name=pr, l_=$R_{POT}$] ++(0,2) to[R, l_=$R_T$] ++(0,2) node[npn, anchor=E, label=left:$Q_{CHG}$, xscale=-1](q){}
-		(q.E) node[circ](){} to[D] ++(2,0) node[circ](aux2){} |- (ccc_dis.center)
+		($ (ccc_thr.center) !.5! (ccc_tri.center) $) node[circ](){} -- ++ (-3,0) node[circ](aux1){} to[pR, name=pr, l_=$R_{POT}$] ++(0,2) to[R, l_=$R_T$] ++(0,2) node[npn, anchor=E, label=left:$BC547$, xscale=-1](q){}
+		(q.E) node[circ](){} to[D=$BC547$] ++(2,0) node[circ](aux2){} |- (ccc_dis.center)
 		
 		(aux2.center) |- (q.B)
 		(aux2.center) to[R, l=$R_B$] ++ (3,0) node[vcc, label=north:$5 \ V$](){}

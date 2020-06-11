@@ -88,21 +88,21 @@ De esta forma, observando el gráfico de la hoja de datos mostrada en la Figura 
 
 \subsection{Máxima frecuencia de entrada sin Sample \& Hold}
 
-De la datasheet del ADC0808, se tiene que si $V_{CC} = V_{REF+} = 5V$ y $V_{REF-} = 0V$, la resolución será de $19.53125 \frac{mV}{bit}$. Si se utiliza la única frecuencia de clock $f_{CLK}$ para la cual se especifica el tiempo de conversión $t_C$ máximo, este es de $116\mu s$. Esto implica que la entrada no deberá de tener una pendiente mayor a $\frac{19.53125mV}{116\mu s}$ para no introducir error en la cuantización de la señal.
+De la datasheet del ADC0808, se tiene que si $V_{CC} = V_{REF+} = 5V$ y $V_{REF-} = 0V$, la resolución será de $19.53125 \frac{mV}{bit}$. Si se utiliza una frecuencia de clock $f_{CLK} = 1.2MHz$ se tiene que $t_{c} = 52\mu s$ con un margen de seguridad como analizado en la sección de restricciones temporales. Esto implica que la entrada no deberá de tener una pendiente mayor a $\frac{19.53125mV}{52\mu s} = 376.6\frac{V}{s}$ para no introducir error en la cuantización de la señal.
 
 
 Si la señal de entrada se encuentra en el peor caso, es decir, con una excursión de tensión de $-0.1V + V_{REF-}$ a $5V + 0.1V$; esta se encuentra montada sobre un nivel de continua igual a $(5.1V - (-0.1V))/2 = 2.6V$; y esta se puede considerar senoidal gracias a la teoría desarrollada por Fourier; se tiene que la amplitud pico máxima de la senoidal podrá ser $2.6V$. Luego, asumiendo el peor caso de la pendiente de la senoidal, para un ángulo igual a cero radianes, lo que permite utilizar la aproximación paraxial, se tiene que
 \\
 
 \begin{equation}
-\left. \frac{d \left( 2.6V \cdot Sin \left( 2\pi f_{in_{max}} t \right) \right)}{dt} \right|_{t=0} = 2.6V \cdot 2\pi f_{in_{max}} = \frac{19.53125mV}{116\mu s}
+\left. \frac{d \left( 2.6V \cdot Sin \left( 2\pi f_{in_{max}} t \right) \right)}{dt} \right|_{t=0} = 2.6V \cdot 2\pi f_{in_{max}} = \frac{19.53125mV}{52\mu s}
 \end{equation}
 \\
 
 
 Finalmente, se obtiene que la componente de mayor frecuencia de la señal de entrada para no comprometer la precisión del ACD0808 deberá ser como máximo
 
-$$f_{in_{max}} = 10.3Hz$$
+$$f_{in_{max}} = 23Hz$$
 
 \subsection{Conversor DAC0800}
 Se utilizó el integrado DAC0800, un conversor D/A de 8 bits con salida diferencial de corriente.
@@ -165,13 +165,13 @@ para simplificar el circuito, se tomó $DT = 25\%$, por lo que se tiene que el t
 T_{sample} = 0.25 \cdot 116\mu s = 29\mu s 
 \end{equation}
 
-Obteniendo una máxima frecuencia de sampleo teórica con las consideraciones tomadas será 
+Obteniendo una máxima frecuencia de sampleo teórica con las consideraciones de 
 $$\frac{1}{116\mu s + 29\mu s} = 6.896kHz$$
 \\
 \textbf{Aproximación a la máxima frecuencia de muestreo real}\\
 \\
 Como último paso, se obtuvo una aproximación empírica a la máxima frecuencia de muestreo posible, simulando el integrado ADC0808 con una sola entrada analógica, una frecuencia de clock de $1.28MHz$ y los pines de start y end of conversion cortocircuitados, lo que provee el menor tiempo de conversión posible, obteniendo $50.48\mu s$. Esto no resulta sorprendente, dado que un documento de Texas Instruments acerca del uso del ADC0808 afirma que con una sola entrada analógica se tiene un tiempo de conversión de alrededor de los $50\mu s$.
-Finalmente, se tomará una máxima frecuencia de muestreo teórica de $\frac{1}{52\mu s + 26\mu s} = 12.82kHz$, reservándose un margen de seguridad en el tiempo de conversión. Luego, se tiene que el duty cycle será de $\frac{26\mu s}{52\mu} = 25\%$.
+Finalmente, se tomará una máxima frecuencia de muestreo teórica de $\frac{1}{52\mu s + 26\mu s} = 12.82kHz$, reservándose un margen de seguridad en el tiempo de conversión. Luego, se tiene que el duty cycle será de $\frac{26\mu s}{52\mu}\cdot 100 = 25\%$.
 
 \subsubsection{Circuito generador de la señal de sincronización}
 
@@ -269,9 +269,9 @@ En la Figura (\ref{sh}) se puede ver que los calculos realizados para la señal 
 
 \subsection{Mediciones}
 \large{MEDIR DE VUELTA}
-Finalmente para comprobar el correcto funcionamiento del circuito se utilizó la máxima $f_{clk}$ admisible por el circuito, de $1.2MHz$, una señal rampa de frecuencia $1kHz$ y una amplitud de $0V$ a $5V$.
+Finalmente para comprobar el correcto funcionamiento del circuito se utilizó la máxima $f_{clk}$ admisible por el circuito, de $1.2MHz$, una señal rampa de frecuencia $45Hz$ y una amplitud de $0V$ a $5V$, de tal manera que la pendiente no sea mayor que $376.6\frac{V}{s}$, calculado en la sección de funcionamiento sin S\&H. Si bien el límite teórico sería de $\approx 75Hz$ para la frecuencia de la rampa, se eligió esa frecuencia particular debido a que se tenia que el tiempo de conversión real era de $84.5\mu s$ y una resolución real de $19.5 mV$, por lo que si se quiere que en cada muestreo el ADC incremente su salida estrictamente por un solo bit, se deberá de tener una rampa con una pendiente de $\approx \frac{19.5mV}{85.8\mu s} = 227.27 \frac{V}{s}$, por lo que la frecuencia debe ser cercana a $\approx \left(\frac{5V}{227.27\frac{V}{s}}\right)^{-1} = 45.45Hz$.
 \\
-Según los cálculos realizados previamente, se tendrá una frecuencia de muestreo de $\frac{632kHz \cdot 2}{88 \cdot 2} = 7.2kHz$. Se midió esta frecuencia de muestreo experimentalmente la cual fue de $7.28kHz$ mostrado en la Figura (\ref{med2}).
+Según los cálculos teóricos realizados en secciones anteriores, se tendrá una frecuencia de muestreo de $\frac{1.2MHz \cdot 2}{96 \cdot 2} = 12.5kHz$. Se midió esta frecuencia de muestreo experimentalmente la cual fue de $11.655kHz$ mostrado en la Figura (\ref{med2}).
 
 \begin{figure}[H]
 \centering
@@ -290,7 +290,9 @@ Según los cálculos realizados previamente, se tendrá una frecuencia de muestr
 Luego, se se midió el error de cuantización empleando el método de..
 
 
-Por otro lado, se midió la forma de onda a la salida del ADC a medida que se eliminaban bits menos significativos. Se puede ver el resultado detallado en las siguientes Figuras:
+Por otro lado, se midió la forma de onda a la salida del DAC a medida que se eliminaban bits menos significativos. Se puede ver el resultado detallado en las siguientes Figuras:
+
+\newpage
 
 \begin{multicols}{2}
 \begin{figure}[H]
@@ -360,6 +362,6 @@ $Vi \ [mV]$ & $Vadc \ [Binario]$ & $Vo_{DAC} \ [mV]$ \\ \midrule
 \caption{Tensión a la salida del circuito para entradas dentro de todo el rango.}
 \end{table}
 
-Se puede ver que si bien algunos casos poseen un pequeño error, este nunca es mayor a $\approx 19.6mV$ excepto para el fondo de escala, lo cual tiene sentido, dado que la resolución del conversor es de ocho bits. Para esta cantidad de bits, se obtienen 256 estados posibles, de los cuales $\frac{5V}{256bit} \approx 19.6\frac{mV}{bit}$. Algunos valores no poseen error alguno, esto se debe a que $Vi\cdot \frac{5V}{256bit} \in \mathbb{Q}$??? $\mathbb{CHEQUEAR}$? 
+Se puede ver que si bien algunos casos poseen un pequeño error, este nunca es mayor a $\approx 19.6mV$ excepto para el fondo de escala que se sitúa en $4.98V$ y no $5V$. Para esta cantidad de bits, se obtienen 256 estados posibles, de los cuales $\frac{5V}{256bit} \approx 19.6\frac{mV}{bit}$. Algunos valores no poseen error alguno, esto se debe a que $Vi\cdot \frac{5V}{256bit} \in \mathbb{Q}$??? $\mathbb{CHEQUEAR}$? 
 
 \end{document}
