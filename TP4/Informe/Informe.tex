@@ -73,11 +73,16 @@ Realizando el mismo proceso para todos los niveles de discretización en el eje 
 \end{itemize}
 }
 
-	Este trabajo se centra en procesos de medio nivel. Dicha definición es muy amplia, por lo cual es necesario acotar este camino. Es por ello que se decidió centralizarse en el seguimiento de objetos en imágenes en movimiento. Dada ciertas condiciones iniciales conocidas (brindadas por el usuario) en una imagen en movimiento en tiempo real, tomar un conjunto de datos de $x$, $y$ y $f(x,y)$ para así seleccionar un objeto dado y seguirlo a través del tiempo. En un principio, a falta de grandes conocimientos actualmente, el trabajo se centrará en la investigación de las técnicas de seguimiento actuales, para luego decidir en qué área del seguimiento de objetos por imágenes en movimiento tratará de profundizar este trabajo.
+Este trabajo se centra en procesos de medio nivel. Dicha definición es muy amplia, por lo cual es necesario acotar este camino. Es por ello que se decidió centralizarse en el seguimiento de objetos en imágenes en movimiento. Dada ciertas condiciones iniciales conocidas (brindadas por el usuario) en una imagen en movimiento en tiempo real, tomar un conjunto de datos de $x$, $y$ y $f(x,y)$ para así seleccionar un objeto dado y seguirlo a través del tiempo. %En un principio, a falta de grandes conocimientos actualmente, el trabajo se centrará en la investigación de las técnicas de seguimiento actuales, para luego decidir en qué área del seguimiento de objetos por imágenes en movimiento tratará de profundizar este trabajo.
+Se analizaron diversas formas de lograr el seguimiento de un objeto. Finalmente se decidió volcarse por el uso del filtro de Kalman. Dicho filtro es un algoritmo que elabora una estimación de unas variables deseadas, mediante el uso de una serie de observaciones a lo largo del tiempo. Este filtro considera ciertas imprecisiones en las mediciones, como lo puede ser el ruido existente. %El filtro de Kalman se caracteriza por estimar la posición de un objeto en movimiento con precisión gracias a los ajustes en los valores $g_n$ y $h_n$ 
 	
-	\textcolor{blue}{Escribí una brevísima descripción de lo que se va a hacer. Profundizar y escribir el objetivo final. Justificar elección.}
+\textcolor{blue}{Escribí una brevísima descripción de lo que se va a hacer. Profundizar y escribir el objetivo final. Justificar elección.}
 
-%\section{Aportes}
+\section{Aportes}
+Se decidió implementar todo código en \textbf{Python}, apoyándose en la librería \href{https://opencv.org/}{OpenCV}.
+
+Se desarrolló un programa capaz de realizar el seguimiento de una sección deseada en tiempo real. El software permite al usuario seleccionar un área rectangular de su cámara, siendo los elementos dentro de dicha sección los cuales son seguidos por el programa.
+
 \textcolor{red}{
 \begin{itemize}
 	\item Descripción y análisis de lo original producido por el grupo.
@@ -86,7 +91,7 @@ Realizando el mismo proceso para todos los niveles de discretización en el eje 
 \end{itemize}
 }
 
-%\section{Desarrollo}
+\section{Desarrollo}
 \textcolor{red}{
 \begin{itemize}
 	\item Viabilidad, caminos alternativos.
