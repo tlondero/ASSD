@@ -280,7 +280,8 @@
 		
 		(dac_iout.center) -| ++ (-1,4.5) node[circ](aux4){} -- ++ (0,1) node[op amp, anchor = -, yscale =-1](u3){}
 		(u3.+) -- ++ (-1,0) node[ground](){}
-		(aux4.center) to[R, l_=$R_3$] ++(2.25,0) -| (u3.out) -- ++ (1,0) node[ocirc, label=above:$V_{OUT}$](){}		 
+		(aux4.center) to[R, l_=$R_3$] ++(2.25,0) -| (u3.out) -- ++ (1,0) node[ocirc, label=above:$V_{OUT}$](){}
+		(u3.out) node[circ](){}
 	;
 	
 %	%NODOS AUXILIARES
