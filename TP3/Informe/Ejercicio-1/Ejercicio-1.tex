@@ -235,7 +235,7 @@ Las celdas utilizadas para implementar dicho filtro corresponde a la topología 
 Si se tuviese que implementar la placa, no se utilizarían filtros implementados de manera discreta sino uno integrado como el MAX291, que es un filtro pasa bajos de Butterworth de orden 8, implementado con switch capacitors, pero debido a que no se pudo encontrar un modelo apto para el proteus, para la simulación se optó por el filtro implementado de manera discreta.
 \subsection{Resultados}
 
-Se observan distintas señales características del circuito en la Figura (\ref{result1}), donde la señal amarilla se mide a la salida del filtro anti-alias, la señal azul a la salida del S\&H, la señal roja a la salida del DAC y finalmente la señal verde a la salida del filtro recuperador.
+Se observan distintas señales características del circuito en la Figura (\ref{result1}) para una entrada sinusoidal de frecuencia cinco veces menor a la frecuencia de paso del filtro anti-alias, donde la señal amarilla se mide a la salida del filtro anti-alias, la señal azul a la salida del S\&H, la señal roja a la salida del DAC y finalmente la señal verde a la salida del filtro recuperador.
 
 \begin{figure}[H]
 \centering
@@ -244,22 +244,29 @@ Se observan distintas señales características del circuito en la Figura (\ref{
 \label{result1}
 \end{figure}
 
-Se puede ver en la Figura (\ref{result2}) una pérdida de amplitud de más del $10\%$ debido al muestreo.
+Se puede ver en la Figura (\ref{result2}) una pequeña pérdida de amplitud debido al muestreo, de alrededor de $150mV$.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\linewidth, page=1]{ImagenesEjercicio1/result2.png}
+\includegraphics[width=0.5\linewidth, page=1]{ImagenesEjercicio1/result2.png}
 \caption{Comparación entre la señal a la salida del filtro anti-alias y el filtro recuperador.}
 \label{result2}
 \end{figure}
 
-En la Figura (\ref{sh}) se puede ver que los calculos realizados para la señal de control del S\&H fueron correctas.
+En la Figura (\ref{sh}) y (\ref{sh2}) se puede ver que los calculos realizados para la señal de control del S\&H fueron correctas.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\linewidth, page=1]{ImagenesEjercicio1/S_H.png}
-\caption{Señal de control del S\&H, señal de entrada y señal a la salida del S\&H.}
+\caption{Señal de control del S\&H, señal de entrada y señal a la salida del S\&H, con una señal tipo rampa al sistema.}
 \label{sh}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\linewidth, page=1]{ImagenesEjercicio1/result3.png}
+\caption{Señal a la salida del filtro FAA, del S\&H y del DAC, con una entrada sinusoidal al sistema.}
+\label{sh2}
 \end{figure}
 
 \subsection{Mediciones}
