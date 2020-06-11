@@ -30,14 +30,14 @@ A continuación, se detalla la funcionalidad de cada pin del integrado mostrado 
 \item \textbf{8 Analog Inputs}: Aquí se colocan las entradas analógicas que se desean convertir. Se utilizó únicamente una sola de estas entradas, mientras que el resto se las conectó a tierra para evitar el ruido electromagnético.
 \item \textbf{3-bit Adress}: Esta entrada binaria permite seleccionar qué entrada analógica se utiliza para realizar la conversión. Estas entradas se conectaron permanentemente a tierra, de manera tal que siempre se realice la conversión con la primer entrada analógica.
 \item \textbf{Adress Latch Enable}: Para un valor alto, el ADC0808 mantiene registro del último adress ingresado. Se conectó a VCC.
-\item \textbf{VCC}: Tensión positiva de alimentación, se utilizó el valor de $5.12V$ de tal manera que la resolución a la salida sea de $20mV$ por bit.
+\item \textbf{VCC}: Tensión positiva de alimentación, se utilizó el valor de $5V$ resultando en una resolución a la salida de $19.6mV$ por bit.
 \item \textbf{GND}: Tierra del circuito
 \item \textbf{REF(+), REF(-)}: Tensiones de referencia para la red escalera 256R. Se conectó la referencia positiva a VCC y la negativa a GND.
-\item \textbf{Clock}: El clock utilizado fue el típico extraído de la datasheet, de $640kHz$.
+\item \textbf{Clock}: El clock utilizado fue cercano al valor máximo extraído de la datasheet, de $1.2MHz$.
 \item \textbf{Start}: Esta señal de control inicia un ciclo de conversión.
 \item \textbf{End of Conversion}: Esta señal de interrupción pasa a un estado alto cuando se acaba un ciclo de conversión. Si se conecta esta señal a la señal de \textbf{Start} se logra la máxima frecuencia de conversión para una señal de \textbf{Clock} fija.
 \item \textbf{8-bit Outputs}: Salida digital paralela de ocho bits.
-\item \textbf{Output Enable}: Permite utilizar la funcionalidad tri-state del buffer de salida. Este pin no fue utilizado.
+\item \textbf{Output Enable}: Permite utilizar la funcionalidad tri-state del buffer de salida. Este pin no fue utilizado y fue fijado en un estado alto.
 \end{itemize}
 
 \begin{figure}[H]
@@ -88,7 +88,7 @@ De esta forma, observando el gráfico de la hoja de datos mostrada en la Figura 
 
 \subsection{Máxima frecuencia de entrada sin Sample \& Hold}
 
-De la datasheet del ADC0808, se tiene que si $V_{CC} = V_{REF+} = 5V$ y $V_{REF-} = 0V$, la resolución será de $19.53125 \frac{mV}{bit}$. Si se utiliza una frecuencia de clock $f_{CLK} = 1.2MHz$ se tiene que $t_{c} = 52\mu s$ con un margen de seguridad como el que se analiza en la sección de restricciones temporales. Esto implica que la entrada no debe de tener una pendiente mayor a $\frac{19.53125mV}{52\mu s} = 376.6\frac{V}{s}$ para no introducir error en la cuantización de la señal.
+De la datasheet del ADC0808, se tiene que si $V_{CC} = V_{REF+} = 5V$ y $V_{REF-} = 0V$, la resolución será de $19.53125 \frac{mV}{bit}$. Si se utiliza una frecuencia de clock $f_{CLK} = 1.2MHz$ se tiene que $t_{c} = 52\mu s$ con un margen de seguridad como se analizó en la sección de restricciones temporales. Esto implica que la entrada no debe de tener una pendiente mayor a $\frac{19.53125mV}{52\mu s} = 376.6\frac{V}{s}$ para no introducir error en la cuantización de la señal.
 
 Si la señal de entrada se encuentra en el peor caso, es decir, con una excursión de tensión de $-0.1V + V_{REF-}$ a $5V + 0.1V$; esta se encuentra montada sobre un nivel de continua igual a $(5.1V - (-0.1V))/2 = 2.6V$; y esta se puede considerar senoidal gracias a la teoría desarrollada por Fourier; se tiene que la amplitud pico máxima de la senoidal puede ser $2.6V$. Luego, asumiendo el peor caso de la pendiente de la senoidal, para un ángulo igual a cero radianes, lo que permite utilizar la aproximación paraxial, se tiene que
 
@@ -110,7 +110,7 @@ Para convertir esta corriente en un nivel de tensión se utilizó el circuito pr
 	\label{fig:dacout}
 \end{figure}
 
-La salida va de 0 a $V_{fs}= I_{fs}cdot R_L$. En cuanto al pinout del DAC es el siguiente:
+La salida va de 0 a $V_{fs}= I_{fs} \cdot R_L$. En cuanto al pinout del DAC es el siguiente:
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{ImagenesEjercicio1/dacpinout.png}
@@ -214,8 +214,8 @@ por lo que la frecuencia de conversión del circuito total será de
 
 
 Tanto para el filtro anti alias como el filtro recuperador se tomaron las mismas especificaciones.
-Tomando como $f_p= 5kHz$ que es levemente menor a $\frac{11.5kHz}{2}\approx 5.75kHz $ y una $f_r$= 5.75kHZ.
-Se optó por utilizar la aproximación de Legendre debido a la planitud en banda pasante y la gran pendiente que este presenta comparada con la de un Butterworth, obteniendo para una $A_p$=1dB y $A_r$=35dB se obtiene un filtro de orden 14.
+Tomando como $f_p= 5kHz$ que es levemente menor a $\frac{12.5kHz}{2}\approx 6.25kHz $ y una $f_s$= 5.75kHZ.
+Se optó por utilizar la aproximación de Legendre debido a la planitud en banda pasante y la gran pendiente que este presenta comparada con la de un Butterworth, obteniendo para una $A_p$=1dB y $A_s$=35dB se obtiene un filtro de orden 14.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.7\linewidth, page=1]{ImagenesEjercicio1/magnitude.png}
@@ -235,7 +235,7 @@ Las celdas utilizadas para implementar dicho filtro corresponde a la topología 
 Si se tuviese que implementar la placa, no se utilizarían filtros implementados de manera discreta sino uno integrado como el MAX291, que es un filtro pasa bajos de Butterworth de orden 8, implementado con switch capacitors, pero debido a que no se pudo encontrar un modelo apto para el proteus, para la simulación se optó por el filtro implementado de manera discreta.
 \subsection{Resultados}
 
-Se observan distintas señales características del circuito en la Figura (\ref{result1}), donde la señal amarilla se mide a la salida del filtro anti-alias, la señal azul a la salida del S\&H, la señal roja a la salida del DAC y finalmente la señal verde a la salida del filtro recuperador.
+Se observan distintas señales características del circuito en la Figura (\ref{result1}) para una entrada sinusoidal de frecuencia cinco veces menor a la frecuencia de paso del filtro anti-alias, donde la señal amarilla se mide a la salida del filtro anti-alias, la señal azul a la salida del S\&H, la señal roja a la salida del DAC y finalmente la señal verde a la salida del filtro recuperador.
 
 \begin{figure}[H]
 \centering
@@ -244,32 +244,33 @@ Se observan distintas señales características del circuito en la Figura (\ref{
 \label{result1}
 \end{figure}
 
-Se puede ver en la Figura (\ref{result2}) una pérdida de amplitud de más del $10\%$ debido al muestreo.
+Se puede ver en la Figura (\ref{result2}) una pequeña pérdida de amplitud debido al muestreo, de alrededor de $150mV$.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\linewidth, page=1]{ImagenesEjercicio1/result2.png}
+\includegraphics[width=0.5\linewidth, page=1]{ImagenesEjercicio1/result2.png}
 \caption{Comparación entre la señal a la salida del filtro anti-alias y el filtro recuperador.}
 \label{result2}
 \end{figure}
 
-En la Figura (\ref{sh}) se puede ver que los calculos realizados para la señal de control del S\&H fueron correctas.
+En la Figura (\ref{sh}) y (\ref{sh2}) se puede ver que los calculos realizados para la señal de control del S\&H fueron correctas.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\linewidth, page=1]{ImagenesEjercicio1/S_H.png}
-\caption{Señal de control del S\&H, señal de entrada y señal a la salida del S\&H.}
+\caption{Señal de control del S\&H, señal de entrada y señal a la salida del S\&H, con una señal tipo rampa al sistema.}
 \label{sh}
 \end{figure}
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\linewidth, page=1]{ImagenesEjercicio1/result3.png}
+\caption{Señal a la salida del filtro FAA, del S\&H y del DAC, con una entrada sinusoidal al sistema.}
+\label{sh2}
+\end{figure}
+
 \subsection{Mediciones}
-\begin{center}
-	\LARGE{\textcolor{red}{\textbf{MEDIR DE VUELTA}}}
-\end{center}
-
 Finalmente para comprobar el correcto funcionamiento del circuito se utilizó la máxima $f_{clk}$ admisible por el circuito, de $1.2MHz$, una señal rampa de frecuencia $45Hz$ y una amplitud de $0V$ a $5V$, de tal manera que la pendiente no sea mayor que $376.6\frac{V}{s}$, calculado en la sección de funcionamiento sin S\&H. Si bien el límite teórico sería de aproximadamente $75Hz$ para la frecuencia de la rampa, se eligió esa frecuencia particular debido a que se tenia que el tiempo de conversión real era de $84.5\mu s$ y una resolución real de $19.5 mV$, por lo que si se quiere que en cada muestreo el ADC incremente su salida estrictamente por un solo bit, se deberá de tener una rampa con una pendiente de aproximadamente $\frac{19.5mV}{85.8\mu s} = 227.27 \frac{V}{s}$, por lo que la frecuencia debe ser cercana a $\left(\frac{5V}{227.27\frac{V}{s}}\right)^{-1} = 45.45Hz$.
-
-Según los cálculos teóricos realizados en secciones anteriores, se tendrá una frecuencia de muestreo de $\frac{1.2MHz \cdot 2}{96 \cdot 2} = 12.5kHz$. Se midió esta frecuencia de muestreo experimentalmente la cual fue de $11.655kHz$ mostrado en la Figura (\ref{med2}).
 
 \begin{figure}[H]
 \centering
@@ -284,11 +285,11 @@ Según los cálculos teóricos realizados en secciones anteriores, se tendrá un
 \caption{Medición de la frecuencia de muestreo experimental.}
 \label{med2}
 \end{figure}
+Según los cálculos teóricos realizados en secciones anteriores, se tendrá una frecuencia de muestreo de $\frac{1.2MHz \cdot 2}{96 \cdot 2} = 12.5kHz$. Se midió esta frecuencia de muestreo experimentalmente la cual fue de $11.655kHz$ mostrado en la Figura (\ref{med2}).
 
-Luego, se se midió el error de cuantización empleando el método de..
 
 \begin{center}
-	\LARGE{\textcolor{red}{\textbf{MÉTODO DE...}}}
+	\LARGE{\textcolor{red}{\textbf{Luego, se se midió el error de cuantización empleando el método de..}}}
 \end{center}
 
 Por otro lado, se midió la forma de onda a la salida del DAC a medida que se eliminaban bits menos significativos. Se puede ver el resultado detallado en las siguientes Figuras:
@@ -363,6 +364,6 @@ $Vi \ [mV]$ & $Vadc \ [Binario]$ & $Vo_{DAC} \ [mV]$ \\ \midrule
 \caption{Tensión a la salida del circuito para entradas dentro de todo el rango.}
 \end{table}
 
-Se puede ver que si bien algunos casos poseen un pequeño error, este nunca es mayor a $19.6mV$ excepto para el fondo de escala que se sitúa en $4.98V$ y no $5V$. Para esta cantidad de bits, se obtienen 256 estados posibles, de los cuales $\frac{5V}{256bit} \approx 19.6\frac{mV}{bit}$. Algunos valores no poseen error alguno, esto se debe a que $Vi\cdot \frac{5V}{256bit} \in \mathbb{Q}$??? $\mathbb{CHEQUEAR}$? 
+Se puede ver que si bien algunos casos poseen un pequeño error, este nunca es mayor a $19.6mV$ excepto para el fondo de escala que se sitúa en $4.98V$ y no $5V$. Para esta cantidad de bits, se obtienen 256 estados posibles, de los cuales $\frac{5V}{256bit} \approx 19.6\frac{mV}{bit}$. Algunos valores no poseen error alguno, esto se debe a que $Vi\cdot \frac{5V}{256bit} \in \mathbb{Q}$
 
 \end{document}
