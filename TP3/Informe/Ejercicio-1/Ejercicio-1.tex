@@ -211,14 +211,11 @@ por lo que la frecuencia de conversión del circuito total será de
 \[ 507Hz < f_{CONV} < 12.5kHz \]
 
 \subsection{FAA y FR}
-\begin{center}
-	\LARGE{\textcolor{red}{\textbf{CAMBIAR VALORES}}}
-\end{center}
 
 
 Tanto para el filtro anti alias como el filtro recuperador se tomaron las mismas especificaciones.
-Tomando como $f_p= 3.5kHz$ que es levemente menor a $\frac{7.2kHz}{2}\approx 3.6kHz $ y una $f_r$= 6kHZ.
-Se optó por utilizar la aproximación elíptica de cauer, obteniendo para una $A_p$=1dB y $A_r$=40dB se obtiene un filtro de orden 4.
+Tomando como $f_p= 5kHz$ que es levemente menor a $\frac{11.5kHz}{2}\approx 5.75kHz $ y una $f_r$= 5.75kHZ.
+Se optó por utilizar la aproximación de Legendre debido a la planitud en banda pasante y la gran pendiente que este presenta comparada con la de un Butterworth, obteniendo para una $A_p$=1dB y $A_r$=35dB se obtiene un filtro de orden 14.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.7\linewidth, page=1]{ImagenesEjercicio1/magnitude.png}
@@ -228,21 +225,21 @@ Se optó por utilizar la aproximación elíptica de cauer, obteniendo para una $
 \label{filtros}
 \end{figure}
 
-Las celdas utilizadas para implementar dicho filtro corresponde a la Sedra-Ghorab-Martin:
+Las celdas utilizadas para implementar dicho filtro corresponde a la topología Sallen-Key pasa bajos:
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\linewidth, page=1]{ImagenesEjercicio1/celdasSedras.png}
+\includegraphics[width=0.8\linewidth, page=1]{ImagenesEjercicio1/SK_LP.png}
 \caption{Filtro implementado.}
 \label{filtros}
 \end{figure}
-
+Si se tuviese que implementar la placa, no se utilizarían filtros implementados de manera discreta sino uno integrado como el MAX291, que es un filtro pasa bajos de Butterworth de orden 8, implementado con switch capacitors, pero debido a que no se pudo encontrar un modelo apto para el proteus, para la simulación se optó por el filtro implementado de manera discreta.
 \subsection{Resultados}
 
 Se observan distintas señales características del circuito en la Figura (\ref{result1}), donde la señal amarilla se mide a la salida del filtro anti-alias, la señal azul a la salida del S\&H, la señal roja a la salida del DAC y finalmente la señal verde a la salida del filtro recuperador.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.6\linewidth, page=1]{ImagenesEjercicio1/result1.png}
+\includegraphics[width=0.5\linewidth, page=1]{ImagenesEjercicio1/result1.png}
 \caption{Señales características del circuito.}
 \label{result1}
 \end{figure}
