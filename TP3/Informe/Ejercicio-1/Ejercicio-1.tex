@@ -110,7 +110,7 @@ Para convertir esta corriente en un nivel de tensión se utilizó el circuito pr
 	\label{fig:dacout}
 \end{figure}
 
-La salida va de 0 a $V_{fs}= I_{fs}cdot R_L$. En cuanto al pinout del DAC es el siguiente:
+La salida va de 0 a $V_{fs}= I_{fs} \cdot R_L$. En cuanto al pinout del DAC es el siguiente:
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{ImagenesEjercicio1/dacpinout.png}
@@ -214,8 +214,8 @@ por lo que la frecuencia de conversión del circuito total será de
 
 
 Tanto para el filtro anti alias como el filtro recuperador se tomaron las mismas especificaciones.
-Tomando como $f_p= 5kHz$ que es levemente menor a $\frac{11.5kHz}{2}\approx 5.75kHz $ y una $f_r$= 5.75kHZ.
-Se optó por utilizar la aproximación de Legendre debido a la planitud en banda pasante y la gran pendiente que este presenta comparada con la de un Butterworth, obteniendo para una $A_p$=1dB y $A_r$=35dB se obtiene un filtro de orden 14.
+Tomando como $f_p= 5kHz$ que es levemente menor a $\frac{12.5kHz}{2}\approx 6.25kHz $ y una $f_s$= 5.75kHZ.
+Se optó por utilizar la aproximación de Legendre debido a la planitud en banda pasante y la gran pendiente que este presenta comparada con la de un Butterworth, obteniendo para una $A_p$=1dB y $A_s$=35dB se obtiene un filtro de orden 14.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.7\linewidth, page=1]{ImagenesEjercicio1/magnitude.png}
@@ -357,6 +357,6 @@ $Vi \ [mV]$ & $Vadc \ [Binario]$ & $Vo_{DAC} \ [mV]$ \\ \midrule
 \caption{Tensión a la salida del circuito para entradas dentro de todo el rango.}
 \end{table}
 
-Se puede ver que si bien algunos casos poseen un pequeño error, este nunca es mayor a $19.6mV$ excepto para el fondo de escala que se sitúa en $4.98V$ y no $5V$. Para esta cantidad de bits, se obtienen 256 estados posibles, de los cuales $\frac{5V}{256bit} \approx 19.6\frac{mV}{bit}$. Algunos valores no poseen error alguno, esto se debe a que $Vi\cdot \frac{5V}{256bit} \in \mathbb{Q}$??? $\mathbb{CHEQUEAR}$? 
+Se puede ver que si bien algunos casos poseen un pequeño error, este nunca es mayor a $19.6mV$ excepto para el fondo de escala que se sitúa en $4.98V$ y no $5V$. Para esta cantidad de bits, se obtienen 256 estados posibles, de los cuales $\frac{5V}{256bit} \approx 19.6\frac{mV}{bit}$. Algunos valores no poseen error alguno, esto se debe a que $Vi\cdot \frac{5V}{256bit} \in \mathbb{Q}$
 
 \end{document}
