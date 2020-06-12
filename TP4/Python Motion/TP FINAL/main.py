@@ -10,6 +10,7 @@ feature_params = dict(maxCorners=300, qualityLevel=0.2,
 # Parameters for Lucas-Kanade optical flow
 lk_params = dict(winSize=(15, 15), maxLevel=2, criteria=(
     cv.TERM_CRITERIA_EPS | cv.TERM_CRITERIA_COUNT, 10, 0.03))
+
 # The video feed is read in as a VideoCapture object
 # cap = cv.VideoCapture("shibuya.mp4")
 cap = cv.VideoCapture(0)
@@ -21,6 +22,8 @@ prev_gray = cv.cvtColor(first_frame, cv.COLOR_BGR2GRAY)
 # Finds the strongest corners in the first frame by Shi-Tomasi method - we will track the optical flow for these corners
 # https://docs.opencv.org/3.0-beta/modules/imgproc/doc/feature_detection.html#goodfeaturestotrack
 prev = cv.goodFeaturesToTrack(prev_gray, mask=None, **feature_params)
+print(prev)
+
 # Creates an image filled with zero intensities with the same dimensions as the frame - for later drawing purposes
 mask = np.zeros_like(first_frame)
 # ret = a boolean return value from getting the frame, frame = the current frame being projected in the video
@@ -37,12 +40,12 @@ while(cap.isOpened()):
     gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
     # Calculates sparse optical flow by Lucas-Kanade method
     # https://docs.opencv.org/3.0-beta/modules/video/doc/motion_analysis_and_object_tracking.html#calcopticalflowpyrlk
-    next, status, error = cv.calcOpticalFlowPyrLK(
+    next_, status, error = cv.calcOpticalFlowPyrLK(
         prev_gray, gray, prev, None, **lk_params)
     # Selects good feature points for previous position
     good_old = prev[status == 1]
     # Selects good feature points for next position
-    good_new = next[status == 1]
+    good_new = next_[status == 1]
 
     # Draws the optical flow tracks
     for i, (new, old) in enumerate(zip(good_new, good_old)):
