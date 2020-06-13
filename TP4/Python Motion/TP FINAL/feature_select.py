@@ -34,8 +34,8 @@ prev = cv.goodFeaturesToTrack(
 ret, frame = cap.read()
 
 
-for p in prev:
-    cv.Circle(frame, (p[0], p[1]), (0, 255, 0), -1)
+# for p in prev:
+#     cv.Circle(frame, (p[0], p[1]), (0, 255, 0), -1)
 
 
 cv.imshow("Capture", frame[y:y+h, x:x+w])
@@ -45,9 +45,9 @@ print(prev)
 
 while(cap.isOpened()):
 
-    # ret, frame = cap.read()
+    ret, frame = cap.read()
 
-    # cv.imshow("Capture", frame[y:y+h, x:x+w])
+    cv.imshow("Capture", frame[y:y+h, x:x+w])
 
     if cv.waitKey(10) & 0xFF == ord('q'):
         break

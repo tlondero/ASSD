@@ -1,5 +1,5 @@
 import cv2 as cv
-
+import util as util
 import numpy as np
 
 # Parameters for Shi-Tomasi corner detection
@@ -8,7 +8,7 @@ feature_params = dict(maxCorners=300, qualityLevel=0.2,
 
 
 # Parameters for Lucas-Kanade optical flow
-lk_params = dict(winSize=(15, 15), maxLevel=2, criteria=(
+lk_params = dict(winSize=(15, 15), maxLevel=4, criteria=(
     cv.TERM_CRITERIA_EPS | cv.TERM_CRITERIA_COUNT, 10, 0.03))
 
 # The video feed is read in as a VideoCapture object
@@ -21,16 +21,26 @@ ret, first_frame = cap.read()
 prev_gray = cv.cvtColor(first_frame, cv.COLOR_BGR2GRAY)
 # Finds the strongest corners in the first frame by Shi-Tomasi method - we will track the optical flow for these corners
 # https://docs.opencv.org/3.0-beta/modules/imgproc/doc/feature_detection.html#goodfeaturestotrack
-prev = cv.goodFeaturesToTrack(prev_gray, mask=None, **feature_params)
-print(prev)
+# Aca vamos a seleccionar con el mouse
+bbox = cv.selectROI("sparse optical flow", first_frame, False)
+x = bbox[0]
+y = bbox[1]
+w = bbox[2]
+h = bbox[3]
+
+prev = cv.goodFeaturesToTrack(
+    prev_gray[y:y+h, x:x+w], mask=None, **feature_params)
+
+# prev = util.space_translate(bbox, prev)  # Cambio de coordenadas
+
+print(f"esto es {prev}")
 
 # Creates an image filled with zero intensities with the same dimensions as the frame - for later drawing purposes
 mask = np.zeros_like(first_frame)
 # ret = a boolean return value from getting the frame, frame = the current frame being projected in the video
 ret, frame = cap.read()
 
-# Aca vamos a seleccionar con el mouse
-bbox = cv.selectROI("sparse optical flow", frame, False)
+print(f" shape de los frame {frame.shape}")
 
 while(cap.isOpened()):
 
