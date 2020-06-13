@@ -2,13 +2,12 @@ from SigmaDelta import SigmaDelta
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import signal
-# from scipy.fft import fft
 
 
 def bitStreamDemo():
     f0 = 500  # Sine wave fundamental frequency
     T0 = 1/f0
-    fs = 5*f0  # Nyquist frecuency
+    fs = 2.2*f0  # Nyquist frecuency with some guard
     Ts = 1/fs  # Time between samples
     p = 3  # Ammount of periods to display
     L = 64  # Oversampling factor
@@ -16,12 +15,12 @@ def bitStreamDemo():
 
     sd = SigmaDelta()
 
-    time = np.arange(0, p*T0, Ts)
+    time = np.arange(0, p*T0, Ts/L)
 
     sine1 = A*np.sin(2*np.pi*f0*time)
 
     resampled_y, resampled_t, out_binary_stream = sd.modulator(
-        time, sine1, L=L)
+        time, sine1, L=1)
 
     plt.step(resampled_t, out_binary_stream, label="bit-stream")
     plt.plot(resampled_t, resampled_y,
@@ -46,7 +45,7 @@ def noiseShapingDemo1(scale="linear"):
 
     f0 = 500  # Sine wave fundamental frequency
     T0 = 1/f0
-    fs = 2.2*f0  # Nyquist frecuency
+    fs = 2.2*f0  # Nyquist frecuency with some guard
     Ts = 1/fs  # Time between samples
     p = 3  # Ammount of periods to display
     L = 256  # Oversampling factor
@@ -197,33 +196,71 @@ def quantizationNoiseShapingDemo():
     plt.show()
 
 
-def fullDemo():
-    f0 = 500
-    fn = 2*500
-    T0 = 1/500
-    K = 128
-    # Sampleamos nuestra señal 64 veces por encima de la frecuencia de Nyquist, es decir
-    # a unos 64Khz
-    time = np.arange(0, 4*T0, 1/(fn*K))
-    sineDemo = 0.5*np.sin(2*np.pi*time*f0)
+def signalRecoveryDemo(L=256, D=16):
+    """
+    Parameters
+    ----------
+    L: int
+        Oversampling rate
+    D: int
+        Decimation factor
 
-    sigma_delta_ADC = SigmaDelta()
+    """
+    f0 = 500  # Sine wave fundamental frequency
+    T0 = 1/f0
+    nyquist_factor = 2.2
+    fs = nyquist_factor*f0  # Nyquist frecuency
+    Ts = 1/fs  # Time between samples
+    p = 1  # Ammount of periods to display
+    L = L  # 256  # Oversampling factor
+    A = 0.5  # Sinewave amplitud
+    D = D  # Decimation factor
 
-    # Podemos simular una operación de sobremuestreo para expandir nuestra base de muestras
-    # pero en este caso no lo haremos
-    resampled_y, resampled_t, out_binary_stream = sigma_delta_ADC.modulator(
-        time, sineDemo, L=10)
+    sd = SigmaDelta()
 
-    plt.xlabel("time [seg]")
-    plt.ylabel("amplitude [V]")
+    time = np.arange(0, p*T0, Ts/L)
 
-    plt.step(resampled_t, out_binary_stream)
-    plt.plot(time, sineDemo, label=f"original waveform f0: {f0} Hz")
+    sine1 = A*np.sin(2*np.pi*f0*time)
+
+    resampled_y, resampled_t, out_binary_stream = sd.modulator(
+        time, sine1)
+
+    plt.step(resampled_t, out_binary_stream,
+             label="bit-stream", color="magenta")
+    plt.plot(resampled_t, resampled_y,
+             label="Oversampled Input signal", color="black")
+
+    recoveredSignal = signal.decimate(resampled_y, q=D, ftype="fir")
+    scaling_factor = resampled_t[-1]/(len(recoveredSignal)-1)
+
+    recoveredT = np.arange(0, len(recoveredSignal))*scaling_factor
+
+    plt.stem(recoveredT, recoveredSignal,
+             label="señal recuperada")
+    plt.step(recoveredT, recoveredSignal,
+             label="señal recuperada", color="yellow")
+
+    plt.title(
+        f"DEMO Salida del modulador OS factor L: {L}, D factor{D} $Fos$ = {fs*L}Hz ")
+    plt.xlabel("tiempo [segs]")
+    plt.ylabel("amplitud [V]")
+    plt.legend(loc="upper right")
+
     plt.show()
 
 
-# bitStreamDemo()
-# noiseShapingDemo1("linear")
-# noiseShapingDemo2("dbm")
-quantizationNoiseShapingDemo()
-# fullDemo()
+# Demostración de la modulación Sigma-delta
+# bitStreamDemo() #Descomentar para correr
+
+# Muestra las diferencias entre diferentes tasas de sobre-muestreo
+# noiseShapingDemo1("linear") #Descomentear para correr
+
+# Demostración de lo que le ocurre a nuestra información luego de ser moduladada
+# noiseShapingDemo2("dbm") #Descomentar y correr
+
+# Demostración de como el ruido de cuantización es trasladado hacia altas frecuencias
+# quantizationNoiseShapingDemo()  #Descomentar y correr
+
+# Demostración completa, modulación y demodulación
+# Los valores propuestos tiene fines ilustrativos
+signalRecoveryDemo(L=256, D=32)  # Descomentar y correr
