@@ -36,15 +36,16 @@ def main():
 
     cv.namedWindow("Kalman")
 
-    while True:
-        state = 0.2 * np.random.randn(2, 1)
 
+    while True:
+
+        state = 0.2 * np.random.randn(2, 1)
         kalman.transitionMatrix = np.array([[1., 1.], [0., 1.]]) ##F
         kalman.measurementMatrix = 1. * np.ones((1, 2)) ##H
         kalman.processNoiseCov = 1e-5 * np.eye(2) ##Q
         kalman.measurementNoiseCov = 1e-1 * np.ones((1, 1)) ##R
         kalman.errorCovPost = 1. * np.ones((2, 2)) ##P post
-        kalman.statePost = 0.1 * np.random.randn(2, 1) ##X post
+        kalman.statePost = 0.1 * np.random.randn(2, 1)  ##X post
 
         while True:
             def calc_point(angle):

@@ -2,6 +2,8 @@ import numpy as np
 import cv2 as cv
 
 def space_translate(x, y, prev):
+    if(type(prev) == None):
+        return None
     for i in range(prev.shape[0]):
             prev[i][0][0] = prev[i][0][0] + x
             prev[i][0][1] = prev[i][0][1] + y
