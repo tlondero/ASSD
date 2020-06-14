@@ -104,7 +104,7 @@ while(cap.isOpened()):
     # Frames are read by intervals of 10 milliseconds. The programs breaks out of the while loop when the user presses the 'q' key
     if cv.waitKey(10) & 0xFF == ord('q'):
         break
-        
+
 # The following frees up resources and closes all windows
 cap.release()
 cv.destroyAllWindows()

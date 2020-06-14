@@ -12,15 +12,6 @@ w = bbox[2]
 h = bbox[3]
 print(f"Primera bounding box {bbox}")
 
-
-# bbox1 = cv.selectROI("Capture", first_frame, False)
-# x1 = bbox1[0]
-# y1 = bbox1[1]
-# w1 = bbox1[2]
-# h1 = bbox1[3]
-# print(f"Segunda bounding box {bbox1}")
-
-
 prev_gray = cv.cvtColor(first_frame, cv.COLOR_BGR2GRAY)
 
 # Parameters for Shi-Tomasi corner detection
