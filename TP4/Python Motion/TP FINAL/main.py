@@ -3,7 +3,7 @@ import util as util
 import numpy as np
 
 # Parameters for Shi-Tomasi corner detection
-feature_params = dict(maxCorners=300, qualityLevel=0.2,
+feature_params = dict(maxCorners=100, qualityLevel=0.2,
                       minDistance=2, blockSize=7)
 
 
@@ -31,20 +31,66 @@ h = bbox[3]
 prev = cv.goodFeaturesToTrack(
     prev_gray[y:y+h, x:x+w], mask=None, **feature_params)
 
-# prev = util.space_translate(bbox, prev)  # Cambio de coordenadas
+prev = util.space_translate(x, y, prev)  # Cambio de coordenadas
 
-print(f"esto es {prev}")
+#print(f"esto es {prev}")
 
 # Creates an image filled with zero intensities with the same dimensions as the frame - for later drawing purposes
 mask = np.zeros_like(first_frame)
 # ret = a boolean return value from getting the frame, frame = the current frame being projected in the video
 ret, frame = cap.read()
 
-print(f" shape de los frame {frame.shape}")
+
+#print(f" shape de los frame {frame.shape}")
+
+prev_x = []
+prev_y = []
+frame_num = 0               #Contador de frames analizados
+RECALC_EVERY_FRAMES = 20    #Cantidad de frames que pasan entre cada recalculacion de los puntitos
 
 while(cap.isOpened()):
 
+    frame_num += 1
     ret, frame = cap.read()
+
+    if(frame_num != 0 and frame_num%RECALC_EVERY_FRAMES == 0): # Cuando TRUE entonces se recalculan los puntitos descartando outliers y aplicando el metodo de SHITOMASI
+                                                                #nuevamente. Se tiene en consideracion ancho y alto de la bounding box inicial para calclular la nueva.
+        frame_num = 0
+
+        prev_x.clear()
+        prev_y.clear()
+        for i in range(prev.shape[0]):
+            prev_x.append(prev[i][0][0])
+            prev_y.append(prev[i][0][1])
+
+        x_mean = np.mean(np.asarray(prev_x))
+        y_mean = np.mean(np.asarray(prev_y))
+
+        x_std = np.std(np.asarray(prev_x))
+        y_std = np.std(np.asarray(prev_y))
+
+        for i in range(len(prev_x)):
+            if (len(prev_x) == i):
+                break
+            if(abs(prev_x[i] - x_mean) > 2*x_std):
+                del prev_x[i]
+
+        for i in range(len(prev_y)):
+            if (len(prev_y) == i):
+                break
+            if (abs(prev_y[i] - y_mean) > 2 * y_std):
+                del prev_y[i]
+
+        x = int(x_mean-(w/2))
+        y = int(y_mean-(h/2))
+
+
+        prev = cv.goodFeaturesToTrack(
+            prev_gray[y:y + h, x:x + w], mask=None,
+            **feature_params)
+        prev = util.space_translate(x,
+                                    y,
+                                    prev)  # Cambio de coordenadas
 
     # Converts each frame to grayscale - we previously only converted the first frame to grayscale
     gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
@@ -67,7 +113,7 @@ while(cap.isOpened()):
         mask = cv.line(mask, (a, b), (c, d), color, 2)
         # Draws filled circle (thickness of -1) at new position with green color and radius of 3
         frame = cv.circle(frame, (a, b), 3, color, -1)
-
+    mask = 0
     # Overlays the optical flow tracks on the original frame
     output = cv.add(frame, mask)
     # Updates previous frame
