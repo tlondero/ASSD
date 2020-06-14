@@ -3,8 +3,21 @@ import util as util
 import numpy as np
 
 # Parameters for Shi-Tomasi corner detection
-feature_params = dict(maxCorners=1000, qualityLevel=0.99,
-                      minDistance=2, blockSize=7)
+feature_params = dict(maxCorners=1000, qualityLevel=0.2,
+                      minDistance=0.5, blockSize=7)
+
+"""
+image – Input 8-bit or floating-point 32-bit, single-channel image.
+corners – Output vector of detected corners.
+maxCorners – Maximum number of corners to return. If there are more corners than are found, the strongest of them is returned.
+qualityLevel – Parameter characterizing the minimal accepted quality of image corners. The parameter value is multiplied by the best corner quality measure, which is the minimal eigenvalue (see cornerMinEigenVal() ) or the Harris function response (see cornerHarris() ). The corners with the quality measure less than the product are rejected. For example, if the best corner has the quality measure = 1500, and the qualityLevel=0.01 , then all the corners with the quality measure less than 15 are rejected.
+minDistance – Minimum possible Euclidean distance between the returned corners.
+mask – Optional region of interest. If the image is not empty (it needs to have the type CV_8UC1 and the same size as image ), it specifies the region in which the corners are detected.
+blockSize – Size of an average block for computing a derivative covariation matrix over each pixel neighborhood. See cornerEigenValsAndVecs() .
+useHarrisDetector – Parameter indicating whether to use a Harris detector (see cornerHarris()) or cornerMinEigenVal().
+k – Free parameter of the Harris detector.
+"""
+
 
 # Parameters for Lucas-Kanade optical flow
 lk_params = dict(winSize=(15, 15), maxLevel=4, criteria=(
@@ -29,8 +42,10 @@ while(prev is None):
 
     x = bbox[0]
     y = bbox[1]
-    w = bbox[2]
+    w= bbox[2]
+    initial_w = w
     h = bbox[3]
+    initial_h = h
 
     # Finds the strongest corners in the first frame by Shi-Tomasi method - we will track the optical flow for these corners
     # https://docs.opencv.org/3.0-beta/modules/imgproc/doc/feature_detection.html#goodfeaturestotrack
@@ -50,7 +65,7 @@ ret, frame = cap.read()
 frame_num = 0
 recalc = False
 #Frame count until recalculation
-RECALC_EVERY_FRAMES = 40
+RECALC_EVERY_FRAMES = 60
 
 while(cap.isOpened()):
 
@@ -60,10 +75,15 @@ while(cap.isOpened()):
 
     #Recalculation of optical flow points using confidence intervals and shi-tomasi method
     if((frame_num != 0 and frame_num%RECALC_EVERY_FRAMES == 0) or recalc):
-        frame_num = 0
-        x, y = util.get_new_box_coordinates(prev, h, w) #New bounding box coordinates
-        prev = cv.goodFeaturesToTrack(prev_gray[y:y + h, x:x + w], mask=None, **feature_params) #Applying shi-tomasi method
-        prev = util.space_translate(x, y, prev)  #Coordinate transform from bounding box to camera window
+        if(not recalc):
+            frame_num = 0
+            x, y = util.get_new_box_coordinates(prev, h, w) #New bounding box coordinates
+            prev = cv.goodFeaturesToTrack(prev_gray[y:y + h, x:x + w], mask=None, **feature_params) #Applying shi-tomasi method
+            prev = util.space_translate(x, y, prev)  #Coordinate transform from bounding box to camera window
+        else:
+            prev = cv.goodFeaturesToTrack(prev_gray[y:y + h, x:x + w], mask=None,
+                                          **feature_params)  # Applying shi-tomasi method
+            prev = util.space_translate(x, y, prev)  # Coordinate transform from bounding box to camera window
         recalc = False
 
     # Converts each frame to grayscale - we previously only converted the first frame to grayscale
@@ -74,13 +94,18 @@ while(cap.isOpened()):
     next_, status, error = cv.calcOpticalFlowPyrLK(
         prev_gray, gray, prev, None, **lk_params)
 
+    if(np.all(status)):
+        # Selects good feature points for previous position
+        good_old = prev[status == 1]
 
-
-    # Selects good feature points for previous position
-    good_old = prev[status == 1]
-
-    # Selects good feature points for next position
-    good_new = next_[status == 1]
+        # Selects good feature points for next position
+        good_new = next_[status == 1]
+    elif(len(status) == 1 and status == 0):
+        recalc = True
+    else:
+        pass
+    if(not np.all(status)):
+        hola = 1
 
     # Draws the optical flow tracks
     for i, (new, old) in enumerate(zip(good_new, good_old)):

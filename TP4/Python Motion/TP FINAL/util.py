@@ -2,7 +2,7 @@ import numpy as np
 import cv2 as cv
 
 def space_translate(x, y, prev):
-    if(type(prev) == None):
+    if prev is None:
         return None
     for i in range(prev.shape[0]):
             prev[i][0][0] = prev[i][0][0] + x
@@ -38,6 +38,9 @@ def get_new_box_coordinates(prev, h, w):
             break
         if (abs(prev_y[i] - y_mean) > SIGMA_INTERVAL * y_std):
             del prev_y[i]
+
+    x_mean = np.mean(np.asarray(prev_x))
+    y_mean = np.mean(np.asarray(prev_y))
 
     x = int(x_mean - (w / 2))
     y = int(y_mean - (h / 2))
