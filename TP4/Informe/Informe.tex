@@ -79,9 +79,17 @@ Se analizaron diversas formas de lograr el seguimiento de un objeto. Finalmente 
 \textcolor{blue}{Escribí una brevísima descripción de lo que se va a hacer. Profundizar y escribir el objetivo final. Justificar elección.}
 
 \section{Aportes}
-Se decidió implementar todo código en \textbf{Python}, apoyándose en la librería \href{https://opencv.org/}{OpenCV}.
+Se decidió implementar código en \textbf{Python}, apoyándose en la librería \href{https://opencv.org/}{OpenCV}.
 
-Se desarrolló un programa capaz de realizar el seguimiento de una sección deseada en tiempo real. El software permite al usuario seleccionar un área rectangular de su cámara, siendo los elementos dentro de dicha sección los cuales son seguidos por el programa.
+Primero se desarrolló un programa capaz de realizar la estimación de una variable mediante el uso del filtro especificado anteriormente. Se puede observar el funcionamiento del algoritmo a continuación: se comparan dos curvas, por un lado una senoidal con un ruido gaussiano montado sobre ella, simulando una medición imprecisa, y por el otro lado, la estimación obtenida a partir del filtro desarrollado.
+%\begin{figure}[H]
+%\centering
+%	\includegraphics[width=0.5\textwidth]{Imagenes/seno-kalman.png}
+%	\caption{Coseno con ruido (xxx) comparada con estimación de Kalman (xxx).}
+%	\label{fig:kalman-comp}
+%\end{figure}
+
+Luego se buscó utilizar el código previamente mencionado para estimar el movimiento de un objeto en tiempo real. Es así que se realizó un software que permite al usuario seleccionar un área rectangular de su cámara, siendo los elementos dentro de dicha sección los cuales son seguidos por el programa.
 
 \textcolor{red}{
 \begin{itemize}
