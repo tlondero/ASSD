@@ -9,6 +9,20 @@ def space_translate(x, y, prev):
             prev[i][0][1] = prev[i][0][1] + y
     return prev
 
+def calculate_means_and_std(prev):
+
+    prev_x = []
+    prev_y = []
+
+    for i in range(prev.shape[0]):
+        prev_x.append(prev[i][0][0])
+        prev_y.append(prev[i][0][1])
+
+    x_mean = np.mean(np.asarray(prev_x))
+    y_mean = np.mean(np.asarray(prev_y))
+    var = np.sqrt((np.std(np.asarray(prev_x))**2 + np.std(np.asarray(prev_y))**2))
+
+    return (x_mean, y_mean, var)
 
 def get_new_box_coordinates(prev, h, w):
 

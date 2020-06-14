@@ -3,7 +3,7 @@ import util as util
 import numpy as np
 
 # Parameters for Shi-Tomasi corner detection
-feature_params = dict(maxCorners=1000, qualityLevel=0.2,
+feature_params = dict(maxCorners=1000, qualityLevel=0.1,
                       minDistance=0.5, blockSize=7)
 
 """
@@ -18,7 +18,6 @@ useHarrisDetector – Parameter indicating whether to use a Harris detector (see
 k – Free parameter of the Harris detector.
 """
 
-
 # Parameters for Lucas-Kanade optical flow
 lk_params = dict(winSize=(15, 15), maxLevel=4, criteria=(
     cv.TERM_CRITERIA_EPS | cv.TERM_CRITERIA_COUNT, 10, 0.03))
@@ -29,6 +28,36 @@ cap = cv.VideoCapture(0)
 
 # Variable for color to draw optical flow track
 color = (0, 255, 0)
+
+""" FILTRO DE KAMMANN"""
+
+dt = 1e-2                   #delta time
+INITIAL_STATE_COV = 0.2
+PROCESS_COV = 0.05      #process covariance, si es chico entonces la estimacion tiene menos ruido pero es menos precisa
+                           #si es grande la estimacion tiene mas ruido pero es mas precisa
+MEAS_MATRIX = 1.
+MEAS_NOISE_COV = 1e-1       #covarianza de medicion
+
+kalman = cv.KalmanFilter(4, 2, 0) #se inicializa el filtro kalman con 4 variables de estado y 2 variables de medicion
+
+kalman.transitionMatrix = np.array([[1., 0., dt, 0.],
+                                    [0., 1., 0., dt],
+                                    [0., 0., 1., 0.],
+                                    [0., 0., 0., 1.]]) #Matriz F
+
+kalman.measurementMatrix = MEAS_MATRIX * np.array([ [1, 0, 0, 0], [ 0, 1, 0, 0]])  #Matriz H, donde se dice que solo se
+                                                                                #mide la posicion y no la velocidad
+kalman.processNoiseCov = PROCESS_COV * np.identity(4)  #Matriz Q
+
+kalman.measurementNoiseCov = MEAS_NOISE_COV * np.identity(2)  #Matriz R
+
+kalman.errorCovPost = np.identity(4) * INITIAL_STATE_COV  #Matriz de covarianza inicial
+
+kalman.statePost = np.array([0., 0., 0., 0.]).reshape(4, 1)  #Matriz de estado inicial
+
+"""@@@@@@@@@@@@@@@@@@"""
+
+
 prev = None
 while(prev is None):
     # ret = a boolean return value from getting the frame, first_frame = the first frame in the entire video sequence
@@ -107,6 +136,15 @@ while(cap.isOpened()):
     if(not np.all(status)):
         hola = 1
 
+    (mux, muy, var) = util.calculate_means_and_std(next_)
+
+    kalman.predict()  # Asi se predice, la prediccion se guarda en las matrices de
+    # statepre y errorcovpre.
+
+    kalman.correct((float(mux), float(muy)))  # Asi se anade una medicion como una tupla de posicion x y posicion y
+    # la prediccion corregida se guarda en statePost y errorcovPost
+
+
     # Draws the optical flow tracks
     for i, (new, old) in enumerate(zip(good_new, good_old)):
         # Returns a contiguous flattened array as (x, y) coordinates for new point
@@ -118,6 +156,9 @@ while(cap.isOpened()):
         # Draws filled circle (thickness of -1) at new position with green color and radius of 3
         frame = cv.circle(frame, (a, b), 3, color, -1)
 
+
+    frame = cv.circle(frame, (int(kalman.statePost[0][0]), int(kalman.statePost[1][0])), int(np.sqrt(kalman.errorCovPost[0][0]**2 + kalman.errorCovPost[1][1]*2)*100), (0, 130, 255), 3)
+    #frame = cv.circle(frame, (mux, muy), 10, (0, 0, 255), 3)
     mask = 0
 
     # Overlays the optical flow tracks on the original frame

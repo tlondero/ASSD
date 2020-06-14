@@ -2,7 +2,7 @@ import cv2 as cv
 import numpy as np
 import matplotlib.pyplot as plt
 
-dt = 1.                    #delta time
+dt = 1e-2                   #delta time
 INITIAL_STATE_COV = 0.2
 PROCESS_COV = 0.00001      #process covariance, si es chico entonces la estimacion tiene menos ruido pero es menos precisa
                            #si es grande la estimacion tiene mas ruido pero es mas precisa
