@@ -1,7 +1,7 @@
 import cv2 as cv
 import util as util
 import numpy as np
-
+import time
 # Parameters for Shi-Tomasi corner detection
 feature_params = dict(maxCorners=1000, qualityLevel=0.1,
                       minDistance=0.5, blockSize=7)
@@ -23,8 +23,11 @@ lk_params = dict(winSize=(15, 15), maxLevel=4, criteria=(
     cv.TERM_CRITERIA_EPS | cv.TERM_CRITERIA_COUNT, 10, 0.03))
 
 # The video feed is read in as a VideoCapture object
-# cap = cv.VideoCapture("shibuya.mp4")
+#cap = cv.VideoCapture("videoPeq2.mp4")
 cap = cv.VideoCapture(0)
+for i in range(30):
+    cap.read()
+
 
 # Variable for color to draw optical flow track
 color = (0, 255, 0)
@@ -59,6 +62,7 @@ kalman.statePost = np.array([0., 0., 0., 0.]).reshape(4, 1)  #Matriz de estado i
 
 
 prev = None
+
 while(prev is None):
     # ret = a boolean return value from getting the frame, first_frame = the first frame in the entire video sequence
     ret, first_frame = cap.read()
@@ -94,7 +98,7 @@ ret, frame = cap.read()
 frame_num = 0
 recalc = False
 #Frame count until recalculation
-RECALC_EVERY_FRAMES = 60
+RECALC_EVERY_FRAMES = 20
 
 while(cap.isOpened()):
 
@@ -155,9 +159,12 @@ while(cap.isOpened()):
         mask = cv.line(mask, (a, b), (c, d), color, 2)
         # Draws filled circle (thickness of -1) at new position with green color and radius of 3
         frame = cv.circle(frame, (a, b), 3, color, -1)
-
+        frame = cv.circle(frame, (int(kalman.statePost[0][0]), int(kalman.statePost[1][0])),
+                          int(np.sqrt(kalman.errorCovPost[0][0] ** 2 + kalman.errorCovPost[1][1] * 2) * 100),
+                          (0, 130, 255), 3)
 
     frame = cv.circle(frame, (int(kalman.statePost[0][0]), int(kalman.statePost[1][0])), int(np.sqrt(kalman.errorCovPost[0][0]**2 + kalman.errorCovPost[1][1]*2)*100), (0, 130, 255), 3)
+    prev_gray=np.append(prev_gray,[[int(kalman.statePost[0][0]), int(kalman.statePost[1][0])]])
     #frame = cv.circle(frame, (mux, muy), 10, (0, 0, 255), 3)
     mask = 0
 
