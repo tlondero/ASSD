@@ -13,58 +13,66 @@ lk_params = dict(winSize=(15, 15), maxLevel=4, criteria=(
 # The video feed is read in as a VideoCapture object
 # cap = cv.VideoCapture("shibuya.mp4")
 cap = cv.VideoCapture(0)
+
 # Variable for color to draw optical flow track
 color = (0, 255, 0)
+
 # ret = a boolean return value from getting the frame, first_frame = the first frame in the entire video sequence
 ret, first_frame = cap.read()
+
+#Convert to gray-scale
 prev_gray = cv.cvtColor(first_frame, cv.COLOR_BGR2GRAY)
-# Finds the strongest corners in the first frame by Shi-Tomasi method - we will track the optical flow for these corners
-# https://docs.opencv.org/3.0-beta/modules/imgproc/doc/feature_detection.html#goodfeaturestotrack
-# Aca vamos a seleccionar con el mouse
+
+# Aca vamos a seleccionar con el mouse el area donde aplicar shi-tomasi
 bbox = cv.selectROI("sparse optical flow", first_frame, False)
 x = bbox[0]
 y = bbox[1]
 w = bbox[2]
 h = bbox[3]
 
+# Finds the strongest corners in the first frame by Shi-Tomasi method - we will track the optical flow for these corners
+# https://docs.opencv.org/3.0-beta/modules/imgproc/doc/feature_detection.html#goodfeaturestotrack
 prev = cv.goodFeaturesToTrack(
     prev_gray[y:y+h, x:x+w], mask=None, **feature_params)
 
-prev = util.space_translate(x, y, prev)  # Cambio de coordenadas
-
-#print(f"esto es {prev}")
+#Coordinate transform from bounding box to camera window
+prev = util.space_translate(x, y, prev)
 
 # Creates an image filled with zero intensities with the same dimensions as the frame - for later drawing purposes
 mask = np.zeros_like(first_frame)
+
 # ret = a boolean return value from getting the frame, frame = the current frame being projected in the video
 ret, frame = cap.read()
 
-
-#print(f" shape de los frame {frame.shape}")
-
-frame_num = 0               #Contador de frames analizados
-RECALC_EVERY_FRAMES = 10    #Cantidad de frames que pasan entre cada recalculacion de los puntitos
+#Frame counter
+frame_num = 0
+#Frame count until recalculation
+RECALC_EVERY_FRAMES = 10
 
 while(cap.isOpened()):
 
     frame_num += 1
+    #Take camera frame
     ret, frame = cap.read()
 
-    if(frame_num != 0 and frame_num%RECALC_EVERY_FRAMES == 0): # Cuando TRUE entonces se recalculan los puntitos descartando outliers y aplicando el metodo de SHITOMASI
-                                                                #nuevamente. Se tiene en consideracion ancho y alto de la bounding box inicial para calclular la nueva.
+    #Recalculation of optical flow points using confidence intervals and shi-tomasi method
+    if(frame_num != 0 and frame_num%RECALC_EVERY_FRAMES == 0):
         frame_num = 0
-        x, y = util.get_new_box_coordinates(prev, h, w) #Recibo nuevas coordenadas para la bounding box
-        prev = cv.goodFeaturesToTrack(prev_gray[y:y + h, x:x + w], mask=None, **feature_params) #aplico algoritmo shitomasi
-        prev = util.space_translate(x, y, prev)  # trasformacion de coordenadas
+        x, y = util.get_new_box_coordinates(prev, h, w) #New bounding box coordinates
+        prev = cv.goodFeaturesToTrack(prev_gray[y:y + h, x:x + w], mask=None, **feature_params) #Applying shi-tomasi method
+        prev = util.space_translate(x, y, prev)  #Coordinate transform from bounding box to camera window
 
     # Converts each frame to grayscale - we previously only converted the first frame to grayscale
     gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
+
     # Calculates sparse optical flow by Lucas-Kanade method
     # https://docs.opencv.org/3.0-beta/modules/video/doc/motion_analysis_and_object_tracking.html#calcopticalflowpyrlk
     next_, status, error = cv.calcOpticalFlowPyrLK(
         prev_gray, gray, prev, None, **lk_params)
+
     # Selects good feature points for previous position
     good_old = prev[status == 1]
+
     # Selects good feature points for next position
     good_new = next_[status == 1]
 
@@ -83,15 +91,20 @@ while(cap.isOpened()):
 
     # Overlays the optical flow tracks on the original frame
     output = cv.add(frame, mask)
+
     # Updates previous frame
     prev_gray = gray.copy()
+
     # Updates previous good feature points
     prev = good_new.reshape(-1, 1, 2)
+
     # Opens a new window and displays the output frame
     cv.imshow("sparse optical flow", output)
+
     # Frames are read by intervals of 10 milliseconds. The programs breaks out of the while loop when the user presses the 'q' key
     if cv.waitKey(10) & 0xFF == ord('q'):
         break
+        
 # The following frees up resources and closes all windows
 cap.release()
 cv.destroyAllWindows()
