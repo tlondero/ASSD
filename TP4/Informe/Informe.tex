@@ -18,6 +18,7 @@
 %%%%%%%%%%%%%%%%%%%%%
 %		Informe		%
 %%%%%%%%%%%%%%%%%%%%%
+
 %\begin{center}
 %	\Large{\textcolor{red}{\textbf{EN ROJO PONGO LO QUE HAY QUE HACER. NO BORRARLO HASTA NO TERMINARLO. RESPETAR FORMATOS.}} \textcolor{orange}{EN AZUL IDEAS DE QUE DESARROLLAR.}}
 %\end{center}
@@ -67,10 +68,11 @@ Realizando el mismo proceso para todos los niveles de discretización en el eje 
 	%\item Descripción de las líneas de investigación (con referencias).
 	\item Descripción de los conceptos más importantes de cada una.
 	\item Análisis propio de lo presentado.
-	\item Simulaciones de lo más relevante (códigos como apéndice)
+	\item Simulaciones de lo más relevante (códigos como apéndice).
 	\item Elección del camino y justificación.
 \end{itemize}
 }
+\textcolor{red}{Ehh... es necesario estos 4 puntos que quedaron? Yo pondría solo el código o algo así.}
 
 Este trabajo se centra en procesos de medio nivel. Dicha definición es muy amplia, por lo cual es necesario acotar este camino. Es por ello que se decidió centralizarse en el seguimiento de objetos en imágenes en movimiento. Dada ciertas condiciones iniciales conocidas (brindadas por el usuario) en una imagen en movimiento en tiempo real, tomar un conjunto de datos de $x$, $y$ y $f(x,y)$ para así seleccionar un objeto dado y seguirlo a través del tiempo. 
 
@@ -80,9 +82,10 @@ La primer técnica consta del uso de información obtenida a partir de la intens
 %Podría poner más de LUCAS KANADE
 
 Por su lado, la segunda técnica consiste en un algoritmo que elabora una estimación de unas variables deseadas, mediante el uso de una serie de observaciones a lo largo del tiempo. Este filtro considera ciertas imprecisiones en las mediciones, como lo puede ser el ruido existente. 
-\textcolor{orange}{Escribí una brevísima descripción de lo que se va a hacer. Profundizar y escribir el objetivo final. Justificar elección.}
+\textcolor{orange}{Escribí una brevísima descripción de lo que se va a hacer. Profundizar y escribir el objetivo final. Justificar elección. \textbf{Yo creo que se puede hablar más de Lucas-Kanade y de Kalman}.}
 
 \section{Aportes}
+\textcolor{orange}{Se debería hablar más de lo que se hizo.}
 Se decidió implementar código en \textbf{Python}, apoyándose en la librería \href{https://opencv.org/}{OpenCV}.
 
 Primero se desarrolló un programa capaz de realizar la estimación de una variable mediante el uso del filtro especificado anteriormente. Se puede observar el funcionamiento del algoritmo a continuación: se comparan dos curvas, por un lado una senoidal con un ruido gaussiano montado sobre ella, simulando una medición imprecisa, y por el otro lado, la estimación obtenida a partir del filtro desarrollado.
@@ -112,6 +115,7 @@ Luego se buscó utilizar el código previamente mencionado para estimar el movim
 	\item Evaluación y conclusiones del desarrollo.
 \end{itemize}
 }
+
 
 \begin{thebibliography}{9}
 \bibitem{ref:intro1}
