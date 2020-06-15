@@ -18,14 +18,13 @@
 %%%%%%%%%%%%%%%%%%%%%
 %		Informe		%
 %%%%%%%%%%%%%%%%%%%%%
-\begin{center}
-	\Large{\textcolor{red}{\textbf{EN ROJO PONGO LO QUE HAY QUE HACER. NO BORRARLO HASTA NO TERMINARLO. RESPETAR FORMATOS.}} \textcolor{blue}{EN AZUL IDEAS DE QUE DESARROLLAR.}}
-\end{center}
+%\begin{center}
+%	\Large{\textcolor{red}{\textbf{EN ROJO PONGO LO QUE HAY QUE HACER. NO BORRARLO HASTA NO TERMINARLO. RESPETAR FORMATOS.}} \textcolor{orange}{EN AZUL IDEAS DE QUE DESARROLLAR.}}
+%\end{center}
 
-\textbf{\textit{En el siguiente trabajo se presenta el estudio, investigación y análisis de un proceso de seguimiento del movimiento de un objeto mediante una cámara, siendo conocida su posición inicial.}}
+\textbf{\textit{En el siguiente trabajo se presenta el estudio, investigación y análisis de un proceso de seguimiento del movimiento de un objeto en tiempo real, siendo conocida su posición inicial. Se realizaron pruebas tanto con videos como con cámaras web, pudiendo alternar el modo de trabajo.}}
 
-
-\textcolor{red}{\textbf{\textit{Resumen: falta mencionar ensayos y resultados.}}}
+%\textcolor{red}{\textbf{\textit{Resumen: falta mencionar ensayos y resultados.}}}
 
 \section{Introducción}
 Una imagen puede ser interpretada como una función bidimensional $f\left( x, y\right)$, donde tanto $x$ como $y$ representan en un plano el espacio visualizado, mientras que la misma función $f\left( x, y\right)$ es la intensidad de la imagen bajo un punto dado. Cuando $x$, $y$ y $f\left( x, y\right)$ son valores cuantizados y discretizados, la imagen se transforma en una imagen digital.
@@ -34,7 +33,7 @@ El procesamiento de dichas se define como el conjunto de técnicas aplicadas a e
 	
 Es posible considerar tres tipos de procesos computarizados en el procesamiento de imágenes, basándose en el nivel de tratamiento que se aplique, siendo así clasificados en bajo, medio y alto nivel. Los primeros incluyen actividades tales como reducción de ruido y aumento de contraste, tareas caracterizadas por el hecho de que tanto la entrada como la salida son imágenes. Las actividades de medio nivel de procesamiento incluyen trabajos de segmentación, es decir, identificar regiones u objetos dentro de las imágenes, descripción y clasificación de dichos elementos. Es así que esta categoría es destacada por sus salidas, ya que suelen ser información extraída de las imágenes a la entrada. Por último, los procesos de alto nivel se caracterizan por no solo reconocer objetos y analizarlos, sino también por darles un tratado normalmente asociado con la visión, tales así como ``darles sentido'' \cite{ref:intro1}.
 	
-	\textcolor{red}{Debe haber suficiente material para que un profesional que no conoce el tema para nada, pueda entenderlo. Referenciar libros y tutorial papers que profundicen.}
+%\textcolor{red}{Debe haber suficiente material para que un profesional que no conoce el tema para nada, pueda entenderlo. Referenciar libros y tutorial papers que profundicen.}
 	
 \section{Investigación}
 Dada una señal continua a la entrada del sistema, una imagen sufre de dos procesos claves: \textbf{cuantización} y \textbf{discretización}. Si bien ambos refieren a tomar variables continuas y almacenarlas en memoria como variables discretas, se realiza esta diferenciación entre ambas ya que la primera hace referencia a la amplitud de la señal mientras que la segunda a coordenadas, que para el caso del estudio de imágenes, se refiere a pixeles, siendo estos el mínimo elemento que compone un a imagen digital.
@@ -81,7 +80,7 @@ La primer técnica consta del uso de información obtenida a partir de la intens
 %Podría poner más de LUCAS KANADE
 
 Por su lado, la segunda técnica consiste en un algoritmo que elabora una estimación de unas variables deseadas, mediante el uso de una serie de observaciones a lo largo del tiempo. Este filtro considera ciertas imprecisiones en las mediciones, como lo puede ser el ruido existente. 
-\textcolor{blue}{Escribí una brevísima descripción de lo que se va a hacer. Profundizar y escribir el objetivo final. Justificar elección.}
+\textcolor{orange}{Escribí una brevísima descripción de lo que se va a hacer. Profundizar y escribir el objetivo final. Justificar elección.}
 
 \section{Aportes}
 Se decidió implementar código en \textbf{Python}, apoyándose en la librería \href{https://opencv.org/}{OpenCV}.
