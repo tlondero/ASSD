@@ -23,7 +23,7 @@ lk_params = dict(winSize=(15, 15), maxLevel=4, criteria=(
     cv.TERM_CRITERIA_EPS | cv.TERM_CRITERIA_COUNT, 10, 0.03))
 
 # The video feed is read in as a VideoCapture object
-#cap = cv.VideoCapture("videoPeq2.mp4")
+#cap = cv.VideoCapture("Car TrafficLowRes.mp4")
 cap = cv.VideoCapture(0)
 for i in range(30):
     cap.read()
@@ -156,16 +156,17 @@ while(cap.isOpened()):
         # Returns a contiguous flattened array as (x, y) coordinates for old point
         c, d = old.ravel()
         # Draws line between new and old position with green color and 2 thickness
-        mask = cv.line(mask, (a, b), (c, d), color, 2)
+        mask = cv.line(mask, (int(a), int(b)), (int(c), int(d)), color, 2)
         # Draws filled circle (thickness of -1) at new position with green color and radius of 3
-        frame = cv.circle(frame, (a, b), 3, color, -1)
+        frame = cv.circle(frame, (int(a), int(b)), 3, color, -1)
         frame = cv.circle(frame, (int(kalman.statePost[0][0]), int(kalman.statePost[1][0])),
                           int(np.sqrt(kalman.errorCovPost[0][0] ** 2 + kalman.errorCovPost[1][1] * 2) * 100),
                           (0, 130, 255), 3)
 
+
     frame = cv.circle(frame, (int(kalman.statePost[0][0]), int(kalman.statePost[1][0])), int(np.sqrt(kalman.errorCovPost[0][0]**2 + kalman.errorCovPost[1][1]*2)*100), (0, 130, 255), 3)
-    prev_gray=np.append(prev_gray,[[int(kalman.statePost[0][0]), int(kalman.statePost[1][0])]])
     #frame = cv.circle(frame, (mux, muy), 10, (0, 0, 255), 3)
+
     mask = 0
 
     # Overlays the optical flow tracks on the original frame
@@ -173,17 +174,36 @@ while(cap.isOpened()):
 
     # Updates previous frame
     prev_gray = gray.copy()
-
     # Updates previous good feature points
+#    good_new[0] = [int(kalman.statePost[0][0]), int(kalman.statePost[1][0])]#negrada
+#    good_new[1] = [int(kalman.statePost[0][0]), int(kalman.statePost[1][0])]
+#    good_new[2] = [int(kalman.statePost[0][0]), int(kalman.statePost[1][0])]
     prev = good_new.reshape(-1, 1, 2)
-
     # Opens a new window and displays the output frame
     cv.imshow("sparse optical flow", output)
 
     # Frames are read by intervals of 10 milliseconds. The programs breaks out of the while loop when the user presses the 'q' key
     if cv.waitKey(10) & 0xFF == ord('q'):
         break
+    if  cv.waitKey(10) & 0xFF == ord('r'):
+        # Aca vamos a seleccionar con el mouse el area donde aplicar shi-tomasi #hay que hacer mejor
+        prev_gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
+        bbox = cv.selectROI("sparse optical flow", frame, False)
+        x = bbox[0]
+        y = bbox[1]
+        w = bbox[2]
+        initial_w = w
+        h = bbox[3]
+        initial_h = h
+        # Finds the strongest corners in the first frame by Shi-Tomasi method - we will track the optical flow for these corners
+        # https://docs.opencv.org/3.0-beta/modules/imgproc/doc/feature_detection.html#goodfeaturestotrack
+        prev = cv.goodFeaturesToTrack(
+            prev_gray[y:y + h, x:x + w], mask=None, **feature_params)
+        # Coordinate transform from bounding box to camera window
+        prev = util.space_translate(x, y, prev)
 
 # The following frees up resources and closes all windows
 cap.release()
 cv.destroyAllWindows()
+
+
