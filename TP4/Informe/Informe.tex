@@ -73,12 +73,14 @@ Realizando el mismo proceso para todos los niveles de discretización en el eje 
 \end{itemize}
 }
 
-Este trabajo se centra en procesos de medio nivel. Dicha definición es muy amplia, por lo cual es necesario acotar este camino. Es por ello que se decidió centralizarse en el seguimiento de objetos en imágenes en movimiento. Dada ciertas condiciones iniciales conocidas (brindadas por el usuario) en una imagen en movimiento en tiempo real, tomar un conjunto de datos de $x$, $y$ y $f(x,y)$ para así seleccionar un objeto dado y seguirlo a través del tiempo. %En un principio, a falta de grandes conocimientos actualmente, el trabajo se centrará en la investigación de las técnicas de seguimiento actuales, para luego decidir en qué área del seguimiento de objetos por imágenes en movimiento tratará de profundizar este trabajo.
+Este trabajo se centra en procesos de medio nivel. Dicha definición es muy amplia, por lo cual es necesario acotar este camino. Es por ello que se decidió centralizarse en el seguimiento de objetos en imágenes en movimiento. Dada ciertas condiciones iniciales conocidas (brindadas por el usuario) en una imagen en movimiento en tiempo real, tomar un conjunto de datos de $x$, $y$ y $f(x,y)$ para así seleccionar un objeto dado y seguirlo a través del tiempo. 
 
+Se analizaron diversas formas de lograr el seguimiento de un objeto. Se decidió volcarse por el uso de una técnica de detección del flujo óptico\footnote{Patrón de movimiento aparente entre objetos en una escena. Esta técnica extrae la información tanto de elementos estáticos como en movimiento\cite{ref:optic-flow}.} de Lucas-Kanade junto con el uso del filtro de Kalman.
+La primer técnica consta del uso de información obtenida a partir de la intensidad del gradiente espacial para buscar la posición que mejor se acomoda a una imagen en movimiento \cite{ref:lucas-kanade}.
 
-%HABLAR DE OPTICAL FLOW
-Se analizaron diversas formas de lograr el seguimiento de un objeto. Se decidió volcarse por el uso del filtro de Kalman. Dicho filtro es un algoritmo que elabora una estimación de unas variables deseadas, mediante el uso de una serie de observaciones a lo largo del tiempo. Este filtro considera ciertas imprecisiones en las mediciones, como lo puede ser el ruido existente. %El filtro de Kalman se caracteriza por estimar la posición de un objeto en movimiento con precisión gracias a los ajustes en los valores $g_n$ y $h_n$ 
-	
+%Podría poner más de LUCAS KANADE
+
+Por su lado, la segunda técnica consiste en un algoritmo que elabora una estimación de unas variables deseadas, mediante el uso de una serie de observaciones a lo largo del tiempo. Este filtro considera ciertas imprecisiones en las mediciones, como lo puede ser el ruido existente. 
 \textcolor{blue}{Escribí una brevísima descripción de lo que se va a hacer. Profundizar y escribir el objetivo final. Justificar elección.}
 
 \section{Aportes}
@@ -92,7 +94,7 @@ Primero se desarrolló un programa capaz de realizar la estimación de una varia
 	\label{fig:kalman-comp}
 \end{figure}
 
-Luego se buscó utilizar el código previamente mencionado para estimar el movimiento de un objeto en tiempo real. Es así que se realizó un software que permite al usuario seleccionar un área rectangular de su cámara, siendo los elementos dentro de dicha sección los cuales son seguidos por el programa.
+Luego se buscó utilizar el código previamente mencionado para estimar el movimiento de un objeto en tiempo real. Es así que se realizó un soSftware que permite al usuario seleccionar un área rectangular de su cámara, siendo los elementos dentro de dicha sección los cuales son seguidos por el programa.
 
 \textcolor{red}{
 \begin{itemize}
@@ -114,11 +116,16 @@ Luego se buscó utilizar el código previamente mencionado para estimar el movim
 
 \begin{thebibliography}{9}
 \bibitem{ref:intro1}
-R. C. Gonzalez, R. E. Woods and S. L. Eddins. \textit{Digital Image Processing Using MATLAB}. Prentice Hall, 2nd ed, 2002, pp. 2-3.
+R. C. Gonzalez, R. E. Woods y S. L. Eddins. \textit{Digital Image Processing Using MATLAB}. Prentice Hall, 2da ed, 2002, pp. 2-3.
 
 \bibitem{ref:digit1}
-R. C. Gonzalez, R. E. Woods and S. L. Eddins. \textit{Digital Image Processing Using MATLAB}. Prentice Hall, 2nd ed, 2002, pp. 52-54.
-\end{thebibliography}
+R. C. Gonzalez, R. E. Woods y S. L. Eddins. \textit{Digital Image Processing Using MATLAB}. Prentice Hall, 2da ed, 2002, pp. 52-54.
 
+\bibitem{ref:lucas-kanade}
+B. D. Lucas y T. Kanade. \textit{An iterative image registration technique with an application to stereo vision}. De Proceedings of Imaging Understanding Workshop, pp. 121-130.
+
+\bibitem{ref:optic-flow}
+D. H. Warren y Edward R. Strelow. \textit{Electronic Spatial Sensing for the Blind: Contributions from Perception}. Springer Netherlands, 1er ed, 1985. pp. 414.
+\end{thebibliography}
 
 \end{document}
