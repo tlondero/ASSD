@@ -11,7 +11,7 @@ def captureROI(capture_device):
 
         capture_device.read()
         ret, frame = capture_device.read()
-        bbox = cv.selectROI("sparse optical flow", frame, False)
+        bbox = cv.selectROI("Grupo 3 Visual Tracker", frame, False)
         x = bbox[0]
         y = bbox[1]
         w = bbox[2]
@@ -149,20 +149,23 @@ def measureFeatures(error_feature, frame, prev, prev_gray, kalman):
     prev_gray = gray.copy()
     return error_feature, good_new, good_old, prev_gray, prev
 
-def drawEstimate(error, good_new, good_old, frame, kalman, dyn_h, dyn_w):
-    if not error:
+def drawEstimate(error, good_new, good_old, frame, kalman, dyn_h, dyn_w, frame_debug):
+    if not error and prm.DEBUG_MODE is True:
         for i, (new, old) in enumerate(zip(good_new, good_old)):
             a, b = new.ravel()
-            frame = cv.circle(frame, (int(a), int(b)), 3, prm.ft_color, -1)
+            frame_debug = cv.circle(frame_debug, (int(a), int(b)), 3, prm.ft_color, -1)
     else:
         x = np.int(kalman.statePost[0][0])
         y = np.int(kalman.statePost[1][0])
         cv.putText(frame, 'Tracking failure', (20, 40), prm.font, 1, (0, 0, 255), 2, cv.LINE_AA)
-        cv.rectangle(frame, (int(x - (dyn_w/2)), int(y - (dyn_h/2))), (int(x + (dyn_w/2)), int(y + (dyn_h/2))), prm.ROI_color, 4)
+        if prm.DEBUG_MODE is True:
+            cv.rectangle(frame_debug, (int(x - (dyn_w/2)), int(y - (dyn_h/2))), (int(x + (dyn_w/2)), int(y + (dyn_h/2))), prm.ROI_color, 4)
 
     frame = cv.circle(frame, (int(kalman.statePost[0][0]), int(kalman.statePost[1][0])), int(35), prm.kalman_color, 3)
     output = cv.add(frame, 0)
-    cv.imshow("sparse optical flow", output)
+    if prm.DEBUG_MODE is True:
+        cv.imshow("Grupo 3 Visual Tracker -- DEBUG", frame_debug)
+    cv.imshow("Grupo 3 Visual Tracker", output)
 
 def searchObject(kalman, dyn_h, dyn_w, h, w, frame, error):
 
@@ -176,6 +179,6 @@ def searchObject(kalman, dyn_h, dyn_w, h, w, frame, error):
         dyn_h, dyn_w = h, w
     else:
         error = True
-        dyn_h += 2
-        dyn_w += 2
+        dyn_h += prm.SEARCHING_ENLARGEMENT*1.05
+        dyn_w += prm.SEARCHING_ENLARGEMENT*1.05
     return error, prev, dyn_h, dyn_w

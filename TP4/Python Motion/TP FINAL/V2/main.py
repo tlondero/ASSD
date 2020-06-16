@@ -5,8 +5,8 @@ import kalman
 
 kalman = kalman.KalmanFilter()
 
-#cap = cv.VideoCapture(cv.samples.findFile("3.mp4"))
-cap = cv.VideoCapture(0)
+cap = cv.VideoCapture(cv.samples.findFile("1.mp4"))
+#cap = cv.VideoCapture(0)
 
 lower_thr, upper_thr = [],[]
 
@@ -46,7 +46,7 @@ while(cap.isOpened()):
     else:
         error, good_new, good_old, prev_gray, prev = util.measureFeatures(error, frame_real, prev, prev_gray, kalman)
 
-    util.drawEstimate(error, good_new, good_old, frame_real, kalman, dyn_h, dyn_w)
+    util.drawEstimate(error, good_new, good_old, frame_real, kalman, dyn_h, dyn_w, frame)
 
     if cv.waitKey(10) & 0xFF == ord('q'):
         break

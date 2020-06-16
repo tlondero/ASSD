@@ -23,9 +23,9 @@ lk_params = dict(winSize=(15, 15),
 
 dt = 1                   #delta time
 INITIAL_STATE_COV = 1
-PROCESS_COV = 0.001      #process covariance, si es chico entonces la estimacion tiene menos ruido pero es menos precisa, si es grande la estimacion tiene mas ruido pero es mas precisa
+PROCESS_COV = 0.0006      #process covariance, si es chico entonces la estimacion tiene menos ruido pero es menos precisa, si es grande la estimacion tiene mas ruido pero es mas precisa
 MEAS_MATRIX = 1.
-MEAS_NOISE_COV = 0.5       #covarianza de medicion
+MEAS_NOISE_COV = 0.4       #covarianza de medicion
 
 """####################"""
 
@@ -39,5 +39,8 @@ SAT_VAR = 40
 VAL_VAR = 40
 
 COLOR_ALGORITHM = True
+DEBUG_MODE = True
 
 font = cv.FONT_HERSHEY_SIMPLEX
+
+SEARCHING_ENLARGEMENT = 3
