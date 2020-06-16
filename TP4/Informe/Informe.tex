@@ -127,7 +127,7 @@ con $z_k \in \mathcal{R}^m$, donde $w_k$ y $v_k$ son variables aleatorias que re
 
 \[ p(v) \sim N(0, R) \]
 
-donde $Q$ y $R$ son las matrices de covarianza del ruido del proceso y ruido de medición respectivamente, las cuales se asumen constantes; donde la matriz de transición de estados $A$ de dimensión $n\times n$ \textemdash siendo $n$ la dimensión de estados dinámicos del modelo\textemdash \ define la relación entre entados del paso $k-1$ al paso $k$ sin contar el ruido del proceso; donde la matriz de transición de observación $H$ de dimensión $m\times n$ \textemdash siendo $m$ la dimensión del vector de medición\textemdash \  fija la relación entre el espacio de  los observables medidos y el espacio de las variables del vector de estados, sin contar el ruido de medición; y finalmente donde el estado del filtro puede representarse como $\hat{x}_{k|k}$ y $P_{k|k}$, siendo estas el estimador del vector de estados a posteriori dadas las mediciones hasta un tiempo $k$, y el estimador de la matriz de covariaza a posteriori dadas las mediciones hasta un tiempo $k$ respectivamente. Se puede definir la operación del filtro de Kalman separando a esta en dos fases: la predicción, y la corrección.
+donde $Q$ y $R$ son las matrices de covarianza del ruido del proceso y ruido de medición respectivamente, las cuales se asumen constantes; donde la matriz de transición de estados $A$ de dimensión $n\times n$ \textemdash siendo $n$ la dimensión de estados dinámicos del modelo\textemdash \ define la relación entre estados del paso $k-1$ al paso $k$ sin contar el ruido del proceso; donde la matriz de transición de observación $H$ de dimensión $m\times n$ \textemdash siendo $m$ la dimensión del vector de medición\textemdash \  fija la relación entre el espacio de  los observables medidos y el espacio de las variables del vector de estados, sin contar el ruido de medición; y finalmente donde el estado del filtro puede representarse como $\hat{x}_{k|k}$ y $P_{k|k}$, siendo estos el estimador del vector de estados a posteriori dadas las mediciones hasta un tiempo $k$, y el estimador de la matriz de covariaza a posteriori dadas las mediciones hasta un tiempo $k$ respectivamente. Se puede definir la operación del filtro de Kalman separando a esta en dos fases: la predicción, y la corrección.
 
 \subsubsection{Ecuaciones de predicción}
 
@@ -166,9 +166,6 @@ K_k = P_{k|k-1}H^TS_k^{-1}
 		\label{fig:kalman1}
 \end{figure}
 
-\subsubsection{Filtro de Color}
-Se utilizó una máscara en todos los frames en base al color promedio de la selección inicial del usuario, el color promedio se obtiene al calcular la mediana de la selección.
- 
 \section{Aportes}
 
 Se decidió implementar código en \textbf{Python}, apoyándose en la librería \href{https://opencv.org/}{OpenCV}.
@@ -242,7 +239,7 @@ Este filtrado de color no solo posee una gran sinergia con el método de obtenci
 Volviendo al caso de los objetos $A$ y $B$:
 
 \begin{itemize}
-\item Si $A$ y $B$ son de colores distintos, con el filtro de color el seguidor nunca detectará que existe un objeto $B$ por lo que seguirlo será imposible, y por consecuencia seguirá únicamente a $A$ y no se tendrá el problema de $A$ pasando por frente de $B$.
+\item Si $A$ y $B$ son de colores distintos, con el filtro de color, el algoritmo nunca detectará que existe un objeto $B$ por lo que seguirlo será imposible, y por consecuencia seguirá únicamente a $A$ y no se tendrá el problema de $A$ pasando por frente de $B$.
 \item Si $A$ y $B$ son de colores distintos, y $A$, el objeto a seguir, pasa por detrás de $B$, ahora no se adosarán las features al objeto $B$, sino que el algoritmo verá que el área de $A$ se achica a medida que este queda oculto por $B$. Como los features no tendrán bordes para seguir, estos desaparecerán, por lo que se dejará de entregar mediciones al filtro de Kalman y este estimará correctamente la posición de $A$ mientras que este no haya sufrido aceleración alguna mientras estaba oculto. 
 \end{itemize}
 
@@ -286,21 +283,26 @@ Volviendo al caso de los objetos $A$ y $B$:
 \subsection{Posibles Mejoras}
 Algunas mejoras que pueden ser implementadas en futuros desarrollos son:
 \begin{itemize}
-\item Trackeado multiobjeto:
-Da la opción al usuario de trackear mas de un objeto en la pantalla.
-\item Filtro de Kalman donde la matriz de covarianza de medición no sea constante:
-En el modelo utilizado actualmente la matriz de covarianza es constante, esto asume que la presición de  medición es fija. Esto último no suele ser verdad en la realidad, una mejora es la introducción de modificaciones en la matriz de covarianza de manera dinámica así el filtro proporcionaría mejores predicciones, un caso en el que esto es vital es en la desaparición del objeto a trackear dado que en ese momento lo único utilizado es la predicción de Kalman. 
-\item Filtro de sensibilidad Multicolor:
-Dado tres objetos $A$ ,$B$ y $C$, donde $A$ cuenta con 2 colores distintivos, siendo estos rojo y azul, $B$ un objeto rojo y $C$ uno azul, lo que propone este filtro es la capacidad de diferenciar al objeto por mas de un color distintivo, cosa de que la interferencia de $B$ o $C$ en el camino de $A$ no comprometa su seguimiento.
-\item Un mejor modelado de las ecuaciones dinámicas del filtro de Kalman para incluir la aceleración como variable de estado:
-El modelo utilizado actualmente consta de un movimiento rectilíneo uniforme bidimensional, la inclusión de la aceleración proporcionaría una mejor predicción.
+\item Trackeado multiobjeto: \\
+Da la opción al usuario de trackear mas de un objeto en la pantalla, utilizando filtros de color diferenciados por cada objeto.
+\item Filtro de Kalman donde la matriz de covarianza de medición no sea constante: \\
+En el modelo utilizado actualmente la matriz de covarianza es constante, esto asume que la presición de  medición es fija. Esto último no suele ser verdad en la realidad. Una mejora es la introducción de modificaciones en la matriz de covarianza de manera dinámica así el filtro proporcionaría mejores predicciones. 
+
+
+
+
+
+\item Filtro de sensibilidad Multicolor: \\
+Dado tres objetos $A$, $B$ y $C$, donde $A$ cuenta con 2 colores distintivos, siendo estos rojo y azul, $B$ un objeto rojo y $C$ uno azul, lo que propone este filtro es la capacidad de diferenciar al objeto a seguir por mas de un color distintivo, cosa de que la interferencia de $B$ o $C$ en el camino de $A$ no comprometa su seguimiento debido a que ni $B$ ni $C$ posee la combinación de colores de $A$.
+\item Un mejor modelado de las ecuaciones dinámicas del filtro de Kalman para incluir la aceleración como variable de estado: \\
+El modelo utilizado actualmente consta de un movimiento rectilíneo uniforme bidimensional. La inclusión de la aceleración proporcionaría una mejor predicción.
 \end{itemize}
 
 
 
 
 \subsection{Conclusiones}
-Se logró seguimiento de un objeto especificado por el usuario en base a cualidades distintivas del mismo, siendo estas su color y su bordes, contando con una predicción certera en el caso de que se encuentre el objeto en pantalla al igual que la situación de que desaparezca de pantalla, aunque la varianza de la predicción aumentará cuanto mas tiempo no sea detectado el objeto, con la capacidad encontrar nuevamente el objeto.\\
+Se logró seguimiento de un objeto especificado por el usuario en base a cualidades distintivas del mismo, siendo estas su color y sus bordes, al igual que por su movimiento. Contando con una predicción certera en el caso de que se encuentre el objeto en pantalla al igual que la situación de que desaparezca de pantalla, aunque la varianza de la predicción aumentará cuanto mas tiempo no sea detectado, con la capacidad encontrar nuevamente a este.\\
 La elección de los algoritmos y filtros utilizados son sinérgicos dado que estos se complementan entre sí, por ejemplo el filtro de color proporciona bordes definidos para el objeto a seguir, que es ideal para la obtención de bordes de Shi-Tomasi
 
 \begin{thebibliography}{9}
