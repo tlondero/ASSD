@@ -127,7 +127,7 @@ con $z_k \in \mathcal{R}^m$, donde $w_k$ y $v_k$ son variables aleatorias que re
 
 \[ p(v) \sim N(0, R) \]
 
-donde $Q$ y $R$ son las matrices de covarianza del ruido del proceso y ruido de medición respectivamente, las cuales se asumen constantes; donde la matriz de transición de estados $A$ de dimensión $n\times n$ \textemdash siendo $n$ la dimensión de estados dinámicos del modelo\textemdash \ define la relación entre entados del paso $k-1$ al paso $k$ sin contar el ruido del proceso; donde la matriz de transición de medición $H$ de dimensión $m\times n$ \textemdash siendo $m$ la dimensión del vector de medición\textemdash \  fija la relación entre la medición realizada y el vector de estados, sin contar el ruido de medición; y finalmente donde el estado del filtro puede representarse como $\hat{x}_{k|k}$ y $P_{k|k}$, siendo estas el estimador del vector de estados a posteriori dadas las mediciones hasta un tiempo $k$, y el estimador de la matriz de covariaza a posteriori dadas las mediciones hasta un tiempo $k$ respectivamente. Se puede definir la operación del filtro de Kalman separando a esta en dos fases: la predicción, y la corrección.
+donde $Q$ y $R$ son las matrices de covarianza del ruido del proceso y ruido de medición respectivamente, las cuales se asumen constantes; donde la matriz de transición de estados $A$ de dimensión $n\times n$ \textemdash siendo $n$ la dimensión de estados dinámicos del modelo\textemdash \ define la relación entre entados del paso $k-1$ al paso $k$ sin contar el ruido del proceso; donde la matriz de transición de observación $H$ de dimensión $m\times n$ \textemdash siendo $m$ la dimensión del vector de medición\textemdash \  fija la relación entre el espacio de  los observables medidos y el espacio de las variables del vector de estados, sin contar el ruido de medición; y finalmente donde el estado del filtro puede representarse como $\hat{x}_{k|k}$ y $P_{k|k}$, siendo estas el estimador del vector de estados a posteriori dadas las mediciones hasta un tiempo $k$, y el estimador de la matriz de covariaza a posteriori dadas las mediciones hasta un tiempo $k$ respectivamente. Se puede definir la operación del filtro de Kalman separando a esta en dos fases: la predicción, y la corrección.
 
 \subsubsection{Ecuaciones de predicción}
 
@@ -166,7 +166,14 @@ K_k = P_{k|k-1}H^TS_k^{-1}
 		\label{fig:kalman1}
 \end{figure}
 
-En la Figura (\ref{fig:kalman-comp}) se puede observar el funcionamiento del algoritmo con un vector de estados dinámicos de dimensión dos compuesto por las coordenadas $(x,y)$ sobre el plano cartesiano, realizando mediciones periódicamente. Se comparan dos curvas. Por un lado, una senoidal con un ruido gaussiano montado sobre ella, simulando una serie de mediciones con ruido, y por el otro lado, la estimación obtenida a partir del filtro desarrollado.
+\subsubsection{Filtro de Color}
+Se utilizó una máscara en todos los frames en base al color promedio de la selección inicial del usuario, el color promedio se obtiene al calcular la mediana de la selección.
+ 
+\section{Aportes}
+
+Se decidió implementar código en \textbf{Python}, apoyándose en la librería \href{https://opencv.org/}{OpenCV}.
+
+Primero se desarrolló un programa capaz de realizar la estimación de una variable mediante el uso del filtro de Kalman. En la Figura (\ref{fig:kalman-comp}) se puede observar el funcionamiento del algoritmo con un vector de estados dinámicos de dimensión dos compuesto por las coordenadas $(x,y)$ sobre el plano cartesiano, realizando mediciones periódicamente. Se comparan dos curvas. Por un lado, una senoidal con un ruido gaussiano montado sobre ella, simulando una serie de mediciones con ruido, y por el otro lado, la estimación obtenida a partir del filtro desarrollado.
 
 \begin{figure}[H]
 \centering
@@ -175,54 +182,80 @@ En la Figura (\ref{fig:kalman-comp}) se puede observar el funcionamiento del alg
 	\label{fig:kalman-comp}
 \end{figure}
 
-%VER COMO MERGEAR ESTO CON LAS SUBSUBSECTIONS DE LUCAS, SHITOMASI, KALMAN Y COLOR
-%Se emplearon distintos algoritmos que en conjunto permiten lograr el seguimiento deseado. Se decidió volcarse por el uso de una técnica de detección de flujo óptico\footnote{Patrón de movimiento aparente entre objetos en una escena. Esta técnica extrae la información tanto de elementos estáticos como en movimiento\cite{ref:optic-flow}.}. % de Lucas-Kanade.
-%Primero se distinguen puntos pertenecientes a un objeto a través del algoritmo de detección de bordes de Shi-Tomasi para luego emplear el método piramidal de Lukas-Kanade..
-%Shi-Tomasi es un algorítmo que busca detectar los bordes de un objeto en particular. Es ideal buscar una buena discriminación de dichos bordes al principio del proceso de seguimiento, de esta forma se busca maximizar la calidad de seguimiento del objeto. Este algoritmo verifica que el seguimiento sea correcto y además, dado que el proceso de optical flow se realiza por color, como se explica más adelante, la imagen final a procesar cuenta con bordes bien definidos \cite{ref:shi-tomasi}.
-%Por su lado, se valió del uso de filtros de Kalman. Esta técnica consiste en un algoritmo que elabora una estimación de unas variables deseadas, mediante el uso de una serie de observaciones a lo largo del tiempo. Este filtro considera ciertas imprecisiones en las mediciones, como lo puede ser el ruido existente. La idea del uso de este algoritmo se basa en el hecho de poder estimar la posición de un objeto una vez perdido de vista.
-%\textcolor{orange}{Escribí una brevísima descripción de lo que se va a hacer. Profundizar y escribir el objetivo final. Justificar elección. \textbf{Yo creo que se puede hablar más de Lucas-Kanade y de Kalman}.}
-\subsubsection{Filtro de Color}
-Se utilizó una máscara en todos los frames en base al color promedio de la selección inicial del usuario, el color promedio se obtiene al calcular la mediana de la selección.
- 
-\section{Aportes}
-
-Se decidió implementar código en \textbf{Python}, apoyándose en la librería \href{https://opencv.org/}{OpenCV}.
-
-Primero se desarrolló un programa capaz de realizar la estimación de una variable mediante el uso del filtro de Kalman.
-
 
 \subsection{Implementación}
- A modo de resumen revisaremos como se encuentra hasta el momento el tracker. A partir de la selección inicial se obtienen las mejores features del objeto seleccionado, luego mediante el algoritmo de Lucas-Kanade de Optical Flow se obtiene la evolución de las features en el tiempo,luego a este cúmulo de puntos se le calcula la media (centro de masas) y el desvío (centro de inercia), ademas se rechazan los puntos que se encuentren a una distancia mayor a un $\sigma$ respecto al centro de masas, luego este centro de masas medido es el que se introduce en el filtro de Kalman para obtener una predicción.
-Este algoritmo cuenta con un problme que es el siguiente: Dados dos objetos A y B, donde A es el objeto a trackear, en el caso de que se crucen A y B esta configuración podría dejar de seguir a A y comenzar a seguir a B si A  y B sufren un cambio brusco en su trayectoria, la mejora propuesta para sortear este problema consiste en agregar un filtro , para diferenciar A y B por su color haciendo así mas dificil que pierda a A. Para la implementación de este filtro de color comienza en el momento que el usuario selecciona el área a trackear, se calcula el color promedio de la zona elegida, y ese color es el que se le dará a la máscara, tal que sea lo único que sobreviva en el frame, esto ademas de aislar el objeto a trackear, si es un color distintivo tendrá una gran sinergia con el método de obtención de features de Shi-Tomasi dado que este frame tendrá bordes bien marcados.
-Volviendo al caso de los objetos A y B, si A y B son de colores distintos, con el filtor de color el tracker nunca detectará que existe un objeto B por lo que seguirlo será imposible, y por consecuencia seguirá únicamente a A, este comportamiento se puede ver en las imagenes (\ref{fig:optical1}) y (\ref{fig:optical2}) donde se puede observar en la pantalla de debug como el único objeto con bordes definidos es el violeta.
+A partir de una selección del video proporcionada por el usuario se obtienen las mejores features del objeto seleccionado utilizando el algoritmo de Shi-Tomasi. Luego, mediante el algoritmo de Lucas-Kanade de Optical Flow se obtiene la evolución de las features en el tiempo. A este cúmulo de puntos se le calcula el centro de masas $\mu$ y el centro de inercia $\sigma$. Se rechazan los puntos de este cúmulo que se encuentren a una distancia mayor a $k_{\sigma}\sigma$ respecto al centro de masas, para luego calcular nuevamente el centro de masas el cual es el que se introduce en el filtro de Kalman como medición de la posición.
 
 
+Este algoritmo, hasta ahora explicado, cuenta con grandes problemas. Dados dos objetos $A$ y $B$, donde $A$ es el objeto a seguir:
 
-Por otro lado, se obtuvo un algoritmo basado en los elementos mencionados previamente que permite detectar un objeto a partir de su color. El programa logrado permite al usuario seleccionar un área rectangular obtenida de una cámara o un video, siendo los elementos dentro de dicha sección los cuales son seguidos. De esta forma se pueden generar dos ventanas: donde simplemente se muestra el seguimiento del objeto en cuestión y otra resultante de lo denominado ``modo de debug'', en la cual se observa el proceso de optical flow.
+\begin{itemize}
+\item Como el algoritmo de Shi-Tomasi tiende a colocar features en bordes bien definidos, y estos suelen ser los bordes externos de un objeto, si el objeto a seguir $A$ pasa por delante de un objeto $B$ con bordes bien definidos, las features del algoritmo de Optical Flow tenderán a adosarse a los bordes del objeto $B$ por más que este esté quieto.
+\item Si el objeto $A$ pasase por detrás del objeto $B$ inmóvil, todas las features sobre el objeto a seguir quedarían adosadas al objeto $B$. Esto plantea un problema mucho más grande que el anterior, dado que no se podrá utilizar la estimación del filtro de Kalman de manera confiable, debido a que cuando los features se queden quietos adosados en $B$, se seguirá midiendo de todas formas y se seguirán entregando esas mediciones al filtro de Kalman, por lo que la estimación de este se adosará también al objeto $B$.
+\item Profundizando en el item anterior, existe una ambigüedad entre que $A$ pase de un movimiento MRU a que se quede completamente quieto y que $A$ pase por detras de $B$, dado que en ambas situaciones las features quedarán quietas en el lugar donde $A$ se haya quedado quieto o el lugar de la intersección entre $A$ y $B$
+\end{itemize}
+
+La mejora propuesta para sortear este problema consiste en agregar un filtro de color, para diferenciar a $A$ y a $B$ por su color. La implementación de este filtro de color comienza en el momento que el usuario selecciona el área a seguir. Se calcula la mediana del color de la zona elegida, y ese color es transformado de formato RGB a formato HSV, o Hue-Saturation-Value, dado que es más sencillo definir una máscara de este modo. Dado $x$ e $y$ las coordenadas de los píxeles de la imagen, $\vec{R_k}$, $\vec{G_k}$ y $\vec{B_k}$ los vectores de píxeles de la selección, $mediana(\vec{R_k}, \vec{G_k}, \vec{B_k}) = (m_R, m_G, m_B)$ el vector que define la mediana del color de la selección, $\mathbb{HSV}$ el operador de transformación del espacio de coordenadas RGB a HSV, y $\mathbb{HSV}(m_R, m_G, m_B) = (m_H, m_S, m_V)$ el vector de la mediana del color de la selección en el espacio HSV, queda entonces definida la máscara de color como
+
+\begin{equation}
+f(x, y) = (f_h(x, y), f_s(x, y), f_v(x, y))
+\end{equation}
+
+\begin{equation}
+f_{u}(x,y) = \left\{
+\begin{array}{ll}
+
+
+      1 & -\Lambda_u < u_{x, y} - m_u < \Lambda_u \\
+      
+      
+      
+      0 & \text{sino} \\
+      
+      
+\end{array} 
+\right.
+\end{equation}
+
+donde $\Lambda$ es el límite para cada propiedad $u$, siendo estas Hue, Saturation o Value. Una vez obtenida la máscara $f(x, y)$ se realiza una operación AND bit-a-bit entre la máscara y la imagen original, logrando obtener una intensidad nula en los píxeles de la imagen que no posean un color cercano a la mediana calculada.
+
+%
+%
+%
+%IMAGEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEN
+%
+%
+%
+%
+%
+
+Este filtrado de color no solo posee una gran sinergia con el método de obtención de features de Shi-Tomasi, dado que este frame tendrá bordes de mucha mejor calidad, sino que tambíen posee una gran sinergia con el método de Optical Flow, debido a que como se verán menos bordes en la imagen modificada, aumenta notablemente la probabilidad de que los features queden contenidos todos dentro, o sobre los bordes del objeto a seguir.
+
+Volviendo al caso de los objetos $A$ y $B$:
+
+\begin{itemize}
+\item Si $A$ y $B$ son de colores distintos, con el filtro de color el seguidor nunca detectará que existe un objeto $B$ por lo que seguirlo será imposible, y por consecuencia seguirá únicamente a $A$ y no se tendrá el problema de $A$ pasando por frente de $B$.
+\item Si $A$ y $B$ son de colores distintos, y $A$, el objeto a seguir, pasa por detrás de $B$, ahora no se adosarán las features al objeto $B$, sino que el algoritmo verá que el área de $A$ se achica a medida que este queda oculto por $B$. Como los features no tendrán bordes para seguir, estos desaparecerán, por lo que se dejará de entregar mediciones al filtro de Kalman y este estimará correctamente la posición de $A$ mientras que este no haya sufrido aceleración alguna mientras estaba oculto. 
+\end{itemize}
+
 \begin{figure}[H]
 \centering
 	\begin{subfigure}{.4\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{Imagenes/Optical1.png}
-		\caption{Modo normal.}
+		\caption{Ventana con el funcionamiento normal del seguidor, el cual utiliza un círculo naranja para detallar donde se encuentra el objeto a seguir.}
 		\label{fig:optical1}
 	\end{subfigure}
 	\begin{subfigure}{.4\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{Imagenes/Optical2.png}
-		\caption{Modo debug.}
+		\caption{Ventana la cual solo aparece al seleccionar el modo debug. Aquí se muestra si el filtro de color se encuentra activado, el video luego de pasar por la máscara de color, las features del objeto como puntos verdes y la zona de búsqueda si se diese el caso de tracking failure.}
 		\label{fig:optical2}
 	\end{subfigure}
 	\caption{Resultado de la selección de un elemento.}
 	\label{fig:optical12}
 \end{figure}
 
-De este modo, se observa en la Figura (\ref{fig:optical1}) como se denota un objeto a seguir, mientras que la Figura (\ref{fig:optical2}) muestra dos datos importantes. Por un lado, se observa en el mismo color del objeto seleccionado como se lo visualiza mediante optical flow, mientras que por otro lado, se muestran los puntos elegidos por el algoritomo de Shi-Tomasi en forma de puntos verdes, los cuales sirven para calcular el centro de masa a seguir. Cabe destacar que el filtro de Kalman estima la posición de este último. Adicionalmente el filtro de Kalman permite estimar la posición del objeto aunque este desaparezca de la pantalla al estar oculto de un objeto a partir de su velocidad estimada por el filtro y las ecuaciones de cinemática, contando con la habilidad de volver a encontrar al objeto cuando reaparezca.
-%Luego se buscó utilizar el código previamente mencionado para estimar el movimiento de un objeto en tiempo real. Es así que se realizó un software que 
-
-El programa desarrollado permite elegir al usuario si desea o no ver la ventana en modo debug, la cual además informa sobre la posición del centro de masa. Para elegir un objeto es tan sencillo como seleccionar una área por sobre este, la cual aparece denotada en azul, para luego iniciar el seguimiento presionando al tecla ``espacio''. Por otra parte, el programa permite reelegir un elemento a detectar presionando la tecla ``r''.
-
-%NO SÉ SI ESTÁ BIEN MENCIONAR EL CÓMO USAR EL PROGRAMA ACÁ
 
 \textcolor{red}{
 \begin{itemize}
