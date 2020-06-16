@@ -76,16 +76,20 @@ Realizando el mismo proceso para todos los niveles de discretización en el eje 
 }
 \textcolor{red}{Ehh... es necesario estos 4 puntos que quedaron? Yo pondría solo el código o algo así.}
 
-Este trabajo se centra en procesos de medio nivel. Dicha definición es muy amplia, por lo cual es necesario acotar este camino. Es por ello que se decidió centralizarse en el seguimiento de objetos en imágenes en movimiento. Se busco que, dada ciertas condiciones iniciales conocidas (brindadas por el usuario) en una imagen en movimiento en tiempo real, tomar un conjunto de datos de $x$, $y$ y $f(x,y)$ para así seleccionar un elemento y seguir su movimiento a través del tiempo, para lograr este fin se utilizó la tecnica de \textbf{Optical Flow}.
+Este trabajo se centra en procesos de medio nivel. Dicha definición es muy amplia, por lo cual es necesario acotar este camino. Es por ello que se decidió centrarse en el seguimiento de objetos en imágenes en movimiento. Se busco que, dada ciertas condiciones iniciales conocidas (brindadas por el usuario) en una imagen en movimiento en tiempo real, tomar un conjunto de datos de $x$, $y$ y $f(x,y)$ para así seleccionar un elemento y seguir su trayectoria a través del tiempo, como hipótesis plantearemos:
+\begin{itemize}
+\item El objeto no cambiará rápidamente de color ni su iluminación o exposición-
+\item El objeto no sufrirá una oclusión por parte de un obstáculo del mismo color.
+\end{itemize} para lograr este fin se utilizó el algoritmo de Lucas-Kanade de Optical Flow, el método de Shi-Tomasi, la utilización de filtros de Kalman y filtrado de color.
 \subsubsection{Optical Flow} 
-El campo de movimiento de una imagen es el movimiento real del objeto en el espacio proyectado sobre el plano de la imagen. El Optical Flow (flujo óptico) se define como el flujo de la intensidad en escala de grises en el plano de la imagen, a medida que evoluciona en el tiempo. También se puede interpretar el Optical Flow o flujo de la imagen como el movimiento aparente de la imagen  basado en la percepción visual, y tiene dimensión de velocidad $\vec{V}= (V_x \ , \ V_y)$. Si el Optical Flow se determina de dos imagenes consecutivas, aparece como un vector de desplazamiento $\vec{d}$ de las cualidades elegidas, entre el cuadro n y el n+1.
+El campo de movimiento de una imagen es el movimiento real del objeto en el espacio proyectado sobre el plano de la imagen. El Optical Flow (flujo óptico) se define como el flujo de la intensidad en escala de grises en el plano de la imagen, a medida que evoluciona en el tiempo. También se puede interpretar el Optical Flow o flujo de la imagen como el movimiento aparente de la imagen  basado en la percepción visual, y tiene dimensión de velocidad $\vec{V}= (V_x \ , \ V_y)$. Si el Optical Flow se determina de dos imagenes consecutivas, aparece un vector de desplazamiento $\vec{d}$ de las cualidades elegidas, entre el cuadro n y el n+1.
 \begin{figure}[H]
 		\centering
 		\includegraphics[width=0.5\textwidth]{Imagenes/opticalflowrubick.png}
 		\caption{Cubo de rubik rotando en una mesa.}
 		\label{fig:opticalflow1}
 \end{figure}
-Para la implementación del algoritmo existen varios caminos, como el basado en calculo de gradientes de la imagen total, existe otro que utiliza solo ciertos puntos que se determinan constantes de la imagen, nosotros utilizaremos el metodo piramidal de Lucas-Kanade.
+Para la implementación del algoritmo existen varios caminos, como el basado en calculo de gradientes de la imagen total, existe otro que utiliza solo ciertos puntos que se determinan constantes de la imagen, nosotros utilizaremos el método piramidal de Lucas-Kanade.
 \subsubsection{Lucas-Kanade} 
  Este consta del uso de información obtenida a partir de la intensidad del gradiente espacial para buscar la posición que mejor se acomoda a una imagen en movimiento \cite{ref:lucas-kanade} \cite{ref:lucas-kanade2}, algunas de las hipótesis que postula Lucas-Kanade son:
 \begin{itemize}
