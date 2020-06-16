@@ -5,7 +5,7 @@ import kalman
 
 kalman = kalman.KalmanFilter()
 
-cap = cv.VideoCapture(cv.samples.findFile("1.mp4"))
+cap = cv.VideoCapture(cv.samples.findFile("gido.mp4"))
 #cap = cv.VideoCapture(0)
 
 lower_thr, upper_thr = [],[]
