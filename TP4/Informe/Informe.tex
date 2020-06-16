@@ -81,7 +81,7 @@ Este trabajo se centra en procesos de medio nivel. Dicha definición es muy ampl
 \item El objeto no cambiará rápidamente de color ni su iluminación o exposición-
 \item El objeto no sufrirá una oclusión por parte de un obstáculo del mismo color.
 \end{itemize} para lograr este fin se utilizó el algoritmo de Lucas-Kanade de Optical Flow, el método de Shi-Tomasi, la utilización de filtros de Kalman y filtrado de color.
-\subsubsection{Optical Flow} 
+\subsection{Optical Flow} 
 El campo de movimiento de una imagen es el movimiento real del objeto en el espacio proyectado sobre el plano de la imagen. El Optical Flow (flujo óptico) se define como el flujo de la intensidad en escala de grises en el plano de la imagen, a medida que evoluciona en el tiempo. También se puede interpretar el Optical Flow o flujo de la imagen como el movimiento aparente de la imagen  basado en la percepción visual, y tiene dimensión de velocidad $\vec{V}= (V_x \ , \ V_y)$. Si el Optical Flow se determina de dos imagenes consecutivas, aparece un vector de desplazamiento $\vec{d}$ de las cualidades elegidas, entre el cuadro n y el n+1.
 \begin{figure}[H]
 		\centering
@@ -104,36 +104,76 @@ Este algoritmo se basa en el principio de ``Divide y conquistarás'' al realizar
 		\label{fig:opticalflow1}
 \end{figure}
 
-\subsubsection{Filtro de Kalman}
+\subsection{Filtro de Kalman}
 
-El filtro de Kalman es un filtro recursivo que busca estimar el estado de un sistema dinámico lineal discretizado de dimensión $N$ mediante una serie mediciones con cierto error. 
+El filtro de Kalman es un filtro recursivo que busca estimar el estado de un sistema dinámico lineal discretizado de dimensión $n$ mediante una serie mediciones con ruido a partir de la descripción del modelo físico que rige las variables del vector de estado\cite{ref:kalman1}, \cite{ref:kalman2}.
 
+\subsubsection{Planteo del problema}
 Dado un proceso estocástico lineal en tiempo discreto definido por
 
 \begin{equation}
 x_k = Ax_{k-1} + w_{k-1} \footnote{Se omitió por simplicidad la función de control.}
 \end{equation}
 
-donde $x_k \in \mathcal{R}^{N}$ y siendo una medición definida por
+donde $x_k \in \mathcal{R}^{N}$ y siendo una medición en tiempo $k$ definida por
 
 \begin{equation}
 z_k = Hx_k + v_k
 \end{equation}
 
-donde $w_k$ y $v_k$ son variables aleatorias que representan el ruido del proceso y de la medición respectivamente, las cuales se asumen que son independientes entre sí y con distribuciones de probabilidad normales definidas como
+con $z_k \in \mathcal{R}^m$, donde $w_k$ y $v_k$ son variables aleatorias que representan el ruido del proceso y de observación respectivamente, las cuales se asumen que son independientes entre sí y con distribuciones de probabilidad normales multivariadas definidas como
+
+\[ p(w) \sim N(0, Q) \]
+
+\[ p(v) \sim N(0, R) \]
+
+donde $Q$ y $R$ son las matrices de covarianza del ruido del proceso y ruido de medición respectivamente, las cuales se asumen constantes; donde la matriz de transición de estados $A$ de dimensión $n\times n$ \textemdash siendo $n$ la dimensión de estados dinámicos del modelo\textemdash \ define la relación entre entados del paso $k-1$ al paso $k$ sin contar el ruido del proceso; donde la matriz de transición de medición $H$ de dimensión $m\times n$ \textemdash siendo $m$ la dimensión del vector de medición\textemdash \  fija la relación entre la medición realizada y el vector de estados, sin contar el ruido de medición; y finalmente donde el estado del filtro puede representarse como $\hat{x}_{k|k}$ y $P_{k|k}$, siendo estas el estimador del vector de estados a posteriori dadas las mediciones hasta un tiempo $k$, y el estimador de la matriz de covariaza a posteriori dadas las mediciones hasta un tiempo $k$ respectivamente. Se puede definir la operación del filtro de Kalman separando a esta en dos fases: la predicción, y la corrección.
+
+\subsubsection{Ecuaciones de predicción}
 
 \begin{equation}
-p(w) \sim N(0, Q)
+\hat{x}_{k|k-1} = A\hat{x}_{k-1|k-1}
 \end{equation}
+\begin{equation}
+P_{k|k-1} = AP_{k-1|k-1}A^T + Q
+\end{equation}
+
+\subsubsection{Ecuaciones de observación}
 
 \begin{equation}
-p(v) \sim N(0, R)
+\hat{x}_{k|k} = \hat{x}_{k|k-1} + K_k y_k
+\end{equation}
+\begin{equation}
+P_{k|k} = (\mathbb{I}-K_kH)P_{k|k-1}
 \end{equation}
 
-donde $Q$ y $R$ son las matrices de covarianza del ruido del proceso y ruido de medición respectivamente, las cuales se asumen constantes; donde la matriz de transición de estados $A$ de dimensión $N\times N$ \textemdash siendo $N$ la dimensión de estados dinámicos del modelo\textemdash \ define la relación entre entados del paso $k-1$ al paso $k$ sin contar el ruido del proceso; y finalmente donde la matriz de transición de medición $H$ de dimensión $M\times N$ \textemdash siendo $M$ la dimensión del vector de medición\textemdash \  fija la relación entre la medición realizada y el vector de estados, sin contar el ruido de medición.
- 
+donde,
 
+\begin{equation}
+y_k = z_k - H\hat{x}_{k|k-1}
+\end{equation}
+\begin{equation}
+S_k = HP_{k|k-1}H^T + R_k
+\end{equation}
+\begin{equation}
+K_k = P_{k|k-1}H^TS_k^{-1}
+\end{equation}
 
+\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\textwidth]{Imagenes/kalman1.png}
+		\caption{Funcionamiento completo del filtro Kalman simple \cite{ref:kalman2}.}
+		\label{fig:kalman1}
+\end{figure}
+
+En la Figura (\ref{fig:kalman-comp}) se puede observar el funcionamiento del algoritmo con un vector de estados dinámicos de dimensión dos compuesto por las coordenadas $(x,y)$ sobre el plano cartesiano, realizando mediciones periódicamente. Se comparan dos curvas. Por un lado, una senoidal con un ruido gaussiano montado sobre ella, simulando una serie de mediciones con ruido, y por el otro lado, la estimación obtenida a partir del filtro desarrollado.
+
+\begin{figure}[H]
+\centering
+	\includegraphics[width=0.4\textwidth]{Imagenes/Kalman_test_1.png}
+	\caption{Seno con ruido comparada con estimación de Kalman.}
+	\label{fig:kalman-comp}
+\end{figure}
 
 %VER COMO MERGEAR ESTO CON LAS SUBSUBSECTIONS DE LUCAS, SHITOMASI, KALMAN Y COLOR
 %Se emplearon distintos algoritmos que en conjunto permiten lograr el seguimiento deseado. Se decidió volcarse por el uso de una técnica de detección de flujo óptico\footnote{Patrón de movimiento aparente entre objetos en una escena. Esta técnica extrae la información tanto de elementos estáticos como en movimiento\cite{ref:optic-flow}.}. % de Lucas-Kanade.
@@ -145,13 +185,8 @@ donde $Q$ y $R$ son las matrices de covarianza del ruido del proceso y ruido de 
 \section{Aportes}
 Se decidió implementar código en \textbf{Python}, apoyándose en la librería \href{https://opencv.org/}{OpenCV}.
 
-Primero se desarrolló un programa capaz de realizar la estimación de una variable mediante el uso del filtro de Kalman. Se puede observar el funcionamiento del algoritmo a continuación: se comparan dos curvas, por un lado una senoidal con un ruido gaussiano montado sobre ella, simulando una medición imprecisa, y por el otro lado, la estimación obtenida a partir del filtro desarrollado.
-\begin{figure}[H]
-\centering
-	\includegraphics[width=0.4\textwidth]{Imagenes/Kalman_test_1.png}
-	\caption{Seno con ruido comparada con estimación de Kalman.}
-	\label{fig:kalman-comp}
-\end{figure}
+Primero se desarrolló un programa capaz de realizar la estimación de una variable mediante el uso del filtro de Kalman.
+
 
 Por otro lado, se obtuvo un algoritmo basado en los elementos mencionados previamente que permite detectar un objeto a partir de su color. El programa logrado permite al usuario seleccionar un área rectangular obtenida de una cámara o un video, siendo los elementos dentro de dicha sección los cuales son seguidos. De esta forma se pueden generar dos ventanas: donde simplemente se muestra el seguimiento del objeto en cuestión y otra resultante de lo denominado ``modo de debug'', en la cual se observa el proceso de optical flow.
 \begin{figure}[H]
@@ -218,6 +253,12 @@ B. D. Lucas y T. Kanade. \textit{An iterative image registration technique with 
 W.S.P. Fernando, L. Udawatta , P. Pathirana. \textit{Identification of Moving Obstacles with Pyramidal
 Lucas Kanade Optical Flow and k means
 Clustering}. Faculty of Engineering, University of Moratuwa, Sri Lanka.
+
+\bibitem{ref:kalman1}
+G. Terejanu, "Discrete Kalman Filter Tutorial", Cse.sc.edu, 2020. [Online]. Available: https://cse.sc.edu/~terejanu/files/tutorialKF.pdf. [Accessed: 15- Jun- 2020].
+
+\bibitem{ref:kalman2}
+G. Welch and G. Bishop, An Introduction to the Kalman Filter. University of North Carolina at Chapel Hill: Department of Computer Science, 2006.
 
 \end{thebibliography}
 
