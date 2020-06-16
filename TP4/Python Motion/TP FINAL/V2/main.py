@@ -51,6 +51,10 @@ while(cap.isOpened()):
 
     if cv.waitKey(10) & 0xFF == ord('q'):
         break
+    if cv.waitKey(10) & 0xFF == ord('p'):
+        while(True):
+            if cv.waitKey(10) & 0xFF == ord('p'):
+                break
     if  (cv.waitKey(10) & 0xFF == ord('r')):
         if prm.COLOR_ALGORITHM is True:
             prev, prev_gray, x, y, w, h, lower_thr, upper_thr = util.captureROI(cap)
