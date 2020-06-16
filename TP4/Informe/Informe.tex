@@ -74,21 +74,19 @@ Realizando el mismo proceso para todos los niveles de discretización en el eje 
 }
 \textcolor{red}{Ehh... es necesario estos 4 puntos que quedaron? Yo pondría solo el código o algo así.}
 
-Este trabajo se centra en procesos de medio nivel. Dicha definición es muy amplia, por lo cual es necesario acotar este camino. Es por ello que se decidió centralizarse en el seguimiento de objetos en imágenes en movimiento. Dada ciertas condiciones iniciales conocidas (brindadas por el usuario) en una imagen en movimiento en tiempo real, tomar un conjunto de datos de $x$, $y$ y $f(x,y)$ para así seleccionar un objeto dado y seguirlo a través del tiempo. 
+Este trabajo se centra en procesos de medio nivel. Dicha definición es muy amplia, por lo cual es necesario acotar este camino. Es por ello que se decidió centralizarse en el seguimiento de objetos en imágenes en movimiento. Se busco que, dada ciertas condiciones iniciales conocidas (brindadas por el usuario) en una imagen en movimiento en tiempo real, tomar un conjunto de datos de $x$, $y$ y $f(x,y)$ para así seleccionar un elemento y seguir su movimiento a través del tiempo. 
 
-Se analizaron diversas formas de lograr el seguimiento de un objeto. Se decidió volcarse por el uso de una técnica de detección del flujo óptico\footnote{Patrón de movimiento aparente entre objetos en una escena. Esta técnica extrae la información tanto de elementos estáticos como en movimiento\cite{ref:optic-flow}.} de Lucas-Kanade junto con el uso del filtro de Kalman.
-La primer técnica consta del uso de información obtenida a partir de la intensidad del gradiente espacial para buscar la posición que mejor se acomoda a una imagen en movimiento \cite{ref:lucas-kanade}.
+Se emplearon distintos algoritmos que en conjunto permiten lograr el seguimiento deseado. Se decidió volcarse por el uso de una técnica de detección de flujo óptico\footnote{Patrón de movimiento aparente entre objetos en una escena. Esta técnica extrae la información tanto de elementos estáticos como en movimiento\cite{ref:optic-flow}.}% de Lucas-Kanade.
+Primero se distinguen puntos pertenecientes a un objeto a través del algoritmo de detección de bordes de Shi-Tomasi para luego emplear el método piramidal de Lukas-Kanade. Este consta del uso de información obtenida a partir de la intensidad del gradiente espacial para buscar la posición que mejor se acomoda a una imagen en movimiento \cite{ref:lucas-kanade} \cite{ref:lucas-kanade2}.
 
-%Podría poner más de LUCAS KANADE
-
-Por su lado, la segunda técnica consiste en un algoritmo que elabora una estimación de unas variables deseadas, mediante el uso de una serie de observaciones a lo largo del tiempo. Este filtro considera ciertas imprecisiones en las mediciones, como lo puede ser el ruido existente. 
+Por su lado, se valió del uso de filtros de Kalman. Esta técnica consiste en un algoritmo que elabora una estimación de unas variables deseadas, mediante el uso de una serie de observaciones a lo largo del tiempo. Este filtro considera ciertas imprecisiones en las mediciones, como lo puede ser el ruido existente. La idea del uso de este algoritmo se basa en el hecho de poder estimar la posición de un objeto una vez perdido de vista.
 \textcolor{orange}{Escribí una brevísima descripción de lo que se va a hacer. Profundizar y escribir el objetivo final. Justificar elección. \textbf{Yo creo que se puede hablar más de Lucas-Kanade y de Kalman}.}
 
 \section{Aportes}
 \textcolor{orange}{Se debería hablar más de lo que se hizo.}
 Se decidió implementar código en \textbf{Python}, apoyándose en la librería \href{https://opencv.org/}{OpenCV}.
 
-Primero se desarrolló un programa capaz de realizar la estimación de una variable mediante el uso del filtro especificado anteriormente. Se puede observar el funcionamiento del algoritmo a continuación: se comparan dos curvas, por un lado una senoidal con un ruido gaussiano montado sobre ella, simulando una medición imprecisa, y por el otro lado, la estimación obtenida a partir del filtro desarrollado.
+Primero se desarrolló un programa capaz de realizar la estimación de una variable mediante el uso del filtro de Kalman. Se puede observar el funcionamiento del algoritmo a continuación: se comparan dos curvas, por un lado una senoidal con un ruido gaussiano montado sobre ella, simulando una medición imprecisa, y por el otro lado, la estimación obtenida a partir del filtro desarrollado.
 \begin{figure}[H]
 \centering
 	\includegraphics[width=0.5\textwidth]{Imagenes/Kalman_test_1.png}
@@ -96,7 +94,26 @@ Primero se desarrolló un programa capaz de realizar la estimación de una varia
 	\label{fig:kalman-comp}
 \end{figure}
 
-Luego se buscó utilizar el código previamente mencionado para estimar el movimiento de un objeto en tiempo real. Es así que se realizó un soSftware que permite al usuario seleccionar un área rectangular de su cámara, siendo los elementos dentro de dicha sección los cuales son seguidos por el programa.
+Por otro lado, se obtuvo un algoritmo basado en los elementos mencionados previamente que permite detectar un objeto a partir de su color. El programa logrado permite al usuario seleccionar un área rectangular obtenida de una cámara o un video, siendo los elementos dentro de dicha sección los cuales son seguidos. De esta forma se pueden generar dos ventanas: donde simplemente se muestra el seguimiento del objeto en cuestión y otra resultante de lo denominado ``modo de debug'', en la cual se observa el proceso de optical flow.
+\begin{figure}[H]
+\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{Imagenes/Optical1.png}
+		\caption{Modo normal.}
+		\label{fig:optical1}
+	\end{subfigure}
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{Imagenes/Optical2.png}
+		\caption{Modo debug.}
+		\label{fig:optical2}
+	\end{subfigure}
+	\caption{Resultado de la selección de un elemento.}
+	\label{fig:optical12}
+\end{figure}
+
+%Luego se buscó utilizar el código previamente mencionado para estimar el movimiento de un objeto en tiempo real. Es así que se realizó un software que 
 
 \textcolor{red}{
 \begin{itemize}
@@ -118,17 +135,24 @@ Luego se buscó utilizar el código previamente mencionado para estimar el movim
 
 
 \begin{thebibliography}{9}
+
 \bibitem{ref:intro1}
 R. C. Gonzalez, R. E. Woods y S. L. Eddins. \textit{Digital Image Processing Using MATLAB}. Prentice Hall, 2da ed, 2002, pp. 2-3.
 
 \bibitem{ref:digit1}
 R. C. Gonzalez, R. E. Woods y S. L. Eddins. \textit{Digital Image Processing Using MATLAB}. Prentice Hall, 2da ed, 2002, pp. 52-54.
 
+\bibitem{ref:optic-flow}
+D. H. Warren y Edward R. Strelow. \textit{Electronic Spatial Sensing for the Blind: Contributions from Perception}. Springer Netherlands, 1er ed, 1985. pp. 414.
+
 \bibitem{ref:lucas-kanade}
 B. D. Lucas y T. Kanade. \textit{An iterative image registration technique with an application to stereo vision}. De Proceedings of Imaging Understanding Workshop, pp. 121-130.
 
-\bibitem{ref:optic-flow}
-D. H. Warren y Edward R. Strelow. \textit{Electronic Spatial Sensing for the Blind: Contributions from Perception}. Springer Netherlands, 1er ed, 1985. pp. 414.
+\bibitem{ref:lucas-kanade2}
+W.S.P. Fernando, L. Udawatta , P. Pathirana. \textit{Identification of Moving Obstacles with Pyramidal
+Lucas Kanade Optical Flow and k means
+Clustering}. Faculty of Engineering, University of Moratuwa, Sri Lanka.
+
 \end{thebibliography}
 
 \end{document}
