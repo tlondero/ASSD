@@ -149,7 +149,7 @@ def measureFeatures(error_feature, frame, prev, prev_gray, kalman):
     prev_gray = gray.copy()
     return error_feature, good_new, good_old, prev_gray, prev
 
-def drawEstimate(error, good_new, good_old, frame, kalman, dyn_h, dyn_w, frame_debug):
+def drawEstimate(error, good_new, good_old, frame, kalman, dyn_h, dyn_w, h, w,  frame_debug):
     if not error and prm.DEBUG_MODE is True:
         for i, (new, old) in enumerate(zip(good_new, good_old)):
             a, b = new.ravel()
@@ -161,8 +161,8 @@ def drawEstimate(error, good_new, good_old, frame, kalman, dyn_h, dyn_w, frame_d
     else:
         x = np.int(kalman.statePost[0][0])
         y = np.int(kalman.statePost[1][0])
-
-        cv.putText(frame, 'Tracking failure', (15, 30), prm.font, 1, (0, 0, 255), 2, cv.LINE_AA)
+        if error is True:
+            cv.putText(frame, 'Tracking failure', (15, 30), prm.font, 1, (0, 0, 255), 2, cv.LINE_AA)
         if prm.DEBUG_MODE is True:
             cv.rectangle(frame_debug, (int(x - (dyn_w/2)), int(y - (dyn_h/2))), (int(x + (dyn_w/2)), int(y + (dyn_h/2))), prm.ROI_color, 4)
 
@@ -171,7 +171,7 @@ def drawEstimate(error, good_new, good_old, frame, kalman, dyn_h, dyn_w, frame_d
     else:
         cv.putText(frame_debug, 'Color filter OFF', (15, 30), prm.font, 0.75, (0, 0, 255), 1, cv.LINE_AA)
 
-    frame = cv.circle(frame, (int(kalman.statePost[0][0]), int(kalman.statePost[1][0])), int(np.sqrt(dyn_w**2 + dyn_h**2)/2), prm.kalman_color, 2)
+    frame = cv.circle(frame, (int(kalman.statePost[0][0]), int(kalman.statePost[1][0])), int(np.sqrt(w**2 + h**2)/2 + 5), prm.kalman_color, 2)
     output = cv.add(frame, 0)
     if prm.DEBUG_MODE is True:
         cv.imshow("Grupo 3 Visual Tracker -- DEBUG", frame_debug)

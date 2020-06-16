@@ -47,7 +47,7 @@ while(cap.isOpened()):
     else:
         error, good_new, good_old, prev_gray, prev = util.measureFeatures(error, frame_real, prev, prev_gray, kalman)
 
-    util.drawEstimate(error, good_new, good_old, frame_real, kalman, dyn_h, dyn_w, frame)
+    util.drawEstimate(error, good_new, good_old, frame_real, kalman, dyn_h, dyn_w, h, w, frame)
 
     if cv.waitKey(10) & 0xFF == ord('q'):
         break
