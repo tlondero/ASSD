@@ -207,7 +207,23 @@ El programa desarrollado permite elegir al usuario si desea o no ver la ventana 
 	\item Evaluación y conclusiones del desarrollo.
 \end{itemize}
 }
+\subsection{Posibles Mejoras}
+Algunas mejoras que pueden ser implementadas en futuros desarrollos son:
+\begin{itemize}
+\item Trackeado multiobjeto:
+Da la opción al usuario de trackear mas de un objeto en la pantalla.
+\item Filtro de Kalman donde la matriz de covarianza de medición no sea constante:
+En el modelo utilizado actualmente la matriz de covarianza es constante, esto asume que la presición de  medición es fija. Esto último no suele ser verdad en la realidad, una mejora es la introducción de modificaciones en la matriz de covarianza de manera dinámica así el filtro proporcionaría mejores predicciones, un caso en el que esto es vital es en la desaparición del objeto a trackear dado que en ese momento lo único utilizado es la predicción de Kalman. 
+\item Filtro de sensibilidad Multicolor:
+Dado tres objetos $A$ ,$B$ y $C$, donde $A$ cuenta con 2 colores distintivos, siendo estos rojo y azul, $B$ un objeto rojo y $C$ uno azul, lo que propone este filtro es la capacidad de diferenciar al objeto por mas de un color distintivo, cosa de que la interferencia de $B$ o $C$ en el camino de $A$ no comprometa su seguimiento.
+\item Un mejor modelado de las ecuaciones dinámicas del filtro de Kalman para incluir la aceleración como variable de estado:
+El modelo utilizado actualmente consta de un movimiento rectilíneo uniforme bidimensional, la inclusión de la aceleración proporcionaría una mejor predicción.
+\end{itemize}
 
+
+
+
+\subsection{Conclusiones}
 
 
 \begin{thebibliography}{9}
