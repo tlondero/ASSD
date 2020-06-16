@@ -138,7 +138,7 @@ donde $Q$ y $R$ son las matrices de covarianza del ruido del proceso y ruido de 
 %VER COMO MERGEAR ESTO CON LAS SUBSUBSECTIONS DE LUCAS, SHITOMASI, KALMAN Y COLOR
 %Se emplearon distintos algoritmos que en conjunto permiten lograr el seguimiento deseado. Se decidió volcarse por el uso de una técnica de detección de flujo óptico\footnote{Patrón de movimiento aparente entre objetos en una escena. Esta técnica extrae la información tanto de elementos estáticos como en movimiento\cite{ref:optic-flow}.}. % de Lucas-Kanade.
 %Primero se distinguen puntos pertenecientes a un objeto a través del algoritmo de detección de bordes de Shi-Tomasi para luego emplear el método piramidal de Lukas-Kanade..
-
+%Shi-Tomasi es un algorítmo que busca detectar los bordes de un objeto en particular. Es ideal buscar una buena discriminación de dichos bordes al principio del proceso de seguimiento, de esta forma se busca maximizar la calidad de seguimiento del objeto. Este algoritmo verifica que el seguimiento sea correcto y además, dado que el proceso de optical flow se realiza por color, como se explica más adelante, la imagen final a procesar cuenta con bordes bien definidos \cite{ref:shi-tomasi}.
 %Por su lado, se valió del uso de filtros de Kalman. Esta técnica consiste en un algoritmo que elabora una estimación de unas variables deseadas, mediante el uso de una serie de observaciones a lo largo del tiempo. Este filtro considera ciertas imprecisiones en las mediciones, como lo puede ser el ruido existente. La idea del uso de este algoritmo se basa en el hecho de poder estimar la posición de un objeto una vez perdido de vista.
 %\textcolor{orange}{Escribí una brevísima descripción de lo que se va a hacer. Profundizar y escribir el objetivo final. Justificar elección. \textbf{Yo creo que se puede hablar más de Lucas-Kanade y de Kalman}.}
 \subsubsection{Filtro de Color}
@@ -223,6 +223,9 @@ D. H. Warren y Edward R. Strelow. \textit{Electronic Spatial Sensing for the Bli
 
 \bibitem{ref:lucas-kanade}
 B. D. Lucas y T. Kanade. \textit{An iterative image registration technique with an application to stereo vision}. De Proceedings of Imaging Understanding Workshop, pp. 121-130.
+
+%\bibitem{ref:shi-tomasi}
+%J. Shi y C. Tomasi. \textit{Good Features to Track}. 9th IEEE Conference on Computer Vision and Pattern Recognition, June 1994, Springer, pp. 593–600.
 
 \bibitem{ref:lucas-kanade2}
 W.S.P. Fernando, L. Udawatta , P. Pathirana. \textit{Identification of Moving Obstacles with Pyramidal
