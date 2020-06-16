@@ -103,11 +103,44 @@ Este algoritmo se basa en el principio de ``Divide y conquistarás'' al realizar
 		\caption{Cálculo del Optical Flow.}
 		\label{fig:opticalflow1}
 \end{figure}
-Se emplearon distintos algoritmos que en conjunto permiten lograr el seguimiento deseado. Se decidió volcarse por el uso de una técnica de detección de flujo óptico\footnote{Patrón de movimiento aparente entre objetos en una escena. Esta técnica extrae la información tanto de elementos estáticos como en movimiento\cite{ref:optic-flow}.}. % de Lucas-Kanade.
-Primero se distinguen puntos pertenecientes a un objeto a través del algoritmo de detección de bordes de Shi-Tomasi para luego emplear el método piramidal de Lukas-Kanade..
 
-Por su lado, se valió del uso de filtros de Kalman. Esta técnica consiste en un algoritmo que elabora una estimación de unas variables deseadas, mediante el uso de una serie de observaciones a lo largo del tiempo. Este filtro considera ciertas imprecisiones en las mediciones, como lo puede ser el ruido existente. La idea del uso de este algoritmo se basa en el hecho de poder estimar la posición de un objeto una vez perdido de vista.
-\textcolor{orange}{Escribí una brevísima descripción de lo que se va a hacer. Profundizar y escribir el objetivo final. Justificar elección. \textbf{Yo creo que se puede hablar más de Lucas-Kanade y de Kalman}.}
+\subsubsection{Filtro de Kalman}
+
+El filtro de Kalman es un filtro recursivo que busca estimar el estado de un sistema dinámico lineal discretizado de dimensión $N$ mediante una serie mediciones con cierto error. 
+
+Dado un proceso estocástico lineal en tiempo discreto definido por
+
+\begin{equation}
+x_k = Ax_{k-1} + w_{k-1} \footnote{Se omitió por simplicidad la función de control.}
+\end{equation}
+
+donde $x_k \in \mathcal{R}^{N}$ y siendo una medición definida por
+
+\begin{equation}
+z_k = Hx_k + v_k
+\end{equation}
+
+donde $w_k$ y $v_k$ son variables aleatorias que representan el ruido del proceso y de la medición respectivamente, las cuales se asumen que son independientes entre sí y con distribuciones de probabilidad normales definidas como
+
+\begin{equation}
+p(w) \sim N(0, Q)
+\end{equation}
+
+\begin{equation}
+p(v) \sim N(0, R)
+\end{equation}
+
+donde $Q$ y $R$ son las matrices de covarianza del ruido del proceso y ruido de medición respectivamente, las cuales se asumen constantes; donde la matriz de transición de estados $A$ de dimensión $N\times N$ \textemdash siendo $N$ la dimensión de estados dinámicos del modelo\textemdash \ define la relación entre entados del paso $k-1$ al paso $k$ sin contar el ruido del proceso; y finalmente donde la matriz de transición de medición $H$ de dimensión $M\times N$ \textemdash siendo $M$ la dimensión del vector de medición\textemdash \  fija la relación entre la medición realizada y el vector de estados, sin contar el ruido de medición.
+ 
+
+
+
+%VER COMO MERGEAR ESTO CON LAS SUBSUBSECTIONS DE LUCAS, SHITOMASI, KALMAN Y COLOR
+%Se emplearon distintos algoritmos que en conjunto permiten lograr el seguimiento deseado. Se decidió volcarse por el uso de una técnica de detección de flujo óptico\footnote{Patrón de movimiento aparente entre objetos en una escena. Esta técnica extrae la información tanto de elementos estáticos como en movimiento\cite{ref:optic-flow}.}. % de Lucas-Kanade.
+%Primero se distinguen puntos pertenecientes a un objeto a través del algoritmo de detección de bordes de Shi-Tomasi para luego emplear el método piramidal de Lukas-Kanade..
+
+%Por su lado, se valió del uso de filtros de Kalman. Esta técnica consiste en un algoritmo que elabora una estimación de unas variables deseadas, mediante el uso de una serie de observaciones a lo largo del tiempo. Este filtro considera ciertas imprecisiones en las mediciones, como lo puede ser el ruido existente. La idea del uso de este algoritmo se basa en el hecho de poder estimar la posición de un objeto una vez perdido de vista.
+%\textcolor{orange}{Escribí una brevísima descripción de lo que se va a hacer. Profundizar y escribir el objetivo final. Justificar elección. \textbf{Yo creo que se puede hablar más de Lucas-Kanade y de Kalman}.}
 
 \section{Aportes}
 Se decidió implementar código en \textbf{Python}, apoyándose en la librería \href{https://opencv.org/}{OpenCV}.
