@@ -942,3 +942,6 @@ healthchecksdb
 MigrationBackup/
 
 # End of https://www.gitignore.io/api/c++,pycharm,visualstudio,visualstudiocode
+TP4/Python Motion/TP FINAL/V2/.idea/modules.xml
+TP4/Python Motion/TP FINAL/V2/.idea/V2.iml
+*.xml
