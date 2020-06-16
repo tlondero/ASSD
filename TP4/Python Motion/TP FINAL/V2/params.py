@@ -6,9 +6,9 @@ import cv2 as cv
 
 feature_params = dict(maxCorners=1000,
                       qualityLevel=0.1,
-                      minDistance=0.5,
+                      minDistance=0.1,
                       blockSize=7)
-RECALC_EVERY_FRAMES = 20
+RECALC_EVERY_FRAMES = 15
 """####################"""
 """LUCAS-KANADE ALGORITHM"""
 
@@ -21,14 +21,23 @@ lk_params = dict(winSize=(15, 15),
 """####################"""
 """KALMAN FILTER ALGORITHM"""
 
-dt = 1e-2                   #delta time
-INITIAL_STATE_COV = 0.2
-PROCESS_COV = 0.05      #process covariance, si es chico entonces la estimacion tiene menos ruido pero es menos precisa, si es grande la estimacion tiene mas ruido pero es mas precisa
+dt = 1                   #delta time
+INITIAL_STATE_COV = 1
+PROCESS_COV = 0.001      #process covariance, si es chico entonces la estimacion tiene menos ruido pero es menos precisa, si es grande la estimacion tiene mas ruido pero es mas precisa
 MEAS_MATRIX = 1.
-MEAS_NOISE_COV = 1e-1       #covarianza de medicion
+MEAS_NOISE_COV = 0.5       #covarianza de medicion
 
 """####################"""
 
 ft_color = (0, 255, 0)
 ROI_color = (255, 0, 0)
 kalman_color = (0, 130, 255)
+
+"""####################"""
+HUE_VAR = 8
+SAT_VAR = 40
+VAL_VAR = 40
+
+COLOR_ALGORITHM = True
+
+font = cv.FONT_HERSHEY_SIMPLEX
