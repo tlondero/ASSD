@@ -26,7 +26,7 @@ threshold= 100
 time_count = 0
 start_time=0
 
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 cap.open(0)
 PrevImg = np.zeros([HEIGHT, WIDTH, 3], np.uint8)
 CurrImg = np.zeros([HEIGHT, WIDTH, 3], np.uint8)

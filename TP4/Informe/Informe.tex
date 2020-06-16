@@ -76,10 +76,35 @@ Realizando el mismo proceso para todos los niveles de discretización en el eje 
 }
 \textcolor{red}{Ehh... es necesario estos 4 puntos que quedaron? Yo pondría solo el código o algo así.}
 
-Este trabajo se centra en procesos de medio nivel. Dicha definición es muy amplia, por lo cual es necesario acotar este camino. Es por ello que se decidió centralizarse en el seguimiento de objetos en imágenes en movimiento. Se busco que, dada ciertas condiciones iniciales conocidas (brindadas por el usuario) en una imagen en movimiento en tiempo real, tomar un conjunto de datos de $x$, $y$ y $f(x,y)$ para así seleccionar un elemento y seguir su movimiento a través del tiempo. 
-
+Este trabajo se centra en procesos de medio nivel. Dicha definición es muy amplia, por lo cual es necesario acotar este camino. Es por ello que se decidió centrarse en el seguimiento de objetos en imágenes en movimiento. Se busco que, dada ciertas condiciones iniciales conocidas (brindadas por el usuario) en una imagen en movimiento en tiempo real, tomar un conjunto de datos de $x$, $y$ y $f(x,y)$ para así seleccionar un elemento y seguir su trayectoria a través del tiempo, como hipótesis plantearemos:
+\begin{itemize}
+\item El objeto no cambiará rápidamente de color ni su iluminación o exposición-
+\item El objeto no sufrirá una oclusión por parte de un obstáculo del mismo color.
+\end{itemize} para lograr este fin se utilizó el algoritmo de Lucas-Kanade de Optical Flow, el método de Shi-Tomasi, la utilización de filtros de Kalman y filtrado de color.
+\subsubsection{Optical Flow} 
+El campo de movimiento de una imagen es el movimiento real del objeto en el espacio proyectado sobre el plano de la imagen. El Optical Flow (flujo óptico) se define como el flujo de la intensidad en escala de grises en el plano de la imagen, a medida que evoluciona en el tiempo. También se puede interpretar el Optical Flow o flujo de la imagen como el movimiento aparente de la imagen  basado en la percepción visual, y tiene dimensión de velocidad $\vec{V}= (V_x \ , \ V_y)$. Si el Optical Flow se determina de dos imagenes consecutivas, aparece un vector de desplazamiento $\vec{d}$ de las cualidades elegidas, entre el cuadro n y el n+1.
+\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\textwidth]{Imagenes/opticalflowrubick.png}
+		\caption{Cubo de rubik rotando en una mesa.}
+		\label{fig:opticalflow1}
+\end{figure}
+Para la implementación del algoritmo existen varios caminos, como el basado en calculo de gradientes de la imagen total, existe otro que utiliza solo ciertos puntos que se determinan constantes de la imagen, nosotros utilizaremos el método piramidal de Lucas-Kanade.
+\subsubsection{Lucas-Kanade} 
+ Este consta del uso de información obtenida a partir de la intensidad del gradiente espacial para buscar la posición que mejor se acomoda a una imagen en movimiento \cite{ref:lucas-kanade} \cite{ref:lucas-kanade2}, algunas de las hipótesis que postula Lucas-Kanade son:
+\begin{itemize}
+\item Los movimientos entre cuadros consecutivos son pequeños. Tan pequeños como un pixel.
+\item La intensidad de los objeto se mantiene constante cuadro a cuadro.
+\end{itemize} 
+Este algoritmo se basa en el principio de ``Divide y conquistarás'' al realizar la tarea de detectar movimiento en toda la imagen en problemas mas sencillos, consta de dividir la pantalla en un arbol cuaternario, y calculando recursivamente el optic flow de cada partición.
+\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\textwidth]{Imagenes/op.png}
+		\caption{Cálculo del Optical Flow.}
+		\label{fig:opticalflow1}
+\end{figure}
 Se emplearon distintos algoritmos que en conjunto permiten lograr el seguimiento deseado. Se decidió volcarse por el uso de una técnica de detección de flujo óptico\footnote{Patrón de movimiento aparente entre objetos en una escena. Esta técnica extrae la información tanto de elementos estáticos como en movimiento\cite{ref:optic-flow}.}. % de Lucas-Kanade.
-Primero se distinguen puntos pertenecientes a un objeto a través del algoritmo de detección de bordes de Shi-Tomasi para luego emplear el método piramidal de Lukas-Kanade. Este consta del uso de información obtenida a partir de la intensidad del gradiente espacial para buscar la posición que mejor se acomoda a una imagen en movimiento \cite{ref:lucas-kanade} \cite{ref:lucas-kanade2}.
+Primero se distinguen puntos pertenecientes a un objeto a través del algoritmo de detección de bordes de Shi-Tomasi para luego emplear el método piramidal de Lukas-Kanade..
 
 Por su lado, se valió del uso de filtros de Kalman. Esta técnica consiste en un algoritmo que elabora una estimación de unas variables deseadas, mediante el uso de una serie de observaciones a lo largo del tiempo. Este filtro considera ciertas imprecisiones en las mediciones, como lo puede ser el ruido existente. La idea del uso de este algoritmo se basa en el hecho de poder estimar la posición de un objeto una vez perdido de vista.
 \textcolor{orange}{Escribí una brevísima descripción de lo que se va a hacer. Profundizar y escribir el objetivo final. Justificar elección. \textbf{Yo creo que se puede hablar más de Lucas-Kanade y de Kalman}.}
@@ -114,7 +139,7 @@ Por otro lado, se obtuvo un algoritmo basado en los elementos mencionados previa
 	\label{fig:optical12}
 \end{figure}
 
-De este modo, se observa en la Figura (\ref{fig:optical1}) como se denota un objeto a seguir, mientras que la Figura (\ref{fig:optical2}) muestra dos datos importantes. Por un lado, se observa en el mismo color del objeto seleccionado como se lo visualiza mediante optical flow, mientras que por otro lado, se muestran los puntos elegidos por el algoritomo de Shi-Tomasi en forma de puntos verdes, los cuales sirven para calcular el centro de masa a seguir. Cabe destacar que el filtro de Kalman estima la posición de este último.
+De este modo, se observa en la Figura (\ref{fig:optical1}) como se denota un objeto a seguir, mientras que la Figura (\ref{fig:optical2}) muestra dos datos importantes. Por un lado, se observa en el mismo color del objeto seleccionado como se lo visualiza mediante optical flow, mientras que por otro lado, se muestran los puntos elegidos por el algoritomo de Shi-Tomasi en forma de puntos verdes, los cuales sirven para calcular el centro de masa a seguir. Cabe destacar que el filtro de Kalman estima la posición de este último. Adicionalmente el filtro de Kalman permite estimar la posición del objeto aunque este desaparezca de la pantalla al estar oculto de un objeto a partir de su velocidad estimada por el filtro y las ecuaciones de cinemática, contando con la habilidad de volver a encontrar al objeto cuando reaparezca.
 %Luego se buscó utilizar el código previamente mencionado para estimar el movimiento de un objeto en tiempo real. Es así que se realizó un software que 
 
 El programa desarrollado permite elegir al usuario si desea o no ver la ventana en modo debug, la cual además informa sobre la posición del centro de masa. Para elegir un objeto es tan sencillo como seleccionar una área por sobre este, la cual aparece denotada en azul, para luego iniciar el seguimiento presionando al tecla ``espacio''. Por otra parte, el programa permite reelegir un elemento a detectar presionando la tecla ``r''.
@@ -130,6 +155,7 @@ El programa desarrollado permite elegir al usuario si desea o no ver la ventana 
 }
 
 \section{Desarrollo}
+
 \textcolor{red}{
 \begin{itemize}
 	\item Viabilidad, caminos alternativos.
@@ -138,6 +164,7 @@ El programa desarrollado permite elegir al usuario si desea o no ver la ventana 
 	\item Evaluación y conclusiones del desarrollo.
 \end{itemize}
 }
+
 
 
 \begin{thebibliography}{9}
