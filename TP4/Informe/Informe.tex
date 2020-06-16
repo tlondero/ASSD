@@ -217,17 +217,25 @@ f_{u}(x,y) = \left\{
 \right.
 \end{equation}
 
-donde $\Lambda$ es el límite para cada propiedad $u$, siendo estas Hue, Saturation o Value. Una vez obtenida la máscara $f(x, y)$ se realiza una operación AND bit-a-bit entre la máscara y la imagen original, logrando obtener una intensidad nula en los píxeles de la imagen que no posean un color cercano a la mediana calculada.
+donde $\Lambda$ es el límite para cada propiedad $u$, siendo estas Hue, Saturation o Value. Una vez obtenida la máscara $f(x, y)$ se realiza una operación AND bit-a-bit entre la máscara y la imagen original, logrando obtener una intensidad nula en los píxeles de la imagen que no posean un color cercano a la mediana calculada como se puede ver en las Figuras (\ref{fig:col1}) y (\ref{fig:col2}).
 
-%
-%
-%
-%IMAGEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEN
-%
-%
-%
-%
-%
+\begin{figure}[H]
+\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{Imagenes/color1.png}
+		\caption{Video antes de aplicar la máscara siguiendo al objeto azul.}
+		\label{fig:col1}
+	\end{subfigure}
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{Imagenes/color2.png}
+		\caption{Video después de aplicar la máscara. Es con esta imagen que opera el algoritmo y no con la normal.}
+		\label{fig:col2}
+	\end{subfigure}
+	\caption{Comparación entre video normal y luego de aplicar la máscara.}
+	\label{fig:color_comp}
+\end{figure}
 
 Este filtrado de color no solo posee una gran sinergia con el método de obtención de features de Shi-Tomasi, dado que este frame tendrá bordes de mucha mejor calidad, sino que tambíen posee una gran sinergia con el método de Optical Flow, debido a que como se verán menos bordes en la imagen modificada, aumenta notablemente la probabilidad de que los features queden contenidos todos dentro, o sobre los bordes del objeto a seguir.
 
