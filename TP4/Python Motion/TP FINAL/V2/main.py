@@ -22,6 +22,7 @@ frame_num = 0
 error = False
 dyn_h = h
 dyn_w = w
+frame = 0
 while(cap.isOpened()):
 
     frame_num += 1
