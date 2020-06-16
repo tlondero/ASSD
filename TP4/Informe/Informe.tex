@@ -50,7 +50,7 @@ Ejemplificando lo anterior, se toma una entrada al sistema, como puede ser la pr
 Por lo tanto, se deben tomar coordenadas finitas, por ejemplo, aquellas que se encuentran sobre la recta AB, y asignarle a cada una un valor dado de amplitud. En la Figura~(\ref{fig:disc2}) se observa como una recta continua paralela al eje $x$ (horizontal), la cual posee ciertas variaciones aleatorias dadas por el ruido existente, es dividida en una cierta cantidad de posiciones equiespaciadas (discretización), marcadas con cuadrados blancos sobre la curva, asignándoles un nivel específico en la escala de grises (cuantización), marcado con una linea negra por la izquierda de dicha escala.
 \begin{figure}[H]
 \centering
-	\includegraphics[width=0.5\textwidth]{Imagenes/Digitalizacion_2.png}
+	\includegraphics[width=0.4\textwidth]{Imagenes/Digitalizacion_2.png}
 	\caption{Amplitud de la escala de grises en la recta AB y muestreo de valores.}
 	\label{fig:disc2}
 \end{figure}
@@ -83,13 +83,12 @@ Por su lado, se valió del uso de filtros de Kalman. Esta técnica consiste en u
 \textcolor{orange}{Escribí una brevísima descripción de lo que se va a hacer. Profundizar y escribir el objetivo final. Justificar elección. \textbf{Yo creo que se puede hablar más de Lucas-Kanade y de Kalman}.}
 
 \section{Aportes}
-\textcolor{orange}{Se debería hablar más de lo que se hizo.}
 Se decidió implementar código en \textbf{Python}, apoyándose en la librería \href{https://opencv.org/}{OpenCV}.
 
 Primero se desarrolló un programa capaz de realizar la estimación de una variable mediante el uso del filtro de Kalman. Se puede observar el funcionamiento del algoritmo a continuación: se comparan dos curvas, por un lado una senoidal con un ruido gaussiano montado sobre ella, simulando una medición imprecisa, y por el otro lado, la estimación obtenida a partir del filtro desarrollado.
 \begin{figure}[H]
 \centering
-	\includegraphics[width=0.5\textwidth]{Imagenes/Kalman_test_1.png}
+	\includegraphics[width=0.4\textwidth]{Imagenes/Kalman_test_1.png}
 	\caption{Coseno con ruido comparada con estimación de Kalman.}
 	\label{fig:kalman-comp}
 \end{figure}
@@ -113,7 +112,12 @@ Por otro lado, se obtuvo un algoritmo basado en los elementos mencionados previa
 	\label{fig:optical12}
 \end{figure}
 
+De este modo, se observa en la Figura (\ref{fig:optical1}) como se denota un objeto a seguir, mientras que la Figura (\ref{fig:optical2}) muestra dos datos importantes. Por un lado, se observa en el mismo color del objeto seleccionado como se lo visualiza mediante optical flow, mientras que por otro lado, se muestran los puntos elegidos por el algoritomo de Shi-Tomasi en forma de puntos verdes, los cuales sirven para calcular el centro de masa a seguir. Cabe destacar que el filtro de Kalman estima la posición de este último.
 %Luego se buscó utilizar el código previamente mencionado para estimar el movimiento de un objeto en tiempo real. Es así que se realizó un software que 
+
+El programa desarrollado permite elegir al usuario si desea o no ver la ventana en modo debug, la cual además informa sobre la posición del centro de masa. Para elegir un objeto es tan sencillo como seleccionar una área por sobre este, la cual aparece denotada en azul, para luego iniciar el seguimiento presionando al tecla ``espacio''. Por otra parte, el programa permite reelegir un elemento a detectar presionando la tecla ``r''.
+
+%NO SÉ SI ESTÁ BIEN MENCIONAR EL CÓMO USAR EL PROGRAMA ACÁ
 
 \textcolor{red}{
 \begin{itemize}
