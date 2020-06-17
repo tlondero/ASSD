@@ -5,7 +5,7 @@ import numpy as np
 class KalmanFilter:
 
     def __init__(self):
-        self.kalman = cv.KalmanFilter(4, 2, 0)  #Se inicializa el filtro kalman con 4 variables de estado y 2 variables de medicion
+        self.kalman = cv.KalmanFilter(4, 2, 4)  #Se inicializa el filtro kalman con 4 variables de estado y 2 variables de medicion
 
         self.kalman.transitionMatrix = np.array([[1.,    0.,    prm.dt, 0.    ],
                                                  [0.,    1.,    0.,     prm.dt],
