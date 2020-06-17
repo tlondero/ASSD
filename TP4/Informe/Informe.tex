@@ -435,8 +435,23 @@ while(cap.isOpened()):
 \end{lstlisting}
 \end{figure} 
  
+ Finalmente se presenta un diagrama en bloques del programa, donde se puede apreciar como interaccionan todos los algoritmos trabajando en armonía.
+\begin{figure}[H]
+\centering
+	\includegraphics[width=0.5\textwidth]{Imagenes/diagram.png}
+	\caption{Diagrama en bloques del programa.}
+	\label{fig:bloques}
+\end{figure}
 
 
+\subsection{Escenarios de fallas}
+Algunos casos donde puede fallar el Tracker son:
+\begin{itemize}
+\item El cambio de trayectoria de un objeto una vez que desaparece, provocará una falla en la predicción.
+\item Interacción entre el objeto trackeado y un objeto de características similares, puede causar un error de detección
+\item Cambios bruscos de iluminación o en color del objeto.
+
+\end{itemize}
 
 
 \subsection{Posibles Mejoras}
