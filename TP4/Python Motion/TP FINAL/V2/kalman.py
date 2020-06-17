@@ -12,8 +12,8 @@ class KalmanFilter:
                                                  [0.,    0.,    1.,     0.    ],
                                                  [0.,    0.,    0.,     1.    ]])  # Matriz F
 
-        self.kalman.measurementMatrix = prm.MEAS_MATRIX * np.array([[1, 0, 0, 0],
-                                                                    [0, 1, 0, 0]])  # Matriz H, donde se dice que solo se mide la posicion y no la velocidad
+        self.kalman.measurementMatrix = np.array([[1, 0, 0, 0],
+                                                  [0, 1, 0, 0]])  # Matriz H, donde se dice que solo se mide la posicion y no la velocidad
 
         self.kalman.processNoiseCov = prm.PROCESS_COV * np.identity(4)  # Matriz Q
 

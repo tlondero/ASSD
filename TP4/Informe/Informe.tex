@@ -65,17 +65,6 @@ Realizando el mismo proceso para todos los niveles de discretización en el eje 
 	\label{fig:disc3}
 \end{figure}
 
-\textcolor{red}{
-\begin{itemize}
-	%\item Descripción de las líneas de investigación (con referencias).
-	\item Descripción de los conceptos más importantes de cada una.
-	\item Análisis propio de lo presentado.
-	\item Simulaciones de lo más relevante (códigos como apéndice).
-	\item Elección del camino y justificación.
-\end{itemize}
-}
-\textcolor{red}{Ehh... es necesario estos 4 puntos que quedaron? Yo pondría solo el código o algo así.}
-
 Este trabajo se centra en procesos de medio nivel. Dicha definición es muy amplia, por lo cual es necesario acotar este camino. Es por ello que se decidió centrarse en el seguimiento de objetos en imágenes en movimiento. Se busco que, dada ciertas condiciones iniciales conocidas (brindadas por el usuario) en una imagen en movimiento en tiempo real, tomar un conjunto de datos de $x$, $y$ y $f(x,y)$ para así seleccionar un elemento y seguir su trayectoria a través del tiempo, como hipótesis plantearemos:
 \begin{itemize}
 \item El objeto no cambiará rápidamente de color ni su iluminación o exposición-
@@ -187,7 +176,73 @@ Se decidió implementar código en \textbf{Python}, apoyándose en la librería 
 \subsection{Implementación}
 A partir de una selección del video proporcionada por el usuario se obtienen las mejores features del objeto seleccionado utilizando el algoritmo de Shi-Tomasi. Luego, mediante el algoritmo de Lucas-Kanade de Optical Flow se obtiene la evolución de las features en el tiempo. A este cúmulo de puntos se le calcula el centro de masas $\mu$ y el centro de inercia $\sigma$. Se rechazan los puntos de este cúmulo que se encuentren a una distancia mayor a $k_{\sigma}\sigma$ respecto al centro de masas, para luego calcular nuevamente el centro de masas el cual es el que se introduce en el filtro de Kalman como medición de la posición.
 
+La dimensión del vector de estados del filtro de Kalman es de cuatro, poseyendo la posición y la velocidad tanto horizontal como vertical. La dimensión del vector de observación es de dos dado que solamente se mide la posición horizontal y vertical del centro de masas. La matriz $A$ queda definida por las ecuaciones que caracterizan el movimiento del objeto a seguir que, por simplicidad, se consideraron las ecuaciones cinemáticas de MRU, quedando entonces
 
+\begin{equation}
+A = 
+\begin{pmatrix}
+1 & dt & 0  & 0\\
+0 & 1  & dt & 0\\
+0 & 0  & 1  & 0\\
+0 & 0  & 0  & 1 
+\end{pmatrix}
+\end{equation}
+
+Luego, se tiene que la matriz de observación o de transición de medición quedará definida por la transformación del espacio de observación al espacio real del vector de estados del filtro. Como los observables a medir forman parte del espacio real del vector de estados y son solo las posiciones, la matriz quedará definida de manera simple
+
+\begin{equation}
+H = 
+\begin{pmatrix}
+1 & 0 & 0  & 0\\
+0 & 1  & 0 & 0 
+\end{pmatrix}
+\end{equation}
+
+Mientras que la matrices de covarianza del proceso $Q$ y de medición $R$ serán cuadradas por definición, de dimensión cuatro y dos respectivamente, y además de la forma $\mathbb{I}\cdot \xi$ dado que se asume independencia de las variables aleatorias, quedando
+
+\begin{equation}
+Q = 
+\begin{pmatrix}
+\xi_Q & 0 & 0  & 0\\
+0 & \xi_Q  & 0 & 0\\
+0 & 0  & \xi_Q  & 0\\
+0 & 0  & 0  & \xi_Q 
+\end{pmatrix}
+\end{equation}
+
+\begin{equation}
+R = 
+\begin{pmatrix}
+\xi_R & 0 \\
+0 & \xi_R 
+\end{pmatrix}
+\end{equation}
+
+Siendo $\xi_Q$ y $\xi_R$ las varianzas del proceso y de medición respectivamente.
+
+Finalmente, $\hat{x}_{k|k}$ y $P_{k|k}$ tomarán la forma
+
+\begin{equation}
+\hat{x}_{k|k} = 
+\begin{pmatrix}
+\hat{x}\\
+\hat{y}\\
+\hat{v_x}\\
+\hat{v_y}
+\end{pmatrix}
+\end{equation}
+
+\begin{equation}
+P_{k|k} = 
+\begin{pmatrix}
+\gamma_{x} & 0 & 0  & 0\\
+0 & \gamma_{y}  & 0 & 0\\
+0 & 0  & \gamma_{v_x}  & 0\\
+0 & 0  & 0  & \gamma_{v_y} 
+\end{pmatrix}
+\end{equation}
+
+Siendo $\gamma_{i}$ la varianza de cada variable de estado. Cabe notar que el modelo utilizado asume independencia entre las variables aleatorias por simplicidad.
 Este algoritmo, hasta ahora explicado, cuenta con grandes problemas. Dados dos objetos $A$ y $B$, donde $A$ es el objeto a seguir:
 
 \begin{itemize}
@@ -265,14 +320,9 @@ Volviendo al caso de los objetos $A$ y $B$:
 	\label{fig:optical12}
 \end{figure}
 
+Sin embargo, el filtro de Kalman no puede estimar la posición del objeto indefinidamente. Es por esto que cuando el objeto se pierde, es decir, no se logran detectar más features, se entra en otra fase del programa. En esta fase, se realiza una búsqueda del objeto en cada frame del video a partir de la estimación del filtro de Kalman y el tamaño original del área seleccionada. La altura y el ancho del área de búsqueda se incrementará por un factor constante por cada frame en la que la búsqueda falle. Esta búsqueda se basa en aplicar el algoritmo de Shi-Tomasi sobre el área mencionada.
 
-\textcolor{red}{
-\begin{itemize}
-	\item Descripción y análisis de lo original producido por el grupo.
-	\item Simulaciones que justifiquen las ideas, y que prueben su originalidad.
-	\item Análisis de resultados
-\end{itemize}
-}
+Finalmente, para reforzar el algoritmo de seguimiento, se implemento además una recalculación periódica de las features con el método de Shi-Tomasi, partiendo de la media del cúmulo de features, removiendo los outliers, volviendo a calcular nuevamente la media y utilizar esta posición para aplicar el algoritmo de Shi-Tomasi, de misma manera que se realiza sobre la primera selección proporcionada por el usuario.
 
 \section{Desarrollo}
 
