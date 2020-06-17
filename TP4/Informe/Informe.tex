@@ -466,6 +466,8 @@ En el modelo utilizado actualmente la matriz de covarianza es constante, esto as
 \item Filtros de correlación:\\
 El uso de filtros de correlación tomando como cuadro inicial la selección del usuario se calcula  la correlación con toda la pantalla entre cuadros, donde la correlación sea mayor será mas probable la coincidencia.
 
+\item Invarianza ante cambios de iluminación:\\
+El cambio de iluminación impacta directamente sobre el color percibido. Esto afecta directamente a nuestra técnica de filtrado por color. Es por eso que se desean explorar formas de hacer más robusto al sistema ante estos cambios.
 
 \item Filtro de sensibilidad Multicolor: \\
 Dado tres objetos $A$, $B$ y $C$, donde $A$ cuenta con 2 colores distintivos, siendo estos rojo y azul, $B$ un objeto rojo y $C$ uno azul, lo que propone este filtro es la capacidad de diferenciar al objeto a seguir por mas de un color distintivo, cosa de que la interferencia de $B$ o $C$ en el camino de $A$ no comprometa su seguimiento debido a que ni $B$ ni $C$ posee la combinación de colores de $A$.
