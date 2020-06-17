@@ -463,7 +463,8 @@ Da la opción al usuario de trackear mas de un objeto en la pantalla, utilizando
 En el modelo utilizado actualmente la matriz de covarianza es constante, esto asume que la presición de  medición es fija. Esto último no suele ser verdad en la realidad. Una mejora es la introducción de modificaciones en la matriz de covarianza de manera dinámica así el filtro proporcionaría mejores predicciones. 
 
 
-
+\item Filtros de correlación:\\
+El uso de filtros de correlación tomando como cuadro inicial la selección del usuario se calcula  la correlación con toda la pantalla entre cuadros, donde la correlación sea mayor será mas probable la coincidencia.
 
 
 \item Filtro de sensibilidad Multicolor: \\
