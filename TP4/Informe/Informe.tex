@@ -90,13 +90,14 @@ El campo de movimiento de una imagen es el movimiento real del objeto en el espa
 		\label{fig:opticalflow1}
 \end{figure}
 Para la implementación del algoritmo existen varios caminos, como el basado en calculo de gradientes de la imagen total, existe otro que utiliza solo ciertos puntos que se determinan constantes de la imagen, nosotros utilizaremos el método piramidal de Lucas-Kanade.
+
 \subsubsection{Lucas-Kanade} 
  Este consta del uso de información obtenida a partir de la intensidad del gradiente espacial para buscar la posición que mejor se acomoda a una imagen en movimiento \cite{ref:lucas-kanade} \cite{ref:lucas-kanade2}, algunas de las hipótesis que postula Lucas-Kanade son:
 \begin{itemize}
 \item Los movimientos entre cuadros consecutivos son pequeños. Tan pequeños como un pixel.
 \item La intensidad de los objeto se mantiene constante cuadro a cuadro.
 \end{itemize} 
-Este algoritmo se basa en el principio de ``Divide y conquistarás'' al realizar la tarea de detectar movimiento en toda la imagen en problemas mas sencillos, consta de dividir la pantalla en un arbol cuaternario, y calculando recursivamente el optic flow de cada partición.
+Este algoritmo se basa en el principio de ``Divide y conquistarás'' al realizar la tarea de detectar movimiento en toda la imagen en problemas mas sencillos, consta de dividir la pantalla en un arbol cuaternario, esto lo hace debido a que las hipótesis de Lucas-Kanade deben cumplirse, asi que lo lleva al menor tamaño posible, donde tienden a cumplirse las hipótesis y de allí calculando recursivamente  cada partición hasta el primer nivel.
 \begin{figure}[H]
 		\centering
 		\includegraphics[width=0.5\textwidth]{Imagenes/op.png}
