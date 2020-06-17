@@ -1,5 +1,6 @@
 \input{Header.tex}
 
+\usepackage[procnames]{listings}
 \begin{document}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -79,13 +80,14 @@ El campo de movimiento de una imagen es el movimiento real del objeto en el espa
 		\label{fig:opticalflow1}
 \end{figure}
 Para la implementación del algoritmo existen varios caminos, como el basado en calculo de gradientes de la imagen total, existe otro que utiliza solo ciertos puntos que se determinan constantes de la imagen, nosotros utilizaremos el método piramidal de Lucas-Kanade.
+
 \subsubsection{Lucas-Kanade} 
  Este consta del uso de información obtenida a partir de la intensidad del gradiente espacial para buscar la posición que mejor se acomoda a una imagen en movimiento \cite{ref:lucas-kanade} \cite{ref:lucas-kanade2}, algunas de las hipótesis que postula Lucas-Kanade son:
 \begin{itemize}
 \item Los movimientos entre cuadros consecutivos son pequeños. Tan pequeños como un pixel.
 \item La intensidad de los objeto se mantiene constante cuadro a cuadro.
 \end{itemize} 
-Este algoritmo se basa en el principio de ``Divide y conquistarás'' al realizar la tarea de detectar movimiento en toda la imagen en problemas mas sencillos, consta de dividir la pantalla en un arbol cuaternario, y calculando recursivamente el optic flow de cada partición.
+Este algoritmo se basa en el principio de ``Divide y conquistarás'' al realizar la tarea de detectar movimiento en toda la imagen en problemas mas sencillos, consta de dividir la pantalla en un arbol cuaternario, esto lo hace debido a que las hipótesis de Lucas-Kanade deben cumplirse, asi que lo lleva al menor tamaño posible, donde tienden a cumplirse las hipótesis y de allí calculando recursivamente  cada partición hasta el primer nivel.
 \begin{figure}[H]
 		\centering
 		\includegraphics[width=0.5\textwidth]{Imagenes/op.png}
@@ -202,9 +204,7 @@ K_k = P_{k|k-1}H^TS_k^{-1}
 
 
 
-\section{Aportes}
-
-Se decidió implementar código en \textbf{Python}, apoyándose en la librería \href{https://opencv.org/}{OpenCV}.
+\section{Aportes y Desarrollo}
 
 \subsection{Implementación}
 A partir de una selección del video proporcionada por el usuario se obtienen las mejores features del objeto seleccionado utilizando el algoritmo de Shi-Tomasi. Luego, mediante el algoritmo de Lucas-Kanade de Optical Flow se obtiene la evolución de las features en el tiempo. A este cúmulo de puntos se le calcula el centro de masas $\mu$ y el centro de inercia $\sigma$. Se rechazan los puntos de este cúmulo que se encuentren a una distancia mayor a $k_{\sigma}\sigma$ respecto al centro de masas, para luego calcular nuevamente el centro de masas el cual es el que se introduce en el filtro de Kalman como medición de la posición.
@@ -322,7 +322,7 @@ f_{u}(x,y) = \left\{
 
 donde $\Lambda$ es el límite para cada propiedad $u$, siendo estas Hue, Saturation o Value. Una vez obtenida la máscara $f(x, y)$ se realiza una operación AND bit-a-bit entre la máscara y la imagen original, logrando obtener una intensidad nula en los píxeles de la imagen que no posean un color cercano a la mediana calculada como se puede ver en las Figuras (\ref{fig:col1}) y (\ref{fig:col2}).
 
-\begin{figure}[]
+\begin{figure}[H]
 \centering
 	\begin{subfigure}{.4\textwidth}
 		\centering
@@ -349,7 +349,7 @@ Volviendo al caso de los objetos $A$ y $B$:
 \item Si $A$ y $B$ son de colores distintos, y $A$, el objeto a seguir, pasa por detrás de $B$, ahora no se adosarán las features al objeto $B$, sino que el algoritmo verá que el área de $A$ se achica a medida que este queda oculto por $B$. Como los features no tendrán bordes para seguir, estos desaparecerán, por lo que se dejará de entregar mediciones al filtro de Kalman y este estimará correctamente la posición de $A$ mientras que este no haya sufrido aceleración alguna mientras estaba oculto. 
 \end{itemize}
 
-\begin{figure}[]
+\begin{figure}[H]
 \centering
 	\begin{subfigure}{.4\textwidth}
 		\centering
@@ -369,18 +369,76 @@ Volviendo al caso de los objetos $A$ y $B$:
 
 Sin embargo, el filtro de Kalman no puede estimar la posición del objeto indefinidamente. Es por esto que cuando el objeto se pierde, es decir, no se logran detectar más features, se entra en otra fase del programa. En esta fase, se realiza una búsqueda del objeto en cada frame del video a partir de la estimación del filtro de Kalman y el tamaño original del área seleccionada. La altura y el ancho del área de búsqueda se incrementará por un factor constante por cada frame en la que la búsqueda falle. Esta búsqueda se basa en aplicar el algoritmo de Shi-Tomasi sobre el área mencionada.
 
+
 Finalmente, para reforzar el algoritmo de seguimiento, se implemento además una recalculación periódica de las features con el método de Shi-Tomasi, partiendo de la media del cúmulo de features, removiendo los outliers, volviendo a calcular nuevamente la media y utilizar esta posición para aplicar el algoritmo de Shi-Tomasi, de misma manera que se realiza sobre la primera selección proporcionada por el usuario.
 
-\section{Desarrollo}
 
-\textcolor{red}{
-\begin{itemize}
-	\item Viabilidad, caminos alternativos.
-	\item Proceso de implementación
-	\item Documentación de los resultados: Resumen de lo más relevante, demos y programas van al apéndice.
-	\item Evaluación y conclusiones del desarrollo.
-\end{itemize}
-}
+
+Se decidió implementar código en \textbf{Python}, apoyándose en la librería \href{https://opencv.org/}{OpenCV}.
+
+
+
+El pseudocódigo que corresponde es:
+
+
+\definecolor{keywords}{RGB}{255,0,90}
+\definecolor{comments}{RGB}{0,0,113}
+\definecolor{red}{RGB}{160,0,0}
+\definecolor{green}{RGB}{0,150,0}
+ 
+\lstset{language=Python, 
+        basicstyle=\ttfamily\small, 
+        keywordstyle=\color{keywords},
+        commentstyle=\color{comments},
+        stringstyle=\color{red},
+        showstringspaces=false,
+        identifierstyle=\color{green},
+        procnamekeys={def,class}}
+\begin{figure}[H]
+
+\begin{lstlisting}
+kalman = KalmanFilter()
+
+cap = VideoCapture()
+
+lower_thr, upper_thr = [],[]
+
+prev = captureROI(cap)
+
+prev = space_translate(x, y, prev)
+
+frame = cap.read()
+
+while(cap.isOpened()):
+
+    frame_num++
+    frame_real = cap.read()
+
+
+    hsv = cvtColor(frame, COLOR_BGR2HSV)
+    mask = inRange(hsv, lower_thr, upper_thr)
+    frame = bitwise_and(frame, mask)
+
+    if(recalc and not error):
+        frame_num = 0
+        prev, x, y = recalculateFeatures()
+
+    if error:
+        prev=  searchObject(kalman)
+        dyn_h, dyn_w = new_dyn_h, new_dyn_w
+
+
+    good_new, good_old,prev= measureFeatures()
+
+    drawEstimate(good_new, kalman, frame)
+
+\end{lstlisting}
+\end{figure} 
+ 
+
+
+
+
 \subsection{Posibles Mejoras}
 Algunas mejoras que pueden ser implementadas en futuros desarrollos son:
 \begin{itemize}
