@@ -10,7 +10,7 @@ class KalmanFilter:
         self.kalman.transitionMatrix = np.array([[1.,    0.,    prm.dt, 0.    ],
                                                  [0.,    1.,    0.,     prm.dt],
                                                  [0.,    0.,    1.,     0.    ],
-                                                 [0.,    0.,    0.,     1.    ]])  # Matriz F
+                                                 [0.,    0.,    0.,     1.    ]])  # Matriz A
 
         self.kalman.measurementMatrix = np.array([[1., 0., 0., 0.],
                                                   [0., 1., 0., 0.]])  # Matriz H, donde se dice que solo se mide la posicion y no la velocidad
