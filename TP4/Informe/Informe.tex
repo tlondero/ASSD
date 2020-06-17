@@ -93,9 +93,42 @@ Este algoritmo se basa en el principio de ``Divide y conquistarás'' al realizar
 		\label{fig:opticalflow1}
 \end{figure}
 \subsection{Shi-Tomasi}
-Shi-Tomasi es un algorítmo que busca detectar los bordes de un objeto en particular. Es ideal tener una buena discriminación de dichos bordes al principio del proceso de seguimiento, de esta forma se busca maximizar la calidad de seguimiento del objeto. Este algoritmo verifica que el seguimiento sea correcto y además, dado que el proceso de optical flow se realiza por color, como se explica más adelante, la imagen final a procesar cuenta con bordes bien definidos \cite{ref:shi-tomasi}.
-\subsection{Filtro de Kalman}
+%Shi-Tomasi es un algorítmo que busca detectar los bordes de un objeto en particular. Es ideal tener una buena discriminación de dichos bordes al principio del proceso de seguimiento, de esta forma se busca maximizar la calidad de seguimiento del objeto. Este algoritmo verifica que el seguimiento sea correcto y además, dado que el proceso de optical flow se realiza por color, como se explica más adelante, la imagen final a procesar cuenta con bordes bien definidos \cite{ref:shi-tomasi}.
+El algoritmo de de Shi-Tomasi se basa en el algoritmo de Harris para detección de bordes. El funcionamiento del algoritmo se basa en asignarle un valor a cada pixel del bitmap recibido, y si el valor del pixel es mayor a cierto límite se determina que ese pixel corresponde a una esquina. El valor asignado al pixel se obtiene utilizando dos autovalores de una matriz Z. Uno le pasa estos autovalores a una función y esta los manipula y devuelve el valor.
+La diferenciación entre el algoritmo de Harris y el de Shi-Tomasi, es que mientras Harris utiliza la función mencionada previamente, Shi-Tomasi decide utilizar únicamente los autovalores \cite{ref:shi-tomasi}.
+\\ Los valores de cada pixel se determinan de la siguietne manera:
 
+\begin{figure}[H]
+\begin{align}
+R= det(Z) - k (trace Z )^2 \\
+det(Z)= \lambda_1 \cdot \lambda_2 \\
+trace Z = \lambda_1 + \lambda_2
+\end{align}
+\label{eq:harris}
+\caption{Valor de pixel para algorítmo de Harris}
+\end{figure}
+
+\begin{figure}[H]
+\begin{align}
+R= min(\lambda_1 , \lambda_2)
+\end{align}
+\label{eq:shitom}
+\caption{Valor de pixel para algorítmo de Shi-Tomasi}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+	\includegraphics[width=0.4\textwidth]{Imagenes/shitom.png}
+	\caption{Detección de bordes Shi-Tomasi.}
+	\label{fig:shitom}
+
+\end{figure}
+\begin{itemize}
+\item La zona verde corresponde a ambos $\lambda_1 \ y \ \lambda_2 $ mayores al valor límite, por lo que estos píxeles son tomados como esquina.
+\item La zona azul y gris corresponden a que uno de los autovalores es menor al límite.
+\item La zona roja corresponden a ambos autovalores menores al mínimo.
+\end{itemize}
+\subsection{Filtro de Kalman}
 El filtro de Kalman es un filtro recursivo que busca estimar el estado de un sistema dinámico lineal discretizado de dimensión $n$ mediante una serie mediciones con ruido a partir de la descripción del modelo físico que rige las variables del vector de estado\cite{ref:kalman1}, \cite{ref:kalman2}.
 
 \subsubsection{Planteo del problema}
@@ -389,6 +422,8 @@ G. Welch and G. Bishop, An Introduction to the Kalman Filter. University of Nort
 
 \bibitem{ref:shi-tomasi}
 J. Shi y C. Tomasi. \textit{Good Features to Track}. 9th IEEE Conference on Computer Vision and Pattern Recognition, June 1994, Springer, pp. 593–600.
+
+
 
 \end{thebibliography}
 
