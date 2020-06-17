@@ -24,7 +24,7 @@
 %	\Large{\textcolor{red}{\textbf{EN ROJO PONGO LO QUE HAY QUE HACER. NO BORRARLO HASTA NO TERMINARLO. RESPETAR FORMATOS.}} \textcolor{orange}{EN AZUL IDEAS DE QUE DESARROLLAR.}}
 %\end{center}
 
-\textbf{\textit{En el siguiente trabajo se presenta el estudio, investigación y análisis de un proceso de seguimiento del movimiento de un objeto en tiempo real, siendo conocida su posición inicial. Se realizaron pruebas tanto con videos como con cámaras web, pudiendo alternar el modo de trabajo.}}
+\textbf{\textit{En el siguiente trabajo se presenta el estudio, investigación y análisis de un proceso de seguimiento del movimiento de un objeto en tiempo real, siendo conocida su posición inicial. Se utilizaron los algoritmos de Shi-Tomasi de búsqueda de bordes y Optical Flow de Lucas-Kanade para la detección de movimiento en conjunción a filtros de Kalman y de color. Se realizaron pruebas tanto con videos como en tiempo real, logrando seguir correctamente al objeto ante breves oclusiones o variaciones bruscas en su trayectoria. }}
 
 %\textcolor{red}{\textbf{\textit{Resumen: falta mencionar ensayos y resultados.}}}
 
@@ -233,7 +233,7 @@ Luego, se tiene que la matriz de observación o de transición de medición qued
 \begin{equation}
 \begin{pmatrix} z_{x_{k}} \\ z_{y_{k}} \end{pmatrix}=\begin{pmatrix}
 1 & 0 & 0  & 0\\
-0 & 1  & 0 & 0  \end{pmatrix} \cdot  \begin{pmatrix} x_k \\ y_k \\ v_{x_{k}} \\ v_{y_{k}}
+%0 & 1  & 0 & 0  \end{pmatrix} \cdot  \begin{pmatrix} x_k \\ y_k \\ v_{x_{k}} \\ v_{y_{k}} \ver
 \end{pmatrix}
 \end{equation}
 Siendo,
